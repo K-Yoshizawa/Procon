@@ -1,0 +1,28 @@
+/**
+ * @brief 頂点sから全頂点への最短距離を計算する(負の閉路が含まれる場合は使用不可)
+ * @attention 負の閉路がないこと／edgeはfromにちゃんと値を入れておくこと
+ * @tparam T 辺集合の型
+ * @param edges 調べる辺集合
+ * @param V 頂点の数
+ * @param s 始点
+ * @retval vector<T, int> 頂点sから全頂点への最短距離と、最後に使用した辺(存在しない場合はINF)
+ */
+template <typename T>
+vector<pair<T, int>> BellmanFord(Edges<T> &edges, int V, int s){
+    const auto INF = numeric_limits<T>::max();
+    using U = pair<T, int>;
+    vector<U> dist(V, U(INF, -1)); dist[s].first = 0;
+    while(1){
+        bool update = false;
+        for(int i = 0; i < edges.size(); ++i){
+            auto e = edges[i];
+            if(dist[e.from].first != INF && dist[e.from].first + e.cost < dist[e.to].first){
+                dist[e.to].first = dist[e.from].first + e.cost;
+                dist[e.to].second = i;
+                update = true;
+            }
+        }
+        if(!update) break;
+    }
+    return dist;
+}

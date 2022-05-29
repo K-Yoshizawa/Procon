@@ -1,0 +1,20 @@
+/**
+ * @brief 頂点fromから頂点toへのコストcostの辺
+ * @param from 辺が出ている頂点
+ * @param to 辺が出た先の頂点
+ * @param cost 辺のコスト
+ * @tparam T costの型
+ */
+template <typename T>
+struct edge{
+    int from, to;
+    T cost;
+    edge(int to, T cost) : from(-1), to(to), cost(cost) {}
+    edge(int from, int to, T cost) : from(from), to(to), cost(cost) {}
+};
+
+using UnweightedGraph = vector<vector<int>>;
+template <typename T>
+using WeightedGraph = vector<vector<edge<T>>>;
+template <typename T>
+using Edges = vector<edge<T>>;

@@ -1,0 +1,4 @@
+*.json
+atcoder/
+*.o
+*.cpp

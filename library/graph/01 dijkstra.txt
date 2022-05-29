@@ -1,0 +1,32 @@
+/**
+ * @brief 頂点sから全頂点への最短距離を計算する(負の辺が含まれる場合は使用不可)
+ * @attention 負の閉路がないこと／edgeはfromにちゃんと値を入れておくこと
+ * @tparam T グラフの型
+ * @param g 調べるグラフ
+ * @param s 始点
+ * @return vector<pair<T, pair<int, int>>> 頂点sから全頂点への最短距離と、最後に使用した辺のインデックス(存在しない場合はINF)
+ */
+template <typename T>
+vector<pair<T, pair<int, int>>> Dijkstra(WeightedGraph<T> &g, int s){
+    const auto INF = numeric_limits<T>::max();
+    using ID = pair<int, int>; // 使った辺のインデックス
+    using RE = pair<T, ID>; // 最短距離と直前に使用した辺
+    using P = pair<T, int>; // 最短距離と今いる頂点
+    vector<RE> dist(g.size(), RE(INF, ID(-1, -1))); dist[s].first = 0;
+    priority_queue<P, vector<P>, greater<P>> que;
+    que.emplace(0, s);
+    while(!que.empty()){
+        P p = que.top(); que.pop();
+        int v = p.second;
+        if(dist[v].first < p.first) continue;
+        for(int i = 0; i < g[v].size(); ++i){
+            auto e = g[v][i];
+            if(dist[e.to].first > dist[v].first + e.cost){
+                dist[e.to].first = dist[v].first + e.cost;
+                dist[e.to].second = ID(v, i);
+                que.emplace(dist[e.to].first, e.to);
+            }
+        }
+    }
+    return dist;
+}

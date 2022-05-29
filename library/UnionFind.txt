@@ -1,0 +1,27 @@
+/**
+ * @brief Union-Find木の構造体
+ * @param parent 要素番目のノードの親ノード
+ */
+struct UnionFind{
+    vector<int> parent;
+
+    UnionFind(int size) : parent(size){
+        for(int i = 0; i < size; ++i) parent[i] = i;
+    }
+
+    int root(int x){
+        if(parent[x] == x) return x;
+        return parent[x] = root(parent[x]);
+    }
+
+    void unite(int x, int y){
+        int root_x = root(x);
+        int root_y = root(y);
+        if(root_x == root_y) return;
+        parent[root_x] = root_y;
+    }
+
+    bool same(int x, int y){
+        return root(x) == root(y);
+    }
+};
