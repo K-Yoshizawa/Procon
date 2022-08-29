@@ -2,3 +2,6 @@
 atcoder/
 *.o
 *.cpp
+*.txt
+!library
+.vscode/
