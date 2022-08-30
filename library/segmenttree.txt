@@ -1,14 +1,81 @@
-template <typename T>
+/**
+ * @brief  セグメント木 inspired by ei1333
+ * @note   
+ * @retval None
+ */
+template <typename Monoid>
 struct SegmentTree{
-    using F = function<T(T, T)>;
-    int size;
-    F fx;
-    const T ex;
-    vector<T> data;
+    using F = function<Monoid(Monoid, Monoid)>;
 
-    SegmentTree(int n, F fx, T ex) : size(), fx(fx), ex(ex), data(n * 4, ex){
-        int x = 1;
-        while(size > x) x *= 2;
-        size = x;
+    int sz;
+    vector<Monoid> seg;
+    const F f;
+    const Monoid M1;
+
+    /**
+     * @brief  セグメント木を初期化する。
+     * @note   
+     * @param  n: セグメント木のサイズ
+     * @param  f: 2つの区間をマージする二項演算
+     * @param  &M1: モノイドの単位元
+     * @retval 
+     */
+    SegmentTree(int n, const F f, const Monoid &M1) : f(f), M1(M1){
+        sz = 1;
+        while(sz < n) sz <<= 1;
+        seg.assign(2 * sz, M1);
+    }
+
+    /**
+     * @brief  k番目の要素にxを代入する。
+     * @param  k: 代入する要素番号
+     * @param  &x: 代入する要素
+     * @retval None
+     */
+    void set(int k, const Monoid &x){
+        seg[k + sz] = x;
+    }
+
+    /**
+     * @brief  セグメント木を構築する。
+     * @retval None
+     */
+    void build(){
+        for(int k = sz - 1; k > 0; --k){
+            seg[k] = f(seg[2 * k + 0], seg[2 * k + 1]);
+        }
+    }
+
+    /**
+     * @brief  k番目の要素をxに変更する（1点更新クエリ）。
+     * @param  k: 更新する要素番号
+     * @param  &x: 変更する要素
+     * @retval None
+     */
+    void update(int k, const Monoid &x){
+        k += sz;
+        seg[k] = x;
+        while(k >>= 1){
+            seg[k] = f(seg[2 * k + 0], seg[2 * k + 1]);
+        }
+    }
+
+    /**
+     * @brief  0-indexの半開区間[a, b)に対して二項演算した結果を返す（区間取得クエリ）。
+     * @note   
+     * @param  a: 半開区間[a, b)の始点
+     * @param  b: 半開区間[a, b)の終点
+     * @retval 二項演算の結果
+     */
+    Monoid query(int a, int b){
+        Monoid L = M1, R = M1;
+        for(a += sz, b += sz; a < b; a >>= 1, b >>= 1){
+            if(a & 1) L = f(L, seg[a++]);
+            if(b & 1) R = f(seg[--b], R);
+        }
+        return f(L, R);
     }
 };
+
+template<typename T>
+function<T(T, T)> func_min = [](T a, T b){return min(a, b);};
