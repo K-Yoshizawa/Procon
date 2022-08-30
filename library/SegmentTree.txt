@@ -75,7 +75,15 @@ struct SegmentTree{
         }
         return f(L, R);
     }
+
+    Monoid operator[](const int &k) const {
+        return seg[k + sz];
+    }
 };
 
 template<typename T>
 function<T(T, T)> func_min = [](T a, T b){return min(a, b);};
+template<typename T>
+function<T(T, T)> func_max = [](T a, T b){return max(a, b);};
+template<typename T>
+function<T(T, T)> func_xor = [](T a, T b){return a ^ b;};
