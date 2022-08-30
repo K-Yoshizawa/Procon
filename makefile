@@ -3,4 +3,4 @@ cp:
 	g++ code.cpp -std=c++17 -I . -o code.o
 
 test:
-	./code > result.txt
+	./code.o < in.txt
