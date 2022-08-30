@@ -1,0 +1,14 @@
+template <typename T>
+struct SegmentTree{
+    using F = function<T(T, T)>;
+    int size;
+    F fx;
+    const T ex;
+    vector<T> data;
+
+    SegmentTree(int n, F fx, T ex) : size(), fx(fx), ex(ex), data(n * 4, ex){
+        int x = 1;
+        while(size > x) x *= 2;
+        size = x;
+    }
+};
