@@ -23,3 +23,7 @@
 ### ver 1.0.0 (2022/09/04)
  - セグメント木
  - UnionFind
+ - グラフテンプレート
+ - Dijkstra法
+ - Prim法
+ - Kruskal法
