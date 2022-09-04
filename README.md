@@ -7,11 +7,11 @@
 ### グラフ系統
 
  - グラフテンプレート (最終更新：2022/09/04)
- - Dijkstra法 (最終更新：2022/09/04)([検証済:AOJ GRL 1 A](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A))
+ - Dijkstra法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 1 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A))
  - 最小全域木
-    - Prim法 (最終更新：2022/09/04)([検証済:AOJ GRL 2 A](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
-    - Kruskal法 (最終更新：2022/09/04)([検証済:AOJ GRL 2 A](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
- - 木の直径 (最終更新：2022/09/05)([検証済:AOJ GRL 5 A](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_5_A))
+    - Prim法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
+    - Kruskal法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
+ - 木の直径 (最終更新：2022/09/05)([検証済 \[AOJ GRL 5 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_5_A))
 
 ### 未分類系統
 
