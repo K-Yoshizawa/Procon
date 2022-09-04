@@ -1,0 +1,83 @@
+/**
+ * @brief グラフ辺テンプレート。直接使うことは少ない気がする。
+ * 
+ * @tparam T 重みの型
+ */
+template<typename T>
+struct Edge{
+    int from, to;
+    T cost;
+    int id;
+
+    Edge(int to) : from(-1), to(to), cost(1), id(-1) {}
+    Edge(int to, T cost) : from(-1), to(to), cost(cost), id(-1) {}
+    Edge(int to, T cost, int id) : from(-1), to(to), cost(cost), id(id) {}
+    Edge(int from, int to, T cost, int id) : from(from), to(to), cost(cost), id(id) {}
+
+    bool operator<(const Edge<T> &e) const { return cost < e.cost; }
+};
+
+/**
+ * @brief グラフ本体。頂点集合と辺集合の2つを保持している。
+ * 
+ * @tparam T グラフ辺の重みの型
+ */
+template<typename T>
+struct Graph{
+    vector<vector<Edge<T>>> vertex; // 頂点集合
+    vector<Edge<T>> edges;          // 辺集合
+
+    Graph(int V) : vertex(V) {}
+
+    /**
+     * @brief 重み無し無向辺の追加
+     * 
+     * @param v 辺が結ぶ頂点1
+     * @param u 辺が結ぶ頂点2
+     */
+    void nd_add(int v, int u){
+        int edge_number = edges.size();
+        vertex[v].push_back(Edge<T>(u, 1, edge_number));
+        vertex[u].push_back(Edge<T>(v, 1, edge_number));
+        edges.push_back(Edge<T>(u, v, 1, edge_number));
+    }
+
+    /**
+     * @brief 重み有り無向辺の追加
+     * 
+     * @param v 辺が結ぶ頂点1
+     * @param u 辺が結ぶ頂点2
+     * @param cost 辺の重み
+     */
+    void nd_add(int v, int u, T cost){
+        int edge_number = edges.size();
+        vertex[v].push_back(Edge<T>(u, cost, edge_number));
+        vertex[u].push_back(Edge<T>(v, cost, edge_number));
+        edges.push_back(Edge<T>(u, v, cost, edge_number));
+    }
+
+    /**
+     * @brief 重み無し有向辺の追加
+     * 
+     * @param from 出次する頂点
+     * @param to 入次する頂点
+     */
+    void d_add(int from, int to){
+        int edge_number = edges.size();
+        vertex[from].push_back(Edge<T>(to, 1, edge_number));
+        edges.push_back(Edge<T>(from, to, 1, edge_number));
+    }
+
+    /**
+     * @brief 重み有り有向辺の追加
+     * 
+     * @param from 出次する頂点
+     * @param to 入次する頂点
+     * @param cost 辺の重み
+     */
+    void d_add(int from, int to, T cost){
+        int edge_number = edges.size();
+        vertex[from].push_back(Edge<T>(to, cost, edge_number));
+        edges.push_back(Edge<T>(from, to, cost, edge_number));
+    }
+};
