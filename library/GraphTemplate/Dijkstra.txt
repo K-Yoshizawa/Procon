@@ -1,47 +1,46 @@
 /**
- * @brief ダイクストラ法を適用した結果を表す構造体
+ * @brief ダイクストラ法を用いて最短距離を求める。
  * 
- * @tparam T グラフ辺の重みの型
+ * @tparam T グラフの辺の重みの型
  */
 template<typename T>
-struct Dijkstra_Result{
-    T dist;
-    int prev_vertex, prev_edge;
+struct Dijkstra{
+    Graph<T> &graph;
+    T INF;
+    vector<T> dist;
+    vector<int> prev_vertex, prev_edge;
 
-    Dijkstra_Result(T init) : dist(init), prev_vertex(-1), prev_edge(-1) {}
-};
+    Dijkstra(Graph<T> &graph) : graph(graph){
+        INF = numeric_limits<T>::max();
+        dist.resize(graph.vertex.size(), INF);
+        prev_vertex.resize(graph.vertex.size(), -1);
+        prev_edge.resize(graph.vertex.size(), -1);
+    }
 
-/**
- * @brief 頂点sから全頂点への最短距離を求める。ただし、存在しない場合はINFを返す。
- * 
- * @tparam T グラフ辺の重みの型
- * @param graph グラフ
- * @param s 始点(0-index)
- * @return vector<Dijkstra_Result<T>> (最短距離,直前の頂点番号,直前の辺番号)をまとめた構造体
- */
-template<typename T>
-vector<Dijkstra_Result<T>> Dijkstra(Graph<T> &graph, int s){
-    const auto INF = numeric_limits<T>::max();
-    
-    auto &g = graph.vertex;
-    vector<Dijkstra_Result<T>> result(g.size(), Dijkstra_Result(INF));
-    result[s].dist = 0;
-    
-    using P = pair<T, int>;
-    priority_queue<P, vector<P>, greater<P>> que;
-    que.emplace(0, s);
-    while(!que.empty()){
-        P p = que.top(); que.pop();
-        T d = p.first; int v = p.second;
-        if(result[v].dist < d) continue;
-        for(auto &e : g[v]){
-            if(result[e.to].dist > result[v].dist + e.cost){
-                result[e.to].dist = result[v].dist + e.cost;
-                result[e.to].prev_vertex = v;
-                result[e.to].prev_edge = e.id;
-                que.emplace(result[e.to].dist, e.to);
+    /**
+     * @brief 始点sから各頂点への最短距離を求める。
+     * 
+     * @param s 始点
+     */
+    void build(int s){
+        auto &g = graph.vertex;
+        dist[s] = 0;
+        
+        using P = pair<T, int>;
+        priority_queue<P, vector<P>, greater<P>> que;
+        que.emplace(0, s);
+        while(!que.empty()){
+            P p = que.top(); que.pop();
+            T d = p.first; int v = p.second;
+            if(dist[v] < d) continue;
+            for(auto &e : g[v]){
+                if(dist[e.to] > dist[v] + e.cost){
+                    dist[e.to] = dist[v] + e.cost;
+                    prev_vertex[e.to] = v;
+                    prev_edge[e.to] = e.id;
+                    que.emplace(dist[e.to], e.to);
+                }
             }
         }
     }
-    return result;
-}
+};
