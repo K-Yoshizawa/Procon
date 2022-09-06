@@ -15,7 +15,7 @@
     - Prim法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
     - Kruskal法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
  - 木の直径 (最終更新：2022/09/05)([検証済 \[AOJ GRL 5 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_5_A))
- - 橋と関節点(Low Link) (最終更新：2022/09/06)([検証済 \[AOJ GRL 3 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_A)[検証済 \[AOJ GRL 3 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B))
+ - 橋と関節点(Low Link) (最終更新：2022/09/06)([検証済 \[AOJ GRL 3 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_A) [検証済 \[AOJ GRL 3 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B))
 
 ### 未分類系統
 
