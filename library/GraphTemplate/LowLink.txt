@@ -1,0 +1,68 @@
+/**
+ * @brief グラフの橋と関節点を求める。
+ * 
+ * @tparam T グラフの辺の重みの型
+ */
+template<typename T>
+struct LowLink{
+    private:
+    Graph<T> &g;
+    vector<bool> visited;
+    vector<int> ord, low;
+
+    public:
+    vector<int> articulation; // 関節点
+    vector<pair<int, int>> bridge; // 橋
+
+    /**
+     * @brief グラフ本体で初期化する。
+     * 
+     * @param graph グラフ本体
+     */
+    LowLink(Graph<T> &graph) : g(graph) {
+        const int V = g.vertex.size();
+        visited.resize(V, false);
+        ord.resize(V, 0); ord[0] = 0;
+        low.resize(V, 0); low[0] = 0;
+    }
+
+    int dfs(int idx, int label, int par){
+        visited[idx] = true;
+        ord[idx] = label++;
+        low[idx] = ord[idx];
+        bool condition = false;
+        int cnt = 0;
+        vector<int> child;
+        for(auto &e : g.vertex[idx]){
+            if(!visited[e.to]){
+                ++cnt;
+                child.emplace_back(e.to);
+                label = dfs(e.to, label, idx);
+                condition |= (~par && ord[idx] <= low[e.to]);
+                if(ord[idx] < low[e.to]){
+                    bridge.emplace_back(minmax(idx, e.to));
+                }
+            }
+            else if(e.to != par){
+                child.emplace_back(e.to);
+            }
+        }
+        for(auto &v : child){
+            low[idx] = min(low[idx], low[v]);
+        }
+        condition |= (par == -1 && cnt > 1);
+        if(condition) articulation.emplace_back(idx);
+        return label;
+    }
+
+    /**
+     * @brief 橋と関節点を求める。
+     * 
+     */
+    void build(){
+        int label = 0;
+        for(int i = 0; i < g.vertex.size(); ++i){
+            if(!visited[i]) label = dfs(i, label, -1);
+        }
+    }
+};

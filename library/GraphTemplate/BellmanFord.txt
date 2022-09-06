@@ -1,0 +1,36 @@
+/**
+ * @brief 始点sから各頂点への最短距離。負の閉路がある場合も検出可。
+ * @attention 負の閉路がある場合、始点sへの最短距離を-1とする。
+ * @tparam T グラフの辺の重みの型
+ * @param graph グラフ本体
+ * @param s 始点
+ * @return vector<T> 各頂点への最短距離
+ */
+template<typename T>
+vector<T> BellmanFord(const Graph<T> &graph, int s){
+    auto &es = graph.edges;
+    const T INF = numeric_limits<T>::max();
+    const int V = graph.vertex.size();
+    vector<T> result(V, INF); result[s] = 0;
+
+    int updatecount = 0;
+    while(true){
+        if(updatecount == V){
+            result[s] = -1;
+            return result;
+        }
+        bool update = false;
+        for(auto &e : es){
+            int from = e.from, to = e.to;
+            T cost = e.cost;
+            if(result[from] == INF) continue;
+            if(result[to] > result[from] + cost){
+                result[to] = result[from] + cost;
+                update = true;
+            }
+        }
+        if(!update) break;
+        ++updatecount;
+    }
+    return result;
+}
