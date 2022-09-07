@@ -3,16 +3,20 @@
  * @attention 負閉路がある場合、[0][0]=-1となる。
  * @tparam T グラフの辺の重みの型
  * @param graph グラフ本体
+ * @param non_direct 無向グラフかどうか
  * @return vector<vector<T>> 全点対最短距離を2次元配列で表現したもの。
  */
 template<typename T>
-vector<vector<T>> WarshallFloyd(const Graph<T> &graph){
+vector<vector<T>> WarshallFloyd(const Graph<T> &graph, bool non_direct){
     int V = graph.vertex.size();
     const T INF = numeric_limits<T>::max();
     vector<vector<T>> result(V, vector<T>(V, INF));
     for(int i = 0; i < V; ++i) result[i][i] = 0;
-    for(auto &e : graph.edges) result[e.from][e.to] = e.cost;
-    
+    for(auto &e : graph.edges){
+        result[e.from][e.to] = e.cost;
+        if(non_direct) result[e.to][e.from] = e.cost;
+    }
+
     for(int k = 0; k < V; ++k){
         for(int i = 0; i < V; ++i){
             for(int j = 0; j < V; ++j){

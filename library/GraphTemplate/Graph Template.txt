@@ -53,7 +53,7 @@ struct Graph{
         int edge_number = edges.size();
         vertex[v].push_back(Edge<T>(u, cost, edge_number));
         vertex[u].push_back(Edge<T>(v, cost, edge_number));
-        edges.push_back(Edge<T>(u, v, cost, edge_number));
+        edges.push_back(Edge<T>(v, u, cost, edge_number));
     }
 
     /**

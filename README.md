@@ -6,11 +6,11 @@
 
 ### グラフ系統
 
- - グラフテンプレート (最終更新：2022/09/04)
+ - グラフテンプレート (最終更新：2022/09/08)
  - 全頂点最短距離
     - Dijkstra法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A))
     - Bellman-Ford法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B))
-    - Warshall-Floyd法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 C\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C))
+    - Warshall-Floyd法 (最終更新：2022/09/08)([検証済 \[AOJ GRL 1 C\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C))
  - 最小全域木
     - Prim法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
     - Kruskal法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
@@ -24,6 +24,10 @@
  - UnionFind (最終更新：2022/09/04)(拝借)
 
 ## Version
+
+### ver 1.2.2 (2022/09/08)
+ - グラフテンプレートの軽微な修正。
+ - WarshallFloyd法の引数に無向グラフか有向グラフかどちらかを指定する変数を追加。
 
 ### ver 1.2.1 (2022/09/06)
  - Dijkstra法をよりシンプルな形に改善。AOJによる再検証を完了。
