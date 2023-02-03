@@ -3,6 +3,7 @@ cp:
 	g++ code.cpp -std=c++17 -I . -o code.o
 
 test:
+<<<<<<< HEAD
 	./code.o < in.txt
 
 do:
@@ -10,3 +11,6 @@ do:
 
 tessoku:
 	g++ tessoku.cpp -std=c++17 -I . -o code.o
+=======
+	./code.o < input.txt
+>>>>>>> cbdaaa8b4171286aa96951f61473524072c540f7

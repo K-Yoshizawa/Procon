@@ -1,0 +1,46 @@
+/**
+ * @brief ダイクストラ法を用いて最短距離を求める。
+ * 
+ * @tparam T グラフの辺の重みの型
+ */
+template<typename T>
+struct Dijkstra{
+    Graph<T> &graph;
+    T INF;
+    vector<T> dist;
+    vector<int> prev_vertex, prev_edge;
+
+    Dijkstra(Graph<T> &graph) : graph(graph){
+        INF = numeric_limits<T>::max();
+        dist.resize(graph.vertex.size(), INF);
+        prev_vertex.resize(graph.vertex.size(), -1);
+        prev_edge.resize(graph.vertex.size(), -1);
+    }
+
+    /**
+     * @brief 始点sから各頂点への最短距離を求める。
+     * 
+     * @param s 始点
+     */
+    void build(int s){
+        auto &g = graph.vertex;
+        dist[s] = 0;
+        
+        using P = pair<T, int>;
+        priority_queue<P, vector<P>, greater<P>> que;
+        que.emplace(0, s);
+        while(!que.empty()){
+            P p = que.top(); que.pop();
+            T d = p.first; int v = p.second;
+            if(dist[v] < d) continue;
+            for(auto &e : g[v]){
+                if(dist[e.to] > dist[v] + e.cost){
+                    dist[e.to] = dist[v] + e.cost;
+                    prev_vertex[e.to] = v;
+                    prev_edge[e.to] = e.id;
+                    que.emplace(dist[e.to], e.to);
+                }
+            }
+        }
+    }
+};

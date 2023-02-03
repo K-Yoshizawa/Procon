@@ -1,0 +1,43 @@
+/**
+ * @brief 最小全域木に関する情報。最小コストと残した辺番号を保持している。
+ * 
+ * @tparam T グラフの辺の重みの型
+ */
+template<typename T>
+struct MST_Result{
+    T totalcost;
+    set<int> remain_edge;
+
+    MST_Result() : totalcost(0) {}
+};
+
+/**
+ * @brief 最小全域木を求める。
+ * 
+ * @tparam T 
+ * @param graph グラフ
+ * @return MST_Result<T> 最小コストと、最小全域木の辺番号集合
+ */
+template<typename T>
+MST_Result<T> Prim(Graph<T> &graph){
+    auto &g = graph.vertex;
+    using PP = pair<int, int>;
+    using P = pair<T, PP>;
+    vector<bool> used(g.size(), false);
+    MST_Result<T> result;
+    priority_queue<P, vector<P>, greater<P>> que;
+    que.emplace(0, PP(0, -1));
+    while(!que.empty()){
+        P p = que.top(); que.pop();
+        T cost = p.first;
+        int v = p.second.first, prev_e = p.second.second;
+        if(used[v]) continue;
+        used[v] = true;
+        result.totalcost += cost;
+        if(prev_e != -1) result.remain_edge.insert(prev_e);
+        for(auto &e : g[v]){
+            que.emplace(e.cost, PP(e.to, e.id));
+        }
+    }
+    return result;
+}

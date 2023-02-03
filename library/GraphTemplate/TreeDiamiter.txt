@@ -1,0 +1,25 @@
+/**
+ * @brief 木の直径、およびその端点を求める。
+ * 
+ * @tparam T グラフの辺の重みの型
+ * @param graph グラフ
+ * @return pair<T, pair<int, int>> (直径,(直径の端点の頂点番号))
+ */
+template<typename T>
+pair<T, pair<int, int>> TreeDiamiter(const Graph<T> &graph){
+    auto &g = graph.vertex;
+    function<pair<T, int>(int, int)> dfs = [&](int s, int prev) -> pair<T, int>{
+        pair<T, int> ret((T)0, s);
+        for(auto &e : g[s]){
+            if(e.to == prev) continue;
+            auto next = dfs(e.to, s);
+            next.first += e.cost;
+            ret = max(ret, next);
+        }
+        return ret;
+    };
+
+    pair<T, int> v1 = dfs(0, -1);
+    pair<T, int> v2 = dfs(v1.second, -1);
+    return make_pair(v2.first, make_pair(v1.second, v2.second));
+}

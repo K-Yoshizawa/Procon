@@ -1,7 +1,14 @@
+!/library/
 .vscode/
-atcoder/
 *.o
+<<<<<<< HEAD
 code.cpp
 *.txt
 !library
 .vscode/
+=======
+*.cpp
+input.txt
+output.txt
+res.txt
+>>>>>>> cbdaaa8b4171286aa96951f61473524072c540f7
