@@ -4,7 +4,7 @@ using namespace std;
 /**
  *  Problem : ARC140B - Shorten ARC
  *  Date    : 2023 / 02 / 03
- *  Solve   : Editional
+ *  Solve   : Editorial
  */
 
 int main(){
