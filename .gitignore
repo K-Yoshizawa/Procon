@@ -1,6 +1,7 @@
 !/library/
 .vscode/
 *.o
+*.out
 code.cpp
 *.txt
 atcoder/
