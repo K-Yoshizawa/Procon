@@ -1,4 +1,4 @@
-!/library/
+!/library/*.txt
 .vscode/
 *.o
 *.out
