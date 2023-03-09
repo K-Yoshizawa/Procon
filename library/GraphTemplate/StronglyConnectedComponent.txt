@@ -1,0 +1,53 @@
+template<typename T>
+struct StronglyConnectedComponent{
+    public:
+    Graph<T> &g;
+    Graph<T> rg;
+    int V;
+    vector<int> result;
+
+    private:
+    vector<int> order;
+    vector<bool> visited;
+
+    void dfs(int v){
+        visited[v] = true;
+        for(auto &e : g.vertex[v]){
+            if(!visited[e.to]) dfs(e.to);
+        }
+        order.push_back(v);
+    }
+
+    void rdfs(int v, int k){
+        visited[v] = true;
+        result[v] = k;
+        for(auto &e : rg.vertex[v]){
+            if(!visited[e.to]) rdfs(e.to, k);
+        }
+    }
+
+    public:
+    StronglyConnectedComponent(Graph<T> &g) : g(g), V(g.vertex.size()){
+        rg = Graph<T>(V);
+        for(auto &e : g.edges){
+            rg.d_add(e.to, e.from);
+        }
+        visited.resize(V, false);
+        result.resize(V);
+    }
+
+    void build(){
+        for(int v = 0; v < V; ++v){
+            if(!visited[v]) dfs(v);
+        }
+        visited.assign(V, false);
+        int k = 0;
+        for(int i = order.size() - 1; i >= 0; --i){
+            if(!visited[order[i]]) rdfs(order[i], k++);
+        }
+    }
+
+    bool same(int u, int v){
+        return result[u] == result[v];
+    }
+};

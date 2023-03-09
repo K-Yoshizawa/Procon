@@ -28,6 +28,7 @@ struct Graph{
     vector<Edge<T>> edges;          // 辺集合
 
     Graph(int V) : vertex(V) {}
+    Graph(){}
 
     /**
      * @brief 重み無し無向辺の追加

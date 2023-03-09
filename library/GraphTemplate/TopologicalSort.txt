@@ -1,0 +1,28 @@
+/**
+ * @brief  有向グラフについてトポロジカルソートを行う
+ * @attention 有向グラフはDAGでなければならない   
+ * @param  &g: トポロジカルソートを行うグラフ
+ * @retval トポロジカルソート済の配列
+ */
+vector<int> TopologicalSort(const Graph<int> &g){
+    auto V = g.vertex;
+    const int N = (int)V.size();
+    vector<int> Vin(N);
+    for(int i = 0; i < N; ++i){
+        for(auto &e : V[i]) ++Vin[e.to];
+    }
+    stack<int> st;
+    for(int i = 0; i < N; ++i){
+        if(Vin[i] == 0) st.emplace(i);
+    }
+    vector<int> ret;
+    while(!st.empty()){
+        auto p = st.top();
+        st.pop();
+        ret.emplace_back(p);
+        for(auto &e : V[p]){
+            if(--Vin[e.to] == 0) st.emplace(e.to);
+        }
+    }
+    return ret;
+}

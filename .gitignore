@@ -1,7 +1,7 @@
-!/library/
+!/library/*.txt
 .vscode/
 *.o
-*.cpp
-input.txt
-output.txt
-res.txt
+*.out
+code.cpp
+*.txt
+atcoder/
