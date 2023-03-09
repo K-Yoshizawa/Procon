@@ -4,3 +4,6 @@ cp:
 
 test:
 	./code.o < input.txt
+
+do:
+	./code.o
