@@ -1,5 +1,5 @@
 /**
- * @brief  セグメント木 inspired by ei1333
+ * @brief  セグメント木
  * @note   
  * @retval None
  */

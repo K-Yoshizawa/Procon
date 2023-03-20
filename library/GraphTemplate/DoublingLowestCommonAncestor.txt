@@ -1,0 +1,65 @@
+template<typename T>
+struct DoublingLowestCommonAncestor{
+    private:
+    Graph<T> &g;
+    int V, LOG;
+    vector<int> depth;
+    vector<vector<int>> parent;
+
+    void dfs(int v, int p, int d){
+        parent[0][v] = p;
+        depth[v] = d;
+        for(auto &e : g.vertex[v]){
+            if(e.to != p) dfs(e.to, v, d + 1);
+        }
+    }
+
+    public:
+    DoublingLowestCommonAncestor(Graph<T> &g) : g(g), V(g.vertex.size()), LOG(ceil(log2(g.vertex.size()))){
+        depth.resize(V);
+        parent.resize(LOG, vector<int>(V, 0));
+        dfs(0, -1, 0);
+        for(int k = 0; k + 1 < LOG; ++k){
+            for(int v = 0; v < V; ++v){
+                if(parent[k][v] < 0) parent[k + 1][v] = -1;
+                else parent[k + 1][v] = parent[k][parent[k][v]];
+            }
+        }
+    }
+
+    /**
+     * @brief 頂点uと頂点vのLCAを求める。
+     * 
+     * @param u 頂点u
+     * @param v 頂点v
+     * @return int LCAの頂点番号
+     */
+    int query(int u, int v){
+        if(depth[u] > depth[v]) swap(u, v);
+        for(int k = 0; k < LOG; ++k){
+            if((depth[v] - depth[u]) >> k & 1){
+                v = parent[k][v];
+            }
+        }
+        if(u == v) return u;
+        for(int k = LOG - 1; k >= 0; --k){
+            if(parent[k][u] != parent[k][v]){
+                u = parent[k][u];
+                v = parent[k][v];
+            }
+        }
+        return parent[0][u];
+    }
+
+    /**
+     * @brief 頂点uと頂点vの距離を求める。
+     * 
+     * @param u 頂点u
+     * @param v 頂点v
+     * @return int 2頂点間の距離
+     */
+    int dist(int u, int v){
+        int ancestor = query(u, v);
+        return depth[u] + depth[v] - 2 * depth[ancestor];
+    }
+};
