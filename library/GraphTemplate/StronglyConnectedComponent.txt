@@ -1,10 +1,15 @@
+/**
+ * @brief 強連結成分分解を行う。
+ * 
+ * @tparam T 有向グラフの型
+ */
 template<typename T>
 struct StronglyConnectedComponent{
     public:
     Graph<T> &g;
     Graph<T> rg;
     int V;
-    vector<int> result;
+    vector<int> topological_order, component_size;
 
     private:
     vector<int> order;
@@ -20,7 +25,8 @@ struct StronglyConnectedComponent{
 
     void rdfs(int v, int k){
         visited[v] = true;
-        result[v] = k;
+        topological_order[v] = k;
+        ++component_size[k];
         for(auto &e : rg.vertex[v]){
             if(!visited[e.to]) rdfs(e.to, k);
         }
@@ -33,9 +39,15 @@ struct StronglyConnectedComponent{
             rg.d_add(e.to, e.from);
         }
         visited.resize(V, false);
-        result.resize(V);
+        topological_order.resize(V);
+        component_size.resize(V, 0);
     }
 
+    /**
+     * @brief 強連結成分分解の処理を実行する。
+     * @return topological_order 頂点iの所属する強連結成分のトポロジカル順序
+     * @return component_size トポロジカル順序iの強連結成分の頂点数
+     */
     void build(){
         for(int v = 0; v < V; ++v){
             if(!visited[v]) dfs(v);
@@ -47,7 +59,10 @@ struct StronglyConnectedComponent{
         }
     }
 
+    /**
+     * @brief 2頂点が同じ強連結成分に属するかを判定する
+     */
     bool same(int u, int v){
-        return result[u] == result[v];
+        return topological_order[u] == topological_order[v];
     }
 };

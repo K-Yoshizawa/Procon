@@ -2,6 +2,7 @@
 .vscode/
 *.o
 *.out
+a.cpp
 code.cpp
 *.txt
 atcoder/
