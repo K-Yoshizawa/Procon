@@ -1,0 +1,44 @@
+/**
+ * @brief 木構造を表す構造体。グラフから変換する。
+ */
+template<typename T>
+struct Tree{
+    Graph<T> &g;
+    vector<int> parent, depth;
+    vector<vector<int>> child;
+    vector<T> dist_to_parent;
+    int root, V;
+
+    private:
+    void dfs(int v, int d){
+        depth[v] = d;
+        for(auto &e : g.vertex[v]){
+            if(depth[e.to] != -1) continue;
+            child[v].push_back(e.to);
+            parent[e.to] = v;
+            dist_to_parent[e.to] = e.cost;
+            dfs(e.to, d + 1);
+        }
+    }
+
+    public:
+    Tree(Graph<T> &g) : g(g), V(g.vertex.size()), root(0) {
+        parent.resize(V, -1);
+        depth.resize(V, -1);
+        child.resize(V);
+        dist_to_parent.resize(V, 0);
+        dfs(root, 0);
+    }
+
+    /**
+     * @brief 2頂点の親子関係を返す。
+     * @param v 調べたい頂点
+     * @param u 調べたい頂点
+     * @return int 子の頂点
+     */
+    int which_child(int v, int u){
+        if(parent[v] == u) return v;
+        if(parent[u] == v) return u;
+        else -1;
+    }
+};

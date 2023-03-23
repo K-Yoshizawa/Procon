@@ -1,0 +1,53 @@
+/**
+ * @brief オイラーツアー。
+ * @attention 使用するためにはTree構造体が必要。
+ * @tparam T 辺の重みの型
+ */
+template<typename T>
+struct EulerTour{
+    private:
+    Tree<T> &tr;
+
+    int V, sz;
+    vector<int> tour;
+    vector<int> in, out;
+
+    int dfs(int v, int idx){
+        in[v] = idx;
+        tour[idx] = v;
+        int next = idx + 1;
+        for(auto &u : tr.child[v]){
+            next = dfs(u, next);
+        }
+        out[v] = next;
+        tour[next] = -v;
+        return next + 1;
+    }
+
+    public:
+    EulerTour(Tree<T> &tr) : tr(tr), V(tr.V){
+        in.resize(V, -1);
+        out.resize(V, -1);
+        sz = V * 2;
+        tour.resize(sz);
+        dfs(tr.root, 0);
+    }
+
+    /**
+     * @brief 頂点vのinの値を得る。
+     * @param v ほしい頂点番号
+     * @return int 
+     */
+    int get_in(int v){
+        return in[v];
+    }
+
+    /**
+     * @brief 頂点vのoutの値を得る。
+     * @param v ほしい頂点番号
+     * @return int 
+     */
+    int get_out(int v){
+        return out[v];
+    }
+};

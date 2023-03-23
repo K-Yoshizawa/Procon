@@ -15,7 +15,7 @@ struct DoublingLowestCommonAncestor{
     }
 
     public:
-    DoublingLowestCommonAncestor(Graph<T> &g) : g(g), V(g.vertex.size()), LOG(ceil(log2(g.vertex.size()))){
+    DoublingLowestCommonAncestor(Graph<T> &g) : g(g), V(g.vertex.size()), LOG(ceil(log2(g.vertex.size())) + 1){
         depth.resize(V);
         parent.resize(LOG, vector<int>(V, 0));
         dfs(0, -1, 0);
