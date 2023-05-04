@@ -1,0 +1,34 @@
+struct PrimeFactor{
+    long long X;
+    vector<pair<long long, long long>> factor;
+
+    PrimeFactor(long long X) : X(X){}
+
+    void build(){
+        auto x = X;
+        for(long long div = 2; div * div <= x; ++div){
+            if(x % div != 0) continue;
+            long long cnt = 0;
+            while(x % div == 0){
+                x /= div;
+                ++cnt;
+            }
+            factor.emplace_back(div, cnt);
+        }
+        if(x != 1){
+            factor.emplace_back(x, 1);
+        }
+    }
+
+    bool isprime(){
+        return factor[0].first == X;
+    }
+
+    long long count(){
+        long long ret = 0;
+        for(auto &p : factor){
+            ret += p.second;
+        }
+        return ret;
+    }
+};

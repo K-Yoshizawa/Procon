@@ -1,0 +1,22 @@
+template<typename T>
+struct LIS{
+    int n;
+    vector<T> X;
+    vector<T> dp, sub_lis;
+
+    LIS(vector<T> X) : n(X.size()), X(X){}
+
+    vector<T> build(){
+        const T INF = numeric_limits<T>::max();
+        int max_len = 0;
+        dp.assign(n, INF);
+        sub_lis.resize(n);
+        for(int i = 0; i < n; ++i){
+            int j = lower_bound(dp.begin(), dp.end(), X[i]) - dp.begin();
+            dp[j] = X[i];
+            max_len = max(max_len, j + 1);
+            sub_lis[i] = max_len;
+        }
+        return sub_lis;
+    }
+};
