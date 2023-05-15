@@ -1,0 +1,58 @@
+/**
+ * @brief 最大流
+ * @note  全然整えてない　鉄則本を写経しました
+ * @tparam T 
+ */
+template<typename T>
+struct FordFulkerson{
+    struct Edge{
+        int to;
+        T cap;
+        int rev;
+
+        Edge(int to, T cap, int rev) : to(to), cap(cap), rev(rev){}
+    };
+
+    int V;
+    vector<vector<Edge>> G;
+    vector<bool> used;
+
+    FordFulkerson(int N) : V(N){
+        G.resize(N);
+        used.resize(N);
+    }
+
+    void add(int from, int to, T capacity){
+        int Current_from = G[from].size();
+        int Current_to = G[to].size();
+        G[from].push_back(Edge(to, capacity, Current_to));
+        G[to].push_back(Edge(from, 0, Current_from));
+    }
+
+    T dfs(int pos, int goal, T F){
+        if(pos == goal) return F;
+        used[pos] = true;
+        for(int i = 0; i < G[pos].size(); ++i){
+            if(G[pos][i].cap == 0) continue;
+            if(used[G[pos][i].to] == true) continue;
+            T flow = dfs(G[pos][i].to, goal, min(F, G[pos][i].cap));
+            if(flow >= 1){
+                G[pos][i].cap -= flow;
+                G[G[pos][i].to][G[pos][i].rev].cap += flow;
+                return flow;
+            }
+        }
+        return 0;
+    }
+
+    T max_flow(int s, int t){
+        T Total_flow = 0;
+        while(true){
+            for(int i = 0; i < V; ++i) used[i] = false;
+            T F = dfs(s, t, numeric_limits<T>::max());
+            if(F == 0) break;
+            Total_flow += F;
+        }
+        return Total_flow;
+    }
+};
