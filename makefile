@@ -5,4 +5,7 @@ cp:
 do:
 	./code.o
 
+in:
+	./code.o < in.txt
+
 test: cp do
