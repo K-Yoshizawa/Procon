@@ -1,0 +1,94 @@
+struct Grid{
+    private:
+    int H, W;
+    vector<string> grid;
+    char Floor, Wall;
+    bool pass;
+    using cell = pair<int, int>;
+    map<char, vector<cell>> object;
+    int INF;
+    const vector<int> dx4{1, 0, -1, 0};
+    const vector<int> dy4{0, -1, 0, 1};
+    const vector<int> dx8{1, 1, 0, -1, -1, -1, 0, 1};
+    const vector<int> dy8{0, -1, -1, -1, 0, 1, 1, 1};
+
+    inline bool inner(int y, int x){
+        return (0 <= y && y < H) && (0 <= x && x < W);
+    }
+
+    public:
+    vector<vector<int>> dist;
+
+    Grid(int H, int W, bool other_moveable = true, char floor = '.', char wall = '#')
+     : H(H), W(W), pass(other_moveable), Floor(floor), Wall(wall){
+        grid.resize(H);
+        dist.resize(H, vector<int>(W));
+        INF = H * W * 1000;
+    }
+
+    void input(){
+        string tmp;
+        for(int i = 0; i < H; ++i){
+            cin >> tmp;
+            assert(tmp.size() == W);
+            for(int j = 0; j < W; ++j){
+                if(tmp[j] != Floor && tmp[j] != Wall){
+                    object[tmp[j]].push_back(cell(i, j));
+                }
+            }
+            grid[i] = tmp;
+        }
+    }
+
+    vector<cell> gets_pos(char target){
+        assert(object.find(target) != object.end());
+        return object[target];
+    }
+
+    cell get_pos(char target){
+        assert(object.find(target) != object.end());
+        return object[target][0];
+    }
+
+    void bfs(cell start, const vector<int> &dx, const vector<int> &dy){
+        for(int i = 0; i < H; ++i){
+            for(int j = 0; j < W; ++j){
+                dist[i][j] = INF;
+            }
+        }
+        dist[start.first][start.second] = 0;
+        const int dir = dx.size();
+        assert(dir == dy.size());
+        queue<pair<cell, int>> que;
+        que.emplace(start, 0);
+        while(!que.empty()){
+            auto [c, d] = que.front(); que.pop();
+            auto [y, x] = c;
+            for(int i = 0; i < dir; ++i){
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if(!inner(ny, nx)) continue;
+                if(grid[ny][nx] == Wall) continue;
+                if(grid[ny][nx] != Floor && !pass) continue;
+                if(d + 1 < dist[ny][nx]){
+                    dist[ny][nx] = d + 1;
+                    que.emplace(cell(ny, nx), d + 1);
+                }
+            }
+        }
+    }
+
+    void bfs(int sy, int sx, const vector<int> &dx, const vector<int> &dy){
+        bfs(cell(sy, sx), dx, dy);
+    }
+    
+    void bfs(cell start, bool dir_8 = false){
+        if(dir_8) bfs(start, dx8, dy8);
+        else bfs(start, dx4, dy4);
+    }
+
+    void bfs(int sy, int sx, bool dir_8 = false){
+        if(dir_8) bfs(cell(sy, sx), dx8, dy8);
+        else bfs(cell(sy, sx), dx4, dy4);
+    }
+};
