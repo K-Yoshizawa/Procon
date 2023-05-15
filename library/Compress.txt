@@ -1,0 +1,26 @@
+struct Compress{
+    int sz;
+    vector<int> to_val;
+    map<int, int> to_index;
+
+    Compress(vector<int> &V){
+        for(auto &v : V){
+            to_val.emplace_back(v);
+        }
+        sort(to_val.begin(), to_val.end());
+        auto border = unique(to_val.begin(), to_val.end());
+        to_val.erase(border, to_val.end());
+        sz = to_val.size();
+        for(int i = 0; i < sz; ++i){
+            to_index[to_val[i]] = i;
+        }
+    }
+
+    inline int vi(int value){
+        return to_index[value];
+    }
+
+    inline int iv(int index){
+        return to_val[index];
+    }
+};
