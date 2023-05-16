@@ -6,7 +6,7 @@
 
 ### グラフ系統
 
- - グラフテンプレート (最終更新：2022/09/08)
+ - グラフテンプレート (最終更新：2023/05/16)
  - 全頂点最短距離
     - Dijkstra法 (最終更新：2023/05/16)([検証済 \[AOJ GRL 1 A\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_1_A/judge/7801557/Reborn_K/C++17))
     - Bellman-Ford法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B))
