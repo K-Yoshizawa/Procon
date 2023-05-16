@@ -5,25 +5,29 @@
  */
 template<typename T>
 struct Dijkstra{
+    private:
     Graph<T> &graph;
+    int V;
     T INF;
+    
+    public:
     vector<T> dist;
     vector<int> prev_vertex, prev_edge;
 
-    Dijkstra(Graph<T> &graph) : graph(graph){
+    Dijkstra(Graph<T> &graph) : graph(graph), V(graph.vertex.size()){
         INF = numeric_limits<T>::max();
-        dist.resize(graph.vertex.size(), INF);
-        prev_vertex.resize(graph.vertex.size(), -1);
-        prev_edge.resize(graph.vertex.size(), -1);
+        dist.resize(V, INF);
+        prev_vertex.resize(V, -1);
+        prev_edge.resize(V, -1);
     }
 
     /**
      * @brief 始点sから各頂点への最短距離を求める。
-     * 
      * @param s 始点
      */
     void build(int s){
         auto &g = graph.vertex;
+        dist.assign(V, INF);
         dist[s] = 0;
         
         using P = pair<T, int>;
@@ -42,5 +46,14 @@ struct Dijkstra{
                 }
             }
         }
+    }
+
+    /**
+     * @brief  頂点vへの距離がINFかを判定する
+     * @param  v: 調べる頂点
+     * @retval INFならtrue
+     */
+    bool inf(int v){
+        return dist[v] == INF;
     }
 };

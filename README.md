@@ -2,13 +2,13 @@
 
 ## Library
 
-現在実装しているライブラリは次の通り。
+現在~~実装している~~verify済のライブラリは次の通り。(最終更新：2023/05/16　あまりに更新サボりすぎててverifyしてないライブラリがたくさん増えたので)
 
 ### グラフ系統
 
  - グラフテンプレート (最終更新：2022/09/08)
  - 全頂点最短距離
-    - Dijkstra法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A))
+    - Dijkstra法 (最終更新：2023/05/16)([検証済 \[AOJ GRL 1 A\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_1_A/judge/7801557/Reborn_K/C++17))
     - Bellman-Ford法 (最終更新：2022/09/06)([検証済 \[AOJ GRL 1 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B))
     - Warshall-Floyd法 (最終更新：2022/09/08)([検証済 \[AOJ GRL 1 C\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C))
  - 最小全域木
@@ -16,6 +16,9 @@
     - Kruskal法 (最終更新：2022/09/04)([検証済 \[AOJ GRL 2 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A))
  - 木の直径 (最終更新：2022/09/05)([検証済 \[AOJ GRL 5 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_5_A))
  - 橋と関節点(Low Link) (最終更新：2022/09/06)([検証済 \[AOJ GRL 3 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_A) [検証済 \[AOJ GRL 3 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B))
+ - トポロジカルソート (最終更新：2023/05/16)([検証済 \[AOJ GRL 4 B\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_4_B/judge/7801592/Reborn_K/C++17))
+ - 最小共通祖先 (最終更新：2023/05/16)([検証済 \[AOJ GRL 5 C\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_5_C/judge/7801609/Reborn_K/C++17))
+ - 最大流(Ford-Fulkerson) (最終更新：2023/05/16)([検証済 \[AOJ GRL 6 A\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_6_A/judge/7803036/Reborn_K/C++17))
 
 ### 未分類系統
 
@@ -24,6 +27,13 @@
  - UnionFind (最終更新：2022/09/04)(拝借)
 
 ## Version
+
+### ver 2.0.0 (2023/05/16)
+ - Dijkstra法を改修。（距離がINFかを判定する関数追加）
+ - グラフテンプレートを改修。
+ - トポロジカルソートをverify。
+ - 最小共通祖先をverify。
+ - 最大流を追加、verify。
 
 ### ver 1.2.2 (2022/09/08)
  - グラフテンプレートの軽微な修正。

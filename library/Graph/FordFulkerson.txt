@@ -1,58 +1,57 @@
 /**
- * @brief 最大流
- * @note  全然整えてない　鉄則本を写経しました
- * @tparam T 
+ * @brief 最大流を計算量O(FE)で求める。ただしFは最大フローである。
  */
-template<typename T>
+template<typename T = int>
 struct FordFulkerson{
-    struct Edge{
-        int to;
-        T cap;
-        int rev;
+    private:
+    int V, E;
+    Graph<T> &G;
+    vector<vector<Edge<T>>> Gv;
+    vector<Edge<T>> Ge;
+    vector<int> rev;
+    vector<bool> used;    
 
-        Edge(int to, T cap, int rev) : to(to), cap(cap), rev(rev){}
-    };
-
-    int V;
-    vector<vector<Edge>> G;
-    vector<bool> used;
-
-    FordFulkerson(int N) : V(N){
-        G.resize(N);
-        used.resize(N);
-    }
-
-    void add(int from, int to, T capacity){
-        int Current_from = G[from].size();
-        int Current_to = G[to].size();
-        G[from].push_back(Edge(to, capacity, Current_to));
-        G[to].push_back(Edge(from, 0, Current_from));
-    }
-
-    T dfs(int pos, int goal, T F){
-        if(pos == goal) return F;
-        used[pos] = true;
-        for(int i = 0; i < G[pos].size(); ++i){
-            if(G[pos][i].cap == 0) continue;
-            if(used[G[pos][i].to] == true) continue;
-            T flow = dfs(G[pos][i].to, goal, min(F, G[pos][i].cap));
-            if(flow >= 1){
-                G[pos][i].cap -= flow;
-                G[G[pos][i].to][G[pos][i].rev].cap += flow;
-                return flow;
+    T dfs(int s, int t, T flow){
+        if(s == t) return flow;
+        used[s] = true;
+        for(int i = 0; i < Gv[s].size(); ++i){
+            if(Gv[s][i].cost == 0) continue;
+            if(used[Gv[s][i].to]) continue;
+            T tflow = dfs(Gv[s][i].to, t, min(flow, Gv[s][i].cost));
+            if(tflow > 0){
+                Gv[s][i].cost -= tflow;
+                Gv[Gv[s][i].to][Gv[s][i].vertex_ridx].cost += tflow;
+                Ge[Gv[s][i].edge_idx].cost -= tflow;
+                Ge[rev[Gv[s][i].edge_idx]].cost += tflow;
+                return tflow;
             }
         }
         return 0;
     }
 
-    T max_flow(int s, int t){
-        T Total_flow = 0;
+    public:
+    FordFulkerson(Graph<T> &g) : G(g), V(g.vertex.size()), E(g.edges.size()){
+        rev = G.add_reverse();
+        Gv = G.vertex;
+        Ge = G.edges;
+        used.resize(V, false);
+    }
+
+    /**
+     * @brief  始点sから終点tまでの最大フローを求める。
+     * @note   0-index
+     * @param  s: 始点の頂点番号
+     * @param  t: 終点の頂点番号
+     * @retval 最大フロー
+     */
+    T build(int s, int t){
+        T ret = 0;
         while(true){
             for(int i = 0; i < V; ++i) used[i] = false;
-            T F = dfs(s, t, numeric_limits<T>::max());
-            if(F == 0) break;
-            Total_flow += F;
+            T f = dfs(s, t, numeric_limits<T>::max());
+            if(f == 0) break;
+            ret += f;
         }
-        return Total_flow;
+        return ret;
     }
 };

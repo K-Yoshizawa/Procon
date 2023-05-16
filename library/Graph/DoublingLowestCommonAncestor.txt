@@ -1,3 +1,8 @@
+/**
+ * @brief  ダブリングによる最小共通祖先
+ * @note   
+ * @retval None
+ */
 template<typename T>
 struct DoublingLowestCommonAncestor{
     private:
