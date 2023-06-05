@@ -41,7 +41,7 @@ struct Dijkstra{
                 if(dist[e.to] > dist[v] + e.cost){
                     dist[e.to] = dist[v] + e.cost;
                     prev_vertex[e.to] = v;
-                    prev_edge[e.to] = e.id;
+                    prev_edge[e.to] = e.edge_idx;
                     que.emplace(dist[e.to], e.to);
                 }
             }

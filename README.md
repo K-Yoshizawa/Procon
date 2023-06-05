@@ -18,7 +18,7 @@
  - 橋と関節点(Low Link) (最終更新：2022/09/06)([検証済 \[AOJ GRL 3 A\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_A) [検証済 \[AOJ GRL 3 B\]](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B))
  - トポロジカルソート (最終更新：2023/05/16)([検証済 \[AOJ GRL 4 B\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_4_B/judge/7801592/Reborn_K/C++17))
  - 最小共通祖先 (最終更新：2023/05/16)([検証済 \[AOJ GRL 5 C\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_5_C/judge/7801609/Reborn_K/C++17))
- - 最大流(Ford-Fulkerson) (最終更新：2023/05/16)([検証済 \[AOJ GRL 6 A\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_6_A/judge/7803036/Reborn_K/C++17))
+ - 最大流(Ford-Fulkerson) (最終更新：2023/05/16)([検証済 \[AOJ GRL 6 A\]](https://onlinejudge.u-aizu.ac.jp/recent_judges/GRL_6_A/judge/7803036/Reborn_K/C++17) [検証済 \[鉄則本 A68\]](https://atcoder.jp/contests/tessoku-book/submissions/41462200))
 
 ### 未分類系統
 
@@ -46,7 +46,7 @@
  - BellmanFord法、WarshallFloyd法を実装、AOJによる検証を完了
  - LowLinkを実装、AOJによる検証を完了
 
-### ver 1.1.0 (2022/09/05)
+### ver 1.1.0 (2022/09/05) 
  - Dijkstra法、Prim法、Kruskal法のAOJによる検証を完了
  - 木の直径(TreeDiamiter)を実装、AOJによる検証を完了
 

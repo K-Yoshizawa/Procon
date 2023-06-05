@@ -1,8 +1,8 @@
 !/library/*.txt
-.vscode/
 *.o
 *.out
 a.cpp
 code.cpp
+verify.cpp
 *.txt
-atcoder/
+answer.exe

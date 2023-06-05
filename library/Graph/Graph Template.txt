@@ -9,6 +9,8 @@ struct Edge{
     T cost;                                 // 重み
     int edge_idx, vertex_idx, vertex_ridx;  // 辺集合でのインデックス、頂点集合でのインデックス、逆辺の頂点集合でのインデックス
 
+    Edge() = default;
+
     /**
      * @brief  単純な辺の追加。あまり使わないかも？
      * @note   
@@ -58,8 +60,8 @@ struct Graph{
         int edge_idx = edges.size();
         int from_idx = vertex[v].size();
         int to_idx = vertex[u].size();
-        vertex[v].push_back(Edge<T>(u, cost, edge_idx, from_idx, to_idx));
-        vertex[u].push_back(Edge<T>(v, cost, edge_idx, to_idx, from_idx));
+        vertex[v].push_back(Edge<T>(v, u, cost, edge_idx, from_idx, to_idx));
+        vertex[u].push_back(Edge<T>(u, v, cost, edge_idx, to_idx, from_idx));
         edges.push_back(Edge<T>(v, u, cost, edge_idx));
     }
 
@@ -87,7 +89,7 @@ struct Graph{
         int E = edges.size();
         vector<int> ret(2 * E);
         for(int i = 0; i < E; ++i){
-            auto &e = edges[i];
+            auto e = edges[i];
             d_add(e.to, e.from, cost);
             int idx = e.vertex_idx;
             int ridx = edges[i + E].vertex_idx;
