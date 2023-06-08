@@ -1,8 +1,10 @@
-!/library/*.txt
 *.o
 *.out
-a.cpp
 code.cpp
+main.cpp
 verify.cpp
-*.txt
+in.txt
+out.txt
+res.txt
+ac-library/
 answer.exe

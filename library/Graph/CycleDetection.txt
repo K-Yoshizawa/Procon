@@ -1,0 +1,53 @@
+template<typename T>
+struct CycleDetection{
+    Graph<T> &G;
+
+    vector<bool> seen, finished;
+    vector<Edge<T>> history;
+
+    CycleDetection(Graph<T> &graph) : G(graph){
+        seen.assign(G.vertex.size(), false);
+        finished.assign(G.vertex.size(), false);
+    }
+
+    int dfs(int v, const Edge<T> &e, bool able_reverse = true){
+        seen[v] = true;
+        history.push_back(e);
+        for(const Edge<T> &e2 : G.vertex[v]){
+            if(able_reverse && e2.to == e.from) continue;
+            if(finished[e2.to]) continue;
+            if(seen[e2.to] && !finished[e2.to]){
+                history.push_back(e2);
+                return e2.to;
+            }
+            int pos = dfs(e2.to, e2, able_reverse);
+            if(pos != -1) return pos;
+        }
+        finished[v] = true;
+        history.pop_back();
+        return -1;
+    }
+
+    vector<Edge<T>> reconstruct(int pos){
+        vector<Edge<T>> cycle;
+        while(!history.empty()){
+            const Edge<T> &e = history.back();
+            cycle.push_back(e);
+            history.pop_back();
+            if(e.from == pos) break;
+        }
+        reverse(cycle.begin(), cycle.end());
+        return cycle;
+    }
+
+    vector<Edge<T>> detect(bool able_reverse = true){
+        int pos = -1;
+        for(int v = 0; v < G.vertex.size() && pos == -1; ++v){
+            if(seen[v]) continue;
+            history.clear();
+            pos = dfs(v, Edge<T>(), able_reverse);
+            if(pos != -1) return reconstruct(pos);
+        }
+        return vector<Edge<T>>();
+    }
+};
