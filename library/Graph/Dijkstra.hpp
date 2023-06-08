@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bits/stdc++.h>
+#include "VGraph.hpp"
 using namespace std;
 
 /**
