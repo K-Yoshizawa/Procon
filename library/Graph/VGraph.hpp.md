@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: library/Graph/CycleDetection.hpp
+    title: Cycle Detection
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: Dijkstra
   - icon: ':heavy_check_mark:'
@@ -15,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-4-A.test.cpp
+    title: verify/AOJ-GRL-4-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -83,13 +89,15 @@ data:
   isVerificationFile: false
   path: library/Graph/VGraph.hpp
   requiredBy:
+  - library/Graph/CycleDetection.hpp
   - library/Graph/Dijkstra.hpp
   - library/Graph/StronglyConnectedComponents.hpp
   timestamp: '2023-06-08 13:33:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-4-A.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
 documentation_of: library/Graph/VGraph.hpp
 layout: document
 redirect_from:
