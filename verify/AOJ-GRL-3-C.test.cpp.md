@@ -1,21 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
     title: StronglyConnectedComponents
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/VGraph.hpp
     title: Vertex Graph
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C
-  bundledCode: "#line 1 \"verify/AOJ-GRL-3-C.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
+  bundledCode: "#line 1 \"verify/AOJ-GRL-3-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/VGraph.hpp\"\n\n#line\
     \ 4 \"library/Graph/VGraph.hpp\"\nusing namespace std;\n\n/**\n * @brief Vertex\
     \ Graph\n */\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\n */\ntemplate<typename\
@@ -70,7 +72,7 @@ data:
     \  v: \u5224\u5B9A\u3057\u305F\u3044\u9802\u70B9v\n     * @retval \u540C\u3058\
     \u5F37\u9023\u7D50\u6210\u5206\u306B\u6240\u5C5E\u3059\u308B\u306A\u3089true\u3001\
     \u305D\u3046\u3067\u306A\u3051\u308C\u3070false\n     */\n    bool same(int u,\
-    \ int v){\n        return belong[u] == belong[v];\n    }\n};\n#line 7 \"verify/AOJ-GRL-3-C.cpp\"\
+    \ int v){\n        return belong[u] == belong[v];\n    }\n};\n#line 7 \"verify/AOJ-GRL-3-C.test.cpp\"\
     \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
     \   VGraph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s, t;\n\
     \        cin >> s >> t;\n        G.add(s, t);\n    }\n    \n    StronglyConnectedComponents<int>\
@@ -87,16 +89,16 @@ data:
   dependsOn:
   - library/Graph/VGraph.hpp
   - library/Graph/StronglyConnectedComponents.hpp
-  isVerificationFile: false
-  path: verify/AOJ-GRL-3-C.cpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2023-06-08 14:23:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2023-06-08 14:47:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-3-C.cpp
+documentation_of: verify/AOJ-GRL-3-C.test.cpp
 layout: document
 redirect_from:
-- /library/verify/AOJ-GRL-3-C.cpp
-- /library/verify/AOJ-GRL-3-C.cpp.html
-title: verify/AOJ-GRL-3-C.cpp
+- /verify/verify/AOJ-GRL-3-C.test.cpp
+- /verify/verify/AOJ-GRL-3-C.test.cpp.html
+title: verify/AOJ-GRL-3-C.test.cpp
 ---

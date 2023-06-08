@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/VGraph.hpp
     title: Vertex Graph
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/AOJ-GRL-1-A.cpp
-    title: verify/AOJ-GRL-1-A.cpp
-  _extendedVerifiedWith: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-1-A.test.cpp
+    title: verify/AOJ-GRL-1-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Dijkstra
     links: []
@@ -106,11 +106,11 @@ data:
   - library/Graph/VGraph.hpp
   isVerificationFile: false
   path: library/Graph/Dijkstra.hpp
-  requiredBy:
-  - verify/AOJ-GRL-1-A.cpp
+  requiredBy: []
   timestamp: '2023-06-08 14:23:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document
 redirect_from:

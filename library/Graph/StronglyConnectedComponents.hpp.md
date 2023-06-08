@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/VGraph.hpp
     title: Vertex Graph
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/AOJ-GRL-3-C.cpp
-    title: verify/AOJ-GRL-3-C.cpp
-  _extendedVerifiedWith: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-3-C.test.cpp
+    title: verify/AOJ-GRL-3-C.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: StronglyConnectedComponents
     links: []
@@ -102,11 +102,11 @@ data:
   - library/Graph/VGraph.hpp
   isVerificationFile: false
   path: library/Graph/StronglyConnectedComponents.hpp
-  requiredBy:
-  - verify/AOJ-GRL-3-C.cpp
+  requiredBy: []
   timestamp: '2023-06-08 14:23:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/AOJ-GRL-3-C.test.cpp
 documentation_of: library/Graph/StronglyConnectedComponents.hpp
 layout: document
 redirect_from:

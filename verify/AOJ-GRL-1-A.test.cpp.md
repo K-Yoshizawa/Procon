@@ -1,21 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: Dijkstra
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/VGraph.hpp
     title: Vertex Graph
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
+  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/VGraph.hpp\"\n\n#line\
     \ 4 \"library/Graph/VGraph.hpp\"\nusing namespace std;\n\n/**\n * @brief Vertex\
     \ Graph\n */\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\n */\ntemplate<typename\
@@ -73,8 +75,8 @@ data:
     \        vector<int> ret;\n        int v = t;\n        while(v != -1){\n     \
     \       ret.push_back(v);\n            v = prev_vertex[v];\n        }\n      \
     \  reverse(ret.begin(), ret.end());\n        return ret;\n    }\n};\n#line 7 \"\
-    verify/AOJ-GRL-1-A.cpp\"\n\nusing namespace std;\n\n\nint main(){\n    int V,\
-    \ E, r;\n    cin >> V >> E >> r;\n    VGraph<long long> G(V, true);\n    for(int\
+    verify/AOJ-GRL-1-A.test.cpp\"\n\nusing namespace std;\n\n\nint main(){\n    int\
+    \ V, E, r;\n    cin >> V >> E >> r;\n    VGraph<long long> G(V, true);\n    for(int\
     \ i = 0; i < E; ++i){\n        int s, t;\n        long long d;\n        cin >>\
     \ s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    Dijkstra<long long> ds(G);\n\
     \    ds.build(r);\n    for(int i = 0; i < V; ++i){\n        if(ds.dist[i] == ds.INF){\n\
@@ -92,16 +94,16 @@ data:
   dependsOn:
   - library/Graph/VGraph.hpp
   - library/Graph/Dijkstra.hpp
-  isVerificationFile: false
-  path: verify/AOJ-GRL-1-A.cpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-08 14:23:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2023-06-08 14:47:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-A.cpp
+documentation_of: verify/AOJ-GRL-1-A.test.cpp
 layout: document
 redirect_from:
-- /library/verify/AOJ-GRL-1-A.cpp
-- /library/verify/AOJ-GRL-1-A.cpp.html
-title: verify/AOJ-GRL-1-A.cpp
+- /verify/verify/AOJ-GRL-1-A.test.cpp
+- /verify/verify/AOJ-GRL-1-A.test.cpp.html
+title: verify/AOJ-GRL-1-A.test.cpp
 ---
