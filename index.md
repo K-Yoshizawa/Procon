@@ -1,28 +1,19 @@
 ---
 data:
   libraryCategories:
-  - name: library_verify/other
+  - name: library/Graph
     pages:
-    - icon: ':warning:'
-      path: library_verify/other/tessoku_A61.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
-    - icon: ':warning:'
-      path: library_verify/other/tessoku_A62.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
-    - icon: ':warning:'
-      path: library_verify/other/tessoku_A63.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
-    - icon: ':warning:'
-      path: library_verify/other/tessoku_A64.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
-    - icon: ':warning:'
-      path: library_verify/other/tessoku_B64.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
+    - icon: ':x:'
+      path: library/Graph/Dijkstra.hpp
+      title: Dijkstra
+    - icon: ':x:'
+      path: library/Graph/VGraph.hpp
+      title: Vertex Graph
   verificationCategories:
-  - name: library_verify/AOJ
+  - name: verify
     pages:
-    - icon: ':heavy_check_mark:'
-      path: library_verify/AOJ/Dijkstra.test.cpp
-      title: "\u9802\u70B9\u96C6\u5408\u3067\u7BA1\u7406\u3059\u308B\u30B0\u30E9\u30D5"
+    - icon: ':x:'
+      path: verify/Dijkstra.test.cpp
+      title: verify/Dijkstra.test.cpp
 layout: toppage
 ---
