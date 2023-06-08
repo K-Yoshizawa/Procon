@@ -1,3 +1,12 @@
+#pragma once
+
+/**
+ * @brief Vertex Graph
+ */
+
+/**
+ * @brief グラフの辺
+ */
 template<typename T>
 struct Edge{
     int from, to;

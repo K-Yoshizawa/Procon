@@ -8,4 +8,4 @@ res.txt
 ac-library/
 .vscode
 answer.exe
-!/library_verify/**
+!/verify/**

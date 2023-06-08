@@ -1,3 +1,9 @@
+#pragma once
+
+/**
+ * @brief Dijkstra
+ */
+
 /**
  * @brief  ダイクストラ法で最短距離を求める。
  * @attention グラフに負の重みの辺がない必要がある。
