@@ -1,23 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: library/Graph/Dijkstra.hpp
     title: Dijkstra
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: library/Graph/VGraph.hpp
     title: Vertex Graph
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify/Dijkstra.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
+  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/VGraph.hpp\"\n\n#line\
     \ 4 \"library/Graph/VGraph.hpp\"\nusing namespace std;\n\n/**\n * @brief Vertex\
     \ Graph\n */\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\n */\ntemplate<typename\
@@ -47,7 +45,7 @@ data:
     \        VGraph<T> ret(sz, true);\n        for(int s = 0; s < sz; ++s){\n    \
     \        for(auto &e : vertex[s]){\n                ret.add(e.to, s, e.cost);\n\
     \            }\n        }\n        return ret;\n    }\n};\n#line 2 \"library/Graph/Dijkstra.hpp\"\
-    \n\n#line 4 \"library/Graph/Dijkstra.hpp\"\nusing namespace std;\n\n/**\n * @brief\
+    \n\n#line 5 \"library/Graph/Dijkstra.hpp\"\nusing namespace std;\n\n/**\n * @brief\
     \ Dijkstra\n */\n\n/**\n * @brief  \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u3067\
     \u6700\u77ED\u8DDD\u96E2\u3092\u6C42\u3081\u308B\u3002\n * @attention \u30B0\u30E9\
     \u30D5\u306B\u8CA0\u306E\u91CD\u307F\u306E\u8FBA\u304C\u306A\u3044\u5FC5\u8981\
@@ -75,7 +73,7 @@ data:
     \        vector<int> ret;\n        int v = t;\n        while(v != -1){\n     \
     \       ret.push_back(v);\n            v = prev_vertex[v];\n        }\n      \
     \  reverse(ret.begin(), ret.end());\n        return ret;\n    }\n};\n#line 7 \"\
-    verify/Dijkstra.test.cpp\"\n\nusing namespace std;\n\n\nint main(){\n    int V,\
+    verify/AOJ-GRL-1-A.cpp\"\n\nusing namespace std;\n\n\nint main(){\n    int V,\
     \ E, r;\n    cin >> V >> E >> r;\n    VGraph<long long> G(V, true);\n    for(int\
     \ i = 0; i < E; ++i){\n        int s, t;\n        long long d;\n        cin >>\
     \ s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    Dijkstra<long long> ds(G);\n\
@@ -94,16 +92,16 @@ data:
   dependsOn:
   - library/Graph/VGraph.hpp
   - library/Graph/Dijkstra.hpp
-  isVerificationFile: true
-  path: verify/Dijkstra.test.cpp
+  isVerificationFile: false
+  path: verify/AOJ-GRL-1-A.cpp
   requiredBy: []
-  timestamp: '2023-06-08 13:33:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-06-08 14:23:58+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/Dijkstra.test.cpp
+documentation_of: verify/AOJ-GRL-1-A.cpp
 layout: document
 redirect_from:
-- /verify/verify/Dijkstra.test.cpp
-- /verify/verify/Dijkstra.test.cpp.html
-title: verify/Dijkstra.test.cpp
+- /library/verify/AOJ-GRL-1-A.cpp
+- /library/verify/AOJ-GRL-1-A.cpp.html
+title: verify/AOJ-GRL-1-A.cpp
 ---

@@ -1,14 +1,23 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/Dijkstra.test.cpp
-    title: verify/Dijkstra.test.cpp
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: library/Graph/Dijkstra.hpp
+    title: Dijkstra
+  - icon: ':warning:'
+    path: library/Graph/StronglyConnectedComponents.hpp
+    title: StronglyConnectedComponents
+  - icon: ':warning:'
+    path: verify/AOJ-GRL-1-A.cpp
+    title: verify/AOJ-GRL-1-A.cpp
+  - icon: ':warning:'
+    path: verify/AOJ-GRL-3-C.cpp
+    title: verify/AOJ-GRL-3-C.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: Vertex Graph
     links: []
@@ -73,11 +82,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: library/Graph/VGraph.hpp
-  requiredBy: []
+  requiredBy:
+  - verify/AOJ-GRL-1-A.cpp
+  - verify/AOJ-GRL-3-C.cpp
+  - library/Graph/Dijkstra.hpp
+  - library/Graph/StronglyConnectedComponents.hpp
   timestamp: '2023-06-08 13:33:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/Dijkstra.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/Graph/VGraph.hpp
 layout: document
 redirect_from:
