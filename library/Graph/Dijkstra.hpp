@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief Dijkstra - 単一始点最短距離（ダイクストラ法）
+ * @brief 単一始点最短距離（ダイクストラ法） - Dijkstra
  */
 
 #include <bits/stdc++.h>

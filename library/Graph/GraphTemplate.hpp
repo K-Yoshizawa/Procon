@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief Graph Template - グラフテンプレート
+ * @brief グラフテンプレート - Graph Template
  */
 
 #include <bits/stdc++.h>

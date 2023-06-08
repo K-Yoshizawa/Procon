@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief Strongly Connected Components - 強連結成分分解
+ * @brief 強連結成分分解 - Strongly Connected Components
  */
 
 #include <bits/stdc++.h>
