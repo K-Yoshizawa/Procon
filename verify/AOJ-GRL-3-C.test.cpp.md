@@ -3,10 +3,10 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
   - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
-    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected Components"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,11 +19,11 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C
   bundledCode: "#line 1 \"verify/AOJ-GRL-3-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/StronglyConnectedComponents.hpp\"\
-    \n\n/**\n * @brief Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\
-    \u5206\u89E3\n */\n\n#line 8 \"library/Graph/StronglyConnectedComponents.hpp\"\
+    \n\n/**\n * @brief \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected\
+    \ Components\n */\n\n#line 8 \"library/Graph/StronglyConnectedComponents.hpp\"\
     \nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n\
-    \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace std;\n\n\
+    \ * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template\n\
+    \ */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace std;\n\n\
     using EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\u30D5\
     \u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n    Vertex\
     \ from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType cost)\
@@ -129,7 +129,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-C.test.cpp

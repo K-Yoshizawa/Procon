@@ -7,28 +7,29 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-4-A.test.cpp
-    title: verify/AOJ-GRL-4-A.test.cpp
+    path: verify/AOJ-GRL-1-B.test.cpp
+    title: verify/AOJ-GRL-1-B.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09\
-      \ - Cycle Detection"
+    document_title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\u30EB\
+      \u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman Ford"
     links: []
-  bundledCode: "#line 2 \"library/Graph/CycleDetection.hpp\"\n\n/**\n * @brief \u9589\
-    \u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09 - Cycle Detection\n\
-    \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
-    \ Template\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
-    \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
-    \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
-    \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
-    \ cost) : from(from), to(to), cost(cost){}\n};\n\n/**\n * @brief \u30B0\u30E9\u30D5\
-    \u3092\u8868\u3059\u30AF\u30E9\u30B9\u3002\n * @note \u8FBA\u96C6\u5408\u306B\u3088\
-    \u3063\u3066\u5B9F\u73FE\u3057\u3066\u3044\u308B\u3002\n * @tparam CostType \u8FBA\
-    \u306E\u91CD\u307F\u306E\u578B\u3002\n */\ntemplate<typename CostType = int>\n\
-    class Graph{\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\n    public:\n\
+  bundledCode: "#line 2 \"library/Graph/BellmanFord.hpp\"\n\n/**\n * @brief \u5358\
+    \u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\u30EB\u30DE\u30F3\u30D5\
+    \u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman Ford\n */\n\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n *\
+    \ @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template\n\
+    \ */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace std;\n\n\
+    using EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\u30D5\
+    \u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n    Vertex\
+    \ from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType cost)\
+    \ : from(from), to(to), cost(cost){}\n};\n\n/**\n * @brief \u30B0\u30E9\u30D5\u3092\
+    \u8868\u3059\u30AF\u30E9\u30B9\u3002\n * @note \u8FBA\u96C6\u5408\u306B\u3088\u3063\
+    \u3066\u5B9F\u73FE\u3057\u3066\u3044\u308B\u3002\n * @tparam CostType \u8FBA\u306E\
+    \u91CD\u307F\u306E\u578B\u3002\n */\ntemplate<typename CostType = int>\nclass\
+    \ Graph{\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\n    public:\n\
     \    vector<Edge<CostType>> edges;\n    vector<vector<EdgeNum>> connect;\n\n \
     \   /**\n     * @brief Construct a new Graph object\n     * @param VertexNum \u30B0\
     \u30E9\u30D5\u306E\u9802\u70B9\u6570\n     * @param isDirected \u6709\u5411\u30B0\
@@ -82,60 +83,44 @@ data:
     \ default = false)\n     * @return int \u9802\u70B9v\u306E\u6307\u5B9A\u3057\u305F\
     \u5024\n     */\n    inline int degree(Vertex v, bool isIn = false){\n       \
     \ if(dir && isIn) return indegree[v];\n        return (int)connect[v].size();\n\
-    \    }\n};\n#line 11 \"library/Graph/CycleDetection.hpp\"\n\n/**\n * @brief \u6709\
-    \u5411\u30B0\u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\u884C\u3046\u3002\
-    \n */\ntemplate<typename CostType>\nstruct CycleDetection{\n    vector<vector<Vertex>>\
-    \ cycle;\n    \n    private:\n    Graph<CostType> &G;\n    vector<Vertex> visited,\
-    \ history;\n    vector<Vertex> belong;\n    vector<Vertex> tmp;\n\n    void dfs(int\
-    \ v){\n        visited[v] = 1;\n        history.push_back(v);\n        for(auto\
-    \ &e : G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n      \
-    \      if(visited[e.to] == 1){\n                for(int i = history.size() - 1;\
-    \ ; --i){\n                    tmp.push_back(history[i]);\n                  \
-    \  belong[history[i]] = cycle.size();\n                    if(history[i] == e.to)\
-    \ break;\n                }\n                cycle.push_back(tmp);\n         \
-    \       tmp.clear();\n            }\n            else{\n                dfs(e.to);\n\
-    \            }\n        }\n        history.pop_back();\n        visited[v] = 2;\n\
-    \    }\n\n    public:\n    CycleDetection(Graph<CostType> &G) : G(G), visited(G.size(),\
-    \ 0), belong(G.size(), -1){\n        assert(G.directed());\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n        }\n \
-    \   }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\u3092\u6301\
-    \u3064\u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool exist(){\n\
-    \        return cycle.size() > 0;\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
-    \u30B0\u30E9\u30D5\uFF09 - Cycle Detection\n */\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#include \"GraphTemplate.hpp\"\n\n/**\n * @brief \u6709\
-    \u5411\u30B0\u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\u884C\u3046\u3002\
-    \n */\ntemplate<typename CostType>\nstruct CycleDetection{\n    vector<vector<Vertex>>\
-    \ cycle;\n    \n    private:\n    Graph<CostType> &G;\n    vector<Vertex> visited,\
-    \ history;\n    vector<Vertex> belong;\n    vector<Vertex> tmp;\n\n    void dfs(int\
-    \ v){\n        visited[v] = 1;\n        history.push_back(v);\n        for(auto\
-    \ &e : G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n      \
-    \      if(visited[e.to] == 1){\n                for(int i = history.size() - 1;\
-    \ ; --i){\n                    tmp.push_back(history[i]);\n                  \
-    \  belong[history[i]] = cycle.size();\n                    if(history[i] == e.to)\
-    \ break;\n                }\n                cycle.push_back(tmp);\n         \
-    \       tmp.clear();\n            }\n            else{\n                dfs(e.to);\n\
-    \            }\n        }\n        history.pop_back();\n        visited[v] = 2;\n\
-    \    }\n\n    public:\n    CycleDetection(Graph<CostType> &G) : G(G), visited(G.size(),\
-    \ 0), belong(G.size(), -1){\n        assert(G.directed());\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n        }\n \
-    \   }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\u3092\u6301\
-    \u3064\u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool exist(){\n\
-    \        return cycle.size() > 0;\n    }\n};"
+    \    }\n};\n#line 11 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename CostType>\n\
+    vector<CostType> BellmanFord(Graph<CostType> &G, int s){\n    const CostType INF\
+    \ = numeric_limits<CostType>::max();\n    vector<CostType> ret(G.size(), INF);\n\
+    \    ret[s] = 0;\n    int updatecount = 0;\n    while(1){\n        if(updatecount\
+    \ == G.size()){\n            ret[s] = -1;\n            return ret;\n        }\n\
+    \        bool update = false;\n        for(auto &e : G.edges){\n            Vertex\
+    \ from = e.from, to = e.to;\n            CostType cost = e.cost;\n           \
+    \ if(ret[from] == INF) continue;\n            if(ret[to] > ret[from] + cost){\n\
+    \                ret[to] = ret[from] + cost;\n                update = true;\n\
+    \            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
+    \    }\n    return ret;\n}\n"
+  code: "#pragma once\n\n/**\n * @brief \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\
+    \u96E2\uFF08\u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman\
+    \ Ford\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include \"GraphTemplate.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(Graph<CostType>\
+    \ &G, int s){\n    const CostType INF = numeric_limits<CostType>::max();\n   \
+    \ vector<CostType> ret(G.size(), INF);\n    ret[s] = 0;\n    int updatecount =\
+    \ 0;\n    while(1){\n        if(updatecount == G.size()){\n            ret[s]\
+    \ = -1;\n            return ret;\n        }\n        bool update = false;\n  \
+    \      for(auto &e : G.edges){\n            Vertex from = e.from, to = e.to;\n\
+    \            CostType cost = e.cost;\n            if(ret[from] == INF) continue;\n\
+    \            if(ret[to] > ret[from] + cost){\n                ret[to] = ret[from]\
+    \ + cost;\n                update = true;\n            }\n        }\n        if(!update)\
+    \ break;\n        ++updatecount;\n    }\n    return ret;\n}"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
-  path: library/Graph/CycleDetection.hpp
+  path: library/Graph/BellmanFord.hpp
   requiredBy: []
   timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-4-A.test.cpp
-documentation_of: library/Graph/CycleDetection.hpp
+  - verify/AOJ-GRL-1-B.test.cpp
+documentation_of: library/Graph/BellmanFord.hpp
 layout: document
 redirect_from:
-- /library/library/Graph/CycleDetection.hpp
-- /library/library/Graph/CycleDetection.hpp.html
-title: "\u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09 - Cycle\
-  \ Detection"
+- /library/library/Graph/BellmanFord.hpp
+- /library/library/Graph/BellmanFord.hpp.html
+title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\u30EB\u30DE\u30F3\
+  \u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman Ford"
 ---

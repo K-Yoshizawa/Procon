@@ -3,11 +3,11 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
-      \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
+    title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
+      \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,10 +20,10 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
   bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/Dijkstra.hpp\"\n\n/**\n\
-    \ * @brief Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
-    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
-    \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
+    \ * @brief \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
+    \ Template\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
     \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
     \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp

@@ -3,20 +3,27 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: library/Graph/BellmanFord.hpp
+    title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\u30EB\u30DE\
+      \u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman Ford"
+  - icon: ':heavy_check_mark:'
     path: library/Graph/CycleDetection.hpp
-    title: "Cycle Detection - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\
-      \u30D5\uFF09"
+    title: "\u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09 - Cycle\
+      \ Detection"
   - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
-      \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
+    title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
+      \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
   - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
-    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected Components"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-1-B.test.cpp
+    title: verify/AOJ-GRL-1-B.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
@@ -27,11 +34,11 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
-      \u30C8"
+    document_title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
+      \ Template"
     links: []
-  bundledCode: "#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @brief Graph\
-    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n */\n\n#include\
+  bundledCode: "#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @brief \u30B0\
+    \u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing EdgeNum = int;\nusing Vertex\
     \ = int;\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\n */\ntemplate<typename\
     \ CostType = int>\nstruct Edge{\n    Vertex from, to;\n    CostType cost;\n\n\
@@ -95,16 +102,16 @@ data:
     \u5024\n     */\n    inline int degree(Vertex v, bool isIn = false){\n       \
     \ if(dir && isIn) return indegree[v];\n        return (int)connect[v].size();\n\
     \    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\u30D5\
-    \u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n    Vertex\
-    \ from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType cost)\
-    \ : from(from), to(to), cost(cost){}\n};\n\n/**\n * @brief \u30B0\u30E9\u30D5\u3092\
-    \u8868\u3059\u30AF\u30E9\u30B9\u3002\n * @note \u8FBA\u96C6\u5408\u306B\u3088\u3063\
-    \u3066\u5B9F\u73FE\u3057\u3066\u3044\u308B\u3002\n * @tparam CostType \u8FBA\u306E\
-    \u91CD\u307F\u306E\u578B\u3002\n */\ntemplate<typename CostType = int>\nclass\
-    \ Graph{\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\n    public:\n\
+  code: "#pragma once\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
+    \u30FC\u30C8 - Graph Template\n */\n\n#include <bits/stdc++.h>\nusing namespace\
+    \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
+    \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
+    \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
+    \ cost) : from(from), to(to), cost(cost){}\n};\n\n/**\n * @brief \u30B0\u30E9\u30D5\
+    \u3092\u8868\u3059\u30AF\u30E9\u30B9\u3002\n * @note \u8FBA\u96C6\u5408\u306B\u3088\
+    \u3063\u3066\u5B9F\u73FE\u3057\u3066\u3044\u308B\u3002\n * @tparam CostType \u8FBA\
+    \u306E\u91CD\u307F\u306E\u578B\u3002\n */\ntemplate<typename CostType = int>\n\
+    class Graph{\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\n    public:\n\
     \    vector<Edge<CostType>> edges;\n    vector<vector<EdgeNum>> connect;\n\n \
     \   /**\n     * @brief Construct a new Graph object\n     * @param VertexNum \u30B0\
     \u30E9\u30D5\u306E\u9802\u70B9\u6570\n     * @param isDirected \u6709\u5411\u30B0\
@@ -163,19 +170,21 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
+  - library/Graph/BellmanFord.hpp
   - library/Graph/CycleDetection.hpp
   - library/Graph/Dijkstra.hpp
   - library/Graph/StronglyConnectedComponents.hpp
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:
 - /library/library/Graph/GraphTemplate.hpp
 - /library/library/Graph/GraphTemplate.hpp.html
-title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
 ---

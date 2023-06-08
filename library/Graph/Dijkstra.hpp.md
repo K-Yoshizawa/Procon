@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -13,14 +13,14 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\
-      \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
+    document_title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\
+      \u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
     links: []
-  bundledCode: "#line 2 \"library/Graph/Dijkstra.hpp\"\n\n/**\n * @brief Dijkstra\
-    \ - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\u30B9\
-    \u30C8\u30E9\u6CD5\uFF09\n */\n\n#include <bits/stdc++.h>\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
-    \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
+  bundledCode: "#line 2 \"library/Graph/Dijkstra.hpp\"\n\n/**\n * @brief \u5358\u4E00\
+    \u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\
+    \u6CD5\uFF09 - Dijkstra\n */\n\n#include <bits/stdc++.h>\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
+    \ Template\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
     \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
     \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
@@ -111,23 +111,23 @@ data:
     \ int v = t;\n        while(v != -1){\n            ret.push_back(v);\n       \
     \     v = prev_vertex[v];\n        }\n        reverse(ret.begin(), ret.end());\n\
     \        return ret;\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\
-    \u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09\n */\n\n#include\
-    \ <bits/stdc++.h>\n#include \"GraphTemplate.hpp\"\nusing namespace std;\n\n/**\n\
-    \ * @brief  \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u3067\u6700\u77ED\u8DDD\
-    \u96E2\u3092\u6C42\u3081\u308B\u3002\n * @attention \u30B0\u30E9\u30D5\u306B\u8CA0\
-    \u306E\u91CD\u307F\u306E\u8FBA\u304C\u306A\u3044\u5FC5\u8981\u304C\u3042\u308B\
-    \u3002\n */\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n   \
-    \ Graph<CostType> &G;\n    vector<Vertex> prev_vertex;\n\n    public:\n    vector<CostType>\
-    \ dist;\n    CostType INF;\n\n    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()),\
-    \ INF(numeric_limits<CostType>::max()), prev_vertex(G.size()){}\n\n    /**\n \
-    \    * @brief  \u9802\u70B9s\u3092\u59CB\u70B9\u3068\u3057\u3066\u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5\u3092\u9069\u7528\u3059\u308B\u3002\n     * @param  s:\
-    \ \u59CB\u70B9\u3068\u306A\u308B\u9802\u70B9s\n     * @note   \u6C42\u3081\u3089\
-    \u308C\u305F\u6700\u77ED\u8DDD\u96E2\u306Fdist\u306B\u683C\u7D0D\u3055\u308C\u308B\
-    \u3002\n     */\n    void build(int s){\n        dist.assign(G.size(), INF);\n\
-    \        prev_vertex.assign(G.size(), -1);\n        using p = pair<CostType, Vertex>;\n\
-    \        priority_queue<p, vector<p>, greater<p>> que;\n        que.emplace(0,\
+  code: "#pragma once\n\n/**\n * @brief \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\
+    \u96E2\uFF08\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra\n */\n\
+    \n#include <bits/stdc++.h>\n#include \"GraphTemplate.hpp\"\nusing namespace std;\n\
+    \n/**\n * @brief  \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u3067\u6700\u77ED\
+    \u8DDD\u96E2\u3092\u6C42\u3081\u308B\u3002\n * @attention \u30B0\u30E9\u30D5\u306B\
+    \u8CA0\u306E\u91CD\u307F\u306E\u8FBA\u304C\u306A\u3044\u5FC5\u8981\u304C\u3042\
+    \u308B\u3002\n */\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n\
+    \    Graph<CostType> &G;\n    vector<Vertex> prev_vertex;\n\n    public:\n   \
+    \ vector<CostType> dist;\n    CostType INF;\n\n    Dijkstra(Graph<CostType> &G)\
+    \ : G(G), dist(G.size()), INF(numeric_limits<CostType>::max()), prev_vertex(G.size()){}\n\
+    \n    /**\n     * @brief  \u9802\u70B9s\u3092\u59CB\u70B9\u3068\u3057\u3066\u30C0\
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u3092\u9069\u7528\u3059\u308B\u3002\n   \
+    \  * @param  s: \u59CB\u70B9\u3068\u306A\u308B\u9802\u70B9s\n     * @note   \u6C42\
+    \u3081\u3089\u308C\u305F\u6700\u77ED\u8DDD\u96E2\u306Fdist\u306B\u683C\u7D0D\u3055\
+    \u308C\u308B\u3002\n     */\n    void build(int s){\n        dist.assign(G.size(),\
+    \ INF);\n        prev_vertex.assign(G.size(), -1);\n        using p = pair<CostType,\
+    \ Vertex>;\n        priority_queue<p, vector<p>, greater<p>> que;\n        que.emplace(0,\
     \ s);\n        dist[s] = 0;\n        while(!que.empty()){\n            auto [d,\
     \ v] = que.top();\n            que.pop();\n            if(dist[v] < d) continue;\n\
     \            for(auto &e : G.get_edges(v)){\n                if(d + e.cost < dist[e.to]){\n\
@@ -147,7 +147,7 @@ data:
   isVerificationFile: false
   path: library/Graph/Dijkstra.hpp
   requiredBy: []
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-A.test.cpp
@@ -156,6 +156,6 @@ layout: document
 redirect_from:
 - /library/library/Graph/Dijkstra.hpp
 - /library/library/Graph/Dijkstra.hpp.html
-title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\
-  \u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
+title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\u30B9\
+  \u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
 ---

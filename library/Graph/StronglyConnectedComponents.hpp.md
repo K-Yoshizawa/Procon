@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -13,14 +13,14 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\
-      \u5206\u89E3"
+    document_title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected\
+      \ Components"
     links: []
   bundledCode: "#line 2 \"library/Graph/StronglyConnectedComponents.hpp\"\n\n/**\n\
-    \ * @brief Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
-    \u89E3\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
-    \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
+    \ * @brief \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected Components\n\
+    \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
+    \ Template\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
     \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
     \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
@@ -108,8 +108,8 @@ data:
     \u5C5E\u3059\u308B\u306A\u3089true\u3001\u305D\u3046\u3067\u306A\u3051\u308C\u3070\
     false\n     */\n    bool same(Vertex u, Vertex v){\n        return belong[u] ==\
     \ belong[v];\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Strongly Connected Components - \u5F37\u9023\
-    \u7D50\u6210\u5206\u5206\u89E3\n */\n\n#include <bits/stdc++.h>\nusing namespace\
+  code: "#pragma once\n\n/**\n * @brief \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\
+    \ - Strongly Connected Components\n */\n\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\n#include \"GraphTemplate.hpp\"\n\n/**\n * @brief  \u5F37\u9023\u7D50\
     \u6210\u5206\u5206\u89E3\u3092\u884C\u3046\u3002\n */\ntemplate<typename CostType>\n\
     struct StronglyConnectedComponents{\n    Graph<CostType> &G, rG;\n    vector<Vertex>\
@@ -141,7 +141,7 @@ data:
   isVerificationFile: false
   path: library/Graph/StronglyConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-3-C.test.cpp
@@ -150,5 +150,5 @@ layout: document
 redirect_from:
 - /library/library/Graph/StronglyConnectedComponents.hpp
 - /library/library/Graph/StronglyConnectedComponents.hpp.html
-title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected Components"
 ---

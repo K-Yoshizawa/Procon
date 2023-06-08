@@ -3,11 +3,11 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/CycleDetection.hpp
-    title: "Cycle Detection - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\
-      \u30D5\uFF09"
+    title: "\u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09 - Cycle\
+      \ Detection"
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,11 +20,11 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A
   bundledCode: "#line 1 \"verify/AOJ-GRL-4-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A\"\
     \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/Graph/CycleDetection.hpp\"\
-    \n\n/**\n * @brief Cycle Detection - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
-    \u30B0\u30E9\u30D5\uFF09\n */\n\n#line 8 \"library/Graph/CycleDetection.hpp\"\n\
+    \n\n/**\n * @brief \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\
+    \uFF09 - Cycle Detection\n */\n\n#line 8 \"library/Graph/CycleDetection.hpp\"\n\
     using namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n *\
-    \ @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace std;\n\n\
+    \ @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template\n\
+    \ */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace std;\n\n\
     using EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\u30D5\
     \u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n    Vertex\
     \ from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType cost)\
@@ -121,7 +121,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-4-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 02:11:51+09:00'
+  timestamp: '2023-06-09 02:29:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-4-A.test.cpp
