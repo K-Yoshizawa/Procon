@@ -1,11 +1,11 @@
 *.o
 *.out
-code.cpp
-main.cpp
-verify.cpp
+*.cpp
 ans.txt
 in.txt
 out.txt
 res.txt
 ac-library/
+.vscode
 answer.exe
+!/library_verify/*
