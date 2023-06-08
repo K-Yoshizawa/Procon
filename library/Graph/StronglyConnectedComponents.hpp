@@ -1,21 +1,22 @@
 #pragma once
 
+/**
+ * @brief Strongly Connected Components - 強連結成分分解
+ */
+
 #include <bits/stdc++.h>
-#include "VGraph.hpp"
 using namespace std;
 
-/**
- * @brief StronglyConnectedComponents
- */
+#include "GraphTemplate.hpp"
 
 /**
  * @brief  強連結成分分解を行う。
  */
-template<typename T>
+template<typename CostType>
 struct StronglyConnectedComponents{
-    VGraph<T> &G, rG;
-    vector<int> belong; // 頂点がどの強連結成分に所属するか
-    vector<vector<int>> sc; // 各強連結成分に所属する頂点
+    Graph<CostType> &G, rG;
+    vector<Vertex> belong; // 頂点がどの強連結成分に所属するか
+    vector<vector<Vertex>> sc; // 各強連結成分に所属する頂点
 
     private:
     vector<int> order, visited;
@@ -23,7 +24,7 @@ struct StronglyConnectedComponents{
 
     void dfs(int v){
         visited[v] = 1;
-        for(auto &e : G.vertex[v]){
+        for(auto &e : G.get_edges(v)){
             if(visited[e.to] == 0) dfs(e.to);
         }
         order.push_back(v);
@@ -33,17 +34,17 @@ struct StronglyConnectedComponents{
         visited[v] = 0;
         belong[v] = k;
         tmp.push_back(v);
-        for(auto &e : rG.vertex[v]){
+        for(auto &e : rG.get_edges(v)){
             if(visited[e.to] == 1) rdfs(e.to, k);
         }
     }
 
     public:
-    StronglyConnectedComponents(VGraph<T> &G) : G(G){
+    StronglyConnectedComponents(Graph<CostType> &G) : G(G){
         rG = G.reverse();
-        visited.resize(G.sz, 0);
-        belong.resize(G.sz, -1);
-        for(int i = 0; i < G.sz; ++i){
+        visited.resize(G.size(), 0);
+        belong.resize(G.size(), -1);
+        for(int i = 0; i < G.size(); ++i){
             if(visited[i] == 0) dfs(i);
         }
         int k = 0;
@@ -62,7 +63,7 @@ struct StronglyConnectedComponents{
      * @param  v: 判定したい頂点v
      * @retval 同じ強連結成分に所属するならtrue、そうでなければfalse
      */
-    bool same(int u, int v){
+    bool same(Vertex u, Vertex v){
         return belong[u] == belong[v];
     }
 };

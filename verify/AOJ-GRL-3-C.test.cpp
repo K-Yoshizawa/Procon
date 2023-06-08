@@ -2,7 +2,6 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/VGraph.hpp"
 #include "../library/Graph/StronglyConnectedComponents.hpp"
 
 using namespace std;
@@ -10,7 +9,7 @@ using namespace std;
 int main(){
     int V, E;
     cin >> V >> E;
-    VGraph<int> G(V, true);
+    Graph<int> G(V, true);
     for(int i = 0; i < E; ++i){
         int s, t;
         cin >> s >> t;

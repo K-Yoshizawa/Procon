@@ -2,16 +2,14 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/VGraph.hpp"
 #include "../library/Graph/Dijkstra.hpp"
 
 using namespace std;
 
-
 int main(){
     int V, E, r;
     cin >> V >> E >> r;
-    VGraph<long long> G(V, true);
+    Graph<long long> G(V, true);
     for(int i = 0; i < E; ++i){
         int s, t;
         long long d;
