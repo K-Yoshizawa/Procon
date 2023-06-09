@@ -40,7 +40,7 @@ struct TreeDiamiter{
         int v = 0;
         CostType d = 0;
         for(int i = 0; i < G.size(); ++i){
-            if(dist[i] < d){
+            if(dist[i] > d){
                 v = i, d = dist[i];
             }
         }
@@ -48,7 +48,7 @@ struct TreeDiamiter{
         bfs(v);
         v = 0, d = 0;
         for(int i = 0; i < G.size(); ++i){
-            if(dist[i] < d){
+            if(dist[i] > d){
                 v = i, d = dist[i];
             }
         }

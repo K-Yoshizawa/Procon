@@ -20,7 +20,7 @@ int main(){
     Dijkstra<long long> ds(G);
     ds.build(r);
     for(int i = 0; i < V; ++i){
-        if(ds.dist[i] == ds.INF){
+        if(ds.dist[i] == G.INF){
             cout << "INF" << endl;
         }
         else{

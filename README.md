@@ -10,6 +10,10 @@ Reborn_Kの競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
+### Ver 1.3.1
+- Dijkstraのverifyがバグってました
+- ついでに木の直径を実装しました
+
 ### Ver 1.3.0
 - Union-Findを実装というか移植
 - Warshall-Floydを実装というか改修
