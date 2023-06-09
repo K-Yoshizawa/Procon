@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief グラフテンプレート - Graph Template
+ * @brief Graph Template - グラフテンプレート
  */
 
 #include <bits/stdc++.h>
@@ -28,6 +28,7 @@ struct Edge{
  */
 template<typename CostType = int>
 class Graph{
+    private:
     int sz;
     bool dir;
     vector<int> indegree;
@@ -35,13 +36,14 @@ class Graph{
     public:
     vector<Edge<CostType>> edges;
     vector<vector<EdgeNum>> connect;
+    CostType INF;
 
     /**
      * @brief Construct a new Graph object
      * @param VertexNum グラフの頂点数
      * @param isDirected 有向グラフとして作成するか
      */
-    Graph(int VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum){}
+    Graph(int VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max()){}
 
     Graph() = default;
 

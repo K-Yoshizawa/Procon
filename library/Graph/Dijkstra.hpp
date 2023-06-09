@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief 単一始点最短距離（ダイクストラ法） - Dijkstra
+ * @brief Dijkstra - 単一始点最短距離（ダイクストラ法）
  */
 
 #include <bits/stdc++.h>
@@ -20,9 +20,8 @@ struct Dijkstra{
 
     public:
     vector<CostType> dist;
-    CostType INF;
 
-    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()), INF(numeric_limits<CostType>::max()), prev_vertex(G.size()){}
+    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()), prev_vertex(G.size()){}
 
     /**
      * @brief  頂点sを始点としてダイクストラ法を適用する。
@@ -30,7 +29,7 @@ struct Dijkstra{
      * @note   求められた最短距離はdistに格納される。
      */
     void build(int s){
-        dist.assign(G.size(), INF);
+        dist.assign(G.size(), G.INF);
         prev_vertex.assign(G.size(), -1);
         using p = pair<CostType, Vertex>;
         priority_queue<p, vector<p>, greater<p>> que;

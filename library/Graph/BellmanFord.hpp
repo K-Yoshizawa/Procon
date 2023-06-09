@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief 単一始点最短距離（ベルマンフォード法） - Bellman Ford
+ * @brief Bellman Ford - 単一始点最短距離（ベルマンフォード法）
  */
 
 #include <bits/stdc++.h>
@@ -11,8 +11,7 @@ using namespace std;
 
 template<typename CostType>
 vector<CostType> BellmanFord(Graph<CostType> &G, int s){
-    const CostType INF = numeric_limits<CostType>::max();
-    vector<CostType> ret(G.size(), INF);
+    vector<CostType> ret(G.size(), G.INF);
     ret[s] = 0;
     int updatecount = 0;
     while(1){
@@ -24,7 +23,7 @@ vector<CostType> BellmanFord(Graph<CostType> &G, int s){
         for(auto &e : G.edges){
             Vertex from = e.from, to = e.to;
             CostType cost = e.cost;
-            if(ret[from] == INF) continue;
+            if(ret[from] == G.INF) continue;
             if(ret[to] > ret[from] + cost){
                 ret[to] = ret[from] + cost;
                 update = true;

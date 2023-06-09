@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief 閉路検出（有向グラフ） - Cycle Detection
+ * @brief Cycle Detection (Directed) - 閉路検出（有向グラフ）
  */
 
 #include <bits/stdc++.h>
