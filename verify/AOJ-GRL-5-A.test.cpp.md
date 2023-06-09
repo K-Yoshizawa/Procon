@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiamiter.hpp
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
@@ -96,10 +96,10 @@ data:
     \                }\n            }\n        }\n    }\n\n    public:\n    pair<Vertex,\
     \ Vertex> EdgeVertex;\n    CostType diamiter;\n\n    TreeDiamiter(Graph<CostType>\
     \ &G) : G(G), dist(G.size()){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] <\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
     \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
     \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] < d){\n                v\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
     \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
     \        diamiter = d;\n    }\n};\n#line 6 \"verify/AOJ-GRL-5-A.test.cpp\"\n\n\
     int main(){\n    int n;\n    cin >> n;\n    Graph<int> G(n);\n    for(int i =\
@@ -118,8 +118,8 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 17:48:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-06-10 00:18:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-A.test.cpp
 layout: document

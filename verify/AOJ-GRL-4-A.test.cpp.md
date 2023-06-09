@@ -5,7 +5,7 @@ data:
     path: library/Graph/CycleDetection.hpp
     title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
       \u30B0\u30E9\u30D5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

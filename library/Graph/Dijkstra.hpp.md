@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\
       \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
@@ -148,7 +148,7 @@ data:
   path: library/Graph/Dijkstra.hpp
   requiredBy: []
   timestamp: '2023-06-09 17:48:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp

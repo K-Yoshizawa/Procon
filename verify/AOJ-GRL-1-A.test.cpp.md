@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
       \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
@@ -119,26 +119,26 @@ data:
     \   Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
     \ s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s, t,\
     \ d);\n    }\n\n    Dijkstra<long long> ds(G);\n    ds.build(r);\n    for(int\
-    \ i = 0; i < V; ++i){\n        if(ds.dist[i] == ds.INF){\n            cout <<\
-    \ \"INF\" << endl;\n        }\n        else{\n            cout << ds.dist[i] <<\
-    \ endl;\n        }\n    }\n}\n"
+    \ i = 0; i < V; ++i){\n        if(ds.dist[i] == G.INF){\n            cout << \"\
+    INF\" << endl;\n        }\n        else{\n            cout << ds.dist[i] << endl;\n\
+    \        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/Dijkstra.hpp\"\n\n\
     using namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n\
     \    Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
     \ s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s, t,\
     \ d);\n    }\n\n    Dijkstra<long long> ds(G);\n    ds.build(r);\n    for(int\
-    \ i = 0; i < V; ++i){\n        if(ds.dist[i] == ds.INF){\n            cout <<\
-    \ \"INF\" << endl;\n        }\n        else{\n            cout << ds.dist[i] <<\
-    \ endl;\n        }\n    }\n}"
+    \ i = 0; i < V; ++i){\n        if(ds.dist[i] == G.INF){\n            cout << \"\
+    INF\" << endl;\n        }\n        else{\n            cout << ds.dist[i] << endl;\n\
+    \        }\n    }\n}"
   dependsOn:
   - library/Graph/Dijkstra.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 17:48:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-06-10 00:18:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp
 layout: document

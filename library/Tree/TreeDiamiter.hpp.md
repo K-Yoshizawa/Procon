@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
     links: []
@@ -92,10 +92,10 @@ data:
     \                }\n            }\n        }\n    }\n\n    public:\n    pair<Vertex,\
     \ Vertex> EdgeVertex;\n    CostType diamiter;\n\n    TreeDiamiter(Graph<CostType>\
     \ &G) : G(G), dist(G.size()){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] <\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
     \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
     \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] < d){\n                v\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
     \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
     \        diamiter = d;\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n\
@@ -110,10 +110,10 @@ data:
     \                }\n            }\n        }\n    }\n\n    public:\n    pair<Vertex,\
     \ Vertex> EdgeVertex;\n    CostType diamiter;\n\n    TreeDiamiter(Graph<CostType>\
     \ &G) : G(G), dist(G.size()){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] <\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
     \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
     \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] < d){\n                v\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
     \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
     \        diamiter = d;\n    }\n};"
   dependsOn:
@@ -121,8 +121,8 @@ data:
   isVerificationFile: false
   path: library/Tree/TreeDiamiter.hpp
   requiredBy: []
-  timestamp: '2023-06-09 17:48:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-06-10 00:18:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-A.test.cpp
 documentation_of: library/Tree/TreeDiamiter.hpp
