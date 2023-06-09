@@ -1,28 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/BellmanFord.hpp
-    title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\
-      \u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
   - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':x:'
+    path: library/Tree/TreeDiamiter.hpp
+    title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
-    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/BellmanFord.hpp\"\n\n\
-    /**\n * @brief Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\
-    \uFF08\u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09\n */\n\n#line\
-    \ 8 \"library/Graph/BellmanFord.hpp\"\nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-5-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
+    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Tree/TreeDiamiter.hpp\"\n\n\
+    /**\n * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
     \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
@@ -88,46 +85,46 @@ data:
     \ default = false)\n     * @return int \u9802\u70B9v\u306E\u6307\u5B9A\u3057\u305F\
     \u5024\n     */\n    inline int degree(Vertex v, bool isIn = false){\n       \
     \ if(dir && isIn) return indegree[v];\n        return (int)connect[v].size();\n\
-    \    }\n};\n#line 11 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename CostType>\n\
-    vector<CostType> BellmanFord(Graph<CostType> &G, int s){\n    vector<CostType>\
-    \ ret(G.size(), G.INF);\n    ret[s] = 0;\n    int updatecount = 0;\n    while(1){\n\
-    \        if(updatecount == G.size()){\n            ret[s] = -1;\n            return\
-    \ ret;\n        }\n        bool update = false;\n        for(auto &e : G.edges){\n\
-    \            Vertex from = e.from, to = e.to;\n            CostType cost = e.cost;\n\
-    \            if(ret[from] == G.INF) continue;\n            if(ret[to] > ret[from]\
-    \ + cost){\n                ret[to] = ret[from] + cost;\n                update\
-    \ = true;\n            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
-    \    }\n    return ret;\n}\n#line 6 \"verify/AOJ-GRL-1-B.test.cpp\"\n\nusing namespace\
-    \ std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n    Graph<int>\
-    \ G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s, t, d;\n       \
-    \ cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    auto ans = BellmanFord(G,\
-    \ r);\n    if(ans[r] == -1){\n        cout << \"NEGATIVE CYCLE\" << endl;\n  \
-    \  }\n    else{\n        for(auto &d : ans){\n            if(d == numeric_limits<int>::max()){\n\
-    \                cout << \"INF\" <<endl;\n            }\n            else{\n \
-    \               cout << d << endl;\n            }\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/BellmanFord.hpp\"\n\
-    \nusing namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >>\
-    \ r;\n    Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
-    \ s, t, d;\n        cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n  \
-    \  auto ans = BellmanFord(G, r);\n    if(ans[r] == -1){\n        cout << \"NEGATIVE\
-    \ CYCLE\" << endl;\n    }\n    else{\n        for(auto &d : ans){\n          \
-    \  if(d == numeric_limits<int>::max()){\n                cout << \"INF\" <<endl;\n\
-    \            }\n            else{\n                cout << d << endl;\n      \
-    \      }\n        }\n    }\n}"
+    \    }\n};\n#line 8 \"library/Tree/TreeDiamiter.hpp\"\n\ntemplate<typename CostType>\n\
+    struct TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n    vector<CostType>\
+    \ dist;\n\n    void bfs(Vertex s){\n        queue<Vertex> que;\n        dist.assign(G.size(),\
+    \ G.INF);\n        dist[s] = 0;\n        que.push(s);\n        while(!que.empty()){\n\
+    \            Vertex v = que.front();\n            que.pop();\n            for(EdgeNum\
+    \ &i : G.connect[v]){\n                Vertex u = G.edges[i].to;\n           \
+    \     CostType w = G.edges[i].cost;\n                if(dist[v] + w < dist[u]){\n\
+    \                    dist[u] = dist[v] + w;\n                    que.push(u);\n\
+    \                }\n            }\n        }\n    }\n\n    public:\n    pair<Vertex,\
+    \ Vertex> EdgeVertex;\n    CostType diamiter;\n\n    TreeDiamiter(Graph<CostType>\
+    \ &G) : G(G), dist(G.size()){\n        bfs(0);\n        int v = 0;\n        CostType\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] <\
+    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
+    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] < d){\n                v\
+    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
+    \        diamiter = d;\n    }\n};\n#line 6 \"verify/AOJ-GRL-5-A.test.cpp\"\n\n\
+    int main(){\n    int n;\n    cin >> n;\n    Graph<int> G(n);\n    for(int i =\
+    \ 0; i < n - 1; ++i){\n        int s, t, w;\n        cin >> s >> t >> w;\n   \
+    \     G.add(s, t, w);\n    }\n\n    TreeDiamiter<int> td(G);\n    cout << td.diamiter\
+    \ << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
+    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Tree/TreeDiamiter.hpp\"\n\
+    \nint main(){\n    int n;\n    cin >> n;\n    Graph<int> G(n);\n    for(int i\
+    \ = 0; i < n - 1; ++i){\n        int s, t, w;\n        cin >> s >> t >> w;\n \
+    \       G.add(s, t, w);\n    }\n\n    TreeDiamiter<int> td(G);\n    cout << td.diamiter\
+    \ << endl;\n}"
   dependsOn:
-  - library/Graph/BellmanFord.hpp
+  - library/Tree/TreeDiamiter.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-1-B.test.cpp
+  path: verify/AOJ-GRL-5-A.test.cpp
   requiredBy: []
   timestamp: '2023-06-09 17:48:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-B.test.cpp
+documentation_of: verify/AOJ-GRL-5-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-1-B.test.cpp
-- /verify/verify/AOJ-GRL-1-B.test.cpp.html
-title: verify/AOJ-GRL-1-B.test.cpp
+- /verify/verify/AOJ-GRL-5-A.test.cpp
+- /verify/verify/AOJ-GRL-5-A.test.cpp.html
+title: verify/AOJ-GRL-5-A.test.cpp
 ---

@@ -10,6 +10,13 @@ Reborn_Kの競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
+### Ver 1.3.0
+- Union-Findを実装というか移植
+- Warshall-Floydを実装というか改修
+- Kruskal法を実装
+- Ford-Fulkerson法を実装というか写経
+- Bipartite Matchingを実装
+
 ### Ver 1.2.0
 - 頂点集合で管理するグラフ？知らない子です（消した）
 - 代わりに辺集合で管理するグラフを作った（GraphTemplate.hpp）

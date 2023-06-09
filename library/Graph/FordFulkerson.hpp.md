@@ -4,21 +4,25 @@ data:
   - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: library/Graph/BipartiteMatching.hpp
+    title: "Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-4-A.test.cpp
-    title: verify/AOJ-GRL-4-A.test.cpp
+    path: verify/AOJ-GRL-6-A.test.cpp
+    title: verify/AOJ-GRL-6-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-7-A.test.cpp
+    title: verify/AOJ-GRL-7-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\
-      \u5411\u30B0\u30E9\u30D5\uFF09"
+    document_title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
     links: []
-  bundledCode: "#line 2 \"library/Graph/CycleDetection.hpp\"\n\n/**\n * @brief Cycle\
-    \ Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\
-    \u30D5\uFF09\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2\
+  bundledCode: "#line 2 \"library/Graph/FordFulkerson.hpp\"\n\n/**\n * @brief Ford-Fulkerson\
+    \ - \u6700\u5927\u30D5\u30ED\u30FC\n */\n\n#include <bits/stdc++.h>\n\n#line 2\
     \ \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @brief Graph Template - \u30B0\
     \u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\
     \nusing namespace std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n *\
@@ -84,60 +88,64 @@ data:
     \ default = false)\n     * @return int \u9802\u70B9v\u306E\u6307\u5B9A\u3057\u305F\
     \u5024\n     */\n    inline int degree(Vertex v, bool isIn = false){\n       \
     \ if(dir && isIn) return indegree[v];\n        return (int)connect[v].size();\n\
-    \    }\n};\n#line 11 \"library/Graph/CycleDetection.hpp\"\n\n/**\n * @brief \u6709\
-    \u5411\u30B0\u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\u884C\u3046\u3002\
-    \n */\ntemplate<typename CostType>\nstruct CycleDetection{\n    vector<vector<Vertex>>\
-    \ cycle;\n    \n    private:\n    Graph<CostType> &G;\n    vector<Vertex> visited,\
-    \ history;\n    vector<Vertex> belong;\n    vector<Vertex> tmp;\n\n    void dfs(int\
-    \ v){\n        visited[v] = 1;\n        history.push_back(v);\n        for(auto\
-    \ &e : G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n      \
-    \      if(visited[e.to] == 1){\n                for(int i = history.size() - 1;\
-    \ ; --i){\n                    tmp.push_back(history[i]);\n                  \
-    \  belong[history[i]] = cycle.size();\n                    if(history[i] == e.to)\
-    \ break;\n                }\n                cycle.push_back(tmp);\n         \
-    \       tmp.clear();\n            }\n            else{\n                dfs(e.to);\n\
-    \            }\n        }\n        history.pop_back();\n        visited[v] = 2;\n\
-    \    }\n\n    public:\n    CycleDetection(Graph<CostType> &G) : G(G), visited(G.size(),\
-    \ 0), belong(G.size(), -1){\n        assert(G.directed());\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n        }\n \
-    \   }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\u3092\u6301\
-    \u3064\u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool exist(){\n\
-    \        return cycle.size() > 0;\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Cycle Detection (Directed) - \u9589\u8DEF\u691C\
-    \u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09\n */\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#include \"GraphTemplate.hpp\"\n\n/**\n * @brief \u6709\
-    \u5411\u30B0\u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\u884C\u3046\u3002\
-    \n */\ntemplate<typename CostType>\nstruct CycleDetection{\n    vector<vector<Vertex>>\
-    \ cycle;\n    \n    private:\n    Graph<CostType> &G;\n    vector<Vertex> visited,\
-    \ history;\n    vector<Vertex> belong;\n    vector<Vertex> tmp;\n\n    void dfs(int\
-    \ v){\n        visited[v] = 1;\n        history.push_back(v);\n        for(auto\
-    \ &e : G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n      \
-    \      if(visited[e.to] == 1){\n                for(int i = history.size() - 1;\
-    \ ; --i){\n                    tmp.push_back(history[i]);\n                  \
-    \  belong[history[i]] = cycle.size();\n                    if(history[i] == e.to)\
-    \ break;\n                }\n                cycle.push_back(tmp);\n         \
-    \       tmp.clear();\n            }\n            else{\n                dfs(e.to);\n\
-    \            }\n        }\n        history.pop_back();\n        visited[v] = 2;\n\
-    \    }\n\n    public:\n    CycleDetection(Graph<CostType> &G) : G(G), visited(G.size(),\
-    \ 0), belong(G.size(), -1){\n        assert(G.directed());\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n        }\n \
-    \   }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\u3092\u6301\
-    \u3064\u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool exist(){\n\
-    \        return cycle.size() > 0;\n    }\n};"
+    \    }\n};\n#line 10 \"library/Graph/FordFulkerson.hpp\"\n\nusing namespace std;\n\
+    \ntemplate<typename CostType>\nstruct FordFulkerson{\n    int E;\n    Graph<CostType>\
+    \ &G;\n    vector<EdgeNum> rev;\n\n    private:\n    vector<int> used;\n\n   \
+    \ CostType dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal)\
+    \ return F;\n        used[pos] = 1;\n        for(EdgeNum &i : G.connect[pos]){\n\
+    \            if(G.edges[i].cost == 0) continue;\n            if(used[G.edges[i].to])\
+    \ continue;\n            CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n\
+    \            if(flow >= 1){\n                G.edges[i].cost -= flow;\n      \
+    \          G.edges[rev[i]].cost += flow;\n                return flow;\n     \
+    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
+    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
+    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
+    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
+    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
+    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
+    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
+    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
+    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
+    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
+    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
+    \        }\n        return ret;\n    }\n};\n"
+  code: "#pragma once\n\n/**\n * @brief Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC\
+    \n */\n\n#include <bits/stdc++.h>\n\n#include \"GraphTemplate.hpp\"\n\nusing namespace\
+    \ std;\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n    int E;\n   \
+    \ Graph<CostType> &G;\n    vector<EdgeNum> rev;\n\n    private:\n    vector<int>\
+    \ used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos\
+    \ == goal) return F;\n        used[pos] = 1;\n        for(EdgeNum &i : G.connect[pos]){\n\
+    \            if(G.edges[i].cost == 0) continue;\n            if(used[G.edges[i].to])\
+    \ continue;\n            CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n\
+    \            if(flow >= 1){\n                G.edges[i].cost -= flow;\n      \
+    \          G.edges[rev[i]].cost += flow;\n                return flow;\n     \
+    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
+    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
+    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
+    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
+    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
+    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
+    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
+    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
+    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
+    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
+    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
+    \        }\n        return ret;\n    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
-  path: library/Graph/CycleDetection.hpp
-  requiredBy: []
+  path: library/Graph/FordFulkerson.hpp
+  requiredBy:
+  - library/Graph/BipartiteMatching.hpp
   timestamp: '2023-06-09 17:48:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-4-A.test.cpp
-documentation_of: library/Graph/CycleDetection.hpp
+  - verify/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ-GRL-7-A.test.cpp
+documentation_of: library/Graph/FordFulkerson.hpp
 layout: document
 redirect_from:
-- /library/library/Graph/CycleDetection.hpp
-- /library/library/Graph/CycleDetection.hpp.html
-title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\
-  \u30E9\u30D5\uFF09"
+- /library/library/Graph/FordFulkerson.hpp
+- /library/library/Graph/FordFulkerson.hpp.html
+title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
 ---

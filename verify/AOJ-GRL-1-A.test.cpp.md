@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: library/Graph/Dijkstra.hpp
-    title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
-      \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
-  - icon: ':heavy_check_mark:'
+    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
+      \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
+  - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
-    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
+    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
@@ -20,10 +20,10 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
   bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/Dijkstra.hpp\"\n\n/**\n\
-    \ * @brief \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph\
-    \ Template\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
+    \ * @brief Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
+    \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
     \u30D5\u306E\u8FBA\n */\ntemplate<typename CostType = int>\nstruct Edge{\n   \
     \ Vertex from, to;\n    CostType cost;\n\n    Edge(Vertex from, Vertex to, CostType\
@@ -31,50 +31,52 @@ data:
     \u3092\u8868\u3059\u30AF\u30E9\u30B9\u3002\n * @note \u8FBA\u96C6\u5408\u306B\u3088\
     \u3063\u3066\u5B9F\u73FE\u3057\u3066\u3044\u308B\u3002\n * @tparam CostType \u8FBA\
     \u306E\u91CD\u307F\u306E\u578B\u3002\n */\ntemplate<typename CostType = int>\n\
-    class Graph{\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\n    public:\n\
-    \    vector<Edge<CostType>> edges;\n    vector<vector<EdgeNum>> connect;\n\n \
-    \   /**\n     * @brief Construct a new Graph object\n     * @param VertexNum \u30B0\
-    \u30E9\u30D5\u306E\u9802\u70B9\u6570\n     * @param isDirected \u6709\u5411\u30B0\
-    \u30E9\u30D5\u3068\u3057\u3066\u4F5C\u6210\u3059\u308B\u304B\n     */\n    Graph(int\
-    \ VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum),\
-    \ indegree(VertexNum){}\n\n    Graph() = default;\n\n    /**\n     * @brief \u30B0\
-    \u30E9\u30D5\u306B\u9802\u70B9s\u3068\u9802\u70B9t\u9593\u306E\u8FBA\u3092\u8FFD\
-    \u52A0\u3059\u308B\u3002\n     * @note \u6709\u5411\u30B0\u30E9\u30D5\u306A\u3089\
-    \u3070\u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6709\u5411\u8FBA\u3092\
-    \u3001\u7121\u5411\u30B0\u30E9\u30D5\u306A\u3089\u3070\u9802\u70B9s\u3068\u9802\
-    \u70B9t\u3092\u7D50\u3076\u7121\u5411\u8FBA\u3092\u8FFD\u52A0\u3059\u308B\u3002\
-    \n     * @param s \u9802\u70B9s\n     * @param t \u9802\u70B9t\n     * @param\
-    \ w \u8FBA\u306E\u91CD\u307F (option, default = 1)\n     */\n    void add(Vertex\
-    \ s, Vertex t, CostType w = 1){\n        assert(0 <= s && s < sz);\n        assert(0\
-    \ <= t && t < sz);\n        EdgeNum e = edges.size();\n        edges.push_back(Edge<CostType>(s,\
-    \ t, w));\n        connect[s].push_back(e);\n        ++indegree[t];\n        if(!dir){\n\
-    \            edges.push_back(Edge<CostType>(t, s, w));\n            connect[t].push_back(e\
-    \ + 1);\n        }\n    }\n\n    /**\n     * @brief \u6307\u5B9A\u3057\u305F\u8FBA\
-    \u756A\u53F7\u306E\u8FBA\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param idx\
-    \ \u8FBA\u756A\u53F7\n     * @return Edge<CostType> \u8FBA\u60C5\u5831\n     */\n\
-    \    Edge<CostType> get_edge(EdgeNum idx){\n        int e = edges.size();\n  \
-    \      assert(0 <= idx && idx < e);\n        return edges[idx];\n    }\n\n   \
-    \ /**\n     * @brief \u6307\u5B9A\u3057\u305F\u9802\u70B9\u756A\u53F7\u306B\u63A5\
-    \u7D9A\u3059\u308B\u8FBA\u306E\u4E00\u89A7\u3092\u53D6\u5F97\u3059\u308B\u3002\
-    \n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return vector<Edge<CostType>>\
-    \ \u6307\u5B9A\u3057\u305F\u9802\u70B9\u756A\u53F7\u306B\u63A5\u7D9A\u3059\u308B\
-    \u8FBA\u306E\u4E00\u89A7\n     */\n    vector<Edge<CostType>> get_edges(Vertex\
-    \ v){\n        assert(0 <= v && v < sz);\n        vector<Edge<CostType>> ret;\n\
-    \        for(auto &idx : connect[v]) ret.push_back(get_edge(idx));\n        return\
-    \ ret;\n    }\n\n    /**\n     * @brief \u6307\u5B9A\u3057\u305F\u9802\u70B9\u756A\
-    \u53F7\u306B\u63A5\u7D9A\u3059\u308B\u8FBA\u756A\u53F7\u306E\u4E00\u89A7\u3092\
-    \u53D6\u5F97\u3059\u308B\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n   \
-    \  * @return vector<EdgeNum> \u6307\u5B9A\u3057\u305F\u9802\u70B9\u756A\u53F7\u306B\
-    \u63A5\u7D9A\u3059\u308B\u8FBA\u756A\u53F7\u306E\u4E00\u89A7\n     */\n    vector<EdgeNum>\
-    \ get_list(Vertex v){\n        assert(0 <= v && v < sz);\n        return connect[v];\n\
-    \    }\n\n    /**\n     * @brief \u9006\u8FBA\u3092\u5F35\u3063\u305F\u30B0\u30E9\
-    \u30D5\u3092\u4F5C\u6210\u3059\u308B\u3002\n     * @attention \u3053\u306E\u64CD\
-    \u4F5C\u306F\u6709\u5411\u30B0\u30E9\u30D5\u306B\u306E\u307F\u53EF\u80FD\u3067\
-    \u3042\u308B\u3002\n     * @return Graph<CostType> \u9006\u8FBA\u3092\u5F35\u3063\
-    \u305F\u30B0\u30E9\u30D5\n     */\n    Graph<CostType> reverse(){\n        assert(dir);\n\
-    \        Graph<CostType> ret(sz, true);\n        for(auto &e : edges){\n     \
-    \       ret.add(e.to, e.from, e.cost);\n        }\n        return ret;\n    }\n\
-    \n    inline size_t size(){\n        return sz;\n    }\n\n    inline bool directed(){\n\
+    class Graph{\n    private:\n    int sz;\n    bool dir;\n    vector<int> indegree;\n\
+    \n    public:\n    vector<Edge<CostType>> edges;\n    vector<vector<EdgeNum>>\
+    \ connect;\n    CostType INF;\n\n    /**\n     * @brief Construct a new Graph\
+    \ object\n     * @param VertexNum \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\n\
+    \     * @param isDirected \u6709\u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u4F5C\
+    \u6210\u3059\u308B\u304B\n     */\n    Graph(int VertexNum, bool isDirected =\
+    \ false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum),\
+    \ INF(numeric_limits<CostType>::max()){}\n\n    Graph() = default;\n\n    /**\n\
+    \     * @brief \u30B0\u30E9\u30D5\u306B\u9802\u70B9s\u3068\u9802\u70B9t\u9593\u306E\
+    \u8FBA\u3092\u8FFD\u52A0\u3059\u308B\u3002\n     * @note \u6709\u5411\u30B0\u30E9\
+    \u30D5\u306A\u3089\u3070\u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6709\
+    \u5411\u8FBA\u3092\u3001\u7121\u5411\u30B0\u30E9\u30D5\u306A\u3089\u3070\u9802\
+    \u70B9s\u3068\u9802\u70B9t\u3092\u7D50\u3076\u7121\u5411\u8FBA\u3092\u8FFD\u52A0\
+    \u3059\u308B\u3002\n     * @param s \u9802\u70B9s\n     * @param t \u9802\u70B9\
+    t\n     * @param w \u8FBA\u306E\u91CD\u307F (option, default = 1)\n     */\n \
+    \   void add(Vertex s, Vertex t, CostType w = 1){\n        assert(0 <= s && s\
+    \ < sz);\n        assert(0 <= t && t < sz);\n        EdgeNum e = edges.size();\n\
+    \        edges.push_back(Edge<CostType>(s, t, w));\n        connect[s].push_back(e);\n\
+    \        ++indegree[t];\n        if(!dir){\n            edges.push_back(Edge<CostType>(t,\
+    \ s, w));\n            connect[t].push_back(e + 1);\n        }\n    }\n\n    /**\n\
+    \     * @brief \u6307\u5B9A\u3057\u305F\u8FBA\u756A\u53F7\u306E\u8FBA\u3092\u53D6\
+    \u5F97\u3059\u308B\u3002\n     * @param idx \u8FBA\u756A\u53F7\n     * @return\
+    \ Edge<CostType> \u8FBA\u60C5\u5831\n     */\n    Edge<CostType> get_edge(EdgeNum\
+    \ idx){\n        int e = edges.size();\n        assert(0 <= idx && idx < e);\n\
+    \        return edges[idx];\n    }\n\n    /**\n     * @brief \u6307\u5B9A\u3057\
+    \u305F\u9802\u70B9\u756A\u53F7\u306B\u63A5\u7D9A\u3059\u308B\u8FBA\u306E\u4E00\
+    \u89A7\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param v \u9802\u70B9\u756A\
+    \u53F7\n     * @return vector<Edge<CostType>> \u6307\u5B9A\u3057\u305F\u9802\u70B9\
+    \u756A\u53F7\u306B\u63A5\u7D9A\u3059\u308B\u8FBA\u306E\u4E00\u89A7\n     */\n\
+    \    vector<Edge<CostType>> get_edges(Vertex v){\n        assert(0 <= v && v <\
+    \ sz);\n        vector<Edge<CostType>> ret;\n        for(auto &idx : connect[v])\
+    \ ret.push_back(get_edge(idx));\n        return ret;\n    }\n\n    /**\n     *\
+    \ @brief \u6307\u5B9A\u3057\u305F\u9802\u70B9\u756A\u53F7\u306B\u63A5\u7D9A\u3059\
+    \u308B\u8FBA\u756A\u53F7\u306E\u4E00\u89A7\u3092\u53D6\u5F97\u3059\u308B\u3002\
+    \n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return vector<EdgeNum> \u6307\
+    \u5B9A\u3057\u305F\u9802\u70B9\u756A\u53F7\u306B\u63A5\u7D9A\u3059\u308B\u8FBA\
+    \u756A\u53F7\u306E\u4E00\u89A7\n     */\n    vector<EdgeNum> get_list(Vertex v){\n\
+    \        assert(0 <= v && v < sz);\n        return connect[v];\n    }\n\n    /**\n\
+    \     * @brief \u9006\u8FBA\u3092\u5F35\u3063\u305F\u30B0\u30E9\u30D5\u3092\u4F5C\
+    \u6210\u3059\u308B\u3002\n     * @attention \u3053\u306E\u64CD\u4F5C\u306F\u6709\
+    \u5411\u30B0\u30E9\u30D5\u306B\u306E\u307F\u53EF\u80FD\u3067\u3042\u308B\u3002\
+    \n     * @return Graph<CostType> \u9006\u8FBA\u3092\u5F35\u3063\u305F\u30B0\u30E9\
+    \u30D5\n     */\n    Graph<CostType> reverse(){\n        assert(dir);\n      \
+    \  Graph<CostType> ret(sz, true);\n        for(auto &e : edges){\n           \
+    \ ret.add(e.to, e.from, e.cost);\n        }\n        return ret;\n    }\n\n  \
+    \  inline size_t size(){\n        return sz;\n    }\n\n    inline bool directed(){\n\
     \        return dir;\n    }\n\n    /**\n     * @brief \u3042\u308B\u9802\u70B9\
     \u306E\u6B21\u6570(\u51FA\u6B21\u6570)\u3092\u53D6\u5F97\u3059\u308B\u3002\n \
     \    * @note \u6709\u5411\u30B0\u30E9\u30D5\u306B\u304A\u3044\u3066\u3001\u7B2C\
@@ -91,15 +93,14 @@ data:
     \u306E\u91CD\u307F\u306E\u8FBA\u304C\u306A\u3044\u5FC5\u8981\u304C\u3042\u308B\
     \u3002\n */\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n   \
     \ Graph<CostType> &G;\n    vector<Vertex> prev_vertex;\n\n    public:\n    vector<CostType>\
-    \ dist;\n    CostType INF;\n\n    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()),\
-    \ INF(numeric_limits<CostType>::max()), prev_vertex(G.size()){}\n\n    /**\n \
-    \    * @brief  \u9802\u70B9s\u3092\u59CB\u70B9\u3068\u3057\u3066\u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5\u3092\u9069\u7528\u3059\u308B\u3002\n     * @param  s:\
-    \ \u59CB\u70B9\u3068\u306A\u308B\u9802\u70B9s\n     * @note   \u6C42\u3081\u3089\
-    \u308C\u305F\u6700\u77ED\u8DDD\u96E2\u306Fdist\u306B\u683C\u7D0D\u3055\u308C\u308B\
-    \u3002\n     */\n    void build(int s){\n        dist.assign(G.size(), INF);\n\
-    \        prev_vertex.assign(G.size(), -1);\n        using p = pair<CostType, Vertex>;\n\
-    \        priority_queue<p, vector<p>, greater<p>> que;\n        que.emplace(0,\
+    \ dist;\n\n    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()), prev_vertex(G.size()){}\n\
+    \n    /**\n     * @brief  \u9802\u70B9s\u3092\u59CB\u70B9\u3068\u3057\u3066\u30C0\
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\u3092\u9069\u7528\u3059\u308B\u3002\n   \
+    \  * @param  s: \u59CB\u70B9\u3068\u306A\u308B\u9802\u70B9s\n     * @note   \u6C42\
+    \u3081\u3089\u308C\u305F\u6700\u77ED\u8DDD\u96E2\u306Fdist\u306B\u683C\u7D0D\u3055\
+    \u308C\u308B\u3002\n     */\n    void build(int s){\n        dist.assign(G.size(),\
+    \ G.INF);\n        prev_vertex.assign(G.size(), -1);\n        using p = pair<CostType,\
+    \ Vertex>;\n        priority_queue<p, vector<p>, greater<p>> que;\n        que.emplace(0,\
     \ s);\n        dist[s] = 0;\n        while(!que.empty()){\n            auto [d,\
     \ v] = que.top();\n            que.pop();\n            if(dist[v] < d) continue;\n\
     \            for(auto &e : G.get_edges(v)){\n                if(d + e.cost < dist[e.to]){\n\
@@ -136,8 +137,8 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 02:29:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-06-09 17:48:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp
 layout: document

@@ -2,9 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/Graph/BellmanFord.hpp
-    title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\
-      \u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
+    path: library/Graph/FordFulkerson.hpp
+    title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
   - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -15,14 +14,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
-    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/BellmanFord.hpp\"\n\n\
-    /**\n * @brief Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\
-    \uFF08\u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09\n */\n\n#line\
-    \ 8 \"library/Graph/BellmanFord.hpp\"\nusing namespace std;\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-6-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
+    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/FordFulkerson.hpp\"\n\n\
+    /**\n * @brief Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC\n */\n\n#line 8\
+    \ \"library/Graph/FordFulkerson.hpp\"\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\
     \u30FC\u30C8\n */\n\n#line 8 \"library/Graph/GraphTemplate.hpp\"\nusing namespace\
     \ std;\n\nusing EdgeNum = int;\nusing Vertex = int;\n\n/**\n * @brief \u30B0\u30E9\
@@ -88,46 +86,50 @@ data:
     \ default = false)\n     * @return int \u9802\u70B9v\u306E\u6307\u5B9A\u3057\u305F\
     \u5024\n     */\n    inline int degree(Vertex v, bool isIn = false){\n       \
     \ if(dir && isIn) return indegree[v];\n        return (int)connect[v].size();\n\
-    \    }\n};\n#line 11 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename CostType>\n\
-    vector<CostType> BellmanFord(Graph<CostType> &G, int s){\n    vector<CostType>\
-    \ ret(G.size(), G.INF);\n    ret[s] = 0;\n    int updatecount = 0;\n    while(1){\n\
-    \        if(updatecount == G.size()){\n            ret[s] = -1;\n            return\
-    \ ret;\n        }\n        bool update = false;\n        for(auto &e : G.edges){\n\
-    \            Vertex from = e.from, to = e.to;\n            CostType cost = e.cost;\n\
-    \            if(ret[from] == G.INF) continue;\n            if(ret[to] > ret[from]\
-    \ + cost){\n                ret[to] = ret[from] + cost;\n                update\
-    \ = true;\n            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
-    \    }\n    return ret;\n}\n#line 6 \"verify/AOJ-GRL-1-B.test.cpp\"\n\nusing namespace\
-    \ std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n    Graph<int>\
-    \ G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s, t, d;\n       \
-    \ cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    auto ans = BellmanFord(G,\
-    \ r);\n    if(ans[r] == -1){\n        cout << \"NEGATIVE CYCLE\" << endl;\n  \
-    \  }\n    else{\n        for(auto &d : ans){\n            if(d == numeric_limits<int>::max()){\n\
-    \                cout << \"INF\" <<endl;\n            }\n            else{\n \
-    \               cout << d << endl;\n            }\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/BellmanFord.hpp\"\n\
-    \nusing namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >>\
-    \ r;\n    Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
-    \ s, t, d;\n        cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n  \
-    \  auto ans = BellmanFord(G, r);\n    if(ans[r] == -1){\n        cout << \"NEGATIVE\
-    \ CYCLE\" << endl;\n    }\n    else{\n        for(auto &d : ans){\n          \
-    \  if(d == numeric_limits<int>::max()){\n                cout << \"INF\" <<endl;\n\
-    \            }\n            else{\n                cout << d << endl;\n      \
-    \      }\n        }\n    }\n}"
+    \    }\n};\n#line 10 \"library/Graph/FordFulkerson.hpp\"\n\nusing namespace std;\n\
+    \ntemplate<typename CostType>\nstruct FordFulkerson{\n    int E;\n    Graph<CostType>\
+    \ &G;\n    vector<EdgeNum> rev;\n\n    private:\n    vector<int> used;\n\n   \
+    \ CostType dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal)\
+    \ return F;\n        used[pos] = 1;\n        for(EdgeNum &i : G.connect[pos]){\n\
+    \            if(G.edges[i].cost == 0) continue;\n            if(used[G.edges[i].to])\
+    \ continue;\n            CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n\
+    \            if(flow >= 1){\n                G.edges[i].cost -= flow;\n      \
+    \          G.edges[rev[i]].cost += flow;\n                return flow;\n     \
+    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
+    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
+    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
+    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
+    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
+    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
+    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
+    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
+    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
+    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
+    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
+    \        }\n        return ret;\n    }\n};\n#line 6 \"verify/AOJ-GRL-6-A.test.cpp\"\
+    \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
+    \   Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int u, v,\
+    \ c;\n        cin >> u >> v >> c;\n        G.add(u, v, c);\n    }\n\n    FordFulkerson<int>\
+    \ ff(G);\n    cout << ff.query(0, V - 1) << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
+    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/FordFulkerson.hpp\"\
+    \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
+    \   Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int u, v,\
+    \ c;\n        cin >> u >> v >> c;\n        G.add(u, v, c);\n    }\n\n    FordFulkerson<int>\
+    \ ff(G);\n    cout << ff.query(0, V - 1) << endl;\n}"
   dependsOn:
-  - library/Graph/BellmanFord.hpp
+  - library/Graph/FordFulkerson.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-1-B.test.cpp
+  path: verify/AOJ-GRL-6-A.test.cpp
   requiredBy: []
   timestamp: '2023-06-09 17:48:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-B.test.cpp
+documentation_of: verify/AOJ-GRL-6-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-1-B.test.cpp
-- /verify/verify/AOJ-GRL-1-B.test.cpp.html
-title: verify/AOJ-GRL-1-B.test.cpp
+- /verify/verify/AOJ-GRL-6-A.test.cpp
+- /verify/verify/AOJ-GRL-6-A.test.cpp.html
+title: verify/AOJ-GRL-6-A.test.cpp
 ---

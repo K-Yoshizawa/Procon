@@ -1,40 +1,81 @@
 ---
 data:
   libraryCategories:
+  - name: library/DataStructure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: library/DataStructure/UnionFind.hpp
+      title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
   - name: library/Graph
     pages:
     - icon: ':heavy_check_mark:'
       path: library/Graph/BellmanFord.hpp
-      title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\u30EB\u30DE\
-        \u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09 - Bellman Ford"
+      title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\
+        \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
+    - icon: ':heavy_check_mark:'
+      path: library/Graph/BipartiteMatching.hpp
+      title: "Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
       path: library/Graph/CycleDetection.hpp
-      title: "\u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\u30B0\u30E9\u30D5\uFF09 -\
-        \ Cycle Detection"
-    - icon: ':heavy_check_mark:'
+      title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
+        \u30B0\u30E9\u30D5\uFF09"
+    - icon: ':x:'
       path: library/Graph/Dijkstra.hpp
-      title: "\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\u30A4\u30AF\
-        \u30B9\u30C8\u30E9\u6CD5\uFF09 - Dijkstra"
+      title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
+        \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
     - icon: ':heavy_check_mark:'
+      path: library/Graph/FordFulkerson.hpp
+      title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
+    - icon: ':question:'
       path: library/Graph/GraphTemplate.hpp
-      title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8 - Graph Template"
+      title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    - icon: ':heavy_check_mark:'
+      path: library/Graph/Kruskal.hpp
+      title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     - icon: ':heavy_check_mark:'
       path: library/Graph/StronglyConnectedComponents.hpp
-      title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 - Strongly Connected Components"
+      title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
+        \u89E3"
+    - icon: ':warning:'
+      path: library/Graph/WarshallFloyd.hpp
+      title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
+  - name: library/Tree
+    pages:
+    - icon: ':x:'
+      path: library/Tree/TreeDiamiter.hpp
+      title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   verificationCategories:
   - name: verify
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-1-A.test.cpp
+      title: verify/AOJ-DSL-1-A.test.cpp
+    - icon: ':x:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ-GRL-1-C.test.cpp
+      title: verify/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-2-A.test.cpp
+      title: verify/AOJ-GRL-2-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-3-C.test.cpp
       title: verify/AOJ-GRL-3-C.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-4-A.test.cpp
       title: verify/AOJ-GRL-4-A.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ-GRL-5-A.test.cpp
+      title: verify/AOJ-GRL-5-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-6-A.test.cpp
+      title: verify/AOJ-GRL-6-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-7-A.test.cpp
+      title: verify/AOJ-GRL-7-A.test.cpp
 layout: toppage
 ---
