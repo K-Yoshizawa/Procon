@@ -27,6 +27,9 @@ data:
     path: library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
+    path: library/Graph/WarshallFloyd.hpp
+    title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
+  - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiamiter.hpp
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
@@ -36,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-B.test.cpp
     title: verify/AOJ-GRL-1-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-1-C.test.cpp
+    title: verify/AOJ-GRL-1-C.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-2-A.test.cpp
     title: verify/AOJ-GRL-2-A.test.cpp
@@ -204,6 +210,7 @@ data:
   - library/Graph/Kruskal.hpp
   - library/Graph/FordFulkerson.hpp
   - library/Graph/Dijkstra.hpp
+  - library/Graph/WarshallFloyd.hpp
   - library/Graph/StronglyConnectedComponents.hpp
   timestamp: '2023-06-09 17:48:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -212,6 +219,7 @@ data:
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-2-A.test.cpp
   - verify/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
   - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
