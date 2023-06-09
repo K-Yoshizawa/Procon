@@ -6,7 +6,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/GraphTemplate.hpp"
+#include "GraphTemplate.hpp"
 
 using namespace std;
 
