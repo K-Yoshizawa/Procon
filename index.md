@@ -4,6 +4,12 @@ data:
   - name: library/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
+      path: library/DataStructure/BinaryIndexedTree.hpp
+      title: Binary Indexed Tree
+    - icon: ':heavy_check_mark:'
+      path: library/DataStructure/SegmentTree.hpp
+      title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
   - name: library/Graph
@@ -42,6 +48,9 @@ data:
   - name: library/Tree
     pages:
     - icon: ':heavy_check_mark:'
+      path: library/Tree/EulerTour.hpp
+      title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+    - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   verificationCategories:
@@ -50,6 +59,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-A.test.cpp
       title: verify/AOJ-DSL-1-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-A.test.cpp
+      title: verify/AOJ-DSL-2-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-B.test.cpp
+      title: verify/AOJ-DSL-2-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
@@ -71,6 +86,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-A.test.cpp
       title: verify/AOJ-GRL-5-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-5-D.test.cpp
+      title: verify/AOJ-GRL-5-D.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ-GRL-6-A.test.cpp
