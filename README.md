@@ -10,6 +10,12 @@ Reborn_Kの競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
+### Ver 1.4.0 (2023/06/12)
+- 【追加】Segment Tree - セグメント木
+- 【追加】Binary Indexed Tree - BIT
+- 【追加】Euler Tour - オイラーツアー
+- 【改修】Graph Template … 無向木において、各頂点の親頂点と親と結ぶ辺番号を取得する関数get_parentを追加
+
 ### Ver 1.3.2
 - Warshall Floydのhppがバグってました
 

@@ -36,6 +36,7 @@ class Graph{
     public:
     vector<Edge<CostType>> edges;
     vector<vector<EdgeNum>> connect;
+    vector<EdgeNum> rev; // 形式上無向グラフでも有向辺を追加するので、辺の追加時に逆辺の辺番号を記録できるようにする
     CostType INF;
 
     /**
@@ -64,6 +65,8 @@ class Graph{
         if(!dir){
             edges.push_back(Edge<CostType>(t, s, w));
             connect[t].push_back(e + 1);
+            rev.emplace_back(e + 1);
+            rev.emplace_back(e);
         }
     }
 
@@ -132,5 +135,27 @@ class Graph{
     inline int degree(Vertex v, bool isIn = false){
         if(dir && isIn) return indegree[v];
         return (int)connect[v].size();
+    }
+
+    /**
+     * @brief グラフを頂点rootを根とした無向根付き木とみなしたとき、各頂点の親頂点の番号と、それを結ぶ辺番号を取得する。
+     * @attention グラフが無向木でない場合の動作は未定義である。
+     * @param root 木の根とする頂点番号
+     * @return vector<pair<Vertex, EdgeNum>> 各頂点の親の頂点番号と親への辺番号（頂点rootに対してはどちらも-1とする）
+     */
+    vector<pair<Vertex, EdgeNum>> get_parent(Vertex root){
+        vector<pair<Vertex, EdgeNum>> ret(sz, pair<Vertex, EdgeNum>(-1, -1));
+        stack<pair<Vertex, Vertex>> st;
+        st.emplace(root, -1);
+        while(!st.empty()){
+            auto [v, parent] = st.top();
+            st.pop();
+            for(auto &idx : connect[v]){
+                if(edges[idx].to == parent) continue;
+                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);
+                st.emplace(edges[idx].to, v);
+            }
+        }
+        return ret;
     }
 };
