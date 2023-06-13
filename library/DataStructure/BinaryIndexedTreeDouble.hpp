@@ -34,7 +34,7 @@ struct BinaryIndexedTreeDouble{
      * @return T 区間[1, i]の総和
      */
     T sum(int i){
-        return BIT0.sum(i) + BIT1.sum(i) * i;
+        return BIT0.sum(i) + BIT1.sum(i) * (T)i;
     }
 
     /**

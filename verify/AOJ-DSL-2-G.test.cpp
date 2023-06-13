@@ -5,7 +5,7 @@
 int main(){
     int n, q;
     cin >> n >> q;
-    BinaryIndexedTreeDouble<int> bit(n);
+    BinaryIndexedTreeDouble<long long> bit(n);
     while(q--){
         int query;
         cin >> query;

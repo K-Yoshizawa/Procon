@@ -10,8 +10,11 @@ Reborn_Kの競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
-### Ver 1.5.0 (????/??/??)
+### Ver 1.5.1 (2023/06/13)
 - 【追加】Lazy Segment Tree - 遅延評価セグメント木
+- 【追加】Lowest Common Ancestor - 最小共通祖先
+- 【追加】Binary Indexed Tree Double - Range Add Query対応BIT
+- 【修正】Binary Indexed Tree : 範囲外参照するバグを修正
 
 ### Ver 1.4.0 (2023/06/12)
 - 【追加】Segment Tree - セグメント木

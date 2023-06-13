@@ -46,7 +46,7 @@ struct BinaryIndexedTree{
      * @param x 加える値
      */
     void add(int i, T x){
-        while(i <= data.size()){
+        while(i < data.size()){
             data[i] += x;
             i += i & -i;
         }
