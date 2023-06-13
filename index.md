@@ -3,9 +3,15 @@ data:
   libraryCategories:
   - name: library/DataStructure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
+    - icon: ':x:'
+      path: library/DataStructure/BinaryIndexedTreeDouble.hpp
+      title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
+    - icon: ':heavy_check_mark:'
+      path: library/DataStructure/LazySegmentTree.hpp
+      title: "\u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -65,6 +71,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-B.test.cpp
       title: verify/AOJ-DSL-2-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-F.test.cpp
+      title: verify/AOJ-DSL-2-F.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ-DSL-2-G.test.cpp
+      title: verify/AOJ-DSL-2-G.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-H.test.cpp
+      title: verify/AOJ-DSL-2-H.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
