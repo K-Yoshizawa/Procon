@@ -51,11 +51,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Graph/WarshallFloyd.hpp
       title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
+  - name: library
+    pages:
+    - icon: ':warning:'
+      path: library/Template.hpp
+      title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - name: library/Tree
     pages:
     - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/LowestCommonAncestor.hpp
+      title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
     - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
@@ -101,6 +109,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-A.test.cpp
       title: verify/AOJ-GRL-5-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-5-C.test.cpp
+      title: verify/AOJ-GRL-5-C.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-D.test.cpp
       title: verify/AOJ-GRL-5-D.test.cpp

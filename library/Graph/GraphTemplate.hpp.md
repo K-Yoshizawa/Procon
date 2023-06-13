@@ -33,6 +33,9 @@ data:
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
+    path: library/Tree/LowestCommonAncestor.hpp
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
+  - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiamiter.hpp
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
@@ -57,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-C.test.cpp
+    title: verify/AOJ-GRL-5-C.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-D.test.cpp
     title: verify/AOJ-GRL-5-D.test.cpp
@@ -252,6 +258,7 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
+  - library/Tree/LowestCommonAncestor.hpp
   - library/Tree/TreeDiamiter.hpp
   - library/Tree/EulerTour.hpp
   - library/Graph/BellmanFord.hpp
@@ -275,6 +282,7 @@ data:
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
   - verify/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:
