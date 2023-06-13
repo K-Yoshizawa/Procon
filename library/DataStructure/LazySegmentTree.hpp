@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief 遅延評価セグメント木
+ * @brief Lazy Segment Tree - 遅延評価セグメント木
  */
 
 #include <bits/stdc++.h>
