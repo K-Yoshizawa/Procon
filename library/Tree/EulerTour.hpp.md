@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTree.hpp
     title: Binary Indexed Tree
   - icon: ':heavy_check_mark:'
@@ -126,9 +126,9 @@ data:
     \n    /**\n     * @brief 1-index\u3067\u8868\u3055\u308C\u308B\u756A\u53F7i\u306B\
     \u5BFE\u3057\u3066\u3001data[i]\u306Bx\u3092\u52A0\u3048\u308B\u3002\n     * @param\
     \ i \u52A0\u3048\u308B\u5834\u6240\n     * @param x \u52A0\u3048\u308B\u5024\n\
-    \     */\n    void add(int i, T x){\n        while(i <= data.size()){\n      \
-    \      data[i] += x;\n            i += i & -i;\n        }\n    }\n\n    /**\n\
-    \     * @brief 0-index\u3067\u8868\u3055\u308C\u308B\u534A\u958B\u533A\u9593[l,\
+    \     */\n    void add(int i, T x){\n        while(i < data.size()){\n       \
+    \     data[i] += x;\n            i += i & -i;\n        }\n    }\n\n    /**\n \
+    \    * @brief 0-index\u3067\u8868\u3055\u308C\u308B\u534A\u958B\u533A\u9593[l,\
     \ r)\u306E\u533A\u9593\u548C\u3092\u6C42\u3081\u308B\u3002\n     * @param l \u533A\
     \u9593\u306E\u5DE6\u7AEF\n     * @param r \u533A\u9593\u306E\u53F3\u7AEF\n   \
     \  * @return T \u533A\u9593\u548C\n     */\n    T query(int l, int r){\n     \
@@ -209,7 +209,7 @@ data:
   isVerificationFile: false
   path: library/Tree/EulerTour.hpp
   requiredBy: []
-  timestamp: '2023-06-13 10:39:04+09:00'
+  timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-D.test.cpp

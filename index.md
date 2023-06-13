@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: library/DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     - icon: ':heavy_check_mark:'
@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-F.test.cpp
       title: verify/AOJ-DSL-2-F.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-G.test.cpp
       title: verify/AOJ-DSL-2-G.test.cpp
     - icon: ':heavy_check_mark:'
