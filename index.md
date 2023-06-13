@@ -11,7 +11,8 @@ data:
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/LazySegmentTree.hpp
-      title: "\u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+      title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
+        \u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -61,6 +62,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/HeavyLightDecomposition.hpp
+      title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
@@ -115,6 +119,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-D.test.cpp
       title: verify/AOJ-GRL-5-D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-5-E.test.cpp
+      title: verify/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ-GRL-6-A.test.cpp

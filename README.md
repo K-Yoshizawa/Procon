@@ -10,6 +10,10 @@ Reborn_Kの競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
+### Ver 1.6.0 (2023/06/13)
+- 【追加】Heavy Light Decomposition - HL分解
+- 一部テキストの軽微な修正
+
 ### Ver 1.5.1 (2023/06/13)
 - 【追加】Lazy Segment Tree - 遅延評価セグメント木
 - 【追加】Lowest Common Ancestor - 最小共通祖先

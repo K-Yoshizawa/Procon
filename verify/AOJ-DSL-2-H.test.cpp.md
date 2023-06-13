@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/DataStructure/LazySegmentTree.hpp
-    title: "\u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
+      \u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -15,26 +16,27 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H
   bundledCode: "#line 1 \"verify/AOJ-DSL-2-H.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H\"\
-    \n\n#line 2 \"library/DataStructure/LazySegmentTree.hpp\"\n\n/**\n * @brief \u9045\
-    \u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n */\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename Monoid, typename OperatorMonoid = Monoid>\n\
-    struct LazySegmentTree{\n    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
-    \    using G = function<Monoid(Monoid, OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid,\
-    \ OperatorMonoid)>;\n\n    int sz, height;\n    vector<Monoid> data;\n    vector<OperatorMonoid>\
-    \ lazy;\n    const F f;\n    const G g;\n    const H h;\n    const Monoid M1;\n\
-    \    const OperatorMonoid OM0;\n\n    void propagate(int k){\n        if(lazy[k]\
-    \ != OM0){\n            lazy[2 * k + 0] = h(lazy[2 * k + 0], lazy[k]);\n     \
-    \       lazy[2 * k + 1] = h(lazy[2 * k + 1], lazy[k]);\n            data[k] =\
-    \ reflect(k);\n            lazy[k] = OM0;\n        }\n    }\n\n    Monoid reflect(int\
-    \ k){\n        return lazy[k] == OM0 ? data[k] : g(data[k], lazy[k]);\n    }\n\
-    \n    void recalc(int k){\n        while(k >>= 1) data[k] = f(reflect(2 * k +\
-    \ 0), reflect(2 * k + 1));\n    }\n\n    void thrust(int k){\n        for(int\
-    \ i = height; i > 0; --i) propagate(k >> i);\n    }\n\n    public:\n    /**\n\
-    \     * @brief Construct a new Lazy Segment Tree object\n     * @param n \u30BB\
-    \u30B0\u6728\u306E\u30B5\u30A4\u30BA\n     * @param f \u533A\u9593\u53D6\u5F97\
-    \u306E\u4E8C\u9805\u6F14\u7B97(Monoid - Monoid)\n     * @param g \u9045\u5EF6\u8A55\
-    \u4FA1\u306E\u4E8C\u9805\u6F14\u7B97(Monoid - OperatorMonoid)\n     * @param h\
-    \ \u533A\u9593\u66F4\u65B0\u306E\u4E8C\u9805\u6F14\u7B97(OperatorMonoid - OperatorMonoid)\n\
+    \n\n#line 2 \"library/DataStructure/LazySegmentTree.hpp\"\n\n/**\n * @brief Lazy\
+    \ Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
+    \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Monoid,\
+    \ typename OperatorMonoid = Monoid>\nstruct LazySegmentTree{\n    private:\n \
+    \   using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
+    \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
+    \n    int sz, height;\n    vector<Monoid> data;\n    vector<OperatorMonoid> lazy;\n\
+    \    const F f;\n    const G g;\n    const H h;\n    const Monoid M1;\n    const\
+    \ OperatorMonoid OM0;\n\n    void propagate(int k){\n        if(lazy[k] != OM0){\n\
+    \            lazy[2 * k + 0] = h(lazy[2 * k + 0], lazy[k]);\n            lazy[2\
+    \ * k + 1] = h(lazy[2 * k + 1], lazy[k]);\n            data[k] = reflect(k);\n\
+    \            lazy[k] = OM0;\n        }\n    }\n\n    Monoid reflect(int k){\n\
+    \        return lazy[k] == OM0 ? data[k] : g(data[k], lazy[k]);\n    }\n\n   \
+    \ void recalc(int k){\n        while(k >>= 1) data[k] = f(reflect(2 * k + 0),\
+    \ reflect(2 * k + 1));\n    }\n\n    void thrust(int k){\n        for(int i =\
+    \ height; i > 0; --i) propagate(k >> i);\n    }\n\n    public:\n    /**\n    \
+    \ * @brief Construct a new Lazy Segment Tree object\n     * @param n \u30BB\u30B0\
+    \u6728\u306E\u30B5\u30A4\u30BA\n     * @param f \u533A\u9593\u53D6\u5F97\u306E\
+    \u4E8C\u9805\u6F14\u7B97(Monoid - Monoid)\n     * @param g \u9045\u5EF6\u8A55\u4FA1\
+    \u306E\u4E8C\u9805\u6F14\u7B97(Monoid - OperatorMonoid)\n     * @param h \u533A\
+    \u9593\u66F4\u65B0\u306E\u4E8C\u9805\u6F14\u7B97(OperatorMonoid - OperatorMonoid)\n\
     \     * @param M1 \u533A\u9593\u53D6\u5F97\u306E\u5358\u4F4D\u5143\n     * @param\
     \ OM0 \u533A\u9593\u66F4\u65B0\u306E\u5358\u4F4D\u5143\n     */\n    LazySegmentTree(int\
     \ n, const F f, const G g, const H h, const Monoid &M1, const OperatorMonoid &OM0)\
@@ -106,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-2-H.test.cpp
   requiredBy: []
-  timestamp: '2023-06-13 10:39:04+09:00'
+  timestamp: '2023-06-13 17:20:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-2-H.test.cpp

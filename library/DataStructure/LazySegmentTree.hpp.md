@@ -13,15 +13,16 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    document_title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\
+      \u30F3\u30C8\u6728"
     links: []
   bundledCode: "#line 2 \"library/DataStructure/LazySegmentTree.hpp\"\n\n/**\n * @brief\
-    \ \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Monoid, typename\
-    \ OperatorMonoid = Monoid>\nstruct LazySegmentTree{\n    private:\n    using F\
-    \ = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid, OperatorMonoid)>;\n\
-    \    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\n \
-    \   int sz, height;\n    vector<Monoid> data;\n    vector<OperatorMonoid> lazy;\n\
+    \ Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename\
+    \ Monoid, typename OperatorMonoid = Monoid>\nstruct LazySegmentTree{\n    private:\n\
+    \    using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
+    \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
+    \n    int sz, height;\n    vector<Monoid> data;\n    vector<OperatorMonoid> lazy;\n\
     \    const F f;\n    const G g;\n    const H h;\n    const Monoid M1;\n    const\
     \ OperatorMonoid OM0;\n\n    void propagate(int k){\n        if(lazy[k] != OM0){\n\
     \            lazy[2 * k + 0] = h(lazy[2 * k + 0], lazy[k]);\n            lazy[2\
@@ -81,11 +82,11 @@ data:
     \ print(int a, int b){\n        cerr << \"LST Data [\" << a << \", \" << b <<\"\
     ) : [\";\n        for(int i = a; i < b; ++i) cerr << query(i) << \" ]\"[i == b\
     \ - 1];\n        cerr << endl;\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\
-    \u30F3\u30C8\u6728\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
-    template <typename Monoid, typename OperatorMonoid = Monoid>\nstruct LazySegmentTree{\n\
-    \    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n    using G =\
-    \ function<Monoid(Monoid, OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid,\
+  code: "#pragma once\n\n/**\n * @brief Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\
+    \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n */\n\n#include <bits/stdc++.h>\nusing namespace\
+    \ std;\n\ntemplate <typename Monoid, typename OperatorMonoid = Monoid>\nstruct\
+    \ LazySegmentTree{\n    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
+    \    using G = function<Monoid(Monoid, OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid,\
     \ OperatorMonoid)>;\n\n    int sz, height;\n    vector<Monoid> data;\n    vector<OperatorMonoid>\
     \ lazy;\n    const F f;\n    const G g;\n    const H h;\n    const Monoid M1;\n\
     \    const OperatorMonoid OM0;\n\n    void propagate(int k){\n        if(lazy[k]\
@@ -150,7 +151,7 @@ data:
   isVerificationFile: false
   path: library/DataStructure/LazySegmentTree.hpp
   requiredBy: []
-  timestamp: '2023-06-13 10:39:04+09:00'
+  timestamp: '2023-06-13 17:20:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-H.test.cpp
@@ -160,5 +161,6 @@ layout: document
 redirect_from:
 - /library/library/DataStructure/LazySegmentTree.hpp
 - /library/library/DataStructure/LazySegmentTree.hpp.html
-title: "\u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
+  \u6728"
 ---

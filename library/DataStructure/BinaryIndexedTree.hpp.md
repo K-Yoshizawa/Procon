@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/HeavyLightDecomposition.hpp
+    title: "Heavy Light Decomposition - HL\u5206\u89E3"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-B.test.cpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-D.test.cpp
     title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -81,11 +87,13 @@ data:
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTree.hpp
   requiredBy:
+  - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/EulerTour.hpp
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
   - verify/AOJ-GRL-5-D.test.cpp
   - verify/AOJ-DSL-2-G.test.cpp

@@ -33,6 +33,9 @@ data:
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
+    path: library/Tree/HeavyLightDecomposition.hpp
+    title: "Heavy Light Decomposition - HL\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
@@ -66,6 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-D.test.cpp
     title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-6-A.test.cpp
     title: verify/AOJ-GRL-6-A.test.cpp
@@ -260,6 +266,7 @@ data:
   requiredBy:
   - library/Tree/LowestCommonAncestor.hpp
   - library/Tree/TreeDiamiter.hpp
+  - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/EulerTour.hpp
   - library/Graph/BellmanFord.hpp
   - library/Graph/CycleDetection.hpp
@@ -272,6 +279,7 @@ data:
   timestamp: '2023-06-12 01:07:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-2-A.test.cpp

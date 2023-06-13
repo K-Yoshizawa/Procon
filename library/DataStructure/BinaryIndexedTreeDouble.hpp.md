@@ -4,11 +4,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTree.hpp
     title: Binary Indexed Tree
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/HeavyLightDecomposition.hpp
+    title: "Heavy Light Decomposition - HL\u5206\u89E3"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-G.test.cpp
     title: verify/AOJ-DSL-2-G.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -90,10 +96,12 @@ data:
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTreeDouble.hpp
-  requiredBy: []
+  requiredBy:
+  - library/Tree/HeavyLightDecomposition.hpp
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-DSL-2-G.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTreeDouble.hpp
 layout: document
