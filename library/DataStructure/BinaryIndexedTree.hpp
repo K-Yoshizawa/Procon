@@ -21,8 +21,10 @@ struct BinaryIndexedTree{
      * @param size 配列の要素数
      */
     BinaryIndexedTree(int size){
-        data.assign(++size, 0);
+        data.resize(++size, 0);
     }
+
+    BinaryIndexedTree() = default;
 
     /**
      * @brief 1-indexで表される番号iに対して、配列の最初からiまでの閉区間の和を求める。
