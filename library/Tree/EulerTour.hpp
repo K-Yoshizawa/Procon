@@ -65,11 +65,19 @@ struct EulerTour{
      * @param x 増加させる重み
      */
     void add(Vertex child, CostType x){
-        assert(0 <= child && child < sz);
         auto [parent, ed] = relation[child];
         G.edges[ed].cost += x;
         G.edges[G.rev[ed]].cost += x;
         BIT.add(arrival[child], x);
         BIT.add(departure[child], -x);
+    }
+
+    void update(Vertex child, CostType x){
+        auto [parent, ed] = relation[child];
+        CostType diff = x - G.edges[ed].cost;
+        G.edges[ed].cost += diff;
+        G.edges[G.rev[ed]].cost += diff;
+        BIT.add(arrival[child], diff);
+        BIT.add(departure[child], -diff);
     }
 };
