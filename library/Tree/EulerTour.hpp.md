@@ -163,10 +163,14 @@ data:
     \u306E\u91CD\u307F\u3092x\u5897\u52A0\u3055\u305B\u308B\u4E00\u70B9\u66F4\u65B0\
     \u30AF\u30A8\u30EA\n     * @param child \u5B50\u306E\u9802\u70B9\u3092\u8868\u3059\
     \u9802\u70B9\u756A\u53F7\n     * @param x \u5897\u52A0\u3055\u305B\u308B\u91CD\
-    \u307F\n     */\n    void add(Vertex child, CostType x){\n        assert(0 <=\
-    \ child && child < sz);\n        auto [parent, ed] = relation[child];\n      \
-    \  G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost += x;\n        BIT.add(arrival[child],\
-    \ x);\n        BIT.add(departure[child], -x);\n    }\n};\n"
+    \u307F\n     */\n    void add(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost\
+    \ += x;\n        BIT.add(arrival[child], x);\n        BIT.add(departure[child],\
+    \ -x);\n    }\n\n    void update(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
+    \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
+    \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
+    \    }\n};\n"
   code: "#pragma once\n\n/**\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\
     \u30A2\u30FC\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n#include \"../DataStructure/BinaryIndexedTree.hpp\"\
     \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    int sz,\
@@ -199,17 +203,21 @@ data:
     \u306E\u91CD\u307F\u3092x\u5897\u52A0\u3055\u305B\u308B\u4E00\u70B9\u66F4\u65B0\
     \u30AF\u30A8\u30EA\n     * @param child \u5B50\u306E\u9802\u70B9\u3092\u8868\u3059\
     \u9802\u70B9\u756A\u53F7\n     * @param x \u5897\u52A0\u3055\u305B\u308B\u91CD\
-    \u307F\n     */\n    void add(Vertex child, CostType x){\n        assert(0 <=\
-    \ child && child < sz);\n        auto [parent, ed] = relation[child];\n      \
-    \  G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost += x;\n        BIT.add(arrival[child],\
-    \ x);\n        BIT.add(departure[child], -x);\n    }\n};"
+    \u307F\n     */\n    void add(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost\
+    \ += x;\n        BIT.add(arrival[child], x);\n        BIT.add(departure[child],\
+    \ -x);\n    }\n\n    void update(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
+    \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
+    \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
+    \    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: false
   path: library/Tree/EulerTour.hpp
   requiredBy: []
-  timestamp: '2023-06-13 11:29:18+09:00'
+  timestamp: '2023-06-14 11:28:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-D.test.cpp

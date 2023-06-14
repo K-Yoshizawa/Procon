@@ -166,18 +166,22 @@ data:
     \u306E\u91CD\u307F\u3092x\u5897\u52A0\u3055\u305B\u308B\u4E00\u70B9\u66F4\u65B0\
     \u30AF\u30A8\u30EA\n     * @param child \u5B50\u306E\u9802\u70B9\u3092\u8868\u3059\
     \u9802\u70B9\u756A\u53F7\n     * @param x \u5897\u52A0\u3055\u305B\u308B\u91CD\
-    \u307F\n     */\n    void add(Vertex child, CostType x){\n        assert(0 <=\
-    \ child && child < sz);\n        auto [parent, ed] = relation[child];\n      \
-    \  G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost += x;\n        BIT.add(arrival[child],\
-    \ x);\n        BIT.add(departure[child], -x);\n    }\n};\n#line 4 \"verify/AOJ-GRL-5-D.test.cpp\"\
-    \n\nint main(){\n    int n;\n    cin >> n;\n    Graph<long long> G(n);\n    for(int\
-    \ i = 0; i < n; ++i){\n        int k;\n        cin >> k;\n        for(int j =\
-    \ 0; j < k; ++j){\n            int c;\n            cin >> c;\n            G.add(i,\
-    \ c, 0);\n        }\n    }\n    EulerTour<long long> et(G);\n    int q;\n    cin\
-    \ >> q;\n    while(q--){\n        int com;\n        cin >> com;\n        if(com\
-    \ == 0){\n            long long v, w;\n            cin >> v >> w;\n          \
-    \  et.add(v, w);\n        }\n        else{\n            int u;\n            cin\
-    \ >> u;\n            cout << et.query(u) << endl;\n        }\n    }\n}\n"
+    \u307F\n     */\n    void add(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost\
+    \ += x;\n        BIT.add(arrival[child], x);\n        BIT.add(departure[child],\
+    \ -x);\n    }\n\n    void update(Vertex child, CostType x){\n        auto [parent,\
+    \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
+    \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
+    \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
+    \    }\n};\n#line 4 \"verify/AOJ-GRL-5-D.test.cpp\"\n\nint main(){\n    int n;\n\
+    \    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
+    \        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n    \
+    \        int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
+    \    }\n    EulerTour<long long> et(G);\n    int q;\n    cin >> q;\n    while(q--){\n\
+    \        int com;\n        cin >> com;\n        if(com == 0){\n            long\
+    \ long v, w;\n            cin >> v >> w;\n            et.add(v, w);\n        }\n\
+    \        else{\n            int u;\n            cin >> u;\n            cout <<\
+    \ et.query(u) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
     \n\n#include \"../library/Tree/EulerTour.hpp\"\n\nint main(){\n    int n;\n  \
     \  cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n  \
@@ -195,7 +199,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-D.test.cpp
   requiredBy: []
-  timestamp: '2023-06-13 11:29:18+09:00'
+  timestamp: '2023-06-14 11:28:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-D.test.cpp
