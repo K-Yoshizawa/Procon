@@ -9,6 +9,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
+    - icon: ':x:'
+      path: library/DataStructure/K-th_MultiSet.hpp
+      title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\
+        \u30FC\u30BF\u69CB\u9020"
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
@@ -128,5 +132,8 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-7-A.test.cpp
       title: verify/AOJ-GRL-7-A.test.cpp
+    - icon: ':x:'
+      path: verify/yuki-649.test.cpp
+      title: verify/yuki-649.test.cpp
 layout: toppage
 ---

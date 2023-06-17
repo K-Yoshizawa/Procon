@@ -1,0 +1,85 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':x:'
+    path: library/DataStructure/K-th_MultiSet.hpp
+    title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\
+      \u30FC\u30BF\u69CB\u9020"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://yukicoder.me/problems/no/649
+    links:
+    - https://yukicoder.me/problems/no/649
+  bundledCode: "#line 1 \"verify/yuki-649.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/649\"\
+    \n\n#include <bits/stdc++.h>\n#line 2 \"library/DataStructure/K-th_MultiSet.hpp\"\
+    \n\n/**\n * @brief K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\
+    \u308B\u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n#line 8 \"library/DataStructure/K-th_MultiSet.hpp\"\
+    \nusing namespace std;\n\ntemplate<typename T>\nstruct Kth_MultiSet{\n    private:\n\
+    \    int K;\n    bool greater;\n    multiset<T> small, large;\n    T __sum;\n\n\
+    \    void balance(){\n        if(greater){\n            while(large.size() < K\
+    \ && small.size()){\n                auto itr = --(small.end());\n           \
+    \     __sum += (*itr);\n                large.insert(*itr);\n                small.erase(itr);\n\
+    \            }\n            if(small.empty() || large.empty()) return;\n     \
+    \       while(1){\n                auto si = --(small.end());\n              \
+    \  auto li = large.begin();\n                T sv = (*si), lv = (*li);\n     \
+    \           if(sv <= lv) break;\n                __sum += (sv - lv);\n       \
+    \         small.erase(si), large.erase(li);\n                small.insert(lv),\
+    \ large.insert(sv);\n            }\n        }\n        else{\n            while(small.size()\
+    \ < K && large.size()){\n                auto itr = large.begin();\n         \
+    \       __sum += (*itr);\n                small.insert(*itr);\n              \
+    \  large.erase(itr);\n            }\n            if(small.empty() || large.empty())\
+    \ return;\n            while(1){\n                auto si = --(small.end());\n\
+    \                auto li = large.begin();\n                T sv = (*si), lv =\
+    \ (*li);\n                if(sv <= lv) break;\n                __sum -= (sv -\
+    \ lv);\n                small.erase(si), large.erase(li);\n                small.insert(lv),\
+    \ large.insert(sv);\n            }\n        }\n    }\n\n    public:\n    Kth_MultiSet(int\
+    \ K, bool greater = false) : K(K), greater(greater), __sum(0){}\n\n    /**\n \
+    \    * @brief \u5024value\u3092\u8FFD\u52A0\u3059\u308B\u3002\n     * @param value\
+    \ \u8FFD\u52A0\u3057\u305F\u3044\u5024\n     */\n    void insert(T value){\n \
+    \       if(greater) small.insert(value);\n        else large.insert(value);\n\
+    \        balance();\n    }\n\n    void erase(T value){\n        if(greater){\n\
+    \            auto itr = large.find(value);\n            if(itr != large.end()){\n\
+    \                __sum -= value;\n                large.erase(itr);\n        \
+    \    }\n            else{\n                assert(small.find(value) != small.end());\n\
+    \                small.erase(small.find(value));\n            }\n        }\n \
+    \       else{\n            auto itr = small.find(value);\n            if(itr !=\
+    \ small.end()){\n                __sum -= value;\n                small.erase(itr);\n\
+    \            }\n            else{\n                assert(large.find(value) !=\
+    \ large.end());\n                large.erase(large.find(value));\n           \
+    \ }\n        }\n        balance();\n    }\n\n    inline T sum(){\n        return\
+    \ __sum;\n    }\n\n    inline bool exist(){\n        return greater ? large.size()\
+    \ == K : small.size() == K;\n    }\n\n    inline T get(){\n        assert(exist());\n\
+    \        return greater ? *(large.begin()) : *(--(small.end()));\n    }\n};\n\
+    #line 5 \"verify/yuki-649.test.cpp\"\n\nint main(){\n    int Q, K;\n    cin >>\
+    \ Q >> K;\n\n    Kth_MultiSet<long long> ms(K);\n    while(Q--){\n        int\
+    \ query;\n        cin >> query;\n        if(query == 1){\n            long long\
+    \ v;\n            cin >> v;\n            ms.insert(v);\n        }\n        else{\n\
+    \            cout << (ms.exist() ? ms.get() : -1) << endl;\n            if(ms.exist())\
+    \ ms.erase(ms.get());\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/649\"\n\n#include <bits/stdc++.h>\n\
+    #include \"../library/DataStructure/K-th_MultiSet.hpp\"\n\nint main(){\n    int\
+    \ Q, K;\n    cin >> Q >> K;\n\n    Kth_MultiSet<long long> ms(K);\n    while(Q--){\n\
+    \        int query;\n        cin >> query;\n        if(query == 1){\n        \
+    \    long long v;\n            cin >> v;\n            ms.insert(v);\n        }\n\
+    \        else{\n            cout << (ms.exist() ? ms.get() : -1) << endl;\n  \
+    \          if(ms.exist()) ms.erase(ms.get());\n        }\n    }\n}"
+  dependsOn:
+  - library/DataStructure/K-th_MultiSet.hpp
+  isVerificationFile: true
+  path: verify/yuki-649.test.cpp
+  requiredBy: []
+  timestamp: '2023-06-18 02:21:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
+  verifiedWith: []
+documentation_of: verify/yuki-649.test.cpp
+layout: document
+redirect_from:
+- /verify/verify/yuki-649.test.cpp
+- /verify/verify/yuki-649.test.cpp.html
+title: verify/yuki-649.test.cpp
+---
