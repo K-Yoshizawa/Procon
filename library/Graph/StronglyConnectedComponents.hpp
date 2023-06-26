@@ -14,11 +14,11 @@ using namespace std;
  */
 template<typename CostType>
 struct StronglyConnectedComponents{
-    Graph<CostType> &G, rG;
-    vector<Vertex> belong; // 頂点がどの強連結成分に所属するか
+    vector<int> belong; // 頂点がどの強連結成分に所属するか
     vector<vector<Vertex>> sc; // 各強連結成分に所属する頂点
 
     private:
+    Graph<CostType> &G, rG;
     vector<int> order, visited;
     vector<int> tmp;
 
@@ -65,5 +65,14 @@ struct StronglyConnectedComponents{
      */
     bool same(Vertex u, Vertex v){
         return belong[u] == belong[v];
+    }
+
+    /**
+     * @brief 頂点vが属する強連結成分を返す。
+     * @param v 調べたい頂点v
+     * @return vector<Vertex> 頂点vが属する強連結成分
+     */
+    vector<Vertex> get(Vertex v){
+        return sc[belong[v]];
     }
 };
