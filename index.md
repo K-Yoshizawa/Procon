@@ -20,7 +20,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/K-th_MultiSet.hpp
       title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\
         \u30FC\u30BF\u69CB\u9020"
@@ -34,6 +34,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+  - name: library/DynamicPrograming
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
+      title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\
+        \u5217"
   - name: library/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -84,6 +90,9 @@ data:
   verificationCategories:
   - name: verify
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DPL-1-D.test.cpp
+      title: verify/AOJ-DPL-1-D.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-A.test.cpp
       title: verify/AOJ-DSL-1-A.test.cpp
@@ -138,6 +147,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-7-A.test.cpp
       title: verify/AOJ-GRL-7-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki-0649.test.cpp
+      title: verify/yuki-0649.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/yuki-1995.test.cpp
       title: verify/yuki-1995.test.cpp

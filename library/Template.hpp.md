@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DPL-1-D.test.cpp
+    title: verify/AOJ-DPL-1-D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
   _isVerificationFailed: false
@@ -15,7 +18,7 @@ data:
   bundledCode: "#line 2 \"library/Template.hpp\"\n\n/**\n * @brief Procon Template\
     \ - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define\
     \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
-    \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REV(x) reverse(ALL(x))\n\
+    \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
     #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
     \ninline string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool\
@@ -76,7 +79,7 @@ data:
   code: "#pragma once\n\n/**\n * @brief Procon Template - \u30C6\u30F3\u30D7\u30EC\
     \u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n\
     #define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define\
-    \ RSORT(x) sort(RALL(x))\n#define REV(x) reverse(ALL(x))\n#define SETPRE(digit)\
+    \ RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
     \ fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n#define\
     \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\ninline\
     \ string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool\
@@ -138,9 +141,10 @@ data:
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-06-26 10:02:23+09:00'
+  timestamp: '2023-06-27 02:19:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-DPL-1-D.test.cpp
   - verify/yuki-1995.test.cpp
 documentation_of: library/Template.hpp
 layout: document
