@@ -111,10 +111,10 @@ data:
     \ v);\n            }\n        }\n        return ret;\n    }\n};\n#line 11 \"library/Graph/StronglyConnectedComponents.hpp\"\
     \n\n/**\n * @brief  \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\u3092\u884C\u3046\
     \u3002\n */\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n\
-    \    Graph<CostType> &G, rG;\n    vector<Vertex> belong; // \u9802\u70B9\u304C\
-    \u3069\u306E\u5F37\u9023\u7D50\u6210\u5206\u306B\u6240\u5C5E\u3059\u308B\u304B\
-    \n    vector<vector<Vertex>> sc; // \u5404\u5F37\u9023\u7D50\u6210\u5206\u306B\
-    \u6240\u5C5E\u3059\u308B\u9802\u70B9\n\n    private:\n    vector<int> order, visited;\n\
+    \    vector<int> belong; // \u9802\u70B9\u304C\u3069\u306E\u5F37\u9023\u7D50\u6210\
+    \u5206\u306B\u6240\u5C5E\u3059\u308B\u304B\n    vector<vector<Vertex>> sc; //\
+    \ \u5404\u5F37\u9023\u7D50\u6210\u5206\u306B\u6240\u5C5E\u3059\u308B\u9802\u70B9\
+    \n\n    private:\n    Graph<CostType> &G, rG;\n    vector<int> order, visited;\n\
     \    vector<int> tmp;\n\n    void dfs(int v){\n        visited[v] = 1;\n     \
     \   for(auto &e : G.get_edges(v)){\n            if(visited[e.to] == 0) dfs(e.to);\n\
     \        }\n        order.push_back(v);\n    }\n\n    void rdfs(int v, int k){\n\
@@ -133,13 +133,17 @@ data:
     \  v: \u5224\u5B9A\u3057\u305F\u3044\u9802\u70B9v\n     * @retval \u540C\u3058\
     \u5F37\u9023\u7D50\u6210\u5206\u306B\u6240\u5C5E\u3059\u308B\u306A\u3089true\u3001\
     \u305D\u3046\u3067\u306A\u3051\u308C\u3070false\n     */\n    bool same(Vertex\
-    \ u, Vertex v){\n        return belong[u] == belong[v];\n    }\n};\n#line 6 \"\
-    verify/AOJ-GRL-3-C.test.cpp\"\n\nusing namespace std;\n\nint main(){\n    int\
-    \ V, E;\n    cin >> V >> E;\n    Graph<int> G(V, true);\n    for(int i = 0; i\
-    \ < E; ++i){\n        int s, t;\n        cin >> s >> t;\n        G.add(s, t);\n\
-    \    }\n    \n    StronglyConnectedComponents<int> scc(G);\n\n    int Q;\n   \
-    \ cin >> Q;\n    while(Q--){\n        int u, v;\n        cin >> u >> v;\n    \
-    \    cout << scc.same(u, v) << endl;\n    }\n}\n"
+    \ u, Vertex v){\n        return belong[u] == belong[v];\n    }\n\n    /**\n  \
+    \   * @brief \u9802\u70B9v\u304C\u5C5E\u3059\u308B\u5F37\u9023\u7D50\u6210\u5206\
+    \u3092\u8FD4\u3059\u3002\n     * @param v \u8ABF\u3079\u305F\u3044\u9802\u70B9\
+    v\n     * @return vector<Vertex> \u9802\u70B9v\u304C\u5C5E\u3059\u308B\u5F37\u9023\
+    \u7D50\u6210\u5206\n     */\n    vector<Vertex> get(Vertex v){\n        return\
+    \ sc[belong[v]];\n    }\n};\n#line 6 \"verify/AOJ-GRL-3-C.test.cpp\"\n\nusing\
+    \ namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n    Graph<int>\
+    \ G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s, t;\n        cin\
+    \ >> s >> t;\n        G.add(s, t);\n    }\n    \n    StronglyConnectedComponents<int>\
+    \ scc(G);\n\n    int Q;\n    cin >> Q;\n    while(Q--){\n        int u, v;\n \
+    \       cin >> u >> v;\n        cout << scc.same(u, v) << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
     \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/StronglyConnectedComponents.hpp\"\
     \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
@@ -153,7 +157,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2023-06-12 01:07:50+09:00'
+  timestamp: '2023-06-27 02:49:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-C.test.cpp

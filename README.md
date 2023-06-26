@@ -12,6 +12,7 @@ lX57の競技プログラミング用のライブラリ。
 
 ### Ver 1.8.0 (2023/06/27)
 - 【追加】Longest Increasing Subsequence - 最長部分増加列
+- 【改修】Strongly Connected Components : ある頂点の属する強連結成分を取得する関数を追加
 
 ### Ver 1.7.2 (2023/06/26)
 - 改名したんでした
