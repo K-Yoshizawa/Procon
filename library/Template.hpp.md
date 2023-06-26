@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki-1995.test.cpp
+    title: verify/yuki-1995.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -136,8 +139,9 @@ data:
   path: library/Template.hpp
   requiredBy: []
   timestamp: '2023-06-26 10:02:23+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yuki-1995.test.cpp
 documentation_of: library/Template.hpp
 layout: document
 redirect_from:

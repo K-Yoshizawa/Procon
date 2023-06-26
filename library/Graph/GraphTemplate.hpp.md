@@ -78,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-7-A.test.cpp
     title: verify/AOJ-GRL-7-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki-1995.test.cpp
+    title: verify/yuki-1995.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -285,6 +288,7 @@ data:
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
+  - verify/yuki-1995.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
   - verify/AOJ-GRL-2-A.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp

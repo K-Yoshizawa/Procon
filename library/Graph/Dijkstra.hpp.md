@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki-1995.test.cpp
+    title: verify/yuki-1995.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -173,6 +176,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/yuki-1995.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document
 redirect_from:
