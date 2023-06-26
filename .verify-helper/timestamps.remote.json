@@ -16,5 +16,6 @@
 "verify/AOJ-GRL-5-D.test.cpp": "2023-06-14 11:28:26 +0900",
 "verify/AOJ-GRL-5-E.test.cpp": "2023-06-13 17:20:28 +0900",
 "verify/AOJ-GRL-6-A.test.cpp": "2023-06-12 01:07:50 +0900",
-"verify/AOJ-GRL-7-A.test.cpp": "2023-06-12 01:07:50 +0900"
+"verify/AOJ-GRL-7-A.test.cpp": "2023-06-12 01:07:50 +0900",
+"verify/yuki-1995.test.cpp": "2023-06-26 11:08:56 +0900"
 }
