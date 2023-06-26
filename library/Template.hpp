@@ -9,7 +9,7 @@
 #define RALL(x) (x).rbegin(), (x).rend()
 #define SORT(x) sort(ALL(x))
 #define RSORT(x) sort(RALL(x))
-#define REV(x) reverse(ALL(x))
+#define REVERSE(x) reverse(ALL(x))
 #define SETPRE(digit) fixed << setprecision(digit)
 #define popcount(x) __builtin_popcount(x)
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
