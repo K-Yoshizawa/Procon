@@ -9,6 +9,7 @@
 #define RALL(x) (x).rbegin(), (x).rend()
 #define SORT(x) sort(ALL(x))
 #define RSORT(x) sort(RALL(x))
+#define REV(x) reverse(ALL(x))
 #define SETPRE(digit) fixed << setprecision(digit)
 #define popcount(x) __builtin_popcount(x)
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
@@ -30,11 +31,12 @@ inline T median(T a, T b, T c){return between(b, a, c) || between(c, a, b) ? a :
 using ll = long long;
 using ull = unsigned long long;
 
-const int mod998 = 998244353;
-const int mod107 = 1000000007;
 const double PI = 3.141592653589793;
 const double PI2 = PI * 2;
 const double PI_2 = PI / 2;
+
+const int INF_INT = numeric_limits<int>::max() / 2;
+const long long INF_LL = numeric_limits<long long>::max() / 2LL;
 
 template <typename T>
 using vec = vector<T>;
@@ -91,10 +93,17 @@ istream &operator>>(istream &is, valarray<T> &v){
     return is;
 }
 
-template <typename T1, typename T2>
-pair<T1, T2> &operator+=(pair<T1, T2> &x, const pair<T1, T2> &y){
-    x.first += y.first;
-    x.second += y.second;
+template <typename T1, typename T2, typename T3>
+pair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){
+    x.first += y;
+    x.second += y;
+    return x;
+}
+
+template <typename T1, typename T2, typename T3>
+pair<T1, T2> &operator-=(pair<T1, T2> &x, const T3 &y){
+    x.first -= y;
+    x.second -= y;
     return x;
 }
 
@@ -113,115 +122,37 @@ ll modpow(ll a, ll b, ll m){
     return p;
 }
 
-template <typename T1>
-double dist(pair<T1, T1> &p){
-    return sqrt((double)p.first * (double)p.first + (double)p.second * (double)p.second);
-}
-
-template <typename T1, typename T2>
-double dist(pair<T1, T1> &p1, pair<T2, T2> &p2){
-    double dx = (double)p1.first - (double)p2.first;
-    double dy = (double)p1.second - (double)p2.second;
-    return sqrt(dx * dx + dy * dy);
-}
-
-template <typename T1, typename T2>
-long long dist2(pair<T1, T1> &p1, pair<T2, T2> &p2){
+template <typename T>
+inline long long EuclideanDist2(const pair<T, T> &p1, const pair<T, T> &p2){
     long long dx = (long long)p1.first - (long long)p2.first;
     long long dy = (long long)p1.second - (long long)p2.second;
     return dx * dx + dy * dy;
 }
 
-double atan2_360(double y, double x){
-    double res = atan2(y, x) / PI * 180.0;
-    if(res < 0.0) res += 360.0;
-    return res;
+template <typename T>
+inline long long EuclideanDist2(const pair<T, T> &p){
+    return EuclideanDist2(p, make_pair(0, 0));
+}
+
+template <typename T>
+inline double EuclideanDist(const pair<T, T> &p1, const pair<T, T> &p2){
+    return sqrt((double)EuclideanDist2(p1, p2));
+}
+
+template <typename T>
+inline double EuclideanDist(const pair<T, T> &p){
+    return sqrt((double)EuclideanDist2(p));
+}
+
+template<typename T>
+inline long long ManhattanDist(const pair<T, T> &p1, const pair<T, T> &p2){
+    return abs(p1.first - p2.first) + abs(p1.second - p2.second);
 }
 
 template <typename T>
 T ceil(T x, T y){
     return (x + y - 1) / y;
 }
-
-template< int mod >
-struct ModInt {
-    int x;
-
-    ModInt() : x(0) {}
-
-    ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}
-
-    ModInt &operator+=(const ModInt &p) {
-        if((x += p.x) >= mod) x -= mod;
-        return *this;
-    }
-
-    ModInt &operator-=(const ModInt &p) {
-        if((x += mod - p.x) >= mod) x -= mod;
-        return *this;
-    }
-
-    ModInt &operator*=(const ModInt &p) {
-        x = (int) (1LL * x * p.x % mod);
-        return *this;
-    }
-
-    ModInt &operator/=(const ModInt &p) {
-        *this *= p.inverse();
-        return *this;
-    }
-
-    ModInt operator-() const { return ModInt(-x); }
-
-    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
-
-    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
-
-    ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
-
-    ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }
-
-    bool operator==(const ModInt &p) const { return x == p.x; }
-
-    bool operator!=(const ModInt &p) const { return x != p.x; }
-
-    ModInt inverse() const {
-        int a = x, b = mod, u = 1, v = 0, t;
-        while(b > 0) {
-            t = a / b;
-            swap(a -= t * b, b);
-            swap(u -= t * v, v);
-        }
-        return ModInt(u);
-    }
-
-    ModInt pow(int64_t n) const {
-        if(n == 0) return ModInt(1);
-        ModInt ret(1), mul(x);
-        while(n > 0) {
-            if(n & 1) ret *= mul;
-            mul *= mul;
-            n >>= 1;
-        }
-        return ret;
-    }
-
-    friend ostream &operator<<(ostream &os, const ModInt &p) {
-        return os << p.x;
-    }
-
-    friend istream &operator>>(istream &is, ModInt &a) {
-        int64_t t;
-        is >> t;
-        a = ModInt< mod >(t);
-        return (is);
-    }
-
-    static int get_mod() { return mod; }
-};
-
-using modint998 = ModInt< mod998 >;
-using modint107 = ModInt< mod107 >;
 
 template<typename T>
 T gcd(T a, T b) {
@@ -233,4 +164,14 @@ T gcd(T a, T b) {
 
 ull lcm(ull a, ull b) {
     return a * b / gcd(a, b);
+}
+
+string bitseq(long long x){
+    string ret = "";
+    while(x){
+        ret.push_back('0' + (x & 1));
+        x <<= 1;
+    }
+    reverse(ret.begin(), ret.end());
+    return ret;
 }
