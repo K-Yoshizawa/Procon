@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: library/Template.hpp
     title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -24,19 +24,23 @@ data:
     \ sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
     #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
-    \ninline string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool\
-    \ YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool\
-    \ flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout\
-    \ << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool minin(T &src, const\
-    \ T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
-    \ T>\nbool maxin(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
-    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
-    \ min <= x && x <= max;}\ntemplate<typename T>\ninline T median(T a, T b, T c){return\
-    \ between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b,\
-    \ a) ? b : c);}\n\nusing ll = long long;\nusing ull = unsigned long long;\n\n\
-    const double PI = 3.141592653589793;\nconst double PI2 = PI * 2;\nconst double\
-    \ PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst\
-    \ long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
+    \n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head,\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n\
+    \    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
+    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
+    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
+    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
+    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
+    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
+    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
+    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
+    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
+    \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
+    \ long;\nusing ull = unsigned long long;\nusing ld = long double;\n\nconst long\
+    \ double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long double PI_2\
+    \ = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst long\
+    \ long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
     \ T>\nusing vec = vector<T>;\nusing pi = pair<int, int>;\nusing pll = pair<ll,\
     \ ll>;\nusing pd = pair<double, double>;\ntemplate <typename T>\nusing pq = priority_queue<T>;\n\
     template <typename T>\nusing rpq = priority_queue<T, vec<T>, greater<T>>;\n\n\
@@ -104,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DPL-1-D.test.cpp
   requiredBy: []
-  timestamp: '2023-06-27 02:19:52+09:00'
+  timestamp: '2023-07-11 12:00:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DPL-1-D.test.cpp

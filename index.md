@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: library
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: library/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/Template.hpp
       title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -53,14 +53,14 @@ data:
       path: library/Graph/CycleDetection.hpp
       title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
         \u30B0\u30E9\u30D5\uFF09"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
         \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
     - icon: ':heavy_check_mark:'
       path: library/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -78,7 +78,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -87,6 +87,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
+  - name: verify
+    pages:
+    - icon: ':warning:'
+      path: verify/AOJ-GRL-5-E.cpp
+      title: verify/AOJ-GRL-5-E.cpp
   verificationCategories:
   - name: verify
     pages:
@@ -139,9 +144,6 @@ data:
       path: verify/AOJ-GRL-5-D.test.cpp
       title: verify/AOJ-GRL-5-D.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-5-E.test.cpp
-      title: verify/AOJ-GRL-5-E.test.cpp
-    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ-GRL-6-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -150,7 +152,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki-0649.test.cpp
       title: verify/yuki-0649.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/yuki-1995.test.cpp
       title: verify/yuki-1995.test.cpp
 layout: toppage

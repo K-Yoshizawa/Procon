@@ -10,6 +10,11 @@ lX57の競技プログラミング用のライブラリ。
 
 ## 更新履歴
 
+### Ver 1.8.1 (2023/07/11)
+- 【改修】Template : デバッグ出力書いた
+- 【改修】Segment Tree : ドキュメントを書いた
+- 【改修】Heavy Light Decomposition : なんか色々改修したけど覚えてないし多分verify直してない
+
 ### Ver 1.8.0 (2023/06/27)
 - 【追加】Longest Increasing Subsequence - 最長部分増加列
 - 【改修】Strongly Connected Components : ある頂点の属する強連結成分を取得する関数を追加

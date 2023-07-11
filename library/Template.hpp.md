@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DPL-1-D.test.cpp
     title: verify/AOJ-DPL-1-D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -21,19 +21,23 @@ data:
     \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
     #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
-    \ninline string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool\
-    \ YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool\
-    \ flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout\
-    \ << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool minin(T &src, const\
-    \ T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
-    \ T>\nbool maxin(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
-    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
-    \ min <= x && x <= max;}\ntemplate<typename T>\ninline T median(T a, T b, T c){return\
-    \ between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b,\
-    \ a) ? b : c);}\n\nusing ll = long long;\nusing ull = unsigned long long;\n\n\
-    const double PI = 3.141592653589793;\nconst double PI2 = PI * 2;\nconst double\
-    \ PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst\
-    \ long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
+    \n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head,\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n\
+    \    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
+    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
+    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
+    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
+    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
+    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
+    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
+    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
+    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
+    \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
+    \ long;\nusing ull = unsigned long long;\nusing ld = long double;\n\nconst long\
+    \ double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long double PI_2\
+    \ = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst long\
+    \ long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
     \ T>\nusing vec = vector<T>;\nusing pi = pair<int, int>;\nusing pll = pair<ll,\
     \ ll>;\nusing pd = pair<double, double>;\ntemplate <typename T>\nusing pq = priority_queue<T>;\n\
     template <typename T>\nusing rpq = priority_queue<T, vec<T>, greater<T>>;\n\n\
@@ -81,53 +85,56 @@ data:
     #define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define\
     \ RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
     \ fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n#define\
-    \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\ninline\
-    \ string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool\
-    \ flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return\
-    \ (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag)\
-    \ << endl;return flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src\
-    \ > cmp){src = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T\
-    \ &src, const T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
-    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
-    \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
-    \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
-    \ long;\nusing ull = unsigned long long;\n\nconst double PI = 3.141592653589793;\n\
-    const double PI2 = PI * 2;\nconst double PI_2 = PI / 2;\n\nconst int INF_INT =\
-    \ numeric_limits<int>::max() / 2;\nconst long long INF_LL = numeric_limits<long\
-    \ long>::max() / 2LL;\n\ntemplate <typename T>\nusing vec = vector<T>;\nusing\
-    \ pi = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
-    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
-    using rpq = priority_queue<T, vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0,\
-    \ -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1,\
-    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate\
-    \ <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
-    \ T2> &p){\n    os << \"{\" << p.first << \" \" << p.second << \"}\";\n    return\
-    \ os;\n}\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is,\
-    \ pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate\
-    \ <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int\
-    \ i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \"\
-    \ : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
-    \   os << v[i] << \"\\n\";\n    }\n    return os;\n}\n\ntemplate <typename T>\n\
-    istream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size();\
-    \ ++i) is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nistream &operator>>(istream\
-    \ &is, valarray<T> &v){\n    for (int i = 0; i < v.size(); ++i) is >> v[i];\n\
-    \    return is;\n}\n\ntemplate <typename T1, typename T2, typename T3>\npair<T1,\
-    \ T2> &operator+=(pair<T1, T2> &x, const T3 &y){\n    x.first += y;\n    x.second\
-    \ += y;\n    return x;\n}\n\ntemplate <typename T1, typename T2, typename T3>\n\
-    pair<T1, T2> &operator-=(pair<T1, T2> &x, const T3 &y){\n    x.first -= y;\n \
-    \   x.second -= y;\n    return x;\n}\n\nll modpow(ll a, ll b, ll m){\n    ll p\
-    \ = 1, q = a;\n    for (int i = 0; i < 63; ++i)\n    {\n        if ((b & (1LL\
-    \ << i)) != 0)\n        {\n            p *= q;\n            p %= m;\n        }\n\
-    \        q *= q;\n        q %= m;\n    }\n    return p;\n}\n\ntemplate <typename\
-    \ T>\ninline long long EuclideanDist2(const pair<T, T> &p1, const pair<T, T> &p2){\n\
-    \    long long dx = (long long)p1.first - (long long)p2.first;\n    long long\
-    \ dy = (long long)p1.second - (long long)p2.second;\n    return dx * dx + dy *\
-    \ dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const pair<T,\
-    \ T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate <typename\
-    \ T>\ninline double EuclideanDist(const pair<T, T> &p1, const pair<T, T> &p2){\n\
-    \    return sqrt((double)EuclideanDist2(p1, p2));\n}\n\ntemplate <typename T>\n\
-    inline double EuclideanDist(const pair<T, T> &p){\n    return sqrt((double)EuclideanDist2(p));\n\
+    \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\n#ifndef\
+    \ ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head, class...\
+    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n    dprint(forward<Tail>(tail)...);\n\
+    }\n#else\ntemplate<class Head, class... Tail>\nvoid dprint(Head&& head, Tail&&...\
+    \ tail){}\n#endif\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" : \"\
+    No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\n\
+    inline string YN(bool flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool\
+    \ flag){cout << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool minin(T\
+    \ &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
+    \ T>\nbool maxin(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
+    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
+    \ min <= x && x <= max;}\ntemplate<typename T>\ninline T median(T a, T b, T c){return\
+    \ between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b,\
+    \ a) ? b : c);}\n\nusing ll = long long;\nusing ull = unsigned long long;\nusing\
+    \ ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double PI2\
+    \ = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
+    \ / 2;\nconst long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate\
+    \ <typename T>\nusing vec = vector<T>;\nusing pi = pair<int, int>;\nusing pll\
+    \ = pair<ll, ll>;\nusing pd = pair<double, double>;\ntemplate <typename T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <typename T>\nusing rpq = priority_queue<T,\
+    \ vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
+    \ = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int\
+    \ dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate <typename T1, typename T2>\n\
+    ostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << \"{\" << p.first\
+    \ << \" \" << p.second << \"}\";\n    return os;\n}\n\ntemplate <typename T1,\
+    \ typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n    is >>\
+    \ p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ &os, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os <<\
+    \ v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, vector<vector<T>> &v){\n    for\
+    \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << \"\\n\";\n    }\n   \
+    \ return os;\n}\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T>\
+    \ &v){\n    for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\
+    \ntemplate <typename T>\nistream &operator>>(istream &is, valarray<T> &v){\n \
+    \   for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate\
+    \ <typename T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2>\
+    \ &x, const T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n}\n\
+    \ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1,\
+    \ T2> &x, const T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n\
+    }\n\nll modpow(ll a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i\
+    \ < 63; ++i)\n    {\n        if ((b & (1LL << i)) != 0)\n        {\n         \
+    \   p *= q;\n            p %= m;\n        }\n        q *= q;\n        q %= m;\n\
+    \    }\n    return p;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
+    \ - (long long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
+    \    return dx * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
+    \ <typename T>\ninline double EuclideanDist(const pair<T, T> &p1, const pair<T,\
+    \ T> &p2){\n    return sqrt((double)EuclideanDist2(p1, p2));\n}\n\ntemplate <typename\
+    \ T>\ninline double EuclideanDist(const pair<T, T> &p){\n    return sqrt((double)EuclideanDist2(p));\n\
     }\n\ntemplate<typename T>\ninline long long ManhattanDist(const pair<T, T> &p1,\
     \ const pair<T, T> &p2){\n    return abs(p1.first - p2.first) + abs(p1.second\
     \ - p2.second);\n}\n\ntemplate <typename T>\nT ceil(T x, T y){\n    return (x\
@@ -141,11 +148,11 @@ data:
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-06-27 02:19:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-07-11 12:00:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-DPL-1-D.test.cpp
   - verify/yuki-1995.test.cpp
+  - verify/AOJ-DPL-1-D.test.cpp
 documentation_of: library/Template.hpp
 layout: document
 redirect_from:

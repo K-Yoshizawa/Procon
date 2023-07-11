@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
     links: []
@@ -44,7 +44,7 @@ data:
   path: library/Compress.hpp
   requiredBy: []
   timestamp: '2023-06-26 11:08:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/yuki-1995.test.cpp
 documentation_of: library/Compress.hpp
