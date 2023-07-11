@@ -15,6 +15,20 @@
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
 using namespace std;
 
+#ifndef ONLINE_JUDGE
+void dprint(){
+    cerr << endl;
+}
+template<class Head, class... Tail>
+void dprint(Head&& head, Tail&&... tail){
+    cerr << head;
+    dprint(forward<Tail>(tail)...);
+}
+#else
+template<class Head, class... Tail>
+void dprint(Head&& head, Tail&&... tail){}
+#endif
+
 inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
 inline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}
 inline string YN(bool flag){return (flag) ? "YES" : "NO";}
@@ -30,10 +44,11 @@ inline T median(T a, T b, T c){return between(b, a, c) || between(c, a, b) ? a :
 
 using ll = long long;
 using ull = unsigned long long;
+using ld = long double;
 
-const double PI = 3.141592653589793;
-const double PI2 = PI * 2;
-const double PI_2 = PI / 2;
+const long double PI = acosl(-1);
+const long double PI2 = PI * 2;
+const long double PI_2 = PI / 2;
 
 const int INF_INT = numeric_limits<int>::max() / 2;
 const long long INF_LL = numeric_limits<long long>::max() / 2LL;

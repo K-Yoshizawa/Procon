@@ -1,6 +1,7 @@
 *.o
 *.out
 *.cpp
+*.c
 ans.txt
 in.txt
 out.txt
