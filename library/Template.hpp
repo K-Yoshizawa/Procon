@@ -21,7 +21,7 @@ void dprint(){
 }
 template<class Head, class... Tail>
 void dprint(Head&& head, Tail&&... tail){
-    cerr << head;
+    cerr << head << " ";
     dprint(forward<Tail>(tail)...);
 }
 #else
