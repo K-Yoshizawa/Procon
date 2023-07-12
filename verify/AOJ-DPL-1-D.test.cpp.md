@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Template.hpp
     title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -25,15 +25,15 @@ data:
     #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
     #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
     \n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head,\
-    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n\
-    \    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
-    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
-    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
-    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
-    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
-    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
-    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
-    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head\
+    \ << \" \";\n    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head,\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline\
+    \ string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool\
+    \ flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return\
+    \ (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag)\
+    \ << endl;return flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src\
+    \ > cmp){src = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T\
+    \ &src, const T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
     \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
     \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
     \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
@@ -108,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DPL-1-D.test.cpp
   requiredBy: []
-  timestamp: '2023-07-11 12:00:36+09:00'
+  timestamp: '2023-07-12 09:47:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DPL-1-D.test.cpp

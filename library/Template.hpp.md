@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DPL-1-D.test.cpp
     title: verify/AOJ-DPL-1-D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -22,15 +22,15 @@ data:
     #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
     #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
     \n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head,\
-    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n\
-    \    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
-    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
-    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
-    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
-    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
-    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
-    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
-    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head\
+    \ << \" \";\n    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head,\
+    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline\
+    \ string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool\
+    \ flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return\
+    \ (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag)\
+    \ << endl;return flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src\
+    \ > cmp){src = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T\
+    \ &src, const T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
     \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
     \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
     \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
@@ -87,33 +87,34 @@ data:
     \ fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n#define\
     \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\n#ifndef\
     \ ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head, class...\
-    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head;\n    dprint(forward<Tail>(tail)...);\n\
-    }\n#else\ntemplate<class Head, class... Tail>\nvoid dprint(Head&& head, Tail&&...\
-    \ tail){}\n#endif\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" : \"\
-    No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\n\
-    inline string YN(bool flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool\
-    \ flag){cout << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool minin(T\
-    \ &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
-    \ T>\nbool maxin(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
-    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
-    \ min <= x && x <= max;}\ntemplate<typename T>\ninline T median(T a, T b, T c){return\
-    \ between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b,\
-    \ a) ? b : c);}\n\nusing ll = long long;\nusing ull = unsigned long long;\nusing\
-    \ ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double PI2\
-    \ = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
-    \ / 2;\nconst long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate\
-    \ <typename T>\nusing vec = vector<T>;\nusing pi = pair<int, int>;\nusing pll\
-    \ = pair<ll, ll>;\nusing pd = pair<double, double>;\ntemplate <typename T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <typename T>\nusing rpq = priority_queue<T,\
-    \ vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
-    \ = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int\
-    \ dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate <typename T1, typename T2>\n\
-    ostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << \"{\" << p.first\
-    \ << \" \" << p.second << \"}\";\n    return os;\n}\n\ntemplate <typename T1,\
-    \ typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n    is >>\
-    \ p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os <<\
-    \ v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
+    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head << \" \"\
+    ;\n    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
+    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
+    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
+    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
+    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
+    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
+    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
+    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
+    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline T median(T a, T b, T c){return between(b, a, c) || between(c, a,\
+    \ b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\n\nusing ll = long\
+    \ long;\nusing ull = unsigned long long;\nusing ld = long double;\n\nconst long\
+    \ double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long double PI_2\
+    \ = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst long\
+    \ long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
+    \ T>\nusing vec = vector<T>;\nusing pi = pair<int, int>;\nusing pll = pair<ll,\
+    \ ll>;\nusing pd = pair<double, double>;\ntemplate <typename T>\nusing pq = priority_queue<T>;\n\
+    template <typename T>\nusing rpq = priority_queue<T, vec<T>, greater<T>>;\n\n\
+    const int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int\
+    \ dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0,\
+    \ 1, 1, 1};\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream\
+    \ &os, const pair<T1, T2> &p){\n    os << \"{\" << p.first << \" \" << p.second\
+    \ << \"}\";\n    return os;\n}\n\ntemplate <typename T1, typename T2>\nistream\
+    \ &operator>>(istream &is, pair<T1, T2> &p){\n    is >> p.first >> p.second;\n\
+    \    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os,\
+    \ vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i]\
+    \ << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
     \ <typename T>\nostream &operator<<(ostream &os, vector<vector<T>> &v){\n    for\
     \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << \"\\n\";\n    }\n   \
     \ return os;\n}\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T>\
@@ -148,8 +149,8 @@ data:
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-07-11 12:00:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-07-12 09:47:00+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki-1995.test.cpp
   - verify/AOJ-DPL-1-D.test.cpp

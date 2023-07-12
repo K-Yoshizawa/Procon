@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: library
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: library/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Template.hpp
       title: "Procon Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -53,14 +53,14 @@ data:
       path: library/Graph/CycleDetection.hpp
       title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
         \u30B0\u30E9\u30D5\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
         \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
     - icon: ':heavy_check_mark:'
       path: library/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -152,7 +152,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki-0649.test.cpp
       title: verify/yuki-0649.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/yuki-1995.test.cpp
       title: verify/yuki-1995.test.cpp
 layout: toppage

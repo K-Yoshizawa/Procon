@@ -13,7 +13,7 @@ data:
     path: library/Graph/CycleDetection.hpp
     title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
       \u30B0\u30E9\u30D5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
       \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
@@ -78,12 +78,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-7-A.test.cpp
     title: verify/AOJ-GRL-7-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -281,7 +281,7 @@ data:
   - library/Tree/EulerTour.hpp
   - verify/AOJ-GRL-5-E.cpp
   timestamp: '2023-06-12 01:07:50+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-D.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
