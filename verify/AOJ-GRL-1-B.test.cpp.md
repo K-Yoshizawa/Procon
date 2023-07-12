@@ -5,7 +5,7 @@ data:
     path: library/Graph/BellmanFord.hpp
     title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\
       \u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

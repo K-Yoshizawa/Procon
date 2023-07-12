@@ -14,10 +14,10 @@ data:
       title: modint
   - name: library/DataStructure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     - icon: ':heavy_check_mark:'
@@ -60,7 +60,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -78,7 +78,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':warning:'
+    - icon: ':x:'
       path: library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -87,11 +87,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
-  - name: verify
-    pages:
-    - icon: ':warning:'
-      path: verify/AOJ-GRL-5-E.cpp
-      title: verify/AOJ-GRL-5-E.cpp
   verificationCategories:
   - name: verify
     pages:
@@ -143,6 +138,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-D.test.cpp
       title: verify/AOJ-GRL-5-D.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ-GRL-5-E.test.cpp
+      title: verify/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ-GRL-6-A.test.cpp

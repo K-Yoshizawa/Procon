@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/AOJ-GRL-5-E.cpp
-    title: verify/AOJ-GRL-5-E.cpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Heavy Light Decomposition - HL\u5206\u89E3"
     links: []
@@ -234,11 +234,11 @@ data:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: library/Tree/HeavyLightDecomposition.hpp
-  requiredBy:
-  - verify/AOJ-GRL-5-E.cpp
+  requiredBy: []
   timestamp: '2023-07-11 12:00:36+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/AOJ-GRL-5-E.test.cpp
 documentation_of: library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

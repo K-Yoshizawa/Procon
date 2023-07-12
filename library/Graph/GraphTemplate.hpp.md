@@ -32,7 +32,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':warning:'
+  - icon: ':x:'
     path: library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -41,9 +41,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiamiter.hpp
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
-  - icon: ':warning:'
-    path: verify/AOJ-GRL-5-E.cpp
-    title: verify/AOJ-GRL-5-E.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
@@ -72,6 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-D.test.cpp
     title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':x:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-6-A.test.cpp
     title: verify/AOJ-GRL-6-A.test.cpp
@@ -81,9 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/yuki-1995.test.cpp
     title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -279,9 +279,8 @@ data:
   - library/Tree/TreeDiamiter.hpp
   - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/EulerTour.hpp
-  - verify/AOJ-GRL-5-E.cpp
   timestamp: '2023-06-12 01:07:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/AOJ-GRL-5-D.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
@@ -295,6 +294,7 @@ data:
   - verify/AOJ-GRL-5-C.test.cpp
   - verify/AOJ-GRL-6-A.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
+  - verify/AOJ-GRL-5-E.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:

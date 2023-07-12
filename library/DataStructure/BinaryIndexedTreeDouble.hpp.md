@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: library/DataStructure/BinaryIndexedTree.hpp
     title: Binary Indexed Tree
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/AOJ-GRL-5-E.cpp
-    title: verify/AOJ-GRL-5-E.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-G.test.cpp
     title: verify/AOJ-DSL-2-G.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verify/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ-GRL-5-E.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     links: []
@@ -93,12 +93,12 @@ data:
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTreeDouble.hpp
-  requiredBy:
-  - verify/AOJ-GRL-5-E.cpp
+  requiredBy: []
   timestamp: '2023-06-13 11:29:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/AOJ-DSL-2-G.test.cpp
+  - verify/AOJ-GRL-5-E.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTreeDouble.hpp
 layout: document
 redirect_from:
