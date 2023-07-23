@@ -81,7 +81,7 @@ data:
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
     string bitseq(long long x){\n    string ret = \"\";\n    while(x){\n        ret.push_back('0'\
-    \ + (x & 1));\n        x <<= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
+    \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
     \    return ret;\n}\n#line 4 \"verify/AOJ-DPL-1-D.test.cpp\"\n\n#line 2 \"library/DynamicPrograming/LongestIncreasingSubsequence.hpp\"\
     \n\n/**\n * @brief Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\
     \u52A0\u5217\n */\n\n#line 8 \"library/DynamicPrograming/LongestIncreasingSubsequence.hpp\"\
@@ -108,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DPL-1-D.test.cpp
   requiredBy: []
-  timestamp: '2023-07-12 09:47:00+09:00'
+  timestamp: '2023-07-24 01:32:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DPL-1-D.test.cpp

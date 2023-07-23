@@ -21,6 +21,9 @@ data:
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     - icon: ':heavy_check_mark:'
+      path: library/DataStructure/CumulativeSum2D.hpp
+      title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/K-th_MultiSet.hpp
       title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\
         \u30FC\u30BF\u69CB\u9020"
@@ -111,6 +114,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-H.test.cpp
       title: verify/AOJ-DSL-2-H.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-5-B.test.cpp
+      title: verify/AOJ-DSL-5-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp

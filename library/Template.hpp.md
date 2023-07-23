@@ -78,7 +78,7 @@ data:
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
     string bitseq(long long x){\n    string ret = \"\";\n    while(x){\n        ret.push_back('0'\
-    \ + (x & 1));\n        x <<= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
+    \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
     \    return ret;\n}\n"
   code: "#pragma once\n\n/**\n * @brief Procon Template - \u30C6\u30F3\u30D7\u30EC\
     \u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n\
@@ -143,13 +143,13 @@ data:
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
     string bitseq(long long x){\n    string ret = \"\";\n    while(x){\n        ret.push_back('0'\
-    \ + (x & 1));\n        x <<= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
+    \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
     \    return ret;\n}"
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-07-12 09:47:00+09:00'
+  timestamp: '2023-07-24 01:32:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/yuki-1995.test.cpp
