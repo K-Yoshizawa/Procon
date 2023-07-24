@@ -40,6 +40,8 @@ bool maxin(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return fa
 template<typename T>
 inline bool between(T min, T x, T max){return min <= x && x <= max;}
 template<typename T>
+inline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax - 1) && between(0, x, xmax - 1);}
+template<typename T>
 inline T median(T a, T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}
 
 using ll = long long;
@@ -58,6 +60,10 @@ using vec = vector<T>;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using pd = pair<double, double>;
+using ti3 = tuple<int, int, int>;
+using tl3 = tuple<ll, ll, ll>;
+using ti4 = tuple<int, int, int, int>;
+using tl4 = tuple<ll, ll, ll, ll>;
 template <typename T>
 using pq = priority_queue<T>;
 template <typename T>
