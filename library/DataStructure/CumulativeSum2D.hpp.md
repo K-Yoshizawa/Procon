@@ -142,8 +142,9 @@ data:
   - verify/AOJ-DSL-5-B.test.cpp
 documentation_of: library/DataStructure/CumulativeSum2D.hpp
 layout: document
-redirect_from:
-- /library/library/DataStructure/CumulativeSum2D.hpp
-- /library/library/DataStructure/CumulativeSum2D.hpp.html
 title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
 ---
+
+## 説明
+
+テスト
