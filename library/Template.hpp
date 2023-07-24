@@ -191,7 +191,7 @@ string bitseq(long long x){
     string ret = "";
     while(x){
         ret.push_back('0' + (x & 1));
-        x <<= 1;
+        x >>= 1;
     }
     reverse(ret.begin(), ret.end());
     return ret;
