@@ -57,6 +57,14 @@ const long long INF_LL = numeric_limits<long long>::max() / 2LL;
 
 template <typename T>
 using vec = vector<T>;
+template <typename T>
+using mat = vector<vector<T>>;
+using vi = vector<int>;
+using vvi = vector<vi>;
+using vvvi = vector<vvi>;
+using vl = vector<ll>;
+using vvl = vector<vl>;
+using vvvl = vector<vvl>;
 using pi = pair<int, int>;
 using pll = pair<ll, ll>;
 using pd = pair<double, double>;
