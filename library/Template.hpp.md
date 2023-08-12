@@ -17,14 +17,18 @@ data:
     links: []
   bundledCode: "#line 2 \"library/Template.hpp\"\n\n/**\n * @brief Procon Template\
     \ - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define\
-    \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
-    \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
-    #define SETPRE(digit) fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n\
-    #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\
-    \n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head,\
-    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head\
-    \ << \" \";\n    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head,\
-    \ class... Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline\
+    \ overload2(_1, _2, _3, ...) _3\n#define overload3(_1, _2, _3, _4, ...) _4\n#define\
+    \ overload4(_1, _2, _3, _4, _5, ...) _5\n#define rep1(loop_count) for(int i =\
+    \ 0; i < (loop_count); ++i)\n#define rep2(loop_var, loop_count) for(int (loop_var)\
+    \ = 0; (loop_var) < (loop_count); ++(loop_var))\n#define rep3(loop_var, loop_init,\
+    \ loop_count) for(int (loop_var) = (loop_init); (loop_var) < (loop_count); ++(loop_var))\n\
+    #define rep4(loop_var, loop_init, loop_count, loop_add) for(int (loop_var) = 0;\
+    \ (loop_var) < (loop_count); (loop_var) += (loop_add))\n#define rep(...) overload4(__VA_ARGS__,\
+    \ rep4, rep3, rep2, rep1)(__VA_ARGS__)\n#define ALL(x) (x).begin(), (x).end()\n\
+    #define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define\
+    \ RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
+    \ fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n#define\
+    \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\ninline\
     \ string Yn(bool flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool\
     \ flag){cout << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return\
     \ (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag)\
@@ -61,10 +65,16 @@ data:
     \ return os;\n}\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T>\
     \ &v){\n    for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\
     \ntemplate <typename T>\nistream &operator>>(istream &is, valarray<T> &v){\n \
-    \   for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate\
-    \ <typename T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2>\
-    \ &x, const T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n}\n\
-    \ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1,\
+    \   for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate<class...\
+    \ T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\nvoid print(){\n\
+    \    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid print(const T&\
+    \ a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout << ' ', b));\n\
+    \    cout << '\\n';\n}\n\n#define INT(...) int __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LL(...) ll __VA_ARGS__; input(__VA_ARGS__)\n\n#ifndef ONLINE_JUDGE\n#define\
+    \ dprint(...) print(__VA_ARGS__)\n#else\n#define dprint(...) print()\n#endif\n\
+    \ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1,\
+    \ T2> &x, const T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n\
+    }\n\ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1,\
     \ T2> &x, const T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n\
     }\n\nll modpow(ll a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i\
     \ < 63; ++i)\n    {\n        if ((b & (1LL << i)) != 0)\n        {\n         \
@@ -87,22 +97,26 @@ data:
     \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
     \    return ret;\n}\n"
   code: "#pragma once\n\n/**\n * @brief Procon Template - \u30C6\u30F3\u30D7\u30EC\
-    \u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n\
-    #define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define\
-    \ RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
-    \ fixed << setprecision(digit)\n#define popcount(x) __builtin_popcount(x)\n#define\
-    \ ACC(x) accumulate((x).begin(), (x).end(), 0LL)\nusing namespace std;\n\n#ifndef\
-    \ ONLINE_JUDGE\nvoid dprint(){\n    cerr << endl;\n}\ntemplate<class Head, class...\
-    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){\n    cerr << head << \" \"\
-    ;\n    dprint(forward<Tail>(tail)...);\n}\n#else\ntemplate<class Head, class...\
-    \ Tail>\nvoid dprint(Head&& head, Tail&&... tail){}\n#endif\n\ninline string Yn(bool\
-    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
-    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
-    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
-    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
-    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
-    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
-    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \u30FC\u30C8\n */\n\n#include <bits/stdc++.h>\n#define overload2(_1, _2, _3, ...)\
+    \ _3\n#define overload3(_1, _2, _3, _4, ...) _4\n#define overload4(_1, _2, _3,\
+    \ _4, _5, ...) _5\n#define rep1(loop_count) for(int i = 0; i < (loop_count); ++i)\n\
+    #define rep2(loop_var, loop_count) for(int (loop_var) = 0; (loop_var) < (loop_count);\
+    \ ++(loop_var))\n#define rep3(loop_var, loop_init, loop_count) for(int (loop_var)\
+    \ = (loop_init); (loop_var) < (loop_count); ++(loop_var))\n#define rep4(loop_var,\
+    \ loop_init, loop_count, loop_add) for(int (loop_var) = 0; (loop_var) < (loop_count);\
+    \ (loop_var) += (loop_add))\n#define rep(...) overload4(__VA_ARGS__, rep4, rep3,\
+    \ rep2, rep1)(__VA_ARGS__)\n#define ALL(x) (x).begin(), (x).end()\n#define RALL(x)\
+    \ (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n\
+    #define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit) fixed << setprecision(digit)\n\
+    #define popcount(x) __builtin_popcount(x)\n#define ACC(x) accumulate((x).begin(),\
+    \ (x).end(), 0LL)\nusing namespace std;\n\ninline string Yn(bool flag){return\
+    \ (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag)\
+    \ << endl;return flag;}\ninline string YN(bool flag){return (flag) ? \"YES\" :\
+    \ \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}\n\
+    template<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src = cmp; return\
+    \ true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const T &cmp){if(src\
+    \ < cmp){src = cmp; return true;}return false;}\ntemplate<typename T>\ninline\
+    \ bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
     \ T>\ninline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax -\
     \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
     \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
@@ -132,10 +146,16 @@ data:
     \ return os;\n}\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T>\
     \ &v){\n    for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\
     \ntemplate <typename T>\nistream &operator>>(istream &is, valarray<T> &v){\n \
-    \   for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate\
-    \ <typename T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2>\
-    \ &x, const T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n}\n\
-    \ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1,\
+    \   for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate<class...\
+    \ T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\nvoid print(){\n\
+    \    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid print(const T&\
+    \ a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout << ' ', b));\n\
+    \    cout << '\\n';\n}\n\n#define INT(...) int __VA_ARGS__; input(__VA_ARGS__)\n\
+    #define LL(...) ll __VA_ARGS__; input(__VA_ARGS__)\n\n#ifndef ONLINE_JUDGE\n#define\
+    \ dprint(...) print(__VA_ARGS__)\n#else\n#define dprint(...) print()\n#endif\n\
+    \ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1,\
+    \ T2> &x, const T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n\
+    }\n\ntemplate <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1,\
     \ T2> &x, const T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n\
     }\n\nll modpow(ll a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i\
     \ < 63; ++i)\n    {\n        if ((b & (1LL << i)) != 0)\n        {\n         \
@@ -161,7 +181,7 @@ data:
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-08-08 10:21:08+09:00'
+  timestamp: '2023-08-12 20:13:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DPL-1-D.test.cpp
