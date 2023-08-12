@@ -10,3 +10,4 @@ ac-library/
 .vscode
 answer.exe
 !/verify/**
+tools/

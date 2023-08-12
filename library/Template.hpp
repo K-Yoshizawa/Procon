@@ -5,6 +5,14 @@
  */
 
 #include <bits/stdc++.h>
+#define overload2(_1, _2, _3, ...) _3
+#define overload3(_1, _2, _3, _4, ...) _4
+#define overload4(_1, _2, _3, _4, _5, ...) _5
+#define rep1(loop_count) for(int i = 0; i < (loop_count); ++i)
+#define rep2(loop_var, loop_count) for(int (loop_var) = 0; (loop_var) < (loop_count); ++(loop_var))
+#define rep3(loop_var, loop_init, loop_count) for(int (loop_var) = (loop_init); (loop_var) < (loop_count); ++(loop_var))
+#define rep4(loop_var, loop_init, loop_count, loop_add) for(int (loop_var) = 0; (loop_var) < (loop_count); (loop_var) += (loop_add))
+#define rep(...) overload4(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
 #define ALL(x) (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()
 #define SORT(x) sort(ALL(x))
@@ -14,20 +22,6 @@
 #define popcount(x) __builtin_popcount(x)
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
 using namespace std;
-
-#ifndef ONLINE_JUDGE
-void dprint(){
-    cerr << endl;
-}
-template<class Head, class... Tail>
-void dprint(Head&& head, Tail&&... tail){
-    cerr << head << " ";
-    dprint(forward<Tail>(tail)...);
-}
-#else
-template<class Head, class... Tail>
-void dprint(Head&& head, Tail&&... tail){}
-#endif
 
 inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
 inline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}
@@ -121,6 +115,31 @@ istream &operator>>(istream &is, valarray<T> &v){
     for (int i = 0; i < v.size(); ++i) is >> v[i];
     return is;
 }
+
+template<class... T>
+void input(T&... vars){
+    (cin >> ... >> vars);
+}
+
+void print(){
+    cout << '\n';
+}
+
+template<class T, class... Ts>
+void print(const T& a, const Ts&... b){
+    cout << a;
+    (cout << ... << (cout << ' ', b));
+    cout << '\n';
+}
+
+#define INT(...) int __VA_ARGS__; input(__VA_ARGS__)
+#define LL(...) ll __VA_ARGS__; input(__VA_ARGS__)
+
+#ifndef ONLINE_JUDGE
+#define dprint(...) print(__VA_ARGS__)
+#else
+#define dprint(...) print()
+#endif
 
 template <typename T1, typename T2, typename T3>
 pair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){
