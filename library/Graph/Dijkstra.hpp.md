@@ -187,8 +187,8 @@ data:
   timestamp: '2023-07-12 09:47:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-1-A.test.cpp
   - verify/yuki-1995.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document
 redirect_from:

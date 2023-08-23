@@ -35,7 +35,9 @@ data:
     \    }\n\n    friend istream &operator>>(istream &is, ModInt &a) {\n        int64_t\
     \ t;\n        is >> t;\n        a = ModInt< mod >(t);\n        return (is);\n\
     \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing modint998 = ModInt<\
-    \ mod998 >;\nusing modint107 = ModInt< mod107 >;\n"
+    \ mod998 >;\nusing modint107 = ModInt< mod107 >;\n\nusing vm998 = vector< modint998\
+    \ >;\nusing vvm998 = vector< vector< modint998 > >;\nusing vm107 = vector< modint107\
+    \ >;\nusing vvm107 = vector< vector< modint107 > >;\n"
   code: "#pragma once\n\n/**\n * @brief modint\n */\n\nconst int mod998 = 998244353;\n\
     const int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct ModInt {\n    int\
     \ x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y >= 0 ? y % mod :\
@@ -62,12 +64,14 @@ data:
     \    }\n\n    friend istream &operator>>(istream &is, ModInt &a) {\n        int64_t\
     \ t;\n        is >> t;\n        a = ModInt< mod >(t);\n        return (is);\n\
     \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing modint998 = ModInt<\
-    \ mod998 >;\nusing modint107 = ModInt< mod107 >;"
+    \ mod998 >;\nusing modint107 = ModInt< mod107 >;\n\nusing vm998 = vector< modint998\
+    \ >;\nusing vvm998 = vector< vector< modint998 > >;\nusing vm107 = vector< modint107\
+    \ >;\nusing vvm107 = vector< vector< modint107 > >;"
   dependsOn: []
   isVerificationFile: false
   path: library/modint.hpp
   requiredBy: []
-  timestamp: '2023-06-26 10:02:23+09:00'
+  timestamp: '2023-08-23 13:10:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/modint.hpp

@@ -89,9 +89,9 @@ data:
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/AOJ-DSL-2-G.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
   - verify/AOJ-GRL-5-D.test.cpp
-  - verify/AOJ-DSL-2-G.test.cpp
   - verify/AOJ-GRL-5-E.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document
