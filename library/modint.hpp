@@ -86,3 +86,8 @@ struct ModInt {
 
 using modint998 = ModInt< mod998 >;
 using modint107 = ModInt< mod107 >;
+
+using vm998 = vector< modint998 >;
+using vvm998 = vector< vector< modint998 > >;
+using vm107 = vector< modint107 >;
+using vvm107 = vector< vector< modint107 > >;
