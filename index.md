@@ -34,7 +34,7 @@ data:
         \u5217"
   - name: library/Graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/BellmanFord.hpp
       title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\
         \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
@@ -62,7 +62,7 @@ data:
       path: library/Graph/StronglyConnectedComponents.hpp
       title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
         \u89E3"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/WarshallFloyd.hpp
       title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: library/Math
@@ -130,10 +130,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-C.test.cpp
       title: verify/AOJ-GRL-1-C.test.cpp
     - icon: ':heavy_check_mark:'
