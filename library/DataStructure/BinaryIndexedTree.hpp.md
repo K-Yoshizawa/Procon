@@ -10,17 +10,20 @@ data:
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-2-B.test.cpp
-    title: verify/AOJ-DSL-2-B.test.cpp
+    path: verify/AOJ/AOJ-DSL-2-B.test.cpp
+    title: verify/AOJ/AOJ-DSL-2-B.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-2-G.test.cpp
-    title: verify/AOJ-DSL-2-G.test.cpp
+    path: verify/AOJ/AOJ-DSL-2-G.test.cpp
+    title: verify/AOJ/AOJ-DSL-2-G.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ-GRL-5-D.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
   - icon: ':x:'
-    path: verify/AOJ-GRL-5-E.test.cpp
-    title: verify/AOJ-GRL-5-E.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
+    title: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -89,10 +92,11 @@ data:
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-DSL-2-G.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/AOJ-GRL-5-D.test.cpp
-  - verify/AOJ-GRL-5-E.test.cpp
+  - verify/LC/LC-PointAddRangeSum-BIT.test.cpp
+  - verify/AOJ/AOJ-DSL-2-G.test.cpp
+  - verify/AOJ/AOJ-DSL-2-B.test.cpp
+  - verify/AOJ/AOJ-GRL-5-D.test.cpp
+  - verify/AOJ/AOJ-GRL-5-E.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

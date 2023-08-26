@@ -24,7 +24,7 @@ data:
     IGNORE_IF_GCC: ''
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E
-  bundledCode: "#line 1 \"verify/AOJ-GRL-5-E.test.cpp\"\n#define IGNORE\n// #define\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-E.test.cpp\"\n#define IGNORE\n// #define\
     \ PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E\"\
     \n\n#line 2 \"library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n\n/**\n * @brief\
     \ Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248\n */\n\n#line\
@@ -226,7 +226,7 @@ data:
     \ ++j){\n                Vertex v = column_vertex[i][j];\n                EdgeNum\
     \ e = relation[v].second;\n                if(e == -1) continue;\n           \
     \     ret[locate(v)] = G.get_edge(e).cost;\n            }\n        }\n       \
-    \ return ret;\n    }\n};\n#line 6 \"verify/AOJ-GRL-5-E.test.cpp\"\n\nint main(){\n\
+    \ return ret;\n    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-5-E.test.cpp\"\n\nint main(){\n\
     \    int n;\n    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i <\
     \ n; ++i){\n        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n\
     \            int c;\n            cin >> c;\n            G.add(i, c, 0);\n    \
@@ -241,8 +241,8 @@ data:
     \ for(auto &[s, t] : seg){\n                ans += BIT.query(s, t);\n        \
     \    }\n            cout << ans << endl;\n        }\n    }\n}\n"
   code: "#define IGNORE\n// #define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E\"\
-    \n\n#include \"../library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n#include\
-    \ \"../library/Tree/HeavyLightDecomposition.hpp\"\n\nint main(){\n    int n;\n\
+    \n\n#include \"../../library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n#include\
+    \ \"../../library/Tree/HeavyLightDecomposition.hpp\"\n\nint main(){\n    int n;\n\
     \    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
     \        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n    \
     \        int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
@@ -262,15 +262,15 @@ data:
   - library/Tree/HeavyLightDecomposition.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-5-E.test.cpp
+  path: verify/AOJ/AOJ-GRL-5-E.test.cpp
   requiredBy: []
-  timestamp: '2023-08-24 15:24:54+09:00'
+  timestamp: '2023-08-26 12:21:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-5-E.test.cpp
+documentation_of: verify/AOJ/AOJ-GRL-5-E.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-5-E.test.cpp
-- /verify/verify/AOJ-GRL-5-E.test.cpp.html
-title: verify/AOJ-GRL-5-E.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-5-E.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-5-E.test.cpp.html
+title: verify/AOJ/AOJ-GRL-5-E.test.cpp
 ---

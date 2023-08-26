@@ -14,7 +14,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-NTL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-NTL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A\"\
     \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Math/PrimeFactorize.hpp\"\n\n\
     /**\n * @brief Prime Factorize - \u7D20\u56E0\u6570\u5206\u89E3\n */\n\n#line\
     \ 8 \"library/Math/PrimeFactorize.hpp\"\nusing namespace std;\n\n/**\n * @brief\
@@ -26,13 +26,13 @@ data:
     \ y = x;\n    vector<pair<long long, int>> ret;\n    for(long long div = 2; div\
     \ * div <= x; ++div){\n        int cnt = 0;\n        while(y % div == 0) ++cnt,\
     \ y /= div;\n        if(cnt != 0) ret.push_back({div, cnt});\n    }\n    if(y\
-    \ != 1) ret.push_back({y, 1});\n    return ret;\n}\n#line 6 \"verify/AOJ-NTL-1-A.test.cpp\"\
+    \ != 1) ret.push_back({y, 1});\n    return ret;\n}\n#line 6 \"verify/AOJ/AOJ-NTL-1-A.test.cpp\"\
     \n\nint main(){\n    long long n; cin >> n;\n    auto ans = PrimeFactorize(n);\n\
     \    cout << n << \":\";\n    for(int i = 0; i < ans.size(); ++i){\n        for(int\
     \ j = 0; j < ans[i].second; ++j){\n            cout << \" \" << ans[i].first;\n\
     \        }\n    }\n    cout << endl;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Math/PrimeFactorize.hpp\"\
+    \n\n#include <bits/stdc++.h>\n\n#include \"../../library/Math/PrimeFactorize.hpp\"\
     \n\nint main(){\n    long long n; cin >> n;\n    auto ans = PrimeFactorize(n);\n\
     \    cout << n << \":\";\n    for(int i = 0; i < ans.size(); ++i){\n        for(int\
     \ j = 0; j < ans[i].second; ++j){\n            cout << \" \" << ans[i].first;\n\
@@ -40,15 +40,15 @@ data:
   dependsOn:
   - library/Math/PrimeFactorize.hpp
   isVerificationFile: true
-  path: verify/AOJ-NTL-1-A.test.cpp
+  path: verify/AOJ/AOJ-NTL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-08-23 13:10:58+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-NTL-1-A.test.cpp
+documentation_of: verify/AOJ/AOJ-NTL-1-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-NTL-1-A.test.cpp
-- /verify/verify/AOJ-NTL-1-A.test.cpp.html
-title: verify/AOJ-NTL-1-A.test.cpp
+- /verify/verify/AOJ/AOJ-NTL-1-A.test.cpp
+- /verify/verify/AOJ/AOJ-NTL-1-A.test.cpp.html
+title: verify/AOJ/AOJ-NTL-1-A.test.cpp
 ---

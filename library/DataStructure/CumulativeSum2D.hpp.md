@@ -7,8 +7,8 @@ data:
     path: verify/AOJ-DSL-4-A.test.cpp
     title: verify/AOJ-DSL-4-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-5-B.test.cpp
-    title: verify/AOJ-DSL-5-B.test.cpp
+    path: verify/AOJ/AOJ-DSL-5-B.test.cpp
+    title: verify/AOJ/AOJ-DSL-5-B.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -106,7 +106,7 @@ data:
   timestamp: '2023-08-24 13:17:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-DSL-5-B.test.cpp
+  - verify/AOJ/AOJ-DSL-5-B.test.cpp
   - verify/AOJ-DSL-4-A.test.cpp
 documentation_of: library/DataStructure/CumulativeSum2D.hpp
 layout: document

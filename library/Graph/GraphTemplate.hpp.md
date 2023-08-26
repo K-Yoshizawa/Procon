@@ -13,7 +13,7 @@ data:
     path: library/Graph/CycleDetection.hpp
     title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
       \u30B0\u30E9\u30D5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
       \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
@@ -43,44 +43,41 @@ data:
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-A.test.cpp
-    title: verify/AOJ-GRL-1-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-1-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-1-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-B.test.cpp
-    title: verify/AOJ-GRL-1-B.test.cpp
+    path: verify/AOJ/AOJ-GRL-1-B.test.cpp
+    title: verify/AOJ/AOJ-GRL-1-B.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-C.test.cpp
-    title: verify/AOJ-GRL-1-C.test.cpp
+    path: verify/AOJ/AOJ-GRL-1-C.test.cpp
+    title: verify/AOJ/AOJ-GRL-1-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-2-A.test.cpp
-    title: verify/AOJ-GRL-2-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-2-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-2-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-3-C.test.cpp
-    title: verify/AOJ-GRL-3-C.test.cpp
+    path: verify/AOJ/AOJ-GRL-3-C.test.cpp
+    title: verify/AOJ/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-4-A.test.cpp
-    title: verify/AOJ-GRL-4-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-4-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-4-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-A.test.cpp
-    title: verify/AOJ-GRL-5-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-C.test.cpp
-    title: verify/AOJ-GRL-5-C.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-C.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ-GRL-5-D.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
   - icon: ':x:'
-    path: verify/AOJ-GRL-5-E.test.cpp
-    title: verify/AOJ-GRL-5-E.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-6-A.test.cpp
-    title: verify/AOJ-GRL-6-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-6-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-6-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-7-A.test.cpp
-    title: verify/AOJ-GRL-7-A.test.cpp
-  - icon: ':x:'
-    path: verify/yuki-1995.test.cpp
-    title: verify/yuki-1995.test.cpp
+    path: verify/AOJ/AOJ-GRL-7-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-7-A.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -285,19 +282,18 @@ data:
   timestamp: '2023-08-24 15:24:54+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-GRL-6-A.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
-  - verify/AOJ-GRL-2-A.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
-  - verify/yuki-1995.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-7-A.test.cpp
-  - verify/AOJ-GRL-4-A.test.cpp
-  - verify/AOJ-GRL-5-D.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/AOJ-GRL-5-E.test.cpp
+  - verify/AOJ/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ/AOJ-GRL-3-C.test.cpp
+  - verify/AOJ/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ/AOJ-GRL-5-C.test.cpp
+  - verify/AOJ/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ/AOJ-GRL-4-A.test.cpp
+  - verify/AOJ/AOJ-GRL-5-D.test.cpp
+  - verify/AOJ/AOJ-GRL-5-A.test.cpp
+  - verify/AOJ/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ/AOJ-GRL-1-C.test.cpp
+  - verify/AOJ/AOJ-GRL-5-E.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:

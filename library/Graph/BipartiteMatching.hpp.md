@@ -10,8 +10,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-7-A.test.cpp
-    title: verify/AOJ-GRL-7-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-7-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-7-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -156,7 +156,7 @@ data:
   timestamp: '2023-08-24 15:24:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ/AOJ-GRL-7-A.test.cpp
 documentation_of: library/Graph/BipartiteMatching.hpp
 layout: document
 redirect_from:

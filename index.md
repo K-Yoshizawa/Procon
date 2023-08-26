@@ -45,7 +45,7 @@ data:
       path: library/Graph/CycleDetection.hpp
       title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
         \u30B0\u30E9\u30D5\uFF09"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30C0\
         \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
@@ -72,12 +72,12 @@ data:
       title: "Prime Factorize - \u7D20\u56E0\u6570\u5206\u89E3"
   - name: library/Other
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Other/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
   - name: library
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Template.hpp
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -98,80 +98,92 @@ data:
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
   verificationCategories:
+  - name: verify/AOJ
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DPL-1-D.test.cpp
+      title: verify/AOJ/AOJ-DPL-1-D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-1-A.test.cpp
+      title: verify/AOJ/AOJ-DSL-1-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-2-A.test.cpp
+      title: verify/AOJ/AOJ-DSL-2-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-2-B.test.cpp
+      title: verify/AOJ/AOJ-DSL-2-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-2-F.test.cpp
+      title: verify/AOJ/AOJ-DSL-2-F.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-2-G.test.cpp
+      title: verify/AOJ/AOJ-DSL-2-G.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-2-H.test.cpp
+      title: verify/AOJ/AOJ-DSL-2-H.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-DSL-5-B.test.cpp
+      title: verify/AOJ/AOJ-DSL-5-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-1-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-1-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-1-B.test.cpp
+      title: verify/AOJ/AOJ-GRL-1-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-1-C.test.cpp
+      title: verify/AOJ/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-2-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-2-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-3-C.test.cpp
+      title: verify/AOJ/AOJ-GRL-3-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-4-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-4-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-5-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-5-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-5-C.test.cpp
+      title: verify/AOJ/AOJ-GRL-5-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-5-D.test.cpp
+      title: verify/AOJ/AOJ-GRL-5-D.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ/AOJ-GRL-5-E.test.cpp
+      title: verify/AOJ/AOJ-GRL-5-E.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-6-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-6-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-GRL-7-A.test.cpp
+      title: verify/AOJ/AOJ-GRL-7-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-NTL-1-A.test.cpp
+      title: verify/AOJ/AOJ-NTL-1-A.test.cpp
   - name: verify
     pages:
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DPL-1-D.test.cpp
-      title: verify/AOJ-DPL-1-D.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-1-A.test.cpp
-      title: verify/AOJ-DSL-1-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-2-A.test.cpp
-      title: verify/AOJ-DSL-2-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-2-B.test.cpp
-      title: verify/AOJ-DSL-2-B.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-2-F.test.cpp
-      title: verify/AOJ-DSL-2-F.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-2-G.test.cpp
-      title: verify/AOJ-DSL-2-G.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-2-H.test.cpp
-      title: verify/AOJ-DSL-2-H.test.cpp
-    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-4-A.test.cpp
       title: verify/AOJ-DSL-4-A.test.cpp
+  - name: verify/LC
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-5-B.test.cpp
-      title: verify/AOJ-DSL-5-B.test.cpp
+      path: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
+      title: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-1-A.test.cpp
-      title: verify/AOJ-GRL-1-A.test.cpp
+      path: verify/LC/LC-PointAddRangeSum-ST.test.cpp
+      title: verify/LC/LC-PointAddRangeSum-ST.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-1-B.test.cpp
-      title: verify/AOJ-GRL-1-B.test.cpp
+      path: verify/LC/LC-Unionfind.test.cpp
+      title: verify/LC/LC-Unionfind.test.cpp
+  - name: verify/yukicoder
+    pages:
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-1-C.test.cpp
-      title: verify/AOJ-GRL-1-C.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-2-A.test.cpp
-      title: verify/AOJ-GRL-2-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-3-C.test.cpp
-      title: verify/AOJ-GRL-3-C.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-4-A.test.cpp
-      title: verify/AOJ-GRL-4-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-5-A.test.cpp
-      title: verify/AOJ-GRL-5-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-5-C.test.cpp
-      title: verify/AOJ-GRL-5-C.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-5-D.test.cpp
-      title: verify/AOJ-GRL-5-D.test.cpp
-    - icon: ':x:'
-      path: verify/AOJ-GRL-5-E.test.cpp
-      title: verify/AOJ-GRL-5-E.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-6-A.test.cpp
-      title: verify/AOJ-GRL-6-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-7-A.test.cpp
-      title: verify/AOJ-GRL-7-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-NTL-1-A.test.cpp
-      title: verify/AOJ-NTL-1-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/yuki-0649.test.cpp
-      title: verify/yuki-0649.test.cpp
-    - icon: ':x:'
-      path: verify/yuki-1995.test.cpp
-      title: verify/yuki-1995.test.cpp
+      path: verify/yukicoder/yuki-0649.test.cpp
+      title: verify/yukicoder/yuki-0649.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

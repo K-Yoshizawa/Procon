@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DataStructure/CumulativeSum2D.hpp
     title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Other/Compress.hpp
     title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
   _extendedRequiredBy: []

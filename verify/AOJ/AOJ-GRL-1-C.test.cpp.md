@@ -1,15 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/BipartiteMatching.hpp
-    title: "Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/FordFulkerson.hpp
-    title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
   - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: library/Graph/WarshallFloyd.hpp
+    title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,15 +14,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
-  bundledCode: "#line 1 \"verify/AOJ-GRL-7-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/BipartiteMatching.hpp\"\
-    \n\n/**\n * @brief Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0\
-    \n */\n\n#line 8 \"library/Graph/BipartiteMatching.hpp\"\n\n#line 2 \"library/Graph/FordFulkerson.hpp\"\
-    \n\n/**\n * @brief Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC\n */\n\n#line\
-    \ 8 \"library/Graph/FordFulkerson.hpp\"\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-1-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
+    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/Graph/WarshallFloyd.hpp\"\n\n\
+    /**\n * @brief Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2\n */\n\
+    \n#line 8 \"library/Graph/WarshallFloyd.hpp\"\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 1.2\n * @date 2023-08-24\n */\n\n#line 12 \"library/Graph/GraphTemplate.hpp\"\
@@ -114,58 +109,50 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n#line 10 \"library/Graph/FordFulkerson.hpp\"\n\nusing\
-    \ namespace std;\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n    int\
-    \ E;\n    Graph<CostType> &G;\n    vector<EdgeNum> rev;\n\n    private:\n    vector<int>\
-    \ used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos\
-    \ == goal) return F;\n        used[pos] = 1;\n        for(EdgeNum &i : G.connect[pos]){\n\
-    \            if(G.edges[i].cost == 0) continue;\n            if(used[G.edges[i].to])\
-    \ continue;\n            CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n\
-    \            if(flow >= 1){\n                G.edges[i].cost -= flow;\n      \
-    \          G.edges[rev[i]].cost += flow;\n                return flow;\n     \
-    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
-    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
-    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
-    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
-    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
-    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
-    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
-    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
-    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
-    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
-    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
-    \        }\n        return ret;\n    }\n};\n#line 10 \"library/Graph/BipartiteMatching.hpp\"\
-    \n\nusing namespace std;\n\nstruct BipartiteMatching{\n    private:\n    Graph<int>\
-    \ G;\n    int X, Y, s, t;\n\n    public:\n    BipartiteMatching(int X, int Y)\
-    \ : X(X), Y(Y), s(X + Y), t(X + Y + 1){\n        G = Graph<int>(X + Y + 2, true);\n\
-    \        for(Vertex x = 0; x < X; ++x) G.add(s, x);\n        for(Vertex y = X;\
-    \ y < X + Y; ++y) G.add(y, t);\n    }\n\n    void add(int x, int y){\n       \
-    \ G.add(x, X + y);\n    }\n\n    int solve(){\n        FordFulkerson<int> ff(G);\n\
-    \        return ff.query(s, t);\n    }\n};\n#line 6 \"verify/AOJ-GRL-7-A.test.cpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int X, Y, E;\n    cin >> X >> Y >>\
-    \ E;\n    BipartiteMatching bm(X, Y);\n    for(int i = 0; i < E; ++i){\n     \
-    \   int x, y;\n        cin >> x >> y;\n        bm.add(x, y);\n    }\n\n    cout\
-    \ << bm.solve() << endl;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../library/Graph/BipartiteMatching.hpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int X, Y, E;\n    cin >> X >> Y >>\
-    \ E;\n    BipartiteMatching bm(X, Y);\n    for(int i = 0; i < E; ++i){\n     \
-    \   int x, y;\n        cin >> x >> y;\n        bm.add(x, y);\n    }\n\n    cout\
-    \ << bm.solve() << endl;\n}"
+    \   return ret;\n    }\n};\n#line 10 \"library/Graph/WarshallFloyd.hpp\"\n\nusing\
+    \ namespace std;\n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n    bool\
+    \ negative;\n    vector<vector<CostType>> dist;\n\n    WarshallFloyd(Graph<CostType>\
+    \ &G){\n        int V = G.size();\n        \n        dist.resize(V, vector<CostType>(V,\
+    \ G.INF));\n        for(int i = 0; i < V; ++i) dist[i][i] = 0;\n        for(auto\
+    \ &e : G.edges){\n            dist[e.from][e.to] = e.cost;\n        }\n\n    \
+    \    for(int k = 0; k < V; ++k){\n            for(int i = 0; i < V; ++i){\n  \
+    \              for(int j = 0; j < V; ++j){\n                    if(dist[i][k]\
+    \ == G.INF || dist[k][j] == G.INF) continue;\n                    dist[i][j] =\
+    \ min(dist[i][j], dist[i][k] + dist[k][j]);\n                }\n            }\n\
+    \        }\n\n        negative = false;\n        for(int i = 0; i < V; ++i) negative\
+    \ |= dist[i][i] < 0;\n    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-1-C.test.cpp\"\n\
+    \nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n   \
+    \ Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s,\
+    \ t, d;\n        cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    WarshallFloyd<long\
+    \ long> wf(G);\n    if(wf.negative){\n        cout << \"NEGATIVE CYCLE\\n\";\n\
+    \    }\n    else{\n        for(auto &i : wf.dist){\n            for(int j = 0;\
+    \ j < i.size(); ++j){\n                if(i[j] == G.INF) cout << \"INF\";\n  \
+    \              else cout << i[j];\n                if(j != i.size() - 1) cout\
+    \ << \" \";\n            }\n            cout << endl;\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
+    \n\n#include <bits/stdc++.h>\n\n#include \"../../library/Graph/WarshallFloyd.hpp\"\
+    \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
+    \   Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
+    \ s, t, d;\n        cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n  \
+    \  WarshallFloyd<long long> wf(G);\n    if(wf.negative){\n        cout << \"NEGATIVE\
+    \ CYCLE\\n\";\n    }\n    else{\n        for(auto &i : wf.dist){\n           \
+    \ for(int j = 0; j < i.size(); ++j){\n                if(i[j] == G.INF) cout <<\
+    \ \"INF\";\n                else cout << i[j];\n                if(j != i.size()\
+    \ - 1) cout << \" \";\n            }\n            cout << endl;\n        }\n \
+    \   }\n}"
   dependsOn:
-  - library/Graph/BipartiteMatching.hpp
-  - library/Graph/FordFulkerson.hpp
+  - library/Graph/WarshallFloyd.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-7-A.test.cpp
+  path: verify/AOJ/AOJ-GRL-1-C.test.cpp
   requiredBy: []
-  timestamp: '2023-08-24 15:24:54+09:00'
+  timestamp: '2023-08-26 12:21:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-7-A.test.cpp
+documentation_of: verify/AOJ/AOJ-GRL-1-C.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-7-A.test.cpp
-- /verify/verify/AOJ-GRL-7-A.test.cpp.html
-title: verify/AOJ-GRL-7-A.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-1-C.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-1-C.test.cpp.html
+title: verify/AOJ/AOJ-GRL-1-C.test.cpp
 ---

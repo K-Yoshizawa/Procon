@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/yuki-0649.test.cpp
-    title: verify/yuki-0649.test.cpp
+    path: verify/yukicoder/yuki-0649.test.cpp
+    title: verify/yukicoder/yuki-0649.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -96,7 +96,7 @@ data:
   timestamp: '2023-06-18 02:21:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yuki-0649.test.cpp
+  - verify/yukicoder/yuki-0649.test.cpp
 documentation_of: library/DataStructure/K-th_MultiSet.hpp
 layout: document
 redirect_from:

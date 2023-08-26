@@ -14,7 +14,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A
-  bundledCode: "#line 1 \"verify/AOJ-DSL-2-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-DSL-2-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
     \n\n#line 2 \"library/DataStructure/SegmentTree.hpp\"\n\n/**\n * @brief Segment\
     \ Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n */\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate<typename Monoid>\nstruct SegmentTree{\n    private:\n\
@@ -72,31 +72,31 @@ data:
     \ T)> SEG_MIN = [](T x, T y){return min(x, y);};\ntemplate<typename T>\nconst\
     \ function<T(T, T)> SEG_MAX = [](T x, T y){return max(x, y);};\ntemplate<typename\
     \ T>\nconst function<T(T, T)> SEG_SUM = [](T x, T y){return x + y;};\n#line 4\
-    \ \"verify/AOJ-DSL-2-A.test.cpp\"\n\nint main(){\n    int n, q;\n    cin >> n\
-    \ >> q;\n\n    SegmentTree<int> RMQ(n, SEG_MIN<int>, numeric_limits<int>::max());\n\
+    \ \"verify/AOJ/AOJ-DSL-2-A.test.cpp\"\n\nint main(){\n    int n, q;\n    cin >>\
+    \ n >> q;\n\n    SegmentTree<int> RMQ(n, SEG_MIN<int>, numeric_limits<int>::max());\n\
     \    RMQ.build();\n    while(q--){\n        int com, x, y;\n        cin >> com\
     \ >> x >> y;\n        if(com == 0){\n            RMQ.update(x, y);\n        }\n\
     \        else{\n            cout << RMQ.query(x, y + 1) << endl;\n        }\n\
     \    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
-    \n\n#include \"../library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n   \
-    \ int n, q;\n    cin >> n >> q;\n\n    SegmentTree<int> RMQ(n, SEG_MIN<int>, numeric_limits<int>::max());\n\
-    \    RMQ.build();\n    while(q--){\n        int com, x, y;\n        cin >> com\
-    \ >> x >> y;\n        if(com == 0){\n            RMQ.update(x, y);\n        }\n\
-    \        else{\n            cout << RMQ.query(x, y + 1) << endl;\n        }\n\
-    \    }\n}"
+    \n\n#include \"../../library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n\
+    \    int n, q;\n    cin >> n >> q;\n\n    SegmentTree<int> RMQ(n, SEG_MIN<int>,\
+    \ numeric_limits<int>::max());\n    RMQ.build();\n    while(q--){\n        int\
+    \ com, x, y;\n        cin >> com >> x >> y;\n        if(com == 0){\n         \
+    \   RMQ.update(x, y);\n        }\n        else{\n            cout << RMQ.query(x,\
+    \ y + 1) << endl;\n        }\n    }\n}"
   dependsOn:
   - library/DataStructure/SegmentTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-2-A.test.cpp
+  path: verify/AOJ/AOJ-DSL-2-A.test.cpp
   requiredBy: []
-  timestamp: '2023-07-11 12:00:36+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-2-A.test.cpp
+documentation_of: verify/AOJ/AOJ-DSL-2-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-2-A.test.cpp
-- /verify/verify/AOJ-DSL-2-A.test.cpp.html
-title: verify/AOJ-DSL-2-A.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-A.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-A.test.cpp.html
+title: verify/AOJ/AOJ-DSL-2-A.test.cpp
 ---

@@ -12,10 +12,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H
-  bundledCode: "#line 1 \"verify/AOJ-DSL-2-H.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-DSL-2-F.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n\n#line 2 \"library/DataStructure/LazySegmentTree.hpp\"\n\n/**\n * @brief Lazy\
     \ Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
     \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Monoid,\
@@ -81,40 +81,39 @@ data:
     \n     * @param b \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     */\n    void\
     \ print(int a, int b){\n        cerr << \"LST Data [\" << a << \", \" << b <<\"\
     ) : [\";\n        for(int i = a; i < b; ++i) cerr << query(i) << \" ]\"[i == b\
-    \ - 1];\n        cerr << endl;\n    }\n};\n#line 4 \"verify/AOJ-DSL-2-H.test.cpp\"\
+    \ - 1];\n        cerr << endl;\n    }\n};\n#line 4 \"verify/AOJ/AOJ-DSL-2-F.test.cpp\"\
     \n\nint main(){\n    int n, q;\n    cin >> n >> q;\n    LazySegmentTree<int> lst(n,\
     \ [](int a, int b){return min(a, b);},\n                                [](int\
-    \ a, int b){return a + b;},\n                                [](int a, int b){return\
-    \ a + b;},\n                                numeric_limits<int>::max(), 0);\n\
-    \    for(int i = 0; i < n; ++i) lst.set(i, 0);\n    lst.build();\n    while(q--){\n\
-    \        int query;\n        cin >> query;\n        if(query == 0){\n        \
-    \    int s, t, x;\n            cin >> s >> t >> x;\n            lst.update(s,\
-    \ t + 1, x);\n        }\n        else{\n            int s, t;\n            cin\
-    \ >> s >> t;\n            cout << lst.query(s, t + 1) << endl;\n        }\n  \
-    \  }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_H\"\
-    \n\n#include \"../library/DataStructure/LazySegmentTree.hpp\"\n\nint main(){\n\
+    \ a, int b){return b;},\n                                [](int a, int b){return\
+    \ b;},\n                                numeric_limits<int>::max(), numeric_limits<int>::max());\n\
+    \    lst.build();\n    while(q--){\n        int query;\n        cin >> query;\n\
+    \        if(query == 0){\n            int s, t, x;\n            cin >> s >> t\
+    \ >> x;\n            lst.update(s, t + 1, x);\n        }\n        else{\n    \
+    \        int s, t;\n            cin >> s >> t;\n            cout << lst.query(s,\
+    \ t + 1) << endl;\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
+    \n\n#include \"../../library/DataStructure/LazySegmentTree.hpp\"\n\nint main(){\n\
     \    int n, q;\n    cin >> n >> q;\n    LazySegmentTree<int> lst(n, [](int a,\
     \ int b){return min(a, b);},\n                                [](int a, int b){return\
-    \ a + b;},\n                                [](int a, int b){return a + b;},\n\
-    \                                numeric_limits<int>::max(), 0);\n    for(int\
-    \ i = 0; i < n; ++i) lst.set(i, 0);\n    lst.build();\n    while(q--){\n     \
-    \   int query;\n        cin >> query;\n        if(query == 0){\n            int\
-    \ s, t, x;\n            cin >> s >> t >> x;\n            lst.update(s, t + 1,\
-    \ x);\n        }\n        else{\n            int s, t;\n            cin >> s >>\
-    \ t;\n            cout << lst.query(s, t + 1) << endl;\n        }\n    }\n}"
+    \ b;},\n                                [](int a, int b){return b;},\n       \
+    \                         numeric_limits<int>::max(), numeric_limits<int>::max());\n\
+    \    lst.build();\n    while(q--){\n        int query;\n        cin >> query;\n\
+    \        if(query == 0){\n            int s, t, x;\n            cin >> s >> t\
+    \ >> x;\n            lst.update(s, t + 1, x);\n        }\n        else{\n    \
+    \        int s, t;\n            cin >> s >> t;\n            cout << lst.query(s,\
+    \ t + 1) << endl;\n        }\n    }\n}"
   dependsOn:
   - library/DataStructure/LazySegmentTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-2-H.test.cpp
+  path: verify/AOJ/AOJ-DSL-2-F.test.cpp
   requiredBy: []
-  timestamp: '2023-06-13 17:20:28+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-2-H.test.cpp
+documentation_of: verify/AOJ/AOJ-DSL-2-F.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-2-H.test.cpp
-- /verify/verify/AOJ-DSL-2-H.test.cpp.html
-title: verify/AOJ-DSL-2-H.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-F.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-F.test.cpp.html
+title: verify/AOJ/AOJ-DSL-2-F.test.cpp
 ---

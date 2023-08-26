@@ -11,11 +11,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A
+    PROBLEM: https://judge.yosupo.jp/problem/unionfind
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-DSL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#line 2 \"library/DataStructure/UnionFind.hpp\"\
+    - https://judge.yosupo.jp/problem/unionfind
+  bundledCode: "#line 1 \"verify/LC/LC-Unionfind.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\
+    \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/DataStructure/UnionFind.hpp\"\
     \n\n/**\n * @brief UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\
     \n */\n\n#line 8 \"library/DataStructure/UnionFind.hpp\"\nusing namespace std;\n\
     \n/**\n * @brief Union-Find\n */\nstruct UnionFind{\n    vector<int> data;\n \n\
@@ -49,29 +49,29 @@ data:
     \        vector<vector<int>> ret(n);\n        for(int i = 0; i < n; i++) {\n \
     \           ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](const vector< int > &v) {\n            return v.empty();\n   \
-    \     }), end(ret));\n        return ret;\n    }\n};\n#line 6 \"verify/AOJ-DSL-1-A.test.cpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int n, q;\n    cin >> n >> q;\n\n\
-    \    UnionFind uf(n);\n    while(q--){\n        int com, x, y;\n        cin >>\
-    \ com >> x >> y;\n        if(com == 0) uf.unite(x, y);\n        else cout << uf.same(x,\
-    \ y) << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../library/DataStructure/UnionFind.hpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int n, q;\n    cin >> n >> q;\n\n\
-    \    UnionFind uf(n);\n    while(q--){\n        int com, x, y;\n        cin >>\
-    \ com >> x >> y;\n        if(com == 0) uf.unite(x, y);\n        else cout << uf.same(x,\
-    \ y) << endl;\n    }\n}"
+    \     }), end(ret));\n        return ret;\n    }\n};\n#line 7 \"verify/LC/LC-Unionfind.test.cpp\"\
+    \n\nint main(){\n    int N, Q;\n    cin >> N >> Q;\n    UnionFind uf(N);\n   \
+    \ for(int i = 0; i < Q; ++i){\n        int t, u, v;\n        cin >> t >> u >>\
+    \ v;\n        if(t == 0){\n            uf.unite(u, v);\n        }\n        else{\n\
+    \            cout << (uf.same(u, v) ? 1 : 0) << endl;\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\n#include \"../../library/DataStructure/UnionFind.hpp\"\
+    \n\nint main(){\n    int N, Q;\n    cin >> N >> Q;\n    UnionFind uf(N);\n   \
+    \ for(int i = 0; i < Q; ++i){\n        int t, u, v;\n        cin >> t >> u >>\
+    \ v;\n        if(t == 0){\n            uf.unite(u, v);\n        }\n        else{\n\
+    \            cout << (uf.same(u, v) ? 1 : 0) << endl;\n        }\n    }\n}"
   dependsOn:
   - library/DataStructure/UnionFind.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-1-A.test.cpp
+  path: verify/LC/LC-Unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-06-09 17:48:02+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-1-A.test.cpp
+documentation_of: verify/LC/LC-Unionfind.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-1-A.test.cpp
-- /verify/verify/AOJ-DSL-1-A.test.cpp.html
-title: verify/AOJ-DSL-1-A.test.cpp
+- /verify/verify/LC/LC-Unionfind.test.cpp
+- /verify/verify/LC/LC-Unionfind.test.cpp.html
+title: verify/LC/LC-Unionfind.test.cpp
 ---

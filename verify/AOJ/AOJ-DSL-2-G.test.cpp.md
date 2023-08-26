@@ -17,7 +17,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G
-  bundledCode: "#line 1 \"verify/AOJ-DSL-2-G.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-DSL-2-G.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
     \n\n#line 2 \"library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n\n/**\n * @brief\
     \ Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248\n */\n\n#line\
     \ 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\n\n/**\n * @brief Binary Indexed\
@@ -66,34 +66,34 @@ data:
     \u9593\u5DE6\u7AEF\n     * @param right \u534A\u958B\u533A\u9593\u53F3\u7AEF\n\
     \     * @return T \u533A\u9593[left, right)\u306E\u7DCF\u548C\n     */\n    T\
     \ query(int left, int right){\n        return sum(right - 1) - sum(left - 1);\n\
-    \    }\n};\n#line 4 \"verify/AOJ-DSL-2-G.test.cpp\"\n\nint main(){\n    int n,\
-    \ q;\n    cin >> n >> q;\n    BinaryIndexedTreeDouble<long long> bit(n);\n   \
-    \ while(q--){\n        int query;\n        cin >> query;\n        if(query ==\
-    \ 0){\n            int s, t, x;\n            cin >> s >> t >> x;\n           \
-    \ bit.add(s, t + 1, x);\n        }\n        else{\n            int s, t;\n   \
-    \         cin >> s >> t;\n            cout << bit.query(s, t + 1) << endl;\n \
-    \       }\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
-    \n\n#include \"../library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n\nint main(){\n\
-    \    int n, q;\n    cin >> n >> q;\n    BinaryIndexedTreeDouble<long long> bit(n);\n\
+    \    }\n};\n#line 4 \"verify/AOJ/AOJ-DSL-2-G.test.cpp\"\n\nint main(){\n    int\
+    \ n, q;\n    cin >> n >> q;\n    BinaryIndexedTreeDouble<long long> bit(n);\n\
     \    while(q--){\n        int query;\n        cin >> query;\n        if(query\
     \ == 0){\n            int s, t, x;\n            cin >> s >> t >> x;\n        \
     \    bit.add(s, t + 1, x);\n        }\n        else{\n            int s, t;\n\
     \            cin >> s >> t;\n            cout << bit.query(s, t + 1) << endl;\n\
-    \        }\n    }\n}"
+    \        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
+    \n\n#include \"../../library/DataStructure/BinaryIndexedTreeDouble.hpp\"\n\nint\
+    \ main(){\n    int n, q;\n    cin >> n >> q;\n    BinaryIndexedTreeDouble<long\
+    \ long> bit(n);\n    while(q--){\n        int query;\n        cin >> query;\n\
+    \        if(query == 0){\n            int s, t, x;\n            cin >> s >> t\
+    \ >> x;\n            bit.add(s, t + 1, x);\n        }\n        else{\n       \
+    \     int s, t;\n            cin >> s >> t;\n            cout << bit.query(s,\
+    \ t + 1) << endl;\n        }\n    }\n}"
   dependsOn:
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-2-G.test.cpp
+  path: verify/AOJ/AOJ-DSL-2-G.test.cpp
   requiredBy: []
-  timestamp: '2023-06-13 11:29:18+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-2-G.test.cpp
+documentation_of: verify/AOJ/AOJ-DSL-2-G.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-2-G.test.cpp
-- /verify/verify/AOJ-DSL-2-G.test.cpp.html
-title: verify/AOJ-DSL-2-G.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-G.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-G.test.cpp.html
+title: verify/AOJ/AOJ-DSL-2-G.test.cpp
 ---

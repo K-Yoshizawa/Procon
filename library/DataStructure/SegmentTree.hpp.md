@@ -4,8 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-2-A.test.cpp
-    title: verify/AOJ-DSL-2-A.test.cpp
+    path: verify/AOJ/AOJ-DSL-2-A.test.cpp
+    title: verify/AOJ/AOJ-DSL-2-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC/LC-PointAddRangeSum-ST.test.cpp
+    title: verify/LC/LC-PointAddRangeSum-ST.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -133,7 +136,8 @@ data:
   timestamp: '2023-07-11 12:00:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC/LC-PointAddRangeSum-ST.test.cpp
+  - verify/AOJ/AOJ-DSL-2-A.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

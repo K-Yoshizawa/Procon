@@ -7,8 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: verify/AOJ-GRL-5-E.test.cpp
-    title: verify/AOJ-GRL-5-E.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-E.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-E.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -239,7 +239,7 @@ data:
   timestamp: '2023-08-24 15:24:54+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify/AOJ-GRL-5-E.test.cpp
+  - verify/AOJ/AOJ-GRL-5-E.test.cpp
 documentation_of: library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

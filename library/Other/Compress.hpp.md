@@ -6,12 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-4-A.test.cpp
     title: verify/AOJ-DSL-4-A.test.cpp
-  - icon: ':x:'
-    path: verify/yuki-1995.test.cpp
-    title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
     links: []
@@ -53,9 +50,8 @@ data:
   path: library/Other/Compress.hpp
   requiredBy: []
   timestamp: '2023-08-24 13:17:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yuki-1995.test.cpp
   - verify/AOJ-DSL-4-A.test.cpp
 documentation_of: library/Other/Compress.hpp
 layout: document

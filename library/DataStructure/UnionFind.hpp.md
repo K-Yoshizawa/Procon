@@ -7,11 +7,14 @@ data:
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-1-A.test.cpp
-    title: verify/AOJ-DSL-1-A.test.cpp
+    path: verify/AOJ/AOJ-DSL-1-A.test.cpp
+    title: verify/AOJ/AOJ-DSL-1-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-2-A.test.cpp
-    title: verify/AOJ-GRL-2-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-2-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-2-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC/LC-Unionfind.test.cpp
+    title: verify/LC/LC-Unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -95,8 +98,9 @@ data:
   timestamp: '2023-06-09 17:48:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-2-A.test.cpp
-  - verify/AOJ-DSL-1-A.test.cpp
+  - verify/LC/LC-Unionfind.test.cpp
+  - verify/AOJ/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ/AOJ-DSL-1-A.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:

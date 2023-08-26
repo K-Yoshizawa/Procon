@@ -20,7 +20,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
-  bundledCode: "#line 1 \"verify/AOJ-GRL-5-D.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-D.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
     \n\n#line 2 \"library/Tree/EulerTour.hpp\"\n\n/**\n * @brief Euler Tour - \u30AA\
     \u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
@@ -174,8 +174,8 @@ data:
     \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
     \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
     \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
-    \    }\n};\n#line 4 \"verify/AOJ-GRL-5-D.test.cpp\"\n\nint main(){\n    int n;\n\
-    \    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
+    \    }\n};\n#line 4 \"verify/AOJ/AOJ-GRL-5-D.test.cpp\"\n\nint main(){\n    int\
+    \ n;\n    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
     \        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n    \
     \        int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
     \    }\n    EulerTour<long long> et(G);\n    int q;\n    cin >> q;\n    while(q--){\n\
@@ -184,10 +184,10 @@ data:
     \        else{\n            int u;\n            cin >> u;\n            cout <<\
     \ et.query(u) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
-    \n\n#include \"../library/Tree/EulerTour.hpp\"\n\nint main(){\n    int n;\n  \
-    \  cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n  \
-    \      int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n      \
-    \      int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
+    \n\n#include \"../../library/Tree/EulerTour.hpp\"\n\nint main(){\n    int n;\n\
+    \    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
+    \        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n    \
+    \        int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
     \    }\n    EulerTour<long long> et(G);\n    int q;\n    cin >> q;\n    while(q--){\n\
     \        int com;\n        cin >> com;\n        if(com == 0){\n            long\
     \ long v, w;\n            cin >> v >> w;\n            et.add(v, w);\n        }\n\
@@ -198,15 +198,15 @@ data:
   - library/Graph/GraphTemplate.hpp
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-5-D.test.cpp
+  path: verify/AOJ/AOJ-GRL-5-D.test.cpp
   requiredBy: []
-  timestamp: '2023-08-24 15:24:54+09:00'
+  timestamp: '2023-08-26 12:21:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-5-D.test.cpp
+documentation_of: verify/AOJ/AOJ-GRL-5-D.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-5-D.test.cpp
-- /verify/verify/AOJ-GRL-5-D.test.cpp.html
-title: verify/AOJ-GRL-5-D.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-5-D.test.cpp
+- /verify/verify/AOJ/AOJ-GRL-5-D.test.cpp.html
+title: verify/AOJ/AOJ-GRL-5-D.test.cpp
 ---

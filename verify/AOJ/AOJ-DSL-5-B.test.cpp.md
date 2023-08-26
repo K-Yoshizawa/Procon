@@ -27,7 +27,7 @@ data:
     \ library/DataStructure/CumulativeSum2D.hpp: line 9: #pragma once found in a non-first\
     \ line\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
-    \n\n#include \"../library/DataStructure/CumulativeSum2D.hpp\"\n\nint main(){\n\
+    \n\n#include \"../../library/DataStructure/CumulativeSum2D.hpp\"\n\nint main(){\n\
     \    int N; cin >> N;\n    CumulativeSum2D<int> cum(1001, 1001);\n    for(int\
     \ i = 0; i < N; ++i){\n        int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;\n\
     \        cum.add(x1, y1, x2, y2, 1);\n    }\n    cum.build();\n    cout << cum.max()\
@@ -35,15 +35,15 @@ data:
   dependsOn:
   - library/DataStructure/CumulativeSum2D.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-5-B.test.cpp
+  path: verify/AOJ/AOJ-DSL-5-B.test.cpp
   requiredBy: []
-  timestamp: '2023-08-24 13:17:41+09:00'
+  timestamp: '2023-08-26 12:21:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-5-B.test.cpp
+documentation_of: verify/AOJ/AOJ-DSL-5-B.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-5-B.test.cpp
-- /verify/verify/AOJ-DSL-5-B.test.cpp.html
-title: verify/AOJ-DSL-5-B.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-5-B.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-5-B.test.cpp.html
+title: verify/AOJ/AOJ-DSL-5-B.test.cpp
 ---

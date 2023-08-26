@@ -10,8 +10,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ-GRL-5-D.test.cpp
+    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -221,7 +221,7 @@ data:
   timestamp: '2023-08-24 15:24:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-5-D.test.cpp
+  - verify/AOJ/AOJ-GRL-5-D.test.cpp
 documentation_of: library/Tree/EulerTour.hpp
 layout: document
 redirect_from:

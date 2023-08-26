@@ -10,11 +10,11 @@ data:
     title: "Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-6-A.test.cpp
-    title: verify/AOJ-GRL-6-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-6-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-6-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-7-A.test.cpp
-    title: verify/AOJ-GRL-7-A.test.cpp
+    path: verify/AOJ/AOJ-GRL-7-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-7-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -163,8 +163,8 @@ data:
   timestamp: '2023-08-24 15:24:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-6-A.test.cpp
-  - verify/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ/AOJ-GRL-7-A.test.cpp
 documentation_of: library/Graph/FordFulkerson.hpp
 layout: document
 redirect_from:

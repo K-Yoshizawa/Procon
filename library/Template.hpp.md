@@ -4,14 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DPL-1-D.test.cpp
-    title: verify/AOJ-DPL-1-D.test.cpp
-  - icon: ':x:'
-    path: verify/yuki-1995.test.cpp
-    title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: true
+    path: verify/AOJ/AOJ-DPL-1-D.test.cpp
+    title: verify/AOJ/AOJ-DPL-1-D.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -102,10 +99,9 @@ data:
   path: library/Template.hpp
   requiredBy: []
   timestamp: '2023-08-24 13:17:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yuki-1995.test.cpp
-  - verify/AOJ-DPL-1-D.test.cpp
+  - verify/AOJ/AOJ-DPL-1-D.test.cpp
 documentation_of: library/Template.hpp
 layout: document
 redirect_from:

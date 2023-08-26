@@ -14,7 +14,7 @@ data:
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B
-  bundledCode: "#line 1 \"verify/AOJ-DSL-2-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-DSL-2-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B\"\
     \n\n#line 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\n\n/**\n * @brief\
     \ Binary Indexed Tree\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
     \n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\u70B9\u66F4\u65B0\u30FB\
@@ -41,13 +41,13 @@ data:
     \ r)\u306E\u533A\u9593\u548C\u3092\u6C42\u3081\u308B\u3002\n     * @param l \u533A\
     \u9593\u306E\u5DE6\u7AEF\n     * @param r \u533A\u9593\u306E\u53F3\u7AEF\n   \
     \  * @return T \u533A\u9593\u548C\n     */\n    T query(int l, int r){\n     \
-    \   return sum(r) - sum(l);\n    }\n};\n#line 4 \"verify/AOJ-DSL-2-B.test.cpp\"\
+    \   return sum(r) - sum(l);\n    }\n};\n#line 4 \"verify/AOJ/AOJ-DSL-2-B.test.cpp\"\
     \n\nint main(){\n    int n, q;\n    cin >> n >> q;\n\n    BinaryIndexedTree<int>\
     \ BIT(n);\n    while(q--){\n        int com, x, y;\n        cin >> com >> x >>\
     \ y;\n        if(com == 0){\n            BIT.add(x, y);\n        }\n        else{\n\
     \            cout << BIT.query(x - 1, y) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B\"\
-    \n\n#include \"../library/DataStructure/BinaryIndexedTree.hpp\"\n\nint main(){\n\
+    \n\n#include \"../../library/DataStructure/BinaryIndexedTree.hpp\"\n\nint main(){\n\
     \    int n, q;\n    cin >> n >> q;\n\n    BinaryIndexedTree<int> BIT(n);\n   \
     \ while(q--){\n        int com, x, y;\n        cin >> com >> x >> y;\n       \
     \ if(com == 0){\n            BIT.add(x, y);\n        }\n        else{\n      \
@@ -55,15 +55,15 @@ data:
   dependsOn:
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-2-B.test.cpp
+  path: verify/AOJ/AOJ-DSL-2-B.test.cpp
   requiredBy: []
-  timestamp: '2023-06-13 11:29:18+09:00'
+  timestamp: '2023-08-26 12:21:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-2-B.test.cpp
+documentation_of: verify/AOJ/AOJ-DSL-2-B.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-2-B.test.cpp
-- /verify/verify/AOJ-DSL-2-B.test.cpp.html
-title: verify/AOJ-DSL-2-B.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-B.test.cpp
+- /verify/verify/AOJ/AOJ-DSL-2-B.test.cpp.html
+title: verify/AOJ/AOJ-DSL-2-B.test.cpp
 ---

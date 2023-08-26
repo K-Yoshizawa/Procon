@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -29,22 +29,22 @@ data:
     \ in a non-first line\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ library/Template.hpp: line 9: #pragma once found in a non-first line\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/1/DPL_1_D\"\
-    \n\n#include \"../library/Template.hpp\"\n\n#include \"../library/DynamicPrograming/LongestIncreasingSubsequence.hpp\"\
+    \n\n#include \"../../library/Template.hpp\"\n\n#include \"../../library/DynamicPrograming/LongestIncreasingSubsequence.hpp\"\
     \n\nint main(){\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    cin >>\
     \ a;\n    cout << LongestIncreasingSubsequence(a) << endl;\n}"
   dependsOn:
   - library/Template.hpp
   - library/DynamicPrograming/LongestIncreasingSubsequence.hpp
   isVerificationFile: true
-  path: verify/AOJ-DPL-1-D.test.cpp
+  path: verify/AOJ/AOJ-DPL-1-D.test.cpp
   requiredBy: []
-  timestamp: '2023-08-24 13:17:41+09:00'
+  timestamp: '2023-08-26 12:21:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DPL-1-D.test.cpp
+documentation_of: verify/AOJ/AOJ-DPL-1-D.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DPL-1-D.test.cpp
-- /verify/verify/AOJ-DPL-1-D.test.cpp.html
-title: verify/AOJ-DPL-1-D.test.cpp
+- /verify/verify/AOJ/AOJ-DPL-1-D.test.cpp
+- /verify/verify/AOJ/AOJ-DPL-1-D.test.cpp.html
+title: verify/AOJ/AOJ-DPL-1-D.test.cpp
 ---

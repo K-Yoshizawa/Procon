@@ -7,14 +7,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-A.test.cpp
-    title: verify/AOJ-GRL-1-A.test.cpp
-  - icon: ':x:'
-    path: verify/yuki-1995.test.cpp
-    title: verify/yuki-1995.test.cpp
-  _isVerificationFailed: true
+    path: verify/AOJ/AOJ-GRL-1-A.test.cpp
+    title: verify/AOJ/AOJ-GRL-1-A.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\
       \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\uFF09"
@@ -186,10 +183,9 @@ data:
   path: library/Graph/Dijkstra.hpp
   requiredBy: []
   timestamp: '2023-08-24 15:24:54+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yuki-1995.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document
 redirect_from:
