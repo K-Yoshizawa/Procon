@@ -1,7 +1,11 @@
 #pragma once
 
 /**
+ * @file GraphTemplate.hpp
+ * @author log K (lX57)
  * @brief Graph Template - グラフテンプレート
+ * @version 1.2
+ * @date 2023-08-24
  */
 
 #include <bits/stdc++.h>
@@ -44,7 +48,7 @@ class Graph{
      * @param VertexNum グラフの頂点数
      * @param isDirected 有向グラフとして作成するか
      */
-    Graph(int VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max()){}
+    Graph(int VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max() / 2){}
 
     Graph() = default;
 

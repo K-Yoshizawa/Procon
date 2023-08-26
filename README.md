@@ -6,6 +6,12 @@
 
 ## 更新履歴
 
+### Ver 1.9.3 (2023/08/24)
+- 【修正】Graph Template : INFの値を修正（オーバーフロー対策）
+- 【改修】Compress : オフセットの初期値を指定できるようにした
+- 【改修】Cumulative Sum 2D : 頭がバグらないようにした？
+- 一部のファイルの体裁を整えてみた
+
 ### Ver 1.9.2 (2023/08/23)
 - 更新サボりすぎており、とりあえず上げる
 
@@ -58,7 +64,7 @@
 - 【追加】Segment Tree - セグメント木
 - 【追加】Binary Indexed Tree - BIT
 - 【追加】Euler Tour - オイラーツアー
-- 【改修】Graph Template … 無向木において、各頂点の親頂点と親と結ぶ辺番号を取得する関数get_parentを追加
+- 【改修】Graph Template - 無向木において、各頂点の親頂点と親と結ぶ辺番号を取得する関数get_parentを追加
 
 ### Ver 1.3.2
 - Warshall Floydのhppがバグってました

@@ -1,8 +1,12 @@
-#pragma once
-
 /**
+ * @file modint.hpp
+ * @author log K (lX57)
  * @brief modint
+ * @version 1.0
+ * @date 2023-08-24
  */
+
+#pragma once
 
 const int mod998 = 998244353;
 const int mod107 = 1000000007;

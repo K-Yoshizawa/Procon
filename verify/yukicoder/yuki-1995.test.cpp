@@ -1,10 +1,17 @@
-#define PROBLEM "https://yukicoder.me/problems/no/1995"
+#define IGNORE
+// #define PROBLEM "https://yukicoder.me/problems/no/1995"
 
 #include "../../library/Template.hpp"
 
+<<<<<<< HEAD:verify/yukicoder/yuki-1995.test.cpp
 #include "../../library/Compress.hpp"
 #include "../../library/Graph/GraphTemplate.hpp"
 #include "../../library/Graph/Dijkstra.hpp"
+=======
+#include "../library/Other/Compress.hpp"
+#include "../library/Graph/GraphTemplate.hpp"
+#include "../library/Graph/Dijkstra.hpp"
+>>>>>>> be2aefab603660a7d7bca2e7379c1a3e8c9840a3:verify/yuki-1995.test.cpp
 
 int main(){
     int N, M;

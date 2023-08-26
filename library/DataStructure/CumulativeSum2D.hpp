@@ -2,12 +2,17 @@
  * @file CumulativeSum2D.hpp
  * @author log K (lX57)
  * @brief Cumulative Sum 2D - 二次元累積和
- * @date 2023-07-24
+ * @version 1.1
+ * @date 2023-08-24
  */
 
+#pragma once
 #include <bits/stdc++.h>
 using namespace std;
 
+/**
+ * @attention 配列は外側に1要素大きくとって実装していることに注意すること 
+ */
 template<typename T>
 struct CumulativeSum2D{
     private:
@@ -41,7 +46,7 @@ struct CumulativeSum2D{
 
     /**
      * @brief (sy, sx)を左上、(ty, tx)を右下とする長方形領域に対してvalueを加算する。
-     * @note (sy, sx)と(ty, tx)はそれぞれ長方形"内部"の隅（閉区間）
+     * @note (sy, sx)と(ty, tx)はそれぞれ長方形の隅（半開区間）
      * @param sx 左上マスのx座標 (0-index)
      * @param sy 左上マスのy座標 (0-index)
      * @param tx 右下マスのx座標 (0-index)
@@ -51,10 +56,11 @@ struct CumulativeSum2D{
     void add(int sx, int sy, int tx, int ty, T value){
         assert(0 <= sx && sx < X && 0 <= sy && sy < Y);
         assert(0 <= tx && tx < X && 0 <= ty && ty < Y);
-        cum[sy + 1][sx + 1] += value;
-        cum[sy + 1][tx + 2] -= value;
-        cum[ty + 2][sx + 1] -= value;
-        cum[ty + 2][tx + 2] += value;
+        ++sx, ++sy, ++tx, ++ty;
+        cum[sy][sx] += value;
+        cum[sy][tx] -= value;
+        cum[ty][sx] -= value;
+        cum[ty][tx] += value;
     }
 
     /**
@@ -76,7 +82,7 @@ struct CumulativeSum2D{
 
     /**
      * @brief (sy, sx)を左上、(ty, tx)を右下とする長方形領域に対するクエリを解く。
-     * @note (sy, sx)と(ty, tx)はそれぞれ長方形"内部"の隅（閉区間）
+     * @note (sy, sx)と(ty, tx)はそれぞれ長方形の隅（半開区間）
      * @param sx 左上マスのx座標 (0-index)
      * @param sy 左上マスのy座標 (0-index)
      * @param tx 右下マスのx座標 (0-index)
@@ -86,7 +92,8 @@ struct CumulativeSum2D{
     T query(int sx, int sy, int tx, int ty){
         assert(0 <= sx && sx < X && 0 <= sy && sy < Y);
         assert(0 <= tx && tx < X && 0 <= ty && ty < Y);
-        return cum[ty + 1][tx + 1] - cum[ty + 1][sx] - cum[sy][tx + 1] + cum[sy][sx];
+        ++sx, ++sy, ++tx, ++ty;
+        return cum[ty][tx] - cum[ty][sx - 1] - cum[sy - 1][tx] + cum[sy - 1][sx - 1];
     }
 
     /**
@@ -94,7 +101,7 @@ struct CumulativeSum2D{
      * @return T 最大値
      */
     T max(){
-        T ret = numeric_limits<T>::min();
+        T ret = numeric_limits<T>::min() / 2;
         for(int i = 1; i <= Y; ++i){
             for(int j = 1; j <= X; ++j){
                 ret = std::max(ret, cum[i][j]);
@@ -108,12 +115,41 @@ struct CumulativeSum2D{
      * @return T 最小値
      */
     T min(){
-        T ret = numeric_limits<T>::max();
+        T ret = numeric_limits<T>::max() / 2;
         for(int i = 1; i <= Y; ++i){
             for(int j = 1; j <= X; ++j){
                 ret = std::min(ret, cum[i][j]);
             }
         }
         return ret;
+    }
+
+    bool test(int y, int x, function<bool(T)> func){
+        ++y, ++x;
+        return func(cum[y][x]);
+    }
+
+    /**
+     * @brief 渡した関数の条件を満たす要素の数を数える
+     * @param func 条件判定の関数
+     * @return int 条件を満たす要素の数
+     */
+    int count_if(function<bool(T)> func){
+        int ret = 0;
+        for(int i = 1; i <= Y; ++i){
+            for(int j = 1; j <= X; ++j){
+                if(func(cum[i][j])) ++ret;
+            }
+        }
+        return ret;
+    }
+
+    void print(bool edge = false){
+        for(int i = !edge; i <= Y + edge; ++i){
+            for(int j = !edge; j <= X + edge; ++j){
+                cerr << cum[i][j] << " ";
+            }
+            cerr << endl;
+        }
     }
 };

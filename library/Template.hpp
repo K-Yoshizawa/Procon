@@ -1,9 +1,12 @@
-#pragma once
-
 /**
- * @brief Procon Template - テンプレート
+ * @file Template.hpp
+ * @author log K (lX57)
+ * @brief Template - テンプレート
+ * @version 1.4
+ * @date 2023-08-24
  */
 
+#pragma once
 #include <bits/stdc++.h>
 #define ALL(x) (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()

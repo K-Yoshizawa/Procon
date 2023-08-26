@@ -22,7 +22,7 @@ int main(){
     }
     else{
         for(auto &d : ans){
-            if(d == numeric_limits<int>::max()){
+            if(d == G.INF){
                 cout << "INF" <<endl;
             }
             else{
