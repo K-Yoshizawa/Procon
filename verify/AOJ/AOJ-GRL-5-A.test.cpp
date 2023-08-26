@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Tree/TreeDiamiter.hpp"
+#include "../../library/Tree/TreeDiamiter.hpp"
 
 int main(){
     int n;

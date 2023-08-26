@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F"
 
-#include "../library/DataStructure/LazySegmentTree.hpp"
+#include "../../library/DataStructure/LazySegmentTree.hpp"
 
 int main(){
     int n, q;

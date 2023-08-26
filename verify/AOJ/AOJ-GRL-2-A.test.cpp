@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/Kruskal.hpp"
+#include "../../library/Graph/Kruskal.hpp"
 
 using namespace std;
 

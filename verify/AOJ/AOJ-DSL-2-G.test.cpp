@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G"
 
-#include "../library/DataStructure/BinaryIndexedTreeDouble.hpp"
+#include "../../library/DataStructure/BinaryIndexedTreeDouble.hpp"
 
 int main(){
     int n, q;

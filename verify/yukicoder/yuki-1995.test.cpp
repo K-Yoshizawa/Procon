@@ -1,10 +1,10 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1995"
 
-#include "../library/Template.hpp"
+#include "../../library/Template.hpp"
 
-#include "../library/Compress.hpp"
-#include "../library/Graph/GraphTemplate.hpp"
-#include "../library/Graph/Dijkstra.hpp"
+#include "../../library/Compress.hpp"
+#include "../../library/Graph/GraphTemplate.hpp"
+#include "../../library/Graph/Dijkstra.hpp"
 
 int main(){
     int N, M;

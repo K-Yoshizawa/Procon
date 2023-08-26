@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B"
 
-#include "../library/DataStructure/CumulativeSum2D.hpp"
+#include "../../library/DataStructure/CumulativeSum2D.hpp"
 
 int main(){
     int N; cin >> N;

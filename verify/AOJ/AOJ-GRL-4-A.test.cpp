@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../library/Graph/CycleDetection.hpp"
+#include "../../library/Graph/CycleDetection.hpp"
 
 int main(){
     int V, E;

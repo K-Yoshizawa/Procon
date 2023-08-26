@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/BellmanFord.hpp"
+#include "../../library/Graph/BellmanFord.hpp"
 
 using namespace std;
 

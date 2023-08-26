@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/StronglyConnectedComponents.hpp"
+#include "../../library/Graph/StronglyConnectedComponents.hpp"
 
 using namespace std;
 

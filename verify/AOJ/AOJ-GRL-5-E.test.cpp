@@ -1,8 +1,8 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E"
 #define IGNORE
 
-#include "../library/DataStructure/BinaryIndexedTreeDouble.hpp"
-#include "../library/Tree/HeavyLightDecomposition.hpp"
+#include "../../library/DataStructure/BinaryIndexedTreeDouble.hpp"
+#include "../../library/Tree/HeavyLightDecomposition.hpp"
 
 int main(){
     int n;

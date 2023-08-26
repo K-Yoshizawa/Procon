@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/Dijkstra.hpp"
+#include "../../library/Graph/Dijkstra.hpp"
 
 using namespace std;
 

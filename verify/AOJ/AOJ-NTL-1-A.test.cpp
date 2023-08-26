@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Math/PrimeFactorize.hpp"
+#include "../../library/Math/PrimeFactorize.hpp"
 
 int main(){
     long long n; cin >> n;

@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../library/Tree/LowestCommonAncestor.hpp"
+#include "../../library/Tree/LowestCommonAncestor.hpp"
 
 int main(){
     int n;

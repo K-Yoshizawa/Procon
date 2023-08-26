@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/649"
 
 #include <bits/stdc++.h>
-#include "../library/DataStructure/K-th_MultiSet.hpp"
+#include "../../library/DataStructure/K-th_MultiSet.hpp"
 
 int main(){
     int Q, K;
