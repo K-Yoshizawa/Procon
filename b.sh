@@ -2,7 +2,7 @@
 
 new_atcoder(){
     oj-bundle code.cpp > submit.cpp
-    g++ submit.cpp -std=gnu++2a -O2 -Wall -Wextra \
+    g++ submit.cpp -std=gnu++2a -O2 \
         -mtune=native -march=native -fconstexpr-depth=2147483647 -fconstexpr-loop-limit=2147483647 -fconstexpr-ops-limit=2147483647 \
         -I/opt/ac-library -I/opt/boost/gcc/include -L/opt/boost/gcc/lib -o a.out -lgmpxx -lgmp \
         -I/usr/include/eigen3
@@ -10,7 +10,7 @@ new_atcoder(){
 
 atcoder(){
     oj-bundle code.cpp > submit.cpp
-    g++ submit.cpp -std=gnu++17 -O2 -Wall -Wextra \
+    g++ submit.cpp -std=gnu++17 -O2 \
         -I/opt/ac-library -I/opt/boost/gcc/include -L/opt/boost/gcc/lib -o a.out
 }
 
