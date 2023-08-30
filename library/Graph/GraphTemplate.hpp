@@ -34,21 +34,22 @@ template<typename CostType = int>
 class Graph{
     private:
     int sz;
-    bool dir;
+    bool isDirected, isTree;
     vector<int> indegree;
 
     public:
-    vector<Edge<CostType>> edges;
-    vector<vector<EdgeNum>> connect;
-    vector<EdgeNum> rev; // 形式上無向グラフでも有向辺を追加するので、辺の追加時に逆辺の辺番号を記録できるようにする
+    vector<Edge<CostType>> edges; // グラフの辺集合
+    vector<vector<EdgeNum>> connect; // 各頂点を端点とする辺の番号一覧
+    vector<EdgeNum> rev; // 無向グラフを有向辺*2として追加するので、辺の追加時に逆辺の辺番号を記録できるようにする
     CostType INF;
 
     /**
      * @brief Construct a new Graph object
      * @param VertexNum グラフの頂点数
-     * @param isDirected 有向グラフとして作成するか
+     * @param isDirected 有向グラフとして作成するか(default = false)
+     * @param isTree 木として作成するか(default = false)
      */
-    Graph(int VertexNum, bool isDirected = false) : sz(VertexNum), dir(isDirected), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max() / 2){}
+    Graph(int VertexNum, bool isDirected = false, bool isTree = false) : sz(VertexNum), isDirected(isDirected), isTree(isTree), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max() / 2){}
 
     Graph() = default;
 
@@ -66,11 +67,27 @@ class Graph{
         edges.push_back(Edge<CostType>(s, t, w));
         connect[s].push_back(e);
         ++indegree[t];
-        if(!dir){
+        if(!isDirected){
             edges.push_back(Edge<CostType>(t, s, w));
             connect[t].push_back(e + 1);
             rev.emplace_back(e + 1);
             rev.emplace_back(e);
+        }
+    }
+
+    /**
+     * @brief グラフへの入力処理を行う。
+     * @param amount 辺の数
+     * @param isWeighted 重みつきグラフか？(default = true)
+     * @param isOne_index 1-indexか？(default = true)
+     */
+    void input(int amount, bool isWeighted = true, bool isOne_index = true){
+        for(int i = 0; i < amount; ++i){
+            Vertex s, t; cin >> s >> t;
+            if(isOne_index) --s, --t;
+            CostType w = 1;
+            if(isWeighted) cin >> w;
+            add(s, t, w);
         }
     }
 
@@ -113,8 +130,8 @@ class Graph{
      * @return Graph<CostType> 逆辺を張ったグラフ
      */
     Graph<CostType> reverse(){
-        assert(dir);
-        Graph<CostType> ret(sz, true);
+        assert(isDirected);
+        Graph<CostType> ret(sz, true, isTree);
         for(auto &e : edges){
             ret.add(e.to, e.from, e.cost);
         }
@@ -126,18 +143,18 @@ class Graph{
     }
 
     inline bool directed(){
-        return dir;
+        return isDirected;
     }
 
     /**
      * @brief ある頂点の次数(出次数)を取得する。
      * @note 有向グラフにおいて、第2引数をtrueにすれば入次数を得ることができる。
      * @param v 頂点番号
-     * @param isIn (有向グラフのときのみ有効)入次数を取得するか (option, default = false)
+     * @param isIn (有向グラフのときのみ有効)入次数を取得するか (default = false)
      * @return int 頂点vの指定した値
      */
     inline int degree(Vertex v, bool isIn = false){
-        if(dir && isIn) return indegree[v];
+        if(isDirected && isIn) return indegree[v];
         return (int)connect[v].size();
     }
 
@@ -148,6 +165,7 @@ class Graph{
      * @return vector<pair<Vertex, EdgeNum>> 各頂点の親の頂点番号と親への辺番号（頂点rootに対してはどちらも-1とする）
      */
     vector<pair<Vertex, EdgeNum>> get_parent(Vertex root){
+        assert(isTree);
         vector<pair<Vertex, EdgeNum>> ret(sz, pair<Vertex, EdgeNum>(-1, -1));
         stack<pair<Vertex, Vertex>> st;
         st.emplace(root, -1);
@@ -163,3 +181,6 @@ class Graph{
         return ret;
     }
 };
+
+template<typename T>
+using Tree = Graph<T>;

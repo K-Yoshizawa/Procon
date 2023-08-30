@@ -7,13 +7,9 @@
 int main(){
     int n;
     cin >> n;
-    Graph<int> G(n);
-    for(int i = 0; i < n - 1; ++i){
-        int s, t, w;
-        cin >> s >> t >> w;
-        G.add(s, t, w);
-    }
+    Tree<int> T(n, false, true);
+    T.input(n - 1, true, false);
 
-    TreeDiamiter<int> td(G);
+    TreeDiamiter<int> td(T);
     cout << td.diamiter << endl;
 }

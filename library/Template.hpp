@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Template.hpp
  * @author log K (lX57)
@@ -6,7 +7,6 @@
  * @date 2023-08-24
  */
 
-#pragma once
 #include <bits/stdc++.h>
 #define ALL(x) (x).begin(), (x).end()
 #define RALL(x) (x).rbegin(), (x).rend()
@@ -16,6 +16,8 @@
 #define SETPRE(digit) fixed << setprecision(digit)
 #define popcount(x) __builtin_popcount(x)
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
+#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(), val) - (x).begin())
+#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(), (x).end(), val) - (x).begin())
 using namespace std;
 
 inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
@@ -128,6 +130,21 @@ void print(const T& a, const Ts&... b){
     (cout << ... << (cout << ' ', b));
     cout << '\n';
 }
+
+#ifndef ONLINE_JUDGE
+void dprint(){
+    cerr << '\n';
+}
+
+template<class T, class... Ts>
+void dprint(const T& a, const Ts&... b){
+    cerr << a;
+    (cerr << ... << (cerr << ' ', b));
+    cerr << '\n';
+}
+#else
+#define dprint(...) 42
+#endif
 
 template <typename T1, typename T2, typename T3>
 pair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){

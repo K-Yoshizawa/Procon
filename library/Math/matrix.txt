@@ -1,0 +1,59 @@
+
+template<typename T>
+struct Matrix{
+    vector<vector<T>> A;
+    int H, W;
+
+    Matrix(){}
+
+    Matrix(int H, int W) : H(H), W(W){
+        A.resize(H, vector<T>(W, 0));
+    }
+
+    Matrix(int N) : H(N), W(N){
+        A.resize(H, vector<T>(W, 0));
+    }
+
+    inline const vector<T>& operator[](int k) const{
+        return (A.at(k));
+    }
+
+    inline vector<T>& operator[](int k){
+        return (A.at(k));
+    }
+
+    static Matrix I(int N){
+        Matrix ret(N);
+        for(int i = 0; i < N; ++i) ret[i][i] = 1;
+        return ret;
+    }
+
+    Matrix& operator*=(const Matrix &B){
+        int h = H, w = B.W, p = W;
+        assert(p == B.H);
+        vector<vector<T>> C(h, vector<T>(w, 0));
+        for(int i = 0; i < h; ++i){
+            for(int j = 0; j < w; ++j){
+                for(int k = 0; k < p; ++k){
+                    C[i][j] = (C[i][j] + A[i][k] * B[k][j]);
+                }
+            }
+        }
+        A.swap(C);
+        return (*this);
+    }
+
+    Matrix operator*(const Matrix &B) const{
+        return (Matrix(*this) *= B);
+    }
+
+    friend ostream& operator<<(ostream &os, Matrix &p){
+        for(int i = 0; i < p.H; ++i){
+            os << "[";
+            for(int j = 0; j < p.W; ++j){
+                os << p[i][j] << (j + 1 == p.W ? "]\n" : ", ");
+            }
+        }
+        return (os);
+    }
+};

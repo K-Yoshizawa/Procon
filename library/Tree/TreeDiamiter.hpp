@@ -1,7 +1,11 @@
 #pragma once
 
 /**
+ * @file TreeDiamiter.hpp
+ * @author log K (lX57)
  * @brief Tree Diamiter - 木の直径
+ * @version 1.1
+ * @date 2023-08-30
  */
 
 #include "../Graph/GraphTemplate.hpp"
@@ -31,11 +35,7 @@ struct TreeDiamiter{
         }
     }
 
-    public:
-    pair<Vertex, Vertex> EdgeVertex;
-    CostType diamiter;
-
-    TreeDiamiter(Graph<CostType> &G) : G(G), dist(G.size()){
+    void build(){
         bfs(0);
         int v = 0;
         CostType d = 0;
@@ -54,5 +54,13 @@ struct TreeDiamiter{
         }
         EdgeVertex.second = v;
         diamiter = d;
+    }
+
+    public:
+    pair<Vertex, Vertex> EdgeVertex;
+    CostType diamiter;
+
+    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){
+        build();
     }
 };
