@@ -1,6 +1,16 @@
 ---
 data:
   libraryCategories:
+  - name: latest/Graph
+    pages:
+    - icon: ':x:'
+      path: latest/Graph/GraphTemplate.hpp
+      title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - name: latest
+    pages:
+    - icon: ':warning:'
+      path: latest/Template.hpp
+      title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - name: library/DataStructure
     pages:
     - icon: ':question:'
@@ -185,6 +195,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yukicoder/yuki-0649.test.cpp
       title: verify/yukicoder/yuki-0649.test.cpp
+  - name: verify_latest
+    pages:
+    - icon: ':x:'
+      path: verify_latest/AOJ-ALDS1-11-A.test.cpp
+      title: verify_latest/AOJ-ALDS1-11-A.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
