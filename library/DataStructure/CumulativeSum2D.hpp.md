@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-4-A.test.cpp
-    title: verify/AOJ-DSL-4-A.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-DSL-5-B.test.cpp
     title: verify/AOJ/AOJ-DSL-5-B.test.cpp
   _isVerificationFailed: false
@@ -107,7 +104,6 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ/AOJ-DSL-5-B.test.cpp
-  - verify/AOJ-DSL-4-A.test.cpp
 documentation_of: library/DataStructure/CumulativeSum2D.hpp
 layout: document
 title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"

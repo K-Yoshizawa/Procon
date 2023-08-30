@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-DSL-4-A.test.cpp
-    title: verify/AOJ-DSL-4-A.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
     links: []
@@ -50,9 +47,8 @@ data:
   path: library/Other/Compress.hpp
   requiredBy: []
   timestamp: '2023-08-24 13:17:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ-DSL-4-A.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/Other/Compress.hpp
 layout: document
 redirect_from:

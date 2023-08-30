@@ -6,7 +6,7 @@ data:
     - icon: ':question:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTreeDouble.hpp
       title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
     - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
       title: "Prime Factorize - \u7D20\u56E0\u6570\u5206\u89E3"
   - name: library/Other
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: library/Other/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
   - name: library
@@ -85,10 +85,10 @@ data:
       title: modint
   - name: library/Tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':x:'
+    - icon: ':warning:'
       path: library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -121,6 +121,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-DSL-2-H.test.cpp
       title: verify/AOJ/AOJ-DSL-2-H.test.cpp
+    - icon: ':x:'
+      path: verify/AOJ/AOJ-DSL-4-A.test.cpp
+      title: verify/AOJ/AOJ-DSL-4-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-DSL-5-B.test.cpp
       title: verify/AOJ/AOJ-DSL-5-B.test.cpp
@@ -148,12 +151,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-GRL-5-C.test.cpp
       title: verify/AOJ/AOJ-GRL-5-C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/AOJ/AOJ-GRL-5-D.test.cpp
       title: verify/AOJ/AOJ-GRL-5-D.test.cpp
-    - icon: ':x:'
-      path: verify/AOJ/AOJ-GRL-5-E.test.cpp
-      title: verify/AOJ/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ/AOJ-GRL-6-A.test.cpp
@@ -161,13 +161,14 @@ data:
       path: verify/AOJ/AOJ-GRL-7-A.test.cpp
       title: verify/AOJ/AOJ-GRL-7-A.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-ITP2-6-C.test.cpp
+      title: verify/AOJ/AOJ-ITP2-6-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ/AOJ-ITP2-6-D.test.cpp
+      title: verify/AOJ/AOJ-ITP2-6-D.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-NTL-1-A.test.cpp
       title: verify/AOJ/AOJ-NTL-1-A.test.cpp
-  - name: verify
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-DSL-4-A.test.cpp
-      title: verify/AOJ-DSL-4-A.test.cpp
   - name: verify/LC
     pages:
     - icon: ':heavy_check_mark:'

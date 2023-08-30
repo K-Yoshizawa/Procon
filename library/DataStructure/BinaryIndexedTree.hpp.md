@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTreeDouble.hpp
     title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedVerifiedWith:
@@ -15,12 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-DSL-2-G.test.cpp
     title: verify/AOJ/AOJ-DSL-2-G.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/AOJ/AOJ-GRL-5-D.test.cpp
     title: verify/AOJ/AOJ-GRL-5-D.test.cpp
-  - icon: ':x:'
-    path: verify/AOJ/AOJ-GRL-5-E.test.cpp
-    title: verify/AOJ/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
     title: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
@@ -96,7 +93,6 @@ data:
   - verify/AOJ/AOJ-DSL-2-G.test.cpp
   - verify/AOJ/AOJ-DSL-2-B.test.cpp
   - verify/AOJ/AOJ-GRL-5-D.test.cpp
-  - verify/AOJ/AOJ-GRL-5-E.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:
