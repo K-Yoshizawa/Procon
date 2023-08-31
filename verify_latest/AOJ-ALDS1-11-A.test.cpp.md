@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
@@ -37,24 +37,31 @@ data:
     \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
     \ = numeric_limits<CostType>::max() / 2){\n        vector ret(__CntVertex, vector(__CntVertex,\
     \ NotAdjacent));\n        for(Vertex v = 0; v < __CntVertex; ++v){\n         \
-    \   for(EdgeID &eid : __IncidentList[v]){\n                ret[v][__EdgeSet[eid].getto(v)]\
-    \ = __EdgeSet[eid].cost;\n            }\n        }\n        return ret;\n    }\n\
-    \n    void print_edgeset(bool OneIndex = true){\n        for(int e = 0; e < __CntEdge;\
-    \ ++e){\n            cout << e + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex\
-    \ << (__isDirected ? \" -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \"\
-    ) = \" << __EdgeSet[e].cost << endl;\n        }\n    }\n\n    void print_matrix(CostType\
-    \ NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){\n\
-    \        auto mat = matrix(NotAdjacent);\n        for(int i = 0; i < __CntVertex;\
-    \ ++i){\n            cout << (DisplayINF && mat[i][j] == NotAdjacent ? \"INF\"\
-    \ : to_string(mat[i][0]));\n            for(int j = 1; j < __CntVertex; ++j){\n\
-    \                cout << \" \" << (DisplayINF && mat[i][j] == NotAdjacent ? \"\
-    INF\" : to_string(mat[i][j]));\n            }\n            cout << endl;\n   \
-    \     }\n    }\n};\n#line 4 \"verify_latest/AOJ-ALDS1-11-A.test.cpp\"\n\n#line\
-    \ 6 \"verify_latest/AOJ-ALDS1-11-A.test.cpp\"\nusing namespace std;\n\nint main(){\n\
-    \    int n; cin >> n;\n    Graph<int> G(n, true);\n    for(int i = 0; i < n; ++i){\n\
-    \        Vertex u; int k; cin >> u >> k, --u;\n        for(int j = 0; j < k; ++j){\n\
-    \            Vertex v; cin >> v, --v;\n            G.add(u, v);\n        }\n \
-    \   }\n    G.print_matrix(0, false);\n}\n"
+    \   ret[v][v] = 0;\n            for(EdgeID &eid : __IncidentList[v]){\n      \
+    \          ret[v][__EdgeSet[eid].getto(v)] = __EdgeSet[eid].cost;\n          \
+    \  }\n        }\n        return ret;\n    }\n\n    inline int vsize(){\n     \
+    \   return __CntVertex;\n    }\n\n    inline int esize(){\n        return __CntEdge;\n\
+    \    }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
+    \    }\n\n    vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        vector<Edge<CostType>> ret;\n        for(auto\
+    \ &eid : __IncidentList[v]){\n            Edge<CostType> e = __EdgeSet[eid];\n\
+    \            if(e.to == v) swap(e.from, e.to);\n            ret.push_back(e);\n\
+    \        }\n        return ret;\n    }\n\n    void print_edgeset(bool OneIndex\
+    \ = true){\n        for(int e = 0; e < __CntEdge; ++e){\n            cout << e\
+    \ + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex << (__isDirected ? \"\
+    \ -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \") = \" << __EdgeSet[e].cost\
+    \ << endl;\n        }\n    }\n\n    void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ / 2, bool DisplayINF = true){\n        auto mat = matrix(NotAdjacent);\n   \
+    \     for(int i = 0; i < __CntVertex; ++i){\n            cout << (DisplayINF &&\
+    \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
+    \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
+    \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"verify_latest/AOJ-ALDS1-11-A.test.cpp\"\
+    \n\n#line 6 \"verify_latest/AOJ-ALDS1-11-A.test.cpp\"\nusing namespace std;\n\n\
+    int main(){\n    int n; cin >> n;\n    Graph<int> G(n, true);\n    for(int i =\
+    \ 0; i < n; ++i){\n        Vertex u; int k; cin >> u >> k, --u;\n        for(int\
+    \ j = 0; j < k; ++j){\n            Vertex v; cin >> v, --v;\n            G.add(u,\
+    \ v);\n        }\n    }\n    G.print_matrix(0, false);\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\"\
     \n\n#include \"../latest/Graph/GraphTemplate.hpp\"\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n,\
@@ -67,8 +74,8 @@ data:
   isVerificationFile: true
   path: verify_latest/AOJ-ALDS1-11-A.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 01:23:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-08-31 15:07:25+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/AOJ-ALDS1-11-A.test.cpp
 layout: document

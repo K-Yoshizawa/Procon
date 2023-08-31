@@ -1,14 +1,32 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/BellmanFord.hpp
+    title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/Dijkstra.hpp
+    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/WarshallFloyd.hpp
+    title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-ALDS1-11-A.test.cpp
     title: verify_latest/AOJ-ALDS1-11-A.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-1-A.test.cpp
+    title: verify_latest/AOJ-GRL-1-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-1-B.test.cpp
+    title: verify_latest/AOJ-GRL-1-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-1-C.test.cpp
+    title: verify_latest/AOJ-GRL-1-C.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -34,19 +52,26 @@ data:
     \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
     \ = numeric_limits<CostType>::max() / 2){\n        vector ret(__CntVertex, vector(__CntVertex,\
     \ NotAdjacent));\n        for(Vertex v = 0; v < __CntVertex; ++v){\n         \
-    \   for(EdgeID &eid : __IncidentList[v]){\n                ret[v][__EdgeSet[eid].getto(v)]\
-    \ = __EdgeSet[eid].cost;\n            }\n        }\n        return ret;\n    }\n\
-    \n    void print_edgeset(bool OneIndex = true){\n        for(int e = 0; e < __CntEdge;\
-    \ ++e){\n            cout << e + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex\
-    \ << (__isDirected ? \" -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \"\
-    ) = \" << __EdgeSet[e].cost << endl;\n        }\n    }\n\n    void print_matrix(CostType\
-    \ NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){\n\
-    \        auto mat = matrix(NotAdjacent);\n        for(int i = 0; i < __CntVertex;\
-    \ ++i){\n            cout << (DisplayINF && mat[i][j] == NotAdjacent ? \"INF\"\
-    \ : to_string(mat[i][0]));\n            for(int j = 1; j < __CntVertex; ++j){\n\
-    \                cout << \" \" << (DisplayINF && mat[i][j] == NotAdjacent ? \"\
-    INF\" : to_string(mat[i][j]));\n            }\n            cout << endl;\n   \
-    \     }\n    }\n};\n"
+    \   ret[v][v] = 0;\n            for(EdgeID &eid : __IncidentList[v]){\n      \
+    \          ret[v][__EdgeSet[eid].getto(v)] = __EdgeSet[eid].cost;\n          \
+    \  }\n        }\n        return ret;\n    }\n\n    inline int vsize(){\n     \
+    \   return __CntVertex;\n    }\n\n    inline int esize(){\n        return __CntEdge;\n\
+    \    }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
+    \    }\n\n    vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        vector<Edge<CostType>> ret;\n        for(auto\
+    \ &eid : __IncidentList[v]){\n            Edge<CostType> e = __EdgeSet[eid];\n\
+    \            if(e.to == v) swap(e.from, e.to);\n            ret.push_back(e);\n\
+    \        }\n        return ret;\n    }\n\n    void print_edgeset(bool OneIndex\
+    \ = true){\n        for(int e = 0; e < __CntEdge; ++e){\n            cout << e\
+    \ + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex << (__isDirected ? \"\
+    \ -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \") = \" << __EdgeSet[e].cost\
+    \ << endl;\n        }\n    }\n\n    void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ / 2, bool DisplayINF = true){\n        auto mat = matrix(NotAdjacent);\n   \
+    \     for(int i = 0; i < __CntVertex; ++i){\n            cout << (DisplayINF &&\
+    \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
+    \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
+    \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
+    \ }\n            cout << endl;\n        }\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n\
     \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
     \n * @version 2.0\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing\
@@ -67,27 +92,40 @@ data:
     \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
     \ = numeric_limits<CostType>::max() / 2){\n        vector ret(__CntVertex, vector(__CntVertex,\
     \ NotAdjacent));\n        for(Vertex v = 0; v < __CntVertex; ++v){\n         \
-    \   for(EdgeID &eid : __IncidentList[v]){\n                ret[v][__EdgeSet[eid].getto(v)]\
-    \ = __EdgeSet[eid].cost;\n            }\n        }\n        return ret;\n    }\n\
-    \n    void print_edgeset(bool OneIndex = true){\n        for(int e = 0; e < __CntEdge;\
-    \ ++e){\n            cout << e + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex\
-    \ << (__isDirected ? \" -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \"\
-    ) = \" << __EdgeSet[e].cost << endl;\n        }\n    }\n\n    void print_matrix(CostType\
-    \ NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){\n\
-    \        auto mat = matrix(NotAdjacent);\n        for(int i = 0; i < __CntVertex;\
-    \ ++i){\n            cout << (DisplayINF && mat[i][j] == NotAdjacent ? \"INF\"\
-    \ : to_string(mat[i][0]));\n            for(int j = 1; j < __CntVertex; ++j){\n\
-    \                cout << \" \" << (DisplayINF && mat[i][j] == NotAdjacent ? \"\
-    INF\" : to_string(mat[i][j]));\n            }\n            cout << endl;\n   \
-    \     }\n    }\n};"
+    \   ret[v][v] = 0;\n            for(EdgeID &eid : __IncidentList[v]){\n      \
+    \          ret[v][__EdgeSet[eid].getto(v)] = __EdgeSet[eid].cost;\n          \
+    \  }\n        }\n        return ret;\n    }\n\n    inline int vsize(){\n     \
+    \   return __CntVertex;\n    }\n\n    inline int esize(){\n        return __CntEdge;\n\
+    \    }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
+    \    }\n\n    vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        vector<Edge<CostType>> ret;\n        for(auto\
+    \ &eid : __IncidentList[v]){\n            Edge<CostType> e = __EdgeSet[eid];\n\
+    \            if(e.to == v) swap(e.from, e.to);\n            ret.push_back(e);\n\
+    \        }\n        return ret;\n    }\n\n    void print_edgeset(bool OneIndex\
+    \ = true){\n        for(int e = 0; e < __CntEdge; ++e){\n            cout << e\
+    \ + OneIndex << \" : (\" << __EdgeSet[e].from + OneIndex << (__isDirected ? \"\
+    \ -> \" : \" <-> \") << __EdgeSet[e].to + OneIndex << \") = \" << __EdgeSet[e].cost\
+    \ << endl;\n        }\n    }\n\n    void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ / 2, bool DisplayINF = true){\n        auto mat = matrix(NotAdjacent);\n   \
+    \     for(int i = 0; i < __CntVertex; ++i){\n            cout << (DisplayINF &&\
+    \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
+    \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
+    \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
+    \ }\n            cout << endl;\n        }\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: latest/Graph/GraphTemplate.hpp
-  requiredBy: []
-  timestamp: '2023-08-31 01:23:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  requiredBy:
+  - latest/Graph/BellmanFord.hpp
+  - latest/Graph/WarshallFloyd.hpp
+  - latest/Graph/Dijkstra.hpp
+  timestamp: '2023-08-31 15:07:25+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-ALDS1-11-A.test.cpp
+  - verify_latest/AOJ-GRL-1-B.test.cpp
+  - verify_latest/AOJ-GRL-1-A.test.cpp
+  - verify_latest/AOJ-GRL-1-C.test.cpp
 documentation_of: latest/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -123,5 +161,8 @@ title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
 - `Graph(int VertexSize, bool isDirected)` : 頂点数`VertexSize`で初期化する。このとき有向グラフとして作成するかを選択できる。デフォルトでは無向グラフを生成する。
 - `add(Vertex s, Vertex t, CostType w)` : 頂点`s`から頂点`t`に重み`w`の辺を追加する。`w`は省略可能。
 - `matrix(CostType NotAdjacent)` : 隣接行列を生成して返す。隣接していない頂点への距離を`NotAdjacent`で指定可能。$O(E)$
+- `vsize(), esize()` : 頂点数、辺数を返す。
+- `get_edgeset()` : 辺集合を返す。
+- `get_incident(Vertex v)` : 頂点`v`の接続リストを返す。
 - `print_edgeset(bool OneIndex)` : 主にデバッグ用。辺集合の中身を出力する。$O(E)$
 - `print_matrix(CostType NotAdjacent, bool DisplayINF)` : 隣接行列を出力する。隣接していない頂点への距離を`INF`として表示することも可能。$O(V^2)$
