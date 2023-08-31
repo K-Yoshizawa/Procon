@@ -55,9 +55,33 @@ struct Graph{
     vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
         vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));
         for(Vertex v = 0; v < __CntVertex; ++v){
+            ret[v][v] = 0;
             for(EdgeID &eid : __IncidentList[v]){
                 ret[v][__EdgeSet[eid].getto(v)] = __EdgeSet[eid].cost;
             }
+        }
+        return ret;
+    }
+
+    inline int vsize(){
+        return __CntVertex;
+    }
+
+    inline int esize(){
+        return __CntEdge;
+    }
+
+    inline vector<Edge<CostType>>& get_edgeset(){
+        return __EdgeSet;
+    }
+
+    vector<Edge<CostType>> get_incident(Vertex v){
+        assert(0 <= v && v < __CntVertex);
+        vector<Edge<CostType>> ret;
+        for(auto &eid : __IncidentList[v]){
+            Edge<CostType> e = __EdgeSet[eid];
+            if(e.to == v) swap(e.from, e.to);
+            ret.push_back(e);
         }
         return ret;
     }
@@ -71,7 +95,7 @@ struct Graph{
     void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){
         auto mat = matrix(NotAdjacent);
         for(int i = 0; i < __CntVertex; ++i){
-            cout << (DisplayINF && mat[i][j] == NotAdjacent ? "INF" : to_string(mat[i][0]));
+            cout << (DisplayINF && mat[i][0] == NotAdjacent ? "INF" : to_string(mat[i][0]));
             for(int j = 1; j < __CntVertex; ++j){
                 cout << " " << (DisplayINF && mat[i][j] == NotAdjacent ? "INF" : to_string(mat[i][j]));
             }
