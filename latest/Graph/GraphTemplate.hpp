@@ -4,7 +4,7 @@
  * @file GraphTemplate.hpp
  * @author log K (lX57)
  * @brief Graph Template - グラフテンプレート
- * @version 2.0
+ * @version 2.1
  * @date 2023-08-31
  */
 
@@ -17,9 +17,10 @@ using EdgeID = int;
 template<typename CostType>
 struct Edge{
     Vertex from, to;
-    CostType cost;
+    CostType cost, cap;
 
-    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}
+    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost), cap(1){}
+    Edge(Vertex from, Vertex to, CostType cap, CostType cost) : from(from), to(to), cost(cost), cap(cap){}
 
     Vertex getto(Vertex v){
         assert(v == from || v == to);
@@ -33,7 +34,7 @@ struct Graph{
     int __CntVertex, __CntEdge;
     bool __isDirected;
     vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;
-    vector<vector<EdgeID>> __IncidentList;
+    vector<vector<pair<EdgeID, bool>>> __IncidentList;
 
     public:
     CostType INF;
@@ -46,18 +47,35 @@ struct Graph{
         assert(0 <= s && s < __CntVertex);
         assert(0 <= t && t < __CntVertex);
         __EdgeSet.push_back(Edge<CostType>(s, t, w));
-        __IncidentList[s].push_back(__CntEdge);
+        __IncidentList[s].push_back({__CntEdge, false});
         __RevEdgeSet.push_back(Edge<CostType>(t, s, w));
-        if(!__isDirected) __IncidentList[t].push_back(__CntEdge);
+        if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});
         ++__CntEdge;
+    }
+
+    void add_flow(Vertex Source, Vertex Sink, CostType Capacity, CostType Cost = 1){
+        assert(0 <= Source && Source < __CntVertex);
+        assert(0 <= Sink && Sink < __CntVertex);
+        __EdgeSet.push_back(Edge<CostType>(Source, Sink, Capacity, Cost));
+        __IncidentList[Source].push_back({__CntEdge, false});
+        __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));
+        __IncidentList[Sink].push_back({__CntEdge, true});
+        ++__CntEdge;
+    }
+
+    void update_flow(EdgeID edge_id, bool isReverse, CostType Decrease){
+        if(isReverse) Decrease *= -1;
+        __EdgeSet[edge_id].cap -= Decrease;
+        __RevEdgeSet[edge_id].cap += Decrease;
     }
 
     vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
         vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));
         for(Vertex v = 0; v < __CntVertex; ++v){
             ret[v][v] = 0;
-            for(EdgeID &eid : __IncidentList[v]){
-                ret[v][__EdgeSet[eid].getto(v)] = __EdgeSet[eid].cost;
+            for(auto [eid, rev] : __IncidentList[v]){
+                if(!rev) ret[v][__EdgeSet[eid].to] = __EdgeSet[eid].cost;
+                else ret[v][__RevEdgeSet[eid].to] = __RevEdgeSet[eid].cost;
             }
         }
         return ret;
@@ -71,6 +89,10 @@ struct Graph{
         return __CntEdge;
     }
 
+    inline Edge<CostType> get_edge(EdgeID edge_id, bool isReverse){
+        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);
+    }
+
     inline vector<Edge<CostType>>& get_edgeset(){
         return __EdgeSet;
     }
@@ -78,17 +100,22 @@ struct Graph{
     vector<Edge<CostType>> get_incident(Vertex v){
         assert(0 <= v && v < __CntVertex);
         vector<Edge<CostType>> ret;
-        for(auto &eid : __IncidentList[v]){
+        for(auto [eid, rev] : __IncidentList[v]){
             Edge<CostType> e = __EdgeSet[eid];
-            if(e.to == v) swap(e.from, e.to);
+            if(rev) e = __RevEdgeSet[eid];
             ret.push_back(e);
         }
         return ret;
     }
 
+    vector<pair<EdgeID, bool>> get_raw_incident(Vertex v){
+        assert(0 <= v && v < __CntVertex);
+        return __IncidentList[v];
+    }
+
     void print_edgeset(bool OneIndex = true){
         for(int e = 0; e < __CntEdge; ++e){
-            cout << e + OneIndex << " : (" << __EdgeSet[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __EdgeSet[e].to + OneIndex << ") = " << __EdgeSet[e].cost << endl;
+            cout << e + OneIndex << " : (" << __EdgeSet[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __EdgeSet[e].to + OneIndex << ") = " << __EdgeSet[e].cost << " (" << __EdgeSet[e].cap << ")" << endl;
         }
     }
 

@@ -19,12 +19,26 @@ codeforces(){
     g++ submit.cpp -std=c++17 -O2 -o a.out
 }
 
+verify(){
+    oj-bundle verify/$1.test.cpp > verify.cpp
+    g++ verify.cpp -std=c++17 -O2 -DLOGK
+}
+
+verify_latest(){
+    oj-bundle verify_latest/$1.test.cpp > verify.cpp
+    g++ verify.cpp -std=c++17 -O2 -DLOGK
+}
+
 if [ $1 = "na" ]; then
     new_atcoder
 elif [ $1 = "a" ]; then
     atcoder
 elif [ $1 = "c" ]; then
     codeforces
+elif [ $1 = "v" ]; then
+    verify $2
+elif [ $1 = "vl" ]; then
+    verify_latest $2
 elif [ $1 = "t" ]; then
     if [ $# = 1 ]; then
         ./a.out
