@@ -6,6 +6,11 @@
 
 ## 更新履歴
 
+### Ver 1.12.0 (2023/09/01)
+- 【改修】新グラフテンプレートにフロー関連の関数を追加
+- 【改修】新Dijkstraをポテンシャルに対応
+- 【準備】Ford-Fulkerson, Primal Dualを新グラフテンプレートに対応
+
 ### Ver 1.11.0 (2023/08/31)
 - 【修正】新グラフテンプレートのverifyミスを修正
 - 【準備】Dijkstra, Bellman Ford, Warshall Floydを新グラフテンプレートに対応

@@ -7,24 +7,21 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-    title: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_latest/AOJ-GRL-1-B.test.cpp
-    title: verify_latest/AOJ-GRL-1-B.test.cpp
+    path: verify_latest/AOJ-GRL-6-A.test.cpp
+    title: verify_latest/AOJ-GRL-6-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+    document_title: "Ford-Fulkerson - \u6700\u5927\u6D41"
     links: []
-  bundledCode: "#line 1 \"latest/Graph/BellmanFord.hpp\"\n/**\n * @file BellmanFord.hpp\n\
-    \ * @author log_K (lX57)\n * @brief BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\
-    \u77ED\u8DDD\u96E2\n * @version 2.0\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
-    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \nusing Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename CostType>\nstruct\
+  bundledCode: "#line 1 \"latest/Graph/FordFulkerson.hpp\"\n/**\n * @file FordFulkerson.hpp\n\
+    \ * @author log K (lX57)\n * @brief Ford-Fulkerson - \u6700\u5927\u6D41\n * @version\
+    \ 2.0\n * @date 2023-09-01\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\
+    \n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph Template\
+    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n\
+    \ * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
+    using Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename CostType>\nstruct\
     \ Edge{\n    Vertex from, to;\n    CostType cost, cap;\n\n    Edge(Vertex from,\
     \ Vertex to, CostType cost) : from(from), to(to), cost(cost), cap(1){}\n    Edge(Vertex\
     \ from, Vertex to, CostType cap, CostType cost) : from(from), to(to), cost(cost),\
@@ -76,40 +73,46 @@ data:
     \ == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int j = 1;\
     \ j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF && mat[i][j]\
     \ == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n            }\n         \
-    \   cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/BellmanFord.hpp\"\
-    \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(Graph<CostType>\
-    \ &G, Vertex Start){\n    vector<CostType> ret(G.vsize(), G.INF);\n    ret[Start]\
-    \ = 0;\n    int updatecount = 0;\n    while(1){\n        if(updatecount == G.vsize()){\n\
-    \            return vector<CostType>{};\n        }\n        bool update = false;\n\
-    \        for(Edge<CostType> &e : G.get_edgeset()){\n            if(ret[e.from]\
-    \ == G.INF) continue;\n            if(ret[e.to] > ret[e.from] + e.cost){\n   \
-    \             ret[e.to] = ret[e.from] + e.cost;\n                update = true;\n\
-    \            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
-    \    }\n    return ret;\n}\n"
-  code: "/**\n * @file BellmanFord.hpp\n * @author log_K (lX57)\n * @brief BellmanFord\
-    \ - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.0\n * @date\
-    \ 2023-08-31\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
-    vector<CostType> BellmanFord(Graph<CostType> &G, Vertex Start){\n    vector<CostType>\
-    \ ret(G.vsize(), G.INF);\n    ret[Start] = 0;\n    int updatecount = 0;\n    while(1){\n\
-    \        if(updatecount == G.vsize()){\n            return vector<CostType>{};\n\
-    \        }\n        bool update = false;\n        for(Edge<CostType> &e : G.get_edgeset()){\n\
-    \            if(ret[e.from] == G.INF) continue;\n            if(ret[e.to] > ret[e.from]\
-    \ + e.cost){\n                ret[e.to] = ret[e.from] + e.cost;\n            \
-    \    update = true;\n            }\n        }\n        if(!update) break;\n  \
-    \      ++updatecount;\n    }\n    return ret;\n}"
+    \   cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/FordFulkerson.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct FordFulkerson{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<int> used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType\
+    \ F){\n        if(pos == goal) return F;\n        used[pos] = 1;\n        for(auto\
+    \ [eid, rev] : G.get_raw_incident(pos)){\n            auto e = G.get_edge(eid,\
+    \ rev);\n            if(e.cap == 0 || used[e.to]) continue;\n            CostType\
+    \ flow = dfs(e.to, goal, min(F, e.cap));\n            if(flow >= 1){\n       \
+    \         G.update_flow(eid, rev, flow);\n                return flow;\n     \
+    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
+    \ &G) : G(G), used(G.vsize(), 0){}\n\n    CostType solve(Vertex Source, Vertex\
+    \ Sink){\n        CostType ans = 0;\n        while(1){\n            used.assign(G.vsize(),\
+    \ 0);\n            CostType F = dfs(Source, Sink, G.INF);\n            if(F ==\
+    \ 0) break;\n            ans += F;\n        }\n        return ans;\n    }\n};\n"
+  code: "/**\n * @file FordFulkerson.hpp\n * @author log K (lX57)\n * @brief Ford-Fulkerson\
+    \ - \u6700\u5927\u6D41\n * @version 2.0\n * @date 2023-09-01\n */\n\n#include\
+    \ \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n\
+    \    private:\n    Graph<CostType> &G;\n    vector<int> used;\n\n    CostType\
+    \ dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal) return F;\n\
+    \        used[pos] = 1;\n        for(auto [eid, rev] : G.get_raw_incident(pos)){\n\
+    \            auto e = G.get_edge(eid, rev);\n            if(e.cap == 0 || used[e.to])\
+    \ continue;\n            CostType flow = dfs(e.to, goal, min(F, e.cap));\n   \
+    \         if(flow >= 1){\n                G.update_flow(eid, rev, flow);\n   \
+    \             return flow;\n            }\n        }\n        return 0;\n    }\n\
+    \n    public:\n    FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0){}\n\
+    \n    CostType solve(Vertex Source, Vertex Sink){\n        CostType ans = 0;\n\
+    \        while(1){\n            used.assign(G.vsize(), 0);\n            CostType\
+    \ F = dfs(Source, Sink, G.INF);\n            if(F == 0) break;\n            ans\
+    \ += F;\n        }\n        return ans;\n    }\n};"
   dependsOn:
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
-  path: latest/Graph/BellmanFord.hpp
+  path: latest/Graph/FordFulkerson.hpp
   requiredBy: []
   timestamp: '2023-09-01 21:17:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_latest/AOJ-GRL-1-B.test.cpp
-  - verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-documentation_of: latest/Graph/BellmanFord.hpp
+  - verify_latest/AOJ-GRL-6-A.test.cpp
+documentation_of: latest/Graph/FordFulkerson.hpp
 layout: document
-title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+title: "Ford-Fulkerson - \u6700\u5927\u6D41"
 ---
 
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -125,10 +128,13 @@ title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
 
 ## Abstract
 
-単一始点最短距離問題をBellmanFord法を用いて求める。
+最小費用流問題をPrimal Dual法を用いて求める。
+
+## Variable
+
+
 
 ## Function
 
-- `BellmanFord(Graph G, Vertex Start)` : 頂点`Start`を始点として単一始点最短距離問題を解く。$O(VE)$
-    - 負閉路が存在する場合、空列を返す。
-    - そうでない場合、各頂点への最短距離を返す。
+- `PrimalDual(Graph G)` : `Graph`で初期化する。
+- `solve(Vertex Start, Vertex Goal, CostType F)` : 頂点`Start`から頂点`Goal`へ流量`F`を流した時の最小費用流を求める。流せない場合、`-1`を返す。$O(FE \log V)$

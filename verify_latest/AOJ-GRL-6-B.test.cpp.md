@@ -7,43 +7,49 @@ data:
   - icon: ':question:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/PrimalDual.hpp
+    title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\n\n#include\
-    \ <bits/stdc++.h>\n\n#line 1 \"latest/Graph/Dijkstra.hpp\"\n/**\n * @file Dijkstra.hpp\n\
-    \ * @author log_K (lX57)\n * @brief Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\
-    \u8DDD\u96E2\n * @version 2.1\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
-    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 2.1\n * @date 2023-08-31\n */\n\n#line 12 \"latest/Graph/GraphTemplate.hpp\"\
-    \nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    Vertex from, to;\n    CostType cost, cap;\n\n \
-    \   Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost),\
-    \ cap(1){}\n    Edge(Vertex from, Vertex to, CostType cap, CostType cost) : from(from),\
-    \ to(to), cost(cost), cap(cap){}\n\n    Vertex getto(Vertex v){\n        assert(v\
-    \ == from || v == to);\n        return from ^ to ^ v;\n    }\n};\n\ntemplate<typename\
-    \ CostType>\nstruct Graph{\n    private:\n    int __CntVertex, __CntEdge;\n  \
-    \  bool __isDirected;\n    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;\n \
-    \   vector<vector<pair<EdgeID, bool>>> __IncidentList;\n\n    public:\n    CostType\
-    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
-    \ __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize), INF(numeric_limits<CostType>::max()\
-    \ / 2){}\n\n    Graph() = default;\n\n    void add(Vertex s, Vertex t, CostType\
-    \ w = 1){\n        assert(0 <= s && s < __CntVertex);\n        assert(0 <= t &&\
-    \ t < __CntVertex);\n        __EdgeSet.push_back(Edge<CostType>(s, t, w));\n \
-    \       __IncidentList[s].push_back({__CntEdge, false});\n        __RevEdgeSet.push_back(Edge<CostType>(t,\
-    \ s, w));\n        if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});\n\
-    \        ++__CntEdge;\n    }\n\n    void add_flow(Vertex Source, Vertex Sink,\
-    \ CostType Capacity, CostType Cost = 1){\n        assert(0 <= Source && Source\
-    \ < __CntVertex);\n        assert(0 <= Sink && Sink < __CntVertex);\n        __EdgeSet.push_back(Edge<CostType>(Source,\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
+  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-6-B.test.cpp\"\n#define PROBLEM \"\
+    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\n\n#line 1\
+    \ \"latest/Graph/PrimalDual.hpp\"\n/**\n * @file PrimalDual.hpp\n * @author log\
+    \ K (lX57)\n * @brief Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41\n * @version\
+    \ 1.0\n * @date 2023-09-01\n */\n\n#line 1 \"latest/Graph/Dijkstra.hpp\"\n/**\n\
+    \ * @file Dijkstra.hpp\n * @author log_K (lX57)\n * @brief Dijkstra - \u5358\u4E00\
+    \u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.1\n * @date 2023-08-31\n */\n\
+    \n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
+    \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
+    \ int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Vertex from, to;\n  \
+    \  CostType cost, cap;\n\n    Edge(Vertex from, Vertex to, CostType cost) : from(from),\
+    \ to(to), cost(cost), cap(1){}\n    Edge(Vertex from, Vertex to, CostType cap,\
+    \ CostType cost) : from(from), to(to), cost(cost), cap(cap){}\n\n    Vertex getto(Vertex\
+    \ v){\n        assert(v == from || v == to);\n        return from ^ to ^ v;\n\
+    \    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int\
+    \ __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
+    \ __EdgeSet, __RevEdgeSet;\n    vector<vector<pair<EdgeID, bool>>> __IncidentList;\n\
+    \n    public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected\
+    \ = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0),\
+    \ __IncidentList(VertexSize), INF(numeric_limits<CostType>::max() / 2){}\n\n \
+    \   Graph() = default;\n\n    void add(Vertex s, Vertex t, CostType w = 1){\n\
+    \        assert(0 <= s && s < __CntVertex);\n        assert(0 <= t && t < __CntVertex);\n\
+    \        __EdgeSet.push_back(Edge<CostType>(s, t, w));\n        __IncidentList[s].push_back({__CntEdge,\
+    \ false});\n        __RevEdgeSet.push_back(Edge<CostType>(t, s, w));\n       \
+    \ if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});\n        ++__CntEdge;\n\
+    \    }\n\n    void add_flow(Vertex Source, Vertex Sink, CostType Capacity, CostType\
+    \ Cost = 1){\n        assert(0 <= Source && Source < __CntVertex);\n        assert(0\
+    \ <= Sink && Sink < __CntVertex);\n        __EdgeSet.push_back(Edge<CostType>(Source,\
     \ Sink, Capacity, Cost));\n        __IncidentList[Source].push_back({__CntEdge,\
     \ false});\n        __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));\n\
     \        __IncidentList[Sink].push_back({__CntEdge, true});\n        ++__CntEdge;\n\
@@ -118,32 +124,46 @@ data:
     \        cout << (DisplayINF && __Dist[0] == G.INF ? \"INF\" : to_string(__Dist[0]));\n\
     \        for(int i = 1; i < (int)__Dist.size(); ++i){\n            cout << Delimiter\
     \ << (DisplayINF && __Dist[i] == G.INF ? \"INF\" : to_string(__Dist[i]));\n  \
-    \      }\n        cout << endl;\n    }\n};\n#line 6 \"verify_latest/AOJ-GRL-1-A.test.cpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >>\
-    \ r;\n    Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n    \
-    \    int s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s,\
-    \ t, d);\n    }\n\n    Dijkstra<long long> ds(G, r);\n    ds.print(true, '\\n');\n\
-    }\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../latest/Graph/Dijkstra.hpp\"\n\n\
-    using namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n\
-    \    Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
-    \ s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s, t,\
-    \ d);\n    }\n\n    Dijkstra<long long> ds(G, r);\n    ds.print(true, '\\n');\n\
-    }"
+    \      }\n        cout << endl;\n    }\n};\n#line 10 \"latest/Graph/PrimalDual.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct PrimalDual{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<CostType> Potential;\n\n    public:\n    PrimalDual(Graph<CostType>\
+    \ &G) : G(G), Potential(G.vsize()){}\n\n    CostType solve(Vertex Start, Vertex\
+    \ Goal, CostType F){\n        CostType ret = 0;\n        Potential.assign(G.vsize(),\
+    \ 0);\n\n        while(F > 0){\n            Dijkstra<CostType> dk(G);\n      \
+    \      dk.update_potential(Potential);\n            vector<CostType> Dist = dk.all(Start);\n\
+    \            if(Dist[Goal] == G.INF) return -1;\n            auto path = dk.restore_edge(Goal);\n\
+    \            CostType f = F;\n            for(auto [eid, rev] : path){\n     \
+    \           auto e = G.get_edge(eid, rev);\n                f = min(f, e.cap);\n\
+    \            }\n            F -= f;\n            ret += f * Dist[Goal];\n    \
+    \        for(auto [eid, rev] : path){\n                G.update_flow(eid, rev,\
+    \ f);\n            }\n            for(int i = 0; i < Dist.size(); ++i){\n    \
+    \            CostType RawDist = Dist[i] -= Potential[i] - Potential[Start];\n\
+    \                Potential[i] = min(Potential[i] + RawDist, G.INF);\n        \
+    \    }\n        }\n        return ret;\n    }\n};\n#line 4 \"verify_latest/AOJ-GRL-6-B.test.cpp\"\
+    \n\nint main(){\n    int V, E, F;\n    cin >> V >> E >> F;\n    Graph<int> G(V,\
+    \ true);\n    for(int i = 0; i < E; ++i){\n        Vertex u, v;\n        int c,\
+    \ d;\n        cin >> u >> v >> c >> d;\n        G.add_flow(u, v, c, d);\n    }\n\
+    \n    PrimalDual<int> pd(G);\n\n    cout << pd.solve(0, V - 1, F) << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
+    \n\n#include \"../latest/Graph/PrimalDual.hpp\"\n\nint main(){\n    int V, E,\
+    \ F;\n    cin >> V >> E >> F;\n    Graph<int> G(V, true);\n    for(int i = 0;\
+    \ i < E; ++i){\n        Vertex u, v;\n        int c, d;\n        cin >> u >> v\
+    \ >> c >> d;\n        G.add_flow(u, v, c, d);\n    }\n\n    PrimalDual<int> pd(G);\n\
+    \n    cout << pd.solve(0, V - 1, F) << endl;\n}"
   dependsOn:
+  - latest/Graph/PrimalDual.hpp
   - latest/Graph/Dijkstra.hpp
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify_latest/AOJ-GRL-1-A.test.cpp
+  path: verify_latest/AOJ-GRL-6-B.test.cpp
   requiredBy: []
   timestamp: '2023-09-01 21:17:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify_latest/AOJ-GRL-1-A.test.cpp
+documentation_of: verify_latest/AOJ-GRL-6-B.test.cpp
 layout: document
 redirect_from:
-- /verify/verify_latest/AOJ-GRL-1-A.test.cpp
-- /verify/verify_latest/AOJ-GRL-1-A.test.cpp.html
-title: verify_latest/AOJ-GRL-1-A.test.cpp
+- /verify/verify_latest/AOJ-GRL-6-B.test.cpp
+- /verify/verify_latest/AOJ-GRL-6-B.test.cpp.html
+title: verify_latest/AOJ-GRL-6-B.test.cpp
 ---

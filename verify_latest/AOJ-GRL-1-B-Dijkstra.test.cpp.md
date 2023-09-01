@@ -1,6 +1,9 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/BellmanFord.hpp
+    title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':question:'
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
@@ -9,16 +12,16 @@ data:
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\n\n#include\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
+  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp\"\n#define PROBLEM\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\n\n#include\
     \ <bits/stdc++.h>\n\n#line 1 \"latest/Graph/Dijkstra.hpp\"\n/**\n * @file Dijkstra.hpp\n\
     \ * @author log_K (lX57)\n * @brief Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\
     \u8DDD\u96E2\n * @version 2.1\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
@@ -118,32 +121,48 @@ data:
     \        cout << (DisplayINF && __Dist[0] == G.INF ? \"INF\" : to_string(__Dist[0]));\n\
     \        for(int i = 1; i < (int)__Dist.size(); ++i){\n            cout << Delimiter\
     \ << (DisplayINF && __Dist[i] == G.INF ? \"INF\" : to_string(__Dist[i]));\n  \
-    \      }\n        cout << endl;\n    }\n};\n#line 6 \"verify_latest/AOJ-GRL-1-A.test.cpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >>\
-    \ r;\n    Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n    \
-    \    int s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s,\
-    \ t, d);\n    }\n\n    Dijkstra<long long> ds(G, r);\n    ds.print(true, '\\n');\n\
-    }\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#include <bits/stdc++.h>\n\n#include \"../latest/Graph/Dijkstra.hpp\"\n\n\
-    using namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n\
-    \    Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int\
-    \ s, t;\n        long long d;\n        cin >> s >> t >> d;\n        G.add(s, t,\
-    \ d);\n    }\n\n    Dijkstra<long long> ds(G, r);\n    ds.print(true, '\\n');\n\
-    }"
+    \      }\n        cout << endl;\n    }\n};\n#line 1 \"latest/Graph/BellmanFord.hpp\"\
+    \n/**\n * @file BellmanFord.hpp\n * @author log_K (lX57)\n * @brief BellmanFord\
+    \ - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.0\n * @date\
+    \ 2023-08-31\n */\n\n#line 10 \"latest/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
+    \ CostType>\nvector<CostType> BellmanFord(Graph<CostType> &G, Vertex Start){\n\
+    \    vector<CostType> ret(G.vsize(), G.INF);\n    ret[Start] = 0;\n    int updatecount\
+    \ = 0;\n    while(1){\n        if(updatecount == G.vsize()){\n            return\
+    \ vector<CostType>{};\n        }\n        bool update = false;\n        for(Edge<CostType>\
+    \ &e : G.get_edgeset()){\n            if(ret[e.from] == G.INF) continue;\n   \
+    \         if(ret[e.to] > ret[e.from] + e.cost){\n                ret[e.to] = ret[e.from]\
+    \ + e.cost;\n                update = true;\n            }\n        }\n      \
+    \  if(!update) break;\n        ++updatecount;\n    }\n    return ret;\n}\n#line\
+    \ 7 \"verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp\"\n\nusing namespace std;\n\n\
+    int main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n    Graph<int> G(V, true);\n\
+    \    for(int i = 0; i < E; ++i){\n        int s, t, d;\n        cin >> s >> t\
+    \ >> d;\n        G.add(s, t, d);\n    }\n\n    auto ans = BellmanFord(G, r);\n\
+    \    if(ans.empty()){\n        cout << \"NEGATIVE CYCLE\" << endl;\n    }\n  \
+    \  else{\n        Dijkstra<int> dk(G);\n        dk.update_potential(ans);\n  \
+    \      dk.build(r);\n        dk.print(true, '\\n');\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
+    \n\n#include <bits/stdc++.h>\n\n#include \"../latest/Graph/Dijkstra.hpp\"\n#include\
+    \ \"../latest/Graph/BellmanFord.hpp\"\n\nusing namespace std;\n\nint main(){\n\
+    \    int V, E, r;\n    cin >> V >> E >> r;\n    Graph<int> G(V, true);\n    for(int\
+    \ i = 0; i < E; ++i){\n        int s, t, d;\n        cin >> s >> t >> d;\n   \
+    \     G.add(s, t, d);\n    }\n\n    auto ans = BellmanFord(G, r);\n    if(ans.empty()){\n\
+    \        cout << \"NEGATIVE CYCLE\" << endl;\n    }\n    else{\n        Dijkstra<int>\
+    \ dk(G);\n        dk.update_potential(ans);\n        dk.build(r);\n        dk.print(true,\
+    \ '\\n');\n    }\n}"
   dependsOn:
   - latest/Graph/Dijkstra.hpp
   - latest/Graph/GraphTemplate.hpp
+  - latest/Graph/BellmanFord.hpp
   isVerificationFile: true
-  path: verify_latest/AOJ-GRL-1-A.test.cpp
+  path: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
   requiredBy: []
   timestamp: '2023-09-01 21:17:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify_latest/AOJ-GRL-1-A.test.cpp
+documentation_of: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
 layout: document
 redirect_from:
-- /verify/verify_latest/AOJ-GRL-1-A.test.cpp
-- /verify/verify_latest/AOJ-GRL-1-A.test.cpp.html
-title: verify_latest/AOJ-GRL-1-A.test.cpp
+- /verify/verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
+- /verify/verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp.html
+title: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
 ---
