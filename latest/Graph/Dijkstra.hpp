@@ -46,7 +46,7 @@ struct Dijkstra{
     public:
     Dijkstra(Graph<CostType> &G) : G(G), __Dist(G.vsize()), __Potential(G.vsize(), 0), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Start(-1){}
     
-    Dijkstra(Graph<CostType> &G, Vertex Start) : G(G), __Dist(G.vsize()), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Start(Start){
+    Dijkstra(Graph<CostType> &G, Vertex Start) : G(G), __Dist(G.vsize()), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Potential(G.vsize(), 0), __Start(Start){
         __solve();
     }
 

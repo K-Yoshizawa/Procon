@@ -26,6 +26,12 @@ struct Edge{
         assert(v == from || v == to);
         return from ^ to ^ v;
     }
+
+    void swap(){
+        Vertex tmp = from;
+        from = to;
+        to = tmp;
+    }
 };
 
 template<typename CostType>
@@ -35,6 +41,7 @@ struct Graph{
     bool __isDirected;
     vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;
     vector<vector<pair<EdgeID, bool>>> __IncidentList;
+    vector<pair<int, int>> __EdgePlace;
 
     public:
     CostType INF;
@@ -46,6 +53,7 @@ struct Graph{
     void add(Vertex s, Vertex t, CostType w = 1){
         assert(0 <= s && s < __CntVertex);
         assert(0 <= t && t < __CntVertex);
+        __EdgePlace.push_back({(int)__IncidentList[s].size(), (int)__IncidentList[t].size()});
         __EdgeSet.push_back(Edge<CostType>(s, t, w));
         __IncidentList[s].push_back({__CntEdge, false});
         __RevEdgeSet.push_back(Edge<CostType>(t, s, w));
@@ -113,9 +121,51 @@ struct Graph{
         return __IncidentList[v];
     }
 
+    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){
+        assert(0 <= Root && Root < __CntVertex);
+        vector<pair<Vertex, EdgeID>> ret(__CntVertex, {-1, -1});
+        vector<int> visited(__CntVertex, 0);
+        queue<Vertex> que;
+        que.push(Root);
+        while(que.size()){
+            Vertex now = que.front(); que.pop();
+            if(visited[now]) continue;
+            visited[now] = 1;
+            for(int i = 0; i < __IncidentList[now].size(); ++i){
+                auto [eid, rev] = __IncidentList[now][i];
+                Edge<CostType> e = get_edge(eid, rev);
+                if(visited[e.to]) continue;
+                que.push(e.to);
+                ret[e.to] = {now, eid};
+                if(rev){
+                    __IncidentList[e.from][__EdgePlace[eid].second].second = false;
+                    __IncidentList[e.to][__EdgePlace[eid].first].second = true;
+                    __EdgeSet[eid].swap();
+                    __RevEdgeSet[eid].swap();
+                    swap(__EdgePlace[eid].first, __EdgePlace[eid].second);
+                }
+            }
+        }
+        return ret;
+    }
+
+    vector<Edge<CostType>> operator[](Vertex v){
+        return get_incident(v);
+    }
+
     void print_edgeset(bool OneIndex = true){
         for(int e = 0; e < __CntEdge; ++e){
             cout << e + OneIndex << " : (" << __EdgeSet[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __EdgeSet[e].to + OneIndex << ") = " << __EdgeSet[e].cost << " (" << __EdgeSet[e].cap << ")" << endl;
+        }
+    }
+
+    void print_incidentlist(bool OneIndex = true){
+        for(int i = 0; i < __CntVertex; ++i){
+            cout << i + OneIndex << " :";
+            for(int j = 0; j < __IncidentList[i].size(); ++j){
+                cout << " (" << __IncidentList[i][j].first << " / " << __IncidentList[i][j].second << ")";
+            }
+            cout << endl;
         }
     }
 
