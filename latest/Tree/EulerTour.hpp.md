@@ -7,17 +7,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: verify_latest/AOJ-GRL-1-C.test.cpp
-    title: verify_latest/AOJ-GRL-1-C.test.cpp
+    path: verify_latest/LIB-VertexAddPathSum.test.cpp
+    title: verify_latest/LIB-VertexAddPathSum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
     links: []
-  bundledCode: "#line 1 \"latest/Graph/WarshallFloyd.hpp\"\n/**\n * @file WarshallFloyd.hpp\n\
-    \ * @author log_K (lX57)\n * @brief WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\
-    \u77ED\u7D4C\u8DEF\n * @version 2.0\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+  bundledCode: "#line 1 \"latest/Tree/EulerTour.hpp\"\n\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -96,90 +93,51 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/WarshallFloyd.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n    private:\n    bool\
-    \ __NegativeCycle;\n    int __Size;\n    CostType __INF;\n    vector<vector<CostType>>\
-    \ __Dist;\n\n    void __solve(){\n        for(int k = 0; k < __Size; ++k){\n \
-    \           for(int i = 0; i < __Size; ++i){\n                for(int j = 0; j\
-    \ < __Size; ++j){\n                    if(__Dist[i][k] == __INF || __Dist[k][j]\
-    \ == __INF) continue;\n                    __Dist[i][j] = min(__Dist[i][j], __Dist[i][k]\
-    \ + __Dist[k][j]);\n                }\n            }\n        }\n        __NegativeCycle\
-    \ = false;\n        for(int i = 0; i < __Size; ++i) __NegativeCycle |= __Dist[i][i]\
-    \ < 0;\n    }\n\n    public:\n    WarshallFloyd(Graph<CostType> &G) : __Size(G.vsize()),\
-    \ __INF(G.INF), __Dist(G.matrix()){\n        __solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>>\
-    \ &M) : __Size((int)M.size()), __INF(numeric_limits<CostType>::max() / 2), __Dist(M){\n\
-    \        __solve();\n    }\n\n    inline bool negative(){\n        return __NegativeCycle;\n\
-    \    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start\
-    \ && Start < __Size);\n        assert(0 <= Goal && Goal < __Size);\n        return\
-    \ __Dist[Start][Goal];\n    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
-    \ / 2, bool DisplayINF = true){\n        for(int i = 0; i < __Size; ++i){\n  \
-    \          cout << (DisplayINF && __Dist[i][0] == NotAdjacent ? \"INF\" : to_string(__Dist[i][0]));\n\
-    \            for(int j = 1; j < __Size; ++j){\n                cout << \" \" <<\
-    \ (DisplayINF && __Dist[i][j] == NotAdjacent ? \"INF\" : to_string(__Dist[i][j]));\n\
-    \            }\n            cout << endl;\n        }\n    }\n};\n"
-  code: "/**\n * @file WarshallFloyd.hpp\n * @author log_K (lX57)\n * @brief WarshallFloyd\
-    \ - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF\n * @version 2.0\n * @date\
-    \ 2023-08-31\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
-    struct WarshallFloyd{\n    private:\n    bool __NegativeCycle;\n    int __Size;\n\
-    \    CostType __INF;\n    vector<vector<CostType>> __Dist;\n\n    void __solve(){\n\
-    \        for(int k = 0; k < __Size; ++k){\n            for(int i = 0; i < __Size;\
-    \ ++i){\n                for(int j = 0; j < __Size; ++j){\n                  \
-    \  if(__Dist[i][k] == __INF || __Dist[k][j] == __INF) continue;\n            \
-    \        __Dist[i][j] = min(__Dist[i][j], __Dist[i][k] + __Dist[k][j]);\n    \
-    \            }\n            }\n        }\n        __NegativeCycle = false;\n \
-    \       for(int i = 0; i < __Size; ++i) __NegativeCycle |= __Dist[i][i] < 0;\n\
-    \    }\n\n    public:\n    WarshallFloyd(Graph<CostType> &G) : __Size(G.vsize()),\
-    \ __INF(G.INF), __Dist(G.matrix()){\n        __solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>>\
-    \ &M) : __Size((int)M.size()), __INF(numeric_limits<CostType>::max() / 2), __Dist(M){\n\
-    \        __solve();\n    }\n\n    inline bool negative(){\n        return __NegativeCycle;\n\
-    \    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start\
-    \ && Start < __Size);\n        assert(0 <= Goal && Goal < __Size);\n        return\
-    \ __Dist[Start][Goal];\n    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
-    \ / 2, bool DisplayINF = true){\n        for(int i = 0; i < __Size; ++i){\n  \
-    \          cout << (DisplayINF && __Dist[i][0] == NotAdjacent ? \"INF\" : to_string(__Dist[i][0]));\n\
-    \            for(int j = 1; j < __Size; ++j){\n                cout << \" \" <<\
-    \ (DisplayINF && __Dist[i][j] == NotAdjacent ? \"INF\" : to_string(__Dist[i][j]));\n\
-    \            }\n            cout << endl;\n        }\n    }\n};"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"latest/Tree/EulerTour.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    int __Size,\
+    \ __Offset, __Counter;\n    Vertex __Root;\n    Graph<CostType> &G;\n    vector<int>\
+    \ __Arrival, __Departure;\n\n    void __dfs(Vertex now, Vertex parent){\n    \
+    \    __Arrival[now] = __Counter++;\n        for(auto &e : G[now]){\n         \
+    \   if(e.to == parent) continue;\n            __dfs(e.to, now);\n        }\n \
+    \       __Departure[now] = __Counter++;\n    }\n\n    public:\n    EulerTour(Graph<CostType>\
+    \ &G, Vertex Root = 0, int Offset = 1) : G(G), __Size(G.vsize()), __Root(Root),\
+    \ __Arrival(G.vsize()), __Departure(G.vsize()), __Offset(Offset){\n        __Counter\
+    \ = __Offset;\n        __dfs(__Root, -1);\n    }\n\n    vector<int> get_arrival_list(){\n\
+    \        return __Arrival;\n    }\n\n    vector<int> get_departure_list(){\n \
+    \       return __Departure;\n    }\n\n    pair<int, int> get_way(Vertex Target){\n\
+    \        assert(0 <= Target && Target < G.vsize());\n        return {__Arrival[__Root],\
+    \ __Arrival[Target]};\n    }\n\n    pair<int, int> get_around(Vertex Target){\n\
+    \        assert(0 <= Target && Target < G.vsize());\n        return {__Arrival[Target],\
+    \ __Departure[Target]};\n    }\n};\n"
+  code: "\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    struct EulerTour{\n    private:\n    int __Size, __Offset, __Counter;\n    Vertex\
+    \ __Root;\n    Graph<CostType> &G;\n    vector<int> __Arrival, __Departure;\n\n\
+    \    void __dfs(Vertex now, Vertex parent){\n        __Arrival[now] = __Counter++;\n\
+    \        for(auto &e : G[now]){\n            if(e.to == parent) continue;\n  \
+    \          __dfs(e.to, now);\n        }\n        __Departure[now] = __Counter++;\n\
+    \    }\n\n    public:\n    EulerTour(Graph<CostType> &G, Vertex Root = 0, int\
+    \ Offset = 1) : G(G), __Size(G.vsize()), __Root(Root), __Arrival(G.vsize()), __Departure(G.vsize()),\
+    \ __Offset(Offset){\n        __Counter = __Offset;\n        __dfs(__Root, -1);\n\
+    \    }\n\n    vector<int> get_arrival_list(){\n        return __Arrival;\n   \
+    \ }\n\n    vector<int> get_departure_list(){\n        return __Departure;\n  \
+    \  }\n\n    pair<int, int> get_way(Vertex Target){\n        assert(0 <= Target\
+    \ && Target < G.vsize());\n        return {__Arrival[__Root], __Arrival[Target]};\n\
+    \    }\n\n    pair<int, int> get_around(Vertex Target){\n        assert(0 <= Target\
+    \ && Target < G.vsize());\n        return {__Arrival[Target], __Departure[Target]};\n\
+    \    }\n};"
   dependsOn:
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
-  path: latest/Graph/WarshallFloyd.hpp
+  path: latest/Tree/EulerTour.hpp
   requiredBy: []
   timestamp: '2023-09-02 20:49:48+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify_latest/AOJ-GRL-1-C.test.cpp
-documentation_of: latest/Graph/WarshallFloyd.hpp
+  - verify_latest/LIB-VertexAddPathSum.test.cpp
+documentation_of: latest/Tree/EulerTour.hpp
 layout: document
-title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
+redirect_from:
+- /library/latest/Tree/EulerTour.hpp
+- /library/latest/Tree/EulerTour.hpp.html
+title: latest/Tree/EulerTour.hpp
 ---
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
-
-## Abstract
-
-全点対間最短距離問題をWarshall Floyd法を用いて求める。
-
-## Variable
-
-- private
-    - `NegativeCycle` : 負の閉路が存在するか
-    - `Size` : 頂点数
-    - `Dist` : 隣接行列形式で表された最短距離。`Dist[i][j]`は頂点`i`から頂点`j`への最短距離を表している。
-
-## Function
-
-- `WarshallFloyd(Graph G)` : `Graph`で初期化し、全点対間最短距離問題を解く。$O(V^3)$
-- `WarshallFloyd(vector<vector<CostType>> M)` : 隣接行列`M`で初期化し、全点対間最短距離問題を解く。$O(V^3)$
-- `negative()` : 負閉路を含むかを返す。
-- `dist(Vertex Start, Vertex Goal)` : 頂点`Start`から頂点`Goal`への最短距離を返す。$O(1)$
-- `print(CostType NotAdjacent, bool DisplayINF)` : 隣接行列を出力する。隣接していない頂点への距離を`INF`として表示することも可能。$O(V^2)$

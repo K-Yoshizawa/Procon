@@ -4,38 +4,31 @@ data:
   - icon: ':x:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
-    path: latest/Graph/WarshallFloyd.hpp
-    title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify_latest/LIB-VertexAddPathSum.test.cpp
+    title: verify_latest/LIB-VertexAddPathSum.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
-  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-1-C.test.cpp\"\n#define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\n\n#line 1\
-    \ \"latest/Graph/WarshallFloyd.hpp\"\n/**\n * @file WarshallFloyd.hpp\n * @author\
-    \ log_K (lX57)\n * @brief WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\
-    \u7D4C\u8DEF\n * @version 2.0\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
-    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \nusing Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename CostType>\nstruct\
-    \ Edge{\n    Vertex from, to;\n    CostType cost, cap;\n\n    Edge(Vertex from,\
-    \ Vertex to, CostType cost) : from(from), to(to), cost(cost), cap(1){}\n    Edge(Vertex\
-    \ from, Vertex to, CostType cap, CostType cost) : from(from), to(to), cost(cost),\
-    \ cap(cap){}\n\n    Vertex getto(Vertex v){\n        assert(v == from || v ==\
-    \ to);\n        return from ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex\
-    \ tmp = from;\n        from = to;\n        to = tmp;\n    }\n};\n\ntemplate<typename\
-    \ CostType>\nstruct Graph{\n    private:\n    int __CntVertex, __CntEdge;\n  \
-    \  bool __isDirected;\n    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;\n \
-    \   vector<vector<pair<EdgeID, bool>>> __IncidentList;\n    vector<pair<int, int>>\
-    \ __EdgePlace;\n\n    public:\n    CostType INF;\n\n    Graph(int VertexSize,\
+    links: []
+  bundledCode: "#line 1 \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n\n#line 2 \"\
+    latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n * @author\
+    \ log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename\
+    \ CostType>\nstruct Edge{\n    Vertex from, to;\n    CostType cost, cap;\n\n \
+    \   Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost),\
+    \ cap(1){}\n    Edge(Vertex from, Vertex to, CostType cap, CostType cost) : from(from),\
+    \ to(to), cost(cost), cap(cap){}\n\n    Vertex getto(Vertex v){\n        assert(v\
+    \ == from || v == to);\n        return from ^ to ^ v;\n    }\n\n    void swap(){\n\
+    \        Vertex tmp = from;\n        from = to;\n        to = tmp;\n    }\n};\n\
+    \ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;\n\
+    \    vector<vector<pair<EdgeID, bool>>> __IncidentList;\n    vector<pair<int,\
+    \ int>> __EdgePlace;\n\n    public:\n    CostType INF;\n\n    Graph(int VertexSize,\
     \ bool isDirected = false) : __CntVertex(VertexSize), __isDirected(isDirected),\
     \ __CntEdge(0), __IncidentList(VertexSize), INF(numeric_limits<CostType>::max()\
     \ / 2){}\n\n    Graph() = default;\n\n    void add(Vertex s, Vertex t, CostType\
@@ -100,52 +93,55 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/WarshallFloyd.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n    private:\n    bool\
-    \ __NegativeCycle;\n    int __Size;\n    CostType __INF;\n    vector<vector<CostType>>\
-    \ __Dist;\n\n    void __solve(){\n        for(int k = 0; k < __Size; ++k){\n \
-    \           for(int i = 0; i < __Size; ++i){\n                for(int j = 0; j\
-    \ < __Size; ++j){\n                    if(__Dist[i][k] == __INF || __Dist[k][j]\
-    \ == __INF) continue;\n                    __Dist[i][j] = min(__Dist[i][j], __Dist[i][k]\
-    \ + __Dist[k][j]);\n                }\n            }\n        }\n        __NegativeCycle\
-    \ = false;\n        for(int i = 0; i < __Size; ++i) __NegativeCycle |= __Dist[i][i]\
-    \ < 0;\n    }\n\n    public:\n    WarshallFloyd(Graph<CostType> &G) : __Size(G.vsize()),\
-    \ __INF(G.INF), __Dist(G.matrix()){\n        __solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>>\
-    \ &M) : __Size((int)M.size()), __INF(numeric_limits<CostType>::max() / 2), __Dist(M){\n\
-    \        __solve();\n    }\n\n    inline bool negative(){\n        return __NegativeCycle;\n\
-    \    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start\
-    \ && Start < __Size);\n        assert(0 <= Goal && Goal < __Size);\n        return\
-    \ __Dist[Start][Goal];\n    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
-    \ / 2, bool DisplayINF = true){\n        for(int i = 0; i < __Size; ++i){\n  \
-    \          cout << (DisplayINF && __Dist[i][0] == NotAdjacent ? \"INF\" : to_string(__Dist[i][0]));\n\
-    \            for(int j = 1; j < __Size; ++j){\n                cout << \" \" <<\
-    \ (DisplayINF && __Dist[i][j] == NotAdjacent ? \"INF\" : to_string(__Dist[i][j]));\n\
-    \            }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"verify_latest/AOJ-GRL-1-C.test.cpp\"\
-    \n\nint main(){\n    int V, E;\n    cin >> V >> E;\n    Graph<long long> G(V,\
-    \ true);\n    for(int i = 0; i < E; ++i){\n        int s, t, d;\n        cin >>\
-    \ s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    WarshallFloyd<long long>\
-    \ wf(G);\n    if(wf.negative()){\n        cout << \"NEGATIVE CYCLE\\n\";\n   \
-    \ }\n    else{\n        wf.print();\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
-    \n\n#include \"../latest/Graph/WarshallFloyd.hpp\"\n\nint main(){\n    int V,\
-    \ E;\n    cin >> V >> E;\n    Graph<long long> G(V, true);\n    for(int i = 0;\
-    \ i < E; ++i){\n        int s, t, d;\n        cin >> s >> t >> d;\n        G.add(s,\
-    \ t, d);\n    }\n\n    WarshallFloyd<long long> wf(G);\n    if(wf.negative()){\n\
-    \        cout << \"NEGATIVE CYCLE\\n\";\n    }\n    else{\n        wf.print();\n\
-    \    }\n}"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 5 \"latest/Tree/LowestCommonAncestor.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n\
+    \    Graph<CostType> &G;\n    int sz, LOG;\n    vector<int> depth;\n    vector<vector<Vertex>>\
+    \ parent;\n\n    void dfs(Vertex v, Vertex p, int d){\n        parent[0][v] =\
+    \ p;\n        depth[v] = d;\n        for(auto &e : G[v]){\n            if(e.to\
+    \ != p) dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ &G) : G(G), sz(G.vsize()), LOG(ceil(log2(G.vsize())) + 1){\n        depth.resize(sz);\n\
+    \        parent.resize(LOG, vector<Vertex>(sz, 0));\n        dfs(0, -1, 0);\n\
+    \        for(int k = 0; k + 1 < LOG; ++k){\n            for(int v = 0; v < sz;\
+    \ ++v){\n                if(parent[k][v] < 0) parent[k + 1][v] = -1;\n       \
+    \         else parent[k + 1][v] = parent[k][parent[k][v]];\n            }\n  \
+    \      }\n    }\n\n    Vertex query(Vertex u, Vertex v){\n        if(depth[u]\
+    \ > depth[v]) swap(u, v);\n        for(int k = 0; k < LOG; ++k){\n           \
+    \ if((depth[v] - depth[u]) >> k & 1){\n                v = parent[k][v];\n   \
+    \         }\n        }\n        if(u == v) return u;\n        for(int k = LOG\
+    \ - 1; k >= 0; --k){\n            if(parent[k][u] != parent[k][v]){\n        \
+    \        u = parent[k][u];\n                v = parent[k][v];\n            }\n\
+    \        }\n        return parent[0][u];\n    }\n};\n"
+  code: "\n\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    struct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int sz,\
+    \ LOG;\n    vector<int> depth;\n    vector<vector<Vertex>> parent;\n\n    void\
+    \ dfs(Vertex v, Vertex p, int d){\n        parent[0][v] = p;\n        depth[v]\
+    \ = d;\n        for(auto &e : G[v]){\n            if(e.to != p) dfs(e.to, v, d\
+    \ + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ &G) : G(G), sz(G.vsize()), LOG(ceil(log2(G.vsize())) + 1){\n        depth.resize(sz);\n\
+    \        parent.resize(LOG, vector<Vertex>(sz, 0));\n        dfs(0, -1, 0);\n\
+    \        for(int k = 0; k + 1 < LOG; ++k){\n            for(int v = 0; v < sz;\
+    \ ++v){\n                if(parent[k][v] < 0) parent[k + 1][v] = -1;\n       \
+    \         else parent[k + 1][v] = parent[k][parent[k][v]];\n            }\n  \
+    \      }\n    }\n\n    Vertex query(Vertex u, Vertex v){\n        if(depth[u]\
+    \ > depth[v]) swap(u, v);\n        for(int k = 0; k < LOG; ++k){\n           \
+    \ if((depth[v] - depth[u]) >> k & 1){\n                v = parent[k][v];\n   \
+    \         }\n        }\n        if(u == v) return u;\n        for(int k = LOG\
+    \ - 1; k >= 0; --k){\n            if(parent[k][u] != parent[k][v]){\n        \
+    \        u = parent[k][u];\n                v = parent[k][v];\n            }\n\
+    \        }\n        return parent[0][u];\n    }\n};"
   dependsOn:
-  - latest/Graph/WarshallFloyd.hpp
   - latest/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify_latest/AOJ-GRL-1-C.test.cpp
+  isVerificationFile: false
+  path: latest/Tree/LowestCommonAncestor.hpp
   requiredBy: []
   timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: verify_latest/AOJ-GRL-1-C.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify_latest/LIB-VertexAddPathSum.test.cpp
+documentation_of: latest/Tree/LowestCommonAncestor.hpp
 layout: document
 redirect_from:
-- /verify/verify_latest/AOJ-GRL-1-C.test.cpp
-- /verify/verify_latest/AOJ-GRL-1-C.test.cpp.html
-title: verify_latest/AOJ-GRL-1-C.test.cpp
+- /library/latest/Tree/LowestCommonAncestor.hpp
+- /library/latest/Tree/LowestCommonAncestor.hpp.html
+title: latest/Tree/LowestCommonAncestor.hpp
 ---
