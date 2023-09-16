@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -121,28 +121,29 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 12 \"library/Tree/TreeDiamiter.hpp\"\n\ntemplate<typename CostType>\nstruct\
-    \ TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n    vector<CostType> dist;\n\
-    \n    void bfs(Vertex s){\n        queue<Vertex> que;\n        dist.assign(G.size(),\
-    \ G.INF);\n        dist[s] = 0;\n        que.push(s);\n        while(!que.empty()){\n\
-    \            Vertex v = que.front();\n            que.pop();\n            for(EdgeNum\
-    \ &i : G.connect[v]){\n                Vertex u = G.edges[i].to;\n           \
-    \     CostType w = G.edges[i].cost;\n                if(dist[v] + w < dist[u]){\n\
-    \                    dist[u] = dist[v] + w;\n                    que.push(u);\n\
-    \                }\n            }\n        }\n    }\n\n    void build(){\n   \
-    \     bfs(0);\n        int v = 0;\n        CostType d = 0;\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v =\
-    \ i, d = dist[i];\n            }\n        }\n        EdgeVertex.first = v;\n \
-    \       bfs(v);\n        v = 0, d = 0;\n        for(int i = 0; i < G.size(); ++i){\n\
-    \            if(dist[i] > d){\n                v = i, d = dist[i];\n         \
-    \   }\n        }\n        EdgeVertex.second = v;\n        diamiter = d;\n    }\n\
-    \n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n    CostType diamiter;\n\n\
-    \    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n        build();\n\
-    \    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-5-A.test.cpp\"\n\nint main(){\n    int\
-    \ n;\n    cin >> n;\n    Tree<int> T(n, false, true);\n    T.input(n - 1, true,\
-    \ false);\n\n    TreeDiamiter<int> td(T);\n    cout << td.diamiter << endl;\n\
-    }\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 12 \"library/Tree/TreeDiamiter.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n   \
+    \ vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex> que;\n\
+    \        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
+    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
+    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
+    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
+    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
+    \                    que.push(u);\n                }\n            }\n        }\n\
+    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
+    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
+    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
+    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
+    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
+    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
+    \        build();\n    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-5-A.test.cpp\"\n\n\
+    int main(){\n    int n;\n    cin >> n;\n    Tree<int> T(n, false, true);\n   \
+    \ T.input(n - 1, true, false);\n\n    TreeDiamiter<int> td(T);\n    cout << td.diamiter\
+    \ << endl;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
     \n\n#include <bits/stdc++.h>\n\n#include \"../../library/Tree/TreeDiamiter.hpp\"\
     \n\nint main(){\n    int n;\n    cin >> n;\n    Tree<int> T(n, false, true);\n\
@@ -154,7 +155,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ/AOJ-GRL-5-A.test.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ/AOJ-GRL-5-A.test.cpp

@@ -1,29 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/DataStructure/SegmentTree.hpp
     title: latest/DataStructure/SegmentTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: latest/Tree/EulerTour.hpp
     title: latest/Tree/EulerTour.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: latest/Tree/LowestCommonAncestor.hpp
     title: latest/Tree/LowestCommonAncestor.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
     links:
     - https://judge.yosupo.jp/problem/vertex_add_path_sum
-  bundledCode: "#line 1 \"verify_latest/LIB-VertexAddPathSum.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify_latest/LIB-VertexAddPathSum.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\n#line 1 \"latest/DataStructure/SegmentTree.hpp\"\
     \n\n\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename Monoid>\n\
     struct SegmentTree{\n    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
@@ -168,7 +166,7 @@ data:
     \         }\n        }\n        if(u == v) return u;\n        for(int k = LOG\
     \ - 1; k >= 0; --k){\n            if(parent[k][u] != parent[k][v]){\n        \
     \        u = parent[k][u];\n                v = parent[k][v];\n            }\n\
-    \        }\n        return parent[0][u];\n    }\n};\n#line 6 \"verify_latest/LIB-VertexAddPathSum.test.cpp\"\
+    \        }\n        return parent[0][u];\n    }\n};\n#line 6 \"verify_latest/LIB-VertexAddPathSum.cpp\"\
     \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
     \   for(int i = 0; i < N; ++i) cin >> a[i];\n    Graph<long long> G(N);\n    for(int\
     \ i = 0; i < N - 1; ++i){\n        Vertex u, v; cin >> u >> v;\n        G.add(u,\
@@ -215,16 +213,16 @@ data:
   - latest/Tree/EulerTour.hpp
   - latest/Graph/GraphTemplate.hpp
   - latest/Tree/LowestCommonAncestor.hpp
-  isVerificationFile: true
-  path: verify_latest/LIB-VertexAddPathSum.test.cpp
+  isVerificationFile: false
+  path: verify_latest/LIB-VertexAddPathSum.cpp
   requiredBy: []
-  timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-16 09:47:20+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify_latest/LIB-VertexAddPathSum.test.cpp
+documentation_of: verify_latest/LIB-VertexAddPathSum.cpp
 layout: document
 redirect_from:
-- /verify/verify_latest/LIB-VertexAddPathSum.test.cpp
-- /verify/verify_latest/LIB-VertexAddPathSum.test.cpp.html
-title: verify_latest/LIB-VertexAddPathSum.test.cpp
+- /library/verify_latest/LIB-VertexAddPathSum.cpp
+- /library/verify_latest/LIB-VertexAddPathSum.cpp.html
+title: verify_latest/LIB-VertexAddPathSum.cpp
 ---

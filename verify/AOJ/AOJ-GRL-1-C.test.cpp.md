@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -121,27 +121,28 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 10 \"library/Graph/WarshallFloyd.hpp\"\n\nusing namespace std;\n\ntemplate<typename\
-    \ CostType>\nstruct WarshallFloyd{\n    bool negative;\n    vector<vector<CostType>>\
-    \ dist;\n\n    WarshallFloyd(Graph<CostType> &G){\n        int V = G.size();\n\
-    \        \n        dist.resize(V, vector<CostType>(V, G.INF));\n        for(int\
-    \ i = 0; i < V; ++i) dist[i][i] = 0;\n        for(auto &e : G.edges){\n      \
-    \      dist[e.from][e.to] = e.cost;\n        }\n\n        for(int k = 0; k < V;\
-    \ ++k){\n            for(int i = 0; i < V; ++i){\n                for(int j =\
-    \ 0; j < V; ++j){\n                    if(dist[i][k] == G.INF || dist[k][j] ==\
-    \ G.INF) continue;\n                    dist[i][j] = min(dist[i][j], dist[i][k]\
-    \ + dist[k][j]);\n                }\n            }\n        }\n\n        negative\
-    \ = false;\n        for(int i = 0; i < V; ++i) negative |= dist[i][i] < 0;\n \
-    \   }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-1-C.test.cpp\"\n\nusing namespace std;\n\
-    \nint main(){\n    int V, E;\n    cin >> V >> E;\n    Graph<long long> G(V, true);\n\
-    \    for(int i = 0; i < E; ++i){\n        int s, t, d;\n        cin >> s >> t\
-    \ >> d;\n        G.add(s, t, d);\n    }\n\n    WarshallFloyd<long long> wf(G);\n\
-    \    if(wf.negative){\n        cout << \"NEGATIVE CYCLE\\n\";\n    }\n    else{\n\
-    \        for(auto &i : wf.dist){\n            for(int j = 0; j < i.size(); ++j){\n\
-    \                if(i[j] == G.INF) cout << \"INF\";\n                else cout\
-    \ << i[j];\n                if(j != i.size() - 1) cout << \" \";\n           \
-    \ }\n            cout << endl;\n        }\n    }\n}\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 10 \"library/Graph/WarshallFloyd.hpp\"\n\n\
+    using namespace std;\n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n \
+    \   bool negative;\n    vector<vector<CostType>> dist;\n\n    WarshallFloyd(Graph<CostType>\
+    \ &G){\n        int V = G.size();\n        \n        dist.resize(V, vector<CostType>(V,\
+    \ G.INF));\n        for(int i = 0; i < V; ++i) dist[i][i] = 0;\n        for(auto\
+    \ &e : G.edges){\n            dist[e.from][e.to] = e.cost;\n        }\n\n    \
+    \    for(int k = 0; k < V; ++k){\n            for(int i = 0; i < V; ++i){\n  \
+    \              for(int j = 0; j < V; ++j){\n                    if(dist[i][k]\
+    \ == G.INF || dist[k][j] == G.INF) continue;\n                    dist[i][j] =\
+    \ min(dist[i][j], dist[i][k] + dist[k][j]);\n                }\n            }\n\
+    \        }\n\n        negative = false;\n        for(int i = 0; i < V; ++i) negative\
+    \ |= dist[i][i] < 0;\n    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-1-C.test.cpp\"\n\
+    \nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n   \
+    \ Graph<long long> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s,\
+    \ t, d;\n        cin >> s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    WarshallFloyd<long\
+    \ long> wf(G);\n    if(wf.negative){\n        cout << \"NEGATIVE CYCLE\\n\";\n\
+    \    }\n    else{\n        for(auto &i : wf.dist){\n            for(int j = 0;\
+    \ j < i.size(); ++j){\n                if(i[j] == G.INF) cout << \"INF\";\n  \
+    \              else cout << i[j];\n                if(j != i.size() - 1) cout\
+    \ << \" \";\n            }\n            cout << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
     \n\n#include <bits/stdc++.h>\n\n#include \"../../library/Graph/WarshallFloyd.hpp\"\
     \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
@@ -159,7 +160,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ/AOJ-GRL-1-C.test.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ/AOJ-GRL-1-C.test.cpp

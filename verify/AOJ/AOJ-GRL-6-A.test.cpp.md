@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -121,32 +121,34 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 10 \"library/Graph/FordFulkerson.hpp\"\n\nusing namespace std;\n\ntemplate<typename\
-    \ CostType>\nstruct FordFulkerson{\n    int E;\n    Graph<CostType> &G;\n    vector<EdgeNum>\
-    \ rev;\n\n    private:\n    vector<int> used;\n\n    CostType dfs(Vertex pos,\
-    \ Vertex goal, CostType F){\n        if(pos == goal) return F;\n        used[pos]\
-    \ = 1;\n        for(EdgeNum &i : G.connect[pos]){\n            if(G.edges[i].cost\
-    \ == 0) continue;\n            if(used[G.edges[i].to]) continue;\n           \
-    \ CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n       \
-    \     if(flow >= 1){\n                G.edges[i].cost -= flow;\n             \
-    \   G.edges[rev[i]].cost += flow;\n                return flow;\n            }\n\
-    \        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
-    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
-    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
-    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
-    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
-    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
-    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
-    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
-    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
-    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
-    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
-    \        }\n        return ret;\n    }\n};\n#line 6 \"verify/AOJ/AOJ-GRL-6-A.test.cpp\"\
-    \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
-    \   Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int u, v,\
-    \ c;\n        cin >> u >> v >> c;\n        G.add(u, v, c);\n    }\n\n    FordFulkerson<int>\
-    \ ff(G);\n    cout << ff.query(0, V - 1) << endl;\n}\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 10 \"library/Graph/FordFulkerson.hpp\"\n\n\
+    using namespace std;\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n \
+    \   int E;\n    Graph<CostType> &G;\n    vector<EdgeNum> rev;\n\n    private:\n\
+    \    vector<int> used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType F){\n\
+    \        if(pos == goal) return F;\n        used[pos] = 1;\n        for(EdgeNum\
+    \ &i : G.connect[pos]){\n            if(G.edges[i].cost == 0) continue;\n    \
+    \        if(used[G.edges[i].to]) continue;\n            CostType flow = dfs(G.edges[i].to,\
+    \ goal, min(F, G.edges[i].cost));\n            if(flow >= 1){\n              \
+    \  G.edges[i].cost -= flow;\n                G.edges[rev[i]].cost += flow;\n \
+    \               return flow;\n            }\n        }\n        return 0;\n  \
+    \  }\n\n    public:\n    FordFulkerson(Graph<CostType> &G) : G(G), used(G.size(),\
+    \ 0){\n        E = G.edges.size();\n        rev.resize(2 * E);\n        for(int\
+    \ i = 0; i < E; ++i){\n            rev[i] = i + E;\n            rev[i + E] = i;\n\
+    \            Edge<CostType> e = G.get_edge(i);\n            G.add(e.to, e.from,\
+    \ 0);\n        }\n    }\n\n    /**\n     * @brief  \u9802\u70B9s\u304B\u3089\u9802\
+    \u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\u3081\u308B\u3002\n     * @param\
+    \  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     * @param  t: \u7D42\u70B9\u306E\u9802\
+    \u70B9t\n     * @retval \u6700\u5927\u6D41\n     */\n    CostType query(Vertex\
+    \ s, Vertex t){\n        CostType ret = 0;\n        while(1){\n            used.assign(G.size(),\
+    \ 0);\n            CostType F = dfs(s, t, G.INF);\n            if(F == 0) break;\n\
+    \            ret += F;\n        }\n        return ret;\n    }\n};\n#line 6 \"\
+    verify/AOJ/AOJ-GRL-6-A.test.cpp\"\n\nusing namespace std;\n\nint main(){\n   \
+    \ int V, E;\n    cin >> V >> E;\n    Graph<int> G(V, true);\n    for(int i = 0;\
+    \ i < E; ++i){\n        int u, v, c;\n        cin >> u >> v >> c;\n        G.add(u,\
+    \ v, c);\n    }\n\n    FordFulkerson<int> ff(G);\n    cout << ff.query(0, V -\
+    \ 1) << endl;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
     \n\n#include <bits/stdc++.h>\n\n#include \"../../library/Graph/FordFulkerson.hpp\"\
     \n\nusing namespace std;\n\nint main(){\n    int V, E;\n    cin >> V >> E;\n \
@@ -159,7 +161,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ/AOJ-GRL-6-A.test.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ/AOJ-GRL-6-A.test.cpp

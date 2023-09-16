@@ -5,7 +5,7 @@ data:
     path: library/Graph/BellmanFord.hpp
     title: "Bellman Ford - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\uFF08\u30D9\
       \u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -123,16 +123,17 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 11 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename CostType>\nvector<CostType>\
-    \ BellmanFord(Graph<CostType> &G, int s){\n    vector<CostType> ret(G.size(),\
-    \ G.INF);\n    ret[s] = 0;\n    int updatecount = 0;\n    while(1){\n        if(updatecount\
-    \ == G.size()){\n            ret[s] = -1;\n            return ret;\n        }\n\
-    \        bool update = false;\n        for(auto &e : G.edges){\n            Vertex\
-    \ from = e.from, to = e.to;\n            CostType cost = e.cost;\n           \
-    \ if(ret[from] == G.INF) continue;\n            if(ret[to] > ret[from] + cost){\n\
-    \                ret[to] = ret[from] + cost;\n                update = true;\n\
-    \            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 11 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
+    \ CostType>\nvector<CostType> BellmanFord(Graph<CostType> &G, int s){\n    vector<CostType>\
+    \ ret(G.size(), G.INF);\n    ret[s] = 0;\n    int updatecount = 0;\n    while(1){\n\
+    \        if(updatecount == G.size()){\n            ret[s] = -1;\n            return\
+    \ ret;\n        }\n        bool update = false;\n        for(auto &e : G.edges){\n\
+    \            Vertex from = e.from, to = e.to;\n            CostType cost = e.cost;\n\
+    \            if(ret[from] == G.INF) continue;\n            if(ret[to] > ret[from]\
+    \ + cost){\n                ret[to] = ret[from] + cost;\n                update\
+    \ = true;\n            }\n        }\n        if(!update) break;\n        ++updatecount;\n\
     \    }\n    return ret;\n}\n#line 6 \"verify/AOJ/AOJ-GRL-1-B.test.cpp\"\n\nusing\
     \ namespace std;\n\nint main(){\n    int V, E, r;\n    cin >> V >> E >> r;\n \
     \   Graph<int> G(V, true);\n    for(int i = 0; i < E; ++i){\n        int s, t,\
@@ -158,7 +159,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ/AOJ-GRL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ/AOJ-GRL-1-B.test.cpp

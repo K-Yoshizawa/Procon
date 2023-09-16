@@ -67,18 +67,18 @@ data:
     \ a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout << ' ', b));\n\
     \    cout << '\\n';\n}\n\n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << '\\\
     n';\n}\n\ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const Ts&...\
-    \ b){\n    cerr << a;\n    (cerr << ... << (cerr << ' ', b));\n    cerr << '\\\
-    n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate <typename T1, typename\
-    \ T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){\n\
-    \    x.first += y;\n    x.second += y;\n    return x;\n}\n\ntemplate <typename\
-    \ T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1, T2> &x, const\
-    \ T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n}\n\nll modpow(ll\
-    \ a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i < 63; ++i)\n  \
-    \  {\n        if ((b & (1LL << i)) != 0)\n        {\n            p *= q;\n   \
-    \         p %= m;\n        }\n        q *= q;\n        q %= m;\n    }\n    return\
-    \ p;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const pair<T,\
-    \ T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first - (long\
-    \ long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
+    \ b){\n    cerr << \"Debug : \" << a;\n    (cerr << ... << (cerr << \" \", b));\n\
+    \    cerr << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate <typename\
+    \ T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2> &x, const\
+    \ T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n}\n\ntemplate\
+    \ <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1, T2>\
+    \ &x, const T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n}\n\
+    \nll modpow(ll a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i <\
+    \ 63; ++i)\n    {\n        if ((b & (1LL << i)) != 0)\n        {\n           \
+    \ p *= q;\n            p %= m;\n        }\n        q *= q;\n        q %= m;\n\
+    \    }\n    return p;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
+    \ - (long long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
     \    return dx * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
     \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
     \ <typename T>\ninline double EuclideanDist(const pair<T, T> &p1, const pair<T,\
@@ -90,9 +90,10 @@ data:
     \ + y - 1) / y;\n}\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a\
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
-    string bitseq(long long x){\n    string ret = \"\";\n    while(x){\n        ret.push_back('0'\
-    \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
-    \    return ret;\n}\n"
+    string bitseq(long long x, int mini_len = 1){\n    string ret = \"\";\n    while(x){\n\
+    \        ret.push_back('0' + (x & 1));\n        x >>= 1;\n    }\n    while(ret.size()<mini_len)\
+    \ ret.push_back('0');\n    reverse(ret.begin(), ret.end());\n    return ret;\n\
+    }\n"
   code: "#pragma once\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
     \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.4\n * @date 2023-08-24\n\
     \ */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n#define\
@@ -145,18 +146,18 @@ data:
     \ a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout << ' ', b));\n\
     \    cout << '\\n';\n}\n\n#ifndef ONLINE_JUDGE\nvoid dprint(){\n    cerr << '\\\
     n';\n}\n\ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const Ts&...\
-    \ b){\n    cerr << a;\n    (cerr << ... << (cerr << ' ', b));\n    cerr << '\\\
-    n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate <typename T1, typename\
-    \ T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){\n\
-    \    x.first += y;\n    x.second += y;\n    return x;\n}\n\ntemplate <typename\
-    \ T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1, T2> &x, const\
-    \ T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n}\n\nll modpow(ll\
-    \ a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i < 63; ++i)\n  \
-    \  {\n        if ((b & (1LL << i)) != 0)\n        {\n            p *= q;\n   \
-    \         p %= m;\n        }\n        q *= q;\n        q %= m;\n    }\n    return\
-    \ p;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const pair<T,\
-    \ T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first - (long\
-    \ long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
+    \ b){\n    cerr << \"Debug : \" << a;\n    (cerr << ... << (cerr << \" \", b));\n\
+    \    cerr << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate <typename\
+    \ T1, typename T2, typename T3>\npair<T1, T2> &operator+=(pair<T1, T2> &x, const\
+    \ T3 &y){\n    x.first += y;\n    x.second += y;\n    return x;\n}\n\ntemplate\
+    \ <typename T1, typename T2, typename T3>\npair<T1, T2> &operator-=(pair<T1, T2>\
+    \ &x, const T3 &y){\n    x.first -= y;\n    x.second -= y;\n    return x;\n}\n\
+    \nll modpow(ll a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i <\
+    \ 63; ++i)\n    {\n        if ((b & (1LL << i)) != 0)\n        {\n           \
+    \ p *= q;\n            p %= m;\n        }\n        q *= q;\n        q %= m;\n\
+    \    }\n    return p;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
+    \ - (long long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
     \    return dx * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
     \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
     \ <typename T>\ninline double EuclideanDist(const pair<T, T> &p1, const pair<T,\
@@ -168,18 +169,19 @@ data:
     \ + y - 1) / y;\n}\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a\
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
-    string bitseq(long long x){\n    string ret = \"\";\n    while(x){\n        ret.push_back('0'\
-    \ + (x & 1));\n        x >>= 1;\n    }\n    reverse(ret.begin(), ret.end());\n\
-    \    return ret;\n}"
+    string bitseq(long long x, int mini_len = 1){\n    string ret = \"\";\n    while(x){\n\
+    \        ret.push_back('0' + (x & 1));\n        x >>= 1;\n    }\n    while(ret.size()<mini_len)\
+    \ ret.push_back('0');\n    reverse(ret.begin(), ret.end());\n    return ret;\n\
+    }"
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ/AOJ-ITP2-6-D.test.cpp
   - verify/AOJ/AOJ-ITP2-6-C.test.cpp
+  - verify/AOJ/AOJ-ITP2-6-D.test.cpp
 documentation_of: library/Template.hpp
 layout: document
 redirect_from:

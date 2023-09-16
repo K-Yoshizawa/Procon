@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: verify_latest/LIB-VertexAddPathSum.cpp
+    title: verify_latest/LIB-VertexAddPathSum.cpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/LIB-PointAddRangeSum.test.cpp
     title: verify_latest/LIB-PointAddRangeSum.test.cpp
-  - icon: ':x:'
-    path: verify_latest/LIB-VertexAddPathSum.test.cpp
-    title: verify_latest/LIB-VertexAddPathSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"latest/DataStructure/SegmentTree.hpp\"\n\n\n\n#include <bits/stdc++.h>\n\
@@ -82,12 +82,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: latest/DataStructure/SegmentTree.hpp
-  requiredBy: []
+  requiredBy:
+  - verify_latest/LIB-VertexAddPathSum.cpp
   timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/LIB-PointAddRangeSum.test.cpp
-  - verify_latest/LIB-VertexAddPathSum.test.cpp
 documentation_of: latest/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

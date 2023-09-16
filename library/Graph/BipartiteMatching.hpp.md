@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -122,35 +122,36 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 10 \"library/Graph/FordFulkerson.hpp\"\n\nusing namespace std;\n\ntemplate<typename\
-    \ CostType>\nstruct FordFulkerson{\n    int E;\n    Graph<CostType> &G;\n    vector<EdgeNum>\
-    \ rev;\n\n    private:\n    vector<int> used;\n\n    CostType dfs(Vertex pos,\
-    \ Vertex goal, CostType F){\n        if(pos == goal) return F;\n        used[pos]\
-    \ = 1;\n        for(EdgeNum &i : G.connect[pos]){\n            if(G.edges[i].cost\
-    \ == 0) continue;\n            if(used[G.edges[i].to]) continue;\n           \
-    \ CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));\n       \
-    \     if(flow >= 1){\n                G.edges[i].cost -= flow;\n             \
-    \   G.edges[rev[i]].cost += flow;\n                return flow;\n            }\n\
-    \        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
-    \ &G) : G(G), used(G.size(), 0){\n        E = G.edges.size();\n        rev.resize(2\
-    \ * E);\n        for(int i = 0; i < E; ++i){\n            rev[i] = i + E;\n  \
-    \          rev[i + E] = i;\n            Edge<CostType> e = G.get_edge(i);\n  \
-    \          G.add(e.to, e.from, 0);\n        }\n    }\n\n    /**\n     * @brief\
-    \  \u9802\u70B9s\u304B\u3089\u9802\u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\
-    \u3081\u308B\u3002\n     * @param  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     *\
-    \ @param  t: \u7D42\u70B9\u306E\u9802\u70B9t\n     * @retval \u6700\u5927\u6D41\
-    \n     */\n    CostType query(Vertex s, Vertex t){\n        CostType ret = 0;\n\
-    \        while(1){\n            used.assign(G.size(), 0);\n            CostType\
-    \ F = dfs(s, t, G.INF);\n            if(F == 0) break;\n            ret += F;\n\
-    \        }\n        return ret;\n    }\n};\n#line 10 \"library/Graph/BipartiteMatching.hpp\"\
-    \n\nusing namespace std;\n\nstruct BipartiteMatching{\n    private:\n    Graph<int>\
-    \ G;\n    int X, Y, s, t;\n\n    public:\n    BipartiteMatching(int X, int Y)\
-    \ : X(X), Y(Y), s(X + Y), t(X + Y + 1){\n        G = Graph<int>(X + Y + 2, true);\n\
-    \        for(Vertex x = 0; x < X; ++x) G.add(s, x);\n        for(Vertex y = X;\
-    \ y < X + Y; ++y) G.add(y, t);\n    }\n\n    void add(int x, int y){\n       \
-    \ G.add(x, X + y);\n    }\n\n    int solve(){\n        FordFulkerson<int> ff(G);\n\
-    \        return ff.query(s, t);\n    }\n};\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 10 \"library/Graph/FordFulkerson.hpp\"\n\n\
+    using namespace std;\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n \
+    \   int E;\n    Graph<CostType> &G;\n    vector<EdgeNum> rev;\n\n    private:\n\
+    \    vector<int> used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType F){\n\
+    \        if(pos == goal) return F;\n        used[pos] = 1;\n        for(EdgeNum\
+    \ &i : G.connect[pos]){\n            if(G.edges[i].cost == 0) continue;\n    \
+    \        if(used[G.edges[i].to]) continue;\n            CostType flow = dfs(G.edges[i].to,\
+    \ goal, min(F, G.edges[i].cost));\n            if(flow >= 1){\n              \
+    \  G.edges[i].cost -= flow;\n                G.edges[rev[i]].cost += flow;\n \
+    \               return flow;\n            }\n        }\n        return 0;\n  \
+    \  }\n\n    public:\n    FordFulkerson(Graph<CostType> &G) : G(G), used(G.size(),\
+    \ 0){\n        E = G.edges.size();\n        rev.resize(2 * E);\n        for(int\
+    \ i = 0; i < E; ++i){\n            rev[i] = i + E;\n            rev[i + E] = i;\n\
+    \            Edge<CostType> e = G.get_edge(i);\n            G.add(e.to, e.from,\
+    \ 0);\n        }\n    }\n\n    /**\n     * @brief  \u9802\u70B9s\u304B\u3089\u9802\
+    \u70B9t\u3078\u306E\u6700\u5927\u6D41\u3092\u6C42\u3081\u308B\u3002\n     * @param\
+    \  s: \u59CB\u70B9\u306E\u9802\u70B9s\n     * @param  t: \u7D42\u70B9\u306E\u9802\
+    \u70B9t\n     * @retval \u6700\u5927\u6D41\n     */\n    CostType query(Vertex\
+    \ s, Vertex t){\n        CostType ret = 0;\n        while(1){\n            used.assign(G.size(),\
+    \ 0);\n            CostType F = dfs(s, t, G.INF);\n            if(F == 0) break;\n\
+    \            ret += F;\n        }\n        return ret;\n    }\n};\n#line 10 \"\
+    library/Graph/BipartiteMatching.hpp\"\n\nusing namespace std;\n\nstruct BipartiteMatching{\n\
+    \    private:\n    Graph<int> G;\n    int X, Y, s, t;\n\n    public:\n    BipartiteMatching(int\
+    \ X, int Y) : X(X), Y(Y), s(X + Y), t(X + Y + 1){\n        G = Graph<int>(X +\
+    \ Y + 2, true);\n        for(Vertex x = 0; x < X; ++x) G.add(s, x);\n        for(Vertex\
+    \ y = X; y < X + Y; ++y) G.add(y, t);\n    }\n\n    void add(int x, int y){\n\
+    \        G.add(x, X + y);\n    }\n\n    int solve(){\n        FordFulkerson<int>\
+    \ ff(G);\n        return ff.query(s, t);\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @brief Bipartite Matching - \u4E8C\u90E8\u30DE\u30C3\
     \u30C1\u30F3\u30B0\n */\n\n#include <bits/stdc++.h>\n\n#include \"FordFulkerson.hpp\"\
     \n\nusing namespace std;\n\nstruct BipartiteMatching{\n    private:\n    Graph<int>\
@@ -166,7 +167,7 @@ data:
   isVerificationFile: false
   path: library/Graph/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ/AOJ-GRL-7-A.test.cpp

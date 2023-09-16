@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -114,41 +114,42 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 8 \"library/Tree/HeavyLightDecomposition.hpp\"\n\ntemplate<typename CostType>\n\
-    struct HeavyLightDecompsition{\n    using Column = int;\n    \n    private:\n\
-    \    int sz;\n    Vertex root;\n    Graph<CostType> &G;\n    vector<int> subtree_size;\
-    \ // \u9802\u70B9i\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u9802\
-    \u70B9\u6570\n    vector<pair<Vertex, EdgeNum>> relation; // \u6728\u306E\u89AA\
-    \u5B50\u95A2\u4FC2\n    vector<vector<Vertex>> column_vertex; // \u5404\u5217\u306B\
-    \u542B\u307E\u308C\u308B\u9802\u70B9\u30EA\u30B9\u30C8\n    vector<pair<Column,\
-    \ int>> column_index; // \u5404\u9802\u70B9\u306E\u9802\u70B9\u30EA\u30B9\u30C8\
-    \u5185\u306E\u4F4D\u7F6E\n    vector<int> offset; // 1\u5217\u306B\u4E26\u3079\
-    \u305F\u3068\u304D\u3001\u5404\u5217\u306E\u5148\u982D\u306E\u9802\u70B9\u306E\
-    \u4F4D\u7F6E (0-index)\n\n    /**\n     * @brief \u9802\u70B9i\u3092\u6839\u3068\
-    \u3059\u308B\u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\u3092\u6C42\u3081\u308B\
-    DFS\n     * @param v \u6839\u3068\u306A\u308B\u9802\u70B9\u756A\u53F7\n     *\
-    \ @param pre \u89AA\u306E\u9802\u70B9\n     * @return int \u9802\u70B9\u306E\u90E8\
-    \u5206\u6728\u306E\u9802\u70B9\u6570\n     */\n    int dfs1(Vertex v, Vertex pre){\n\
-    \        int res = 0;\n        for(auto &e : G.get_edges(v)){\n            if(e.to\
-    \ == pre) continue;\n            res += dfs1(e.to, v);\n        }\n        return\
-    \ subtree_size[v] = res + 1;\n    }\n\n    void dfs2(Vertex v, Vertex pre, Column\
-    \ col){\n        if(column_vertex.size() == col) column_vertex.emplace_back(vector<Vertex>{});\n\
-    \        column_index[v] = pair<Column, int>(col, column_vertex[col].size());\n\
-    \        column_vertex[col].push_back(v);\n        Vertex next = -1;\n       \
-    \ int max_subtree = 0;\n        for(auto &e : G.get_edges(v)){\n            if(e.to\
-    \ == pre) continue;\n            if(max_subtree < subtree_size[e.to]){\n     \
-    \           next = e.to;\n                max_subtree = subtree_size[e.to];\n\
-    \            }\n        }\n        if(next != -1) dfs2(next, v, col);\n      \
-    \  for(auto &e : G.get_edges(v)){\n            if(e.to == pre || e.to == next)\
-    \ continue;\n            dfs2(e.to, v, column_vertex.size());\n        }\n   \
-    \     return;\n    }\n\n    /**\n     * @brief 1\u5217\u306B\u4E26\u3079\u305F\
-    \u3068\u304D\u306E\u9802\u70B9v\u306E\u4F4D\u7F6E\n     * @param v \u4F4D\u7F6E\
-    \u3092\u77E5\u308A\u305F\u3044\u9802\u70B9\u756A\u53F7\n     * @return int \u5217\
-    \u306B\u304A\u3051\u308B\u4F4D\u7F6E(0-index)\n     */\n    inline int locate(Vertex\
-    \ v){\n        auto [i, j] = column_index[v];\n        return offset[i] + j;\n\
-    \    }\n    \n    public:\n    HeavyLightDecompsition(Graph<CostType> &G, Vertex\
-    \ root = 0) : G(G), sz(G.size()), root(root){\n        subtree_size.resize(sz,\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 8 \"library/Tree/HeavyLightDecomposition.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct HeavyLightDecompsition{\n    using Column\
+    \ = int;\n    \n    private:\n    int sz;\n    Vertex root;\n    Graph<CostType>\
+    \ &G;\n    vector<int> subtree_size; // \u9802\u70B9i\u3092\u6839\u3068\u3059\u308B\
+    \u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n    vector<pair<Vertex, EdgeNum>>\
+    \ relation; // \u6728\u306E\u89AA\u5B50\u95A2\u4FC2\n    vector<vector<Vertex>>\
+    \ column_vertex; // \u5404\u5217\u306B\u542B\u307E\u308C\u308B\u9802\u70B9\u30EA\
+    \u30B9\u30C8\n    vector<pair<Column, int>> column_index; // \u5404\u9802\u70B9\
+    \u306E\u9802\u70B9\u30EA\u30B9\u30C8\u5185\u306E\u4F4D\u7F6E\n    vector<int>\
+    \ offset; // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u3001\u5404\u5217\u306E\
+    \u5148\u982D\u306E\u9802\u70B9\u306E\u4F4D\u7F6E (0-index)\n\n    /**\n     *\
+    \ @brief \u9802\u70B9i\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u9802\
+    \u70B9\u6570\u3092\u6C42\u3081\u308BDFS\n     * @param v \u6839\u3068\u306A\u308B\
+    \u9802\u70B9\u756A\u53F7\n     * @param pre \u89AA\u306E\u9802\u70B9\n     * @return\
+    \ int \u9802\u70B9\u306E\u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n     */\n\
+    \    int dfs1(Vertex v, Vertex pre){\n        int res = 0;\n        for(auto &e\
+    \ : G.get_edges(v)){\n            if(e.to == pre) continue;\n            res +=\
+    \ dfs1(e.to, v);\n        }\n        return subtree_size[v] = res + 1;\n    }\n\
+    \n    void dfs2(Vertex v, Vertex pre, Column col){\n        if(column_vertex.size()\
+    \ == col) column_vertex.emplace_back(vector<Vertex>{});\n        column_index[v]\
+    \ = pair<Column, int>(col, column_vertex[col].size());\n        column_vertex[col].push_back(v);\n\
+    \        Vertex next = -1;\n        int max_subtree = 0;\n        for(auto &e\
+    \ : G.get_edges(v)){\n            if(e.to == pre) continue;\n            if(max_subtree\
+    \ < subtree_size[e.to]){\n                next = e.to;\n                max_subtree\
+    \ = subtree_size[e.to];\n            }\n        }\n        if(next != -1) dfs2(next,\
+    \ v, col);\n        for(auto &e : G.get_edges(v)){\n            if(e.to == pre\
+    \ || e.to == next) continue;\n            dfs2(e.to, v, column_vertex.size());\n\
+    \        }\n        return;\n    }\n\n    /**\n     * @brief 1\u5217\u306B\u4E26\
+    \u3079\u305F\u3068\u304D\u306E\u9802\u70B9v\u306E\u4F4D\u7F6E\n     * @param v\
+    \ \u4F4D\u7F6E\u3092\u77E5\u308A\u305F\u3044\u9802\u70B9\u756A\u53F7\n     * @return\
+    \ int \u5217\u306B\u304A\u3051\u308B\u4F4D\u7F6E(0-index)\n     */\n    inline\
+    \ int locate(Vertex v){\n        auto [i, j] = column_index[v];\n        return\
+    \ offset[i] + j;\n    }\n    \n    public:\n    HeavyLightDecompsition(Graph<CostType>\
+    \ &G, Vertex root = 0) : G(G), sz(G.size()), root(root){\n        subtree_size.resize(sz,\
     \ -1);\n        dfs1(root, -1);\n        column_index.resize(sz, pair<Column,\
     \ int>(-1, -1));\n        dfs2(root, -1, 0);\n        offset.resize(column_vertex.size(),\
     \ 0);\n        for(int i = 1; i < column_vertex.size(); ++i){\n            offset[i]\
@@ -247,7 +248,7 @@ data:
   isVerificationFile: false
   path: library/Tree/HeavyLightDecomposition.hpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Tree/HeavyLightDecomposition.hpp

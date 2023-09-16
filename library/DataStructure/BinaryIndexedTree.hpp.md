@@ -5,9 +5,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTreeDouble.hpp
     title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+  - icon: ':warning:'
+    path: verify/AOJ/AOJ-GRL-5-D.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-DSL-2-B.test.cpp
@@ -15,15 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-DSL-2-G.test.cpp
     title: verify/AOJ/AOJ-DSL-2-G.test.cpp
-  - icon: ':x:'
-    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
     title: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Binary Indexed Tree
     links: []
@@ -86,13 +86,13 @@ data:
   requiredBy:
   - library/Tree/EulerTour.hpp
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
+  - verify/AOJ/AOJ-GRL-5-D.cpp
   timestamp: '2023-06-13 11:29:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC/LC-PointAddRangeSum-BIT.test.cpp
   - verify/AOJ/AOJ-DSL-2-G.test.cpp
   - verify/AOJ/AOJ-DSL-2-B.test.cpp
-  - verify/AOJ/AOJ-GRL-5-D.test.cpp
+  - verify/LC/LC-PointAddRangeSum-BIT.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

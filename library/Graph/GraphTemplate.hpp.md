@@ -29,18 +29,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/WarshallFloyd.hpp
     title: "Warshall-Floyd - \u5168\u70B9\u9593\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':warning:'
     path: library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiamiter.hpp
     title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
+  - icon: ':warning:'
+    path: verify/AOJ/AOJ-GRL-5-C.cpp
+    title: verify/AOJ/AOJ-GRL-5-C.cpp
+  - icon: ':warning:'
+    path: verify/AOJ/AOJ-GRL-5-D.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-GRL-1-A.test.cpp
@@ -64,20 +70,14 @@ data:
     path: verify/AOJ/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ/AOJ-GRL-5-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-GRL-5-C.test.cpp
-    title: verify/AOJ/AOJ-GRL-5-C.test.cpp
-  - icon: ':x:'
-    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-GRL-6-A.test.cpp
     title: verify/AOJ/AOJ-GRL-6-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ/AOJ-GRL-7-A.test.cpp
     title: verify/AOJ/AOJ-GRL-7-A.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -182,7 +182,9 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n\
     \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
     \n * @version 1.2\n * @date 2023-08-24\n */\n\n#include <bits/stdc++.h>\nusing\
@@ -283,37 +285,39 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;"
   dependsOn: []
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
-  - library/Tree/LowestCommonAncestor.hpp
-  - library/Tree/TreeDiamiter.hpp
-  - library/Tree/HeavyLightDecomposition.hpp
-  - library/Tree/EulerTour.hpp
+  - library/Graph/Dijkstra.hpp
+  - library/Graph/FordFulkerson.hpp
   - library/Graph/BipartiteMatching.hpp
-  - library/Graph/Kruskal.hpp
   - library/Graph/BellmanFord.hpp
-  - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/CycleDetection.hpp
   - library/Graph/WarshallFloyd.hpp
-  - library/Graph/FordFulkerson.hpp
-  - library/Graph/Dijkstra.hpp
-  timestamp: '2023-08-30 10:46:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  - library/Graph/Kruskal.hpp
+  - library/Graph/StronglyConnectedComponents.hpp
+  - library/Tree/HeavyLightDecomposition.hpp
+  - library/Tree/EulerTour.hpp
+  - library/Tree/LowestCommonAncestor.hpp
+  - library/Tree/TreeDiamiter.hpp
+  - verify/AOJ/AOJ-GRL-5-C.cpp
+  - verify/AOJ/AOJ-GRL-5-D.cpp
+  timestamp: '2023-09-16 09:30:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ/AOJ-GRL-6-A.test.cpp
   - verify/AOJ/AOJ-GRL-3-C.test.cpp
-  - verify/AOJ/AOJ-GRL-2-A.test.cpp
-  - verify/AOJ/AOJ-GRL-5-C.test.cpp
-  - verify/AOJ/AOJ-GRL-1-B.test.cpp
   - verify/AOJ/AOJ-GRL-7-A.test.cpp
-  - verify/AOJ/AOJ-GRL-4-A.test.cpp
-  - verify/AOJ/AOJ-GRL-5-D.test.cpp
-  - verify/AOJ/AOJ-GRL-5-A.test.cpp
-  - verify/AOJ/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ/AOJ-GRL-6-A.test.cpp
   - verify/AOJ/AOJ-GRL-1-C.test.cpp
+  - verify/AOJ/AOJ-GRL-4-A.test.cpp
+  - verify/AOJ/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ/AOJ-GRL-5-A.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:

@@ -3,27 +3,27 @@ data:
   libraryCategories:
   - name: latest/DataStructure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/DataStructure/SegmentTree.hpp
       title: latest/DataStructure/SegmentTree.hpp
   - name: latest/Graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/BellmanFord.hpp
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/PrimalDual.hpp
       title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/WarshallFloyd.hpp
       title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: latest
@@ -33,15 +33,15 @@ data:
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - name: latest/Tree
     pages:
-    - icon: ':x:'
+    - icon: ':warning:'
       path: latest/Tree/EulerTour.hpp
       title: latest/Tree/EulerTour.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: latest/Tree/LowestCommonAncestor.hpp
       title: latest/Tree/LowestCommonAncestor.hpp
   - name: library/DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
     - icon: ':heavy_check_mark:'
@@ -90,7 +90,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u30D5\u30ED\u30FC"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -123,18 +123,34 @@ data:
       title: modint
   - name: library/Tree
     pages:
-    - icon: ':x:'
+    - icon: ':warning:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':warning:'
       path: library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
     - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiamiter.hpp
       title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
+  - name: verify/AOJ
+    pages:
+    - icon: ':warning:'
+      path: verify/AOJ/AOJ-DSL-4-A.cpp
+      title: verify/AOJ/AOJ-DSL-4-A.cpp
+    - icon: ':warning:'
+      path: verify/AOJ/AOJ-GRL-5-C.cpp
+      title: verify/AOJ/AOJ-GRL-5-C.cpp
+    - icon: ':warning:'
+      path: verify/AOJ/AOJ-GRL-5-D.cpp
+      title: verify/AOJ/AOJ-GRL-5-D.cpp
+  - name: verify_latest
+    pages:
+    - icon: ':warning:'
+      path: verify_latest/LIB-VertexAddPathSum.cpp
+      title: verify_latest/LIB-VertexAddPathSum.cpp
   verificationCategories:
   - name: verify/AOJ
     pages:
@@ -159,9 +175,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-DSL-2-H.test.cpp
       title: verify/AOJ/AOJ-DSL-2-H.test.cpp
-    - icon: ':x:'
-      path: verify/AOJ/AOJ-DSL-4-A.test.cpp
-      title: verify/AOJ/AOJ-DSL-4-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-DSL-5-B.test.cpp
       title: verify/AOJ/AOJ-DSL-5-B.test.cpp
@@ -186,12 +199,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-GRL-5-A.test.cpp
       title: verify/AOJ/AOJ-GRL-5-A.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ/AOJ-GRL-5-C.test.cpp
-      title: verify/AOJ/AOJ-GRL-5-C.test.cpp
-    - icon: ':x:'
-      path: verify/AOJ/AOJ-GRL-5-D.test.cpp
-      title: verify/AOJ/AOJ-GRL-5-D.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ/AOJ-GRL-6-A.test.cpp
       title: verify/AOJ/AOJ-GRL-6-A.test.cpp
@@ -225,33 +232,30 @@ data:
       title: verify/yukicoder/yuki-0649.test.cpp
   - name: verify_latest
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-ALDS1-11-A.test.cpp
       title: verify_latest/AOJ-ALDS1-11-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-A.test.cpp
       title: verify_latest/AOJ-GRL-1-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
       title: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-B.test.cpp
       title: verify_latest/AOJ-GRL-1-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-C.test.cpp
       title: verify_latest/AOJ-GRL-1-C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-A.test.cpp
       title: verify_latest/AOJ-GRL-6-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-B.test.cpp
       title: verify_latest/AOJ-GRL-6-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/LIB-PointAddRangeSum.test.cpp
       title: verify_latest/LIB-PointAddRangeSum.test.cpp
-    - icon: ':x:'
-      path: verify_latest/LIB-VertexAddPathSum.test.cpp
-      title: verify_latest/LIB-VertexAddPathSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

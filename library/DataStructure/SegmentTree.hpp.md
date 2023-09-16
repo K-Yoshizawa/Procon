@@ -136,8 +136,8 @@ data:
   timestamp: '2023-07-11 12:00:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC/LC-PointAddRangeSum-ST.test.cpp
   - verify/AOJ/AOJ-DSL-2-A.test.cpp
+  - verify/LC/LC-PointAddRangeSum-ST.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

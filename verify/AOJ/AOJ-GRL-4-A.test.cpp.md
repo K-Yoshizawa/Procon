@@ -5,7 +5,7 @@ data:
     path: library/Graph/CycleDetection.hpp
     title: "Cycle Detection (Directed) - \u9589\u8DEF\u691C\u51FA\uFF08\u6709\u5411\
       \u30B0\u30E9\u30D5\uFF09"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -123,26 +123,27 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 11 \"library/Graph/CycleDetection.hpp\"\n\n/**\n * @brief \u6709\u5411\u30B0\
-    \u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\u884C\u3046\u3002\n */\ntemplate<typename\
-    \ CostType>\nstruct CycleDetection{\n    vector<vector<Vertex>> cycle;\n    \n\
-    \    private:\n    Graph<CostType> &G;\n    vector<Vertex> visited, history;\n\
-    \    vector<Vertex> belong;\n    vector<Vertex> tmp;\n\n    void dfs(int v){\n\
-    \        visited[v] = 1;\n        history.push_back(v);\n        for(auto &e :\
-    \ G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n           \
-    \ if(visited[e.to] == 1){\n                for(int i = history.size() - 1; ; --i){\n\
-    \                    tmp.push_back(history[i]);\n                    belong[history[i]]\
-    \ = cycle.size();\n                    if(history[i] == e.to) break;\n       \
-    \         }\n                cycle.push_back(tmp);\n                tmp.clear();\n\
-    \            }\n            else{\n                dfs(e.to);\n            }\n\
-    \        }\n        history.pop_back();\n        visited[v] = 2;\n    }\n\n  \
-    \  public:\n    CycleDetection(Graph<CostType> &G) : G(G), visited(G.size(), 0),\
-    \ belong(G.size(), -1){\n        assert(G.directed());\n        for(int i = 0;\
-    \ i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n        }\n    }\n\
-    \n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\u3092\u6301\u3064\
-    \u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool exist(){\n     \
-    \   return cycle.size() > 0;\n    }\n};\n#line 7 \"verify/AOJ/AOJ-GRL-4-A.test.cpp\"\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 11 \"library/Graph/CycleDetection.hpp\"\n\n\
+    /**\n * @brief \u6709\u5411\u30B0\u30E9\u30D5\u306E\u9589\u8DEF\u691C\u51FA\u3092\
+    \u884C\u3046\u3002\n */\ntemplate<typename CostType>\nstruct CycleDetection{\n\
+    \    vector<vector<Vertex>> cycle;\n    \n    private:\n    Graph<CostType> &G;\n\
+    \    vector<Vertex> visited, history;\n    vector<Vertex> belong;\n    vector<Vertex>\
+    \ tmp;\n\n    void dfs(int v){\n        visited[v] = 1;\n        history.push_back(v);\n\
+    \        for(auto &e : G.get_edges(v)){\n            if(visited[e.to] == 2) continue;\n\
+    \            if(visited[e.to] == 1){\n                for(int i = history.size()\
+    \ - 1; ; --i){\n                    tmp.push_back(history[i]);\n             \
+    \       belong[history[i]] = cycle.size();\n                    if(history[i]\
+    \ == e.to) break;\n                }\n                cycle.push_back(tmp);\n\
+    \                tmp.clear();\n            }\n            else{\n            \
+    \    dfs(e.to);\n            }\n        }\n        history.pop_back();\n     \
+    \   visited[v] = 2;\n    }\n\n    public:\n    CycleDetection(Graph<CostType>\
+    \ &G) : G(G), visited(G.size(), 0), belong(G.size(), -1){\n        assert(G.directed());\n\
+    \        for(int i = 0; i < G.size(); ++i){\n            if(!visited[i]) dfs(i);\n\
+    \        }\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5G\u304C\u9589\u8DEF\
+    \u3092\u6301\u3064\u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool\
+    \ exist(){\n        return cycle.size() > 0;\n    }\n};\n#line 7 \"verify/AOJ/AOJ-GRL-4-A.test.cpp\"\
     \n\nint main(){\n    int V, E;\n    cin >> V >> E;\n    Graph<int> G(V, true);\n\
     \    for(int i = 0; i < E; ++i){\n        int s, t;\n        cin >> s >> t;\n\
     \        G.add(s, t);\n    }\n\n    CycleDetection<int> cd(G);\n    cout << cd.exist()\
@@ -159,7 +160,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ/AOJ-GRL-4-A.test.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ/AOJ-GRL-4-A.test.cpp

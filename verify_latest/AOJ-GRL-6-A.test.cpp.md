@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
@@ -131,7 +131,7 @@ data:
   path: verify_latest/AOJ-GRL-6-A.test.cpp
   requiredBy: []
   timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/AOJ-GRL-6-A.test.cpp
 layout: document

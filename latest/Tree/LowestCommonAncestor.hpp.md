@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify_latest/LIB-VertexAddPathSum.test.cpp
-    title: verify_latest/LIB-VertexAddPathSum.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: verify_latest/LIB-VertexAddPathSum.cpp
+    title: verify_latest/LIB-VertexAddPathSum.cpp
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n\n#line 2 \"\
@@ -133,11 +133,11 @@ data:
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: latest/Tree/LowestCommonAncestor.hpp
-  requiredBy: []
+  requiredBy:
+  - verify_latest/LIB-VertexAddPathSum.cpp
   timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify_latest/LIB-VertexAddPathSum.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: latest/Tree/LowestCommonAncestor.hpp
 layout: document
 redirect_from:

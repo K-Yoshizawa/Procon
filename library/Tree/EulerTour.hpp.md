@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTree.hpp
     title: Binary Indexed Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/AOJ/AOJ-GRL-5-D.test.cpp
-    title: verify/AOJ/AOJ-GRL-5-D.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: verify/AOJ/AOJ-GRL-5-D.cpp
+    title: verify/AOJ/AOJ-GRL-5-D.cpp
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     links: []
@@ -120,18 +120,19 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\n\n/**\n * @brief Binary Indexed\
-    \ Tree\n */\n\n#line 8 \"library/DataStructure/BinaryIndexedTree.hpp\"\nusing\
-    \ namespace std;\n\n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\u70B9\
-    \u66F4\u65B0\u30FB\u533A\u9593\u548C\u306E\u30AF\u30A8\u30EA\u306B\u5BFE\u3057\
-    \u3066\u9AD8\u901F\u304B\u3064\u7C21\u6613\u306B\u5B9F\u88C5\u3067\u304D\u308B\
-    \u30C7\u30FC\u30BF\u69CB\u9020\u3002 \n */\ntemplate<typename T>\nstruct BinaryIndexedTree{\n\
-    \    private:\n    vector<T> data;\n\n    public:\n    /**\n     * @brief Binary\
-    \ Indexed Tree\u3092\u8981\u7D20\u6570size\u3001\u50240\u3067\u521D\u671F\u5316\
-    \u3059\u308B\u3002\n     * @param size \u914D\u5217\u306E\u8981\u7D20\u6570\n\
-    \     */\n    BinaryIndexedTree(int size){\n        data.resize(++size, 0);\n\
-    \    }\n\n    BinaryIndexedTree() = default;\n\n    /**\n     * @brief 1-index\u3067\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\
+    \n\n/**\n * @brief Binary Indexed Tree\n */\n\n#line 8 \"library/DataStructure/BinaryIndexedTree.hpp\"\
+    \nusing namespace std;\n\n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\
+    \u70B9\u66F4\u65B0\u30FB\u533A\u9593\u548C\u306E\u30AF\u30A8\u30EA\u306B\u5BFE\
+    \u3057\u3066\u9AD8\u901F\u304B\u3064\u7C21\u6613\u306B\u5B9F\u88C5\u3067\u304D\
+    \u308B\u30C7\u30FC\u30BF\u69CB\u9020\u3002 \n */\ntemplate<typename T>\nstruct\
+    \ BinaryIndexedTree{\n    private:\n    vector<T> data;\n\n    public:\n    /**\n\
+    \     * @brief Binary Indexed Tree\u3092\u8981\u7D20\u6570size\u3001\u50240\u3067\
+    \u521D\u671F\u5316\u3059\u308B\u3002\n     * @param size \u914D\u5217\u306E\u8981\
+    \u7D20\u6570\n     */\n    BinaryIndexedTree(int size){\n        data.resize(++size,\
+    \ 0);\n    }\n\n    BinaryIndexedTree() = default;\n\n    /**\n     * @brief 1-index\u3067\
     \u8868\u3055\u308C\u308B\u756A\u53F7i\u306B\u5BFE\u3057\u3066\u3001\u914D\u5217\
     \u306E\u6700\u521D\u304B\u3089i\u307E\u3067\u306E\u9589\u533A\u9593\u306E\u548C\
     \u3092\u6C42\u3081\u308B\u3002\n     * @param i \u6C42\u3081\u305F\u3044\u9589\
@@ -231,11 +232,11 @@ data:
   - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: false
   path: library/Tree/EulerTour.hpp
-  requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify/AOJ/AOJ-GRL-5-D.test.cpp
+  requiredBy:
+  - verify/AOJ/AOJ-GRL-5-D.cpp
+  timestamp: '2023-09-16 09:30:31+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/Tree/EulerTour.hpp
 layout: document
 redirect_from:

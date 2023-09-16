@@ -1,23 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
-  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-C.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
     \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2 \"library/Tree/LowestCommonAncestor.hpp\"\
     \n\n/**\n * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\
     \n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
@@ -120,25 +118,26 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 8 \"library/Tree/LowestCommonAncestor.hpp\"\n\nusing namespace std;\n\ntemplate<typename\
-    \ CostType>\nstruct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n\
-    \    int sz, LOG;\n    vector<int> depth;\n    vector<vector<Vertex>> parent;\n\
-    \n    void dfs(Vertex v, Vertex p, int d){\n        parent[0][v] = p;\n      \
-    \  depth[v] = d;\n        for(auto &e : G.get_edges(v)){\n            if(e.to\
-    \ != p) dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
-    \ &G) : G(G), sz(G.size()), LOG(ceil(log2(G.size())) + 1){\n        depth.resize(sz);\n\
-    \        parent.resize(LOG, vector<Vertex>(sz, 0));\n        dfs(0, -1, 0);\n\
-    \        for(int k = 0; k + 1 < LOG; ++k){\n            for(int v = 0; v < sz;\
-    \ ++v){\n                if(parent[k][v] < 0) parent[k + 1][v] = -1;\n       \
-    \         else parent[k + 1][v] = parent[k][parent[k][v]];\n            }\n  \
-    \      }\n    }\n\n    Vertex query(Vertex u, Vertex v){\n        if(depth[u]\
-    \ > depth[v]) swap(u, v);\n        for(int k = 0; k < LOG; ++k){\n           \
-    \ if((depth[v] - depth[u]) >> k & 1){\n                v = parent[k][v];\n   \
-    \         }\n        }\n        if(u == v) return u;\n        for(int k = LOG\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 8 \"library/Tree/LowestCommonAncestor.hpp\"\
+    \n\nusing namespace std;\n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n\
+    \    private:\n    Graph<CostType> &G;\n    int sz, LOG;\n    vector<int> depth;\n\
+    \    vector<vector<Vertex>> parent;\n\n    void dfs(Vertex v, Vertex p, int d){\n\
+    \        parent[0][v] = p;\n        depth[v] = d;\n        for(auto &e : G.get_edges(v)){\n\
+    \            if(e.to != p) dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n\
+    \    LowestCommonAncestor(Graph<CostType> &G,Vertex Root) : G(G), sz(G.size()),\
+    \ LOG(32){\n        depth.resize(sz);\n        parent.resize(LOG, vector<Vertex>(sz,\
+    \ -1));\n        dfs(Root, -1, 0);\n        for(int k = 0; k + 1 < LOG; ++k){\n\
+    \            for(int v = 0; v < sz; ++v){\n                if(parent[k][v] < 0)\
+    \ parent[k + 1][v] = -1;\n                else parent[k + 1][v] = parent[k][parent[k][v]];\n\
+    \            }\n        }\n    }\n\n    Vertex query(Vertex u, Vertex v){\n  \
+    \      if(depth[u] > depth[v]) swap(u, v);\n        for(int k = 0; k < LOG; ++k){\n\
+    \            if((depth[v] - depth[u]) >> k & 1){\n                v = parent[k][v];\n\
+    \            }\n        }\n        if(u == v) return u;\n        for(int k = LOG\
     \ - 1; k >= 0; --k){\n            if(parent[k][u] != parent[k][v]){\n        \
     \        u = parent[k][u];\n                v = parent[k][v];\n            }\n\
-    \        }\n        return parent[0][u];\n    }\n};\n#line 7 \"verify/AOJ/AOJ-GRL-5-C.test.cpp\"\
+    \        }\n        return parent[0][u];\n    }\n};\n#line 7 \"verify/AOJ/AOJ-GRL-5-C.cpp\"\
     \n\nint main(){\n    int n;\n    cin >> n;\n    Graph<int> G(n);\n    for(int\
     \ i = 0; i < n; ++i){\n        int k;\n        cin >> k;\n        for(int j =\
     \ 0; j < k; ++j){\n            int c;\n            cin >> c;\n            G.add(i,\
@@ -156,16 +155,16 @@ data:
   dependsOn:
   - library/Tree/LowestCommonAncestor.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify/AOJ/AOJ-GRL-5-C.test.cpp
+  isVerificationFile: false
+  path: verify/AOJ/AOJ-GRL-5-C.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-16 09:45:58+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/AOJ/AOJ-GRL-5-C.test.cpp
+documentation_of: verify/AOJ/AOJ-GRL-5-C.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ/AOJ-GRL-5-C.test.cpp
-- /verify/verify/AOJ/AOJ-GRL-5-C.test.cpp.html
-title: verify/AOJ/AOJ-GRL-5-C.test.cpp
+- /library/verify/AOJ/AOJ-GRL-5-C.cpp
+- /library/verify/AOJ/AOJ-GRL-5-C.cpp.html
+title: verify/AOJ/AOJ-GRL-5-C.cpp
 ---

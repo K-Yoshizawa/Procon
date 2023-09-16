@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -118,25 +118,26 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 12 \"library/Tree/TreeDiamiter.hpp\"\n\ntemplate<typename CostType>\nstruct\
-    \ TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n    vector<CostType> dist;\n\
-    \n    void bfs(Vertex s){\n        queue<Vertex> que;\n        dist.assign(G.size(),\
-    \ G.INF);\n        dist[s] = 0;\n        que.push(s);\n        while(!que.empty()){\n\
-    \            Vertex v = que.front();\n            que.pop();\n            for(EdgeNum\
-    \ &i : G.connect[v]){\n                Vertex u = G.edges[i].to;\n           \
-    \     CostType w = G.edges[i].cost;\n                if(dist[v] + w < dist[u]){\n\
-    \                    dist[u] = dist[v] + w;\n                    que.push(u);\n\
-    \                }\n            }\n        }\n    }\n\n    void build(){\n   \
-    \     bfs(0);\n        int v = 0;\n        CostType d = 0;\n        for(int i\
-    \ = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v =\
-    \ i, d = dist[i];\n            }\n        }\n        EdgeVertex.first = v;\n \
-    \       bfs(v);\n        v = 0, d = 0;\n        for(int i = 0; i < G.size(); ++i){\n\
-    \            if(dist[i] > d){\n                v = i, d = dist[i];\n         \
-    \   }\n        }\n        EdgeVertex.second = v;\n        diamiter = d;\n    }\n\
-    \n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n    CostType diamiter;\n\n\
-    \    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n        build();\n\
-    \    }\n};\n"
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 12 \"library/Tree/TreeDiamiter.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n   \
+    \ vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex> que;\n\
+    \        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
+    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
+    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
+    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
+    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
+    \                    que.push(u);\n                }\n            }\n        }\n\
+    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
+    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
+    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
+    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
+    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
+    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
+    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
+    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
+    \        build();\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file TreeDiamiter.hpp\n * @author log K (lX57)\n\
     \ * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n * @version 1.1\n * @date\
     \ 2023-08-30\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename\
@@ -162,7 +163,7 @@ data:
   isVerificationFile: false
   path: library/Tree/TreeDiamiter.hpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
+  timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ/AOJ-GRL-5-A.test.cpp

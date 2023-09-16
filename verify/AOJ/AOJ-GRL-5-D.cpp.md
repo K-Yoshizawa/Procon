@@ -1,26 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/BinaryIndexedTree.hpp
     title: Binary Indexed Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
-  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-D.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
+  bundledCode: "#line 1 \"verify/AOJ/AOJ-GRL-5-D.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
     \n\n#line 2 \"library/Tree/EulerTour.hpp\"\n\n/**\n * @brief Euler Tour - \u30AA\
     \u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
@@ -123,18 +121,19 @@ data:
     \ &idx : connect[v]){\n                if(edges[idx].to == parent) continue;\n\
     \                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);\n  \
     \              st.emplace(edges[idx].to, v);\n            }\n        }\n     \
-    \   return ret;\n    }\n};\n\ntemplate<typename T>\nusing Tree = Graph<T>;\n#line\
-    \ 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\n\n/**\n * @brief Binary Indexed\
-    \ Tree\n */\n\n#line 8 \"library/DataStructure/BinaryIndexedTree.hpp\"\nusing\
-    \ namespace std;\n\n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\u70B9\
-    \u66F4\u65B0\u30FB\u533A\u9593\u548C\u306E\u30AF\u30A8\u30EA\u306B\u5BFE\u3057\
-    \u3066\u9AD8\u901F\u304B\u3064\u7C21\u6613\u306B\u5B9F\u88C5\u3067\u304D\u308B\
-    \u30C7\u30FC\u30BF\u69CB\u9020\u3002 \n */\ntemplate<typename T>\nstruct BinaryIndexedTree{\n\
-    \    private:\n    vector<T> data;\n\n    public:\n    /**\n     * @brief Binary\
-    \ Indexed Tree\u3092\u8981\u7D20\u6570size\u3001\u50240\u3067\u521D\u671F\u5316\
-    \u3059\u308B\u3002\n     * @param size \u914D\u5217\u306E\u8981\u7D20\u6570\n\
-    \     */\n    BinaryIndexedTree(int size){\n        data.resize(++size, 0);\n\
-    \    }\n\n    BinaryIndexedTree() = default;\n\n    /**\n     * @brief 1-index\u3067\
+    \   return ret;\n    }\n\n    void pr(){\n        for(auto &e:edges){\n      \
+    \      cerr<<e.from+1<<\" \"<<e.to+1<<endl;\n        }\n    }\n};\n\ntemplate<typename\
+    \ T>\nusing Tree = Graph<T>;\n#line 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\
+    \n\n/**\n * @brief Binary Indexed Tree\n */\n\n#line 8 \"library/DataStructure/BinaryIndexedTree.hpp\"\
+    \nusing namespace std;\n\n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\
+    \u70B9\u66F4\u65B0\u30FB\u533A\u9593\u548C\u306E\u30AF\u30A8\u30EA\u306B\u5BFE\
+    \u3057\u3066\u9AD8\u901F\u304B\u3064\u7C21\u6613\u306B\u5B9F\u88C5\u3067\u304D\
+    \u308B\u30C7\u30FC\u30BF\u69CB\u9020\u3002 \n */\ntemplate<typename T>\nstruct\
+    \ BinaryIndexedTree{\n    private:\n    vector<T> data;\n\n    public:\n    /**\n\
+    \     * @brief Binary Indexed Tree\u3092\u8981\u7D20\u6570size\u3001\u50240\u3067\
+    \u521D\u671F\u5316\u3059\u308B\u3002\n     * @param size \u914D\u5217\u306E\u8981\
+    \u7D20\u6570\n     */\n    BinaryIndexedTree(int size){\n        data.resize(++size,\
+    \ 0);\n    }\n\n    BinaryIndexedTree() = default;\n\n    /**\n     * @brief 1-index\u3067\
     \u8868\u3055\u308C\u308B\u756A\u53F7i\u306B\u5BFE\u3057\u3066\u3001\u914D\u5217\
     \u306E\u6700\u521D\u304B\u3089i\u307E\u3067\u306E\u9589\u533A\u9593\u306E\u548C\
     \u3092\u6C42\u3081\u308B\u3002\n     * @param i \u6C42\u3081\u305F\u3044\u9589\
@@ -188,8 +187,8 @@ data:
     \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
     \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
     \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
-    \    }\n};\n#line 4 \"verify/AOJ/AOJ-GRL-5-D.test.cpp\"\n\nint main(){\n    int\
-    \ n;\n    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
+    \    }\n};\n#line 4 \"verify/AOJ/AOJ-GRL-5-D.cpp\"\n\nint main(){\n    int n;\n\
+    \    cin >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n\
     \        int k;\n        cin >> k;\n        for(int j = 0; j < k; ++j){\n    \
     \        int c;\n            cin >> c;\n            G.add(i, c, 0);\n        }\n\
     \    }\n    EulerTour<long long> et(G);\n    int q;\n    cin >> q;\n    while(q--){\n\
@@ -211,16 +210,16 @@ data:
   - library/Tree/EulerTour.hpp
   - library/Graph/GraphTemplate.hpp
   - library/DataStructure/BinaryIndexedTree.hpp
-  isVerificationFile: true
-  path: verify/AOJ/AOJ-GRL-5-D.test.cpp
+  isVerificationFile: false
+  path: verify/AOJ/AOJ-GRL-5-D.cpp
   requiredBy: []
-  timestamp: '2023-08-30 10:46:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-16 09:45:58+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/AOJ/AOJ-GRL-5-D.test.cpp
+documentation_of: verify/AOJ/AOJ-GRL-5-D.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ/AOJ-GRL-5-D.test.cpp
-- /verify/verify/AOJ/AOJ-GRL-5-D.test.cpp.html
-title: verify/AOJ/AOJ-GRL-5-D.test.cpp
+- /library/verify/AOJ/AOJ-GRL-5-D.cpp
+- /library/verify/AOJ/AOJ-GRL-5-D.cpp.html
+title: verify/AOJ/AOJ-GRL-5-D.cpp
 ---
