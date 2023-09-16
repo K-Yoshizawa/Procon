@@ -138,8 +138,8 @@ void dprint(){
 
 template<class T, class... Ts>
 void dprint(const T& a, const Ts&... b){
-    cerr << a;
-    (cerr << ... << (cerr << ' ', b));
+    cerr << "Debug : " << a;
+    (cerr << ... << (cerr << " ", b));
     cerr << '\n';
 }
 #else
@@ -219,12 +219,13 @@ ull lcm(ull a, ull b) {
     return a * b / gcd(a, b);
 }
 
-string bitseq(long long x){
+string bitseq(long long x, int mini_len = 1){
     string ret = "";
     while(x){
         ret.push_back('0' + (x & 1));
         x >>= 1;
     }
+    while(ret.size()<mini_len) ret.push_back('0');
     reverse(ret.begin(), ret.end());
     return ret;
 }

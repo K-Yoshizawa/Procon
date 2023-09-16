@@ -180,6 +180,12 @@ class Graph{
         }
         return ret;
     }
+
+    void pr(){
+        for(auto &e:edges){
+            cerr<<e.from+1<<" "<<e.to+1<<endl;
+        }
+    }
 };
 
 template<typename T>

@@ -25,10 +25,10 @@ struct LowestCommonAncestor{
     }
 
     public:
-    LowestCommonAncestor(Graph<CostType> &G) : G(G), sz(G.size()), LOG(ceil(log2(G.size())) + 1){
+    LowestCommonAncestor(Graph<CostType> &G,Vertex Root) : G(G), sz(G.size()), LOG(32){
         depth.resize(sz);
-        parent.resize(LOG, vector<Vertex>(sz, 0));
-        dfs(0, -1, 0);
+        parent.resize(LOG, vector<Vertex>(sz, -1));
+        dfs(Root, -1, 0);
         for(int k = 0; k + 1 < LOG; ++k){
             for(int v = 0; v < sz; ++v){
                 if(parent[k][v] < 0) parent[k + 1][v] = -1;
