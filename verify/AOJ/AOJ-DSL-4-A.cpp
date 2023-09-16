@@ -1,3 +1,4 @@
+#define IGNORE
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/4/DSL_4_A"
 
 #include "../library/Other/Compress.hpp"
