@@ -10,6 +10,9 @@
 
 template<typename CostType>
 struct FordFulkerson{
+    public:
+    map<pair<Vertex, Vertex>, CostType> flew_list;
+
     private:
     Graph<CostType> &G;
     vector<int> used;
@@ -23,6 +26,8 @@ struct FordFulkerson{
             CostType flow = dfs(e.to, goal, min(F, e.cap));
             if(flow >= 1){
                 G.update_flow(eid, rev, flow);
+                flew_list[{pos, e.to}] += flow;
+                flew_list[{e.to, pos}] -= flow;
                 return flow;
             }
         }
@@ -30,10 +35,11 @@ struct FordFulkerson{
     }
 
     public:
-    FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0){}
+    FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0), flew_list(G.vsize()){}
 
     CostType solve(Vertex Source, Vertex Sink){
         CostType ans = 0;
+        flew_list.clear();
         while(1){
             used.assign(G.vsize(), 0);
             CostType F = dfs(Source, Sink, G.INF);
@@ -41,5 +47,13 @@ struct FordFulkerson{
             ans += F;
         }
         return ans;
+    }
+
+    vector<pair<Vertex, CostType>> flow_to(Vertex from){
+        vector<pair<Vertex, CostType>> ret;
+        for(auto [e, val] : flew_list){
+            if(e.first == from && val > 0) ret.push_back({to, val});
+        }
+        return ret;
     }
 };
