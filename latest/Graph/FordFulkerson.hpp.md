@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: latest/Graph/BipartiteMatching.hpp
+    title: latest/Graph/BipartiteMatching.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-6-A.test.cpp
     title: verify_latest/AOJ-GRL-6-A.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Ford-Fulkerson - \u6700\u5927\u6D41"
     links: []
@@ -97,40 +100,54 @@ data:
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
     \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/FordFulkerson.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct FordFulkerson{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<int> used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType\
-    \ F){\n        if(pos == goal) return F;\n        used[pos] = 1;\n        for(auto\
-    \ [eid, rev] : G.get_raw_incident(pos)){\n            auto e = G.get_edge(eid,\
-    \ rev);\n            if(e.cap == 0 || used[e.to]) continue;\n            CostType\
-    \ flow = dfs(e.to, goal, min(F, e.cap));\n            if(flow >= 1){\n       \
-    \         G.update_flow(eid, rev, flow);\n                return flow;\n     \
-    \       }\n        }\n        return 0;\n    }\n\n    public:\n    FordFulkerson(Graph<CostType>\
-    \ &G) : G(G), used(G.vsize(), 0){}\n\n    CostType solve(Vertex Source, Vertex\
-    \ Sink){\n        CostType ans = 0;\n        while(1){\n            used.assign(G.vsize(),\
+    \n\ntemplate<typename CostType>\nstruct FordFulkerson{\n    public:\n    map<pair<Vertex,\
+    \ Vertex>, CostType> flew_list;\n\n    private:\n    Graph<CostType> &G;\n   \
+    \ vector<int> used;\n\n    CostType dfs(Vertex pos, Vertex goal, CostType F){\n\
+    \        if(pos == goal) return F;\n        used[pos] = 1;\n        for(auto [eid,\
+    \ rev] : G.get_raw_incident(pos)){\n            auto e = G.get_edge(eid, rev);\n\
+    \            if(e.cap == 0 || used[e.to]) continue;\n            CostType flow\
+    \ = dfs(e.to, goal, min(F, e.cap));\n            if(flow >= 1){\n            \
+    \    G.update_flow(eid, rev, flow);\n                flew_list[{pos, e.to}] +=\
+    \ flow;\n                flew_list[{e.to, pos}] -= flow;\n                return\
+    \ flow;\n            }\n        }\n        return 0;\n    }\n\n    public:\n \
+    \   FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0), flew_list(G.vsize()){}\n\
+    \n    CostType solve(Vertex Source, Vertex Sink){\n        CostType ans = 0;\n\
+    \        flew_list.clear();\n        while(1){\n            used.assign(G.vsize(),\
     \ 0);\n            CostType F = dfs(Source, Sink, G.INF);\n            if(F ==\
-    \ 0) break;\n            ans += F;\n        }\n        return ans;\n    }\n};\n"
+    \ 0) break;\n            ans += F;\n        }\n        return ans;\n    }\n\n\
+    \    vector<pair<Vertex, CostType>> flow_to(Vertex from){\n        vector<pair<Vertex,\
+    \ CostType>> ret;\n        for(auto [e, val] : flew_list){\n            if(e.first\
+    \ == from && val > 0) ret.push_back({to, val});\n        }\n        return ret;\n\
+    \    }\n};\n"
   code: "/**\n * @file FordFulkerson.hpp\n * @author log K (lX57)\n * @brief Ford-Fulkerson\
     \ - \u6700\u5927\u6D41\n * @version 2.0\n * @date 2023-09-01\n */\n\n#include\
     \ \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n\
-    \    private:\n    Graph<CostType> &G;\n    vector<int> used;\n\n    CostType\
-    \ dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal) return F;\n\
-    \        used[pos] = 1;\n        for(auto [eid, rev] : G.get_raw_incident(pos)){\n\
-    \            auto e = G.get_edge(eid, rev);\n            if(e.cap == 0 || used[e.to])\
-    \ continue;\n            CostType flow = dfs(e.to, goal, min(F, e.cap));\n   \
-    \         if(flow >= 1){\n                G.update_flow(eid, rev, flow);\n   \
-    \             return flow;\n            }\n        }\n        return 0;\n    }\n\
-    \n    public:\n    FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0){}\n\
-    \n    CostType solve(Vertex Source, Vertex Sink){\n        CostType ans = 0;\n\
-    \        while(1){\n            used.assign(G.vsize(), 0);\n            CostType\
-    \ F = dfs(Source, Sink, G.INF);\n            if(F == 0) break;\n            ans\
-    \ += F;\n        }\n        return ans;\n    }\n};"
+    \    public:\n    map<pair<Vertex, Vertex>, CostType> flew_list;\n\n    private:\n\
+    \    Graph<CostType> &G;\n    vector<int> used;\n\n    CostType dfs(Vertex pos,\
+    \ Vertex goal, CostType F){\n        if(pos == goal) return F;\n        used[pos]\
+    \ = 1;\n        for(auto [eid, rev] : G.get_raw_incident(pos)){\n            auto\
+    \ e = G.get_edge(eid, rev);\n            if(e.cap == 0 || used[e.to]) continue;\n\
+    \            CostType flow = dfs(e.to, goal, min(F, e.cap));\n            if(flow\
+    \ >= 1){\n                G.update_flow(eid, rev, flow);\n                flew_list[{pos,\
+    \ e.to}] += flow;\n                flew_list[{e.to, pos}] -= flow;\n         \
+    \       return flow;\n            }\n        }\n        return 0;\n    }\n\n \
+    \   public:\n    FordFulkerson(Graph<CostType> &G) : G(G), used(G.vsize(), 0),\
+    \ flew_list(G.vsize()){}\n\n    CostType solve(Vertex Source, Vertex Sink){\n\
+    \        CostType ans = 0;\n        flew_list.clear();\n        while(1){\n  \
+    \          used.assign(G.vsize(), 0);\n            CostType F = dfs(Source, Sink,\
+    \ G.INF);\n            if(F == 0) break;\n            ans += F;\n        }\n \
+    \       return ans;\n    }\n\n    vector<pair<Vertex, CostType>> flow_to(Vertex\
+    \ from){\n        vector<pair<Vertex, CostType>> ret;\n        for(auto [e, val]\
+    \ : flew_list){\n            if(e.first == from && val > 0) ret.push_back({to,\
+    \ val});\n        }\n        return ret;\n    }\n};"
   dependsOn:
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: latest/Graph/FordFulkerson.hpp
-  requiredBy: []
-  timestamp: '2023-09-02 20:49:48+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy:
+  - latest/Graph/BipartiteMatching.hpp
+  timestamp: '2023-09-16 10:35:36+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp
 documentation_of: latest/Graph/FordFulkerson.hpp
