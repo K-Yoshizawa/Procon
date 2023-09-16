@@ -116,7 +116,37 @@ data:
     \ == from && val > 0) ret.push_back({to, val});\n        }\n        return ret;\n\
     \    }\n};\n#line 2 \"latest/Graph/BipartiteMatching.hpp\"\n\nstruct BipartiteMatching{\n\
     \    private:\n    Graph<int> G, H;\n    int X, Y, s, t;\n    set<pair<Vertex,\
-    \ Vertex>> remain_edge;\n    vector<int> mark_X, mark_Y;\n\n    public:\n    BipartiteMatching(int\
+    \ Vertex>> remain_edge;\n    vector<int> mark_X, mark_Y;\n    int MX, MY;\n\n\
+    \    public:\n    BipartiteMatching(int X, int Y, int src_flow = 1, int sink_flow\
+    \ = 1) : X(X), Y(Y), s(X + Y), t(X + Y + 1){\n        G = Graph<int>(X + Y + 2,\
+    \ true);\n        for(Vertex x = 0; x < X; ++x) G.add_flow(s, x, src_flow);\n\
+    \        for(Vertex y = X; y < X + Y; ++y) G.add(y, t, sink_flow);\n    }\n\n\
+    \    void add_flow(int x, int y, int flow = 1){\n        G.add_flow(x, X + y,\
+    \ flow);\n        remain_edge.insert({x, X + y});\n    }\n\n    int solve(bool\
+    \ MakeSubGraph = false){\n        FordFulkerson<int> ff(G);\n        int ret =\
+    \ ff.solve(s, t);\n        if(MakeSubGraph){\n            H = Graph<int>(X + Y,\
+    \ true);\n            mark_X.resize(X, 1), mark_Y.resize(Y, 0);\n            for(auto\
+    \ [e, f] : ff.flew_list){\n                auto [x, y] = e;\n                H.add(y,\
+    \ x);\n                remain_edge.erase({x, y});\n                mark_X[x] =\
+    \ 0;\n            }\n            for(auto [x, y] : remain_edge){\n           \
+    \     H.add(x, y);\n            }\n            for(Vertex x = 0; x < X; ++x){\n\
+    \                if(!mark_X[x]) continue;\n                queue<Vertex> que;\n\
+    \                que.push(x);\n                while(que.size()){\n          \
+    \          Vertex now = que.front();\n                    que.pop();\n       \
+    \             for(auto e : H.get_incident(now)){\n                        if(e.to\
+    \ < X && !mark_X[e.to]){\n                            mark_X[e.to] = 1;\n    \
+    \                        que.push(e.to);\n                        }\n        \
+    \                if(e.to >= X && !mark_Y[e.to - X]){\n                       \
+    \     mark_Y[e.to - X] = 1;\n                            que.push(e.to);\n   \
+    \                     }\n                    }\n                }\n          \
+    \  }\n            MX = accumulate(mark_X.begin(), mark_X.end(), 0);\n        \
+    \    MY = accumulate(mark_Y.begin(), mark_Y.end(), 0);\n        }\n        return\
+    \ ret;\n    }\n    \n    int MinimumVertexCover(){\n        return X - MX + MY;\n\
+    \    }\n\n    int MaximumIndependentSet(){\n        return MX + Y - MY;\n    }\n\
+    };\n"
+  code: "#include \"FordFulkerson.hpp\"\n\nstruct BipartiteMatching{\n    private:\n\
+    \    Graph<int> G, H;\n    int X, Y, s, t;\n    set<pair<Vertex, Vertex>> remain_edge;\n\
+    \    vector<int> mark_X, mark_Y;\n    int MX, MY;\n\n    public:\n    BipartiteMatching(int\
     \ X, int Y, int src_flow = 1, int sink_flow = 1) : X(X), Y(Y), s(X + Y), t(X +\
     \ Y + 1){\n        G = Graph<int>(X + Y + 2, true);\n        for(Vertex x = 0;\
     \ x < X; ++x) G.add_flow(s, x, src_flow);\n        for(Vertex y = X; y < X + Y;\
@@ -138,43 +168,18 @@ data:
     \                    }\n                        if(e.to >= X && !mark_Y[e.to -\
     \ X]){\n                            mark_Y[e.to - X] = 1;\n                  \
     \          que.push(e.to);\n                        }\n                    }\n\
-    \                }\n            }\n        }\n        return ret;\n    }\n   \
-    \ \n    // todo : \u3053\u3053\u306B\u6700\u5C0F\u8FBA\u88AB\u8986\u3068\u304B\
-    \u66F8\u304F\n};\n"
-  code: "#include \"FordFulkerson.hpp\"\n\nstruct BipartiteMatching{\n    private:\n\
-    \    Graph<int> G, H;\n    int X, Y, s, t;\n    set<pair<Vertex, Vertex>> remain_edge;\n\
-    \    vector<int> mark_X, mark_Y;\n\n    public:\n    BipartiteMatching(int X,\
-    \ int Y, int src_flow = 1, int sink_flow = 1) : X(X), Y(Y), s(X + Y), t(X + Y\
-    \ + 1){\n        G = Graph<int>(X + Y + 2, true);\n        for(Vertex x = 0; x\
-    \ < X; ++x) G.add_flow(s, x, src_flow);\n        for(Vertex y = X; y < X + Y;\
-    \ ++y) G.add(y, t, sink_flow);\n    }\n\n    void add_flow(int x, int y, int flow\
-    \ = 1){\n        G.add_flow(x, X + y, flow);\n        remain_edge.insert({x, X\
-    \ + y});\n    }\n\n    int solve(bool MakeSubGraph = false){\n        FordFulkerson<int>\
-    \ ff(G);\n        int ret = ff.solve(s, t);\n        if(MakeSubGraph){\n     \
-    \       H = Graph<int>(X + Y, true);\n            mark_X.resize(X, 1), mark_Y.resize(Y,\
-    \ 0);\n            for(auto [e, f] : ff.flew_list){\n                auto [x,\
-    \ y] = e;\n                H.add(y, x);\n                remain_edge.erase({x,\
-    \ y});\n                mark_X[x] = 0;\n            }\n            for(auto [x,\
-    \ y] : remain_edge){\n                H.add(x, y);\n            }\n          \
-    \  for(Vertex x = 0; x < X; ++x){\n                if(!mark_X[x]) continue;\n\
-    \                queue<Vertex> que;\n                que.push(x);\n          \
-    \      while(que.size()){\n                    Vertex now = que.front();\n   \
-    \                 que.pop();\n                    for(auto e : H.get_incident(now)){\n\
-    \                        if(e.to < X && !mark_X[e.to]){\n                    \
-    \        mark_X[e.to] = 1;\n                            que.push(e.to);\n    \
-    \                    }\n                        if(e.to >= X && !mark_Y[e.to -\
-    \ X]){\n                            mark_Y[e.to - X] = 1;\n                  \
-    \          que.push(e.to);\n                        }\n                    }\n\
-    \                }\n            }\n        }\n        return ret;\n    }\n   \
-    \ \n    // todo : \u3053\u3053\u306B\u6700\u5C0F\u8FBA\u88AB\u8986\u3068\u304B\
-    \u66F8\u304F\n};"
+    \                }\n            }\n            MX = accumulate(mark_X.begin(),\
+    \ mark_X.end(), 0);\n            MY = accumulate(mark_Y.begin(), mark_Y.end(),\
+    \ 0);\n        }\n        return ret;\n    }\n    \n    int MinimumVertexCover(){\n\
+    \        return X - MX + MY;\n    }\n\n    int MaximumIndependentSet(){\n    \
+    \    return MX + Y - MY;\n    }\n};"
   dependsOn:
   - latest/Graph/FordFulkerson.hpp
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: latest/Graph/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2023-09-16 10:35:36+09:00'
+  timestamp: '2023-09-16 21:33:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: latest/Graph/BipartiteMatching.hpp
