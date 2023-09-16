@@ -6,6 +6,7 @@ struct BipartiteMatching{
     int X, Y, s, t;
     set<pair<Vertex, Vertex>> remain_edge;
     vector<int> mark_X, mark_Y;
+    int MX, MY;
 
     public:
     BipartiteMatching(int X, int Y, int src_flow = 1, int sink_flow = 1) : X(X), Y(Y), s(X + Y), t(X + Y + 1){
@@ -53,9 +54,17 @@ struct BipartiteMatching{
                     }
                 }
             }
+            MX = accumulate(mark_X.begin(), mark_X.end(), 0);
+            MY = accumulate(mark_Y.begin(), mark_Y.end(), 0);
         }
         return ret;
     }
     
-    // todo : ここに最小辺被覆とか書く
+    int MinimumVertexCover(){
+        return X - MX + MY;
+    }
+
+    int MaximumIndependentSet(){
+        return MX + Y - MY;
+    }
 };
