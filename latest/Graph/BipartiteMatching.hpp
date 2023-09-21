@@ -3,68 +3,76 @@
 struct BipartiteMatching{
     private:
     Graph<int> G, H;
-    int X, Y, s, t;
+    int __L, __R;
+    Vertex __S, __T;
+    vector<pair<Vertex, Vertex>> __Matching;
+
+    bool __SubGraph;
     set<pair<Vertex, Vertex>> remain_edge;
-    vector<int> mark_X, mark_Y;
-    int MX, MY;
+    vector<int> mark_L, mark_R;
+    int ML, MR;
 
     public:
-    BipartiteMatching(int X, int Y, int src_flow = 1, int sink_flow = 1) : X(X), Y(Y), s(X + Y), t(X + Y + 1){
-        G = Graph<int>(X + Y + 2, true);
-        for(Vertex x = 0; x < X; ++x) G.add_flow(s, x, src_flow);
-        for(Vertex y = X; y < X + Y; ++y) G.add(y, t, sink_flow);
+    BipartiteMatching(int L, int R, int src_flow = 1, int sink_flow = 1, bool MakeSubGraph = false) : __L(L), __R(R), __S(L + R), __T(L + R + 1), __SubGraph(MakeSubGraph){
+        G = Graph<int>(__L + __R + 2, true);
+        for(Vertex l = 0; l < __L; ++l) G.add_flow(__S, l, src_flow);
+        for(Vertex r = __L; r < __L + __R; ++r) G.add_flow(r, __T, sink_flow);
     }
 
-    void add_flow(int x, int y, int flow = 1){
-        G.add_flow(x, X + y, flow);
-        remain_edge.insert({x, X + y});
+    void add_flow(int l, int r, int flow = 1){
+        G.add_flow(l, __L + r, flow);
+        remain_edge.insert({l, __L + r});
     }
 
     int solve(bool MakeSubGraph = false){
         FordFulkerson<int> ff(G);
-        int ret = ff.solve(s, t);
+        int ret = ff.solve(__S, __T);
+        for(auto e : ff.get_flow()) if(e.from != __S && e.to != __T) __Matching.push_back({e.from, e.to - __L});
         if(MakeSubGraph){
-            H = Graph<int>(X + Y, true);
-            mark_X.resize(X, 1), mark_Y.resize(Y, 0);
-            for(auto [e, f] : ff.flew_list){
-                auto [x, y] = e;
-                H.add(y, x);
-                remain_edge.erase({x, y});
-                mark_X[x] = 0;
+            H = Graph<int>(__L + __R, true);
+            mark_L.resize(__L, 1), mark_R.resize(__R, 0);
+            for(auto [l, r] : __Matching){
+                H.add(r, l);
+                remain_edge.erase({l, r});
+                mark_L[l] = 0;
             }
-            for(auto [x, y] : remain_edge){
-                H.add(x, y);
+            for(auto [l, r] : remain_edge){
+                H.add(l, r);
             }
-            for(Vertex x = 0; x < X; ++x){
-                if(!mark_X[x]) continue;
+            for(Vertex l = 0; l < __L; ++l){
+                if(!mark_L[l]) continue;
                 queue<Vertex> que;
-                que.push(x);
+                que.push(l);
                 while(que.size()){
                     Vertex now = que.front();
                     que.pop();
                     for(auto e : H.get_incident(now)){
-                        if(e.to < X && !mark_X[e.to]){
-                            mark_X[e.to] = 1;
+                        if(e.to < __L && !mark_L[e.to]){
+                            mark_L[e.to] = 1;
                             que.push(e.to);
                         }
-                        if(e.to >= X && !mark_Y[e.to - X]){
-                            mark_Y[e.to - X] = 1;
+                        if(e.to >= __L && !mark_R[e.to - __L]){
+                            mark_R[e.to - __L] = 1;
                             que.push(e.to);
                         }
                     }
                 }
             }
-            MX = accumulate(mark_X.begin(), mark_X.end(), 0);
-            MY = accumulate(mark_Y.begin(), mark_Y.end(), 0);
+            ML = accumulate(mark_L.begin(), mark_L.end(), 0);
+            MR = accumulate(mark_R.begin(), mark_R.end(), 0);
         }
         return ret;
     }
+
+    vector<pair<Vertex, Vertex>> get_matching(){
+        return __Matching;
+    }
     
     int MinimumVertexCover(){
-        return X - MX + MY;
+        return __L - ML + MR;
     }
 
     int MaximumIndependentSet(){
-        return MX + Y - MY;
+        return ML + __R - MR;
     }
 };

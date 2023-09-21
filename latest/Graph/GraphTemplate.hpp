@@ -43,6 +43,8 @@ struct Graph{
     vector<vector<pair<EdgeID, bool>>> __IncidentList;
     vector<pair<int, int>> __EdgePlace;
 
+    vector<CostType> __Flow;
+
     public:
     CostType INF;
 
@@ -68,6 +70,7 @@ struct Graph{
         __IncidentList[Source].push_back({__CntEdge, false});
         __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));
         __IncidentList[Sink].push_back({__CntEdge, true});
+        __Flow.push_back(0);
         ++__CntEdge;
     }
 
@@ -75,6 +78,17 @@ struct Graph{
         if(isReverse) Decrease *= -1;
         __EdgeSet[edge_id].cap -= Decrease;
         __RevEdgeSet[edge_id].cap += Decrease;
+        __Flow[edge_id] += Decrease;
+    }
+
+    vector<Edge<CostType>> get_flow(){
+        vector<Edge<CostType>> ret;
+        for(EdgeID i = 0; i < __CntEdge; ++i){
+            if(__Flow[i] > 0){
+                ret.push_back(__EdgeSet[i]);
+            }
+        }
+        return ret;
     }
 
     vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
