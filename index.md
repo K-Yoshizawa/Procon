@@ -11,16 +11,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: latest/Graph/BellmanFord.hpp
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/BipartiteMatching.hpp
       title: latest/Graph/BipartiteMatching.hpp
     - icon: ':heavy_check_mark:'
       path: latest/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -149,11 +149,11 @@ data:
     - icon: ':warning:'
       path: verify/AOJ/AOJ-GRL-5-D.cpp
       title: verify/AOJ/AOJ-GRL-5-D.cpp
-  - name: verify_latest
+  - name: verify_latest/pending
     pages:
     - icon: ':warning:'
-      path: verify_latest/LIB-VertexAddPathSum.cpp
-      title: verify_latest/LIB-VertexAddPathSum.cpp
+      path: verify_latest/pending/LC-BipartiteMatching.cpp
+      title: verify_latest/pending/LC-BipartiteMatching.cpp
   verificationCategories:
   - name: verify/AOJ
     pages:
@@ -250,15 +250,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-C.test.cpp
       title: verify_latest/AOJ-GRL-1-C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-A.test.cpp
       title: verify_latest/AOJ-GRL-6-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-B.test.cpp
       title: verify_latest/AOJ-GRL-6-B.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify_latest/LIB-PointAddRangeSum.test.cpp
-      title: verify_latest/LIB-PointAddRangeSum.test.cpp
+      path: verify_latest/AOJ-GRL-7-A.test.cpp
+      title: verify_latest/AOJ-GRL-7-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/LC-PointAddRangeSum.test.cpp
+      title: verify_latest/LC-PointAddRangeSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

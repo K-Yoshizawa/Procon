@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
     links:
     - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"verify_latest/LIB-PointAddRangeSum.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify_latest/LC-PointAddRangeSum.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n#line 1 \"latest/DataStructure/SegmentTree.hpp\"\
     \n\n\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename Monoid>\n\
     struct SegmentTree{\n    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
@@ -47,7 +47,7 @@ data:
     \        return __query(Left + __ZeroIndex, Right + __ZeroIndex, 1, __Size + 1,\
     \ 1);\n    }\n\n    Monoid get(int k){\n        __Check(k + __ZeroIndex);\n  \
     \      return __Data[__Offset + k + __ZeroIndex];\n    }\n\n    Monoid operator[](const\
-    \ int &k){\n        return get(k);\n    }\n};\n#line 4 \"verify_latest/LIB-PointAddRangeSum.test.cpp\"\
+    \ int &k){\n        return get(k);\n    }\n};\n#line 4 \"verify_latest/LC-PointAddRangeSum.test.cpp\"\
     \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
     \   for(int i = 0; i < N; ++i) cin >> a[i];\n    SegmentTree<long long> seg(a,\
     \ [](long long x, long long y){return x + y;}, 0, true);\n    for(int query =\
@@ -67,15 +67,15 @@ data:
   dependsOn:
   - latest/DataStructure/SegmentTree.hpp
   isVerificationFile: true
-  path: verify_latest/LIB-PointAddRangeSum.test.cpp
+  path: verify_latest/LC-PointAddRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-09-02 20:49:48+09:00'
+  timestamp: '2023-09-22 02:20:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify_latest/LIB-PointAddRangeSum.test.cpp
+documentation_of: verify_latest/LC-PointAddRangeSum.test.cpp
 layout: document
 redirect_from:
-- /verify/verify_latest/LIB-PointAddRangeSum.test.cpp
-- /verify/verify_latest/LIB-PointAddRangeSum.test.cpp.html
-title: verify_latest/LIB-PointAddRangeSum.test.cpp
+- /verify/verify_latest/LC-PointAddRangeSum.test.cpp
+- /verify/verify_latest/LC-PointAddRangeSum.test.cpp.html
+title: verify_latest/LC-PointAddRangeSum.test.cpp
 ---
