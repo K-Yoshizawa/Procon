@@ -1,51 +1,50 @@
 
 
-
 #include "../Graph/GraphTemplate.hpp"
 
 template<typename CostType>
 struct LowestCommonAncestor{
     private:
     Graph<CostType> &G;
-    int sz, LOG;
-    vector<int> depth;
-    vector<vector<Vertex>> parent;
+    int __Height;
+    vector<int> __Depth;
+    vector<vector<Vertex>> __Parent;
 
-    void dfs(Vertex v, Vertex p, int d){
-        parent[0][v] = p;
-        depth[v] = d;
-        for(auto &e : G[v]){
-            if(e.to != p) dfs(e.to, v, d + 1);
+    void __dfs(Vertex v, Vertex p, int d){
+        __Parent[0][v] = p;
+        __Depth[v] = d;
+        for(auto &e : G.get_incident(v)){
+            if(e.to != p) __dfs(e.to, v, d + 1);
         }
     }
 
     public:
-    LowestCommonAncestor(Graph<CostType> &G) : G(G), sz(G.vsize()), LOG(ceil(log2(G.vsize())) + 1){
-        depth.resize(sz);
-        parent.resize(LOG, vector<Vertex>(sz, 0));
-        dfs(0, -1, 0);
-        for(int k = 0; k + 1 < LOG; ++k){
-            for(int v = 0; v < sz; ++v){
-                if(parent[k][v] < 0) parent[k + 1][v] = -1;
-                else parent[k + 1][v] = parent[k][parent[k][v]];
+    LowestCommonAncestor(Graph<CostType> &G, Vertex Root) : G(G), __Height(32){
+        __Depth.resize(G.vsize());
+        __Parent.resize(__Height, vector<Vertex>(G.vsize(), -1));
+        __dfs(Root, -1, 0);
+        for(int k = 0; k + 1 < __Height; ++k){
+            for(Vertex v = 0; v < G.vsize(); ++v){
+                if(__Parent[k][v] < 0) __Parent[k + 1][v] = -1;
+                else __Parent[k + 1][v] = __Parent[k][__Parent[k][v]];
             }
         }
     }
 
-    Vertex query(Vertex u, Vertex v){
-        if(depth[u] > depth[v]) swap(u, v);
-        for(int k = 0; k < LOG; ++k){
-            if((depth[v] - depth[u]) >> k & 1){
-                v = parent[k][v];
+    Vertex get(Vertex u, Vertex v){
+        if(__Depth[u] > __Depth[v]) swap(u, v);
+        for(int k = 0; k < __Height; ++k){
+            if((__Depth[v] - __Depth[u]) >> k & 1){
+                v = __Parent[k][v];
             }
         }
         if(u == v) return u;
-        for(int k = LOG - 1; k >= 0; --k){
-            if(parent[k][u] != parent[k][v]){
-                u = parent[k][u];
-                v = parent[k][v];
+        for(int k = __Height - 1; k >= 0; --k){
+            if(__Parent[k][u] != __Parent[k][v]){
+                u = __Parent[k][u];
+                v = __Parent[k][v];
             }
         }
-        return parent[0][u];
+        return __Parent[0][u];
     }
 };

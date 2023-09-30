@@ -13,14 +13,19 @@ using namespace std;
 
 using Vertex = int;
 using EdgeID = int;
+using EdgeIndex = int;
 
 template<typename CostType>
 struct Edge{
     Vertex from, to;
     CostType cost, cap;
+    EdgeID ID;
+    EdgeIndex fidx, tidx;
 
-    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost), cap(1){}
-    Edge(Vertex from, Vertex to, CostType cap, CostType cost) : from(from), to(to), cost(cost), cap(cap){}
+    Edge() : ID(-1){} = default;
+
+    Edge(Vertex from, Vertex to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) 
+        : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}
 
     Vertex getto(Vertex v){
         assert(v == from || v == to);
@@ -32,6 +37,10 @@ struct Edge{
         from = to;
         to = tmp;
     }
+
+    void print(){
+        cerr << "Edge " << ID << " : (" << from << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << fidx << ", " << tidx << "]" << endl;
+    }
 };
 
 template<typename CostType>
@@ -40,7 +49,7 @@ struct Graph{
     int __CntVertex, __CntEdge;
     bool __isDirected;
     vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;
-    vector<vector<pair<EdgeID, bool>>> __IncidentList;
+    vector<vector<Edge<CostType>>> __IncidentList;
     vector<pair<int, int>> __EdgePlace;
 
     vector<CostType> __Flow;
@@ -55,27 +64,32 @@ struct Graph{
     void add(Vertex s, Vertex t, CostType w = 1){
         assert(0 <= s && s < __CntVertex);
         assert(0 <= t && t < __CntVertex);
-        __EdgePlace.push_back({(int)__IncidentList[s].size(), (int)__IncidentList[t].size()});
-        __EdgeSet.push_back(Edge<CostType>(s, t, w));
-        __IncidentList[s].push_back({__CntEdge, false});
-        __RevEdgeSet.push_back(Edge<CostType>(t, s, w));
-        if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});
+        EdgeIndex sidx = __IncidentList[s].size(), tidx = __IncidentList[t].size();
+        Edge<CostType> es(s, t, 1, w, __CntEdge, sidx, tidx);
+        Edge<CostType> et(t, s, 1, w, __CntEdge, tidx, sidx);
+        __EdgeSet.push_back(es);
+        __IncidentList[s].push_back(es);
+        __RevEdgeSet.push_back(et);
+        if(!__isDirected) __IncidentList[t].push_back(et);
         ++__CntEdge;
     }
 
     void add_flow(Vertex Source, Vertex Sink, CostType Capacity, CostType Cost = 1){
         assert(0 <= Source && Source < __CntVertex);
         assert(0 <= Sink && Sink < __CntVertex);
-        __EdgeSet.push_back(Edge<CostType>(Source, Sink, Capacity, Cost));
-        __IncidentList[Source].push_back({__CntEdge, false});
-        __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));
-        __IncidentList[Sink].push_back({__CntEdge, true});
+        EdgeIndex sidx = __IncidentList[Source].size(), tidx = __IncidentList[Sink].size();
+        Edge<CostType> es(Source, Sink, Cost, Capacity, __CntEdge, sidx, tidx);
+        Edge<CostType> et(Sink, Source, -Cost, 0, __CntEdge, tidx, sidx);
+        __EdgeSet.push_back(es);
+        __IncidentList[Source].push_back(es);
+        __RevEdgeSet.push_back(et);
+        __IncidentList[Sink].push_back(et);
         __Flow.push_back(0);
         ++__CntEdge;
     }
 
-    void update_flow(EdgeID edge_id, bool isReverse, CostType Decrease){
-        if(isReverse) Decrease *= -1;
+    void update_flow(Vertex Source, EdgeID edge_id, CostType Decrease){
+        if(__EdgeSet[edge_id].from != Source) Decrease *= -1;
         __EdgeSet[edge_id].cap -= Decrease;
         __RevEdgeSet[edge_id].cap += Decrease;
         __Flow[edge_id] += Decrease;
@@ -111,6 +125,10 @@ struct Graph{
         return __CntEdge;
     }
 
+    inline int incsize(Vertex v){
+        return __IncidentList[v].size();
+    }
+
     inline Edge<CostType> get_edge(EdgeID edge_id, bool isReverse){
         return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);
     }
@@ -121,18 +139,12 @@ struct Graph{
 
     vector<Edge<CostType>> get_incident(Vertex v){
         assert(0 <= v && v < __CntVertex);
-        vector<Edge<CostType>> ret;
-        for(auto [eid, rev] : __IncidentList[v]){
-            Edge<CostType> e = __EdgeSet[eid];
-            if(rev) e = __RevEdgeSet[eid];
-            ret.push_back(e);
-        }
-        return ret;
+        return __IncidentList[v];
     }
 
-    vector<pair<EdgeID, bool>> get_raw_incident(Vertex v){
-        assert(0 <= v && v < __CntVertex);
-        return __IncidentList[v];
+    EdgeIndex get_place(EdgeID ID, Vertex From){
+        if(__EdgeSet[ID].from == From) return __EdgePlace[ID].first;
+        else return __EdgePlace[ID].second;
     }
 
     vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){

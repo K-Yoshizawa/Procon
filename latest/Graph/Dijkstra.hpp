@@ -14,13 +14,13 @@ struct Dijkstra{
     Graph<CostType> &G;
     vector<CostType> __Dist, __Potential;
     vector<Vertex> __PrevVertex;
-    vector<pair<EdgeID, bool>> __PrevEdge;
+    vector<Edge<CostType>> __PrevEdge;
     Vertex __Start;
 
     void __solve(){
         __Dist.assign(G.vsize(), G.INF);
         __PrevVertex.assign(G.vsize(), -1);
-        __PrevEdge.assign(G.vsize(), {-1, false});
+        __PrevEdge.assign(G.vsize(), Edge<CostType>());
         using p = pair<CostType, Vertex>;
         priority_queue<p, vector<p>, greater<p>> que;
         que.emplace(__Potential[__Start], __Start);
@@ -28,12 +28,11 @@ struct Dijkstra{
         while(que.size()){
             auto [d, v] = que.top(); que.pop();
             if(__Dist[v] < d) continue;
-            for(auto [eid, rev] : G.get_raw_incident(v)){
-                Edge<CostType> e = G.get_edge(eid, rev);
+            for(auto e : G.get_incident(v)){
                 if(e.cap > 0 && d + e.cost + __Potential[e.from] - __Potential[e.to] < __Dist[e.to]){
                     __Dist[e.to] = d + e.cost + __Potential[e.from] - __Potential[e.to];
                     __PrevVertex[e.to] = v;
-                    __PrevEdge[e.to] = {eid, rev};
+                    __PrevEdge[e.to] = e;
                     que.emplace(__Dist[e.to], e.to);
                 }
             }
@@ -86,7 +85,7 @@ struct Dijkstra{
     vector<pair<CostType, bool>> restore_edge(Vertex Goal){
         vector<pair<CostType, bool>> ret;
         Vertex now = Goal;
-        while(__PrevEdge[now].first != -1){
+        while(__PrevEdge[now].ID != -1){
             ret.push_back(__PrevEdge[now]);
             auto [eid, rev] = __PrevEdge[now];
             now = G.get_edge(eid, rev).from;
