@@ -177,8 +177,8 @@ data:
   timestamp: '2023-09-16 09:30:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ/AOJ-GRL-7-A.test.cpp
   - verify/AOJ/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ/AOJ-GRL-7-A.test.cpp
 documentation_of: library/Graph/FordFulkerson.hpp
 layout: document
 redirect_from:

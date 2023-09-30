@@ -2,32 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: latest/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':x:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
-    path: latest/Graph/PrimalDual.hpp
-    title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
-  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-6-B.test.cpp\"\n#define PROBLEM \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\n\n#line 1\
-    \ \"latest/Graph/PrimalDual.hpp\"\n/**\n * @file PrimalDual.hpp\n * @author log\
-    \ K (lX57)\n * @brief Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41\n * @version\
-    \ 1.0\n * @date 2023-09-01\n */\n\n#line 1 \"latest/Graph/Dijkstra.hpp\"\n/**\n\
-    \ * @file Dijkstra.hpp\n * @author log_K (lX57)\n * @brief Dijkstra - \u5358\u4E00\
-    \u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.1\n * @date 2023-08-31\n */\n\
-    \n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
+    links: []
+  bundledCode: "#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
     \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
     \u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
@@ -115,87 +99,45 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Graph/Dijkstra.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<CostType> __Dist, __Potential;\n    vector<Vertex> __PrevVertex;\n\
-    \    vector<Edge<CostType>> __PrevEdge;\n    Vertex __Start;\n\n    void __solve(){\n\
-    \        __Dist.assign(G.vsize(), G.INF);\n        __PrevVertex.assign(G.vsize(),\
-    \ -1);\n        __PrevEdge.assign(G.vsize(), Edge<CostType>());\n        using\
-    \ p = pair<CostType, Vertex>;\n        priority_queue<p, vector<p>, greater<p>>\
-    \ que;\n        que.emplace(__Potential[__Start], __Start);\n        __Dist[__Start]\
-    \ = __Potential[__Start];\n        while(que.size()){\n            auto [d, v]\
-    \ = que.top(); que.pop();\n            if(__Dist[v] < d) continue;\n         \
-    \   for(auto e : G.get_incident(v)){\n                if(e.cap > 0 && d + e.cost\
-    \ + __Potential[e.from] - __Potential[e.to] < __Dist[e.to]){\n               \
-    \     __Dist[e.to] = d + e.cost + __Potential[e.from] - __Potential[e.to];\n \
-    \                   __PrevVertex[e.to] = v;\n                    __PrevEdge[e.to]\
-    \ = e;\n                    que.emplace(__Dist[e.to], e.to);\n               \
-    \ }\n            }\n        }\n        for(Vertex i = 0; i < G.vsize(); ++i){\n\
-    \            if(__Dist[i] != G.INF) __Dist[i] += __Potential[i] - __Potential[__Start];\n\
-    \        }\n    }\n\n    public:\n    Dijkstra(Graph<CostType> &G) : G(G), __Dist(G.vsize()),\
-    \ __Potential(G.vsize(), 0), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Start(-1){}\n\
-    \    \n    Dijkstra(Graph<CostType> &G, Vertex Start) : G(G), __Dist(G.vsize()),\
-    \ __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Potential(G.vsize(), 0), __Start(Start){\n\
-    \        __solve();\n    }\n\n    void update_potential(vector<CostType> Potential){\n\
-    \        assert(__Potential.size() == Potential.size());\n        __Potential\
-    \ = Potential;\n    }\n\n    void rebuild(){\n        __solve();\n    }\n\n  \
-    \  void build(Vertex Start){\n        assert(0 <= Start && Start < G.vsize());\n\
-    \        if(Start != __Start){\n            __Start = Start;\n            __solve();\n\
-    \        }\n    }\n\n    vector<CostType> all(Vertex Start){\n        assert(0\
-    \ <= Start && Start < G.vsize());\n        if(Start != __Start) build(Start);\n\
-    \        return __Dist;\n    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n\
-    \        assert(0 <= Start && Start < G.vsize());\n        assert(0 <= Goal &&\
-    \ Goal < G.vsize());\n        if(Start != __Start){\n            __Start = Start;\n\
-    \            __solve();\n        }\n        return __Dist[Goal];\n    }\n\n  \
-    \  vector<pair<CostType, bool>> restore_edge(Vertex Goal){\n        vector<pair<CostType,\
-    \ bool>> ret;\n        Vertex now = Goal;\n        while(__PrevEdge[now].ID !=\
-    \ -1){\n            ret.push_back(__PrevEdge[now]);\n            auto [eid, rev]\
-    \ = __PrevEdge[now];\n            now = G.get_edge(eid, rev).from;\n        }\n\
-    \        reverse(ret.begin(), ret.end());\n        return ret;\n    }\n\n    void\
-    \ print(bool DisplayINF = true, char Delimiter = ' '){\n        cout << (DisplayINF\
-    \ && __Dist[0] == G.INF ? \"INF\" : to_string(__Dist[0]));\n        for(int i\
-    \ = 1; i < (int)__Dist.size(); ++i){\n            cout << Delimiter << (DisplayINF\
-    \ && __Dist[i] == G.INF ? \"INF\" : to_string(__Dist[i]));\n        }\n      \
-    \  cout << endl;\n    }\n};\n#line 10 \"latest/Graph/PrimalDual.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct PrimalDual{\n    private:\n    Graph<CostType> &G;\n    vector<CostType>\
-    \ Potential;\n\n    public:\n    PrimalDual(Graph<CostType> &G) : G(G), Potential(G.vsize()){}\n\
-    \n    CostType solve(Vertex Start, Vertex Goal, CostType F){\n        CostType\
-    \ ret = 0;\n        Potential.assign(G.vsize(), 0);\n\n        while(F > 0){\n\
-    \            Dijkstra<CostType> dk(G);\n            dk.update_potential(Potential);\n\
-    \            vector<CostType> Dist = dk.all(Start);\n            if(Dist[Goal]\
-    \ == G.INF) return -1;\n            auto path = dk.restore_edge(Goal);\n     \
-    \       CostType f = F;\n            for(auto [eid, rev] : path){\n          \
-    \      auto e = G.get_edge(eid, rev);\n                f = min(f, e.cap);\n  \
-    \          }\n            F -= f;\n            ret += f * Dist[Goal];\n      \
-    \      for(auto [eid, rev] : path){\n                G.update_flow(eid, rev, f);\n\
-    \            }\n            for(int i = 0; i < Dist.size(); ++i){\n          \
-    \      CostType RawDist = Dist[i] -= Potential[i] - Potential[Start];\n      \
-    \          Potential[i] = min(Potential[i] + RawDist, G.INF);\n            }\n\
-    \        }\n        return ret;\n    }\n};\n#line 4 \"verify_latest/AOJ-GRL-6-B.test.cpp\"\
-    \n\nint main(){\n    int V, E, F;\n    cin >> V >> E >> F;\n    Graph<int> G(V,\
-    \ true);\n    for(int i = 0; i < E; ++i){\n        Vertex u, v;\n        int c,\
-    \ d;\n        cin >> u >> v >> c >> d;\n        G.add_flow(u, v, c, d);\n    }\n\
-    \n    PrimalDual<int> pd(G);\n\n    cout << pd.solve(0, V - 1, F) << endl;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
-    \n\n#include \"../latest/Graph/PrimalDual.hpp\"\n\nint main(){\n    int V, E,\
-    \ F;\n    cin >> V >> E >> F;\n    Graph<int> G(V, true);\n    for(int i = 0;\
-    \ i < E; ++i){\n        Vertex u, v;\n        int c, d;\n        cin >> u >> v\
-    \ >> c >> d;\n        G.add_flow(u, v, c, d);\n    }\n\n    PrimalDual<int> pd(G);\n\
-    \n    cout << pd.solve(0, V - 1, F) << endl;\n}"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 2 \"latest/Tree/TreeDiamiter.hpp\"\
+    \n\ntemplate<typename CostType>\nint TreeDiamiter(Graph<CostType> &G){\n    vector<int>\
+    \ dist(G.vsize(), G.INF);\n    dist[0] = 0;\n    queue<Vertex> que; que.push(0);\n\
+    \    while(que.size()){\n        Vertex now = que.front(); que.pop();\n      \
+    \  int d = dist[now];\n        for(auto e : G.get_incident(now)){\n          \
+    \  if(dist[e.to] == G.INF){\n                dist[e.to] = d + e.cost;\n      \
+    \          que.push(e.to);\n            }\n        }\n    }\n    Vertex Farther\
+    \ = max_element(dist.begin(), dist.end()) - dist.begin();\n    que.push(Farther);\n\
+    \    dist.assign(dist.size(), G.INF);\n    dist[Farther] = 0;\n    while(que.size()){\n\
+    \        Vertex now = que.front(); que.pop();\n        int d = dist[now];\n  \
+    \      for(auto e : G.get_incident(now)){\n            if(dist[e.to] == G.INF){\n\
+    \                dist[e.to] = d + e.cost;\n                que.push(e.to);\n \
+    \           }\n        }\n    }\n    return *max_element(dist.begin(), dist.end());\n\
+    }\n"
+  code: "#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    int TreeDiamiter(Graph<CostType> &G){\n    vector<int> dist(G.vsize(), G.INF);\n\
+    \    dist[0] = 0;\n    queue<Vertex> que; que.push(0);\n    while(que.size()){\n\
+    \        Vertex now = que.front(); que.pop();\n        int d = dist[now];\n  \
+    \      for(auto e : G.get_incident(now)){\n            if(dist[e.to] == G.INF){\n\
+    \                dist[e.to] = d + e.cost;\n                que.push(e.to);\n \
+    \           }\n        }\n    }\n    Vertex Farther = max_element(dist.begin(),\
+    \ dist.end()) - dist.begin();\n    que.push(Farther);\n    dist.assign(dist.size(),\
+    \ G.INF);\n    dist[Farther] = 0;\n    while(que.size()){\n        Vertex now\
+    \ = que.front(); que.pop();\n        int d = dist[now];\n        for(auto e :\
+    \ G.get_incident(now)){\n            if(dist[e.to] == G.INF){\n              \
+    \  dist[e.to] = d + e.cost;\n                que.push(e.to);\n            }\n\
+    \        }\n    }\n    return *max_element(dist.begin(), dist.end());\n}"
   dependsOn:
-  - latest/Graph/PrimalDual.hpp
-  - latest/Graph/Dijkstra.hpp
   - latest/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify_latest/AOJ-GRL-6-B.test.cpp
+  isVerificationFile: false
+  path: latest/Tree/TreeDiamiter.hpp
   requiredBy: []
   timestamp: '2023-09-30 12:20:40+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify_latest/AOJ-GRL-6-B.test.cpp
+documentation_of: latest/Tree/TreeDiamiter.hpp
 layout: document
 redirect_from:
-- /verify/verify_latest/AOJ-GRL-6-B.test.cpp
-- /verify/verify_latest/AOJ-GRL-6-B.test.cpp.html
-title: verify_latest/AOJ-GRL-6-B.test.cpp
+- /library/latest/Tree/TreeDiamiter.hpp
+- /library/latest/Tree/TreeDiamiter.hpp.html
+title: latest/Tree/TreeDiamiter.hpp
 ---

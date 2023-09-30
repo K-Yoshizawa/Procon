@@ -2,61 +2,67 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/BipartiteMatching.hpp
     title: latest/Graph/BipartiteMatching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/PrimalDual.hpp
     title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - icon: ':warning:'
     path: latest/Tree/EulerTour.hpp
     title: latest/Tree/EulerTour.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: latest/Tree/LowestCommonAncestor.hpp
     title: latest/Tree/LowestCommonAncestor.hpp
+  - icon: ':warning:'
+    path: latest/Tree/TreeDiamiter.hpp
+    title: latest/Tree/TreeDiamiter.hpp
   - icon: ':warning:'
     path: verify_latest/pending/LC-BipartiteMatching.cpp
     title: verify_latest/pending/LC-BipartiteMatching.cpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-ALDS1-11-A.test.cpp
     title: verify_latest/AOJ-ALDS1-11-A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-1-A.test.cpp
     title: verify_latest/AOJ-GRL-1-A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
     title: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-1-B.test.cpp
     title: verify_latest/AOJ-GRL-1-B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-1-C.test.cpp
     title: verify_latest/AOJ-GRL-1-C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: verify_latest/AOJ-GRL-5-C.test.cpp
+    title: verify_latest/AOJ-GRL-5-C.test.cpp
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-6-A.test.cpp
     title: verify_latest/AOJ-GRL-6-A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-6-B.test.cpp
     title: verify_latest/AOJ-GRL-6-B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-7-A.test.cpp
     title: verify_latest/AOJ-GRL-7-A.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -65,34 +71,42 @@ data:
     \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
     \u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
-    \ int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Vertex from, to;\n  \
-    \  CostType cost, cap;\n\n    Edge(Vertex from, Vertex to, CostType cost) : from(from),\
-    \ to(to), cost(cost), cap(1){}\n    Edge(Vertex from, Vertex to, CostType cap,\
-    \ CostType cost) : from(from), to(to), cost(cost), cap(cap){}\n\n    Vertex getto(Vertex\
-    \ v){\n        assert(v == from || v == to);\n        return from ^ to ^ v;\n\
-    \    }\n\n    void swap(){\n        Vertex tmp = from;\n        from = to;\n \
-    \       to = tmp;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n \
-    \   private:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
-    \ __EdgeSet, __RevEdgeSet;\n    vector<vector<pair<EdgeID, bool>>> __IncidentList;\n\
+    \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
+    \    Vertex from, to;\n    CostType cost, cap;\n    EdgeID ID;\n    EdgeIndex\
+    \ fidx, tidx;\n\n    Edge() : ID(-1){} = default;\n\n    Edge(Vertex from, Vertex\
+    \ to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx)\
+    \ \n        : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\
+    \n    Vertex getto(Vertex v){\n        assert(v == from || v == to);\n       \
+    \ return from ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex tmp = from;\n\
+    \        from = to;\n        to = tmp;\n    }\n\n    void print(){\n        cerr\
+    \ << \"Edge \" << ID << \" : (\" << from << \" -> \" << to << \"), Cost = \" <<\
+    \ cost << \", Capacity = \" << cap << \", Place = [\" << fidx << \", \" << tidx\
+    \ << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n\
+    \    private:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
+    \ __EdgeSet, __RevEdgeSet;\n    vector<vector<Edge<CostType>>> __IncidentList;\n\
     \    vector<pair<int, int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n \
     \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
     \ false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize),\
     \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
     \ void add(Vertex s, Vertex t, CostType w = 1){\n        assert(0 <= s && s <\
-    \ __CntVertex);\n        assert(0 <= t && t < __CntVertex);\n        __EdgePlace.push_back({(int)__IncidentList[s].size(),\
-    \ (int)__IncidentList[t].size()});\n        __EdgeSet.push_back(Edge<CostType>(s,\
-    \ t, w));\n        __IncidentList[s].push_back({__CntEdge, false});\n        __RevEdgeSet.push_back(Edge<CostType>(t,\
-    \ s, w));\n        if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});\n\
+    \ __CntVertex);\n        assert(0 <= t && t < __CntVertex);\n        EdgeIndex\
+    \ sidx = __IncidentList[s].size(), tidx = __IncidentList[t].size();\n        Edge<CostType>\
+    \ es(s, t, 1, w, __CntEdge, sidx, tidx);\n        Edge<CostType> et(t, s, 1, w,\
+    \ __CntEdge, tidx, sidx);\n        __EdgeSet.push_back(es);\n        __IncidentList[s].push_back(es);\n\
+    \        __RevEdgeSet.push_back(et);\n        if(!__isDirected) __IncidentList[t].push_back(et);\n\
     \        ++__CntEdge;\n    }\n\n    void add_flow(Vertex Source, Vertex Sink,\
     \ CostType Capacity, CostType Cost = 1){\n        assert(0 <= Source && Source\
-    \ < __CntVertex);\n        assert(0 <= Sink && Sink < __CntVertex);\n        __EdgeSet.push_back(Edge<CostType>(Source,\
-    \ Sink, Capacity, Cost));\n        __IncidentList[Source].push_back({__CntEdge,\
-    \ false});\n        __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));\n\
-    \        __IncidentList[Sink].push_back({__CntEdge, true});\n        __Flow.push_back(0);\n\
-    \        ++__CntEdge;\n    }\n\n    void update_flow(EdgeID edge_id, bool isReverse,\
-    \ CostType Decrease){\n        if(isReverse) Decrease *= -1;\n        __EdgeSet[edge_id].cap\
-    \ -= Decrease;\n        __RevEdgeSet[edge_id].cap += Decrease;\n        __Flow[edge_id]\
-    \ += Decrease;\n    }\n\n    vector<Edge<CostType>> get_flow(){\n        vector<Edge<CostType>>\
+    \ < __CntVertex);\n        assert(0 <= Sink && Sink < __CntVertex);\n        EdgeIndex\
+    \ sidx = __IncidentList[Source].size(), tidx = __IncidentList[Sink].size();\n\
+    \        Edge<CostType> es(Source, Sink, Cost, Capacity, __CntEdge, sidx, tidx);\n\
+    \        Edge<CostType> et(Sink, Source, -Cost, 0, __CntEdge, tidx, sidx);\n \
+    \       __EdgeSet.push_back(es);\n        __IncidentList[Source].push_back(es);\n\
+    \        __RevEdgeSet.push_back(et);\n        __IncidentList[Sink].push_back(et);\n\
+    \        __Flow.push_back(0);\n        ++__CntEdge;\n    }\n\n    void update_flow(Vertex\
+    \ Source, EdgeID edge_id, CostType Decrease){\n        if(__EdgeSet[edge_id].from\
+    \ != Source) Decrease *= -1;\n        __EdgeSet[edge_id].cap -= Decrease;\n  \
+    \      __RevEdgeSet[edge_id].cap += Decrease;\n        __Flow[edge_id] += Decrease;\n\
+    \    }\n\n    vector<Edge<CostType>> get_flow(){\n        vector<Edge<CostType>>\
     \ ret;\n        for(EdgeID i = 0; i < __CntEdge; ++i){\n            if(__Flow[i]\
     \ > 0){\n                ret.push_back(__EdgeSet[i]);\n            }\n       \
     \ }\n        return ret;\n    }\n\n    vector<vector<CostType>> matrix(CostType\
@@ -103,19 +117,18 @@ data:
     \               else ret[v][__RevEdgeSet[eid].to] = __RevEdgeSet[eid].cost;\n\
     \            }\n        }\n        return ret;\n    }\n\n    inline int vsize(){\n\
     \        return __CntVertex;\n    }\n\n    inline int esize(){\n        return\
-    \ __CntEdge;\n    }\n\n    inline Edge<CostType> get_edge(EdgeID edge_id, bool\
-    \ isReverse){\n        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);\n\
-    \    }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
+    \ __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n        return __IncidentList[v].size();\n\
+    \    }\n\n    inline Edge<CostType> get_edge(EdgeID edge_id, bool isReverse){\n\
+    \        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);\n  \
+    \  }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
     \    }\n\n    vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0\
-    \ <= v && v < __CntVertex);\n        vector<Edge<CostType>> ret;\n        for(auto\
-    \ [eid, rev] : __IncidentList[v]){\n            Edge<CostType> e = __EdgeSet[eid];\n\
-    \            if(rev) e = __RevEdgeSet[eid];\n            ret.push_back(e);\n \
-    \       }\n        return ret;\n    }\n\n    vector<pair<EdgeID, bool>> get_raw_incident(Vertex\
-    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IncidentList[v];\n\
-    \    }\n\n    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){\n\
-    \        assert(0 <= Root && Root < __CntVertex);\n        vector<pair<Vertex,\
-    \ EdgeID>> ret(__CntVertex, {-1, -1});\n        vector<int> visited(__CntVertex,\
-    \ 0);\n        queue<Vertex> que;\n        que.push(Root);\n        while(que.size()){\n\
+    \ <= v && v < __CntVertex);\n        return __IncidentList[v];\n    }\n\n    EdgeIndex\
+    \ get_place(EdgeID ID, Vertex From){\n        if(__EdgeSet[ID].from == From) return\
+    \ __EdgePlace[ID].first;\n        else return __EdgePlace[ID].second;\n    }\n\
+    \n    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){\n    \
+    \    assert(0 <= Root && Root < __CntVertex);\n        vector<pair<Vertex, EdgeID>>\
+    \ ret(__CntVertex, {-1, -1});\n        vector<int> visited(__CntVertex, 0);\n\
+    \        queue<Vertex> que;\n        que.push(Root);\n        while(que.size()){\n\
     \            Vertex now = que.front(); que.pop();\n            if(visited[now])\
     \ continue;\n            visited[now] = 1;\n            for(int i = 0; i < __IncidentList[now].size();\
     \ ++i){\n                auto [eid, rev] = __IncidentList[now][i];\n         \
@@ -146,35 +159,43 @@ data:
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n\
     \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
     \n * @version 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    Vertex from, to;\n    CostType cost, cap;\n\n \
-    \   Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost),\
-    \ cap(1){}\n    Edge(Vertex from, Vertex to, CostType cap, CostType cost) : from(from),\
-    \ to(to), cost(cost), cap(cap){}\n\n    Vertex getto(Vertex v){\n        assert(v\
-    \ == from || v == to);\n        return from ^ to ^ v;\n    }\n\n    void swap(){\n\
-    \        Vertex tmp = from;\n        from = to;\n        to = tmp;\n    }\n};\n\
-    \ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int __CntVertex,\
-    \ __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;\n\
-    \    vector<vector<pair<EdgeID, bool>>> __IncidentList;\n    vector<pair<int,\
-    \ int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n    public:\n    CostType\
-    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
-    \ __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize), INF(numeric_limits<CostType>::max()\
-    \ / 2){}\n\n    Graph() = default;\n\n    void add(Vertex s, Vertex t, CostType\
-    \ w = 1){\n        assert(0 <= s && s < __CntVertex);\n        assert(0 <= t &&\
-    \ t < __CntVertex);\n        __EdgePlace.push_back({(int)__IncidentList[s].size(),\
-    \ (int)__IncidentList[t].size()});\n        __EdgeSet.push_back(Edge<CostType>(s,\
-    \ t, w));\n        __IncidentList[s].push_back({__CntEdge, false});\n        __RevEdgeSet.push_back(Edge<CostType>(t,\
-    \ s, w));\n        if(!__isDirected) __IncidentList[t].push_back({__CntEdge, true});\n\
+    \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
+    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Vertex from, to;\n\
+    \    CostType cost, cap;\n    EdgeID ID;\n    EdgeIndex fidx, tidx;\n\n    Edge()\
+    \ : ID(-1){} = default;\n\n    Edge(Vertex from, Vertex to, CostType cap, CostType\
+    \ cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) \n        : from(from), to(to),\
+    \ cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\n    Vertex getto(Vertex\
+    \ v){\n        assert(v == from || v == to);\n        return from ^ to ^ v;\n\
+    \    }\n\n    void swap(){\n        Vertex tmp = from;\n        from = to;\n \
+    \       to = tmp;\n    }\n\n    void print(){\n        cerr << \"Edge \" << ID\
+    \ << \" : (\" << from << \" -> \" << to << \"), Cost = \" << cost << \", Capacity\
+    \ = \" << cap << \", Place = [\" << fidx << \", \" << tidx << \"]\" << endl;\n\
+    \    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int\
+    \ __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
+    \ __EdgeSet, __RevEdgeSet;\n    vector<vector<Edge<CostType>>> __IncidentList;\n\
+    \    vector<pair<int, int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n \
+    \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
+    \ false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize),\
+    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
+    \ void add(Vertex s, Vertex t, CostType w = 1){\n        assert(0 <= s && s <\
+    \ __CntVertex);\n        assert(0 <= t && t < __CntVertex);\n        EdgeIndex\
+    \ sidx = __IncidentList[s].size(), tidx = __IncidentList[t].size();\n        Edge<CostType>\
+    \ es(s, t, 1, w, __CntEdge, sidx, tidx);\n        Edge<CostType> et(t, s, 1, w,\
+    \ __CntEdge, tidx, sidx);\n        __EdgeSet.push_back(es);\n        __IncidentList[s].push_back(es);\n\
+    \        __RevEdgeSet.push_back(et);\n        if(!__isDirected) __IncidentList[t].push_back(et);\n\
     \        ++__CntEdge;\n    }\n\n    void add_flow(Vertex Source, Vertex Sink,\
     \ CostType Capacity, CostType Cost = 1){\n        assert(0 <= Source && Source\
-    \ < __CntVertex);\n        assert(0 <= Sink && Sink < __CntVertex);\n        __EdgeSet.push_back(Edge<CostType>(Source,\
-    \ Sink, Capacity, Cost));\n        __IncidentList[Source].push_back({__CntEdge,\
-    \ false});\n        __RevEdgeSet.push_back(Edge<CostType>(Sink, Source, 0, -Cost));\n\
-    \        __IncidentList[Sink].push_back({__CntEdge, true});\n        __Flow.push_back(0);\n\
-    \        ++__CntEdge;\n    }\n\n    void update_flow(EdgeID edge_id, bool isReverse,\
-    \ CostType Decrease){\n        if(isReverse) Decrease *= -1;\n        __EdgeSet[edge_id].cap\
-    \ -= Decrease;\n        __RevEdgeSet[edge_id].cap += Decrease;\n        __Flow[edge_id]\
-    \ += Decrease;\n    }\n\n    vector<Edge<CostType>> get_flow(){\n        vector<Edge<CostType>>\
+    \ < __CntVertex);\n        assert(0 <= Sink && Sink < __CntVertex);\n        EdgeIndex\
+    \ sidx = __IncidentList[Source].size(), tidx = __IncidentList[Sink].size();\n\
+    \        Edge<CostType> es(Source, Sink, Cost, Capacity, __CntEdge, sidx, tidx);\n\
+    \        Edge<CostType> et(Sink, Source, -Cost, 0, __CntEdge, tidx, sidx);\n \
+    \       __EdgeSet.push_back(es);\n        __IncidentList[Source].push_back(es);\n\
+    \        __RevEdgeSet.push_back(et);\n        __IncidentList[Sink].push_back(et);\n\
+    \        __Flow.push_back(0);\n        ++__CntEdge;\n    }\n\n    void update_flow(Vertex\
+    \ Source, EdgeID edge_id, CostType Decrease){\n        if(__EdgeSet[edge_id].from\
+    \ != Source) Decrease *= -1;\n        __EdgeSet[edge_id].cap -= Decrease;\n  \
+    \      __RevEdgeSet[edge_id].cap += Decrease;\n        __Flow[edge_id] += Decrease;\n\
+    \    }\n\n    vector<Edge<CostType>> get_flow(){\n        vector<Edge<CostType>>\
     \ ret;\n        for(EdgeID i = 0; i < __CntEdge; ++i){\n            if(__Flow[i]\
     \ > 0){\n                ret.push_back(__EdgeSet[i]);\n            }\n       \
     \ }\n        return ret;\n    }\n\n    vector<vector<CostType>> matrix(CostType\
@@ -185,19 +206,18 @@ data:
     \               else ret[v][__RevEdgeSet[eid].to] = __RevEdgeSet[eid].cost;\n\
     \            }\n        }\n        return ret;\n    }\n\n    inline int vsize(){\n\
     \        return __CntVertex;\n    }\n\n    inline int esize(){\n        return\
-    \ __CntEdge;\n    }\n\n    inline Edge<CostType> get_edge(EdgeID edge_id, bool\
-    \ isReverse){\n        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);\n\
-    \    }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
+    \ __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n        return __IncidentList[v].size();\n\
+    \    }\n\n    inline Edge<CostType> get_edge(EdgeID edge_id, bool isReverse){\n\
+    \        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);\n  \
+    \  }\n\n    inline vector<Edge<CostType>>& get_edgeset(){\n        return __EdgeSet;\n\
     \    }\n\n    vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0\
-    \ <= v && v < __CntVertex);\n        vector<Edge<CostType>> ret;\n        for(auto\
-    \ [eid, rev] : __IncidentList[v]){\n            Edge<CostType> e = __EdgeSet[eid];\n\
-    \            if(rev) e = __RevEdgeSet[eid];\n            ret.push_back(e);\n \
-    \       }\n        return ret;\n    }\n\n    vector<pair<EdgeID, bool>> get_raw_incident(Vertex\
-    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IncidentList[v];\n\
-    \    }\n\n    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){\n\
-    \        assert(0 <= Root && Root < __CntVertex);\n        vector<pair<Vertex,\
-    \ EdgeID>> ret(__CntVertex, {-1, -1});\n        vector<int> visited(__CntVertex,\
-    \ 0);\n        queue<Vertex> que;\n        que.push(Root);\n        while(que.size()){\n\
+    \ <= v && v < __CntVertex);\n        return __IncidentList[v];\n    }\n\n    EdgeIndex\
+    \ get_place(EdgeID ID, Vertex From){\n        if(__EdgeSet[ID].from == From) return\
+    \ __EdgePlace[ID].first;\n        else return __EdgePlace[ID].second;\n    }\n\
+    \n    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){\n    \
+    \    assert(0 <= Root && Root < __CntVertex);\n        vector<pair<Vertex, EdgeID>>\
+    \ ret(__CntVertex, {-1, -1});\n        vector<int> visited(__CntVertex, 0);\n\
+    \        queue<Vertex> que;\n        que.push(Root);\n        while(que.size()){\n\
     \            Vertex now = que.front(); que.pop();\n            if(visited[now])\
     \ continue;\n            visited[now] = 1;\n            for(int i = 0; i < __IncidentList[now].size();\
     \ ++i){\n                auto [eid, rev] = __IncidentList[now][i];\n         \
@@ -229,26 +249,28 @@ data:
   isVerificationFile: false
   path: latest/Graph/GraphTemplate.hpp
   requiredBy:
+  - latest/Graph/BipartiteMatching.hpp
   - latest/Graph/Dijkstra.hpp
   - latest/Graph/FordFulkerson.hpp
-  - latest/Graph/PrimalDual.hpp
-  - latest/Graph/BipartiteMatching.hpp
-  - latest/Graph/BellmanFord.hpp
   - latest/Graph/WarshallFloyd.hpp
+  - latest/Graph/BellmanFord.hpp
+  - latest/Graph/PrimalDual.hpp
   - latest/Tree/EulerTour.hpp
   - latest/Tree/LowestCommonAncestor.hpp
+  - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-09-22 02:20:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-09-30 12:20:40+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify_latest/AOJ-GRL-7-A.test.cpp
-  - verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - verify_latest/AOJ-GRL-6-B.test.cpp
   - verify_latest/AOJ-GRL-6-A.test.cpp
-  - verify_latest/AOJ-GRL-1-C.test.cpp
-  - verify_latest/AOJ-GRL-1-A.test.cpp
-  - verify_latest/AOJ-ALDS1-11-A.test.cpp
   - verify_latest/AOJ-GRL-1-B.test.cpp
+  - verify_latest/AOJ-GRL-6-B.test.cpp
+  - verify_latest/AOJ-GRL-1-A.test.cpp
+  - verify_latest/AOJ-GRL-5-C.test.cpp
+  - verify_latest/AOJ-GRL-7-A.test.cpp
+  - verify_latest/AOJ-ALDS1-11-A.test.cpp
+  - verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
+  - verify_latest/AOJ-GRL-1-C.test.cpp
 documentation_of: latest/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"

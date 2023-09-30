@@ -84,14 +84,14 @@ data:
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTree.hpp
   requiredBy:
+  - verify/AOJ/AOJ-GRL-5-D.cpp
   - library/Tree/EulerTour.hpp
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
-  - verify/AOJ/AOJ-GRL-5-D.cpp
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ/AOJ-DSL-2-G.test.cpp
   - verify/AOJ/AOJ-DSL-2-B.test.cpp
+  - verify/AOJ/AOJ-DSL-2-G.test.cpp
   - verify/LC/LC-PointAddRangeSum-BIT.test.cpp
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document

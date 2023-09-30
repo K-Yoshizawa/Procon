@@ -4,17 +4,22 @@ data:
   - icon: ':x:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':x:'
-    path: verify_latest/AOJ-GRL-5-C.test.cpp
-    title: verify_latest/AOJ-GRL-5-C.test.cpp
+    path: latest/Tree/LowestCommonAncestor.hpp
+    title: latest/Tree/LowestCommonAncestor.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: true
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes:
-    links: []
-  bundledCode: "#line 1 \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
+  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-5-C.test.cpp\"\n#define PROBLEM \"\
+    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\n\n#line 1\
+    \ \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -121,39 +126,32 @@ data:
     \        for(int k = __Height - 1; k >= 0; --k){\n            if(__Parent[k][u]\
     \ != __Parent[k][v]){\n                u = __Parent[k][u];\n                v\
     \ = __Parent[k][v];\n            }\n        }\n        return __Parent[0][u];\n\
-    \    }\n};\n"
-  code: "\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
-    struct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int __Height;\n\
-    \    vector<int> __Depth;\n    vector<vector<Vertex>> __Parent;\n\n    void __dfs(Vertex\
-    \ v, Vertex p, int d){\n        __Parent[0][v] = p;\n        __Depth[v] = d;\n\
-    \        for(auto &e : G.get_incident(v)){\n            if(e.to != p) __dfs(e.to,\
-    \ v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
-    \ &G, Vertex Root) : G(G), __Height(32){\n        __Depth.resize(G.vsize());\n\
-    \        __Parent.resize(__Height, vector<Vertex>(G.vsize(), -1));\n        __dfs(Root,\
-    \ -1, 0);\n        for(int k = 0; k + 1 < __Height; ++k){\n            for(Vertex\
-    \ v = 0; v < G.vsize(); ++v){\n                if(__Parent[k][v] < 0) __Parent[k\
-    \ + 1][v] = -1;\n                else __Parent[k + 1][v] = __Parent[k][__Parent[k][v]];\n\
-    \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
-    \    if(__Depth[u] > __Depth[v]) swap(u, v);\n        for(int k = 0; k < __Height;\
-    \ ++k){\n            if((__Depth[v] - __Depth[u]) >> k & 1){\n               \
-    \ v = __Parent[k][v];\n            }\n        }\n        if(u == v) return u;\n\
-    \        for(int k = __Height - 1; k >= 0; --k){\n            if(__Parent[k][u]\
-    \ != __Parent[k][v]){\n                u = __Parent[k][u];\n                v\
-    \ = __Parent[k][v];\n            }\n        }\n        return __Parent[0][u];\n\
-    \    }\n};"
+    \    }\n};\n#line 4 \"verify_latest/AOJ-GRL-5-C.test.cpp\"\n\nint main(){\n  \
+    \  int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0; i <= n - 1; ++i){\n\
+    \        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int\
+    \ c; cin >> c;\n            G.add(i, c);\n        }\n    }\n\n    LowestCommonAncestor<int>\
+    \ lca(G, 0);\n    int q; cin >> q;\n    while(q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << lca.get(u, v) << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
+    \n\n#include \"../latest/Tree/LowestCommonAncestor.hpp\"\n\nint main(){\n    int\
+    \ n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0; i <= n - 1; ++i){\n \
+    \       int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int\
+    \ c; cin >> c;\n            G.add(i, c);\n        }\n    }\n\n    LowestCommonAncestor<int>\
+    \ lca(G, 0);\n    int q; cin >> q;\n    while(q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << lca.get(u, v) << endl;\n    }\n}"
   dependsOn:
+  - latest/Tree/LowestCommonAncestor.hpp
   - latest/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: latest/Tree/LowestCommonAncestor.hpp
+  isVerificationFile: true
+  path: verify_latest/AOJ-GRL-5-C.test.cpp
   requiredBy: []
   timestamp: '2023-09-30 12:20:40+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify_latest/AOJ-GRL-5-C.test.cpp
-documentation_of: latest/Tree/LowestCommonAncestor.hpp
+  verificationStatus: TEST_WRONG_ANSWER
+  verifiedWith: []
+documentation_of: verify_latest/AOJ-GRL-5-C.test.cpp
 layout: document
 redirect_from:
-- /library/latest/Tree/LowestCommonAncestor.hpp
-- /library/latest/Tree/LowestCommonAncestor.hpp.html
-title: latest/Tree/LowestCommonAncestor.hpp
+- /verify/verify_latest/AOJ-GRL-5-C.test.cpp
+- /verify/verify_latest/AOJ-GRL-5-C.test.cpp.html
+title: verify_latest/AOJ-GRL-5-C.test.cpp
 ---
