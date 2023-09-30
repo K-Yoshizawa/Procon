@@ -5,12 +5,12 @@
 int main(){
     int V, E, F;
     cin >> V >> E >> F;
-    Graph<int> G(V, true);
+    Flow<int> G(V);
     for(int i = 0; i < E; ++i){
         Vertex u, v;
         int c, d;
         cin >> u >> v >> c >> d;
-        G.add_flow(u, v, c, d);
+        G.add(u, v, c, d);
     }
 
     PrimalDual<int> pd(G);

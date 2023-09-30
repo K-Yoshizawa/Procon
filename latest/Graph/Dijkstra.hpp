@@ -29,8 +29,8 @@ struct Dijkstra{
             auto [d, v] = que.top(); que.pop();
             if(__Dist[v] < d) continue;
             for(auto e : G.get_incident(v)){
-                if(e.cap > 0 && d + e.cost + __Potential[e.from] - __Potential[e.to] < __Dist[e.to]){
-                    __Dist[e.to] = d + e.cost + __Potential[e.from] - __Potential[e.to];
+                if(e.cap > 0 && d + e.cost + __Potential[e.src] - __Potential[e.to] < __Dist[e.to]){
+                    __Dist[e.to] = d + e.cost + __Potential[e.src] - __Potential[e.to];
                     __PrevVertex[e.to] = v;
                     __PrevEdge[e.to] = e;
                     que.emplace(__Dist[e.to], e.to);
@@ -82,13 +82,12 @@ struct Dijkstra{
         return __Dist[Goal];
     }
 
-    vector<pair<CostType, bool>> restore_edge(Vertex Goal){
-        vector<pair<CostType, bool>> ret;
+    EdgeSet<CostType> restore_edge(Vertex Goal){
+        EdgeSet<CostType> ret;
         Vertex now = Goal;
         while(__PrevEdge[now].ID != -1){
             ret.push_back(__PrevEdge[now]);
-            auto [eid, rev] = __PrevEdge[now];
-            now = G.get_edge(eid, rev).from;
+            now = __PrevEdge[now].src;
         }
         reverse(ret.begin(), ret.end());
         return ret;

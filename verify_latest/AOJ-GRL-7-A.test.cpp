@@ -8,7 +8,7 @@ int main(){
     BipartiteMatching bm(X, Y);
     for(int i = 0; i < E; ++i){
         int x, y; cin >> x >> y;
-        bm.add_flow(x, y);
+        bm.add(x, y);
     }
     cout << bm.solve() << endl;
 }

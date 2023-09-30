@@ -5,12 +5,15 @@
 int main(){
     int V, E;
     cin >> V >> E;
-    Graph<int> G(V, true);
+    Flow<int> G(V);
     for(int i = 0; i < E; ++i){
         int u, v, c;
         cin >> u >> v >> c;
-        G.add_flow(u, v, c);
+        G.add(u, v, c);
     }
+
+    // G.print_incidentlist(false);
+    // cerr << "Check" << endl;
 
     FordFulkerson<int> ff(G);
     cout << ff.solve(0, V - 1) << endl;

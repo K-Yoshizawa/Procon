@@ -17,101 +17,59 @@ using EdgeIndex = int;
 
 template<typename CostType>
 struct Edge{
-    Vertex from, to;
+    EdgeID ID{-1};
+    Vertex src, to;
     CostType cost, cap;
-    EdgeID ID;
-    EdgeIndex fidx, tidx;
+    EdgeIndex sidx, tidx;
 
-    Edge() : ID(-1){}
-
-    Edge(Vertex from, Vertex to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) 
-        : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}
-
-    Vertex getto(Vertex v){
-        assert(v == from || v == to);
-        return from ^ to ^ v;
-    }
-
-    void swap(){
-        Vertex tmp = from;
-        from = to;
-        to = tmp;
-    }
+    Edge() = default;
 
     void print(){
-        cerr << "Edge " << ID << " : (" << from << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << fidx << ", " << tidx << "]" << endl;
+        cerr << "Edge " << ID << " : (" << src << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << sidx << ", " << tidx << "]" << endl;
     }
 };
 
 template<typename CostType>
+using EdgeSet = vector<Edge<CostType>>;
+template<typename CostType>
+using IncidentList = vector<vector<Edge<CostType>>>;
+using AdjacentList = vector<vector<Vertex>>;
+
+template<typename CostType>
 struct Graph{
-    private:
+    protected:
     int __CntVertex, __CntEdge;
     bool __isDirected;
-    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;
-    vector<vector<Edge<CostType>>> __IncidentList;
-    vector<pair<int, int>> __EdgePlace;
-
-    vector<CostType> __Flow;
+    EdgeSet<CostType> __ES, __RES;
+    IncidentList<CostType> __IL;
+    AdjacentList __AL;
 
     public:
     CostType INF;
 
-    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize), INF(numeric_limits<CostType>::max() / 2){}
+    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}
 
     Graph() = default;
 
-    void add(Vertex s, Vertex t, CostType w = 1){
-        assert(0 <= s && s < __CntVertex);
-        assert(0 <= t && t < __CntVertex);
-        EdgeIndex sidx = __IncidentList[s].size(), tidx = __IncidentList[t].size();
-        Edge<CostType> es(s, t, 1, w, __CntEdge, sidx, tidx);
-        Edge<CostType> et(t, s, 1, w, __CntEdge, tidx, sidx);
-        __EdgeSet.push_back(es);
-        __IncidentList[s].push_back(es);
-        __RevEdgeSet.push_back(et);
-        if(!__isDirected) __IncidentList[t].push_back(et);
-        ++__CntEdge;
-    }
-
-    void add_flow(Vertex Source, Vertex Sink, CostType Capacity, CostType Cost = 1){
+    void add(Vertex Source, Vertex To, CostType Cost = 1){
         assert(0 <= Source && Source < __CntVertex);
-        assert(0 <= Sink && Sink < __CntVertex);
-        EdgeIndex sidx = __IncidentList[Source].size(), tidx = __IncidentList[Sink].size();
-        Edge<CostType> es(Source, Sink, Cost, Capacity, __CntEdge, sidx, tidx);
-        Edge<CostType> et(Sink, Source, -Cost, 0, __CntEdge, tidx, sidx);
-        __EdgeSet.push_back(es);
-        __IncidentList[Source].push_back(es);
-        __RevEdgeSet.push_back(et);
-        __IncidentList[Sink].push_back(et);
-        __Flow.push_back(0);
+        assert(0 <= To && To < __CntVertex);
+        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();
+        Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};
+        Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx, sidx};
+        __ES.push_back(es);
+        __RES.push_back(et);
+        __IL[Source].push_back(es), __AL[Source].push_back(To);
+        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);
         ++__CntEdge;
-    }
-
-    void update_flow(Vertex Source, EdgeID edge_id, CostType Decrease){
-        if(__EdgeSet[edge_id].from != Source) Decrease *= -1;
-        __EdgeSet[edge_id].cap -= Decrease;
-        __RevEdgeSet[edge_id].cap += Decrease;
-        __Flow[edge_id] += Decrease;
-    }
-
-    vector<Edge<CostType>> get_flow(){
-        vector<Edge<CostType>> ret;
-        for(EdgeID i = 0; i < __CntEdge; ++i){
-            if(__Flow[i] > 0){
-                ret.push_back(__EdgeSet[i]);
-            }
-        }
-        return ret;
     }
 
     vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
         vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));
         for(Vertex v = 0; v < __CntVertex; ++v){
             ret[v][v] = 0;
-            for(auto [eid, rev] : __IncidentList[v]){
-                if(!rev) ret[v][__EdgeSet[eid].to] = __EdgeSet[eid].cost;
-                else ret[v][__RevEdgeSet[eid].to] = __RevEdgeSet[eid].cost;
+            for(auto e : __IL[v]){
+                ret[v][e.to] = e.cost;
             }
         }
         return ret;
@@ -126,53 +84,29 @@ struct Graph{
     }
 
     inline int incsize(Vertex v){
-        return __IncidentList[v].size();
+        return __IL[v].size();
     }
 
-    inline Edge<CostType> get_edge(EdgeID edge_id, bool isReverse){
-        return (isReverse ? __RevEdgeSet[edge_id] : __EdgeSet[edge_id]);
+    inline EdgeSet<CostType> get_edgeset(){
+        return __ES;
     }
 
-    inline vector<Edge<CostType>>& get_edgeset(){
-        return __EdgeSet;
+    inline IncidentList<CostType> get_incidentlist(){
+        return __IL;
     }
 
-    vector<Edge<CostType>> get_incident(Vertex v){
+    inline vector<Edge<CostType>> get_incident(Vertex v){
         assert(0 <= v && v < __CntVertex);
-        return __IncidentList[v];
+        return __IL[v];
     }
 
-    EdgeIndex get_place(EdgeID ID, Vertex From){
-        if(__EdgeSet[ID].from == From) return __EdgePlace[ID].first;
-        else return __EdgePlace[ID].second;
+    inline AdjacentList get_adjacentlist(){
+        return __AL;
     }
 
-    vector<pair<Vertex, EdgeID>> convert_rootedtree(Vertex Root = 0){
-        assert(0 <= Root && Root < __CntVertex);
-        vector<pair<Vertex, EdgeID>> ret(__CntVertex, {-1, -1});
-        vector<int> visited(__CntVertex, 0);
-        queue<Vertex> que;
-        que.push(Root);
-        while(que.size()){
-            Vertex now = que.front(); que.pop();
-            if(visited[now]) continue;
-            visited[now] = 1;
-            for(int i = 0; i < __IncidentList[now].size(); ++i){
-                auto [eid, rev] = __IncidentList[now][i];
-                Edge<CostType> e = get_edge(eid, rev);
-                if(visited[e.to]) continue;
-                que.push(e.to);
-                ret[e.to] = {now, eid};
-                if(rev){
-                    __IncidentList[e.from][__EdgePlace[eid].second].second = false;
-                    __IncidentList[e.to][__EdgePlace[eid].first].second = true;
-                    __EdgeSet[eid].swap();
-                    __RevEdgeSet[eid].swap();
-                    swap(__EdgePlace[eid].first, __EdgePlace[eid].second);
-                }
-            }
-        }
-        return ret;
+    inline vector<Vertex> get_adjacent(Vertex v){
+        assert(0 <= v && v < __CntVertex);
+        return __AL[v];
     }
 
     vector<Edge<CostType>> operator[](Vertex v){
@@ -181,15 +115,15 @@ struct Graph{
 
     void print_edgeset(bool OneIndex = true){
         for(int e = 0; e < __CntEdge; ++e){
-            cout << e + OneIndex << " : (" << __EdgeSet[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __EdgeSet[e].to + OneIndex << ") = " << __EdgeSet[e].cost << " (" << __EdgeSet[e].cap << ")" << endl;
+            cout << e + OneIndex << " : (" << __ES[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __ES[e].to + OneIndex << ") = " << __ES[e].cost << " (" << __ES[e].cap << ")" << endl;
         }
     }
 
     void print_incidentlist(bool OneIndex = true){
         for(int i = 0; i < __CntVertex; ++i){
             cout << i + OneIndex << " :";
-            for(int j = 0; j < __IncidentList[i].size(); ++j){
-                cout << " (" << __IncidentList[i][j].first << " / " << __IncidentList[i][j].second << ")";
+            for(int j = 0; j < __IL[i].size(); ++j){
+                cout << " (" << __IL[i][j].to << " / " << __IL[i][j].cost << ", " << __IL[i][j].cap << ")";
             }
             cout << endl;
         }

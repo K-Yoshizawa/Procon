@@ -18,10 +18,10 @@ vector<CostType> BellmanFord(Graph<CostType> &G, Vertex Start){
             return vector<CostType>{};
         }
         bool update = false;
-        for(Edge<CostType> &e : G.get_edgeset()){
-            if(ret[e.from] == G.INF) continue;
-            if(ret[e.to] > ret[e.from] + e.cost){
-                ret[e.to] = ret[e.from] + e.cost;
+        for(auto e : G.get_edgeset()){
+            if(ret[e.src] == G.INF) continue;
+            if(ret[e.to] > ret[e.src] + e.cost){
+                ret[e.to] = ret[e.src] + e.cost;
                 update = true;
             }
         }

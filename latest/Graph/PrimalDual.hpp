@@ -6,16 +6,17 @@
  * @date 2023-09-01
  */
 
+#include "FlowTemplate.hpp"
 #include "Dijkstra.hpp"
 
 template<typename CostType>
 struct PrimalDual{
     private:
-    Graph<CostType> &G;
+    Flow<CostType> &G;
     vector<CostType> Potential;
 
     public:
-    PrimalDual(Graph<CostType> &G) : G(G), Potential(G.vsize()){}
+    PrimalDual(Flow<CostType> &G) : G(G), Potential(G.vsize()){}
 
     CostType solve(Vertex Start, Vertex Goal, CostType F){
         CostType ret = 0;
@@ -28,14 +29,13 @@ struct PrimalDual{
             if(Dist[Goal] == G.INF) return -1;
             auto path = dk.restore_edge(Goal);
             CostType f = F;
-            for(auto [eid, rev] : path){
-                auto e = G.get_edge(eid, rev);
+            for(auto e : path){
                 f = min(f, e.cap);
             }
             F -= f;
             ret += f * Dist[Goal];
-            for(auto [eid, rev] : path){
-                G.update_flow(eid, rev, f);
+            for(auto e : path){
+                G.update(e.src, e.sidx, f);
             }
             for(int i = 0; i < Dist.size(); ++i){
                 CostType RawDist = Dist[i] -= Potential[i] - Potential[Start];

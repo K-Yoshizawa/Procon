@@ -6,12 +6,12 @@
  * @date 2023-09-01
  */
 
-#include "GraphTemplate.hpp"
+#include "FlowTemplate.hpp"
 
 template<typename CostType>
 struct FordFulkerson{
     private:
-    Graph<CostType> &G;
+    Flow<CostType> &G;
     vector<int> __used;
 
     CostType __dfs(Vertex pos, Vertex goal, CostType F){
@@ -19,9 +19,11 @@ struct FordFulkerson{
         __used[pos] = 1;
         for(auto e : G.get_incident(pos)){
             if(e.cap == 0 || __used[e.to]) continue;
+            // cerr << "[" << e.src << ", " << e.to << "] (" << e.cap << ")\n";
             CostType flow = __dfs(e.to, goal, min(F, e.cap));
             if(flow >= 1){
-                G.update_flow(e.from, e.ID, flow);
+                // cerr << "Update [" << e.src << ", " << e.to << "] Flow = " << flow << endl;
+                G.update(e.src, e.sidx, flow);
                 return flow;
             }
         }
@@ -29,7 +31,7 @@ struct FordFulkerson{
     }
 
     public:
-    FordFulkerson(Graph<CostType> &G) : G(G), __used(G.vsize(), 0){}
+    FordFulkerson(Flow<CostType> &G) : G(G), __used(G.vsize(), 0){}
 
     CostType solve(Vertex Source, Vertex Sink){
         CostType ans = 0;
@@ -42,7 +44,7 @@ struct FordFulkerson{
         return ans;
     }
 
-    vector<Edge<CostType>> get_flow(){
-        return G.get_flow();
+    vector<Edge<CostType>> get(){
+        return G.get();
     }
 };

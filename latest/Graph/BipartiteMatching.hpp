@@ -2,7 +2,7 @@
 
 struct BipartiteMatching{
     private:
-    Graph<int> G, H;
+    Flow<int> G, H;
     int __L, __R;
     Vertex __S, __T;
     vector<pair<Vertex, Vertex>> __Matching;
@@ -14,22 +14,22 @@ struct BipartiteMatching{
 
     public:
     BipartiteMatching(int L, int R, int src_flow = 1, int sink_flow = 1, bool MakeSubGraph = false) : __L(L), __R(R), __S(L + R), __T(L + R + 1), __SubGraph(MakeSubGraph){
-        G = Graph<int>(__L + __R + 2, true);
-        for(Vertex l = 0; l < __L; ++l) G.add_flow(__S, l, src_flow);
-        for(Vertex r = __L; r < __L + __R; ++r) G.add_flow(r, __T, sink_flow);
+        G = Flow<int>(__L + __R + 2);
+        for(Vertex l = 0; l < __L; ++l) G.add(__S, l, src_flow);
+        for(Vertex r = __L; r < __L + __R; ++r) G.add(r, __T, sink_flow);
     }
 
-    void add_flow(int l, int r, int flow = 1){
-        G.add_flow(l, __L + r, flow);
+    void add(int l, int r, int flow = 1){
+        G.add(l, __L + r, flow);
         remain_edge.insert({l, __L + r});
     }
 
     int solve(bool MakeSubGraph = false){
         FordFulkerson<int> ff(G);
         int ret = ff.solve(__S, __T);
-        for(auto e : ff.get_flow()) if(e.from != __S && e.to != __T) __Matching.push_back({e.from, e.to - __L});
+        for(auto e : ff.get()) if(e.src != __S && e.to != __T) __Matching.push_back({e.src, e.to - __L});
         if(MakeSubGraph){
-            H = Graph<int>(__L + __R, true);
+            H = Flow<int>(__L + __R);
             mark_L.resize(__L, 1), mark_R.resize(__R, 0);
             for(auto [l, r] : __Matching){
                 H.add(r, l);
