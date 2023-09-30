@@ -23,13 +23,5 @@
 "verify/LC/LC-PointAddRangeSum-ST.test.cpp": "2023-08-26 12:21:12 +0900",
 "verify/LC/LC-Unionfind.test.cpp": "2023-08-26 12:21:12 +0900",
 "verify/yukicoder/yuki-0649.test.cpp": "2023-08-26 12:21:12 +0900",
-"verify_latest/AOJ-ALDS1-11-A.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-1-A.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-1-B.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-1-C.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-6-A.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-6-B.test.cpp": "2023-09-22 02:20:57 +0900",
-"verify_latest/AOJ-GRL-7-A.test.cpp": "2023-09-22 02:20:57 +0900",
 "verify_latest/LC-PointAddRangeSum.test.cpp": "2023-09-22 02:20:57 +0900"
 }
