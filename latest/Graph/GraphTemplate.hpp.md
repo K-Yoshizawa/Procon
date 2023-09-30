@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':x:'
     path: latest/Graph/BipartiteMatching.hpp
     title: latest/Graph/BipartiteMatching.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
   - icon: ':warning:'
     path: latest/Tree/EulerTour.hpp
     title: latest/Tree/EulerTour.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Tree/LowestCommonAncestor.hpp
     title: latest/Tree/LowestCommonAncestor.hpp
   - icon: ':warning:'
@@ -36,19 +36,19 @@ data:
   - icon: ':x:'
     path: verify_latest/AOJ-ALDS1-11-A.test.cpp
     title: verify_latest/AOJ-ALDS1-11-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-1-A.test.cpp
     title: verify_latest/AOJ-GRL-1-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
     title: verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-1-B.test.cpp
     title: verify_latest/AOJ-GRL-1-B.test.cpp
   - icon: ':x:'
     path: verify_latest/AOJ-GRL-1-C.test.cpp
     title: verify_latest/AOJ-GRL-1-C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-5-C.test.cpp
     title: verify_latest/AOJ-GRL-5-C.test.cpp
   - icon: ':x:'
@@ -62,7 +62,7 @@ data:
     title: verify_latest/AOJ-GRL-7-A.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -73,16 +73,16 @@ data:
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
     \    Vertex from, to;\n    CostType cost, cap;\n    EdgeID ID;\n    EdgeIndex\
-    \ fidx, tidx;\n\n    Edge() : ID(-1){} = default;\n\n    Edge(Vertex from, Vertex\
-    \ to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx)\
-    \ \n        : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\
-    \n    Vertex getto(Vertex v){\n        assert(v == from || v == to);\n       \
-    \ return from ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex tmp = from;\n\
-    \        from = to;\n        to = tmp;\n    }\n\n    void print(){\n        cerr\
-    \ << \"Edge \" << ID << \" : (\" << from << \" -> \" << to << \"), Cost = \" <<\
-    \ cost << \", Capacity = \" << cap << \", Place = [\" << fidx << \", \" << tidx\
-    \ << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n\
-    \    private:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
+    \ fidx, tidx;\n\n    Edge() : ID(-1){}\n\n    Edge(Vertex from, Vertex to, CostType\
+    \ cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) \n        : from(from),\
+    \ to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\n    Vertex\
+    \ getto(Vertex v){\n        assert(v == from || v == to);\n        return from\
+    \ ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex tmp = from;\n        from\
+    \ = to;\n        to = tmp;\n    }\n\n    void print(){\n        cerr << \"Edge\
+    \ \" << ID << \" : (\" << from << \" -> \" << to << \"), Cost = \" << cost <<\
+    \ \", Capacity = \" << cap << \", Place = [\" << fidx << \", \" << tidx << \"\
+    ]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n\
+    \    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
     \ __EdgeSet, __RevEdgeSet;\n    vector<vector<Edge<CostType>>> __IncidentList;\n\
     \    vector<pair<int, int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n \
     \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
@@ -162,26 +162,26 @@ data:
     \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Vertex from, to;\n\
     \    CostType cost, cap;\n    EdgeID ID;\n    EdgeIndex fidx, tidx;\n\n    Edge()\
-    \ : ID(-1){} = default;\n\n    Edge(Vertex from, Vertex to, CostType cap, CostType\
-    \ cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) \n        : from(from), to(to),\
-    \ cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\n    Vertex getto(Vertex\
-    \ v){\n        assert(v == from || v == to);\n        return from ^ to ^ v;\n\
-    \    }\n\n    void swap(){\n        Vertex tmp = from;\n        from = to;\n \
-    \       to = tmp;\n    }\n\n    void print(){\n        cerr << \"Edge \" << ID\
-    \ << \" : (\" << from << \" -> \" << to << \"), Cost = \" << cost << \", Capacity\
-    \ = \" << cap << \", Place = [\" << fidx << \", \" << tidx << \"]\" << endl;\n\
-    \    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int\
-    \ __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
-    \ __EdgeSet, __RevEdgeSet;\n    vector<vector<Edge<CostType>>> __IncidentList;\n\
-    \    vector<pair<int, int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n \
-    \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
-    \ false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize),\
-    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
-    \ void add(Vertex s, Vertex t, CostType w = 1){\n        assert(0 <= s && s <\
-    \ __CntVertex);\n        assert(0 <= t && t < __CntVertex);\n        EdgeIndex\
-    \ sidx = __IncidentList[s].size(), tidx = __IncidentList[t].size();\n        Edge<CostType>\
-    \ es(s, t, 1, w, __CntEdge, sidx, tidx);\n        Edge<CostType> et(t, s, 1, w,\
-    \ __CntEdge, tidx, sidx);\n        __EdgeSet.push_back(es);\n        __IncidentList[s].push_back(es);\n\
+    \ : ID(-1){}\n\n    Edge(Vertex from, Vertex to, CostType cap, CostType cost,\
+    \ EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) \n        : from(from), to(to), cost(cost),\
+    \ cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\n    Vertex getto(Vertex v){\n\
+    \        assert(v == from || v == to);\n        return from ^ to ^ v;\n    }\n\
+    \n    void swap(){\n        Vertex tmp = from;\n        from = to;\n        to\
+    \ = tmp;\n    }\n\n    void print(){\n        cerr << \"Edge \" << ID << \" :\
+    \ (\" << from << \" -> \" << to << \"), Cost = \" << cost << \", Capacity = \"\
+    \ << cap << \", Place = [\" << fidx << \", \" << tidx << \"]\" << endl;\n    }\n\
+    };\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>> __EdgeSet, __RevEdgeSet;\n\
+    \    vector<vector<Edge<CostType>>> __IncidentList;\n    vector<pair<int, int>>\
+    \ __EdgePlace;\n\n    vector<CostType> __Flow;\n\n    public:\n    CostType INF;\n\
+    \n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
+    \ __isDirected(isDirected), __CntEdge(0), __IncidentList(VertexSize), INF(numeric_limits<CostType>::max()\
+    \ / 2){}\n\n    Graph() = default;\n\n    void add(Vertex s, Vertex t, CostType\
+    \ w = 1){\n        assert(0 <= s && s < __CntVertex);\n        assert(0 <= t &&\
+    \ t < __CntVertex);\n        EdgeIndex sidx = __IncidentList[s].size(), tidx =\
+    \ __IncidentList[t].size();\n        Edge<CostType> es(s, t, 1, w, __CntEdge,\
+    \ sidx, tidx);\n        Edge<CostType> et(t, s, 1, w, __CntEdge, tidx, sidx);\n\
+    \        __EdgeSet.push_back(es);\n        __IncidentList[s].push_back(es);\n\
     \        __RevEdgeSet.push_back(et);\n        if(!__isDirected) __IncidentList[t].push_back(et);\n\
     \        ++__CntEdge;\n    }\n\n    void add_flow(Vertex Source, Vertex Sink,\
     \ CostType Capacity, CostType Cost = 1){\n        assert(0 <= Source && Source\
@@ -259,8 +259,8 @@ data:
   - latest/Tree/LowestCommonAncestor.hpp
   - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-09-30 12:20:40+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-09-30 17:57:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp
   - verify_latest/AOJ-GRL-1-B.test.cpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':x:'
+  - icon: ':question:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -29,16 +29,16 @@ data:
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
     \    Vertex from, to;\n    CostType cost, cap;\n    EdgeID ID;\n    EdgeIndex\
-    \ fidx, tidx;\n\n    Edge() : ID(-1){} = default;\n\n    Edge(Vertex from, Vertex\
-    \ to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx)\
-    \ \n        : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\
-    \n    Vertex getto(Vertex v){\n        assert(v == from || v == to);\n       \
-    \ return from ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex tmp = from;\n\
-    \        from = to;\n        to = tmp;\n    }\n\n    void print(){\n        cerr\
-    \ << \"Edge \" << ID << \" : (\" << from << \" -> \" << to << \"), Cost = \" <<\
-    \ cost << \", Capacity = \" << cap << \", Place = [\" << fidx << \", \" << tidx\
-    \ << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n\
-    \    private:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
+    \ fidx, tidx;\n\n    Edge() : ID(-1){}\n\n    Edge(Vertex from, Vertex to, CostType\
+    \ cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) \n        : from(from),\
+    \ to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}\n\n    Vertex\
+    \ getto(Vertex v){\n        assert(v == from || v == to);\n        return from\
+    \ ^ to ^ v;\n    }\n\n    void swap(){\n        Vertex tmp = from;\n        from\
+    \ = to;\n        to = tmp;\n    }\n\n    void print(){\n        cerr << \"Edge\
+    \ \" << ID << \" : (\" << from << \" -> \" << to << \"), Cost = \" << cost <<\
+    \ \", Capacity = \" << cap << \", Place = [\" << fidx << \", \" << tidx << \"\
+    ]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nstruct Graph{\n    private:\n\
+    \    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    vector<Edge<CostType>>\
     \ __EdgeSet, __RevEdgeSet;\n    vector<vector<Edge<CostType>>> __IncidentList;\n\
     \    vector<pair<int, int>> __EdgePlace;\n\n    vector<CostType> __Flow;\n\n \
     \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
@@ -192,7 +192,7 @@ data:
   isVerificationFile: false
   path: latest/Graph/PrimalDual.hpp
   requiredBy: []
-  timestamp: '2023-09-30 12:20:40+09:00'
+  timestamp: '2023-09-30 17:57:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify_latest/AOJ-GRL-6-B.test.cpp
