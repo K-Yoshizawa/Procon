@@ -11,22 +11,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: latest/Graph/BellmanFord.hpp
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/BipartiteMatching.hpp
       title: latest/Graph/BipartiteMatching.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
+      path: latest/Graph/FlowTemplate.hpp
+      title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/FordFulkerson.hpp
       title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/PrimalDual.hpp
       title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: latest/Graph/WarshallFloyd.hpp
       title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: latest
@@ -238,7 +241,7 @@ data:
       title: verify/yukicoder/yuki-0649.test.cpp
   - name: verify_latest
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-ALDS1-11-A.test.cpp
       title: verify_latest/AOJ-ALDS1-11-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -250,19 +253,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-B.test.cpp
       title: verify_latest/AOJ-GRL-1-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-C.test.cpp
       title: verify_latest/AOJ-GRL-1-C.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-5-C.test.cpp
       title: verify_latest/AOJ-GRL-5-C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-A.test.cpp
       title: verify_latest/AOJ-GRL-6-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-B.test.cpp
       title: verify_latest/AOJ-GRL-6-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-7-A.test.cpp
       title: verify_latest/AOJ-GRL-7-A.test.cpp
     - icon: ':heavy_check_mark:'
