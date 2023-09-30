@@ -22,7 +22,7 @@ struct Edge{
     EdgeID ID;
     EdgeIndex fidx, tidx;
 
-    Edge() : ID(-1){} = default;
+    Edge() : ID(-1){}
 
     Edge(Vertex from, Vertex to, CostType cap, CostType cost, EdgeID ID, EdgeIndex fidx, EdgeIndex tidx) 
         : from(from), to(to), cost(cost), cap(cap), ID(ID), fidx(fidx), tidx(tidx){}
