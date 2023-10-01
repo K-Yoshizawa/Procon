@@ -5,7 +5,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: latest/DataStructure/SegmentTree.hpp
-      title: latest/DataStructure/SegmentTree.hpp
+      title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - name: latest/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -127,7 +127,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Template.hpp
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/modint.hpp
       title: modint
   - name: library/Tree
@@ -245,6 +245,12 @@ data:
       path: verify_latest/AOJ-ALDS1-11-A.test.cpp
       title: verify_latest/AOJ-ALDS1-11-A.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-A.test.cpp
+      title: verify_latest/AOJ-DSL-2-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
+      title: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-A.test.cpp
       title: verify_latest/AOJ-GRL-1-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -271,6 +277,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/LC-PointAddRangeSum.test.cpp
       title: verify_latest/LC-PointAddRangeSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/LC-PointSetRangeComposite.test.cpp
+      title: verify_latest/LC-PointSetRangeComposite.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

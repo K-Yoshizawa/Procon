@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/LC-PointSetRangeComposite.test.cpp
+    title: verify_latest/LC-PointSetRangeComposite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: modint
     links: []
@@ -74,8 +77,9 @@ data:
   path: library/modint.hpp
   requiredBy: []
   timestamp: '2023-08-30 10:46:40+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify_latest/LC-PointSetRangeComposite.test.cpp
 documentation_of: library/modint.hpp
 layout: document
 redirect_from:
