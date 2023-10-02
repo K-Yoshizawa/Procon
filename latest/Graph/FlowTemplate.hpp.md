@@ -7,7 +7,8 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: latest/Graph/BipartiteMatching.hpp
-    title: latest/Graph/BipartiteMatching.hpp
+    title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
+      \u30C3\u30C1\u30F3\u30B0"
   - icon: ':heavy_check_mark:'
     path: latest/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
@@ -36,10 +37,10 @@ data:
     links: []
   bundledCode: "#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\n/**\n * @file FlowTemplate.hpp\n\
     \ * @author log K (lX57)\n * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n * @date 2023-09-29\n */\n\n#line 2\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2023-09-29\n */\n\n#line 2\
     \ \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n * @author\
     \ log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\n\
+    \u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
     \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
@@ -113,7 +114,7 @@ data:
     \         }\n        }\n        return ret;\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file FlowTemplate.hpp\n * @author log K (lX57)\n\
     \ * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @version 0.1\n * @date 2023-09-29\n */\n\n#include \"GraphTemplate.hpp\"\n\
+    \n * @version 1.0\n * @date 2023-09-29\n */\n\n#include \"GraphTemplate.hpp\"\n\
     \n#define LOGK_FLOW\n\ntemplate<typename CostType>\nstruct Flow : public Graph<CostType>{\n\
     \    using Graph<CostType>::Graph;\n\n    vector<vector<int>> __Rev;\n\n    public:\n\
     \    void add(Vertex Source, Vertex To, CostType Capacity = 1, CostType Cost =\
@@ -143,7 +144,7 @@ data:
   - latest/Graph/FordFulkerson.hpp
   - latest/Graph/PrimalDual.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-09-30 19:29:55+09:00'
+  timestamp: '2023-10-03 01:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp

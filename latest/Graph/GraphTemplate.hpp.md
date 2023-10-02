@@ -7,7 +7,8 @@ data:
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
     path: latest/Graph/BipartiteMatching.hpp
-    title: latest/Graph/BipartiteMatching.hpp
+    title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
+      \u30C3\u30C1\u30F3\u30B0"
   - icon: ':heavy_check_mark:'
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
@@ -72,7 +73,7 @@ data:
     links: []
   bundledCode: "#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
     \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n * @date 2023-08-31\n */\n\n#include\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
     \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
@@ -127,7 +128,7 @@ data:
     \ }\n            cout << endl;\n        }\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n\
     \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @version 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing\
+    \n * @version 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
     \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
@@ -194,7 +195,7 @@ data:
   - latest/Tree/LowestCommonAncestor.hpp
   - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-09-30 19:29:55+09:00'
+  timestamp: '2023-10-03 01:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp

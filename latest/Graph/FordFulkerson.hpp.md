@@ -10,7 +10,8 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: latest/Graph/BipartiteMatching.hpp
-    title: latest/Graph/BipartiteMatching.hpp
+    title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
+      \u30C3\u30C1\u30F3\u30B0"
   - icon: ':warning:'
     path: verify_latest/pending/LC-BipartiteMatching.cpp
     title: verify_latest/pending/LC-BipartiteMatching.cpp
@@ -29,13 +30,13 @@ data:
     links: []
   bundledCode: "#line 1 \"latest/Graph/FordFulkerson.hpp\"\n/**\n * @file FordFulkerson.hpp\n\
     \ * @author log K (lX57)\n * @brief Ford-Fulkerson - \u6700\u5927\u6D41\n * @version\
-    \ 2.0\n * @date 2023-09-01\n */\n\n#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\
+    \ 2.1\n * @date 2023-10-02\n */\n\n#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\
     \n/**\n * @file FlowTemplate.hpp\n * @author log K (lX57)\n * @brief Flow Template\
-    \ - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n\
+    \ - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n\
     \ * @date 2023-09-29\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n\
     \ * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph Template\
-    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 2.1\n\
-    \ * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
+    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n\
+    \ * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
     using Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex = int;\n\ntemplate<typename\
     \ CostType>\nstruct Edge{\n    EdgeID ID{-1};\n    Vertex src, to;\n    CostType\
     \ cost, cap;\n    EdgeIndex sidx, tidx;\n\n    Edge() = default;\n\n    void print(){\n\
@@ -123,7 +124,7 @@ data:
     \ == 0) break;\n            ans += F;\n        }\n        return ans;\n    }\n\
     \n    vector<Edge<CostType>> get(){\n        return G.get();\n    }\n};\n"
   code: "/**\n * @file FordFulkerson.hpp\n * @author log K (lX57)\n * @brief Ford-Fulkerson\
-    \ - \u6700\u5927\u6D41\n * @version 2.0\n * @date 2023-09-01\n */\n\n#include\
+    \ - \u6700\u5927\u6D41\n * @version 2.1\n * @date 2023-10-02\n */\n\n#include\
     \ \"FlowTemplate.hpp\"\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n\
     \    private:\n    Flow<CostType> &G;\n    vector<int> __used;\n\n    CostType\
     \ __dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal) return\
@@ -148,7 +149,7 @@ data:
   requiredBy:
   - latest/Graph/BipartiteMatching.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-09-30 19:29:55+09:00'
+  timestamp: '2023-10-03 01:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp

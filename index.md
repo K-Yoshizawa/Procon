@@ -5,8 +5,8 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: latest/DataStructure/LazySegmentTree.hpp
-      title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `Size`\
-        \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002"
+      title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
+        \u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: latest/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -17,7 +17,8 @@ data:
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
     - icon: ':heavy_check_mark:'
       path: latest/Graph/BipartiteMatching.hpp
-      title: latest/Graph/BipartiteMatching.hpp
+      title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\
+        \u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
       path: latest/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"

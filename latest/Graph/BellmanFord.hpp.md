@@ -20,10 +20,10 @@ data:
     links: []
   bundledCode: "#line 1 \"latest/Graph/BellmanFord.hpp\"\n/**\n * @file BellmanFord.hpp\n\
     \ * @author log_K (lX57)\n * @brief BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\
-    \u77ED\u8DDD\u96E2\n * @version 2.0\n * @date 2023-08-31\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+    \u77ED\u8DDD\u96E2\n * @version 2.1\n * @date 2023-10-02\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 2.1\n * @date 2023-08-31\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
     \nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex = int;\n\ntemplate<typename\
     \ CostType>\nstruct Edge{\n    EdgeID ID{-1};\n    Vertex src, to;\n    CostType\
     \ cost, cap;\n    EdgeIndex sidx, tidx;\n\n    Edge() = default;\n\n    void print(){\n\
@@ -85,8 +85,8 @@ data:
     \  }\n        if(!update) break;\n        ++updatecount;\n    }\n    return ret;\n\
     }\n"
   code: "/**\n * @file BellmanFord.hpp\n * @author log_K (lX57)\n * @brief BellmanFord\
-    \ - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.0\n * @date\
-    \ 2023-08-31\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    \ - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2\n * @version 2.1\n * @date\
+    \ 2023-10-02\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
     vector<CostType> BellmanFord(Graph<CostType> &G, Vertex Start){\n    vector<CostType>\
     \ ret(G.vsize(), G.INF);\n    ret[Start] = 0;\n    int updatecount = 0;\n    while(1){\n\
     \        if(updatecount == G.vsize()){\n            return vector<CostType>{};\n\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: false
   path: latest/Graph/BellmanFord.hpp
   requiredBy: []
-  timestamp: '2023-09-30 19:29:55+09:00'
+  timestamp: '2023-10-03 01:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-1-B.test.cpp
