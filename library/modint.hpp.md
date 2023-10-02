@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_latest/LC-PointSetRangeComposite.test.cpp
     title: verify_latest/LC-PointSetRangeComposite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/LC-RangeAffineRangeSum.test.cpp
+    title: verify_latest/LC-RangeAffineRangeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -80,6 +83,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/LC-PointSetRangeComposite.test.cpp
+  - verify_latest/LC-RangeAffineRangeSum.test.cpp
 documentation_of: library/modint.hpp
 layout: document
 redirect_from:

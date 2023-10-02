@@ -35,11 +35,11 @@ data:
     \u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity\
     \ \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\
     \u3057\u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
-    \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false) : f(Merge),\
-    \ __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n      \
-    \  while(__Size < Size) __Size <<= 1;\n        __Offset = __Size - 1;\n      \
-    \  __Data.resize(2 * __Size, __M1);\n    }\n\n    /**\n     * @brief \u30BB\u30B0\
-    \u30E1\u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention\
+    \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    :\
+    \ f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n\
+    \        while(__Size < Size) __Size <<= 1;\n        __Offset = __Size - 1;\n\
+    \        __Data.resize(2 * __Size, __M1);\n    }\n\n    /**\n     * @brief \u30BB\
+    \u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention\
     \ \u5FC5\u305A `set()` \u3067\u521D\u671F\u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\
     \u3089\u547C\u3073\u51FA\u3059\u3053\u3068\uFF01\n     */\n    void build(){\n\
     \        for(int i = __Offset; i >= 1; --i){\n            __Data[i] = f(__Data[i\
@@ -55,9 +55,9 @@ data:
     \u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\
     \u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\
     \u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid>\
-    \ &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\
-    \ : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size =\
-    \ 1;\n        while(__Size < (int)Init_Data.size()) __Size <<= 1;\n        __Offset\
+    \ &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n\
+    \    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size\
+    \ = 1;\n        while(__Size < (int)Init_Data.size()) __Size <<= 1;\n        __Offset\
     \ = __Size - 1;\n        __Data.resize(2 * __Size, __M1);\n        for(int i =\
     \ 0; i < (int)Init_Data.size(); ++i){\n            __Data[__Size + i] = Init_Data[i];\n\
     \        }\n        build();\n    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: true
   path: verify_latest/AOJ-DSL-2-A.test.cpp
   requiredBy: []
-  timestamp: '2023-10-02 01:05:54+09:00'
+  timestamp: '2023-10-03 00:15:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/AOJ-DSL-2-A.test.cpp

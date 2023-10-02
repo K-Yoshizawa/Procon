@@ -35,7 +35,7 @@ data:
     \     * @param Monoid_Identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\
     \n     * @param ZeroIndex 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\u304B\
     \ (default = `false`)\n     */\n    SegmentTree(int Size, F Merge, const Monoid\
-    \ &Monoid_Identity, bool ZeroIndex = false) : f(Merge), __M1(Monoid_Identity),\
+    \ &Monoid_Identity, bool ZeroIndex = false)\n    : f(Merge), __M1(Monoid_Identity),\
     \ __ZeroIndex(ZeroIndex){\n        __Size = 1;\n        while(__Size < Size) __Size\
     \ <<= 1;\n        __Offset = __Size - 1;\n        __Data.resize(2 * __Size, __M1);\n\
     \    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\
@@ -55,7 +55,7 @@ data:
     \u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\
     \u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\
     \u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid> &Init_Data,\
-    \ F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false) : f(Merge),\
+    \ F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    : f(Merge),\
     \ __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n      \
     \  while(__Size < (int)Init_Data.size()) __Size <<= 1;\n        __Offset = __Size\
     \ - 1;\n        __Data.resize(2 * __Size, __M1);\n        for(int i = 0; i < (int)Init_Data.size();\
@@ -101,7 +101,7 @@ data:
   isVerificationFile: true
   path: verify_latest/LC-PointAddRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-02 01:05:54+09:00'
+  timestamp: '2023-10-03 00:15:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/LC-PointAddRangeSum.test.cpp

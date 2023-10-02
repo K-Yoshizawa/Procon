@@ -4,6 +4,10 @@ data:
   - name: latest/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
+      path: latest/DataStructure/LazySegmentTree.hpp
+      title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `Size`\
+        \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002"
+    - icon: ':heavy_check_mark:'
       path: latest/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - name: latest/Graph
@@ -251,6 +255,18 @@ data:
       path: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
       title: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-F.test.cpp
+      title: verify_latest/AOJ-DSL-2-F.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-G.test.cpp
+      title: verify_latest/AOJ-DSL-2-G.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-H.test.cpp
+      title: verify_latest/AOJ-DSL-2-H.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-I.test.cpp
+      title: verify_latest/AOJ-DSL-2-I.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-A.test.cpp
       title: verify_latest/AOJ-GRL-1-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -280,6 +296,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/LC-PointSetRangeComposite.test.cpp
       title: verify_latest/LC-PointSetRangeComposite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/LC-RangeAffineRangeSum.test.cpp
+      title: verify_latest/LC-RangeAffineRangeSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
