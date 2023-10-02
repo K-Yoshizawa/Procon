@@ -4,8 +4,8 @@
  * @file GraphTemplate.hpp
  * @author log K (lX57)
  * @brief Graph Template - グラフテンプレート
- * @version 2.1
- * @date 2023-08-31
+ * @version 2.2
+ * @date 2023-10-02
  */
 
 #include <bits/stdc++.h>

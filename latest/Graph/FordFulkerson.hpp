@@ -2,8 +2,8 @@
  * @file FordFulkerson.hpp
  * @author log K (lX57)
  * @brief Ford-Fulkerson - 最大流
- * @version 2.0
- * @date 2023-09-01
+ * @version 2.1
+ * @date 2023-10-02
  */
 
 #include "FlowTemplate.hpp"

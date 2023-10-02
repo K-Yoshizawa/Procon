@@ -2,8 +2,8 @@
  * @file WarshallFloyd.hpp
  * @author log_K (lX57)
  * @brief WarshallFloyd - 全点対間最短経路
- * @version 2.0
- * @date 2023-08-31
+ * @version 2.2
+ * @date 2023-10-02
  */
 
 #include "GraphTemplate.hpp"

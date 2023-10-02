@@ -2,8 +2,8 @@
  * @file Dijkstra.hpp
  * @author log_K (lX57)
  * @brief Dijkstra - 単一始点最短距離
- * @version 2.1
- * @date 2023-08-31
+ * @version 2.2
+ * @date 2023-10-02
  */
 
 #include "GraphTemplate.hpp"

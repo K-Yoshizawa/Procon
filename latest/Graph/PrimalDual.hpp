@@ -2,8 +2,8 @@
  * @file PrimalDual.hpp
  * @author log K (lX57)
  * @brief Primal Dual - 最小費用流
- * @version 1.0
- * @date 2023-09-01
+ * @version 1.1
+ * @date 2023-10-02
  */
 
 #include "FlowTemplate.hpp"

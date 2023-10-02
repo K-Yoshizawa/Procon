@@ -1,4 +1,10 @@
-
+/**
+ * @file LazySegmentTree.hpp
+ * @author log K (lX57)
+ * @brief Lazy Segment Tree - 遅延評価セグメント木
+ * @version 2.0
+ * @date 2023-10-02
+ */
 
 #include <bits/stdc++.h>
 using namespace std;

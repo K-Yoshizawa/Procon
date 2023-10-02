@@ -1,3 +1,11 @@
+/**
+ * @file BipartiteMatching.hpp
+ * @author log K (lX57)
+ * @brief Bipartite Matching - 二部グラフの最大マッチング
+ * @version 2.1
+ * @date 2023-10-02
+ */
+
 #include "FordFulkerson.hpp"
 
 struct BipartiteMatching{
