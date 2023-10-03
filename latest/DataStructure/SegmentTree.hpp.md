@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_latest/LC-PointSetRangeComposite.test.cpp
     title: verify_latest/LC-PointSetRangeComposite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/LC-VertexAddPathSum.test.cpp
+    title: verify_latest/LC-VertexAddPathSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -158,6 +161,7 @@ data:
   verifiedWith:
   - verify_latest/LC-PointSetRangeComposite.test.cpp
   - verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
+  - verify_latest/LC-VertexAddPathSum.test.cpp
   - verify_latest/LC-PointAddRangeSum.test.cpp
   - verify_latest/AOJ-DSL-2-A.test.cpp
 documentation_of: latest/DataStructure/SegmentTree.hpp

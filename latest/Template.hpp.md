@@ -35,8 +35,9 @@ data:
     \ = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename T>\nusing vec\
     \ = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\nusing vi\
     \ = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\nusing vl\
-    \ = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing pi\
-    \ = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
+    \ = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing vs\
+    \ = vector<string>;\nusing pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing\
+    \ pd = pair<double, double>;\nusing vpi = vector<pi>;\nusing vpl = vector<pl>;\n\
     using ti3 = tuple<int, int, int>;\nusing tl3 = tuple<ll, ll, ll>;\nusing ti4 =\
     \ tuple<int, int, int, int>;\nusing tl4 = tuple<ll, ll, ll, ll>;\ntemplate <typename\
     \ T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\nusing rpq = priority_queue<T,\
@@ -83,16 +84,17 @@ data:
     \ long>::max() / 2LL;\n\ntemplate <typename T>\nusing vec = vector<T>;\ntemplate\
     \ <typename T>\nusing mat = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
     \ vvi = vector<vi>;\nusing vvvi = vector<vvi>;\nusing vl = vector<ll>;\nusing\
-    \ vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing pi = pair<int, int>;\nusing\
-    \ pll = pair<ll, ll>;\nusing pd = pair<double, double>;\nusing ti3 = tuple<int,\
-    \ int, int>;\nusing tl3 = tuple<ll, ll, ll>;\nusing ti4 = tuple<int, int, int,\
-    \ int>;\nusing tl4 = tuple<ll, ll, ll, ll>;\ntemplate <typename T>\nusing pq =\
-    \ priority_queue<T>;\ntemplate <typename T>\nusing rpq = priority_queue<T, vec<T>,\
-    \ greater<T>>;\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream\
-    \ &is, pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\n\
-    template <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for\
-    \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ?\
-    \ \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing vs = vector<string>;\nusing\
+    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
+    using vpi = vector<pi>;\nusing vpl = vector<pl>;\nusing ti3 = tuple<int, int,\
+    \ int>;\nusing tl3 = tuple<ll, ll, ll>;\nusing ti4 = tuple<int, int, int, int>;\n\
+    using tl4 = tuple<ll, ll, ll, ll>;\ntemplate <typename T>\nusing pq = priority_queue<T>;\n\
+    template <typename T>\nusing rpq = priority_queue<T, vec<T>, greater<T>>;\n\n\
+    template <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1,\
+    \ T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename\
+    \ T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i <\
+    \ v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n\
+    \    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
     \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
     \   os << v[i] << \"\\n\";\n    }\n    return os;\n}\n\ntemplate <typename T>\n\
     istream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size();\
@@ -109,7 +111,7 @@ data:
   isVerificationFile: false
   path: latest/Template.hpp
   requiredBy: []
-  timestamp: '2023-08-31 01:23:42+09:00'
+  timestamp: '2023-10-04 00:54:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: latest/Template.hpp

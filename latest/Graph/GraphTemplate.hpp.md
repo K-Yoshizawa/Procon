@@ -28,6 +28,9 @@ data:
     path: latest/Tree/EulerTour.hpp
     title: latest/Tree/EulerTour.hpp
   - icon: ':heavy_check_mark:'
+    path: latest/Tree/HeavyLightDecomposition.hpp
+    title: "Heavy Light Decomposition - HL\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: latest/Tree/LowestCommonAncestor.hpp
     title: latest/Tree/LowestCommonAncestor.hpp
   - icon: ':warning:'
@@ -53,6 +56,9 @@ data:
     path: verify_latest/AOJ-GRL-1-C.test.cpp
     title: verify_latest/AOJ-GRL-1-C.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-5-C-HLD.test.cpp
+    title: verify_latest/AOJ-GRL-5-C-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-5-C.test.cpp
     title: verify_latest/AOJ-GRL-5-C.test.cpp
   - icon: ':heavy_check_mark:'
@@ -64,6 +70,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-7-A.test.cpp
     title: verify_latest/AOJ-GRL-7-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/LC-VertexAddPathSum.test.cpp
+    title: verify_latest/LC-VertexAddPathSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -193,6 +202,7 @@ data:
   - latest/Graph/FlowTemplate.hpp
   - latest/Tree/EulerTour.hpp
   - latest/Tree/LowestCommonAncestor.hpp
+  - latest/Tree/HeavyLightDecomposition.hpp
   - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
   timestamp: '2023-10-03 01:00:30+09:00'
@@ -204,6 +214,8 @@ data:
   - verify_latest/AOJ-GRL-1-A.test.cpp
   - verify_latest/AOJ-GRL-5-C.test.cpp
   - verify_latest/AOJ-GRL-7-A.test.cpp
+  - verify_latest/LC-VertexAddPathSum.test.cpp
+  - verify_latest/AOJ-GRL-5-C-HLD.test.cpp
   - verify_latest/AOJ-ALDS1-11-A.test.cpp
   - verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify_latest/AOJ-GRL-1-C.test.cpp

@@ -4,6 +4,9 @@ data:
   - name: latest/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
+      path: latest/DataStructure/CumulativeSum2D.hpp
+      title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
+    - icon: ':heavy_check_mark:'
       path: latest/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728"
@@ -47,6 +50,9 @@ data:
     - icon: ':warning:'
       path: latest/Tree/EulerTour.hpp
       title: latest/Tree/EulerTour.hpp
+    - icon: ':heavy_check_mark:'
+      path: latest/Tree/HeavyLightDecomposition.hpp
+      title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: latest/Tree/LowestCommonAncestor.hpp
       title: latest/Tree/LowestCommonAncestor.hpp
@@ -268,6 +274,9 @@ data:
       path: verify_latest/AOJ-DSL-2-I.test.cpp
       title: verify_latest/AOJ-DSL-2-I.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-5-B.test.cpp
+      title: verify_latest/AOJ-DSL-5-B.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-A.test.cpp
       title: verify_latest/AOJ-GRL-1-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -279,6 +288,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-1-C.test.cpp
       title: verify_latest/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-GRL-5-C-HLD.test.cpp
+      title: verify_latest/AOJ-GRL-5-C-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-5-C.test.cpp
       title: verify_latest/AOJ-GRL-5-C.test.cpp
@@ -300,6 +312,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_latest/LC-RangeAffineRangeSum.test.cpp
       title: verify_latest/LC-RangeAffineRangeSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/LC-VertexAddPathSum.test.cpp
+      title: verify_latest/LC-VertexAddPathSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
