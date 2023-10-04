@@ -2,11 +2,11 @@
  * @file BipartiteMatching.hpp
  * @author log K (lX57)
  * @brief Bipartite Matching - 二部グラフの最大マッチング
- * @version 2.1
- * @date 2023-10-02
+ * @version 2.2
+ * @date 2023-10-04
  */
 
-#include "FordFulkerson.hpp"
+#include "Dinic.hpp"
 
 struct BipartiteMatching{
     private:
@@ -33,42 +33,47 @@ struct BipartiteMatching{
     }
 
     int solve(bool MakeSubGraph = false){
-        FordFulkerson<int> ff(G);
-        int ret = ff.solve(__S, __T);
-        for(auto e : ff.get()) if(e.src != __S && e.to != __T) __Matching.push_back({e.src, e.to - __L});
-        if(MakeSubGraph){
-            H = Flow<int>(__L + __R);
-            mark_L.resize(__L, 1), mark_R.resize(__R, 0);
-            for(auto [l, r] : __Matching){
-                H.add(r, l);
-                remain_edge.erase({l, r});
-                mark_L[l] = 0;
-            }
-            for(auto [l, r] : remain_edge){
-                H.add(l, r);
-            }
-            for(Vertex l = 0; l < __L; ++l){
-                if(!mark_L[l]) continue;
-                queue<Vertex> que;
-                que.push(l);
-                while(que.size()){
-                    Vertex now = que.front();
-                    que.pop();
-                    for(auto e : H.get_incident(now)){
-                        if(e.to < __L && !mark_L[e.to]){
-                            mark_L[e.to] = 1;
-                            que.push(e.to);
-                        }
-                        if(e.to >= __L && !mark_R[e.to - __L]){
-                            mark_R[e.to - __L] = 1;
-                            que.push(e.to);
-                        }
-                    }
-                }
-            }
-            ML = accumulate(mark_L.begin(), mark_L.end(), 0);
-            MR = accumulate(mark_R.begin(), mark_R.end(), 0);
+        Dinic<int> dn(G);
+        int ret = dn.solve(__S, __T);
+        EdgeSet<int> es = G.get_edgeset();
+        for(int i = 0; i < es.size(); ++i){
+            if(es[i].cap > 0) continue;
+            if(es[i].src == __S || es[i].to == __T) continue;
+            __Matching.push_back({es[i].src, es[i].to - __L});
         }
+        // if(MakeSubGraph){
+        //     H = Flow<int>(__L + __R);
+        //     mark_L.resize(__L, 1), mark_R.resize(__R, 0);
+        //     for(auto [l, r] : __Matching){
+        //         H.add(r, l);
+        //         remain_edge.erase({l, r});
+        //         mark_L[l] = 0;
+        //     }
+        //     for(auto [l, r] : remain_edge){
+        //         H.add(l, r);
+        //     }
+        //     for(Vertex l = 0; l < __L; ++l){
+        //         if(!mark_L[l]) continue;
+        //         queue<Vertex> que;
+        //         que.push(l);
+        //         while(que.size()){
+        //             Vertex now = que.front();
+        //             que.pop();
+        //             for(auto e : H.get_incident(now)){
+        //                 if(e.to < __L && !mark_L[e.to]){
+        //                     mark_L[e.to] = 1;
+        //                     que.push(e.to);
+        //                 }
+        //                 if(e.to >= __L && !mark_R[e.to - __L]){
+        //                     mark_R[e.to - __L] = 1;
+        //                     que.push(e.to);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     ML = accumulate(mark_L.begin(), mark_L.end(), 0);
+        //     MR = accumulate(mark_R.begin(), mark_R.end(), 0);
+        // }
         return ret;
     }
 

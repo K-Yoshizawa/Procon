@@ -1,3 +1,11 @@
+/**
+ * @file Dinic.hpp
+ * @author log K (lX57)
+ * @brief Dinic - 最大流
+ * @version 1.0
+ * @date 2023-10-04
+ */
+
 #include "FlowTemplate.hpp"
 
 template<typename CostType>

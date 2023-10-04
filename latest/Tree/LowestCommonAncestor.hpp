@@ -1,4 +1,10 @@
-
+/**
+ * @file LowestCommonAncestor.hpp
+ * @author log K (lX57)
+ * @brief Lowest Common Ancestor - 最小共通祖先
+ * @version 2.0
+ * @date 2023-10-04
+ */
 
 #include "../Graph/GraphTemplate.hpp"
 

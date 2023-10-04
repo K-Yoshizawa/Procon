@@ -8,7 +8,7 @@ int main(){
     BipartiteMatching bm(L, R);
     for(int i = 0; i < M; ++i){
         int a, b; cin >> a >> b;
-        bm.add_flow(a, b);
+        bm.add(a, b);
     }
 
     int K = bm.solve();
