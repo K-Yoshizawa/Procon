@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: latest/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/BipartiteMatching.hpp
     title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
       \u30C3\u30C1\u30F3\u30B0"
@@ -14,11 +14,11 @@ data:
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
     path: latest/Graph/Dinic.hpp
-    title: latest/Graph/Dinic.hpp
-  - icon: ':question:'
+    title: "Dinic - \u6700\u5927\u6D41"
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
   - icon: ':heavy_check_mark:'
@@ -35,7 +35,7 @@ data:
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: latest/Tree/LowestCommonAncestor.hpp
-    title: latest/Tree/LowestCommonAncestor.hpp
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':warning:'
     path: latest/Tree/TreeDiamiter.hpp
     title: latest/Tree/TreeDiamiter.hpp
@@ -79,15 +79,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-6-B.test.cpp
     title: verify_latest/AOJ-GRL-6-B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-7-A.test.cpp
     title: verify_latest/AOJ-GRL-7-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_latest/LC-VertexAddPathSum.test.cpp
     title: verify_latest/LC-VertexAddPathSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -224,7 +224,7 @@ data:
   - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
   timestamp: '2023-10-04 21:46:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp
   - verify_latest/AOJ-GRL-1-B.test.cpp

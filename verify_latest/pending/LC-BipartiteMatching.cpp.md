@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/BipartiteMatching.hpp
     title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
       \u30C3\u30C1\u30F3\u30B0"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: latest/Graph/Dinic.hpp
+    title: "Dinic - \u6700\u5927\u6D41"
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
-    path: latest/Graph/FordFulkerson.hpp
-    title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -26,13 +26,13 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n\n#line 1 \"\
     latest/Graph/BipartiteMatching.hpp\"\n/**\n * @file BipartiteMatching.hpp\n *\
     \ @author log K (lX57)\n * @brief Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\
-    \u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0\n * @version 2.1\n * @date\
-    \ 2023-10-02\n */\n\n#line 1 \"latest/Graph/FordFulkerson.hpp\"\n/**\n * @file\
-    \ FordFulkerson.hpp\n * @author log K (lX57)\n * @brief Ford-Fulkerson - \u6700\
-    \u5927\u6D41\n * @version 2.1\n * @date 2023-10-02\n */\n\n#line 2 \"latest/Graph/FlowTemplate.hpp\"\
-    \n\n/**\n * @file FlowTemplate.hpp\n * @author log K (lX57)\n * @brief Flow Template\
-    \ - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n\
-    \ * @date 2023-09-29\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n\
+    \u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0\n * @version 2.2\n * @date\
+    \ 2023-10-04\n */\n\n#line 1 \"latest/Graph/Dinic.hpp\"\n/**\n * @file Dinic.hpp\n\
+    \ * @author log K (lX57)\n * @brief Dinic - \u6700\u5927\u6D41\n * @version 1.0\n\
+    \ * @date 2023-10-04\n */\n\n#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\n/**\n\
+    \ * @file FlowTemplate.hpp\n * @author log K (lX57)\n * @brief Flow Template -\
+    \ \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n *\
+    \ @date 2023-09-29\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n\
     \ * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph Template\
     \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n\
     \ * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
@@ -118,22 +118,26 @@ data:
     \            if(e.cap == 0 && arrive[e.src] && !arrive[e.to]){\n             \
     \   Edge<CostType> ne = e;\n                ne.cap = re.cap;\n               \
     \ ret.push_back(ne);\n            }\n        }\n        return ret;\n    }\n};\n\
-    #line 10 \"latest/Graph/FordFulkerson.hpp\"\n\ntemplate<typename CostType>\nstruct\
-    \ FordFulkerson{\n    private:\n    Flow<CostType> &G;\n    vector<int> __used;\n\
-    \n    CostType __dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos ==\
-    \ goal) return F;\n        __used[pos] = 1;\n        for(auto e : G.get_incident(pos)){\n\
-    \            if(e.cap == 0 || __used[e.to]) continue;\n            // cerr <<\
-    \ \"[\" << e.src << \", \" << e.to << \"] (\" << e.cap << \")\\n\";\n        \
-    \    CostType flow = __dfs(e.to, goal, min(F, e.cap));\n            if(flow >=\
-    \ 1){\n                // cerr << \"Update [\" << e.src << \", \" << e.to << \"\
-    ] Flow = \" << flow << endl;\n                G.update(e.src, e.sidx, flow);\n\
-    \                return flow;\n            }\n        }\n        return 0;\n \
-    \   }\n\n    public:\n    FordFulkerson(Flow<CostType> &G) : G(G), __used(G.vsize(),\
-    \ 0){}\n\n    CostType solve(Vertex Source, Vertex Sink){\n        CostType ans\
-    \ = 0;\n        while(1){\n            __used.assign(G.vsize(), 0);\n        \
-    \    CostType F = __dfs(Source, Sink, G.INF);\n            if(F == 0) break;\n\
-    \            ans += F;\n        }\n        return ans;\n    }\n\n    vector<Edge<CostType>>\
-    \ get(){\n        return G.get();\n    }\n};\n#line 10 \"latest/Graph/BipartiteMatching.hpp\"\
+    #line 10 \"latest/Graph/Dinic.hpp\"\n\ntemplate<typename CostType>\nstruct Dinic{\n\
+    \    Flow<CostType> &F;\n\n    vector<int> __Dist, __Iter;\n\n    void __bfs(Vertex\
+    \ Source){\n        __Dist.assign(F.vsize(), -1);\n        __Dist[Source] = 0;\n\
+    \        queue<Vertex> que; que.push(Source);\n        while(que.size()){\n  \
+    \          Vertex now = que.front(); que.pop();\n            for(auto e : F.get_incident(now)){\n\
+    \                if(e.cap > 0 && __Dist[e.to] < 0){\n                    __Dist[e.to]\
+    \ = __Dist[now] + 1;\n                    que.push(e.to);\n                }\n\
+    \            }\n        }\n    }\n\n    CostType __dfs(Vertex v, Vertex t, CostType\
+    \ f){\n        if(v == t) return f;\n        auto IL = F.get_incident(v);\n  \
+    \      for(int &i = __Iter[v]; i < F.incsize(v); ++i){\n            Edge<CostType>\
+    \ e = IL[i];\n            if(e.cap > 0 && __Dist[v] < __Dist[e.to]){\n       \
+    \         CostType d = __dfs(e.to, t, min(f, e.cap));\n                if(d >\
+    \ 0){\n                    F.update(v, e.sidx, d);\n                    return\
+    \ d;\n                }\n            }\n        }\n        return 0;\n    }\n\n\
+    \    public:\n    Dinic(Flow<CostType> &F) : F(F){\n        __Dist.resize(F.vsize());\n\
+    \        __Iter.resize(F.vsize());\n    }\n\n    CostType solve(Vertex Source,\
+    \ Vertex Sink){\n        CostType ret = 0;\n        while(1){\n            __bfs(Source);\n\
+    \            if(__Dist[Sink] < 0) return ret;\n            __Iter.assign(F.vsize(),\
+    \ 0);\n            CostType f;\n            while((f = __dfs(Source, Sink, F.INF))\
+    \ > 0) ret += f;\n        }\n    }\n};\n#line 10 \"latest/Graph/BipartiteMatching.hpp\"\
     \n\nstruct BipartiteMatching{\n    private:\n    Flow<int> G, H;\n    int __L,\
     \ __R;\n    Vertex __S, __T;\n    vector<pair<Vertex, Vertex>> __Matching;\n\n\
     \    bool __SubGraph;\n    set<pair<Vertex, Vertex>> remain_edge;\n    vector<int>\
@@ -144,50 +148,51 @@ data:
     \        for(Vertex r = __L; r < __L + __R; ++r) G.add(r, __T, sink_flow);\n \
     \   }\n\n    void add(int l, int r, int flow = 1){\n        G.add(l, __L + r,\
     \ flow);\n        remain_edge.insert({l, __L + r});\n    }\n\n    int solve(bool\
-    \ MakeSubGraph = false){\n        FordFulkerson<int> ff(G);\n        int ret =\
-    \ ff.solve(__S, __T);\n        for(auto e : ff.get()) if(e.src != __S && e.to\
-    \ != __T) __Matching.push_back({e.src, e.to - __L});\n        if(MakeSubGraph){\n\
-    \            H = Flow<int>(__L + __R);\n            mark_L.resize(__L, 1), mark_R.resize(__R,\
-    \ 0);\n            for(auto [l, r] : __Matching){\n                H.add(r, l);\n\
-    \                remain_edge.erase({l, r});\n                mark_L[l] = 0;\n\
-    \            }\n            for(auto [l, r] : remain_edge){\n                H.add(l,\
-    \ r);\n            }\n            for(Vertex l = 0; l < __L; ++l){\n         \
-    \       if(!mark_L[l]) continue;\n                queue<Vertex> que;\n       \
-    \         que.push(l);\n                while(que.size()){\n                 \
-    \   Vertex now = que.front();\n                    que.pop();\n              \
-    \      for(auto e : H.get_incident(now)){\n                        if(e.to < __L\
-    \ && !mark_L[e.to]){\n                            mark_L[e.to] = 1;\n        \
-    \                    que.push(e.to);\n                        }\n            \
-    \            if(e.to >= __L && !mark_R[e.to - __L]){\n                       \
-    \     mark_R[e.to - __L] = 1;\n                            que.push(e.to);\n \
-    \                       }\n                    }\n                }\n        \
-    \    }\n            ML = accumulate(mark_L.begin(), mark_L.end(), 0);\n      \
-    \      MR = accumulate(mark_R.begin(), mark_R.end(), 0);\n        }\n        return\
-    \ ret;\n    }\n\n    vector<pair<Vertex, Vertex>> get_matching(){\n        return\
-    \ __Matching;\n    }\n    \n    int MinimumVertexCover(){\n        return __L\
-    \ - ML + MR;\n    }\n\n    int MaximumIndependentSet(){\n        return ML + __R\
-    \ - MR;\n    }\n};\n#line 4 \"verify_latest/pending/LC-BipartiteMatching.cpp\"\
+    \ MakeSubGraph = false){\n        Dinic<int> dn(G);\n        int ret = dn.solve(__S,\
+    \ __T);\n        EdgeSet<int> es = G.get_edgeset();\n        for(int i = 0; i\
+    \ < es.size(); ++i){\n            if(es[i].cap > 0) continue;\n            if(es[i].src\
+    \ == __S || es[i].to == __T) continue;\n            __Matching.push_back({es[i].src,\
+    \ es[i].to - __L});\n        }\n        // if(MakeSubGraph){\n        //     H\
+    \ = Flow<int>(__L + __R);\n        //     mark_L.resize(__L, 1), mark_R.resize(__R,\
+    \ 0);\n        //     for(auto [l, r] : __Matching){\n        //         H.add(r,\
+    \ l);\n        //         remain_edge.erase({l, r});\n        //         mark_L[l]\
+    \ = 0;\n        //     }\n        //     for(auto [l, r] : remain_edge){\n   \
+    \     //         H.add(l, r);\n        //     }\n        //     for(Vertex l =\
+    \ 0; l < __L; ++l){\n        //         if(!mark_L[l]) continue;\n        // \
+    \        queue<Vertex> que;\n        //         que.push(l);\n        //     \
+    \    while(que.size()){\n        //             Vertex now = que.front();\n  \
+    \      //             que.pop();\n        //             for(auto e : H.get_incident(now)){\n\
+    \        //                 if(e.to < __L && !mark_L[e.to]){\n        //     \
+    \                mark_L[e.to] = 1;\n        //                     que.push(e.to);\n\
+    \        //                 }\n        //                 if(e.to >= __L && !mark_R[e.to\
+    \ - __L]){\n        //                     mark_R[e.to - __L] = 1;\n        //\
+    \                     que.push(e.to);\n        //                 }\n        //\
+    \             }\n        //         }\n        //     }\n        //     ML = accumulate(mark_L.begin(),\
+    \ mark_L.end(), 0);\n        //     MR = accumulate(mark_R.begin(), mark_R.end(),\
+    \ 0);\n        // }\n        return ret;\n    }\n\n    vector<pair<Vertex, Vertex>>\
+    \ get_matching(){\n        return __Matching;\n    }\n    \n    int MinimumVertexCover(){\n\
+    \        return __L - ML + MR;\n    }\n\n    int MaximumIndependentSet(){\n  \
+    \      return ML + __R - MR;\n    }\n};\n#line 4 \"verify_latest/pending/LC-BipartiteMatching.cpp\"\
     \n\nint main(){\n    int L, R, M;\n    cin >> L >> R >> M;\n    BipartiteMatching\
     \ bm(L, R);\n    for(int i = 0; i < M; ++i){\n        int a, b; cin >> a >> b;\n\
-    \        bm.add_flow(a, b);\n    }\n\n    int K = bm.solve();\n    cout << K <<\
-    \ endl;\n    for(auto [c, d] : bm.get_matching()){\n        cout << c << \" \"\
-    \ << d << endl;\n    }\n}\n"
+    \        bm.add(a, b);\n    }\n\n    int K = bm.solve();\n    cout << K << endl;\n\
+    \    for(auto [c, d] : bm.get_matching()){\n        cout << c << \" \" << d <<\
+    \ endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n\n\
     #include \"../../latest/Graph/BipartiteMatching.hpp\"\n\nint main(){\n    int\
     \ L, R, M;\n    cin >> L >> R >> M;\n    BipartiteMatching bm(L, R);\n    for(int\
-    \ i = 0; i < M; ++i){\n        int a, b; cin >> a >> b;\n        bm.add_flow(a,\
-    \ b);\n    }\n\n    int K = bm.solve();\n    cout << K << endl;\n    for(auto\
-    \ [c, d] : bm.get_matching()){\n        cout << c << \" \" << d << endl;\n   \
-    \ }\n}"
+    \ i = 0; i < M; ++i){\n        int a, b; cin >> a >> b;\n        bm.add(a, b);\n\
+    \    }\n\n    int K = bm.solve();\n    cout << K << endl;\n    for(auto [c, d]\
+    \ : bm.get_matching()){\n        cout << c << \" \" << d << endl;\n    }\n}"
   dependsOn:
   - latest/Graph/BipartiteMatching.hpp
-  - latest/Graph/FordFulkerson.hpp
+  - latest/Graph/Dinic.hpp
   - latest/Graph/FlowTemplate.hpp
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: verify_latest/pending/LC-BipartiteMatching.cpp
   requiredBy: []
-  timestamp: '2023-10-04 21:46:36+09:00'
+  timestamp: '2023-10-04 22:29:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify_latest/pending/LC-BipartiteMatching.cpp

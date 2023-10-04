@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -13,8 +13,11 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
     links: []
-  bundledCode: "#line 1 \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+  bundledCode: "#line 1 \"latest/Tree/LowestCommonAncestor.hpp\"\n/**\n * @file LowestCommonAncestor.hpp\n\
+    \ * @author log K (lX57)\n * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\
+    \u901A\u7956\u5148\n * @version 2.0\n * @date 2023-10-04\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -70,7 +73,7 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"latest/Tree/LowestCommonAncestor.hpp\"\
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Tree/LowestCommonAncestor.hpp\"\
     \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n\
     \    Graph<CostType> &G;\n    int __Height;\n    vector<int> __Depth;\n    vector<vector<Vertex>>\
     \ __Parent;\n\n    void __dfs(Vertex v, Vertex p, int d){\n        __Parent[0][v]\
@@ -89,17 +92,19 @@ data:
     \ != __Parent[k][v]){\n                u = __Parent[k][u];\n                v\
     \ = __Parent[k][v];\n            }\n        }\n        return __Parent[0][u];\n\
     \    }\n};\n"
-  code: "\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
-    struct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int __Height;\n\
-    \    vector<int> __Depth;\n    vector<vector<Vertex>> __Parent;\n\n    void __dfs(Vertex\
-    \ v, Vertex p, int d){\n        __Parent[0][v] = p;\n        __Depth[v] = d;\n\
-    \        for(auto &e : G.get_incident(v)){\n            if(e.to != p) __dfs(e.to,\
-    \ v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
-    \ &G, Vertex Root) : G(G), __Height(32){\n        __Depth.resize(G.vsize());\n\
-    \        __Parent.resize(__Height, vector<Vertex>(G.vsize(), -1));\n        __dfs(Root,\
-    \ -1, 0);\n        for(int k = 0; k + 1 < __Height; ++k){\n            for(Vertex\
-    \ v = 0; v < G.vsize(); ++v){\n                if(__Parent[k][v] < 0) __Parent[k\
-    \ + 1][v] = -1;\n                else __Parent[k + 1][v] = __Parent[k][__Parent[k][v]];\n\
+  code: "/**\n * @file LowestCommonAncestor.hpp\n * @author log K (lX57)\n * @brief\
+    \ Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version 2.0\n\
+    \ * @date 2023-10-04\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n\
+    \    int __Height;\n    vector<int> __Depth;\n    vector<vector<Vertex>> __Parent;\n\
+    \n    void __dfs(Vertex v, Vertex p, int d){\n        __Parent[0][v] = p;\n  \
+    \      __Depth[v] = d;\n        for(auto &e : G.get_incident(v)){\n          \
+    \  if(e.to != p) __dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n   \
+    \ LowestCommonAncestor(Graph<CostType> &G, Vertex Root) : G(G), __Height(32){\n\
+    \        __Depth.resize(G.vsize());\n        __Parent.resize(__Height, vector<Vertex>(G.vsize(),\
+    \ -1));\n        __dfs(Root, -1, 0);\n        for(int k = 0; k + 1 < __Height;\
+    \ ++k){\n            for(Vertex v = 0; v < G.vsize(); ++v){\n                if(__Parent[k][v]\
+    \ < 0) __Parent[k + 1][v] = -1;\n                else __Parent[k + 1][v] = __Parent[k][__Parent[k][v]];\n\
     \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
     \    if(__Depth[u] > __Depth[v]) swap(u, v);\n        for(int k = 0; k < __Height;\
     \ ++k){\n            if((__Depth[v] - __Depth[u]) >> k & 1){\n               \
@@ -113,7 +118,7 @@ data:
   isVerificationFile: false
   path: latest/Tree/LowestCommonAncestor.hpp
   requiredBy: []
-  timestamp: '2023-10-04 21:46:36+09:00'
+  timestamp: '2023-10-04 22:29:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_latest/AOJ-GRL-5-C.test.cpp
@@ -122,5 +127,5 @@ layout: document
 redirect_from:
 - /library/latest/Tree/LowestCommonAncestor.hpp
 - /library/latest/Tree/LowestCommonAncestor.hpp.html
-title: latest/Tree/LowestCommonAncestor.hpp
+title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
 ---

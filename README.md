@@ -6,12 +6,17 @@
 
 ## 更新履歴
 
+### Ver 1.15.0 (2023/10/04)
+- 【追加】Dinic - Dinic法
+- 【改修】Bipartite Matching : 使用するフローアルゴリズムをDinic法に変更（でもyosupo-judgeはTLEします（え））
+- 【修正】Lowest Common Ancestor : ちゃんと冒頭のやつ書いてなかった
+
 ### Ver 1.14.1 (2023/10/04)
 - 【改修】Heavy Light Decomposition : 辺周りの処理を削除（工夫すると要らないねという話　詳しくはverifyのAOJ-GRL-5-D/Eを参照）
 
 ### Ver 1.14.0 (2023/10/03)
-- 【追加】Cumulative Sum 2D - 二次元累積和
-- 【追加】Heavy Light Decomposition - HL分解 (辺周りの処理に改良の余地あり(そもそも要る？))
+- 【追加】新 Cumulative Sum 2D - 二次元累積和
+- 【追加】新 Heavy Light Decomposition - HL分解 (辺周りの処理に改良の余地あり(そもそも要る？))
 
 ### Ver 1.13.0 (2023/10/02)
 - 【改修】新グラフテンプレートからフロー関連を削除と、それに伴う既存ライブラリの修正

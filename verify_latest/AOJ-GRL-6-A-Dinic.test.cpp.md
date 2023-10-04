@@ -3,11 +3,11 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: latest/Graph/Dinic.hpp
-    title: latest/Graph/Dinic.hpp
-  - icon: ':question:'
+    title: "Dinic - \u6700\u5927\u6D41"
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -22,33 +22,36 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
   bundledCode: "#line 1 \"verify_latest/AOJ-GRL-6-A-Dinic.test.cpp\"\n#define PROBLEM\
     \ \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\n\n#line\
-    \ 2 \"latest/Graph/FlowTemplate.hpp\"\n\n/**\n * @file FlowTemplate.hpp\n * @author\
-    \ log K (lX57)\n * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2023-09-29\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
-    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    EdgeID ID{-1};\n    Vertex src, to;\n    CostType\
-    \ cost, cap;\n    EdgeIndex sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID\
-    \ ID, Vertex src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex\
-    \ tidx) :\n        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx),\
-    \ tidx(tidx){}\n\n    void print(){\n        cerr << \"Edge \" << ID << \" : (\"\
-    \ << src << \" -> \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap\
-    \ << \", Place = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n};\n\n\
-    template<typename CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename\
-    \ CostType>\nusing IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList\
-    \ = vector<vector<Vertex>>;\n\ntemplate<typename CostType>\nstruct Graph{\n  \
-    \  protected:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType>\
-    \ __ES, __RES;\n    IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n \
-    \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
-    \ false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IL(VertexSize),\
-    \ __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph()\
-    \ = default;\n\n    void add(Vertex Source, Vertex To, CostType Cost = 1){\n \
-    \       assert(0 <= Source && Source < __CntVertex);\n        assert(0 <= To &&\
-    \ To < __CntVertex);\n        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n\
-    \        Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n    \
-    \    Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
+    \ 1 \"latest/Graph/Dinic.hpp\"\n/**\n * @file Dinic.hpp\n * @author log K (lX57)\n\
+    \ * @brief Dinic - \u6700\u5927\u6D41\n * @version 1.0\n * @date 2023-10-04\n\
+    \ */\n\n#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\n/**\n * @file FlowTemplate.hpp\n\
+    \ * @author log K (lX57)\n * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2023-09-29\n */\n\n#line 2\
+    \ \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n * @author\
+    \ log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
+    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
+    \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
+    \ Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost,\
+    \ CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n        ID(ID), src(src), to(to),\
+    \ cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n    void print(){\n      \
+    \  cerr << \"Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost =\
+    \ \" << cost << \", Capacity = \" << cap << \", Place = [\" << sidx << \", \"\
+    \ << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nusing EdgeSet\
+    \ = vector<Edge<CostType>>;\ntemplate<typename CostType>\nusing IncidentList =\
+    \ vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
+    \ntemplate<typename CostType>\nstruct Graph{\n    protected:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType> __ES, __RES;\n   \
+    \ IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n    public:\n    CostType\
+    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
+    \ __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize),\
+    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
+    \ void add(Vertex Source, Vertex To, CostType Cost = 1){\n        assert(0 <=\
+    \ Source && Source < __CntVertex);\n        assert(0 <= To && To < __CntVertex);\n\
+    \        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n     \
+    \   Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n        Edge<CostType>\
+    \ et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
     \        __RES.push_back(et);\n        __IL[Source].push_back(es), __AL[Source].push_back(To);\n\
     \        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);\n\
     \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
@@ -110,7 +113,7 @@ data:
     \            if(e.cap == 0 && arrive[e.src] && !arrive[e.to]){\n             \
     \   Edge<CostType> ne = e;\n                ne.cap = re.cap;\n               \
     \ ret.push_back(ne);\n            }\n        }\n        return ret;\n    }\n};\n\
-    #line 2 \"latest/Graph/Dinic.hpp\"\n\ntemplate<typename CostType>\nstruct Dinic{\n\
+    #line 10 \"latest/Graph/Dinic.hpp\"\n\ntemplate<typename CostType>\nstruct Dinic{\n\
     \    Flow<CostType> &F;\n\n    vector<int> __Dist, __Iter;\n\n    void __bfs(Vertex\
     \ Source){\n        __Dist.assign(F.vsize(), -1);\n        __Dist[Source] = 0;\n\
     \        queue<Vertex> que; que.push(Source);\n        while(que.size()){\n  \
@@ -146,7 +149,7 @@ data:
   isVerificationFile: true
   path: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
   requiredBy: []
-  timestamp: '2023-10-04 21:46:36+09:00'
+  timestamp: '2023-10-04 22:29:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp

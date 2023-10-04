@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: latest/Tree/LowestCommonAncestor.hpp
-    title: latest/Tree/LowestCommonAncestor.hpp
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,7 +19,9 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
   bundledCode: "#line 1 \"verify_latest/AOJ-GRL-5-C.test.cpp\"\n#define PROBLEM \"\
     https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\n\n#line 1\
-    \ \"latest/Tree/LowestCommonAncestor.hpp\"\n\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+    \ \"latest/Tree/LowestCommonAncestor.hpp\"\n/**\n * @file LowestCommonAncestor.hpp\n\
+    \ * @author log K (lX57)\n * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\
+    \u901A\u7956\u5148\n * @version 2.0\n * @date 2023-10-04\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -75,7 +77,7 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"latest/Tree/LowestCommonAncestor.hpp\"\
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"latest/Tree/LowestCommonAncestor.hpp\"\
     \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n\
     \    Graph<CostType> &G;\n    int __Height;\n    vector<int> __Depth;\n    vector<vector<Vertex>>\
     \ __Parent;\n\n    void __dfs(Vertex v, Vertex p, int d){\n        __Parent[0][v]\
@@ -112,7 +114,7 @@ data:
   isVerificationFile: true
   path: verify_latest/AOJ-GRL-5-C.test.cpp
   requiredBy: []
-  timestamp: '2023-10-04 21:46:36+09:00'
+  timestamp: '2023-10-04 22:29:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify_latest/AOJ-GRL-5-C.test.cpp
