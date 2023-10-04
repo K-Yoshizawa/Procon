@@ -6,6 +6,9 @@
 
 ## 更新履歴
 
+### Ver 1.14.1 (2023/10/04)
+- 【改修】Heavy Light Decomposition : 辺周りの処理を削除（工夫すると要らないねという話　詳しくはverifyのAOJ-GRL-5-D/Eを参照）
+
 ### Ver 1.14.0 (2023/10/03)
 - 【追加】Cumulative Sum 2D - 二次元累積和
 - 【追加】Heavy Light Decomposition - HL分解 (辺周りの処理に改良の余地あり(そもそも要る？))

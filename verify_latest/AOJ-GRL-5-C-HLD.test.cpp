@@ -13,7 +13,7 @@ int main(){
         }
     }
 
-    HeavyLightDecomposition<int> HLD(G, true, false);
+    HeavyLightDecomposition<int> HLD(G);
     int q; cin >> q;
     while(q--){
         int u, v; cin >> u >> v;
