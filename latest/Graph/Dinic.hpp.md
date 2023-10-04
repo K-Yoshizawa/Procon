@@ -2,44 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: latest/Graph/FlowTemplate.hpp
+    title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: latest/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: latest/Graph/BipartiteMatching.hpp
-    title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
-      \u30C3\u30C1\u30F3\u30B0"
-  - icon: ':heavy_check_mark:'
-    path: latest/Graph/Dinic.hpp
-    title: latest/Graph/Dinic.hpp
-  - icon: ':question:'
-    path: latest/Graph/FordFulkerson.hpp
-    title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-  - icon: ':heavy_check_mark:'
-    path: latest/Graph/PrimalDual.hpp
-    title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
-  - icon: ':warning:'
-    path: verify_latest/pending/LC-BipartiteMatching.cpp
-    title: verify_latest/pending/LC-BipartiteMatching.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
     title: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_latest/AOJ-GRL-6-A.test.cpp
-    title: verify_latest/AOJ-GRL-6-A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_latest/AOJ-GRL-6-B.test.cpp
-    title: verify_latest/AOJ-GRL-6-B.test.cpp
-  - icon: ':x:'
-    path: verify_latest/AOJ-GRL-7-A.test.cpp
-    title: verify_latest/AOJ-GRL-7-A.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\
-      \u30C8"
     links: []
   bundledCode: "#line 2 \"latest/Graph/FlowTemplate.hpp\"\n\n/**\n * @file FlowTemplate.hpp\n\
     \ * @author log K (lX57)\n * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\
@@ -129,60 +105,61 @@ data:
     \   // cerr << \"[\" << e.src << \", \" << e.to << \"] Cap = \" << e.cap << endl;\n\
     \            if(e.cap == 0 && arrive[e.src] && !arrive[e.to]){\n             \
     \   Edge<CostType> ne = e;\n                ne.cap = re.cap;\n               \
-    \ ret.push_back(ne);\n            }\n        }\n        return ret;\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @file FlowTemplate.hpp\n * @author log K (lX57)\n\
-    \ * @brief Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @version 1.0\n * @date 2023-09-29\n */\n\n#include \"GraphTemplate.hpp\"\n\
-    \n#define LOGK_FLOW\n\ntemplate<typename CostType>\nstruct Flow : public Graph<CostType>{\n\
-    \    using Graph<CostType>::Graph;\n\n    vector<vector<int>> __Rev;\n\n    public:\n\
-    \    void add(Vertex Source, Vertex To, CostType Capacity = 1, CostType Cost =\
-    \ 1){\n        assert(0 <= Source && Source < this->__CntVertex);\n        assert(0\
-    \ <= To && To < this->__CntVertex);\n        EdgeIndex sidx = this->__IL[Source].size(),\
-    \ tidx = this->__IL[To].size();\n        Edge<CostType> es(this->__CntEdge, Source,\
-    \ To, Cost, Capacity, sidx, tidx);\n        Edge<CostType> et(this->__CntEdge,\
-    \ To, Source, -Cost, 0, tidx, sidx);\n        this->__ES.push_back(es);\n    \
-    \    this->__RES.push_back(et);\n        this->__IL[Source].push_back(es), this->__AL[Source].push_back(To);\n\
-    \        this->__IL[To].push_back(et), this->__AL[To].push_back(Source);\n   \
-    \     ++this->__CntEdge;\n        if(__Rev.empty()) __Rev.resize(this->__CntVertex);\n\
-    \        __Rev[Source].push_back(0), __Rev[To].push_back(1);\n    }\n\n    void\
-    \ update(Vertex Source, EdgeIndex Index, CostType Amount){\n        Vertex To\
-    \ = this->__IL[Source][Index].to;\n        EdgeIndex RIndex = this->__IL[Source][Index].tidx;\n\
-    \        EdgeID eid = this->__IL[Source][Index].ID;\n        this->__IL[Source][Index].cap\
-    \ -= Amount;\n        this->__IL[To][RIndex].cap += Amount;\n        if(this->__ES[eid].src\
-    \ != Source) Amount *= -1;\n        this->__ES[eid].cap -= Amount;\n        this->__RES[eid].cap\
-    \ += Amount;\n    }\n\n    EdgeSet<CostType> restore_cut(Vertex Source){\n   \
-    \     EdgeSet<CostType> ret;\n        vector<int> arrive(this->vsize(), 0);\n\
+    \ ret.push_back(ne);\n            }\n        }\n        return ret;\n    }\n};\n\
+    #line 2 \"latest/Graph/Dinic.hpp\"\n\ntemplate<typename CostType>\nstruct Dinic{\n\
+    \    Flow<CostType> &F;\n\n    vector<int> __Dist, __Iter;\n\n    void __bfs(Vertex\
+    \ Source){\n        __Dist.assign(F.vsize(), -1);\n        __Dist[Source] = 0;\n\
     \        queue<Vertex> que; que.push(Source);\n        while(que.size()){\n  \
-    \          Vertex now = que.front(); que.pop();\n            if(arrive[now]) continue;\
-    \ arrive[now] = 1;\n            for(auto e : this->get_incident(now)){\n     \
-    \           if(e.cap <= 0 || arrive[e.to]) continue;\n                que.push(e.to);\n\
-    \            }\n        }\n        for(int i = 0; i < this->esize(); ++i){\n \
-    \           Edge<CostType> e = this->__ES[i], re = this->__RES[i];\n         \
-    \   // cerr << \"[\" << e.src << \", \" << e.to << \"] Cap = \" << e.cap << endl;\n\
-    \            if(e.cap == 0 && arrive[e.src] && !arrive[e.to]){\n             \
-    \   Edge<CostType> ne = e;\n                ne.cap = re.cap;\n               \
-    \ ret.push_back(ne);\n            }\n        }\n        return ret;\n    }\n};"
+    \          Vertex now = que.front(); que.pop();\n            for(auto e : F.get_incident(now)){\n\
+    \                if(e.cap > 0 && __Dist[e.to] < 0){\n                    __Dist[e.to]\
+    \ = __Dist[now] + 1;\n                    que.push(e.to);\n                }\n\
+    \            }\n        }\n    }\n\n    CostType __dfs(Vertex v, Vertex t, CostType\
+    \ f){\n        if(v == t) return f;\n        auto IL = F.get_incident(v);\n  \
+    \      for(int &i = __Iter[v]; i < F.incsize(v); ++i){\n            Edge<CostType>\
+    \ e = IL[i];\n            if(e.cap > 0 && __Dist[v] < __Dist[e.to]){\n       \
+    \         CostType d = __dfs(e.to, t, min(f, e.cap));\n                if(d >\
+    \ 0){\n                    F.update(v, e.sidx, d);\n                    return\
+    \ d;\n                }\n            }\n        }\n        return 0;\n    }\n\n\
+    \    public:\n    Dinic(Flow<CostType> &F) : F(F){\n        __Dist.resize(F.vsize());\n\
+    \        __Iter.resize(F.vsize());\n    }\n\n    CostType solve(Vertex Source,\
+    \ Vertex Sink){\n        CostType ret = 0;\n        while(1){\n            __bfs(Source);\n\
+    \            if(__Dist[Sink] < 0) return ret;\n            __Iter.assign(F.vsize(),\
+    \ 0);\n            CostType f;\n            while((f = __dfs(Source, Sink, F.INF))\
+    \ > 0) ret += f;\n        }\n    }\n};\n"
+  code: "#include \"FlowTemplate.hpp\"\n\ntemplate<typename CostType>\nstruct Dinic{\n\
+    \    Flow<CostType> &F;\n\n    vector<int> __Dist, __Iter;\n\n    void __bfs(Vertex\
+    \ Source){\n        __Dist.assign(F.vsize(), -1);\n        __Dist[Source] = 0;\n\
+    \        queue<Vertex> que; que.push(Source);\n        while(que.size()){\n  \
+    \          Vertex now = que.front(); que.pop();\n            for(auto e : F.get_incident(now)){\n\
+    \                if(e.cap > 0 && __Dist[e.to] < 0){\n                    __Dist[e.to]\
+    \ = __Dist[now] + 1;\n                    que.push(e.to);\n                }\n\
+    \            }\n        }\n    }\n\n    CostType __dfs(Vertex v, Vertex t, CostType\
+    \ f){\n        if(v == t) return f;\n        auto IL = F.get_incident(v);\n  \
+    \      for(int &i = __Iter[v]; i < F.incsize(v); ++i){\n            Edge<CostType>\
+    \ e = IL[i];\n            if(e.cap > 0 && __Dist[v] < __Dist[e.to]){\n       \
+    \         CostType d = __dfs(e.to, t, min(f, e.cap));\n                if(d >\
+    \ 0){\n                    F.update(v, e.sidx, d);\n                    return\
+    \ d;\n                }\n            }\n        }\n        return 0;\n    }\n\n\
+    \    public:\n    Dinic(Flow<CostType> &F) : F(F){\n        __Dist.resize(F.vsize());\n\
+    \        __Iter.resize(F.vsize());\n    }\n\n    CostType solve(Vertex Source,\
+    \ Vertex Sink){\n        CostType ret = 0;\n        while(1){\n            __bfs(Source);\n\
+    \            if(__Dist[Sink] < 0) return ret;\n            __Iter.assign(F.vsize(),\
+    \ 0);\n            CostType f;\n            while((f = __dfs(Source, Sink, F.INF))\
+    \ > 0) ret += f;\n        }\n    }\n};"
   dependsOn:
+  - latest/Graph/FlowTemplate.hpp
   - latest/Graph/GraphTemplate.hpp
   isVerificationFile: false
-  path: latest/Graph/FlowTemplate.hpp
-  requiredBy:
-  - latest/Graph/BipartiteMatching.hpp
-  - latest/Graph/Dinic.hpp
-  - latest/Graph/FordFulkerson.hpp
-  - latest/Graph/PrimalDual.hpp
-  - verify_latest/pending/LC-BipartiteMatching.cpp
+  path: latest/Graph/Dinic.hpp
+  requiredBy: []
   timestamp: '2023-10-04 21:46:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_latest/AOJ-GRL-6-A.test.cpp
-  - verify_latest/AOJ-GRL-6-B.test.cpp
   - verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
-  - verify_latest/AOJ-GRL-7-A.test.cpp
-documentation_of: latest/Graph/FlowTemplate.hpp
+documentation_of: latest/Graph/Dinic.hpp
 layout: document
 redirect_from:
-- /library/latest/Graph/FlowTemplate.hpp
-- /library/latest/Graph/FlowTemplate.hpp.html
-title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+- /library/latest/Graph/Dinic.hpp
+- /library/latest/Graph/Dinic.hpp.html
+title: latest/Graph/Dinic.hpp
 ---

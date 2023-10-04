@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: latest/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: latest/Graph/BipartiteMatching.hpp
     title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
       \u30C3\u30C1\u30F3\u30B0"
@@ -13,9 +13,12 @@ data:
     path: latest/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
+    path: latest/Graph/Dinic.hpp
+    title: latest/Graph/Dinic.hpp
+  - icon: ':question:'
     path: latest/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: latest/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
   - icon: ':heavy_check_mark:'
@@ -68,20 +71,23 @@ data:
     path: verify_latest/AOJ-GRL-5-E.test.cpp
     title: verify_latest/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
+    title: verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-6-A.test.cpp
     title: verify_latest/AOJ-GRL-6-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-GRL-6-B.test.cpp
     title: verify_latest/AOJ-GRL-6-B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify_latest/AOJ-GRL-7-A.test.cpp
     title: verify_latest/AOJ-GRL-7-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_latest/LC-VertexAddPathSum.test.cpp
     title: verify_latest/LC-VertexAddPathSum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -92,44 +98,46 @@ data:
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
     \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
-    \ sidx, tidx;\n\n    Edge() = default;\n\n    void print(){\n        cerr << \"\
-    Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost = \" << cost <<\
-    \ \", Capacity = \" << cap << \", Place = [\" << sidx << \", \" << tidx << \"\
-    ]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nusing EdgeSet = vector<Edge<CostType>>;\n\
-    template<typename CostType>\nusing IncidentList = vector<vector<Edge<CostType>>>;\n\
-    using AdjacentList = vector<vector<Vertex>>;\n\ntemplate<typename CostType>\n\
-    struct Graph{\n    protected:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n\
-    \    EdgeSet<CostType> __ES, __RES;\n    IncidentList<CostType> __IL;\n    AdjacentList\
-    \ __AL;\n\n    public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected\
-    \ = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0),\
-    \ __IL(VertexSize), __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}\n\
-    \n    Graph() = default;\n\n    void add(Vertex Source, Vertex To, CostType Cost\
-    \ = 1){\n        assert(0 <= Source && Source < __CntVertex);\n        assert(0\
-    \ <= To && To < __CntVertex);\n        EdgeIndex sidx = __IL[Source].size(), tidx\
-    \ = __IL[To].size();\n        Edge<CostType> es{__CntEdge, Source, To, Cost, 1,\
-    \ sidx, tidx};\n        Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx,\
-    \ sidx};\n        __ES.push_back(es);\n        __RES.push_back(et);\n        __IL[Source].push_back(es),\
-    \ __AL[Source].push_back(To);\n        if(!__isDirected) __IL[To].push_back(et),\
-    \ __AL[To].push_back(Source);\n        ++__CntEdge;\n    }\n\n    vector<vector<CostType>>\
-    \ matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){\n      \
-    \  vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));\n        for(Vertex\
-    \ v = 0; v < __CntVertex; ++v){\n            ret[v][v] = 0;\n            for(auto\
-    \ e : __IL[v]){\n                ret[v][e.to] = e.cost;\n            }\n     \
-    \   }\n        return ret;\n    }\n\n    inline int vsize(){\n        return __CntVertex;\n\
-    \    }\n\n    inline int esize(){\n        return __CntEdge;\n    }\n\n    inline\
-    \ int incsize(Vertex v){\n        return __IL[v].size();\n    }\n\n    inline\
-    \ EdgeSet<CostType> get_edgeset(){\n        return __ES;\n    }\n\n    inline\
-    \ IncidentList<CostType> get_incidentlist(){\n        return __IL;\n    }\n\n\
-    \    inline vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0 <=\
-    \ v && v < __CntVertex);\n        return __IL[v];\n    }\n\n    inline AdjacentList\
-    \ get_adjacentlist(){\n        return __AL;\n    }\n\n    inline vector<Vertex>\
-    \ get_adjacent(Vertex v){\n        assert(0 <= v && v < __CntVertex);\n      \
-    \  return __AL[v];\n    }\n\n    vector<Edge<CostType>> operator[](Vertex v){\n\
-    \        return get_incident(v);\n    }\n\n    void print_edgeset(bool OneIndex\
-    \ = true){\n        for(int e = 0; e < __CntEdge; ++e){\n            cout << e\
-    \ + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected ? \" -> \"\
-    \ : \" <-> \") << __ES[e].to + OneIndex << \") = \" << __ES[e].cost << \" (\"\
-    \ << __ES[e].cap << \")\" << endl;\n        }\n    }\n\n    void print_incidentlist(bool\
+    \ sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex\
+    \ to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n       \
+    \ ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n\
+    \    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \" ->\
+    \ \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
+    \ = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename\
+    \ CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename CostType>\n\
+    using IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
+    \ntemplate<typename CostType>\nstruct Graph{\n    protected:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType> __ES, __RES;\n   \
+    \ IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n    public:\n    CostType\
+    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
+    \ __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize),\
+    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
+    \ void add(Vertex Source, Vertex To, CostType Cost = 1){\n        assert(0 <=\
+    \ Source && Source < __CntVertex);\n        assert(0 <= To && To < __CntVertex);\n\
+    \        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n     \
+    \   Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n        Edge<CostType>\
+    \ et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
+    \        __RES.push_back(et);\n        __IL[Source].push_back(es), __AL[Source].push_back(To);\n\
+    \        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);\n\
+    \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
+    \ = numeric_limits<CostType>::max() / 2){\n        vector ret(__CntVertex, vector(__CntVertex,\
+    \ NotAdjacent));\n        for(Vertex v = 0; v < __CntVertex; ++v){\n         \
+    \   ret[v][v] = 0;\n            for(auto e : __IL[v]){\n                ret[v][e.to]\
+    \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
+    \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
+    \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
+    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> get_edgeset(){\n\
+    \        return __ES;\n    }\n\n    inline IncidentList<CostType> get_incidentlist(){\n\
+    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> get_incident(Vertex\
+    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
+    \   }\n\n    inline AdjacentList get_adjacentlist(){\n        return __AL;\n \
+    \   }\n\n    inline vector<Vertex> get_adjacent(Vertex v){\n        assert(0 <=\
+    \ v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
+    \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
+    \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
+    \ ? \" -> \" : \" <-> \") << __ES[e].to + OneIndex << \") = \" << __ES[e].cost\
+    \ << \" (\" << __ES[e].cap << \")\" << endl;\n        }\n    }\n\n    void print_incidentlist(bool\
     \ OneIndex = true){\n        for(int i = 0; i < __CntVertex; ++i){\n         \
     \   cout << i + OneIndex << \" :\";\n            for(int j = 0; j < __IL[i].size();\
     \ ++j){\n                cout << \" (\" << __IL[i][j].to << \" / \" << __IL[i][j].cost\
@@ -147,22 +155,25 @@ data:
     \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
     \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
-    \ Edge() = default;\n\n    void print(){\n        cerr << \"Edge \" << ID << \"\
-    \ : (\" << src << \" -> \" << to << \"), Cost = \" << cost << \", Capacity = \"\
-    \ << cap << \", Place = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n\
-    };\n\ntemplate<typename CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename\
-    \ CostType>\nusing IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList\
-    \ = vector<vector<Vertex>>;\n\ntemplate<typename CostType>\nstruct Graph{\n  \
-    \  protected:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType>\
-    \ __ES, __RES;\n    IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n \
-    \   public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected =\
-    \ false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IL(VertexSize),\
-    \ __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph()\
-    \ = default;\n\n    void add(Vertex Source, Vertex To, CostType Cost = 1){\n \
-    \       assert(0 <= Source && Source < __CntVertex);\n        assert(0 <= To &&\
-    \ To < __CntVertex);\n        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n\
-    \        Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n    \
-    \    Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
+    \ Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost,\
+    \ CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n        ID(ID), src(src), to(to),\
+    \ cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n    void print(){\n      \
+    \  cerr << \"Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost =\
+    \ \" << cost << \", Capacity = \" << cap << \", Place = [\" << sidx << \", \"\
+    \ << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nusing EdgeSet\
+    \ = vector<Edge<CostType>>;\ntemplate<typename CostType>\nusing IncidentList =\
+    \ vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
+    \ntemplate<typename CostType>\nstruct Graph{\n    protected:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType> __ES, __RES;\n   \
+    \ IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n    public:\n    CostType\
+    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
+    \ __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize),\
+    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
+    \ void add(Vertex Source, Vertex To, CostType Cost = 1){\n        assert(0 <=\
+    \ Source && Source < __CntVertex);\n        assert(0 <= To && To < __CntVertex);\n\
+    \        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n     \
+    \   Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n        Edge<CostType>\
+    \ et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
     \        __RES.push_back(et);\n        __IL[Source].push_back(es), __AL[Source].push_back(To);\n\
     \        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);\n\
     \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
@@ -200,6 +211,7 @@ data:
   path: latest/Graph/GraphTemplate.hpp
   requiredBy:
   - latest/Graph/BipartiteMatching.hpp
+  - latest/Graph/Dinic.hpp
   - latest/Graph/Dijkstra.hpp
   - latest/Graph/FordFulkerson.hpp
   - latest/Graph/WarshallFloyd.hpp
@@ -211,13 +223,14 @@ data:
   - latest/Tree/HeavyLightDecomposition.hpp
   - latest/Tree/TreeDiamiter.hpp
   - verify_latest/pending/LC-BipartiteMatching.cpp
-  timestamp: '2023-10-03 01:00:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-10-04 21:46:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify_latest/AOJ-GRL-6-A.test.cpp
   - verify_latest/AOJ-GRL-1-B.test.cpp
   - verify_latest/AOJ-GRL-6-B.test.cpp
   - verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+  - verify_latest/AOJ-GRL-6-A-Dinic.test.cpp
   - verify_latest/AOJ-GRL-1-A.test.cpp
   - verify_latest/AOJ-GRL-5-C.test.cpp
   - verify_latest/AOJ-GRL-7-A.test.cpp
