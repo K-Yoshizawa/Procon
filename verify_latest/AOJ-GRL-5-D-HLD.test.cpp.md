@@ -17,57 +17,57 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
     links:
-    - https://judge.yosupo.jp/problem/vertex_add_path_sum
-  bundledCode: "#line 1 \"verify_latest/LC-VertexAddPathSum.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\n#line 1 \"latest/Tree/HeavyLightDecomposition.hpp\"\
-    \n/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
-    \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 2.0\n * @date 2023-10-04\n\
-    \ */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
-    \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
-    \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
-    \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
-    \ sidx, tidx;\n\n    Edge() = default;\n\n    void print(){\n        cerr << \"\
-    Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost = \" << cost <<\
-    \ \", Capacity = \" << cap << \", Place = [\" << sidx << \", \" << tidx << \"\
-    ]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nusing EdgeSet = vector<Edge<CostType>>;\n\
-    template<typename CostType>\nusing IncidentList = vector<vector<Edge<CostType>>>;\n\
-    using AdjacentList = vector<vector<Vertex>>;\n\ntemplate<typename CostType>\n\
-    struct Graph{\n    protected:\n    int __CntVertex, __CntEdge;\n    bool __isDirected;\n\
-    \    EdgeSet<CostType> __ES, __RES;\n    IncidentList<CostType> __IL;\n    AdjacentList\
-    \ __AL;\n\n    public:\n    CostType INF;\n\n    Graph(int VertexSize, bool isDirected\
-    \ = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0),\
-    \ __IL(VertexSize), __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}\n\
-    \n    Graph() = default;\n\n    void add(Vertex Source, Vertex To, CostType Cost\
-    \ = 1){\n        assert(0 <= Source && Source < __CntVertex);\n        assert(0\
-    \ <= To && To < __CntVertex);\n        EdgeIndex sidx = __IL[Source].size(), tidx\
-    \ = __IL[To].size();\n        Edge<CostType> es{__CntEdge, Source, To, Cost, 1,\
-    \ sidx, tidx};\n        Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx,\
-    \ sidx};\n        __ES.push_back(es);\n        __RES.push_back(et);\n        __IL[Source].push_back(es),\
-    \ __AL[Source].push_back(To);\n        if(!__isDirected) __IL[To].push_back(et),\
-    \ __AL[To].push_back(Source);\n        ++__CntEdge;\n    }\n\n    vector<vector<CostType>>\
-    \ matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){\n      \
-    \  vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));\n        for(Vertex\
-    \ v = 0; v < __CntVertex; ++v){\n            ret[v][v] = 0;\n            for(auto\
-    \ e : __IL[v]){\n                ret[v][e.to] = e.cost;\n            }\n     \
-    \   }\n        return ret;\n    }\n\n    inline int vsize(){\n        return __CntVertex;\n\
-    \    }\n\n    inline int esize(){\n        return __CntEdge;\n    }\n\n    inline\
-    \ int incsize(Vertex v){\n        return __IL[v].size();\n    }\n\n    inline\
-    \ EdgeSet<CostType> get_edgeset(){\n        return __ES;\n    }\n\n    inline\
-    \ IncidentList<CostType> get_incidentlist(){\n        return __IL;\n    }\n\n\
-    \    inline vector<Edge<CostType>> get_incident(Vertex v){\n        assert(0 <=\
-    \ v && v < __CntVertex);\n        return __IL[v];\n    }\n\n    inline AdjacentList\
-    \ get_adjacentlist(){\n        return __AL;\n    }\n\n    inline vector<Vertex>\
-    \ get_adjacent(Vertex v){\n        assert(0 <= v && v < __CntVertex);\n      \
-    \  return __AL[v];\n    }\n\n    vector<Edge<CostType>> operator[](Vertex v){\n\
-    \        return get_incident(v);\n    }\n\n    void print_edgeset(bool OneIndex\
-    \ = true){\n        for(int e = 0; e < __CntEdge; ++e){\n            cout << e\
-    \ + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected ? \" -> \"\
-    \ : \" <-> \") << __ES[e].to + OneIndex << \") = \" << __ES[e].cost << \" (\"\
-    \ << __ES[e].cap << \")\" << endl;\n        }\n    }\n\n    void print_incidentlist(bool\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D
+  bundledCode: "#line 1 \"verify_latest/AOJ-GRL-5-D-HLD.test.cpp\"\n#define PROBLEM\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\n\n#line\
+    \ 1 \"latest/Tree/HeavyLightDecomposition.hpp\"\n/**\n * @file HeavyLightDecomposition.hpp\n\
+    \ * @author log K (lX57)\n * @brief Heavy Light Decomposition - HL\u5206\u89E3\
+    \n * @version 2.0\n * @date 2023-10-04\n */\n\n#line 2 \"latest/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
+    \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
+    \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    \nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex = int;\n\ntemplate<typename\
+    \ CostType>\nstruct Edge{\n    EdgeID ID{-1};\n    Vertex src, to;\n    CostType\
+    \ cost, cap;\n    EdgeIndex sidx, tidx;\n\n    Edge() = default;\n\n    void print(){\n\
+    \        cerr << \"Edge \" << ID << \" : (\" << src << \" -> \" << to << \"),\
+    \ Cost = \" << cost << \", Capacity = \" << cap << \", Place = [\" << sidx <<\
+    \ \", \" << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\n\
+    using EdgeSet = vector<Edge<CostType>>;\ntemplate<typename CostType>\nusing IncidentList\
+    \ = vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
+    \ntemplate<typename CostType>\nstruct Graph{\n    protected:\n    int __CntVertex,\
+    \ __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType> __ES, __RES;\n   \
+    \ IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n    public:\n    CostType\
+    \ INF;\n\n    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize),\
+    \ __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize),\
+    \ INF(numeric_limits<CostType>::max() / 2){}\n\n    Graph() = default;\n\n   \
+    \ void add(Vertex Source, Vertex To, CostType Cost = 1){\n        assert(0 <=\
+    \ Source && Source < __CntVertex);\n        assert(0 <= To && To < __CntVertex);\n\
+    \        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();\n     \
+    \   Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};\n        Edge<CostType>\
+    \ et{__CntEdge, To, Source, Cost, 1, tidx, sidx};\n        __ES.push_back(es);\n\
+    \        __RES.push_back(et);\n        __IL[Source].push_back(es), __AL[Source].push_back(To);\n\
+    \        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);\n\
+    \        ++__CntEdge;\n    }\n\n    vector<vector<CostType>> matrix(CostType NotAdjacent\
+    \ = numeric_limits<CostType>::max() / 2){\n        vector ret(__CntVertex, vector(__CntVertex,\
+    \ NotAdjacent));\n        for(Vertex v = 0; v < __CntVertex; ++v){\n         \
+    \   ret[v][v] = 0;\n            for(auto e : __IL[v]){\n                ret[v][e.to]\
+    \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
+    \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
+    \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
+    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> get_edgeset(){\n\
+    \        return __ES;\n    }\n\n    inline IncidentList<CostType> get_incidentlist(){\n\
+    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> get_incident(Vertex\
+    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
+    \   }\n\n    inline AdjacentList get_adjacentlist(){\n        return __AL;\n \
+    \   }\n\n    inline vector<Vertex> get_adjacent(Vertex v){\n        assert(0 <=\
+    \ v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
+    \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
+    \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
+    \ ? \" -> \" : \" <-> \") << __ES[e].to + OneIndex << \") = \" << __ES[e].cost\
+    \ << \" (\" << __ES[e].cap << \")\" << endl;\n        }\n    }\n\n    void print_incidentlist(bool\
     \ OneIndex = true){\n        for(int i = 0; i < __CntVertex; ++i){\n         \
     \   cout << i + OneIndex << \" :\";\n            for(int j = 0; j < __IL[i].size();\
     \ ++j){\n                cout << \" (\" << __IL[i][j].to << \" / \" << __IL[i][j].cost\
@@ -217,49 +217,47 @@ data:
     \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
     \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
     \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n#line\
-    \ 5 \"verify_latest/LC-VertexAddPathSum.test.cpp\"\n\nint main(){\n    int N,\
-    \ Q; cin >> N >> Q;\n    vector<long long> a(N);\n    for(int i = 0; i < N; ++i)\
-    \ cin >> a[i];\n\n    vector<long long> Init_Data(N);\n    Graph<long long> G(N);\n\
-    \    for(int i = 0; i < N - 1; ++i){\n        int u, v; cin >> u >> v;\n     \
-    \   G.add(u, v);\n    }\n    HeavyLightDecomposition<long long> HLD(G);\n    for(int\
-    \ i = 0; i < N; ++i){\n        Init_Data[HLD.get_vertex_locate(i)] = a[i];\n \
-    \   }\n\n    SegmentTree<long long> seg(Init_Data, [](long long l, long long r){return\
-    \ l + r;}, 0, true);\n    while(Q--){\n        int query; cin >> query;\n    \
-    \    if(query == 0){\n            long long p, x; cin >> p >> x;\n           \
-    \ int lp = HLD.get_vertex_locate(p);\n            seg.update(lp, seg[lp] + x);\n\
-    \        }\n        else{\n            int u, v; cin >> u >> v;\n            auto\
-    \ path = HLD.get_vertex_segment(u, v);\n            long long ans = 0;\n     \
-    \       for(auto [l, r] : path){\n                ans += seg.query(l, r);\n  \
-    \          }\n            cout << ans << endl;\n        }\n    }\n\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
-    \n#include \"../latest/Tree/HeavyLightDecomposition.hpp\"\n#include \"../latest/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
-    \   for(int i = 0; i < N; ++i) cin >> a[i];\n\n    vector<long long> Init_Data(N);\n\
-    \    Graph<long long> G(N);\n    for(int i = 0; i < N - 1; ++i){\n        int\
-    \ u, v; cin >> u >> v;\n        G.add(u, v);\n    }\n    HeavyLightDecomposition<long\
-    \ long> HLD(G);\n    for(int i = 0; i < N; ++i){\n        Init_Data[HLD.get_vertex_locate(i)]\
-    \ = a[i];\n    }\n\n    SegmentTree<long long> seg(Init_Data, [](long long l,\
-    \ long long r){return l + r;}, 0, true);\n    while(Q--){\n        int query;\
-    \ cin >> query;\n        if(query == 0){\n            long long p, x; cin >> p\
-    \ >> x;\n            int lp = HLD.get_vertex_locate(p);\n            seg.update(lp,\
-    \ seg[lp] + x);\n        }\n        else{\n            int u, v; cin >> u >> v;\n\
-    \            auto path = HLD.get_vertex_segment(u, v);\n            long long\
-    \ ans = 0;\n            for(auto [l, r] : path){\n                ans += seg.query(l,\
-    \ r);\n            }\n            cout << ans << endl;\n        }\n    }\n\n}"
+    \ 5 \"verify_latest/AOJ-GRL-5-D-HLD.test.cpp\"\n\nint main(){\n    int n; cin\
+    \ >> n;\n    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n       \
+    \ int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int c; cin\
+    \ >> c;\n            G.add(i, c);\n        }\n    }\n\n    HeavyLightDecomposition<long\
+    \ long> HLD(G);\n    auto vdic = HLD.get_vertex_locations();\n    vector<long\
+    \ long> Init_Data(n, 0);\n    SegmentTree<long long> seg(Init_Data, [](long long\
+    \ x, long long y){return x + y;}, 0LL, true);\n\n    int q; cin >> q;\n    while(q--){\n\
+    \        int t; cin >> t;\n        if(t == 0){\n            int v, w; cin >> v\
+    \ >> w;\n            seg.update(vdic[v], seg[vdic[v]] + w);\n        }\n     \
+    \   else{\n            int u; cin >> u;\n            auto ret = HLD.get_vertex_segment(0,\
+    \ u);\n            long long ans = 0LL;\n            for(auto [l, r] : ret){\n\
+    \                ans += seg.query(l, r);\n            }\n            cout << ans\
+    \ << endl;\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
+    \n\n#include \"../latest/Tree/HeavyLightDecomposition.hpp\"\n#include \"../latest/DataStructure/SegmentTree.hpp\"\
+    \n\nint main(){\n    int n; cin >> n;\n    Graph<long long> G(n);\n    for(int\
+    \ i = 0; i < n; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k;\
+    \ ++j){\n            int c; cin >> c;\n            G.add(i, c);\n        }\n \
+    \   }\n\n    HeavyLightDecomposition<long long> HLD(G);\n    auto vdic = HLD.get_vertex_locations();\n\
+    \    vector<long long> Init_Data(n, 0);\n    SegmentTree<long long> seg(Init_Data,\
+    \ [](long long x, long long y){return x + y;}, 0LL, true);\n\n    int q; cin >>\
+    \ q;\n    while(q--){\n        int t; cin >> t;\n        if(t == 0){\n       \
+    \     int v, w; cin >> v >> w;\n            seg.update(vdic[v], seg[vdic[v]] +\
+    \ w);\n        }\n        else{\n            int u; cin >> u;\n            auto\
+    \ ret = HLD.get_vertex_segment(0, u);\n            long long ans = 0LL;\n    \
+    \        for(auto [l, r] : ret){\n                ans += seg.query(l, r);\n  \
+    \          }\n            cout << ans << endl;\n        }\n    }\n}"
   dependsOn:
   - latest/Tree/HeavyLightDecomposition.hpp
   - latest/Graph/GraphTemplate.hpp
   - latest/DataStructure/SegmentTree.hpp
   isVerificationFile: true
-  path: verify_latest/LC-VertexAddPathSum.test.cpp
+  path: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
   requiredBy: []
   timestamp: '2023-10-04 11:50:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify_latest/LC-VertexAddPathSum.test.cpp
+documentation_of: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
 layout: document
 redirect_from:
-- /verify/verify_latest/LC-VertexAddPathSum.test.cpp
-- /verify/verify_latest/LC-VertexAddPathSum.test.cpp.html
-title: verify_latest/LC-VertexAddPathSum.test.cpp
+- /verify/verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+- /verify/verify_latest/AOJ-GRL-5-D-HLD.test.cpp.html
+title: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
 ---

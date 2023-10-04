@@ -10,6 +10,9 @@ data:
     path: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
     title: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+    title: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_latest/LC-PointAddRangeSum.test.cpp
     title: verify_latest/LC-PointAddRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,6 +162,7 @@ data:
   timestamp: '2023-10-03 00:15:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify_latest/AOJ-GRL-5-D-HLD.test.cpp
   - verify_latest/LC-PointSetRangeComposite.test.cpp
   - verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
   - verify_latest/LC-VertexAddPathSum.test.cpp

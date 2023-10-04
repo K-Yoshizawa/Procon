@@ -295,6 +295,12 @@ data:
       path: verify_latest/AOJ-GRL-5-C.test.cpp
       title: verify_latest/AOJ-GRL-5-C.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+      title: verify_latest/AOJ-GRL-5-D-HLD.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-GRL-5-E.test.cpp
+      title: verify_latest/AOJ-GRL-5-E.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-GRL-6-A.test.cpp
       title: verify_latest/AOJ-GRL-6-A.test.cpp
     - icon: ':heavy_check_mark:'

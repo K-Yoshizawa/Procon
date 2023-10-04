@@ -16,6 +16,9 @@ data:
     path: verify_latest/AOJ-DSL-2-I.test.cpp
     title: verify_latest/AOJ-DSL-2-I.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-GRL-5-E.test.cpp
+    title: verify_latest/AOJ-GRL-5-E.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_latest/LC-RangeAffineRangeSum.test.cpp
     title: verify_latest/LC-RangeAffineRangeSum.test.cpp
   _isVerificationFailed: false
@@ -218,6 +221,7 @@ data:
   - verify_latest/AOJ-DSL-2-H.test.cpp
   - verify_latest/LC-RangeAffineRangeSum.test.cpp
   - verify_latest/AOJ-DSL-2-F.test.cpp
+  - verify_latest/AOJ-GRL-5-E.test.cpp
   - verify_latest/AOJ-DSL-2-G.test.cpp
   - verify_latest/AOJ-DSL-2-I.test.cpp
 documentation_of: latest/DataStructure/LazySegmentTree.hpp
