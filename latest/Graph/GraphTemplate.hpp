@@ -23,6 +23,8 @@ struct Edge{
     EdgeIndex sidx, tidx;
 
     Edge() = default;
+    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :
+        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}
 
     void print(){
         cerr << "Edge " << ID << " : (" << src << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << sidx << ", " << tidx << "]" << endl;

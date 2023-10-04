@@ -23,8 +23,8 @@ struct Flow : public Graph<CostType>{
         assert(0 <= Source && Source < this->__CntVertex);
         assert(0 <= To && To < this->__CntVertex);
         EdgeIndex sidx = this->__IL[Source].size(), tidx = this->__IL[To].size();
-        Edge<CostType> es{this->__CntEdge, Source, To, Cost, Capacity, sidx, tidx};
-        Edge<CostType> et{this->__CntEdge, To, Source, -Cost, 0, tidx, sidx};
+        Edge<CostType> es(this->__CntEdge, Source, To, Cost, Capacity, sidx, tidx);
+        Edge<CostType> et(this->__CntEdge, To, Source, -Cost, 0, tidx, sidx);
         this->__ES.push_back(es);
         this->__RES.push_back(et);
         this->__IL[Source].push_back(es), this->__AL[Source].push_back(To);
@@ -37,17 +37,33 @@ struct Flow : public Graph<CostType>{
     void update(Vertex Source, EdgeIndex Index, CostType Amount){
         Vertex To = this->__IL[Source][Index].to;
         EdgeIndex RIndex = this->__IL[Source][Index].tidx;
+        EdgeID eid = this->__IL[Source][Index].ID;
         this->__IL[Source][Index].cap -= Amount;
         this->__IL[To][RIndex].cap += Amount;
+        if(this->__ES[eid].src != Source) Amount *= -1;
+        this->__ES[eid].cap -= Amount;
+        this->__RES[eid].cap += Amount;
     }
 
-    EdgeSet<CostType> get(){
+    EdgeSet<CostType> restore_cut(Vertex Source){
         EdgeSet<CostType> ret;
-        for(Vertex i = 0; i < this->__CntVertex; ++i){
-            for(EdgeIndex j = 0; j < this->__IL[i].size(); ++j){
-                if(!__Rev[i][j]){
-                    ret.push_back(this->__IL[i][j]);
-                }
+        vector<int> arrive(this->vsize(), 0);
+        queue<Vertex> que; que.push(Source);
+        while(que.size()){
+            Vertex now = que.front(); que.pop();
+            if(arrive[now]) continue; arrive[now] = 1;
+            for(auto e : this->get_incident(now)){
+                if(e.cap <= 0 || arrive[e.to]) continue;
+                que.push(e.to);
+            }
+        }
+        for(int i = 0; i < this->esize(); ++i){
+            Edge<CostType> e = this->__ES[i], re = this->__RES[i];
+            // cerr << "[" << e.src << ", " << e.to << "] Cap = " << e.cap << endl;
+            if(e.cap == 0 && arrive[e.src] && !arrive[e.to]){
+                Edge<CostType> ne = e;
+                ne.cap = re.cap;
+                ret.push_back(ne);
             }
         }
         return ret;
