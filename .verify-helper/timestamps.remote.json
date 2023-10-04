@@ -35,13 +35,15 @@
 "verify_latest/AOJ-GRL-1-B-Dijkstra.test.cpp": "2023-10-03 01:00:30 +0900",
 "verify_latest/AOJ-GRL-1-B.test.cpp": "2023-10-03 01:00:30 +0900",
 "verify_latest/AOJ-GRL-1-C.test.cpp": "2023-10-03 01:00:30 +0900",
-"verify_latest/AOJ-GRL-5-C-HLD.test.cpp": "2023-10-04 00:54:20 +0900",
+"verify_latest/AOJ-GRL-5-C-HLD.test.cpp": "2023-10-04 11:50:55 +0900",
 "verify_latest/AOJ-GRL-5-C.test.cpp": "2023-10-03 01:00:30 +0900",
+"verify_latest/AOJ-GRL-5-D-HLD.test.cpp": "2023-10-04 11:50:55 +0900",
+"verify_latest/AOJ-GRL-5-E.test.cpp": "2023-10-04 11:50:55 +0900",
 "verify_latest/AOJ-GRL-6-A.test.cpp": "2023-10-03 01:00:30 +0900",
 "verify_latest/AOJ-GRL-6-B.test.cpp": "2023-10-03 01:00:30 +0900",
 "verify_latest/AOJ-GRL-7-A.test.cpp": "2023-10-03 01:00:30 +0900",
 "verify_latest/LC-PointAddRangeSum.test.cpp": "2023-10-03 00:15:19 +0900",
 "verify_latest/LC-PointSetRangeComposite.test.cpp": "2023-10-03 00:15:19 +0900",
 "verify_latest/LC-RangeAffineRangeSum.test.cpp": "2023-10-03 01:00:30 +0900",
-"verify_latest/LC-VertexAddPathSum.test.cpp": "2023-10-04 00:54:20 +0900"
+"verify_latest/LC-VertexAddPathSum.test.cpp": "2023-10-04 11:50:55 +0900"
 }
