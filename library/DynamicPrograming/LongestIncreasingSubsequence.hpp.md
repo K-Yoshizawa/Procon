@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-DPL-1-D.test.cpp
-    title: verify/AOJ/AOJ-DPL-1-D.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\
       \u52A0\u5217"
@@ -45,9 +42,8 @@ data:
   path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
   requiredBy: []
   timestamp: '2023-06-27 02:19:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ/AOJ-DPL-1-D.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
 layout: document
 redirect_from:

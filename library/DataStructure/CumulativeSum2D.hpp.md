@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-DSL-5-B.test.cpp
-    title: verify/AOJ/AOJ-DSL-5-B.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
     links: []
@@ -101,9 +98,8 @@ data:
   path: library/DataStructure/CumulativeSum2D.hpp
   requiredBy: []
   timestamp: '2023-08-24 13:17:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ/AOJ-DSL-5-B.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/DataStructure/CumulativeSum2D.hpp
 layout: document
 title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"

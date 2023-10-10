@@ -4,17 +4,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/LowestCommonAncestor.hpp
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
-    links: []
-  bundledCode: "#line 2 \"library/Tree/TreeDiamiter.hpp\"\n\n/**\n * @file TreeDiamiter.hpp\n\
-    \ * @author log K (lX57)\n * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n\
-    \ * @version 1.1\n * @date 2023-08-30\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
+  bundledCode: "#line 1 \"verify/AOJ-GRL-5-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
+    \n\n#line 1 \"library/Tree/LowestCommonAncestor.hpp\"\n/**\n * @file LowestCommonAncestor.hpp\n\
+    \ * @author log K (lX57)\n * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\
+    \u901A\u7956\u5148\n * @version 2.0\n * @date 2023-10-04\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -70,56 +76,50 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 12 \"library/Tree/TreeDiamiter.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex>\
-    \ que;\n        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
-    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
-    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
-    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
-    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
-    \                    que.push(u);\n                }\n            }\n        }\n\
-    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
-    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
-    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
-    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
-    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
-    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
-    \        build();\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @file TreeDiamiter.hpp\n * @author log K (lX57)\n\
-    \ * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n * @version 1.1\n * @date\
-    \ 2023-08-30\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n   \
-    \ vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex> que;\n\
-    \        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
-    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
-    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
-    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
-    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
-    \                    que.push(u);\n                }\n            }\n        }\n\
-    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
-    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
-    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
-    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
-    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
-    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
-    \        build();\n    }\n};"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"library/Tree/LowestCommonAncestor.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n\
+    \    Graph<CostType> &G;\n    int __Height;\n    vector<int> __Depth;\n    vector<vector<Vertex>>\
+    \ __Parent;\n\n    void __dfs(Vertex v, Vertex p, int d){\n        __Parent[0][v]\
+    \ = p;\n        __Depth[v] = d;\n        for(auto &e : G.get_incident(v)){\n \
+    \           if(e.to != p) __dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n\
+    \    LowestCommonAncestor(Graph<CostType> &G, Vertex Root) : G(G), __Height(32){\n\
+    \        __Depth.resize(G.vsize());\n        __Parent.resize(__Height, vector<Vertex>(G.vsize(),\
+    \ -1));\n        __dfs(Root, -1, 0);\n        for(int k = 0; k + 1 < __Height;\
+    \ ++k){\n            for(Vertex v = 0; v < G.vsize(); ++v){\n                if(__Parent[k][v]\
+    \ < 0) __Parent[k + 1][v] = -1;\n                else __Parent[k + 1][v] = __Parent[k][__Parent[k][v]];\n\
+    \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
+    \    if(__Depth[u] > __Depth[v]) swap(u, v);\n        for(int k = 0; k < __Height;\
+    \ ++k){\n            if((__Depth[v] - __Depth[u]) >> k & 1){\n               \
+    \ v = __Parent[k][v];\n            }\n        }\n        if(u == v) return u;\n\
+    \        for(int k = __Height - 1; k >= 0; --k){\n            if(__Parent[k][u]\
+    \ != __Parent[k][v]){\n                u = __Parent[k][u];\n                v\
+    \ = __Parent[k][v];\n            }\n        }\n        return __Parent[0][u];\n\
+    \    }\n};\n#line 4 \"verify/AOJ-GRL-5-C.test.cpp\"\n\nint main(){\n    int n;\
+    \ cin >> n;\n    Graph<int> G(n);\n    for(int i = 0; i <= n - 1; ++i){\n    \
+    \    int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int c;\
+    \ cin >> c;\n            G.add(i, c);\n        }\n    }\n\n    LowestCommonAncestor<int>\
+    \ lca(G, 0);\n    int q; cin >> q;\n    while(q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << lca.get(u, v) << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
+    \n\n#include \"../library/Tree/LowestCommonAncestor.hpp\"\n\nint main(){\n   \
+    \ int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0; i <= n - 1; ++i){\n\
+    \        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int\
+    \ c; cin >> c;\n            G.add(i, c);\n        }\n    }\n\n    LowestCommonAncestor<int>\
+    \ lca(G, 0);\n    int q; cin >> q;\n    while(q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << lca.get(u, v) << endl;\n    }\n}"
   dependsOn:
+  - library/Tree/LowestCommonAncestor.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: library/Tree/TreeDiamiter.hpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-5-C.test.cpp
   requiredBy: []
   timestamp: '2023-10-10 13:58:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: library/Tree/TreeDiamiter.hpp
+documentation_of: verify/AOJ-GRL-5-C.test.cpp
 layout: document
 redirect_from:
-- /library/library/Tree/TreeDiamiter.hpp
-- /library/library/Tree/TreeDiamiter.hpp.html
-title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
+- /verify/verify/AOJ-GRL-5-C.test.cpp
+- /verify/verify/AOJ-GRL-5-C.test.cpp.html
+title: verify/AOJ-GRL-5-C.test.cpp
 ---

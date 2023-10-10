@@ -2,28 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: library/DataStructure/BinaryIndexedTreeDouble.hpp
     title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
   - icon: ':warning:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':warning:'
-    path: verify/AOJ/AOJ-GRL-5-D.cpp
-    title: verify/AOJ/AOJ-GRL-5-D.cpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-DSL-2-B.test.cpp
-    title: verify/AOJ/AOJ-DSL-2-B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-DSL-2-G.test.cpp
-    title: verify/AOJ/AOJ-DSL-2-G.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
-    title: verify/LC/LC-PointAddRangeSum-BIT.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: Binary Indexed Tree
     links: []
@@ -84,15 +72,11 @@ data:
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTree.hpp
   requiredBy:
-  - verify/AOJ/AOJ-GRL-5-D.cpp
   - library/Tree/EulerTour.hpp
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
   timestamp: '2023-06-13 11:29:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ/AOJ-DSL-2-B.test.cpp
-  - verify/AOJ/AOJ-DSL-2-G.test.cpp
-  - verify/LC/LC-PointAddRangeSum-BIT.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

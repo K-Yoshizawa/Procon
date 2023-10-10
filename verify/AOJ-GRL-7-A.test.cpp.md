@@ -2,6 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: library/Graph/BipartiteMatching.hpp
+    title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
+      \u30C3\u30C1\u30F3\u30B0"
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Dinic.hpp
     title: "Dinic - \u6700\u5927\u6D41"
   - icon: ':heavy_check_mark:'
@@ -11,18 +15,17 @@ data:
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-7-A.test.cpp
-    title: verify/AOJ-GRL-7-A.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\
-      \u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    links: []
-  bundledCode: "#line 1 \"library/Graph/BipartiteMatching.hpp\"\n/**\n * @file BipartiteMatching.hpp\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-7-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
+    \n\n#line 1 \"library/Graph/BipartiteMatching.hpp\"\n/**\n * @file BipartiteMatching.hpp\n\
     \ * @author log K (lX57)\n * @brief Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\
     \u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0\n * @version 2.2\n * @date\
     \ 2023-10-04\n */\n\n#line 1 \"library/Graph/Dinic.hpp\"\n/**\n * @file Dinic.hpp\n\
@@ -170,61 +173,30 @@ data:
     \ 0);\n        // }\n        return ret;\n    }\n\n    vector<pair<Vertex, Vertex>>\
     \ get_matching(){\n        return __Matching;\n    }\n    \n    int MinimumVertexCover(){\n\
     \        return __L - ML + MR;\n    }\n\n    int MaximumIndependentSet(){\n  \
-    \      return ML + __R - MR;\n    }\n};\n"
-  code: "/**\n * @file BipartiteMatching.hpp\n * @author log K (lX57)\n * @brief Bipartite\
-    \ Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\
-    \u30F3\u30B0\n * @version 2.2\n * @date 2023-10-04\n */\n\n#include \"Dinic.hpp\"\
-    \n\nstruct BipartiteMatching{\n    private:\n    Flow<int> G, H;\n    int __L,\
-    \ __R;\n    Vertex __S, __T;\n    vector<pair<Vertex, Vertex>> __Matching;\n\n\
-    \    bool __SubGraph;\n    set<pair<Vertex, Vertex>> remain_edge;\n    vector<int>\
-    \ mark_L, mark_R;\n    int ML, MR;\n\n    public:\n    BipartiteMatching(int L,\
-    \ int R, int src_flow = 1, int sink_flow = 1, bool MakeSubGraph = false) : __L(L),\
-    \ __R(R), __S(L + R), __T(L + R + 1), __SubGraph(MakeSubGraph){\n        G = Flow<int>(__L\
-    \ + __R + 2);\n        for(Vertex l = 0; l < __L; ++l) G.add(__S, l, src_flow);\n\
-    \        for(Vertex r = __L; r < __L + __R; ++r) G.add(r, __T, sink_flow);\n \
-    \   }\n\n    void add(int l, int r, int flow = 1){\n        G.add(l, __L + r,\
-    \ flow);\n        remain_edge.insert({l, __L + r});\n    }\n\n    int solve(bool\
-    \ MakeSubGraph = false){\n        Dinic<int> dn(G);\n        int ret = dn.solve(__S,\
-    \ __T);\n        EdgeSet<int> es = G.get_edgeset();\n        for(int i = 0; i\
-    \ < es.size(); ++i){\n            if(es[i].cap > 0) continue;\n            if(es[i].src\
-    \ == __S || es[i].to == __T) continue;\n            __Matching.push_back({es[i].src,\
-    \ es[i].to - __L});\n        }\n        // if(MakeSubGraph){\n        //     H\
-    \ = Flow<int>(__L + __R);\n        //     mark_L.resize(__L, 1), mark_R.resize(__R,\
-    \ 0);\n        //     for(auto [l, r] : __Matching){\n        //         H.add(r,\
-    \ l);\n        //         remain_edge.erase({l, r});\n        //         mark_L[l]\
-    \ = 0;\n        //     }\n        //     for(auto [l, r] : remain_edge){\n   \
-    \     //         H.add(l, r);\n        //     }\n        //     for(Vertex l =\
-    \ 0; l < __L; ++l){\n        //         if(!mark_L[l]) continue;\n        // \
-    \        queue<Vertex> que;\n        //         que.push(l);\n        //     \
-    \    while(que.size()){\n        //             Vertex now = que.front();\n  \
-    \      //             que.pop();\n        //             for(auto e : H.get_incident(now)){\n\
-    \        //                 if(e.to < __L && !mark_L[e.to]){\n        //     \
-    \                mark_L[e.to] = 1;\n        //                     que.push(e.to);\n\
-    \        //                 }\n        //                 if(e.to >= __L && !mark_R[e.to\
-    \ - __L]){\n        //                     mark_R[e.to - __L] = 1;\n        //\
-    \                     que.push(e.to);\n        //                 }\n        //\
-    \             }\n        //         }\n        //     }\n        //     ML = accumulate(mark_L.begin(),\
-    \ mark_L.end(), 0);\n        //     MR = accumulate(mark_R.begin(), mark_R.end(),\
-    \ 0);\n        // }\n        return ret;\n    }\n\n    vector<pair<Vertex, Vertex>>\
-    \ get_matching(){\n        return __Matching;\n    }\n    \n    int MinimumVertexCover(){\n\
-    \        return __L - ML + MR;\n    }\n\n    int MaximumIndependentSet(){\n  \
-    \      return ML + __R - MR;\n    }\n};"
+    \      return ML + __R - MR;\n    }\n};\n#line 4 \"verify/AOJ-GRL-7-A.test.cpp\"\
+    \n\nint main(){\n    int X, Y, E;\n    cin >> X >> Y >> E;\n    BipartiteMatching\
+    \ bm(X, Y);\n    for(int i = 0; i < E; ++i){\n        int x, y; cin >> x >> y;\n\
+    \        bm.add(x, y);\n    }\n    cout << bm.solve() << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
+    \n\n#include \"../library/Graph/BipartiteMatching.hpp\"\n\nint main(){\n    int\
+    \ X, Y, E;\n    cin >> X >> Y >> E;\n    BipartiteMatching bm(X, Y);\n    for(int\
+    \ i = 0; i < E; ++i){\n        int x, y; cin >> x >> y;\n        bm.add(x, y);\n\
+    \    }\n    cout << bm.solve() << endl;\n}"
   dependsOn:
+  - library/Graph/BipartiteMatching.hpp
   - library/Graph/Dinic.hpp
   - library/Graph/FlowTemplate.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: library/Graph/BipartiteMatching.hpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-7-A.test.cpp
   requiredBy: []
   timestamp: '2023-10-10 13:58:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ-GRL-7-A.test.cpp
-documentation_of: library/Graph/BipartiteMatching.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/AOJ-GRL-7-A.test.cpp
 layout: document
 redirect_from:
-- /library/library/Graph/BipartiteMatching.hpp
-- /library/library/Graph/BipartiteMatching.hpp.html
-title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
-  \u30C3\u30C1\u30F3\u30B0"
+- /verify/verify/AOJ-GRL-7-A.test.cpp
+- /verify/verify/AOJ-GRL-7-A.test.cpp.html
+title: verify/AOJ-GRL-7-A.test.cpp
 ---

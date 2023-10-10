@@ -5,20 +5,23 @@ data:
     path: library/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
+    path: library/Graph/FordFulkerson.hpp
+    title: "Ford-Fulkerson - \u6700\u5927\u6D41"
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-6-A.test.cpp
-    title: verify/AOJ-GRL-6-A.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-    links: []
-  bundledCode: "#line 1 \"library/Graph/FordFulkerson.hpp\"\n/**\n * @file FordFulkerson.hpp\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-6-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
+    \n\n#line 1 \"library/Graph/FordFulkerson.hpp\"\n/**\n * @file FordFulkerson.hpp\n\
     \ * @author log K (lX57)\n * @brief Ford-Fulkerson - \u6700\u5927\u6D41\n * @version\
     \ 2.1\n * @date 2023-10-02\n */\n\n#line 2 \"library/Graph/FlowTemplate.hpp\"\n\
     \n/**\n * @file FlowTemplate.hpp\n * @author log K (lX57)\n * @brief Flow Template\
@@ -124,60 +127,32 @@ data:
     \ = 0;\n        while(1){\n            __used.assign(G.vsize(), 0);\n        \
     \    CostType F = __dfs(Source, Sink, G.INF);\n            if(F == 0) break;\n\
     \            ans += F;\n        }\n        return ans;\n    }\n\n    vector<Edge<CostType>>\
-    \ get(){\n        return G.get();\n    }\n};\n"
-  code: "/**\n * @file FordFulkerson.hpp\n * @author log K (lX57)\n * @brief Ford-Fulkerson\
-    \ - \u6700\u5927\u6D41\n * @version 2.1\n * @date 2023-10-02\n */\n\n#include\
-    \ \"FlowTemplate.hpp\"\n\ntemplate<typename CostType>\nstruct FordFulkerson{\n\
-    \    private:\n    Flow<CostType> &G;\n    vector<int> __used;\n\n    CostType\
-    \ __dfs(Vertex pos, Vertex goal, CostType F){\n        if(pos == goal) return\
-    \ F;\n        __used[pos] = 1;\n        for(auto e : G.get_incident(pos)){\n \
-    \           if(e.cap == 0 || __used[e.to]) continue;\n            // cerr << \"\
-    [\" << e.src << \", \" << e.to << \"] (\" << e.cap << \")\\n\";\n            CostType\
-    \ flow = __dfs(e.to, goal, min(F, e.cap));\n            if(flow >= 1){\n     \
-    \           // cerr << \"Update [\" << e.src << \", \" << e.to << \"] Flow = \"\
-    \ << flow << endl;\n                G.update(e.src, e.sidx, flow);\n         \
-    \       return flow;\n            }\n        }\n        return 0;\n    }\n\n \
-    \   public:\n    FordFulkerson(Flow<CostType> &G) : G(G), __used(G.vsize(), 0){}\n\
-    \n    CostType solve(Vertex Source, Vertex Sink){\n        CostType ans = 0;\n\
-    \        while(1){\n            __used.assign(G.vsize(), 0);\n            CostType\
-    \ F = __dfs(Source, Sink, G.INF);\n            if(F == 0) break;\n           \
-    \ ans += F;\n        }\n        return ans;\n    }\n\n    vector<Edge<CostType>>\
-    \ get(){\n        return G.get();\n    }\n};"
+    \ get(){\n        return G.get();\n    }\n};\n#line 4 \"verify/AOJ-GRL-6-A.test.cpp\"\
+    \n\nint main(){\n    int V, E;\n    cin >> V >> E;\n    Flow<int> G(V);\n    for(int\
+    \ i = 0; i < E; ++i){\n        int u, v, c;\n        cin >> u >> v >> c;\n   \
+    \     G.add(u, v, c);\n    }\n\n    // G.print_incidentlist(false);\n    // cerr\
+    \ << \"Check\" << endl;\n\n    FordFulkerson<int> ff(G);\n    cout << ff.solve(0,\
+    \ V - 1) << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
+    \n\n#include \"../library/Graph/FordFulkerson.hpp\"\n\nint main(){\n    int V,\
+    \ E;\n    cin >> V >> E;\n    Flow<int> G(V);\n    for(int i = 0; i < E; ++i){\n\
+    \        int u, v, c;\n        cin >> u >> v >> c;\n        G.add(u, v, c);\n\
+    \    }\n\n    // G.print_incidentlist(false);\n    // cerr << \"Check\" << endl;\n\
+    \n    FordFulkerson<int> ff(G);\n    cout << ff.solve(0, V - 1) << endl;\n}"
   dependsOn:
+  - library/Graph/FordFulkerson.hpp
   - library/Graph/FlowTemplate.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: library/Graph/FordFulkerson.hpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-6-A.test.cpp
   requiredBy: []
   timestamp: '2023-10-10 13:58:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ-GRL-6-A.test.cpp
-documentation_of: library/Graph/FordFulkerson.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/AOJ-GRL-6-A.test.cpp
 layout: document
-title: "Ford-Fulkerson - \u6700\u5927\u6D41"
+redirect_from:
+- /verify/verify/AOJ-GRL-6-A.test.cpp
+- /verify/verify/AOJ-GRL-6-A.test.cpp.html
+title: verify/AOJ-GRL-6-A.test.cpp
 ---
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
-
-## Abstract
-
-最大流問題をFord-Fulkerson法を用いて求める。
-
-## Variable
-
-
-
-## Function
-
-- `FordFulkerson(Graph G)` : `Graph`で初期化する。
-- `solve(Vertex Source, Vertex Sink)` : 頂点`Source`から頂点`Sink`への最大流を求める。$O(FE)$

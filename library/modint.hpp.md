@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify_latest/LC-PointSetRangeComposite.test.cpp
-    title: verify_latest/LC-PointSetRangeComposite.test.cpp
+    path: verify/LC-PointSetRangeComposite.test.cpp
+    title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify_latest/LC-RangeAffineRangeSum.test.cpp
-    title: verify_latest/LC-RangeAffineRangeSum.test.cpp
+    path: verify/LC-RangeAffineRangeSum.test.cpp
+    title: verify/LC-RangeAffineRangeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -82,8 +82,8 @@ data:
   timestamp: '2023-08-30 10:46:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_latest/LC-PointSetRangeComposite.test.cpp
-  - verify_latest/LC-RangeAffineRangeSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
 documentation_of: library/modint.hpp
 layout: document
 redirect_from:

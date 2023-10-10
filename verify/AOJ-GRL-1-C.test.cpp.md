@@ -4,17 +4,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: library/Graph/WarshallFloyd.hpp
+    title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
-    links: []
-  bundledCode: "#line 2 \"library/Tree/TreeDiamiter.hpp\"\n\n/**\n * @file TreeDiamiter.hpp\n\
-    \ * @author log K (lX57)\n * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n\
-    \ * @version 1.1\n * @date 2023-08-30\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
+    links:
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
+  bundledCode: "#line 1 \"verify/AOJ-GRL-1-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
+    \n\n#line 1 \"library/Graph/WarshallFloyd.hpp\"\n/**\n * @file WarshallFloyd.hpp\n\
+    \ * @author log_K (lX57)\n * @brief WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\
+    \u77ED\u7D4C\u8DEF\n * @version 2.2\n * @date 2023-10-02\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -70,56 +76,52 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 12 \"library/Tree/TreeDiamiter.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex>\
-    \ que;\n        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
-    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
-    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
-    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
-    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
-    \                    que.push(u);\n                }\n            }\n        }\n\
-    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
-    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
-    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
-    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
-    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
-    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
-    \        build();\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @file TreeDiamiter.hpp\n * @author log K (lX57)\n\
-    \ * @brief Tree Diamiter - \u6728\u306E\u76F4\u5F84\n * @version 1.1\n * @date\
-    \ 2023-08-30\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct TreeDiamiter{\n    private:\n    Graph<CostType> &G;\n   \
-    \ vector<CostType> dist;\n\n    void bfs(Vertex s){\n        queue<Vertex> que;\n\
-    \        dist.assign(G.size(), G.INF);\n        dist[s] = 0;\n        que.push(s);\n\
-    \        while(!que.empty()){\n            Vertex v = que.front();\n         \
-    \   que.pop();\n            for(EdgeNum &i : G.connect[v]){\n                Vertex\
-    \ u = G.edges[i].to;\n                CostType w = G.edges[i].cost;\n        \
-    \        if(dist[v] + w < dist[u]){\n                    dist[u] = dist[v] + w;\n\
-    \                    que.push(u);\n                }\n            }\n        }\n\
-    \    }\n\n    void build(){\n        bfs(0);\n        int v = 0;\n        CostType\
-    \ d = 0;\n        for(int i = 0; i < G.size(); ++i){\n            if(dist[i] >\
-    \ d){\n                v = i, d = dist[i];\n            }\n        }\n       \
-    \ EdgeVertex.first = v;\n        bfs(v);\n        v = 0, d = 0;\n        for(int\
-    \ i = 0; i < G.size(); ++i){\n            if(dist[i] > d){\n                v\
-    \ = i, d = dist[i];\n            }\n        }\n        EdgeVertex.second = v;\n\
-    \        diamiter = d;\n    }\n\n    public:\n    pair<Vertex, Vertex> EdgeVertex;\n\
-    \    CostType diamiter;\n\n    TreeDiamiter(Tree<CostType> &T) : G(T), dist(T.size()){\n\
-    \        build();\n    }\n};"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"library/Graph/WarshallFloyd.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n    private:\n    bool\
+    \ __NegativeCycle;\n    int __Size;\n    CostType __INF;\n    vector<vector<CostType>>\
+    \ __Dist;\n\n    void __solve(){\n        for(int k = 0; k < __Size; ++k){\n \
+    \           for(int i = 0; i < __Size; ++i){\n                for(int j = 0; j\
+    \ < __Size; ++j){\n                    if(__Dist[i][k] == __INF || __Dist[k][j]\
+    \ == __INF) continue;\n                    __Dist[i][j] = min(__Dist[i][j], __Dist[i][k]\
+    \ + __Dist[k][j]);\n                }\n            }\n        }\n        __NegativeCycle\
+    \ = false;\n        for(int i = 0; i < __Size; ++i) __NegativeCycle |= __Dist[i][i]\
+    \ < 0;\n    }\n\n    public:\n    WarshallFloyd(Graph<CostType> &G) : __Size(G.vsize()),\
+    \ __INF(G.INF), __Dist(G.matrix()){\n        __solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>>\
+    \ &M) : __Size((int)M.size()), __INF(numeric_limits<CostType>::max() / 2), __Dist(M){\n\
+    \        __solve();\n    }\n\n    inline bool negative(){\n        return __NegativeCycle;\n\
+    \    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start\
+    \ && Start < __Size);\n        assert(0 <= Goal && Goal < __Size);\n        return\
+    \ __Dist[Start][Goal];\n    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ / 2, bool DisplayINF = true){\n        for(int i = 0; i < __Size; ++i){\n  \
+    \          cout << (DisplayINF && __Dist[i][0] == NotAdjacent ? \"INF\" : to_string(__Dist[i][0]));\n\
+    \            for(int j = 1; j < __Size; ++j){\n                cout << \" \" <<\
+    \ (DisplayINF && __Dist[i][j] == NotAdjacent ? \"INF\" : to_string(__Dist[i][j]));\n\
+    \            }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"verify/AOJ-GRL-1-C.test.cpp\"\
+    \n\nint main(){\n    int V, E;\n    cin >> V >> E;\n    Graph<long long> G(V,\
+    \ true);\n    for(int i = 0; i < E; ++i){\n        int s, t, d;\n        cin >>\
+    \ s >> t >> d;\n        G.add(s, t, d);\n    }\n\n    WarshallFloyd<long long>\
+    \ wf(G);\n    if(wf.negative()){\n        cout << \"NEGATIVE CYCLE\\n\";\n   \
+    \ }\n    else{\n        wf.print();\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
+    \n\n#include \"../library/Graph/WarshallFloyd.hpp\"\n\nint main(){\n    int V,\
+    \ E;\n    cin >> V >> E;\n    Graph<long long> G(V, true);\n    for(int i = 0;\
+    \ i < E; ++i){\n        int s, t, d;\n        cin >> s >> t >> d;\n        G.add(s,\
+    \ t, d);\n    }\n\n    WarshallFloyd<long long> wf(G);\n    if(wf.negative()){\n\
+    \        cout << \"NEGATIVE CYCLE\\n\";\n    }\n    else{\n        wf.print();\n\
+    \    }\n}"
   dependsOn:
+  - library/Graph/WarshallFloyd.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: library/Tree/TreeDiamiter.hpp
+  isVerificationFile: true
+  path: verify/AOJ-GRL-1-C.test.cpp
   requiredBy: []
   timestamp: '2023-10-10 13:58:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: library/Tree/TreeDiamiter.hpp
+documentation_of: verify/AOJ-GRL-1-C.test.cpp
 layout: document
 redirect_from:
-- /library/library/Tree/TreeDiamiter.hpp
-- /library/library/Tree/TreeDiamiter.hpp.html
-title: "Tree Diamiter - \u6728\u306E\u76F4\u5F84"
+- /verify/verify/AOJ-GRL-1-C.test.cpp
+- /verify/verify/AOJ-GRL-1-C.test.cpp.html
+title: verify/AOJ-GRL-1-C.test.cpp
 ---

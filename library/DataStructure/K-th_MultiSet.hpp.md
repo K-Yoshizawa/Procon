@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/yukicoder/yuki-0649.test.cpp
-    title: verify/yukicoder/yuki-0649.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\
       \u30C7\u30FC\u30BF\u69CB\u9020"
@@ -94,9 +91,8 @@ data:
   path: library/DataStructure/K-th_MultiSet.hpp
   requiredBy: []
   timestamp: '2023-06-18 02:21:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/yukicoder/yuki-0649.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: library/DataStructure/K-th_MultiSet.hpp
 layout: document
 redirect_from:

@@ -4,140 +4,170 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ/AOJ-DSL-2-A.test.cpp
-    title: verify/AOJ/AOJ-DSL-2-A.test.cpp
+    path: verify/AOJ-DSL-2-A.test.cpp
+    title: verify/AOJ-DSL-2-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/LC/LC-PointAddRangeSum-ST.test.cpp
-    title: verify/LC/LC-PointAddRangeSum-ST.test.cpp
+    path: verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+    title: verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-D-HLD.test.cpp
+    title: verify/AOJ-GRL-5-D-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-PointAddRangeSum.test.cpp
+    title: verify/LC-PointAddRangeSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-PointSetRangeComposite.test.cpp
+    title: verify/LC-PointSetRangeComposite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddPathSum.test.cpp
+    title: verify/LC-VertexAddPathSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     links: []
-  bundledCode: "#line 2 \"library/DataStructure/SegmentTree.hpp\"\n\n/**\n * @brief\
-    \ Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n */\n\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 1 \"library/DataStructure/SegmentTree.hpp\"\n/**\n * @file SegmentTree.hpp\n\
+    \ * @author log K (lX57)\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\
+    \u6728\n * @version 2.0\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate<typename Monoid>\nstruct SegmentTree{\n    private:\n\
-    \    using F = function<Monoid(Monoid, Monoid)>;\n\n    int sz;\n    vector<Monoid>\
-    \ data;\n    const F f; // 2\u3064\u306E\u533A\u9593\u3092\u30DE\u30FC\u30B8\u3059\
-    \u308B\u4E8C\u9805\u6F14\u7B97\n    const Monoid M1; // \u30BB\u30B0\u30E1\u30F3\
-    \u30C8\u6728\u306E\u5404\u8981\u7D20\u306E\u5358\u4F4D\u5143\n\n    public:\n\
-    \    /**\n     * @brief Construct a new Segment Tree object\n     * @param N \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u30B5\u30A4\u30BA\n     * @param f 2\u8981\
-    \u7D20\u3092\u30DE\u30FC\u30B8\u3059\u308B\u6F14\u7B97\u5B50\n     * @param M1\
-    \ \u5358\u4F4D\u5143\n     * @note \u5404\u8981\u7D20\u306E\u521D\u671F\u5024\u306F\
-    M1\u306B\u306A\u308B\u3002\u521D\u671F\u5024\u3092\u5225\u3067\u8A2D\u5B9A\u3057\
-    \u305F\u3044\u5834\u5408\u306Fset\u95A2\u6570\u3092\u4F7F\u3046\u3002\n     */\n\
-    \    SegmentTree(int N, const F f, const Monoid &M1) : f(f), M1(M1){\n       \
-    \ sz = 1;\n        while(sz < N) sz <<= 1;\n        data.resize(2 * sz, M1);\n\
-    \    }\n\n    SegmentTree() = default;\n\n    /**\n     * @brief \u6307\u5B9A\u3057\
-    \u305F\u8981\u7D20\u306B\u521D\u671F\u5024\u3092\u8A2D\u5B9A\u3059\u308B\u3002\
-    \n     * @note \u3053\u306E\u95A2\u6570\u306Fbuild\u95A2\u6570\u547C\u3073\u51FA\
-    \u3057\u524D\u306B\u884C\u3046\u3053\u3068\u3002\n     * @attention 1-index\u3067\
-    \u6307\u5B9A\u3059\u308B\u3053\u3068\uFF01\n     * @param k \u8A2D\u5B9A\u3057\
-    \u305F\u3044\u8981\u7D20\u756A\u53F7\uFF081-index\uFF09\n     * @param x \u8A2D\
-    \u5B9A\u3057\u305F\u3044\u5024\n     */\n    void set(int k, const Monoid &x){\n\
-    \        data[k + sz] = x;\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\
-    \u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u521D\u671F\
-    \u5024\u306E\u8A2D\u5B9A\u306F\u3053\u306E\u95A2\u6570\u3092\u547C\u3073\u51FA\
-    \u3059\u524D\u306Bset\u95A2\u6570\u3067\u884C\u3046\u3053\u3068\u3002\n     */\n\
-    \    void build(){\n        for(int k = sz - 1; k > 0; --k){\n            data[k]\
-    \ = f(data[2 * k], data[2 * k + 1]);\n        }\n    }\n\n    /**\n     * @brief\
-    \ 1\u70B9\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n\
-    \     * @attention 1-index\u3067\u6307\u5B9A\u3059\u308B\u3053\u3068\uFF01\n \
-    \    * @param k \u66F4\u65B0\u3057\u305F\u3044\u8981\u7D20\u756A\u53F7\uFF081-index\uFF09\
-    \n     * @param x \u66F4\u65B0\u3057\u305F\u3044\u5024\n     */\n    void update(int\
-    \ k, const Monoid &x){\n        k += sz;\n        data[k] = x;\n        while(k\
-    \ >>= 1){\n            data[k] = f(data[2 * k], data[2 * k + 1]);\n        }\n\
-    \    }\n\n    /**\n     * @brief \u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
-    \u51E6\u7406\u3059\u308B\u3002\n     * @attention 1-index\u30FB\u534A\u958B\u533A\
-    \u9593\u3067\u6307\u5B9A\u3059\u308B\u3053\u3068\uFF01\n     * @param left \u534A\
-    \u958B\u533A\u9593\u59CB\u70B9\uFF081-index\uFF09\n     * @param right \u534A\u958B\
-    \u533A\u9593\u7D42\u70B9\uFF081-index\uFF09\n     * @return Monoid \u30AF\u30A8\
-    \u30EA\u51E6\u7406\u7D50\u679C\n     */\n    Monoid query(int left, int right){\n\
-    \        Monoid L = M1, R = M1;\n        for(left += sz, right += sz; left < right;\
-    \ left >>= 1, right >>= 1){\n            if(left & 1) L = f(L, data[left++]);\n\
-    \            if(right & 1) R = f(data[--right], R);\n        }\n        return\
-    \ f(L, R);\n    }\n\n    /**\n     * @brief \u6307\u5B9A\u3057\u305F\u8981\u7D20\
-    \u306E\u5024\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @attention 1-index\u3067\
-    \u6307\u5B9A\u3059\u308B\u3053\u3068\uFF01\n     * @param k \u53D6\u5F97\u3057\
-    \u305F\u3044\u8981\u7D20\u756A\u53F7\uFF081-index\uFF09\n     * @return Monoid\
-    \ \u53D6\u5F97\u7D50\u679C\n     */\n    Monoid get(int k){\n        return data[k\
-    \ + sz];\n    }\n\n    /**\n     * @brief \u5168\u8981\u7D20\u306E\u5024\u3092\
-    \u53D6\u5F97\u3059\u308B\u3002\n     * @param length \u5143\u914D\u5217\u306E\u9577\
-    \u3055\n     * @return vector<Monoid> \u5168\u8981\u7D20\u306E\u5024\n     */\n\
-    \    vector<Monoid> get_list(int length){\n        vector<Monoid> ret(length);\n\
-    \        for(int i = 0; i < length; ++i){\n            ret[i] = get(i);\n    \
-    \    }\n        return ret;\n    }\n};\n\ntemplate<typename T>\nconst function<T(T,\
-    \ T)> SEG_MIN = [](T x, T y){return min(x, y);};\ntemplate<typename T>\nconst\
-    \ function<T(T, T)> SEG_MAX = [](T x, T y){return max(x, y);};\ntemplate<typename\
-    \ T>\nconst function<T(T, T)> SEG_SUM = [](T x, T y){return x + y;};\n"
-  code: "#pragma once\n\n/**\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\
-    \u6728\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename\
-    \ Monoid>\nstruct SegmentTree{\n    private:\n    using F = function<Monoid(Monoid,\
-    \ Monoid)>;\n\n    int sz;\n    vector<Monoid> data;\n    const F f; // 2\u3064\
-    \u306E\u533A\u9593\u3092\u30DE\u30FC\u30B8\u3059\u308B\u4E8C\u9805\u6F14\u7B97\
-    \n    const Monoid M1; // \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\u5404\u8981\
-    \u7D20\u306E\u5358\u4F4D\u5143\n\n    public:\n    /**\n     * @brief Construct\
-    \ a new Segment Tree object\n     * @param N \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \u306E\u30B5\u30A4\u30BA\n     * @param f 2\u8981\u7D20\u3092\u30DE\u30FC\u30B8\
-    \u3059\u308B\u6F14\u7B97\u5B50\n     * @param M1 \u5358\u4F4D\u5143\n     * @note\
-    \ \u5404\u8981\u7D20\u306E\u521D\u671F\u5024\u306FM1\u306B\u306A\u308B\u3002\u521D\
-    \u671F\u5024\u3092\u5225\u3067\u8A2D\u5B9A\u3057\u305F\u3044\u5834\u5408\u306F\
-    set\u95A2\u6570\u3092\u4F7F\u3046\u3002\n     */\n    SegmentTree(int N, const\
-    \ F f, const Monoid &M1) : f(f), M1(M1){\n        sz = 1;\n        while(sz <\
-    \ N) sz <<= 1;\n        data.resize(2 * sz, M1);\n    }\n\n    SegmentTree() =\
-    \ default;\n\n    /**\n     * @brief \u6307\u5B9A\u3057\u305F\u8981\u7D20\u306B\
-    \u521D\u671F\u5024\u3092\u8A2D\u5B9A\u3059\u308B\u3002\n     * @note \u3053\u306E\
-    \u95A2\u6570\u306Fbuild\u95A2\u6570\u547C\u3073\u51FA\u3057\u524D\u306B\u884C\u3046\
-    \u3053\u3068\u3002\n     * @attention 1-index\u3067\u6307\u5B9A\u3059\u308B\u3053\
-    \u3068\uFF01\n     * @param k \u8A2D\u5B9A\u3057\u305F\u3044\u8981\u7D20\u756A\
-    \u53F7\uFF081-index\uFF09\n     * @param x \u8A2D\u5B9A\u3057\u305F\u3044\u5024\
-    \n     */\n    void set(int k, const Monoid &x){\n        data[k + sz] = x;\n\
+    \    using F = function<Monoid(Monoid, Monoid)>;\n\n    int __Size, __Offset,\
+    \ __ZeroIndex;\n    vector<Monoid> __Data;\n    const F f;\n    const Monoid __M1;\n\
+    \n    inline void __Check(int x){\n        assert(1 <= x && x <= __Size);\n  \
+    \  }\n\n    Monoid __query(int ql, int qr, int left, int right, int cell){\n \
+    \       if(qr <= left || right <= ql){\n            return __M1;\n        }\n\
+    \        if(ql <= left && right <= qr){\n            return __Data[cell];\n  \
+    \      }\n        int mid = (left + right) / 2;\n        Monoid ans_left = __query(ql,\
+    \ qr, left, mid, 2 * cell);\n        Monoid ans_right = __query(ql, qr, mid, right,\
+    \ 2 * cell + 1);\n        return f(ans_left, ans_right);\n    }\n\n    public:\n\
+    \    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\
+    \u6570 `Size` \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u30BB\
+    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\n     * @param Merge \u533A\
+    \u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity\
+    \ \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\
+    \u3057\u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
+    \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    :\
+    \ f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n\
+    \        while(__Size < Size) __Size <<= 1;\n        __Offset = __Size - 1;\n\
+    \        __Data.resize(2 * __Size, __M1);\n    }\n\n    /**\n     * @brief \u30BB\
+    \u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention\
+    \ \u5FC5\u305A `set()` \u3067\u521D\u671F\u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\
+    \u3089\u547C\u3073\u51FA\u3059\u3053\u3068\uFF01\n     */\n    void build(){\n\
+    \        for(int i = __Offset; i >= 1; --i){\n            __Data[i] = f(__Data[i\
+    \ * 2 + 0], __Data[i * 2 + 1]);\n        }\n    }\n\n    /**\n     * @brief \u30BB\
+    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\
+    \u308B\u3002\n     * @param Index \u4EE3\u5165\u5148\u306E\u8981\u7D20\u756A\u53F7\
+    \ (default = 1-index)\n     * @param Value \u4EE3\u5165\u3059\u308B\u5024\n  \
+    \   */\n    void set(int Index, Monoid Value){\n        __Check(Index + __ZeroIndex);\n\
+    \        __Data[__Offset + Index + __ZeroIndex] = Value;\n    }\n\n    /**\n \
+    \    * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u914D\u5217 `Init_Data`\
+    \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Init_Data \u521D\u671F\
+    \u30C7\u30FC\u30BF\u306E\u914D\u5217\n     * @param Merge \u533A\u9593\u53D6\u5F97\
+    \u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\
+    \u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\
+    \u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid>\
+    \ &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n\
+    \    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size\
+    \ = 1;\n        while(__Size < (int)Init_Data.size()) __Size <<= 1;\n        __Offset\
+    \ = __Size - 1;\n        __Data.resize(2 * __Size, __M1);\n        for(int i =\
+    \ 0; i < (int)Init_Data.size(); ++i){\n            __Data[__Size + i] = Init_Data[i];\n\
+    \        }\n        build();\n    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\
+    \u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n     * @param Index\
+    \ \u66F4\u65B0\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
+    \ @param Value \u66F4\u65B0\u3059\u308B\u5024\n     */\n    void update(int Index,\
+    \ Monoid Value){\n        __Check(Index + __ZeroIndex);\n        int k = __Offset\
+    \ + Index + __ZeroIndex;\n        __Data[k] = Value;\n        while(k >>= 1){\n\
+    \            __Data[k] = f(__Data[2 * k], __Data[2 * k + 1]);\n        }\n   \
+    \ }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[Left, Right)` \u306B\u5BFE\
+    \u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u884C\u3046\u3002\
+    \n     * @param Left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n     * @param\
+    \ Right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return Monoid \u53D6\
+    \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid query(int Left, int Right){\n\
+    \        __Check(Left + __ZeroIndex);\n        __Check(Right + __ZeroIndex - 1);\n\
+    \        return __query(Left + __ZeroIndex, Right + __ZeroIndex, 1, __Size + 1,\
+    \ 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7 `k` \u306E\u8981\
+    \u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\u5148\
+    \u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\
+    \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
+    \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
+    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n"
+  code: "/**\n * @file SegmentTree.hpp\n * @author log K (lX57)\n * @brief Segment\
+    \ Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @version 2.0\n * @date 2023-10-02\n\
+    \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename Monoid>\n\
+    struct SegmentTree{\n    private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
+    \n    int __Size, __Offset, __ZeroIndex;\n    vector<Monoid> __Data;\n    const\
+    \ F f;\n    const Monoid __M1;\n\n    inline void __Check(int x){\n        assert(1\
+    \ <= x && x <= __Size);\n    }\n\n    Monoid __query(int ql, int qr, int left,\
+    \ int right, int cell){\n        if(qr <= left || right <= ql){\n            return\
+    \ __M1;\n        }\n        if(ql <= left && right <= qr){\n            return\
+    \ __Data[cell];\n        }\n        int mid = (left + right) / 2;\n        Monoid\
+    \ ans_left = __query(ql, qr, left, mid, 2 * cell);\n        Monoid ans_right =\
+    \ __query(ql, qr, mid, right, 2 * cell + 1);\n        return f(ans_left, ans_right);\n\
+    \    }\n\n    public:\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \u3092\u8981\u7D20\u6570 `Size` \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n \
+    \    * @param Size \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\
+    \n     * @param Merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n\
+    \     * @param Monoid_Identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\
+    \n     * @param ZeroIndex 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\u304B\
+    \ (default = `false`)\n     */\n    SegmentTree(int Size, F Merge, const Monoid\
+    \ &Monoid_Identity, bool ZeroIndex = false)\n    : f(Merge), __M1(Monoid_Identity),\
+    \ __ZeroIndex(ZeroIndex){\n        __Size = 1;\n        while(__Size < Size) __Size\
+    \ <<= 1;\n        __Offset = __Size - 1;\n        __Data.resize(2 * __Size, __M1);\n\
     \    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\
-    \u7BC9\u3059\u308B\u3002\n     * @note \u521D\u671F\u5024\u306E\u8A2D\u5B9A\u306F\
-    \u3053\u306E\u95A2\u6570\u3092\u547C\u3073\u51FA\u3059\u524D\u306Bset\u95A2\u6570\
-    \u3067\u884C\u3046\u3053\u3068\u3002\n     */\n    void build(){\n        for(int\
-    \ k = sz - 1; k > 0; --k){\n            data[k] = f(data[2 * k], data[2 * k +\
-    \ 1]);\n        }\n    }\n\n    /**\n     * @brief 1\u70B9\u66F4\u65B0\u30AF\u30A8\
-    \u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n     * @attention 1-index\u3067\u6307\
-    \u5B9A\u3059\u308B\u3053\u3068\uFF01\n     * @param k \u66F4\u65B0\u3057\u305F\
-    \u3044\u8981\u7D20\u756A\u53F7\uFF081-index\uFF09\n     * @param x \u66F4\u65B0\
-    \u3057\u305F\u3044\u5024\n     */\n    void update(int k, const Monoid &x){\n\
-    \        k += sz;\n        data[k] = x;\n        while(k >>= 1){\n           \
-    \ data[k] = f(data[2 * k], data[2 * k + 1]);\n        }\n    }\n\n    /**\n  \
-    \   * @brief \u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\
-    \u308B\u3002\n     * @attention 1-index\u30FB\u534A\u958B\u533A\u9593\u3067\u6307\
-    \u5B9A\u3059\u308B\u3053\u3068\uFF01\n     * @param left \u534A\u958B\u533A\u9593\
-    \u59CB\u70B9\uFF081-index\uFF09\n     * @param right \u534A\u958B\u533A\u9593\u7D42\
-    \u70B9\uFF081-index\uFF09\n     * @return Monoid \u30AF\u30A8\u30EA\u51E6\u7406\
-    \u7D50\u679C\n     */\n    Monoid query(int left, int right){\n        Monoid\
-    \ L = M1, R = M1;\n        for(left += sz, right += sz; left < right; left >>=\
-    \ 1, right >>= 1){\n            if(left & 1) L = f(L, data[left++]);\n       \
-    \     if(right & 1) R = f(data[--right], R);\n        }\n        return f(L, R);\n\
-    \    }\n\n    /**\n     * @brief \u6307\u5B9A\u3057\u305F\u8981\u7D20\u306E\u5024\
-    \u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @attention 1-index\u3067\u6307\u5B9A\
-    \u3059\u308B\u3053\u3068\uFF01\n     * @param k \u53D6\u5F97\u3057\u305F\u3044\
-    \u8981\u7D20\u756A\u53F7\uFF081-index\uFF09\n     * @return Monoid \u53D6\u5F97\
-    \u7D50\u679C\n     */\n    Monoid get(int k){\n        return data[k + sz];\n\
-    \    }\n\n    /**\n     * @brief \u5168\u8981\u7D20\u306E\u5024\u3092\u53D6\u5F97\
-    \u3059\u308B\u3002\n     * @param length \u5143\u914D\u5217\u306E\u9577\u3055\n\
-    \     * @return vector<Monoid> \u5168\u8981\u7D20\u306E\u5024\n     */\n    vector<Monoid>\
-    \ get_list(int length){\n        vector<Monoid> ret(length);\n        for(int\
-    \ i = 0; i < length; ++i){\n            ret[i] = get(i);\n        }\n        return\
-    \ ret;\n    }\n};\n\ntemplate<typename T>\nconst function<T(T, T)> SEG_MIN = [](T\
-    \ x, T y){return min(x, y);};\ntemplate<typename T>\nconst function<T(T, T)> SEG_MAX\
-    \ = [](T x, T y){return max(x, y);};\ntemplate<typename T>\nconst function<T(T,\
-    \ T)> SEG_SUM = [](T x, T y){return x + y;};"
+    \u7BC9\u3059\u308B\u3002\n     * @attention \u5FC5\u305A `set()` \u3067\u521D\u671F\
+    \u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\u3089\u547C\u3073\u51FA\u3059\u3053\
+    \u3068\uFF01\n     */\n    void build(){\n        for(int i = __Offset; i >= 1;\
+    \ --i){\n            __Data[i] = f(__Data[i * 2 + 0], __Data[i * 2 + 1]);\n  \
+    \      }\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \u306E\u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\u308B\u3002\n     * @param Index\
+    \ \u4EE3\u5165\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
+    \ @param Value \u4EE3\u5165\u3059\u308B\u5024\n     */\n    void set(int Index,\
+    \ Monoid Value){\n        __Check(Index + __ZeroIndex);\n        __Data[__Offset\
+    \ + Index + __ZeroIndex] = Value;\n    }\n\n    /**\n     * @brief \u30BB\u30B0\
+    \u30E1\u30F3\u30C8\u6728\u3092\u914D\u5217 `Init_Data` \u3067\u521D\u671F\u5316\
+    \u3059\u308B\u3002\n     * @param Init_Data \u521D\u671F\u30C7\u30FC\u30BF\u306E\
+    \u914D\u5217\n     * @param Merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\
+    \u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\
+    \u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid> &Init_Data,\
+    \ F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    : f(Merge),\
+    \ __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n      \
+    \  while(__Size < (int)Init_Data.size()) __Size <<= 1;\n        __Offset = __Size\
+    \ - 1;\n        __Data.resize(2 * __Size, __M1);\n        for(int i = 0; i < (int)Init_Data.size();\
+    \ ++i){\n            __Data[__Size + i] = Init_Data[i];\n        }\n        build();\n\
+    \    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\
+    \u51E6\u7406\u3059\u308B\u3002\n     * @param Index \u66F4\u65B0\u5148\u306E\u8981\
+    \u7D20\u756A\u53F7 (default = 1-index)\n     * @param Value \u66F4\u65B0\u3059\
+    \u308B\u5024\n     */\n    void update(int Index, Monoid Value){\n        __Check(Index\
+    \ + __ZeroIndex);\n        int k = __Offset + Index + __ZeroIndex;\n        __Data[k]\
+    \ = Value;\n        while(k >>= 1){\n            __Data[k] = f(__Data[2 * k],\
+    \ __Data[2 * k + 1]);\n        }\n    }\n\n    /**\n     * @brief \u534A\u958B\
+    \u533A\u9593 `[Left, Right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\
+    \u30A8\u30EA\u3092\u884C\u3046\u3002\n     * @param Left \u534A\u958B\u533A\u9593\
+    \u306E\u5DE6\u7AEF\n     * @param Right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\
+    \n     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ query(int Left, int Right){\n        __Check(Left + __ZeroIndex);\n        __Check(Right\
+    \ + __ZeroIndex - 1);\n        return __query(Left + __ZeroIndex, Right + __ZeroIndex,\
+    \ 1, __Size + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7\
+    \ `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k\
+    \ \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
+    \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int\
+    \ k){\n        __Check(k + __ZeroIndex);\n        return __Data[__Offset + k +\
+    \ __ZeroIndex];\n    }\n\n    Monoid operator[](const int &k){\n        return\
+    \ get(k);\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2023-07-11 12:00:36+09:00'
+  timestamp: '2023-10-10 13:58:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ/AOJ-DSL-2-A.test.cpp
-  - verify/LC/LC-PointAddRangeSum-ST.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:
