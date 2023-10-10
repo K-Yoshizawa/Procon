@@ -75,6 +75,9 @@ data:
       title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: library/Math
     pages:
+    - icon: ':heavy_check_mark:'
+      path: library/Math/Matrix.hpp
+      title: "Matrix - \u884C\u5217\u6F14\u7B97"
     - icon: ':warning:'
       path: library/Math/PrimeFactorize.hpp
       title: "Prime Factorize - \u7D20\u56E0\u6570\u5206\u89E3"
@@ -174,6 +177,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-7-A.test.cpp
       title: verify/AOJ-GRL-7-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-DeterminantofMatrix.test.cpp
+      title: verify/LC-DeterminantofMatrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-InverseMatrix.test.cpp
+      title: verify/LC-InverseMatrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-MatrixProduct.test.cpp
+      title: verify/LC-MatrixProduct.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp

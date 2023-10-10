@@ -111,15 +111,16 @@ data:
     \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
     \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
     };\n#line 2 \"library/modint.hpp\"\n/**\n * @file modint.hpp\n * @author log K\
-    \ (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\nconst\
-    \ int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate< int mod\
-    \ >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
-    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
-    \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
-    \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
-    \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
-    \ ModInt &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n\
-    \    }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
+    \ (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\n#line\
+    \ 11 \"library/modint.hpp\"\nusing namespace std;\n\nconst int mod998 = 998244353;\n\
+    const int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct ModInt {\n    int\
+    \ x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y >= 0 ? y % mod :\
+    \ (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const ModInt &p) {\n\
+    \        if((x += p.x) >= mod) x -= mod;\n        return *this;\n    }\n\n   \
+    \ ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x) >= mod) x\
+    \ -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const ModInt\
+    \ &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n   \
+    \ }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
     \        return *this;\n    }\n\n    ModInt operator-() const { return ModInt(-x);\
     \ }\n\n    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p;\
     \ }\n\n    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p;\
@@ -192,7 +193,7 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-10-11 01:51:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp
