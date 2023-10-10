@@ -6,7 +6,6 @@
  * @date 2023-08-24
  */
 
-#pragma once
 #include <bits/stdc++.h>
 using namespace std;
 

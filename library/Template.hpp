@@ -219,13 +219,13 @@ ull lcm(ull a, ull b) {
     return a * b / gcd(a, b);
 }
 
-string bitseq(long long x, int mini_len = 1){
+string bitseq(long long x, int mini_len = 1, bool rev = false){
     string ret = "";
     while(x){
         ret.push_back('0' + (x & 1));
         x >>= 1;
     }
     while(ret.size()<mini_len) ret.push_back('0');
-    reverse(ret.begin(), ret.end());
+    if(!rev) reverse(ret.begin(), ret.end());
     return ret;
 }

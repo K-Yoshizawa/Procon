@@ -6,6 +6,10 @@
 
 ## 更新履歴
 
+### Ver 1.15.1 (2023/10/10)
+- 【改修】Template : bitseqに逆順出力のオプションを追加
+- 【修正】Compress : 要らない行の削除
+
 ### Ver 1.15.0 (2023/10/04)
 - 【追加】Dinic - Dinic法
 - 【改修】Bipartite Matching : 使用するフローアルゴリズムをDinic法に変更（でもyosupo-judgeはTLEします（え））
