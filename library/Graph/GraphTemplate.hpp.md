@@ -25,9 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Kruskal.hpp
-    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+    title: library/Graph/Kruskal.hpp
   - icon: ':heavy_check_mark:'
     path: library/Graph/PrimalDual.hpp
     title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
@@ -65,6 +65,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-C.test.cpp
     title: verify/AOJ-GRL-1-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-2-A.test.cpp
+    title: verify/AOJ-GRL-2-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C-HLD.test.cpp
     title: verify/AOJ-GRL-5-C-HLD.test.cpp
@@ -133,13 +136,13 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> get_incident(Vertex\
+    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
+    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
+    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
     \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList get_adjacentlist(){\n        return __AL;\n \
-    \   }\n\n    inline vector<Vertex> get_adjacent(Vertex v){\n        assert(0 <=\
-    \ v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
+    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -190,13 +193,13 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> get_incident(Vertex\
+    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
+    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
+    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
     \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList get_adjacentlist(){\n        return __AL;\n \
-    \   }\n\n    inline vector<Vertex> get_adjacent(Vertex v){\n        assert(0 <=\
-    \ v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
+    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -232,7 +235,7 @@ data:
   - library/Tree/LowestCommonAncestor.hpp
   - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/TreeDiamiter.hpp
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-6-A.test.cpp
@@ -247,6 +250,7 @@ data:
   - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-GRL-5-C-HLD.test.cpp
   - verify/AOJ-ALDS1-11-A.test.cpp
+  - verify/AOJ-GRL-2-A.test.cpp
   - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp

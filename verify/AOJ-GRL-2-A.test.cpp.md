@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: library/DataStructure/UnionFind.hpp
+    title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: library/Graph/Kruskal.hpp
+    title: library/Graph/Kruskal.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -11,10 +17,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
-  bundledCode: "#line 1 \"verify/AOJ-ALDS1-11-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-2-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\
     \n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
     \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
     \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
@@ -71,31 +77,73 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 4 \"verify/AOJ-ALDS1-11-A.test.cpp\"\
-    \n\n#line 6 \"verify/AOJ-ALDS1-11-A.test.cpp\"\nusing namespace std;\n\nint main(){\n\
-    \    int n; cin >> n;\n    Graph<int> G(n, true);\n    for(int i = 0; i < n; ++i){\n\
-    \        Vertex u; int k; cin >> u >> k, --u;\n        for(int j = 0; j < k; ++j){\n\
-    \            Vertex v; cin >> v, --v;\n            G.add(u, v);\n        }\n \
-    \   }\n    G.print_matrix(0, false);\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\"\
-    \n\n#include \"../library/Graph/GraphTemplate.hpp\"\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n,\
-    \ true);\n    for(int i = 0; i < n; ++i){\n        Vertex u; int k; cin >> u >>\
-    \ k, --u;\n        for(int j = 0; j < k; ++j){\n            Vertex v; cin >> v,\
-    \ --v;\n            G.add(u, v);\n        }\n    }\n    G.print_matrix(0, false);\n\
-    }"
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 2 \"library/DataStructure/UnionFind.hpp\"\
+    \n\n/**\n * @brief UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\
+    \n */\n\n#line 8 \"library/DataStructure/UnionFind.hpp\"\nusing namespace std;\n\
+    \n/**\n * @brief Union-Find\n */\nstruct UnionFind{\n    vector<int> data;\n \n\
+    \    UnionFind(size_t sz) : data(sz, -1) {}\n \n    /**\n     * @brief \u8981\u7D20\
+    x\u3068\u8981\u7D20y\u3092\u4F75\u5408\u3059\u308B\n     * @param x \u4F75\u5408\
+    \u3059\u308B\u8981\u7D20x\n     * @param y \u4F75\u5408\u3059\u308B\u8981\u7D20\
+    y\n     * @return true \u8981\u7D20x\u3068\u8981\u7D20y\u304C\u307E\u3060\u672A\
+    \u4F75\u5408\u3060\u3063\u305F\u5834\u5408\n     * @return false \u8981\u7D20\
+    x\u3068\u8981\u7D20y\u304C\u4F75\u5408\u6E08\u3060\u3063\u305F\u5834\u5408\n \
+    \    */\n    bool unite(int x, int y){\n        x = find(x), y = find(y);\n  \
+    \      if(x == y) return false;\n        if(data[x] > data[y]) swap(x, y);\n \
+    \       data[x] += data[y];\n        data[y] = x;\n        return true;\n    }\n\
+    \ \n    /**\n     * @brief \u8981\u7D20k\u304C\u542B\u307E\u308C\u308B\u96C6\u5408\
+    \u306E\u8981\u7D20\u3092\u8ABF\u3079\u308B\u3002\n     * @param k \u8ABF\u3079\
+    \u305F\u3044\u8981\u7D20k\n     * @return int \u542B\u307E\u308C\u308B\u96C6\u5408\
+    \u306E\u89AA\n     */\n    int find(int k){\n        if(data[k] < 0) return (k);\n\
+    \        return data[k] = find(data[k]);\n    }\n \n    /**\n     * @brief \u8981\
+    \u7D20k\u304C\u542B\u307E\u308C\u308B\u96C6\u5408\u306E\u8981\u7D20\u6570\u3092\
+    \u6C42\u3081\u308B\u3002\n     * @param k \u8ABF\u3079\u305F\u3044\u8981\u7D20\
+    k\n     * @return int \u96C6\u5408\u306E\u8981\u7D20\u6570\n     */\n    int size(int\
+    \ k){\n        return -data[find(k)];\n    }\n \n    /**\n     * @brief \u8981\
+    \u7D20x\u3001\u8981\u7D20y\u304C\u540C\u3058\u96C6\u5408\u306B\u5C5E\u3059\u308B\
+    \u304B\u5224\u5B9A\u3059\u308B\u3002\n     * @param x \u5224\u5B9A\u3059\u308B\
+    \u8981\u7D20x\n     * @param y \u5224\u5B9A\u3059\u308B\u8981\u7D20y\n     * @return\
+    \ true \u540C\u3058\u96C6\u5408\u306B\u5C5E\u3057\u3066\u3044\u308B\u5834\u5408\
+    \n     * @return false \u540C\u3058\u96C6\u5408\u306B\u5C5E\u3057\u3066\u3044\u306A\
+    \u3044\u5834\u5408\n     */\n    bool same(int x, int y){\n        return find(x)\
+    \ == find(y);\n    }\n\n    /**\n     * @brief  \u3059\u3079\u3066\u306E\u9023\
+    \u7D50\u6210\u5206\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @retval vector<vector<int>>\
+    \ \n     */\n    vector<vector<int>> groups() {\n        int n = (int) data.size();\n\
+    \        vector<vector<int>> ret(n);\n        for(int i = 0; i < n; i++) {\n \
+    \           ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
+    \ end(ret), [&](const vector< int > &v) {\n            return v.empty();\n   \
+    \     }), end(ret));\n        return ret;\n    }\n};\n#line 3 \"library/Graph/Kruskal.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<EdgeID> __RemainEdge;\n    CostType __Cost;\n\n    public:\n\
+    \    Kruskal(Graph<CostType> &G) : G(G), __Cost(0){\n        UnionFind uf(G.vsize());\n\
+    \        auto es = G.get_edgeset();\n        vector<EdgeID> eid(G.esize());\n\
+    \        iota(eid.begin(), eid.end(), 0);\n        sort(eid.begin(), eid.end(),\
+    \ [&](EdgeID l, EdgeID r){return es[l].cost < es[r].cost;});\n        for(EdgeID\
+    \ i : eid){\n            if(uf.same(es[i].src, es[i].to)) continue;\n        \
+    \    uf.unite(es[i].src, es[i].to);\n            __RemainEdge.push_back(i);\n\
+    \            __Cost += es[i].cost;\n        }\n    }\n\n    CostType get(){\n\
+    \        return __Cost;\n    }\n};\n#line 4 \"verify/AOJ-GRL-2-A.test.cpp\"\n\n\
+    int main(){\n    int V, E; cin >> V >> E;\n    Graph<int> G(V);\n    for(int i\
+    \ = 0; i < E; ++i){\n        int s, t, w; cin >> s >> t >> w;\n        G.add(s,\
+    \ t, w);\n    }\n\n    Kruskal<int> kr(G);\n    cout << kr.get() << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\
+    \n\n#include \"../library/Graph/Kruskal.hpp\"\n\nint main(){\n    int V, E; cin\
+    \ >> V >> E;\n    Graph<int> G(V);\n    for(int i = 0; i < E; ++i){\n        int\
+    \ s, t, w; cin >> s >> t >> w;\n        G.add(s, t, w);\n    }\n\n    Kruskal<int>\
+    \ kr(G);\n    cout << kr.get() << endl;\n}"
   dependsOn:
+  - library/Graph/Kruskal.hpp
   - library/Graph/GraphTemplate.hpp
+  - library/DataStructure/UnionFind.hpp
   isVerificationFile: true
-  path: verify/AOJ-ALDS1-11-A.test.cpp
+  path: verify/AOJ-GRL-2-A.test.cpp
   requiredBy: []
   timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-ALDS1-11-A.test.cpp
+documentation_of: verify/AOJ-GRL-2-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-ALDS1-11-A.test.cpp
-- /verify/verify/AOJ-ALDS1-11-A.test.cpp.html
-title: verify/AOJ-ALDS1-11-A.test.cpp
+- /verify/verify/AOJ-GRL-2-A.test.cpp
+- /verify/verify/AOJ-GRL-2-A.test.cpp.html
+title: verify/AOJ-GRL-2-A.test.cpp
 ---

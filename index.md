@@ -23,7 +23,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
   - name: library/DynamicPrograming
@@ -60,9 +60,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/Kruskal.hpp
-      title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+      title: library/Graph/Kruskal.hpp
     - icon: ':heavy_check_mark:'
       path: library/Graph/PrimalDual.hpp
       title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
@@ -147,6 +147,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-C.test.cpp
       title: verify/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-2-A.test.cpp
+      title: verify/AOJ-GRL-2-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-C-HLD.test.cpp
       title: verify/AOJ-GRL-5-C-HLD.test.cpp

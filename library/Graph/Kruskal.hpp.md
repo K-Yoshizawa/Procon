@@ -1,36 +1,36 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/UnionFind.hpp
     title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-2-A.test.cpp
+    title: verify/AOJ-GRL-2-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     links: []
-  bundledCode: "#line 2 \"library/Graph/Kruskal.hpp\"\n\n/**\n * @brief Kruskal -\
-    \ \u6700\u5C0F\u5168\u57DF\u6728\n */\n\n#include <bits/stdc++.h>\n\n#line 2 \"\
-    library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n * @author\
-    \ log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#line 12 \"library/Graph/GraphTemplate.hpp\"\
-    \nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
-    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
-    \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
-    \ Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost,\
-    \ CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n        ID(ID), src(src), to(to),\
-    \ cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n    void print(){\n      \
-    \  cerr << \"Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost =\
-    \ \" << cost << \", Capacity = \" << cap << \", Place = [\" << sidx << \", \"\
-    \ << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename CostType>\nusing EdgeSet\
-    \ = vector<Edge<CostType>>;\ntemplate<typename CostType>\nusing IncidentList =\
-    \ vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
+  bundledCode: "#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
+    \ * @author log K (lX57)\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
+    \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
+    \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
+    \ sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex\
+    \ to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n       \
+    \ ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n\
+    \    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \" ->\
+    \ \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
+    \ = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename\
+    \ CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename CostType>\n\
+    using IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
     \ntemplate<typename CostType>\nstruct Graph{\n    protected:\n    int __CntVertex,\
     \ __CntEdge;\n    bool __isDirected;\n    EdgeSet<CostType> __ES, __RES;\n   \
     \ IncidentList<CostType> __IL;\n    AdjacentList __AL;\n\n    public:\n    CostType\
@@ -51,13 +51,13 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> get_incident(Vertex\
+    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
+    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
+    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
     \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList get_adjacentlist(){\n        return __AL;\n \
-    \   }\n\n    inline vector<Vertex> get_adjacent(Vertex v){\n        assert(0 <=\
-    \ v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
+    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
+    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -107,41 +107,42 @@ data:
     \        vector<vector<int>> ret(n);\n        for(int i = 0; i < n; i++) {\n \
     \           ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](const vector< int > &v) {\n            return v.empty();\n   \
-    \     }), end(ret));\n        return ret;\n    }\n};\n#line 11 \"library/Graph/Kruskal.hpp\"\
-    \n\nusing namespace std;\n\ntemplate<typename CostType>\nstruct Kruskal{\n   \
-    \ int V;\n    vector<EdgeNum> MST;\n    CostType Cost;\n\n    Kruskal(Graph<CostType>\
-    \ &G){\n        V = G.size();\n        UnionFind uf(V);\n    \n        vector<pair<CostType,\
-    \ EdgeNum>> EL;\n        for(int i = 0; i < G.edges.size(); ++i){\n          \
-    \  EL.emplace_back(G.edges[i].cost, i);\n        }\n        sort(EL.begin(), EL.end());\n\
-    \n        Cost = 0;\n        for(auto &x : EL){\n            auto e = G.get_edge(x.second);\n\
-    \            if(!uf.same(e.from, e.to)){\n                uf.unite(e.from, e.to);\n\
-    \                Cost += x.first;\n                MST.push_back(x.second);\n\
-    \            }\n        }\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\n\
-    \ */\n\n#include <bits/stdc++.h>\n\n#include \"GraphTemplate.hpp\"\n#include \"\
-    ../DataStructure/UnionFind.hpp\"\n\nusing namespace std;\n\ntemplate<typename\
-    \ CostType>\nstruct Kruskal{\n    int V;\n    vector<EdgeNum> MST;\n    CostType\
-    \ Cost;\n\n    Kruskal(Graph<CostType> &G){\n        V = G.size();\n        UnionFind\
-    \ uf(V);\n    \n        vector<pair<CostType, EdgeNum>> EL;\n        for(int i\
-    \ = 0; i < G.edges.size(); ++i){\n            EL.emplace_back(G.edges[i].cost,\
-    \ i);\n        }\n        sort(EL.begin(), EL.end());\n\n        Cost = 0;\n \
-    \       for(auto &x : EL){\n            auto e = G.get_edge(x.second);\n     \
-    \       if(!uf.same(e.from, e.to)){\n                uf.unite(e.from, e.to);\n\
-    \                Cost += x.first;\n                MST.push_back(x.second);\n\
-    \            }\n        }\n    }\n};"
+    \     }), end(ret));\n        return ret;\n    }\n};\n#line 3 \"library/Graph/Kruskal.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<EdgeID> __RemainEdge;\n    CostType __Cost;\n\n    public:\n\
+    \    Kruskal(Graph<CostType> &G) : G(G), __Cost(0){\n        UnionFind uf(G.vsize());\n\
+    \        auto es = G.get_edgeset();\n        vector<EdgeID> eid(G.esize());\n\
+    \        iota(eid.begin(), eid.end(), 0);\n        sort(eid.begin(), eid.end(),\
+    \ [&](EdgeID l, EdgeID r){return es[l].cost < es[r].cost;});\n        for(EdgeID\
+    \ i : eid){\n            if(uf.same(es[i].src, es[i].to)) continue;\n        \
+    \    uf.unite(es[i].src, es[i].to);\n            __RemainEdge.push_back(i);\n\
+    \            __Cost += es[i].cost;\n        }\n    }\n\n    CostType get(){\n\
+    \        return __Cost;\n    }\n};\n"
+  code: "#include \"GraphTemplate.hpp\"\n#include \"../DataStructure/UnionFind.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<EdgeID> __RemainEdge;\n    CostType __Cost;\n\n    public:\n\
+    \    Kruskal(Graph<CostType> &G) : G(G), __Cost(0){\n        UnionFind uf(G.vsize());\n\
+    \        auto es = G.get_edgeset();\n        vector<EdgeID> eid(G.esize());\n\
+    \        iota(eid.begin(), eid.end(), 0);\n        sort(eid.begin(), eid.end(),\
+    \ [&](EdgeID l, EdgeID r){return es[l].cost < es[r].cost;});\n        for(EdgeID\
+    \ i : eid){\n            if(uf.same(es[i].src, es[i].to)) continue;\n        \
+    \    uf.unite(es[i].src, es[i].to);\n            __RemainEdge.push_back(i);\n\
+    \            __Cost += es[i].cost;\n        }\n    }\n\n    CostType get(){\n\
+    \        return __Cost;\n    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   - library/DataStructure/UnionFind.hpp
   isVerificationFile: false
   path: library/Graph/Kruskal.hpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-10-10 14:21:48+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/AOJ-GRL-2-A.test.cpp
 documentation_of: library/Graph/Kruskal.hpp
 layout: document
 redirect_from:
 - /library/library/Graph/Kruskal.hpp
 - /library/library/Graph/Kruskal.hpp.html
-title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+title: library/Graph/Kruskal.hpp
 ---
