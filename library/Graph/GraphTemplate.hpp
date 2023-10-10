@@ -89,24 +89,24 @@ struct Graph{
         return __IL[v].size();
     }
 
-    inline EdgeSet<CostType> get_edgeset(){
+    inline EdgeSet<CostType> &get_edgeset(){
         return __ES;
     }
 
-    inline IncidentList<CostType> get_incidentlist(){
+    inline IncidentList<CostType> &get_incidentlist(){
         return __IL;
     }
 
-    inline vector<Edge<CostType>> get_incident(Vertex v){
+    inline vector<Edge<CostType>> &get_incident(Vertex v){
         assert(0 <= v && v < __CntVertex);
         return __IL[v];
     }
 
-    inline AdjacentList get_adjacentlist(){
+    inline AdjacentList &get_adjacentlist(){
         return __AL;
     }
 
-    inline vector<Vertex> get_adjacent(Vertex v){
+    inline vector<Vertex> &get_adjacent(Vertex v){
         assert(0 <= v && v < __CntVertex);
         return __AL[v];
     }

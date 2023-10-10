@@ -1,40 +1,29 @@
-#pragma once
-
-/**
- * @brief Kruskal - 最小全域木
- */
-
-#include <bits/stdc++.h>
-
 #include "GraphTemplate.hpp"
 #include "../DataStructure/UnionFind.hpp"
 
-using namespace std;
-
 template<typename CostType>
 struct Kruskal{
-    int V;
-    vector<EdgeNum> MST;
-    CostType Cost;
+    private:
+    Graph<CostType> &G;
+    vector<EdgeID> __RemainEdge;
+    CostType __Cost;
 
-    Kruskal(Graph<CostType> &G){
-        V = G.size();
-        UnionFind uf(V);
-    
-        vector<pair<CostType, EdgeNum>> EL;
-        for(int i = 0; i < G.edges.size(); ++i){
-            EL.emplace_back(G.edges[i].cost, i);
+    public:
+    Kruskal(Graph<CostType> &G) : G(G), __Cost(0){
+        UnionFind uf(G.vsize());
+        auto es = G.get_edgeset();
+        vector<EdgeID> eid(G.esize());
+        iota(eid.begin(), eid.end(), 0);
+        sort(eid.begin(), eid.end(), [&](EdgeID l, EdgeID r){return es[l].cost < es[r].cost;});
+        for(EdgeID i : eid){
+            if(uf.same(es[i].src, es[i].to)) continue;
+            uf.unite(es[i].src, es[i].to);
+            __RemainEdge.push_back(i);
+            __Cost += es[i].cost;
         }
-        sort(EL.begin(), EL.end());
+    }
 
-        Cost = 0;
-        for(auto &x : EL){
-            auto e = G.get_edge(x.second);
-            if(!uf.same(e.from, e.to)){
-                uf.unite(e.from, e.to);
-                Cost += x.first;
-                MST.push_back(x.second);
-            }
-        }
+    CostType get(){
+        return __Cost;
     }
 };
