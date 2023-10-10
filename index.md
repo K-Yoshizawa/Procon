@@ -265,6 +265,12 @@ data:
       path: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
       title: verify_latest/AOJ-DSL-2-B-SegmentTree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-D-Lazy.test.cpp
+      title: verify_latest/AOJ-DSL-2-D-Lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_latest/AOJ-DSL-2-E-Lazy.test.cpp
+      title: verify_latest/AOJ-DSL-2-E-Lazy.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify_latest/AOJ-DSL-2-F.test.cpp
       title: verify_latest/AOJ-DSL-2-F.test.cpp
     - icon: ':heavy_check_mark:'

@@ -90,10 +90,10 @@ data:
     \ + y - 1) / y;\n}\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a\
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
-    string bitseq(long long x, int mini_len = 1){\n    string ret = \"\";\n    while(x){\n\
-    \        ret.push_back('0' + (x & 1));\n        x >>= 1;\n    }\n    while(ret.size()<mini_len)\
-    \ ret.push_back('0');\n    reverse(ret.begin(), ret.end());\n    return ret;\n\
-    }\n"
+    string bitseq(long long x, int mini_len = 1, bool rev = false){\n    string ret\
+    \ = \"\";\n    while(x){\n        ret.push_back('0' + (x & 1));\n        x >>=\
+    \ 1;\n    }\n    while(ret.size()<mini_len) ret.push_back('0');\n    if(!rev)\
+    \ reverse(ret.begin(), ret.end());\n    return ret;\n}\n"
   code: "#pragma once\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
     \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.4\n * @date 2023-08-24\n\
     \ */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n#define\
@@ -169,15 +169,15 @@ data:
     \ + y - 1) / y;\n}\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a\
     \ = -a;\n    if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b,\
     \ a % b);\n}\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\n\
-    string bitseq(long long x, int mini_len = 1){\n    string ret = \"\";\n    while(x){\n\
-    \        ret.push_back('0' + (x & 1));\n        x >>= 1;\n    }\n    while(ret.size()<mini_len)\
-    \ ret.push_back('0');\n    reverse(ret.begin(), ret.end());\n    return ret;\n\
-    }"
+    string bitseq(long long x, int mini_len = 1, bool rev = false){\n    string ret\
+    \ = \"\";\n    while(x){\n        ret.push_back('0' + (x & 1));\n        x >>=\
+    \ 1;\n    }\n    while(ret.size()<mini_len) ret.push_back('0');\n    if(!rev)\
+    \ reverse(ret.begin(), ret.end());\n    return ret;\n}"
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-09-16 09:30:31+09:00'
+  timestamp: '2023-10-10 13:39:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ/AOJ-ITP2-6-C.test.cpp

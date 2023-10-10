@@ -4,6 +4,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-DSL-2-D-Lazy.test.cpp
+    title: verify_latest/AOJ-DSL-2-D-Lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_latest/AOJ-DSL-2-E-Lazy.test.cpp
+    title: verify_latest/AOJ-DSL-2-E-Lazy.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_latest/AOJ-DSL-2-F.test.cpp
     title: verify_latest/AOJ-DSL-2-F.test.cpp
   - icon: ':heavy_check_mark:'
@@ -222,8 +228,10 @@ data:
   - verify_latest/LC-RangeAffineRangeSum.test.cpp
   - verify_latest/AOJ-DSL-2-F.test.cpp
   - verify_latest/AOJ-GRL-5-E.test.cpp
+  - verify_latest/AOJ-DSL-2-E-Lazy.test.cpp
   - verify_latest/AOJ-DSL-2-G.test.cpp
   - verify_latest/AOJ-DSL-2-I.test.cpp
+  - verify_latest/AOJ-DSL-2-D-Lazy.test.cpp
 documentation_of: latest/DataStructure/LazySegmentTree.hpp
 layout: document
 redirect_from:
