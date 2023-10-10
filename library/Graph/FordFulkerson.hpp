@@ -1,34 +1,29 @@
-#pragma once
-
 /**
- * @brief Ford-Fulkerson - 最大フロー
+ * @file FordFulkerson.hpp
+ * @author log K (lX57)
+ * @brief Ford-Fulkerson - 最大流
+ * @version 2.1
+ * @date 2023-10-02
  */
 
-#include <bits/stdc++.h>
-
-#include "GraphTemplate.hpp"
-
-using namespace std;
+#include "FlowTemplate.hpp"
 
 template<typename CostType>
 struct FordFulkerson{
-    int E;
-    Graph<CostType> &G;
-    vector<EdgeNum> rev;
-
     private:
-    vector<int> used;
+    Flow<CostType> &G;
+    vector<int> __used;
 
-    CostType dfs(Vertex pos, Vertex goal, CostType F){
+    CostType __dfs(Vertex pos, Vertex goal, CostType F){
         if(pos == goal) return F;
-        used[pos] = 1;
-        for(EdgeNum &i : G.connect[pos]){
-            if(G.edges[i].cost == 0) continue;
-            if(used[G.edges[i].to]) continue;
-            CostType flow = dfs(G.edges[i].to, goal, min(F, G.edges[i].cost));
+        __used[pos] = 1;
+        for(auto e : G.get_incident(pos)){
+            if(e.cap == 0 || __used[e.to]) continue;
+            // cerr << "[" << e.src << ", " << e.to << "] (" << e.cap << ")\n";
+            CostType flow = __dfs(e.to, goal, min(F, e.cap));
             if(flow >= 1){
-                G.edges[i].cost -= flow;
-                G.edges[rev[i]].cost += flow;
+                // cerr << "Update [" << e.src << ", " << e.to << "] Flow = " << flow << endl;
+                G.update(e.src, e.sidx, flow);
                 return flow;
             }
         }
@@ -36,31 +31,20 @@ struct FordFulkerson{
     }
 
     public:
-    FordFulkerson(Graph<CostType> &G) : G(G), used(G.size(), 0){
-        E = G.edges.size();
-        rev.resize(2 * E);
-        for(int i = 0; i < E; ++i){
-            rev[i] = i + E;
-            rev[i + E] = i;
-            Edge<CostType> e = G.get_edge(i);
-            G.add(e.to, e.from, 0);
+    FordFulkerson(Flow<CostType> &G) : G(G), __used(G.vsize(), 0){}
+
+    CostType solve(Vertex Source, Vertex Sink){
+        CostType ans = 0;
+        while(1){
+            __used.assign(G.vsize(), 0);
+            CostType F = __dfs(Source, Sink, G.INF);
+            if(F == 0) break;
+            ans += F;
         }
+        return ans;
     }
 
-    /**
-     * @brief  頂点sから頂点tへの最大流を求める。
-     * @param  s: 始点の頂点s
-     * @param  t: 終点の頂点t
-     * @retval 最大流
-     */
-    CostType query(Vertex s, Vertex t){
-        CostType ret = 0;
-        while(1){
-            used.assign(G.size(), 0);
-            CostType F = dfs(s, t, G.INF);
-            if(F == 0) break;
-            ret += F;
-        }
-        return ret;
+    vector<Edge<CostType>> get(){
+        return G.get();
     }
 };

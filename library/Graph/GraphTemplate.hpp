@@ -4,189 +4,141 @@
  * @file GraphTemplate.hpp
  * @author log K (lX57)
  * @brief Graph Template - グラフテンプレート
- * @version 1.2
- * @date 2023-08-24
+ * @version 2.2
+ * @date 2023-10-02
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
-using EdgeNum = int;
 using Vertex = int;
+using EdgeID = int;
+using EdgeIndex = int;
 
-/**
- * @brief グラフの辺
- */
-template<typename CostType = int>
+template<typename CostType>
 struct Edge{
-    Vertex from, to;
-    CostType cost;
+    EdgeID ID{-1};
+    Vertex src, to;
+    CostType cost, cap;
+    EdgeIndex sidx, tidx;
 
-    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}
+    Edge() = default;
+    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :
+        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}
+
+    void print(){
+        cerr << "Edge " << ID << " : (" << src << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << sidx << ", " << tidx << "]" << endl;
+    }
 };
 
-/**
- * @brief グラフを表すクラス。
- * @note 辺集合によって実現している。
- * @tparam CostType 辺の重みの型。
- */
-template<typename CostType = int>
-class Graph{
-    private:
-    int sz;
-    bool isDirected, isTree;
-    vector<int> indegree;
+template<typename CostType>
+using EdgeSet = vector<Edge<CostType>>;
+template<typename CostType>
+using IncidentList = vector<vector<Edge<CostType>>>;
+using AdjacentList = vector<vector<Vertex>>;
+
+template<typename CostType>
+struct Graph{
+    protected:
+    int __CntVertex, __CntEdge;
+    bool __isDirected;
+    EdgeSet<CostType> __ES, __RES;
+    IncidentList<CostType> __IL;
+    AdjacentList __AL;
 
     public:
-    vector<Edge<CostType>> edges; // グラフの辺集合
-    vector<vector<EdgeNum>> connect; // 各頂点を端点とする辺の番号一覧
-    vector<EdgeNum> rev; // 無向グラフを有向辺*2として追加するので、辺の追加時に逆辺の辺番号を記録できるようにする
     CostType INF;
 
-    /**
-     * @brief Construct a new Graph object
-     * @param VertexNum グラフの頂点数
-     * @param isDirected 有向グラフとして作成するか(default = false)
-     * @param isTree 木として作成するか(default = false)
-     */
-    Graph(int VertexNum, bool isDirected = false, bool isTree = false) : sz(VertexNum), isDirected(isDirected), isTree(isTree), connect(VertexNum), indegree(VertexNum), INF(numeric_limits<CostType>::max() / 2){}
+    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}
 
     Graph() = default;
 
-    /**
-     * @brief グラフに頂点sと頂点t間の辺を追加する。
-     * @note 有向グラフならば頂点sから頂点tへの有向辺を、無向グラフならば頂点sと頂点tを結ぶ無向辺を追加する。
-     * @param s 頂点s
-     * @param t 頂点t
-     * @param w 辺の重み (option, default = 1)
-     */
-    void add(Vertex s, Vertex t, CostType w = 1){
-        assert(0 <= s && s < sz);
-        assert(0 <= t && t < sz);
-        EdgeNum e = edges.size();
-        edges.push_back(Edge<CostType>(s, t, w));
-        connect[s].push_back(e);
-        ++indegree[t];
-        if(!isDirected){
-            edges.push_back(Edge<CostType>(t, s, w));
-            connect[t].push_back(e + 1);
-            rev.emplace_back(e + 1);
-            rev.emplace_back(e);
-        }
+    void add(Vertex Source, Vertex To, CostType Cost = 1){
+        assert(0 <= Source && Source < __CntVertex);
+        assert(0 <= To && To < __CntVertex);
+        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();
+        Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};
+        Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx, sidx};
+        __ES.push_back(es);
+        __RES.push_back(et);
+        __IL[Source].push_back(es), __AL[Source].push_back(To);
+        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);
+        ++__CntEdge;
     }
 
-    /**
-     * @brief グラフへの入力処理を行う。
-     * @param amount 辺の数
-     * @param isWeighted 重みつきグラフか？(default = true)
-     * @param isOne_index 1-indexか？(default = true)
-     */
-    void input(int amount, bool isWeighted = true, bool isOne_index = true){
-        for(int i = 0; i < amount; ++i){
-            Vertex s, t; cin >> s >> t;
-            if(isOne_index) --s, --t;
-            CostType w = 1;
-            if(isWeighted) cin >> w;
-            add(s, t, w);
-        }
-    }
-
-    /**
-     * @brief 指定した辺番号の辺を取得する。
-     * @param idx 辺番号
-     * @return Edge<CostType> 辺情報
-     */
-    Edge<CostType> get_edge(EdgeNum idx){
-        int e = edges.size();
-        assert(0 <= idx && idx < e);
-        return edges[idx];
-    }
-
-    /**
-     * @brief 指定した頂点番号に接続する辺の一覧を取得する。
-     * @param v 頂点番号
-     * @return vector<Edge<CostType>> 指定した頂点番号に接続する辺の一覧
-     */
-    vector<Edge<CostType>> get_edges(Vertex v){
-        assert(0 <= v && v < sz);
-        vector<Edge<CostType>> ret;
-        for(auto &idx : connect[v]) ret.push_back(get_edge(idx));
-        return ret;
-    }
-
-    /**
-     * @brief 指定した頂点番号に接続する辺番号の一覧を取得する。
-     * @param v 頂点番号
-     * @return vector<EdgeNum> 指定した頂点番号に接続する辺番号の一覧
-     */
-    vector<EdgeNum> get_list(Vertex v){
-        assert(0 <= v && v < sz);
-        return connect[v];
-    }
-
-    /**
-     * @brief 逆辺を張ったグラフを作成する。
-     * @attention この操作は有向グラフにのみ可能である。
-     * @return Graph<CostType> 逆辺を張ったグラフ
-     */
-    Graph<CostType> reverse(){
-        assert(isDirected);
-        Graph<CostType> ret(sz, true, isTree);
-        for(auto &e : edges){
-            ret.add(e.to, e.from, e.cost);
-        }
-        return ret;
-    }
-
-    inline size_t size(){
-        return sz;
-    }
-
-    inline bool directed(){
-        return isDirected;
-    }
-
-    /**
-     * @brief ある頂点の次数(出次数)を取得する。
-     * @note 有向グラフにおいて、第2引数をtrueにすれば入次数を得ることができる。
-     * @param v 頂点番号
-     * @param isIn (有向グラフのときのみ有効)入次数を取得するか (default = false)
-     * @return int 頂点vの指定した値
-     */
-    inline int degree(Vertex v, bool isIn = false){
-        if(isDirected && isIn) return indegree[v];
-        return (int)connect[v].size();
-    }
-
-    /**
-     * @brief グラフを頂点rootを根とした無向根付き木とみなしたとき、各頂点の親頂点の番号と、それを結ぶ辺番号を取得する。
-     * @attention グラフが無向木でない場合の動作は未定義である。
-     * @param root 木の根とする頂点番号
-     * @return vector<pair<Vertex, EdgeNum>> 各頂点の親の頂点番号と親への辺番号（頂点rootに対してはどちらも-1とする）
-     */
-    vector<pair<Vertex, EdgeNum>> get_parent(Vertex root){
-        assert(isTree);
-        vector<pair<Vertex, EdgeNum>> ret(sz, pair<Vertex, EdgeNum>(-1, -1));
-        stack<pair<Vertex, Vertex>> st;
-        st.emplace(root, -1);
-        while(!st.empty()){
-            auto [v, parent] = st.top();
-            st.pop();
-            for(auto &idx : connect[v]){
-                if(edges[idx].to == parent) continue;
-                ret[edges[idx].to] = pair<Vertex, EdgeNum>(v, rev[idx]);
-                st.emplace(edges[idx].to, v);
+    vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
+        vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));
+        for(Vertex v = 0; v < __CntVertex; ++v){
+            ret[v][v] = 0;
+            for(auto e : __IL[v]){
+                ret[v][e.to] = e.cost;
             }
         }
         return ret;
     }
 
-    void pr(){
-        for(auto &e:edges){
-            cerr<<e.from+1<<" "<<e.to+1<<endl;
+    inline int vsize(){
+        return __CntVertex;
+    }
+
+    inline int esize(){
+        return __CntEdge;
+    }
+
+    inline int incsize(Vertex v){
+        return __IL[v].size();
+    }
+
+    inline EdgeSet<CostType> get_edgeset(){
+        return __ES;
+    }
+
+    inline IncidentList<CostType> get_incidentlist(){
+        return __IL;
+    }
+
+    inline vector<Edge<CostType>> get_incident(Vertex v){
+        assert(0 <= v && v < __CntVertex);
+        return __IL[v];
+    }
+
+    inline AdjacentList get_adjacentlist(){
+        return __AL;
+    }
+
+    inline vector<Vertex> get_adjacent(Vertex v){
+        assert(0 <= v && v < __CntVertex);
+        return __AL[v];
+    }
+
+    vector<Edge<CostType>> operator[](Vertex v){
+        return get_incident(v);
+    }
+
+    void print_edgeset(bool OneIndex = true){
+        for(int e = 0; e < __CntEdge; ++e){
+            cout << e + OneIndex << " : (" << __ES[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __ES[e].to + OneIndex << ") = " << __ES[e].cost << " (" << __ES[e].cap << ")" << endl;
+        }
+    }
+
+    void print_incidentlist(bool OneIndex = true){
+        for(int i = 0; i < __CntVertex; ++i){
+            cout << i + OneIndex << " :";
+            for(int j = 0; j < __IL[i].size(); ++j){
+                cout << " (" << __IL[i][j].to << " / " << __IL[i][j].cost << ", " << __IL[i][j].cap << ")";
+            }
+            cout << endl;
+        }
+    }
+
+    void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){
+        auto mat = matrix(NotAdjacent);
+        for(int i = 0; i < __CntVertex; ++i){
+            cout << (DisplayINF && mat[i][0] == NotAdjacent ? "INF" : to_string(mat[i][0]));
+            for(int j = 1; j < __CntVertex; ++j){
+                cout << " " << (DisplayINF && mat[i][j] == NotAdjacent ? "INF" : to_string(mat[i][j]));
+            }
+            cout << endl;
         }
     }
 };
-
-template<typename T>
-using Tree = Graph<T>;

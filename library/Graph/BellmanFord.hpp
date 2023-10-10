@@ -1,31 +1,27 @@
-#pragma once
-
 /**
- * @brief Bellman Ford - 単一始点最短距離（ベルマンフォード法）
+ * @file BellmanFord.hpp
+ * @author log_K (lX57)
+ * @brief BellmanFord - 単一始点最短距離
+ * @version 2.1
+ * @date 2023-10-02
  */
-
-#include <bits/stdc++.h>
-using namespace std;
 
 #include "GraphTemplate.hpp"
 
 template<typename CostType>
-vector<CostType> BellmanFord(Graph<CostType> &G, int s){
-    vector<CostType> ret(G.size(), G.INF);
-    ret[s] = 0;
+vector<CostType> BellmanFord(Graph<CostType> &G, Vertex Start){
+    vector<CostType> ret(G.vsize(), G.INF);
+    ret[Start] = 0;
     int updatecount = 0;
     while(1){
-        if(updatecount == G.size()){
-            ret[s] = -1;
-            return ret;
+        if(updatecount == G.vsize()){
+            return vector<CostType>{};
         }
         bool update = false;
-        for(auto &e : G.edges){
-            Vertex from = e.from, to = e.to;
-            CostType cost = e.cost;
-            if(ret[from] == G.INF) continue;
-            if(ret[to] > ret[from] + cost){
-                ret[to] = ret[from] + cost;
+        for(auto e : G.get_edgeset()){
+            if(ret[e.src] == G.INF) continue;
+            if(ret[e.to] > ret[e.src] + e.cost){
+                ret[e.to] = ret[e.src] + e.cost;
                 update = true;
             }
         }

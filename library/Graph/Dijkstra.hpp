@@ -1,74 +1,103 @@
-#pragma once
-
 /**
- * @brief Dijkstra - 単一始点最短距離（ダイクストラ法）
+ * @file Dijkstra.hpp
+ * @author log_K (lX57)
+ * @brief Dijkstra - 単一始点最短距離
+ * @version 2.2
+ * @date 2023-10-02
  */
 
-#include <bits/stdc++.h>
 #include "GraphTemplate.hpp"
-using namespace std;
 
-/**
- * @brief  ダイクストラ法で最短距離を求める。
- * @attention グラフに負の重みの辺がない必要がある。
- */
 template<typename CostType>
 struct Dijkstra{
     private:
     Graph<CostType> &G;
-    vector<Vertex> prev_vertex;
-    vector<EdgeNum> prev_edge;
+    vector<CostType> __Dist, __Potential;
+    vector<Vertex> __PrevVertex;
+    vector<Edge<CostType>> __PrevEdge;
+    Vertex __Start;
 
-    public:
-    vector<CostType> dist;
-
-    Dijkstra(Graph<CostType> &G) : G(G), dist(G.size()), prev_vertex(G.size()), prev_edge(G.size()){}
-
-    /**
-     * @brief  頂点sを始点としてダイクストラ法を適用する。
-     * @param  s: 始点となる頂点s
-     * @note   求められた最短距離はdistに格納される。
-     */
-    void build(int s){
-        dist.assign(G.size(), G.INF);
-        prev_vertex.assign(G.size(), -1);
-        prev_edge.assign(G.size(), -1);
+    void __solve(){
+        __Dist.assign(G.vsize(), G.INF);
+        __PrevVertex.assign(G.vsize(), -1);
+        __PrevEdge.assign(G.vsize(), Edge<CostType>());
         using p = pair<CostType, Vertex>;
         priority_queue<p, vector<p>, greater<p>> que;
-        que.emplace(0, s);
-        dist[s] = 0;
-        while(!que.empty()){
-            auto [d, v] = que.top();
-            que.pop();
-            if(dist[v] < d) continue;
-            for(auto &eidx : G.get_list(v)){
-                auto e = G.get_edge(eidx);
-                if(d + e.cost < dist[e.to]){
-                    dist[e.to] = d + e.cost;
-                    prev_vertex[e.to] = v;
-                    prev_edge[e.to] = eidx;
-                    que.emplace(d + e.cost, e.to);
+        que.emplace(__Potential[__Start], __Start);
+        __Dist[__Start] = __Potential[__Start];
+        while(que.size()){
+            auto [d, v] = que.top(); que.pop();
+            if(__Dist[v] < d) continue;
+            for(auto e : G.get_incident(v)){
+                if(e.cap > 0 && d + e.cost + __Potential[e.src] - __Potential[e.to] < __Dist[e.to]){
+                    __Dist[e.to] = d + e.cost + __Potential[e.src] - __Potential[e.to];
+                    __PrevVertex[e.to] = v;
+                    __PrevEdge[e.to] = e;
+                    que.emplace(__Dist[e.to], e.to);
                 }
             }
         }
+        for(Vertex i = 0; i < G.vsize(); ++i){
+            if(__Dist[i] != G.INF) __Dist[i] += __Potential[i] - __Potential[__Start];
+        }
     }
 
-    /**
-     * @brief  頂点sから頂点tへの最短経路を取得する
-     * @attention 予めbuildで最短距離を求める必要がある。
-     * @param  t: 終点となる頂点t
-     * @param  isEdge: 頂点番号の代わりに辺番号を取得する(opt default = false)
-     * @retval 最短経路の頂点番号 or 辺番号
-     */
-    vector<int> restore(int t, bool isEdge = false){
-        vector<int> ret;
-        int v = t;
-        while(v != -1){
-            if(!isEdge) ret.push_back(v);
-            else if(prev_edge[v] != -1) ret.push_back(prev_edge[v]);
-            v = prev_vertex[v];
+    public:
+    Dijkstra(Graph<CostType> &G) : G(G), __Dist(G.vsize()), __Potential(G.vsize(), 0), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Start(-1){}
+    
+    Dijkstra(Graph<CostType> &G, Vertex Start) : G(G), __Dist(G.vsize()), __PrevVertex(G.vsize()), __PrevEdge(G.vsize()), __Potential(G.vsize(), 0), __Start(Start){
+        __solve();
+    }
+
+    void update_potential(vector<CostType> Potential){
+        assert(__Potential.size() == Potential.size());
+        __Potential = Potential;
+    }
+
+    void rebuild(){
+        __solve();
+    }
+
+    void build(Vertex Start){
+        assert(0 <= Start && Start < G.vsize());
+        if(Start != __Start){
+            __Start = Start;
+            __solve();
+        }
+    }
+
+    vector<CostType> all(Vertex Start){
+        assert(0 <= Start && Start < G.vsize());
+        if(Start != __Start) build(Start);
+        return __Dist;
+    }
+
+    CostType dist(Vertex Start, Vertex Goal){
+        assert(0 <= Start && Start < G.vsize());
+        assert(0 <= Goal && Goal < G.vsize());
+        if(Start != __Start){
+            __Start = Start;
+            __solve();
+        }
+        return __Dist[Goal];
+    }
+
+    EdgeSet<CostType> restore_edge(Vertex Goal){
+        EdgeSet<CostType> ret;
+        Vertex now = Goal;
+        while(__PrevEdge[now].ID != -1){
+            ret.push_back(__PrevEdge[now]);
+            now = __PrevEdge[now].src;
         }
         reverse(ret.begin(), ret.end());
         return ret;
+    }
+
+    void print(bool DisplayINF = true, char Delimiter = ' '){
+        cout << (DisplayINF && __Dist[0] == G.INF ? "INF" : to_string(__Dist[0]));
+        for(int i = 1; i < (int)__Dist.size(); ++i){
+            cout << Delimiter << (DisplayINF && __Dist[i] == G.INF ? "INF" : to_string(__Dist[i]));
+        }
+        cout << endl;
     }
 };

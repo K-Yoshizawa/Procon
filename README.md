@@ -1,10 +1,13 @@
 [![Actions Status](https://github.com/K-Yoshizawa/procon/workflows/verify/badge.svg)](https://github.com/K-Yoshizawa/procon/actions)
- [![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://K-Yoshizawa.github.io/Procon/)
+[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://K-Yoshizawa.github.io/Procon/)
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
 
 # log K's Procon Library
 
 ## 更新履歴
+
+### Ver 2.0.0 (2023/10/10)
+- 今まで `latest` フォルダにあったライブラリ群を `library` に統合しました
 
 ### Ver 1.15.1 (2023/10/10)
 - 【改修】Template : bitseqに逆順出力のオプションを追加

@@ -1,39 +1,60 @@
-#pragma once
-
 /**
- * @brief Warshall-Floyd - 全点間最短距離
+ * @file WarshallFloyd.hpp
+ * @author log_K (lX57)
+ * @brief WarshallFloyd - 全点対間最短経路
+ * @version 2.2
+ * @date 2023-10-02
  */
-
-#include <bits/stdc++.h>
 
 #include "GraphTemplate.hpp"
 
-using namespace std;
-
 template<typename CostType>
 struct WarshallFloyd{
-    bool negative;
-    vector<vector<CostType>> dist;
+    private:
+    bool __NegativeCycle;
+    int __Size;
+    CostType __INF;
+    vector<vector<CostType>> __Dist;
 
-    WarshallFloyd(Graph<CostType> &G){
-        int V = G.size();
-        
-        dist.resize(V, vector<CostType>(V, G.INF));
-        for(int i = 0; i < V; ++i) dist[i][i] = 0;
-        for(auto &e : G.edges){
-            dist[e.from][e.to] = e.cost;
-        }
-
-        for(int k = 0; k < V; ++k){
-            for(int i = 0; i < V; ++i){
-                for(int j = 0; j < V; ++j){
-                    if(dist[i][k] == G.INF || dist[k][j] == G.INF) continue;
-                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+    void __solve(){
+        for(int k = 0; k < __Size; ++k){
+            for(int i = 0; i < __Size; ++i){
+                for(int j = 0; j < __Size; ++j){
+                    if(__Dist[i][k] == __INF || __Dist[k][j] == __INF) continue;
+                    __Dist[i][j] = min(__Dist[i][j], __Dist[i][k] + __Dist[k][j]);
                 }
             }
         }
+        __NegativeCycle = false;
+        for(int i = 0; i < __Size; ++i) __NegativeCycle |= __Dist[i][i] < 0;
+    }
 
-        negative = false;
-        for(int i = 0; i < V; ++i) negative |= dist[i][i] < 0;
+    public:
+    WarshallFloyd(Graph<CostType> &G) : __Size(G.vsize()), __INF(G.INF), __Dist(G.matrix()){
+        __solve();
+    }
+
+    WarshallFloyd(vector<vector<CostType>> &M) : __Size((int)M.size()), __INF(numeric_limits<CostType>::max() / 2), __Dist(M){
+        __solve();
+    }
+
+    inline bool negative(){
+        return __NegativeCycle;
+    }
+
+    CostType dist(Vertex Start, Vertex Goal){
+        assert(0 <= Start && Start < __Size);
+        assert(0 <= Goal && Goal < __Size);
+        return __Dist[Start][Goal];
+    }
+    
+    void print(CostType NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){
+        for(int i = 0; i < __Size; ++i){
+            cout << (DisplayINF && __Dist[i][0] == NotAdjacent ? "INF" : to_string(__Dist[i][0]));
+            for(int j = 1; j < __Size; ++j){
+                cout << " " << (DisplayINF && __Dist[i][j] == NotAdjacent ? "INF" : to_string(__Dist[i][j]));
+            }
+            cout << endl;
+        }
     }
 };

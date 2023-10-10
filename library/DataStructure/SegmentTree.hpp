@@ -1,7 +1,9 @@
-#pragma once
-
 /**
+ * @file SegmentTree.hpp
+ * @author log K (lX57)
  * @brief Segment Tree - セグメント木
+ * @version 2.0
+ * @date 2023-10-02
  */
 
 #include <bits/stdc++.h>
@@ -12,105 +14,120 @@ struct SegmentTree{
     private:
     using F = function<Monoid(Monoid, Monoid)>;
 
-    int sz;
-    vector<Monoid> data;
-    const F f; // 2つの区間をマージする二項演算
-    const Monoid M1; // セグメント木の各要素の単位元
+    int __Size, __Offset, __ZeroIndex;
+    vector<Monoid> __Data;
+    const F f;
+    const Monoid __M1;
+
+    inline void __Check(int x){
+        assert(1 <= x && x <= __Size);
+    }
+
+    Monoid __query(int ql, int qr, int left, int right, int cell){
+        if(qr <= left || right <= ql){
+            return __M1;
+        }
+        if(ql <= left && right <= qr){
+            return __Data[cell];
+        }
+        int mid = (left + right) / 2;
+        Monoid ans_left = __query(ql, qr, left, mid, 2 * cell);
+        Monoid ans_right = __query(ql, qr, mid, right, 2 * cell + 1);
+        return f(ans_left, ans_right);
+    }
 
     public:
     /**
-     * @brief Construct a new Segment Tree object
-     * @param N セグメント木のサイズ
-     * @param f 2要素をマージする演算子
-     * @param M1 単位元
-     * @note 各要素の初期値はM1になる。初期値を別で設定したい場合はset関数を使う。
+     * @brief セグメント木を要素数 `Size` で初期化する。
+     * @param Size セグメント木の要素数
+     * @param Merge 区間取得を行う演算
+     * @param Monoid_Identity モノイドの単位元
+     * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
      */
-    SegmentTree(int N, const F f, const Monoid &M1) : f(f), M1(M1){
-        sz = 1;
-        while(sz < N) sz <<= 1;
-        data.resize(2 * sz, M1);
-    }
-
-    SegmentTree() = default;
-
-    /**
-     * @brief 指定した要素に初期値を設定する。
-     * @note この関数はbuild関数呼び出し前に行うこと。
-     * @attention 1-indexで指定すること！
-     * @param k 設定したい要素番号（1-index）
-     * @param x 設定したい値
-     */
-    void set(int k, const Monoid &x){
-        data[k + sz] = x;
+    SegmentTree(int Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
+    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){
+        __Size = 1;
+        while(__Size < Size) __Size <<= 1;
+        __Offset = __Size - 1;
+        __Data.resize(2 * __Size, __M1);
     }
 
     /**
      * @brief セグメント木を構築する。
-     * @note 初期値の設定はこの関数を呼び出す前にset関数で行うこと。
+     * @attention 必ず `set()` で初期値を代入してから呼び出すこと！
      */
     void build(){
-        for(int k = sz - 1; k > 0; --k){
-            data[k] = f(data[2 * k], data[2 * k + 1]);
+        for(int i = __Offset; i >= 1; --i){
+            __Data[i] = f(__Data[i * 2 + 0], __Data[i * 2 + 1]);
         }
     }
 
     /**
-     * @brief 1点更新クエリを処理する。
-     * @attention 1-indexで指定すること！
-     * @param k 更新したい要素番号（1-index）
-     * @param x 更新したい値
+     * @brief セグメント木の初期値を代入する。
+     * @param Index 代入先の要素番号 (default = 1-index)
+     * @param Value 代入する値
      */
-    void update(int k, const Monoid &x){
-        k += sz;
-        data[k] = x;
+    void set(int Index, Monoid Value){
+        __Check(Index + __ZeroIndex);
+        __Data[__Offset + Index + __ZeroIndex] = Value;
+    }
+
+    /**
+     * @brief セグメント木を配列 `Init_Data` で初期化する。
+     * @param Init_Data 初期データの配列
+     * @param Merge 区間取得を行う演算
+     * @param Monoid_Identity モノイドの単位元
+     * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
+     */
+    SegmentTree(vector<Monoid> &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
+    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){
+        __Size = 1;
+        while(__Size < (int)Init_Data.size()) __Size <<= 1;
+        __Offset = __Size - 1;
+        __Data.resize(2 * __Size, __M1);
+        for(int i = 0; i < (int)Init_Data.size(); ++i){
+            __Data[__Size + i] = Init_Data[i];
+        }
+        build();
+    }
+
+    /**
+     * @brief 一点更新クエリを処理する。
+     * @param Index 更新先の要素番号 (default = 1-index)
+     * @param Value 更新する値
+     */
+    void update(int Index, Monoid Value){
+        __Check(Index + __ZeroIndex);
+        int k = __Offset + Index + __ZeroIndex;
+        __Data[k] = Value;
         while(k >>= 1){
-            data[k] = f(data[2 * k], data[2 * k + 1]);
+            __Data[k] = f(__Data[2 * k], __Data[2 * k + 1]);
         }
     }
 
     /**
-     * @brief 区間取得クエリを処理する。
-     * @attention 1-index・半開区間で指定すること！
-     * @param left 半開区間始点（1-index）
-     * @param right 半開区間終点（1-index）
-     * @return Monoid クエリ処理結果
+     * @brief 半開区間 `[Left, Right)` に対して区間取得クエリを行う。
+     * @param Left 半開区間の左端
+     * @param Right 半開区間の右端
+     * @return Monoid 取得した結果
      */
-    Monoid query(int left, int right){
-        Monoid L = M1, R = M1;
-        for(left += sz, right += sz; left < right; left >>= 1, right >>= 1){
-            if(left & 1) L = f(L, data[left++]);
-            if(right & 1) R = f(data[--right], R);
-        }
-        return f(L, R);
+    Monoid query(int Left, int Right){
+        __Check(Left + __ZeroIndex);
+        __Check(Right + __ZeroIndex - 1);
+        return __query(Left + __ZeroIndex, Right + __ZeroIndex, 1, __Size + 1, 1);
     }
 
     /**
-     * @brief 指定した要素の値を取得する。
-     * @attention 1-indexで指定すること！
-     * @param k 取得したい要素番号（1-index）
-     * @return Monoid 取得結果
+     * @brief 要素番号 `k` の要素を取得する。
+     * @param k 取得先の要素番号 (default = 1-index)
+     * @return Monoid 取得した結果
      */
     Monoid get(int k){
-        return data[k + sz];
+        __Check(k + __ZeroIndex);
+        return __Data[__Offset + k + __ZeroIndex];
     }
 
-    /**
-     * @brief 全要素の値を取得する。
-     * @param length 元配列の長さ
-     * @return vector<Monoid> 全要素の値
-     */
-    vector<Monoid> get_list(int length){
-        vector<Monoid> ret(length);
-        for(int i = 0; i < length; ++i){
-            ret[i] = get(i);
-        }
-        return ret;
+    Monoid operator[](const int &k){
+        return get(k);
     }
 };
-
-template<typename T>
-const function<T(T, T)> SEG_MIN = [](T x, T y){return min(x, y);};
-template<typename T>
-const function<T(T, T)> SEG_MAX = [](T x, T y){return max(x, y);};
-template<typename T>
-const function<T(T, T)> SEG_SUM = [](T x, T y){return x + y;};

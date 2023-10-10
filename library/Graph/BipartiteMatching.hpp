@@ -1,33 +1,91 @@
-#pragma once
-
 /**
- * @brief Bipartite Matching - 二部マッチング
+ * @file BipartiteMatching.hpp
+ * @author log K (lX57)
+ * @brief Bipartite Matching - 二部グラフの最大マッチング
+ * @version 2.2
+ * @date 2023-10-04
  */
 
-#include <bits/stdc++.h>
-
-#include "FordFulkerson.hpp"
-
-using namespace std;
+#include "Dinic.hpp"
 
 struct BipartiteMatching{
     private:
-    Graph<int> G;
-    int X, Y, s, t;
+    Flow<int> G, H;
+    int __L, __R;
+    Vertex __S, __T;
+    vector<pair<Vertex, Vertex>> __Matching;
+
+    bool __SubGraph;
+    set<pair<Vertex, Vertex>> remain_edge;
+    vector<int> mark_L, mark_R;
+    int ML, MR;
 
     public:
-    BipartiteMatching(int X, int Y) : X(X), Y(Y), s(X + Y), t(X + Y + 1){
-        G = Graph<int>(X + Y + 2, true);
-        for(Vertex x = 0; x < X; ++x) G.add(s, x);
-        for(Vertex y = X; y < X + Y; ++y) G.add(y, t);
+    BipartiteMatching(int L, int R, int src_flow = 1, int sink_flow = 1, bool MakeSubGraph = false) : __L(L), __R(R), __S(L + R), __T(L + R + 1), __SubGraph(MakeSubGraph){
+        G = Flow<int>(__L + __R + 2);
+        for(Vertex l = 0; l < __L; ++l) G.add(__S, l, src_flow);
+        for(Vertex r = __L; r < __L + __R; ++r) G.add(r, __T, sink_flow);
     }
 
-    void add(int x, int y){
-        G.add(x, X + y);
+    void add(int l, int r, int flow = 1){
+        G.add(l, __L + r, flow);
+        remain_edge.insert({l, __L + r});
     }
 
-    int solve(){
-        FordFulkerson<int> ff(G);
-        return ff.query(s, t);
+    int solve(bool MakeSubGraph = false){
+        Dinic<int> dn(G);
+        int ret = dn.solve(__S, __T);
+        EdgeSet<int> es = G.get_edgeset();
+        for(int i = 0; i < es.size(); ++i){
+            if(es[i].cap > 0) continue;
+            if(es[i].src == __S || es[i].to == __T) continue;
+            __Matching.push_back({es[i].src, es[i].to - __L});
+        }
+        // if(MakeSubGraph){
+        //     H = Flow<int>(__L + __R);
+        //     mark_L.resize(__L, 1), mark_R.resize(__R, 0);
+        //     for(auto [l, r] : __Matching){
+        //         H.add(r, l);
+        //         remain_edge.erase({l, r});
+        //         mark_L[l] = 0;
+        //     }
+        //     for(auto [l, r] : remain_edge){
+        //         H.add(l, r);
+        //     }
+        //     for(Vertex l = 0; l < __L; ++l){
+        //         if(!mark_L[l]) continue;
+        //         queue<Vertex> que;
+        //         que.push(l);
+        //         while(que.size()){
+        //             Vertex now = que.front();
+        //             que.pop();
+        //             for(auto e : H.get_incident(now)){
+        //                 if(e.to < __L && !mark_L[e.to]){
+        //                     mark_L[e.to] = 1;
+        //                     que.push(e.to);
+        //                 }
+        //                 if(e.to >= __L && !mark_R[e.to - __L]){
+        //                     mark_R[e.to - __L] = 1;
+        //                     que.push(e.to);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     ML = accumulate(mark_L.begin(), mark_L.end(), 0);
+        //     MR = accumulate(mark_R.begin(), mark_R.end(), 0);
+        // }
+        return ret;
+    }
+
+    vector<pair<Vertex, Vertex>> get_matching(){
+        return __Matching;
+    }
+    
+    int MinimumVertexCover(){
+        return __L - ML + MR;
+    }
+
+    int MaximumIndependentSet(){
+        return ML + __R - MR;
     }
 };

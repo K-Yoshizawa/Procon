@@ -1,6 +1,6 @@
 ---
 title: Dijkstra - 単一始点最短距離
-documentation_of: ../latest/Graph/Dijkstra.hpp
+documentation_of: ../library/Graph/Dijkstra.hpp
 ---
 
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
