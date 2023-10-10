@@ -179,5 +179,5 @@ title: "Ford-Fulkerson - \u6700\u5927\u6D41"
 
 ## Function
 
-- `FordFulkerson(Graph G)` : `Graph`で初期化する。
-- `solve(Vertex Source, Vertex Sink)` : 頂点`Source`から頂点`Sink`への最大流を求める。$O(FE)$
+- `FordFulkerson(Graph G)` : `Graph` で初期化する。
+- `solve(Vertex Source, Vertex Sink)` : 頂点 `Source` から頂点 `Sink` への最大流を求める。$O(FE)$

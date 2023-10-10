@@ -140,7 +140,7 @@ data:
     \ = Potential;\n    }\n\n    void rebuild(){\n        __solve();\n    }\n\n  \
     \  void build(Vertex Start){\n        assert(0 <= Start && Start < G.vsize());\n\
     \        if(Start != __Start){\n            __Start = Start;\n            __solve();\n\
-    \        }\n    }\n\n    vector<CostType> all(Vertex Start){\n        assert(0\
+    \        }\n    }\n\n    vector<CostType> &all(Vertex Start){\n        assert(0\
     \ <= Start && Start < G.vsize());\n        if(Start != __Start) build(Start);\n\
     \        return __Dist;\n    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n\
     \        assert(0 <= Start && Start < G.vsize());\n        assert(0 <= Goal &&\
@@ -193,14 +193,35 @@ data:
   isVerificationFile: false
   path: library/Graph/PrimalDual.hpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-10-10 14:52:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-6-B.test.cpp
 documentation_of: library/Graph/PrimalDual.hpp
 layout: document
-redirect_from:
-- /library/library/Graph/PrimalDual.hpp
-- /library/library/Graph/PrimalDual.hpp.html
 title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
 ---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+## Abstract
+
+最小費用流問題をPrimal Dual法を用いて求める。
+
+## Variable
+
+
+
+## Function
+
+- `PrimalDual(Graph G)` : `Graph`で初期化する。
+- `solve(Vertex Start, Vertex Goal, CostType F)` : 頂点 `Start` から頂点 `Goal` へ流量 `F` を流した時の最小費用流を求める。流せない場合、`-1`を返す。$O(FE \log V)$

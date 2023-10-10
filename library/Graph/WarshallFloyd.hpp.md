@@ -155,8 +155,8 @@ title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
 
 ## Function
 
-- `WarshallFloyd(Graph G)` : `Graph`で初期化し、全点対間最短距離問題を解く。$O(V^3)$
-- `WarshallFloyd(vector<vector<CostType>> M)` : 隣接行列`M`で初期化し、全点対間最短距離問題を解く。$O(V^3)$
+- `WarshallFloyd(Graph G)` : `Graph` で初期化し、全点対間最短距離問題を解く。$O(V^3)$
+- `WarshallFloyd(vector<vector<CostType>> M)` : 隣接行列 `M` で初期化し、全点対間最短距離問題を解く。$O(V^3)$
 - `negative()` : 負閉路を含むかを返す。
-- `dist(Vertex Start, Vertex Goal)` : 頂点`Start`から頂点`Goal`への最短距離を返す。$O(1)$
-- `print(CostType NotAdjacent, bool DisplayINF)` : 隣接行列を出力する。隣接していない頂点への距離を`INF`として表示することも可能。$O(V^2)$
+- `dist(Vertex Start, Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短距離を返す。$O(1)$
+- `print(CostType NotAdjacent, bool DisplayINF)` : 隣接行列を出力する。隣接していない頂点への距離を `INF` として表示することも可能。$O(V^2)$

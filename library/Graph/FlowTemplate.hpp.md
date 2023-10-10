@@ -177,8 +177,27 @@ data:
   - verify/AOJ-GRL-7-A.test.cpp
 documentation_of: library/Graph/FlowTemplate.hpp
 layout: document
-redirect_from:
-- /library/library/Graph/FlowTemplate.hpp
-- /library/library/Graph/FlowTemplate.hpp.html
 title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
 ---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+## Abstract
+
+フローアルゴリズムのためのテンプレート。
+
+## Variable
+
+
+
+## Function
+

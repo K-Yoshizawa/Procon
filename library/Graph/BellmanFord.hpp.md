@@ -129,6 +129,6 @@ title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
 
 ## Function
 
-- `BellmanFord(Graph G, Vertex Start)` : 頂点`Start`を始点として単一始点最短距離問題を解く。$O(VE)$
+- `BellmanFord(Graph G, Vertex Start)` : 頂点 `Start` を始点として単一始点最短距離問題を解く。$O(VE)$
     - 負閉路が存在する場合、空列を返す。
     - そうでない場合、各頂点への最短距離を返す。

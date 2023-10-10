@@ -103,7 +103,7 @@ data:
     \ = Potential;\n    }\n\n    void rebuild(){\n        __solve();\n    }\n\n  \
     \  void build(Vertex Start){\n        assert(0 <= Start && Start < G.vsize());\n\
     \        if(Start != __Start){\n            __Start = Start;\n            __solve();\n\
-    \        }\n    }\n\n    vector<CostType> all(Vertex Start){\n        assert(0\
+    \        }\n    }\n\n    vector<CostType> &all(Vertex Start){\n        assert(0\
     \ <= Start && Start < G.vsize());\n        if(Start != __Start) build(Start);\n\
     \        return __Dist;\n    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n\
     \        assert(0 <= Start && Start < G.vsize());\n        assert(0 <= Goal &&\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-10-10 14:52:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp

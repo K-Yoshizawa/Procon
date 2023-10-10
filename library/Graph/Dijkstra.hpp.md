@@ -108,7 +108,7 @@ data:
     \ = Potential;\n    }\n\n    void rebuild(){\n        __solve();\n    }\n\n  \
     \  void build(Vertex Start){\n        assert(0 <= Start && Start < G.vsize());\n\
     \        if(Start != __Start){\n            __Start = Start;\n            __solve();\n\
-    \        }\n    }\n\n    vector<CostType> all(Vertex Start){\n        assert(0\
+    \        }\n    }\n\n    vector<CostType> &all(Vertex Start){\n        assert(0\
     \ <= Start && Start < G.vsize());\n        if(Start != __Start) build(Start);\n\
     \        return __Dist;\n    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n\
     \        assert(0 <= Start && Start < G.vsize());\n        assert(0 <= Goal &&\
@@ -150,7 +150,7 @@ data:
     \ = Potential;\n    }\n\n    void rebuild(){\n        __solve();\n    }\n\n  \
     \  void build(Vertex Start){\n        assert(0 <= Start && Start < G.vsize());\n\
     \        if(Start != __Start){\n            __Start = Start;\n            __solve();\n\
-    \        }\n    }\n\n    vector<CostType> all(Vertex Start){\n        assert(0\
+    \        }\n    }\n\n    vector<CostType> &all(Vertex Start){\n        assert(0\
     \ <= Start && Start < G.vsize());\n        if(Start != __Start) build(Start);\n\
     \        return __Dist;\n    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n\
     \        assert(0 <= Start && Start < G.vsize());\n        assert(0 <= Goal &&\
@@ -171,7 +171,7 @@ data:
   path: library/Graph/Dijkstra.hpp
   requiredBy:
   - library/Graph/PrimalDual.hpp
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-10-10 14:52:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-6-B.test.cpp
@@ -201,19 +201,19 @@ title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
 ## Variable
 
 - private
-    - `Dist` : 始点`Start`からの距離(存在しない場合は`G.INF`)
-    - `Potential` : ポテンシャル(初期値`0`)
-    - `PrevVertex` : 各頂点の最短経路上における前の頂点(存在しない場合は`-1`)
-    - `PrevEdge` : 各頂点の最短経路上における前の辺(存在しない場合は`-1`)
+    - `Dist` : 始点 `Start` からの距離(存在しない場合は `G.INF` )
+    - `Potential` : ポテンシャル(初期値 `0` )
+    - `PrevVertex` : 各頂点の最短経路上における前の頂点(存在しない場合は `-1` )
+    - `PrevEdge` : 各頂点の最短経路上における前の辺番号(存在しない場合は `-1` )
     - `Start` : 始点
 
 ## Function
 
-- `Dijkstra(Graph G)` : `Graph`で初期化する。
-- `Dijkstra(Graph G, Vertex Start)` : `Graph`で初期化し、頂点`Start`を始点として単一始点最短距離問題を解く。$O(E \log V)$
-- `update_potential(vector<CostType> Potential)` : グラフのポテンシャル値を`Potential`で更新する。$O(V)$
-- `build(Vertex Start)` : 頂点`Start`を始点として単一始点最短距離問題を解く。$O(E \log V)$
-- `all(Vertex Start)` : 頂点`Start`を始点としたときの各頂点への最短経路を返す。$O(E \log V)$
-- `dist(Vertex Start, Vertex Goal)` : 頂点`Start`から頂点`Goal`への最短距離を求める。頂点`Start`を始点とした最短距離が残っているなら$O(1)$、そうでなければ$O(E \log V)$
-- `restore_edge(Vertex Goal)` : 頂点`Goal`から頂点`Start`への最短経路の辺を復元して返す。$O(V)$
-- `print(bool DisplayINF, char Delimiter)` : 最短距離を文字`Delimiter`を区切り文字として出力する。$O(V)$
+- `Dijkstra(Graph G)` : `Graph` で初期化する。
+- `Dijkstra(Graph G, Vertex Start)` : `Graph` で初期化し、頂点 `Start` を始点として単一始点最短距離問題を解く。$O(E \log V)$
+- `update_potential(vector<CostType> Potential)` : グラフのポテンシャル値を `Potential` で更新する。$O(V)$
+- `build(Vertex Start)` : 頂点 `Start` を始点として単一始点最短距離問題を解く。$O(E \log V)$
+- `all(Vertex Start)` : 頂点 `Start` を始点としたときの各頂点への最短経路を返す。$O(E \log V)$
+- `dist(Vertex Start, Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短距離を求める。頂点 `Start` を始点とした最短距離が残っているなら $O(1)$ 、そうでなければ $O(E \log V)$
+- `restore_edge(Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短経路の辺を復元して返す。$O(V)$
+- `print(bool DisplayINF, char Delimiter)` : 最短距離を文字 `Delimiter` を区切り文字として出力する。$O(V)$
