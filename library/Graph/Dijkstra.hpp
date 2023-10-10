@@ -66,7 +66,7 @@ struct Dijkstra{
         }
     }
 
-    vector<CostType> all(Vertex Start){
+    vector<CostType> &all(Vertex Start){
         assert(0 <= Start && Start < G.vsize());
         if(Start != __Start) build(Start);
         return __Dist;

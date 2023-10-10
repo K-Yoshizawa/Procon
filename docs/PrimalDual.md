@@ -1,6 +1,6 @@
 ---
-title: Ford-Fulkerson - 最大流
-documentation_of: ../library/Graph/FordFulkerson.hpp
+title: Primal Dual - 最小費用流
+documentation_of: ../library/Graph/PrimalDual.hpp
 ---
 
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -25,4 +25,4 @@ documentation_of: ../library/Graph/FordFulkerson.hpp
 ## Function
 
 - `PrimalDual(Graph G)` : `Graph`で初期化する。
-- `solve(Vertex Start, Vertex Goal, CostType F)` : 頂点`Start`から頂点`Goal`へ流量`F`を流した時の最小費用流を求める。流せない場合、`-1`を返す。$O(FE \log V)$
+- `solve(Vertex Start, Vertex Goal, CostType F)` : 頂点 `Start` から頂点 `Goal` へ流量 `F` を流した時の最小費用流を求める。流せない場合、`-1`を返す。$O(FE \log V)$
