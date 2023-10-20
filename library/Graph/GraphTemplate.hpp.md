@@ -37,7 +37,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
@@ -78,6 +78,9 @@ data:
     path: verify/AOJ-GRL-5-D-HLD.test.cpp
     title: verify/AOJ-GRL-5-D-HLD.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-E.test.cpp
     title: verify/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
@@ -95,6 +98,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum.test.cpp
+    title: verify/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -220,39 +226,41 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
-  - library/Graph/BipartiteMatching.hpp
-  - library/Graph/Dinic.hpp
-  - library/Graph/CycleDetection.hpp
-  - library/Graph/Dijkstra.hpp
-  - library/Graph/FordFulkerson.hpp
-  - library/Graph/WarshallFloyd.hpp
-  - library/Graph/BellmanFord.hpp
-  - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/Kruskal.hpp
   - library/Graph/PrimalDual.hpp
+  - library/Graph/Dinic.hpp
+  - library/Graph/Dijkstra.hpp
+  - library/Graph/StronglyConnectedComponents.hpp
+  - library/Graph/CycleDetection.hpp
+  - library/Graph/BellmanFord.hpp
   - library/Graph/FlowTemplate.hpp
-  - library/Tree/EulerTour.hpp
+  - library/Graph/BipartiteMatching.hpp
+  - library/Graph/WarshallFloyd.hpp
+  - library/Graph/FordFulkerson.hpp
   - library/Tree/LowestCommonAncestor.hpp
   - library/Tree/HeavyLightDecomposition.hpp
+  - library/Tree/EulerTour.hpp
   - library/Tree/TreeDiamiter.hpp
   timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-6-A.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-6-B.test.cpp
-  - verify/AOJ-GRL-5-D-HLD.test.cpp
   - verify/AOJ-GRL-6-A-Dinic.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
+  - verify/AOJ-GRL-6-B.test.cpp
   - verify/AOJ-GRL-7-A.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-5-E.test.cpp
-  - verify/AOJ-GRL-5-C-HLD.test.cpp
-  - verify/AOJ-ALDS1-11-A.test.cpp
   - verify/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ-GRL-5-C-HLD.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
+  - verify/AOJ-ALDS1-11-A.test.cpp
+  - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
+  - verify/AOJ-GRL-6-A.test.cpp
+  - verify/AOJ-GRL-5-D.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"

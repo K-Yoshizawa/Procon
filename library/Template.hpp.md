@@ -30,11 +30,13 @@ data:
     template<typename T>\ninline T median(T a, T b, T c){return between(b, a, c) ||\
     \ between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\ntemplate<typename\
     \ T>\ninline T except(T src, T cond, T excp){return (src == cond ? excp : src);}\n\
-    \nusing ll = long long;\nusing ull = unsigned long long;\nusing ld = long double;\n\
-    \nconst long double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long\
-    \ double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\n\
-    const long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
-    \ T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
+    template<typename T>\ninline T min(vector<T> &v){return *min_element((v).begin(),\
+    \ (v).end());}\ntemplate<typename T>\ninline T max(vector<T> &v){return *max_element((v).begin(),\
+    \ (v).end());}\n\nusing ll = long long;\nusing ull = unsigned long long;\nusing\
+    \ ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double PI2\
+    \ = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
+    \ / 2;\nconst long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate\
+    \ <typename T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
     using vi = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\n\
     using vl = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing\
     \ pi = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
@@ -108,12 +110,14 @@ data:
     \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
     \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
     \ || between(c, b, a) ? b : c);}\ntemplate<typename T>\ninline T except(T src,\
-    \ T cond, T excp){return (src == cond ? excp : src);}\n\nusing ll = long long;\n\
-    using ull = unsigned long long;\nusing ld = long double;\n\nconst long double\
-    \ PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long double PI_2 = PI\
-    \ / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\nconst long long\
-    \ INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename T>\n\
-    using vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
+    \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
+    inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
+    \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
+    \nusing ll = long long;\nusing ull = unsigned long long;\nusing ld = long double;\n\
+    \nconst long double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long\
+    \ double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\n\
+    const long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
+    \ T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
     using vi = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\n\
     using vl = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing\
     \ pi = pair<int, int>;\nusing pll = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
@@ -171,7 +175,7 @@ data:
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy: []
-  timestamp: '2023-10-10 13:39:54+09:00'
+  timestamp: '2023-10-20 15:07:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp

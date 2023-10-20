@@ -96,7 +96,7 @@ data:
       title: modint
   - name: library/Tree
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
@@ -163,6 +163,9 @@ data:
       path: verify/AOJ-GRL-5-D-HLD.test.cpp
       title: verify/AOJ-GRL-5-D-HLD.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-5-D.test.cpp
+      title: verify/AOJ-GRL-5-D.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-E.test.cpp
       title: verify/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
@@ -198,6 +201,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-VertexAddSubtreeSum.test.cpp
+      title: verify/LC-VertexAddSubtreeSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

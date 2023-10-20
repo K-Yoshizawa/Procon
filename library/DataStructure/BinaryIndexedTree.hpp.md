@@ -5,9 +5,6 @@ data:
   - icon: ':warning:'
     path: library/DataStructure/BinaryIndexedTreeDouble.hpp
     title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
-  - icon: ':warning:'
-    path: library/Tree/EulerTour.hpp
-    title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -72,7 +69,6 @@ data:
   isVerificationFile: false
   path: library/DataStructure/BinaryIndexedTree.hpp
   requiredBy:
-  - library/Tree/EulerTour.hpp
   - library/DataStructure/BinaryIndexedTreeDouble.hpp
   timestamp: '2023-06-13 11:29:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS

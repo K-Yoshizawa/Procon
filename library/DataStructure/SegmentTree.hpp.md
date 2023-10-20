@@ -13,6 +13,9 @@ data:
     path: verify/AOJ-GRL-5-D-HLD.test.cpp
     title: verify/AOJ-GRL-5-D-HLD.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum.test.cpp
+    title: verify/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -162,12 +168,14 @@ data:
   timestamp: '2023-10-10 13:58:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-5-D-HLD.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/AOJ-GRL-5-D.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
-  - verify/AOJ-DSL-2-A.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

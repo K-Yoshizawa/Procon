@@ -1,22 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
-    path: library/DataStructure/BinaryIndexedTree.hpp
-    title: Binary Indexed Tree
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-5-D.test.cpp
+    title: verify/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum.test.cpp
+    title: verify/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     links: []
-  bundledCode: "#line 2 \"library/Tree/EulerTour.hpp\"\n\n/**\n * @brief Euler Tour\
-    \ - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+  bundledCode: "#line 1 \"library/Tree/EulerTour.hpp\"\n/**\n * @file EulerTour.hpp\n\
+    \ * @author log K (lX57)\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\
+    \u30A2\u30FC\n * @version 2.0\n * @date 2023-10-20\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @author log K (lX57)\n * @brief Graph\
     \ Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
     \ 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -72,120 +76,58 @@ data:
     \ mat[i][0] == NotAdjacent ? \"INF\" : to_string(mat[i][0]));\n            for(int\
     \ j = 1; j < __CntVertex; ++j){\n                cout << \" \" << (DisplayINF\
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
-    \ }\n            cout << endl;\n        }\n    }\n};\n#line 2 \"library/DataStructure/BinaryIndexedTree.hpp\"\
-    \n\n/**\n * @brief Binary Indexed Tree\n */\n\n#line 8 \"library/DataStructure/BinaryIndexedTree.hpp\"\
-    \nusing namespace std;\n\n/**\n * @brief \u533A\u9593\u306B\u5BFE\u3059\u308B\u4E00\
-    \u70B9\u66F4\u65B0\u30FB\u533A\u9593\u548C\u306E\u30AF\u30A8\u30EA\u306B\u5BFE\
-    \u3057\u3066\u9AD8\u901F\u304B\u3064\u7C21\u6613\u306B\u5B9F\u88C5\u3067\u304D\
-    \u308B\u30C7\u30FC\u30BF\u69CB\u9020\u3002 \n */\ntemplate<typename T>\nstruct\
-    \ BinaryIndexedTree{\n    private:\n    vector<T> data;\n\n    public:\n    /**\n\
-    \     * @brief Binary Indexed Tree\u3092\u8981\u7D20\u6570size\u3001\u50240\u3067\
-    \u521D\u671F\u5316\u3059\u308B\u3002\n     * @param size \u914D\u5217\u306E\u8981\
-    \u7D20\u6570\n     */\n    BinaryIndexedTree(int size){\n        data.resize(++size,\
-    \ 0);\n    }\n\n    BinaryIndexedTree() = default;\n\n    /**\n     * @brief 1-index\u3067\
-    \u8868\u3055\u308C\u308B\u756A\u53F7i\u306B\u5BFE\u3057\u3066\u3001\u914D\u5217\
-    \u306E\u6700\u521D\u304B\u3089i\u307E\u3067\u306E\u9589\u533A\u9593\u306E\u548C\
-    \u3092\u6C42\u3081\u308B\u3002\n     * @param i \u6C42\u3081\u305F\u3044\u9589\
-    \u533A\u9593\u53F3\u7AEF(1-index)\n     * @return T \u533A\u9593\u548C\n     */\n\
-    \    T sum(int i){\n        T ret = 0;\n        while(i > 0){\n            ret\
-    \ += data[i];\n            i -= i & -i;\n        }\n        return ret;\n    }\n\
-    \n    /**\n     * @brief 1-index\u3067\u8868\u3055\u308C\u308B\u756A\u53F7i\u306B\
-    \u5BFE\u3057\u3066\u3001data[i]\u306Bx\u3092\u52A0\u3048\u308B\u3002\n     * @param\
-    \ i \u52A0\u3048\u308B\u5834\u6240\n     * @param x \u52A0\u3048\u308B\u5024\n\
-    \     */\n    void add(int i, T x){\n        while(i < data.size()){\n       \
-    \     data[i] += x;\n            i += i & -i;\n        }\n    }\n\n    /**\n \
-    \    * @brief 0-index\u3067\u8868\u3055\u308C\u308B\u534A\u958B\u533A\u9593[l,\
-    \ r)\u306E\u533A\u9593\u548C\u3092\u6C42\u3081\u308B\u3002\n     * @param l \u533A\
-    \u9593\u306E\u5DE6\u7AEF\n     * @param r \u533A\u9593\u306E\u53F3\u7AEF\n   \
-    \  * @return T \u533A\u9593\u548C\n     */\n    T query(int l, int r){\n     \
-    \   return sum(r) - sum(l);\n    }\n};\n#line 9 \"library/Tree/EulerTour.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    int sz,\
-    \ k;\n    using Tour = int;\n    Graph<CostType> &G;\n    vector<Tour> arrival,\
-    \ departure; // \u9802\u70B9i\u306B\u8A2A\u308C\u305F\u6642\u9593 / \u9802\u70B9\
-    i\u304B\u3089\u53BB\u308B\u6642\u9593 : BIT\u306B\u4E57\u305B\u308B\u3053\u3068\
-    \u3092\u60F3\u5B9A\u3057\u3066\u3044\u308B\u305F\u3081\u3001\u30AF\u30A8\u30EA\
-    \u51E6\u7406\u3092\u7C21\u6613\u306B\u3059\u308B\u305F\u3081\u306B1-index\u3067\
-    \u8A18\u9332\u3059\u308B\n    BinaryIndexedTree<CostType> BIT;\n    vector<pair<Vertex,\
-    \ EdgeNum>> relation;\n\n    void dfs1(int v, int pre){\n        arrival[v] =\
-    \ k++;\n        for(auto &e : G.get_edges(v)){\n            if(e.to == pre) continue;\n\
-    \            dfs1(e.to, v);\n        }\n        departure[v] = k++;\n    }\n\n\
-    \    void dfs2(int v, int pre, CostType value){\n        BIT.add(arrival[v], value);\n\
-    \        for(auto &e : G.get_edges(v)){\n            if(e.to == pre) continue;\n\
-    \            dfs2(e.to, v, e.cost);\n        }\n        BIT.add(departure[v],\
-    \ -value);\n    }\n\n    public:\n    /**\n     * @brief \u9802\u70B9root\u3092\
-    \u6839\u3068\u3057\u305F\u6728G\u3067\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\
-    \u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention G\u304C\u6728\u3067\u306A\
-    \u3044\u5834\u5408\u306E\u52D5\u4F5C\u306F\u672A\u5B9A\u7FA9\n     * @param G\
-    \ \u6728\n     * @param root \u6839 (option, default = 0)\n     */\n    EulerTour(Graph<CostType>\
-    \ &G, Vertex root = 0) : G(G), sz(G.size()), BIT(G.size() * 2), k(1){\n      \
-    \  arrival.resize(sz, -1);\n        departure.resize(sz, -1);\n        dfs1(root,\
-    \ -1);\n        dfs2(0, -1, 0);\n        relation = G.get_parent(root);\n    }\n\
-    \n    /**\n     * @brief \u6839\u304B\u3089\u9802\u70B9v\u3078\u306E\u8DDD\u96E2\
-    \u3092BIT\u3092\u7528\u3044\u3066\u53D6\u5F97\u3059\u308B\u3002\n     * @param\
-    \ v \u53D6\u5F97\u3057\u305F\u3044\u9802\u70B9\u756A\u53F7v\n     * @return CostType\
-    \ \u6839\u304B\u3089\u9802\u70B9v\u3078\u306E\u8DDD\u96E2\n     */\n    CostType\
-    \ query(Vertex v){\n        return BIT.sum(arrival[v]);\n    }\n\n    /**\n  \
-    \   * @brief \u9802\u70B9child\u3068\u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\
-    \u306E\u91CD\u307F\u3092x\u5897\u52A0\u3055\u305B\u308B\u4E00\u70B9\u66F4\u65B0\
-    \u30AF\u30A8\u30EA\n     * @param child \u5B50\u306E\u9802\u70B9\u3092\u8868\u3059\
-    \u9802\u70B9\u756A\u53F7\n     * @param x \u5897\u52A0\u3055\u305B\u308B\u91CD\
-    \u307F\n     */\n    void add(Vertex child, CostType x){\n        auto [parent,\
-    \ ed] = relation[child];\n        G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost\
-    \ += x;\n        BIT.add(arrival[child], x);\n        BIT.add(departure[child],\
-    \ -x);\n    }\n\n    void update(Vertex child, CostType x){\n        auto [parent,\
-    \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
-    \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
-    \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
-    \    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\
-    \u30A2\u30FC\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n#include \"../DataStructure/BinaryIndexedTree.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    int sz,\
-    \ k;\n    using Tour = int;\n    Graph<CostType> &G;\n    vector<Tour> arrival,\
-    \ departure; // \u9802\u70B9i\u306B\u8A2A\u308C\u305F\u6642\u9593 / \u9802\u70B9\
-    i\u304B\u3089\u53BB\u308B\u6642\u9593 : BIT\u306B\u4E57\u305B\u308B\u3053\u3068\
-    \u3092\u60F3\u5B9A\u3057\u3066\u3044\u308B\u305F\u3081\u3001\u30AF\u30A8\u30EA\
-    \u51E6\u7406\u3092\u7C21\u6613\u306B\u3059\u308B\u305F\u3081\u306B1-index\u3067\
-    \u8A18\u9332\u3059\u308B\n    BinaryIndexedTree<CostType> BIT;\n    vector<pair<Vertex,\
-    \ EdgeNum>> relation;\n\n    void dfs1(int v, int pre){\n        arrival[v] =\
-    \ k++;\n        for(auto &e : G.get_edges(v)){\n            if(e.to == pre) continue;\n\
-    \            dfs1(e.to, v);\n        }\n        departure[v] = k++;\n    }\n\n\
-    \    void dfs2(int v, int pre, CostType value){\n        BIT.add(arrival[v], value);\n\
-    \        for(auto &e : G.get_edges(v)){\n            if(e.to == pre) continue;\n\
-    \            dfs2(e.to, v, e.cost);\n        }\n        BIT.add(departure[v],\
-    \ -value);\n    }\n\n    public:\n    /**\n     * @brief \u9802\u70B9root\u3092\
-    \u6839\u3068\u3057\u305F\u6728G\u3067\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\
-    \u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention G\u304C\u6728\u3067\u306A\
-    \u3044\u5834\u5408\u306E\u52D5\u4F5C\u306F\u672A\u5B9A\u7FA9\n     * @param G\
-    \ \u6728\n     * @param root \u6839 (option, default = 0)\n     */\n    EulerTour(Graph<CostType>\
-    \ &G, Vertex root = 0) : G(G), sz(G.size()), BIT(G.size() * 2), k(1){\n      \
-    \  arrival.resize(sz, -1);\n        departure.resize(sz, -1);\n        dfs1(root,\
-    \ -1);\n        dfs2(0, -1, 0);\n        relation = G.get_parent(root);\n    }\n\
-    \n    /**\n     * @brief \u6839\u304B\u3089\u9802\u70B9v\u3078\u306E\u8DDD\u96E2\
-    \u3092BIT\u3092\u7528\u3044\u3066\u53D6\u5F97\u3059\u308B\u3002\n     * @param\
-    \ v \u53D6\u5F97\u3057\u305F\u3044\u9802\u70B9\u756A\u53F7v\n     * @return CostType\
-    \ \u6839\u304B\u3089\u9802\u70B9v\u3078\u306E\u8DDD\u96E2\n     */\n    CostType\
-    \ query(Vertex v){\n        return BIT.sum(arrival[v]);\n    }\n\n    /**\n  \
-    \   * @brief \u9802\u70B9child\u3068\u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\
-    \u306E\u91CD\u307F\u3092x\u5897\u52A0\u3055\u305B\u308B\u4E00\u70B9\u66F4\u65B0\
-    \u30AF\u30A8\u30EA\n     * @param child \u5B50\u306E\u9802\u70B9\u3092\u8868\u3059\
-    \u9802\u70B9\u756A\u53F7\n     * @param x \u5897\u52A0\u3055\u305B\u308B\u91CD\
-    \u307F\n     */\n    void add(Vertex child, CostType x){\n        auto [parent,\
-    \ ed] = relation[child];\n        G.edges[ed].cost += x;\n        G.edges[G.rev[ed]].cost\
-    \ += x;\n        BIT.add(arrival[child], x);\n        BIT.add(departure[child],\
-    \ -x);\n    }\n\n    void update(Vertex child, CostType x){\n        auto [parent,\
-    \ ed] = relation[child];\n        CostType diff = x - G.edges[ed].cost;\n    \
-    \    G.edges[ed].cost += diff;\n        G.edges[G.rev[ed]].cost += diff;\n   \
-    \     BIT.add(arrival[child], diff);\n        BIT.add(departure[child], -diff);\n\
+    \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"library/Tree/EulerTour.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    Graph<CostType>\
+    \ &G;\n    Vertex __Root;\n    vector<int> __In, __Out;\n    int __timer;\n\n\
+    \    void __dfs(Vertex now, Vertex par){\n        __In[now] = __timer++;\n   \
+    \     for(auto e : G.get_incident(now)){\n            if(e.to == par) continue;\n\
+    \            __dfs(e.to, now);\n        }\n        __Out[now] = __timer++;\n \
+    \   }\n\n    public:\n    /**\n     * @brief Euler Tour\u3092\u69CB\u7BC9\u3059\
+    \u308B\u3002\n     * @param G \u69CB\u7BC9\u3059\u308B\u30B0\u30E9\u30D5\n   \
+    \  * @param Root \u6839\u3068\u3059\u308B\u9802\u70B9\u756A\u53F7 (default = `0`)\n\
+    \     * @note `timer` \u306F `1` \u304B\u3089\u59CB\u307E\u308B(\u30BB\u30B0\u6728\
+    \u306A\u3069\u306B1-index\u3067\u8F09\u305B\u3089\u308C\u308B)\n     */\n    EulerTour(Graph<CostType>\
+    \ &G, Vertex Root = 0) : G(G), __Root(Root), __In(G.vsize(), -1), __Out(G.vsize(),\
+    \ -1){\n        __timer = 1;\n        __dfs(__Root, -1);\n    }\n\n    int in(Vertex\
+    \ v){\n        assert(0 <= v && v < G.vsize());\n        return __In[v];\n   \
+    \ }\n\n    int out(Vertex v){\n        assert(0 <= v && v < G.vsize());\n    \
+    \    return __Out[v];\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\
+    \ `in` \u3068 `out` \u3092\u540C\u6642\u306B\u53D6\u5F97\u3059\u308B\n     * @param\
+    \ v \u9802\u70B9\u756A\u53F7\n     * @return pair<int, int> `{in(v), out(v)}`\n\
+    \     */\n    pair<int, int> operator[](Vertex v){\n        return make_pair(in(v),\
+    \ out(v));\n    }\n};\n"
+  code: "/**\n * @file EulerTour.hpp\n * @author log K (lX57)\n * @brief Euler Tour\
+    \ - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version 2.0\n * @date 2023-10-20\n\
+    \ */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    struct EulerTour{\n    private:\n    Graph<CostType> &G;\n    Vertex __Root;\n\
+    \    vector<int> __In, __Out;\n    int __timer;\n\n    void __dfs(Vertex now,\
+    \ Vertex par){\n        __In[now] = __timer++;\n        for(auto e : G.get_incident(now)){\n\
+    \            if(e.to == par) continue;\n            __dfs(e.to, now);\n      \
+    \  }\n        __Out[now] = __timer++;\n    }\n\n    public:\n    /**\n     * @brief\
+    \ Euler Tour\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param G \u69CB\u7BC9\
+    \u3059\u308B\u30B0\u30E9\u30D5\n     * @param Root \u6839\u3068\u3059\u308B\u9802\
+    \u70B9\u756A\u53F7 (default = `0`)\n     * @note `timer` \u306F `1` \u304B\u3089\
+    \u59CB\u307E\u308B(\u30BB\u30B0\u6728\u306A\u3069\u306B1-index\u3067\u8F09\u305B\
+    \u3089\u308C\u308B)\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root =\
+    \ 0) : G(G), __Root(Root), __In(G.vsize(), -1), __Out(G.vsize(), -1){\n      \
+    \  __timer = 1;\n        __dfs(__Root, -1);\n    }\n\n    int in(Vertex v){\n\
+    \        assert(0 <= v && v < G.vsize());\n        return __In[v];\n    }\n\n\
+    \    int out(Vertex v){\n        assert(0 <= v && v < G.vsize());\n        return\
+    \ __Out[v];\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E `in` \u3068\
+    \ `out` \u3092\u540C\u6642\u306B\u53D6\u5F97\u3059\u308B\n     * @param v \u9802\
+    \u70B9\u756A\u53F7\n     * @return pair<int, int> `{in(v), out(v)}`\n     */\n\
+    \    pair<int, int> operator[](Vertex v){\n        return make_pair(in(v), out(v));\n\
     \    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
-  - library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: false
   path: library/Tree/EulerTour.hpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-10-20 15:07:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/AOJ-GRL-5-D.test.cpp
 documentation_of: library/Tree/EulerTour.hpp
 layout: document
 redirect_from:
