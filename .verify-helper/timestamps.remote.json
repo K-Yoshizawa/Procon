@@ -16,6 +16,7 @@
 "verify/AOJ-GRL-5-C-HLD.test.cpp": "2023-10-10 14:21:48 +0900",
 "verify/AOJ-GRL-5-C.test.cpp": "2023-10-10 14:21:48 +0900",
 "verify/AOJ-GRL-5-D-HLD.test.cpp": "2023-10-10 14:21:48 +0900",
+"verify/AOJ-GRL-5-D.test.cpp": "2023-10-20 15:07:30 +0900",
 "verify/AOJ-GRL-5-E.test.cpp": "2023-10-10 14:21:48 +0900",
 "verify/AOJ-GRL-6-A-Dinic.test.cpp": "2023-10-10 14:21:48 +0900",
 "verify/AOJ-GRL-6-A.test.cpp": "2023-10-10 14:21:48 +0900",
@@ -27,5 +28,6 @@
 "verify/LC-PointAddRangeSum.test.cpp": "2023-10-10 13:58:30 +0900",
 "verify/LC-PointSetRangeComposite.test.cpp": "2023-10-11 01:51:01 +0900",
 "verify/LC-RangeAffineRangeSum.test.cpp": "2023-10-11 01:51:01 +0900",
-"verify/LC-VertexAddPathSum.test.cpp": "2023-10-10 14:21:48 +0900"
+"verify/LC-VertexAddPathSum.test.cpp": "2023-10-10 14:21:48 +0900",
+"verify/LC-VertexAddSubtreeSum.test.cpp": "2023-10-20 15:07:30 +0900"
 }
