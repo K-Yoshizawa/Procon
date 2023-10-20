@@ -36,6 +36,10 @@ template<typename T>
 inline T median(T a, T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}
 template<typename T>
 inline T except(T src, T cond, T excp){return (src == cond ? excp : src);}
+template<typename T>
+inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}
+template<typename T>
+inline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}
 
 using ll = long long;
 using ull = unsigned long long;
