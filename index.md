@@ -86,6 +86,14 @@ data:
     - icon: ':warning:'
       path: library/Other/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
+  - name: library/String
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: library/String/Manacher.hpp
+      title: library/String/Manacher.hpp
+    - icon: ':heavy_check_mark:'
+      path: library/String/ZAlgorithm.hpp
+      title: library/String/ZAlgorithm.hpp
   - name: library
     pages:
     - icon: ':warning:'
@@ -184,6 +192,9 @@ data:
       path: verify/LC-DeterminantofMatrix.test.cpp
       title: verify/LC-DeterminantofMatrix.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-EnumeratePalindromes.test.cpp
+      title: verify/LC-EnumeratePalindromes.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-InverseMatrix.test.cpp
       title: verify/LC-InverseMatrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -204,6 +215,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-ZAlgorithm.test.cpp
+      title: verify/LC-ZAlgorithm.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
