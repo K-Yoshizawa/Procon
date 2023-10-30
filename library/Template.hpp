@@ -3,8 +3,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.4
- * @date 2023-08-24
+ * @version 1.5
+ * @date 2023-10-30
  */
 
 #include <bits/stdc++.h>
@@ -14,8 +14,9 @@
 #define RSORT(x) sort(RALL(x))
 #define REVERSE(x) reverse(ALL(x))
 #define SETPRE(digit) fixed << setprecision(digit)
-#define popcount(x) __builtin_popcount(x)
+#define POPCOUNT(x) __builtin_popcount(x)
 #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
+#define IOTA(x) iota((x).begin(), (x).end(), 0)
 #define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(), val) - (x).begin())
 #define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(), (x).end(), val) - (x).begin())
 using namespace std;
@@ -63,12 +64,19 @@ using vl = vector<ll>;
 using vvl = vector<vl>;
 using vvvl = vector<vvl>;
 using pi = pair<int, int>;
-using pll = pair<ll, ll>;
+using pl = pair<ll, ll>;
 using pd = pair<double, double>;
+using vpi = vector<pi>;
+using vpl = vector<pl>;
+using vpd = vector<pd>;
+using vvpi = vector<vpi>;
+using vvpl = vector<vpl>;
+using vvpd = vector<vpd>;
 using ti3 = tuple<int, int, int>;
 using tl3 = tuple<ll, ll, ll>;
 using ti4 = tuple<int, int, int, int>;
 using tl4 = tuple<ll, ll, ll, ll>;
+using vs = vector<string>;
 template <typename T>
 using pq = priority_queue<T>;
 template <typename T>
@@ -81,7 +89,7 @@ const int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};
 
 template <typename T1, typename T2>
 ostream &operator<<(ostream &os, const pair<T1, T2> &p){
-    os << "{" << p.first << " " << p.second << "}";
+    os << p.first << " " << p.second;
     return os;
 }
 
@@ -102,19 +110,13 @@ ostream &operator<<(ostream &os, vector<T> &v){
 template <typename T>
 ostream &operator<<(ostream &os, vector<vector<T>> &v){
     for (int i = 0; i < v.size(); ++i){
-        os << v[i] << "\n";
+        os << v[i] << (i + 1 != v.size() ? "\n" : "");
     }
     return os;
 }
 
 template <typename T>
 istream &operator>>(istream &is, vector<T> &v){
-    for (int i = 0; i < v.size(); ++i) is >> v[i];
-    return is;
-}
-
-template <typename T>
-istream &operator>>(istream &is, valarray<T> &v){
     for (int i = 0; i < v.size(); ++i) is >> v[i];
     return is;
 }
@@ -135,7 +137,7 @@ void print(const T& a, const Ts&... b){
     cout << '\n';
 }
 
-#ifndef ONLINE_JUDGE
+#ifdef LOGK
 void dprint(){
     cerr << '\n';
 }
@@ -150,86 +152,7 @@ void dprint(const T& a, const Ts&... b){
 #define dprint(...) 42
 #endif
 
-template <typename T1, typename T2, typename T3>
-pair<T1, T2> &operator+=(pair<T1, T2> &x, const T3 &y){
-    x.first += y;
-    x.second += y;
-    return x;
-}
-
-template <typename T1, typename T2, typename T3>
-pair<T1, T2> &operator-=(pair<T1, T2> &x, const T3 &y){
-    x.first -= y;
-    x.second -= y;
-    return x;
-}
-
-ll modpow(ll a, ll b, ll m){
-    ll p = 1, q = a;
-    for (int i = 0; i < 63; ++i)
-    {
-        if ((b & (1LL << i)) != 0)
-        {
-            p *= q;
-            p %= m;
-        }
-        q *= q;
-        q %= m;
-    }
-    return p;
-}
-
-template <typename T>
-inline long long EuclideanDist2(const pair<T, T> &p1, const pair<T, T> &p2){
-    long long dx = (long long)p1.first - (long long)p2.first;
-    long long dy = (long long)p1.second - (long long)p2.second;
-    return dx * dx + dy * dy;
-}
-
-template <typename T>
-inline long long EuclideanDist2(const pair<T, T> &p){
-    return EuclideanDist2(p, make_pair(0, 0));
-}
-
-template <typename T>
-inline double EuclideanDist(const pair<T, T> &p1, const pair<T, T> &p2){
-    return sqrt((double)EuclideanDist2(p1, p2));
-}
-
-template <typename T>
-inline double EuclideanDist(const pair<T, T> &p){
-    return sqrt((double)EuclideanDist2(p));
-}
-
-template<typename T>
-inline long long ManhattanDist(const pair<T, T> &p1, const pair<T, T> &p2){
-    return abs(p1.first - p2.first) + abs(p1.second - p2.second);
-}
-
 template <typename T>
 T ceil(T x, T y){
     return (x + y - 1) / y;
-}
-
-template<typename T>
-T gcd(T a, T b) {
-    if(a < 0) a = -a;
-    if(b < 0) b = -b;
-    if(b == 0) return a;
-    else return gcd(b, a % b);
-}
-
-ull lcm(ull a, ull b) {
-    return a * b / gcd(a, b);
-}
-
-string bitseq(long long x, int mini_len = 1, bool rev = false){
-    string ret = "";
-    while(x){
-        ret.push_back('0' + (x & 1));
-        x >>= 1;
-    }
-    while(ret.size()<mini_len) ret.push_back('0');
-    if(!rev) reverse(ret.begin(), ret.end());
-    return ret;
 }
