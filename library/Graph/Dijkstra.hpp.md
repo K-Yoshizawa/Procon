@@ -175,8 +175,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-6-B.test.cpp
-  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document
 title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"

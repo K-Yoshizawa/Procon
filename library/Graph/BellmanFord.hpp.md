@@ -105,8 +105,8 @@ data:
   timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
 documentation_of: library/Graph/BellmanFord.hpp
 layout: document
 title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"

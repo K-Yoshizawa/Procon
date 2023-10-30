@@ -242,10 +242,10 @@ data:
   timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-5-C-HLD.test.cpp
-  - verify/AOJ-GRL-5-D-HLD.test.cpp
   - verify/AOJ-GRL-5-E.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-GRL-5-C-HLD.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
 documentation_of: library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

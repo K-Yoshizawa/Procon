@@ -24,10 +24,16 @@ data:
       path: library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
+      path: library/DataStructure/SlideMin.hpp
+      title: "Slide-Min - \u30B9\u30E9\u30A4\u30C9\u6700\u5C0F\u5024"
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
   - name: library/DynamicPrograming
     pages:
+    - icon: ':heavy_check_mark:'
+      path: library/DynamicPrograming/Knapsack01.hpp
+      title: "0-1 Knapsack - 0-1 \u30CA\u30C3\u30D7\u30B6\u30C3\u30AF\u554F\u984C"
     - icon: ':warning:'
       path: library/DynamicPrograming/LongestIncreasingSubsequence.hpp
       title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\
@@ -99,6 +105,9 @@ data:
     - icon: ':warning:'
       path: library/Template.hpp
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    - icon: ':warning:'
+      path: library/TemplateExtend.hpp
+      title: library/TemplateExtend.hpp
     - icon: ':heavy_check_mark:'
       path: library/modint.hpp
       title: modint
@@ -123,6 +132,12 @@ data:
       path: verify/AOJ-ALDS1-11-A.test.cpp
       title: verify/AOJ-ALDS1-11-A.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DPL-1-B.test.cpp
+      title: verify/AOJ-DPL-1-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DPL-1-F.test.cpp
+      title: verify/AOJ-DPL-1-F.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-A.test.cpp
       title: verify/AOJ-DSL-2-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -146,6 +161,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-I.test.cpp
       title: verify/AOJ-DSL-2-I.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-3-D.test.cpp
+      title: verify/AOJ-DSL-3-D.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
