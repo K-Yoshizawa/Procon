@@ -1,108 +1,72 @@
-#pragma once
-
-/**
- * @brief K-th MultiSet - K番目の値に関するデータ構造
- */
-
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
-template<typename T>
+template<typename Data, typename Value = Data>
 struct Kth_MultiSet{
+    using F = function<Value(Value, Data)>;
+    using G = function<bool(Data, Data)>;
+
     private:
-    int K;
-    bool greater;
-    multiset<T> small, large;
-    T __sum;
+    int __K;
+    multiset<Data> __P, __Q;
+    F __Add, __Sub;
+    G __Require;
+    Value __Sum;
 
     void balance(){
-        if(greater){
-            while(large.size() < K && small.size()){
-                auto itr = --(small.end());
-                __sum += (*itr);
-                large.insert(*itr);
-                small.erase(itr);
-            }
-            if(small.empty() || large.empty()) return;
-            while(1){
-                auto si = --(small.end());
-                auto li = large.begin();
-                T sv = (*si), lv = (*li);
-                if(sv <= lv) break;
-                __sum += (sv - lv);
-                small.erase(si), large.erase(li);
-                small.insert(lv), large.insert(sv);
-            }
+        while(__P.size() < __K && __Q.size()){
+            auto itr = __Q.begin();
+            __Sum = __Add(__Sum, *itr);
+            __P.insert(*itr);
+            __Q.erase(itr);
         }
-        else{
-            while(small.size() < K && large.size()){
-                auto itr = large.begin();
-                __sum += (*itr);
-                small.insert(*itr);
-                large.erase(itr);
-            }
-            if(small.empty() || large.empty()) return;
-            while(1){
-                auto si = --(small.end());
-                auto li = large.begin();
-                T sv = (*si), lv = (*li);
-                if(sv <= lv) break;
-                __sum -= (sv - lv);
-                small.erase(si), large.erase(li);
-                small.insert(lv), large.insert(sv);
-            }
+        if(__P.empty() || __Q.empty()) return;
+        while(1){
+            auto si = --(__P.end());
+            auto li = __Q.begin();
+            Data sv = (*si), lv = (*li);
+            if(__Require(sv, lv)) break;
+            __Sum = __Add(__Sub(__Sum, sv), lv);
+            __P.erase(si), __Q.erase(li);
+            __P.insert(lv), __Q.insert(sv);
         }
     }
 
     public:
-    Kth_MultiSet(int K, bool greater = false) : K(K), greater(greater), __sum(0){}
+    Kth_MultiSet(int K, 
+        F Add = [](Value x, Data y){return x + y;}, 
+        F Sub = [](Value x, Data y){return x - y;},
+        G Require = [](Data x, Data y){return x <= y;})
+        : __K(K), __Add(Add), __Sub(Sub), __Require(Require), __Sum(){}
 
-    /**
-     * @brief 値valueを追加する。
-     * @param value 追加したい値
-     */
-    void insert(T value){
-        if(greater) small.insert(value);
-        else large.insert(value);
+    void insert(Data data){
+        __Q.insert(data);
         balance();
     }
 
-    void erase(T value){
-        if(greater){
-            auto itr = large.find(value);
-            if(itr != large.end()){
-                __sum -= value;
-                large.erase(itr);
-            }
-            else{
-                assert(small.find(value) != small.end());
-                small.erase(small.find(value));
-            }
+    void erase(Data value){
+        auto itr = __P.find(value);
+        if(itr != __P.end()){
+            __Sum = __Sub(__Sum, value);
+            __P.erase(itr);
         }
         else{
-            auto itr = small.find(value);
-            if(itr != small.end()){
-                __sum -= value;
-                small.erase(itr);
-            }
-            else{
-                assert(large.find(value) != large.end());
-                large.erase(large.find(value));
-            }
+            assert(__Q.find(value) != __Q.end());
+            __Q.erase(__Q.find(value));
         }
         balance();
-    }
-
-    inline T sum(){
-        return __sum;
     }
 
     inline bool exist(){
-        return greater ? large.size() == K : small.size() == K;
+        return __P.size() == __K;
     }
 
-    inline T get(){
+    inline Data get(){
         assert(exist());
-        return greater ? *(large.begin()) : *(--(small.end()));
+        return *(--(__P.end()));
+    }
+
+    inline Value sum(){
+        return __Sum;
     }
 };

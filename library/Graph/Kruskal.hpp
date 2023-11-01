@@ -1,3 +1,11 @@
+/**
+ * @file Kruskal.hpp
+ * @author log K (lX57)
+ * @brief Kruskal - 最小全域木
+ * @version 2.0
+ * @date 2023-11-01
+ */
+
 #include "GraphTemplate.hpp"
 #include "../DataStructure/UnionFind.hpp"
 

@@ -131,3 +131,11 @@ struct SegmentTree{
         return get(k);
     }
 };
+
+namespace logk{
+    template<typename T>
+    SegmentTree<T> SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){
+        if(INF == 0) INF = numeric_limits<T>::max() >> 1;
+        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);}, INF, ZeroIndex);
+    }
+}

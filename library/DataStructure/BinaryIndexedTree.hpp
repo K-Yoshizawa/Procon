@@ -1,64 +1,45 @@
-#pragma once
-
 /**
+ * @file BinaryIndexedTree.hpp
+ * @author log K (lX57)
  * @brief Binary Indexed Tree
+ * @version 2.0
+ * @date 2023-11-01
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
-/**
- * @brief 区間に対する一点更新・区間和のクエリに対して高速かつ簡易に実装できるデータ構造。 
- */
 template<typename T>
 struct BinaryIndexedTree{
     private:
-    vector<T> data;
+    int __Size;
+    vector<T> __Data;
+    bool __ZeroIndex;
 
     public:
     /**
-     * @brief Binary Indexed Treeを要素数size、値0で初期化する。
-     * @param size 配列の要素数
+     * @brief Binary Indexed Tree を要素数 `Size` で初期化する
+     * @param Size 要素数
+     * @param ZeroIndex `0-index` で扱いたいか (default = `false`)
      */
-    BinaryIndexedTree(int size){
-        data.resize(++size, 0);
+    BinaryIndexedTree(int Size, bool ZeroIndex = false) : __Size(Size), __ZeroIndex(ZeroIndex){
+        __Data.resize(__Size + 1, 0);
     }
 
-    BinaryIndexedTree() = default;
-
-    /**
-     * @brief 1-indexで表される番号iに対して、配列の最初からiまでの閉区間の和を求める。
-     * @param i 求めたい閉区間右端(1-index)
-     * @return T 区間和
-     */
     T sum(int i){
         T ret = 0;
-        while(i > 0){
-            ret += data[i];
-            i -= i & -i;
-        }
+        i += __ZeroIndex;
+        for(; i > 0; i -= i & -i) ret += __Data[i];
         return ret;
     }
 
-    /**
-     * @brief 1-indexで表される番号iに対して、data[i]にxを加える。
-     * @param i 加える場所
-     * @param x 加える値
-     */
     void add(int i, T x){
-        while(i < data.size()){
-            data[i] += x;
-            i += i & -i;
-        }
+        i += __ZeroIndex;
+        for(; i <= __Size; i += i & -i) __Data[i] += x;
     }
 
-    /**
-     * @brief 0-indexで表される半開区間[l, r)の区間和を求める。
-     * @param l 区間の左端
-     * @param r 区間の右端
-     * @return T 区間和
-     */
     T query(int l, int r){
-        return sum(r) - sum(l);
+        l += __ZeroIndex, r += __ZeroIndex;
+        return sum(r) - sum(l - 1);
     }
 };

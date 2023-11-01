@@ -6,7 +6,7 @@ int main(){
     int n, q; cin >> n >> q;
     long long INF = (1LL << 31) - 1;
     vector<long long> Init_Data(n, INF);
-    SegmentTree<long long> seg(Init_Data,[](long long a, long long b){return min(a, b);}, INF, true);
+    SegmentTree<long long> seg = logk::SegmentTreeRMQ(Init_Data, INF, true);
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){

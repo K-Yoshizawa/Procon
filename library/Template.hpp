@@ -41,6 +41,11 @@ template<typename T>
 inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}
 template<typename T>
 inline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}
+vector<int> make_sequence(int Size){
+    vector<int> ret(Size);
+    IOTA(ret);
+    return ret;
+}
 
 using ll = long long;
 using ull = unsigned long long;
