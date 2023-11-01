@@ -78,28 +78,31 @@ data:
     \u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\
     \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
     \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
-    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n#line\
-    \ 4 \"verify/AOJ-DSL-2-A.test.cpp\"\n\nint main(){\n    int n, q; cin >> n >>\
-    \ q;\n    long long INF = (1LL << 31) - 1;\n    vector<long long> Init_Data(n,\
-    \ INF);\n    SegmentTree<long long> seg(Init_Data,[](long long a, long long b){return\
-    \ min(a, b);}, INF, true);\n    while(q--){\n        int com, x, y; cin >> com\
-    \ >> x >> y;\n        if(com == 0){\n            seg.update(x, y);\n        }\n\
-    \        if(com == 1){\n            cout << seg.query(x, y + 1) << endl;\n   \
-    \     }\n    }\n}\n"
+    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n\n\
+    namespace logk{\n    template<typename T>\n    SegmentTree<T> SegmentTreeRMQ(vector<T>\
+    \ &InitData, T INF = 0, bool ZeroIndex = false){\n        if(INF == 0) INF = numeric_limits<T>::max()\
+    \ >> 1;\n        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);},\
+    \ INF, ZeroIndex);\n    }\n}\n#line 4 \"verify/AOJ-DSL-2-A.test.cpp\"\n\nint main(){\n\
+    \    int n, q; cin >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long\
+    \ long> Init_Data(n, INF);\n    SegmentTree<long long> seg = logk::SegmentTreeRMQ(Init_Data,\
+    \ INF, true);\n    while(q--){\n        int com, x, y; cin >> com >> x >> y;\n\
+    \        if(com == 0){\n            seg.update(x, y);\n        }\n        if(com\
+    \ == 1){\n            cout << seg.query(x, y + 1) << endl;\n        }\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
     \n\n#include \"../library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n   \
     \ int n, q; cin >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long\
-    \ long> Init_Data(n, INF);\n    SegmentTree<long long> seg(Init_Data,[](long long\
-    \ a, long long b){return min(a, b);}, INF, true);\n    while(q--){\n        int\
-    \ com, x, y; cin >> com >> x >> y;\n        if(com == 0){\n            seg.update(x,\
-    \ y);\n        }\n        if(com == 1){\n            cout << seg.query(x, y +\
-    \ 1) << endl;\n        }\n    }\n}"
+    \ long> Init_Data(n, INF);\n    SegmentTree<long long> seg = logk::SegmentTreeRMQ(Init_Data,\
+    \ INF, true);\n    while(q--){\n        int com, x, y; cin >> com >> x >> y;\n\
+    \        if(com == 0){\n            seg.update(x, y);\n        }\n        if(com\
+    \ == 1){\n            cout << seg.query(x, y + 1) << endl;\n        }\n    }\n\
+    }"
   dependsOn:
   - library/DataStructure/SegmentTree.hpp
   isVerificationFile: true
   path: verify/AOJ-DSL-2-A.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-2-A.test.cpp

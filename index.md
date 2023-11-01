@@ -3,19 +3,15 @@ data:
   libraryCategories:
   - name: library/DataStructure
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
     - icon: ':warning:'
-      path: library/DataStructure/BinaryIndexedTreeDouble.hpp
-      title: "Binary Indexed Tree (Double) - Range Add Query\u5BFE\u5FDC\u7248"
-    - icon: ':warning:'
       path: library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/K-th_MultiSet.hpp
-      title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\
-        \u30FC\u30BF\u69CB\u9020"
+      title: library/DataStructure/K-th_MultiSet.hpp
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
@@ -68,7 +64,7 @@ data:
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
       path: library/Graph/Kruskal.hpp
-      title: library/Graph/Kruskal.hpp
+      title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     - icon: ':heavy_check_mark:'
       path: library/Graph/PrimalDual.hpp
       title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
@@ -81,6 +77,9 @@ data:
       title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: library/Math
     pages:
+    - icon: ':warning:'
+      path: library/Math/Combination.hpp
+      title: "Combination - \u7D44\u5408\u305B"
     - icon: ':heavy_check_mark:'
       path: library/Math/Matrix.hpp
       title: "Matrix - \u884C\u5217\u6F14\u7B97"
@@ -143,6 +142,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-B-SegmentTree.test.cpp
       title: verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-B.test.cpp
+      title: verify/AOJ-DSL-2-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-D-Lazy.test.cpp
       title: verify/AOJ-DSL-2-D-Lazy.test.cpp
@@ -236,6 +238,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-ZAlgorithm.test.cpp
       title: verify/LC-ZAlgorithm.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yuki-649.test.cpp
+      title: verify/yuki-649.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

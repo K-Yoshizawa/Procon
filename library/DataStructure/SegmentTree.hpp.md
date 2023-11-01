@@ -96,7 +96,11 @@ data:
     \u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\
     \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
     \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
-    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n"
+    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n\n\
+    namespace logk{\n    template<typename T>\n    SegmentTree<T> SegmentTreeRMQ(vector<T>\
+    \ &InitData, T INF = 0, bool ZeroIndex = false){\n        if(INF == 0) INF = numeric_limits<T>::max()\
+    \ >> 1;\n        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);},\
+    \ INF, ZeroIndex);\n    }\n}\n"
   code: "/**\n * @file SegmentTree.hpp\n * @author log K (lX57)\n * @brief Segment\
     \ Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @version 2.0\n * @date 2023-10-02\n\
     \ */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename Monoid>\n\
@@ -160,22 +164,25 @@ data:
     \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int\
     \ k){\n        __Check(k + __ZeroIndex);\n        return __Data[__Offset + k +\
     \ __ZeroIndex];\n    }\n\n    Monoid operator[](const int &k){\n        return\
-    \ get(k);\n    }\n};"
+    \ get(k);\n    }\n};\n\nnamespace logk{\n    template<typename T>\n    SegmentTree<T>\
+    \ SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){\n  \
+    \      if(INF == 0) INF = numeric_limits<T>::max() >> 1;\n        return SegmentTree<T>(InitData,\
+    \ [](T l, T r){return min(l, r);}, INF, ZeroIndex);\n    }\n}"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-DSL-2-A.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/AOJ-GRL-5-D.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
-  - verify/AOJ-GRL-5-D-HLD.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-DSL-2-B-SegmentTree.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

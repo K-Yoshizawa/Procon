@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: library/Graph/Kruskal.hpp
-    title: library/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-2-A.test.cpp

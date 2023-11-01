@@ -2,102 +2,75 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/yuki-649.test.cpp
+    title: verify/yuki-649.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\
-      \u30C7\u30FC\u30BF\u69CB\u9020"
     links: []
-  bundledCode: "#line 2 \"library/DataStructure/K-th_MultiSet.hpp\"\n\n/**\n * @brief\
-    \ K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\u30FC\
-    \u30BF\u69CB\u9020\n */\n\n#include <set>\nusing namespace std;\n\ntemplate<typename\
-    \ T>\nstruct Kth_MultiSet{\n    private:\n    int K;\n    bool greater;\n    multiset<T>\
-    \ small, large;\n    T __sum;\n\n    void balance(){\n        if(greater){\n \
-    \           while(large.size() < K && small.size()){\n                auto itr\
-    \ = --(small.end());\n                __sum += (*itr);\n                large.insert(*itr);\n\
-    \                small.erase(itr);\n            }\n            if(small.empty()\
-    \ || large.empty()) return;\n            while(1){\n                auto si =\
-    \ --(small.end());\n                auto li = large.begin();\n               \
-    \ T sv = (*si), lv = (*li);\n                if(sv <= lv) break;\n           \
-    \     __sum += (sv - lv);\n                small.erase(si), large.erase(li);\n\
-    \                small.insert(lv), large.insert(sv);\n            }\n        }\n\
-    \        else{\n            while(small.size() < K && large.size()){\n       \
-    \         auto itr = large.begin();\n                __sum += (*itr);\n      \
-    \          small.insert(*itr);\n                large.erase(itr);\n          \
-    \  }\n            if(small.empty() || large.empty()) return;\n            while(1){\n\
-    \                auto si = --(small.end());\n                auto li = large.begin();\n\
-    \                T sv = (*si), lv = (*li);\n                if(sv <= lv) break;\n\
-    \                __sum -= (sv - lv);\n                small.erase(si), large.erase(li);\n\
-    \                small.insert(lv), large.insert(sv);\n            }\n        }\n\
-    \    }\n\n    public:\n    Kth_MultiSet(int K, bool greater = false) : K(K), greater(greater),\
-    \ __sum(0){}\n\n    /**\n     * @brief \u5024value\u3092\u8FFD\u52A0\u3059\u308B\
-    \u3002\n     * @param value \u8FFD\u52A0\u3057\u305F\u3044\u5024\n     */\n  \
-    \  void insert(T value){\n        if(greater) small.insert(value);\n        else\
-    \ large.insert(value);\n        balance();\n    }\n\n    void erase(T value){\n\
-    \        if(greater){\n            auto itr = large.find(value);\n           \
-    \ if(itr != large.end()){\n                __sum -= value;\n                large.erase(itr);\n\
-    \            }\n            else{\n                assert(small.find(value) !=\
-    \ small.end());\n                small.erase(small.find(value));\n           \
-    \ }\n        }\n        else{\n            auto itr = small.find(value);\n   \
-    \         if(itr != small.end()){\n                __sum -= value;\n         \
-    \       small.erase(itr);\n            }\n            else{\n                assert(large.find(value)\
-    \ != large.end());\n                large.erase(large.find(value));\n        \
-    \    }\n        }\n        balance();\n    }\n\n    inline T sum(){\n        return\
-    \ __sum;\n    }\n\n    inline bool exist(){\n        return greater ? large.size()\
-    \ == K : small.size() == K;\n    }\n\n    inline T get(){\n        assert(exist());\n\
-    \        return greater ? *(large.begin()) : *(--(small.end()));\n    }\n};\n"
-  code: "#pragma once\n\n/**\n * @brief K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\
-    \u95A2\u3059\u308B\u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n#include <set>\nusing\
-    \ namespace std;\n\ntemplate<typename T>\nstruct Kth_MultiSet{\n    private:\n\
-    \    int K;\n    bool greater;\n    multiset<T> small, large;\n    T __sum;\n\n\
-    \    void balance(){\n        if(greater){\n            while(large.size() < K\
-    \ && small.size()){\n                auto itr = --(small.end());\n           \
-    \     __sum += (*itr);\n                large.insert(*itr);\n                small.erase(itr);\n\
-    \            }\n            if(small.empty() || large.empty()) return;\n     \
-    \       while(1){\n                auto si = --(small.end());\n              \
-    \  auto li = large.begin();\n                T sv = (*si), lv = (*li);\n     \
-    \           if(sv <= lv) break;\n                __sum += (sv - lv);\n       \
-    \         small.erase(si), large.erase(li);\n                small.insert(lv),\
-    \ large.insert(sv);\n            }\n        }\n        else{\n            while(small.size()\
-    \ < K && large.size()){\n                auto itr = large.begin();\n         \
-    \       __sum += (*itr);\n                small.insert(*itr);\n              \
-    \  large.erase(itr);\n            }\n            if(small.empty() || large.empty())\
-    \ return;\n            while(1){\n                auto si = --(small.end());\n\
-    \                auto li = large.begin();\n                T sv = (*si), lv =\
-    \ (*li);\n                if(sv <= lv) break;\n                __sum -= (sv -\
-    \ lv);\n                small.erase(si), large.erase(li);\n                small.insert(lv),\
-    \ large.insert(sv);\n            }\n        }\n    }\n\n    public:\n    Kth_MultiSet(int\
-    \ K, bool greater = false) : K(K), greater(greater), __sum(0){}\n\n    /**\n \
-    \    * @brief \u5024value\u3092\u8FFD\u52A0\u3059\u308B\u3002\n     * @param value\
-    \ \u8FFD\u52A0\u3057\u305F\u3044\u5024\n     */\n    void insert(T value){\n \
-    \       if(greater) small.insert(value);\n        else large.insert(value);\n\
-    \        balance();\n    }\n\n    void erase(T value){\n        if(greater){\n\
-    \            auto itr = large.find(value);\n            if(itr != large.end()){\n\
-    \                __sum -= value;\n                large.erase(itr);\n        \
-    \    }\n            else{\n                assert(small.find(value) != small.end());\n\
-    \                small.erase(small.find(value));\n            }\n        }\n \
-    \       else{\n            auto itr = small.find(value);\n            if(itr !=\
-    \ small.end()){\n                __sum -= value;\n                small.erase(itr);\n\
-    \            }\n            else{\n                assert(large.find(value) !=\
-    \ large.end());\n                large.erase(large.find(value));\n           \
-    \ }\n        }\n        balance();\n    }\n\n    inline T sum(){\n        return\
-    \ __sum;\n    }\n\n    inline bool exist(){\n        return greater ? large.size()\
-    \ == K : small.size() == K;\n    }\n\n    inline T get(){\n        assert(exist());\n\
-    \        return greater ? *(large.begin()) : *(--(small.end()));\n    }\n};"
+  bundledCode: "#line 1 \"library/DataStructure/K-th_MultiSet.hpp\"\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\ntemplate<typename Data, typename Value = Data>\nstruct\
+    \ Kth_MultiSet{\n    using F = function<Value(Value, Data)>;\n    using G = function<bool(Data,\
+    \ Data)>;\n\n    private:\n    int __K;\n    multiset<Data> __P, __Q;\n    F __Add,\
+    \ __Sub;\n    G __Require;\n    Value __Sum;\n\n    void balance(){\n        while(__P.size()\
+    \ < __K && __Q.size()){\n            auto itr = __Q.begin();\n            __Sum\
+    \ = __Add(__Sum, *itr);\n            __P.insert(*itr);\n            __Q.erase(itr);\n\
+    \        }\n        if(__P.empty() || __Q.empty()) return;\n        while(1){\n\
+    \            auto si = --(__P.end());\n            auto li = __Q.begin();\n  \
+    \          Data sv = (*si), lv = (*li);\n            if(__Require(sv, lv)) break;\n\
+    \            __Sum = __Add(__Sub(__Sum, sv), lv);\n            __P.erase(si),\
+    \ __Q.erase(li);\n            __P.insert(lv), __Q.insert(sv);\n        }\n   \
+    \ }\n\n    public:\n    Kth_MultiSet(int K, \n        F Add = [](Value x, Data\
+    \ y){return x + y;}, \n        F Sub = [](Value x, Data y){return x - y;},\n \
+    \       G Require = [](Data x, Data y){return x <= y;})\n        : __K(K), __Add(Add),\
+    \ __Sub(Sub), __Require(Require), __Sum(){}\n\n    void insert(Data data){\n \
+    \       __Q.insert(data);\n        balance();\n    }\n\n    void erase(Data value){\n\
+    \        auto itr = __P.find(value);\n        if(itr != __P.end()){\n        \
+    \    __Sum = __Sub(__Sum, value);\n            __P.erase(itr);\n        }\n  \
+    \      else{\n            assert(__Q.find(value) != __Q.end());\n            __Q.erase(__Q.find(value));\n\
+    \        }\n        balance();\n    }\n\n    inline bool exist(){\n        return\
+    \ __P.size() == __K;\n    }\n\n    inline Data get(){\n        assert(exist());\n\
+    \        return *(--(__P.end()));\n    }\n\n    inline Value sum(){\n        return\
+    \ __Sum;\n    }\n};\n"
+  code: "#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate<typename Data,\
+    \ typename Value = Data>\nstruct Kth_MultiSet{\n    using F = function<Value(Value,\
+    \ Data)>;\n    using G = function<bool(Data, Data)>;\n\n    private:\n    int\
+    \ __K;\n    multiset<Data> __P, __Q;\n    F __Add, __Sub;\n    G __Require;\n\
+    \    Value __Sum;\n\n    void balance(){\n        while(__P.size() < __K && __Q.size()){\n\
+    \            auto itr = __Q.begin();\n            __Sum = __Add(__Sum, *itr);\n\
+    \            __P.insert(*itr);\n            __Q.erase(itr);\n        }\n     \
+    \   if(__P.empty() || __Q.empty()) return;\n        while(1){\n            auto\
+    \ si = --(__P.end());\n            auto li = __Q.begin();\n            Data sv\
+    \ = (*si), lv = (*li);\n            if(__Require(sv, lv)) break;\n           \
+    \ __Sum = __Add(__Sub(__Sum, sv), lv);\n            __P.erase(si), __Q.erase(li);\n\
+    \            __P.insert(lv), __Q.insert(sv);\n        }\n    }\n\n    public:\n\
+    \    Kth_MultiSet(int K, \n        F Add = [](Value x, Data y){return x + y;},\
+    \ \n        F Sub = [](Value x, Data y){return x - y;},\n        G Require = [](Data\
+    \ x, Data y){return x <= y;})\n        : __K(K), __Add(Add), __Sub(Sub), __Require(Require),\
+    \ __Sum(){}\n\n    void insert(Data data){\n        __Q.insert(data);\n      \
+    \  balance();\n    }\n\n    void erase(Data value){\n        auto itr = __P.find(value);\n\
+    \        if(itr != __P.end()){\n            __Sum = __Sub(__Sum, value);\n   \
+    \         __P.erase(itr);\n        }\n        else{\n            assert(__Q.find(value)\
+    \ != __Q.end());\n            __Q.erase(__Q.find(value));\n        }\n       \
+    \ balance();\n    }\n\n    inline bool exist(){\n        return __P.size() ==\
+    \ __K;\n    }\n\n    inline Data get(){\n        assert(exist());\n        return\
+    \ *(--(__P.end()));\n    }\n\n    inline Value sum(){\n        return __Sum;\n\
+    \    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/K-th_MultiSet.hpp
   requiredBy: []
-  timestamp: '2023-06-18 02:21:42+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-11-02 01:25:06+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/yuki-649.test.cpp
 documentation_of: library/DataStructure/K-th_MultiSet.hpp
 layout: document
 redirect_from:
 - /library/library/DataStructure/K-th_MultiSet.hpp
 - /library/library/DataStructure/K-th_MultiSet.hpp.html
-title: "K-th MultiSet - K\u756A\u76EE\u306E\u5024\u306B\u95A2\u3059\u308B\u30C7\u30FC\
-  \u30BF\u69CB\u9020"
+title: library/DataStructure/K-th_MultiSet.hpp
 ---

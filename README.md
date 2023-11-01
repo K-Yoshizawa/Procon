@@ -7,6 +7,11 @@
 
 ## 更新履歴
 
+### Ver 2.4.1 (2023/11/02)
+- 【追加】Binary Indexed Tree
+- 【改修】K-th Multiset
+- Kruskal法にドキュメントを追加
+
 ### Ver 2.4.0 (2023/10/30)
 - 【追加】0-1 Knapsack - 0-1 ナップザック問題
 - 【追加】Slide-Min - スライド最小値

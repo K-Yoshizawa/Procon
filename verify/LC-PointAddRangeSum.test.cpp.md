@@ -79,14 +79,17 @@ data:
     \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int\
     \ k){\n        __Check(k + __ZeroIndex);\n        return __Data[__Offset + k +\
     \ __ZeroIndex];\n    }\n\n    Monoid operator[](const int &k){\n        return\
-    \ get(k);\n    }\n};\n#line 4 \"verify/LC-PointAddRangeSum.test.cpp\"\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n    for(int i = 0;\
-    \ i < N; ++i) cin >> a[i];\n    SegmentTree<long long> seg(a, [](long long x,\
-    \ long long y){return x + y;}, 0, true);\n    for(int query = 0; query < Q; ++query){\n\
-    \        int q; cin >> q;\n        if(q == 0){\n            int p, x; cin >> p\
-    \ >> x;\n            seg.update(p, seg[p] + x);\n        }\n        else{\n  \
-    \          int l, r; cin >> l >> r;\n            cout << seg.query(l, r) << endl;\n\
-    \        }\n    }\n}\n"
+    \ get(k);\n    }\n};\n\nnamespace logk{\n    template<typename T>\n    SegmentTree<T>\
+    \ SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){\n  \
+    \      if(INF == 0) INF = numeric_limits<T>::max() >> 1;\n        return SegmentTree<T>(InitData,\
+    \ [](T l, T r){return min(l, r);}, INF, ZeroIndex);\n    }\n}\n#line 4 \"verify/LC-PointAddRangeSum.test.cpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
+    \   for(int i = 0; i < N; ++i) cin >> a[i];\n    SegmentTree<long long> seg(a,\
+    \ [](long long x, long long y){return x + y;}, 0, true);\n    for(int query =\
+    \ 0; query < Q; ++query){\n        int q; cin >> q;\n        if(q == 0){\n   \
+    \         int p, x; cin >> p >> x;\n            seg.update(p, seg[p] + x);\n \
+    \       }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
+    \ << seg.query(l, r) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     \n#include \"../library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n    int\
     \ N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n    for(int i = 0; i < N;\
@@ -101,7 +104,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointAddRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointAddRangeSum.test.cpp

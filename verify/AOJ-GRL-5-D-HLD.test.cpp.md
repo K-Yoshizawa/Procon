@@ -217,20 +217,23 @@ data:
     \u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\
     \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
     \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
-    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n#line\
-    \ 5 \"verify/AOJ-GRL-5-D-HLD.test.cpp\"\n\nint main(){\n    int n; cin >> n;\n\
-    \    Graph<long long> G(n);\n    for(int i = 0; i < n; ++i){\n        int k; cin\
-    \ >> k;\n        for(int j = 0; j < k; ++j){\n            int c; cin >> c;\n \
-    \           G.add(i, c);\n        }\n    }\n\n    HeavyLightDecomposition<long\
-    \ long> HLD(G);\n    auto vdic = HLD.get_vertex_locations();\n    vector<long\
-    \ long> Init_Data(n, 0);\n    SegmentTree<long long> seg(Init_Data, [](long long\
-    \ x, long long y){return x + y;}, 0LL, true);\n\n    int q; cin >> q;\n    while(q--){\n\
-    \        int t; cin >> t;\n        if(t == 0){\n            int v, w; cin >> v\
-    \ >> w;\n            seg.update(vdic[v], seg[vdic[v]] + w);\n        }\n     \
-    \   else{\n            int u; cin >> u;\n            auto ret = HLD.get_vertex_segment(0,\
-    \ u);\n            long long ans = 0LL;\n            for(auto [l, r] : ret){\n\
-    \                ans += seg.query(l, r);\n            }\n            cout << ans\
-    \ << endl;\n        }\n    }\n}\n"
+    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n\n\
+    namespace logk{\n    template<typename T>\n    SegmentTree<T> SegmentTreeRMQ(vector<T>\
+    \ &InitData, T INF = 0, bool ZeroIndex = false){\n        if(INF == 0) INF = numeric_limits<T>::max()\
+    \ >> 1;\n        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);},\
+    \ INF, ZeroIndex);\n    }\n}\n#line 5 \"verify/AOJ-GRL-5-D-HLD.test.cpp\"\n\n\
+    int main(){\n    int n; cin >> n;\n    Graph<long long> G(n);\n    for(int i =\
+    \ 0; i < n; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n\
+    \            int c; cin >> c;\n            G.add(i, c);\n        }\n    }\n\n\
+    \    HeavyLightDecomposition<long long> HLD(G);\n    auto vdic = HLD.get_vertex_locations();\n\
+    \    vector<long long> Init_Data(n, 0);\n    SegmentTree<long long> seg(Init_Data,\
+    \ [](long long x, long long y){return x + y;}, 0LL, true);\n\n    int q; cin >>\
+    \ q;\n    while(q--){\n        int t; cin >> t;\n        if(t == 0){\n       \
+    \     int v, w; cin >> v >> w;\n            seg.update(vdic[v], seg[vdic[v]] +\
+    \ w);\n        }\n        else{\n            int u; cin >> u;\n            auto\
+    \ ret = HLD.get_vertex_segment(0, u);\n            long long ans = 0LL;\n    \
+    \        for(auto [l, r] : ret){\n                ans += seg.query(l, r);\n  \
+    \          }\n            cout << ans << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
     \n\n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
     \n\nint main(){\n    int n; cin >> n;\n    Graph<long long> G(n);\n    for(int\
@@ -252,7 +255,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-D-HLD.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-D-HLD.test.cpp

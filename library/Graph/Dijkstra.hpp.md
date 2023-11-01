@@ -174,8 +174,8 @@ data:
   timestamp: '2023-10-10 14:52:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-6-B.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-6-B.test.cpp
   - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
 documentation_of: library/Graph/Dijkstra.hpp
 layout: document

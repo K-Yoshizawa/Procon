@@ -218,21 +218,24 @@ data:
     \u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\
     \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n        __Check(k\
     \ + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n    }\n\
-    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n#line\
-    \ 5 \"verify/LC-VertexAddPathSum.test.cpp\"\n\nint main(){\n    int N, Q; cin\
-    \ >> N >> Q;\n    vector<long long> a(N);\n    for(int i = 0; i < N; ++i) cin\
-    \ >> a[i];\n\n    vector<long long> Init_Data(N);\n    Graph<long long> G(N);\n\
-    \    for(int i = 0; i < N - 1; ++i){\n        int u, v; cin >> u >> v;\n     \
-    \   G.add(u, v);\n    }\n    HeavyLightDecomposition<long long> HLD(G);\n    for(int\
-    \ i = 0; i < N; ++i){\n        Init_Data[HLD.get_vertex_locate(i)] = a[i];\n \
-    \   }\n\n    SegmentTree<long long> seg(Init_Data, [](long long l, long long r){return\
-    \ l + r;}, 0, true);\n    while(Q--){\n        int query; cin >> query;\n    \
-    \    if(query == 0){\n            long long p, x; cin >> p >> x;\n           \
-    \ int lp = HLD.get_vertex_locate(p);\n            seg.update(lp, seg[lp] + x);\n\
-    \        }\n        else{\n            int u, v; cin >> u >> v;\n            auto\
-    \ path = HLD.get_vertex_segment(u, v);\n            long long ans = 0;\n     \
-    \       for(auto [l, r] : path){\n                ans += seg.query(l, r);\n  \
-    \          }\n            cout << ans << endl;\n        }\n    }\n\n}\n"
+    \n    Monoid operator[](const int &k){\n        return get(k);\n    }\n};\n\n\
+    namespace logk{\n    template<typename T>\n    SegmentTree<T> SegmentTreeRMQ(vector<T>\
+    \ &InitData, T INF = 0, bool ZeroIndex = false){\n        if(INF == 0) INF = numeric_limits<T>::max()\
+    \ >> 1;\n        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);},\
+    \ INF, ZeroIndex);\n    }\n}\n#line 5 \"verify/LC-VertexAddPathSum.test.cpp\"\n\
+    \nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n   \
+    \ for(int i = 0; i < N; ++i) cin >> a[i];\n\n    vector<long long> Init_Data(N);\n\
+    \    Graph<long long> G(N);\n    for(int i = 0; i < N - 1; ++i){\n        int\
+    \ u, v; cin >> u >> v;\n        G.add(u, v);\n    }\n    HeavyLightDecomposition<long\
+    \ long> HLD(G);\n    for(int i = 0; i < N; ++i){\n        Init_Data[HLD.get_vertex_locate(i)]\
+    \ = a[i];\n    }\n\n    SegmentTree<long long> seg(Init_Data, [](long long l,\
+    \ long long r){return l + r;}, 0, true);\n    while(Q--){\n        int query;\
+    \ cin >> query;\n        if(query == 0){\n            long long p, x; cin >> p\
+    \ >> x;\n            int lp = HLD.get_vertex_locate(p);\n            seg.update(lp,\
+    \ seg[lp] + x);\n        }\n        else{\n            int u, v; cin >> u >> v;\n\
+    \            auto path = HLD.get_vertex_segment(u, v);\n            long long\
+    \ ans = 0;\n            for(auto [l, r] : path){\n                ans += seg.query(l,\
+    \ r);\n            }\n            cout << ans << endl;\n        }\n    }\n\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
     \n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
     \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
@@ -255,7 +258,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddPathSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddPathSum.test.cpp

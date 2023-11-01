@@ -162,18 +162,21 @@ data:
     \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int\
     \ k){\n        __Check(k + __ZeroIndex);\n        return __Data[__Offset + k +\
     \ __ZeroIndex];\n    }\n\n    Monoid operator[](const int &k){\n        return\
-    \ get(k);\n    }\n};\n#line 5 \"verify/AOJ-GRL-5-D.test.cpp\"\n\nint main(){\n\
-    \    int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0; i < n; ++i){\n\
-    \        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n            int\
-    \ c; cin >> c;\n            G.add(i, c, 0);\n        }\n    }\n    EulerTour<int>\
-    \ et(G, 0);\n    vector<long long> Init_Data(2 * n, 0);\n    SegmentTree<long\
-    \ long> seg(Init_Data,\n        [](int l, int r){return l + r;},\n        0, false);\n\
-    \    \n    int q; cin >> q;\n    while(q--){\n        int query; cin >> query;\n\
-    \        if(query == 0){\n            int v, w; cin >> v >> w;\n            auto\
-    \ [in, out] = et[v];\n            seg.update(in, seg.get(in) + w);\n         \
-    \   seg.update(out, seg.get(out) - w);\n        }\n        else{\n           \
-    \ int u; cin >> u;\n            cout << seg.query(1, et.in(u) + 1) << endl;\n\
-    \        }\n    }\n}\n"
+    \ get(k);\n    }\n};\n\nnamespace logk{\n    template<typename T>\n    SegmentTree<T>\
+    \ SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){\n  \
+    \      if(INF == 0) INF = numeric_limits<T>::max() >> 1;\n        return SegmentTree<T>(InitData,\
+    \ [](T l, T r){return min(l, r);}, INF, ZeroIndex);\n    }\n}\n#line 5 \"verify/AOJ-GRL-5-D.test.cpp\"\
+    \n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0;\
+    \ i < n; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n\
+    \            int c; cin >> c;\n            G.add(i, c, 0);\n        }\n    }\n\
+    \    EulerTour<int> et(G, 0);\n    vector<long long> Init_Data(2 * n, 0);\n  \
+    \  SegmentTree<long long> seg(Init_Data,\n        [](int l, int r){return l +\
+    \ r;},\n        0, false);\n    \n    int q; cin >> q;\n    while(q--){\n    \
+    \    int query; cin >> query;\n        if(query == 0){\n            int v, w;\
+    \ cin >> v >> w;\n            auto [in, out] = et[v];\n            seg.update(in,\
+    \ seg.get(in) + w);\n            seg.update(out, seg.get(out) - w);\n        }\n\
+    \        else{\n            int u; cin >> u;\n            cout << seg.query(1,\
+    \ et.in(u) + 1) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
     \n\n#include \"../library/Tree/EulerTour.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
     \n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0;\
@@ -194,7 +197,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-D.test.cpp
   requiredBy: []
-  timestamp: '2023-10-20 15:07:30+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-D.test.cpp

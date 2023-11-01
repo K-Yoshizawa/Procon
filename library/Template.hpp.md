@@ -36,11 +36,12 @@ data:
     \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
     inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
     \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
-    \nusing ll = long long;\nusing ull = unsigned long long;\nusing ld = long double;\n\
-    \nconst long double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long\
-    \ double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\n\
-    const long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
-    \ T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
+    vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
+    \    return ret;\n}\n\nusing ll = long long;\nusing ull = unsigned long long;\n\
+    using ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double\
+    \ PI2 = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
+    \ / 2;\nconst long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate\
+    \ <typename T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
     using vi = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\n\
     using vl = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing\
     \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
@@ -95,11 +96,12 @@ data:
     \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
     inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
     \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
-    \nusing ll = long long;\nusing ull = unsigned long long;\nusing ld = long double;\n\
-    \nconst long double PI = acosl(-1);\nconst long double PI2 = PI * 2;\nconst long\
-    \ double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max() / 2;\n\
-    const long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate <typename\
-    \ T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
+    vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
+    \    return ret;\n}\n\nusing ll = long long;\nusing ull = unsigned long long;\n\
+    using ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double\
+    \ PI2 = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
+    \ / 2;\nconst long long INF_LL = numeric_limits<long long>::max() / 2LL;\n\ntemplate\
+    \ <typename T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
     using vi = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\n\
     using vl = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing\
     \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
@@ -135,7 +137,7 @@ data:
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2023-10-30 14:15:09+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp

@@ -163,9 +163,12 @@ data:
     \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int\
     \ k){\n        __Check(k + __ZeroIndex);\n        return __Data[__Offset + k +\
     \ __ZeroIndex];\n    }\n\n    Monoid operator[](const int &k){\n        return\
-    \ get(k);\n    }\n};\n#line 5 \"verify/LC-VertexAddSubtreeSum.test.cpp\"\n\nint\
-    \ main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N), p(N);\n \
-    \   Graph<int> G(N);\n    for(int i = 0; i < N; ++i) cin >> a[i];\n    for(int\
+    \ get(k);\n    }\n};\n\nnamespace logk{\n    template<typename T>\n    SegmentTree<T>\
+    \ SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){\n  \
+    \      if(INF == 0) INF = numeric_limits<T>::max() >> 1;\n        return SegmentTree<T>(InitData,\
+    \ [](T l, T r){return min(l, r);}, INF, ZeroIndex);\n    }\n}\n#line 5 \"verify/LC-VertexAddSubtreeSum.test.cpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N), p(N);\n\
+    \    Graph<int> G(N);\n    for(int i = 0; i < N; ++i) cin >> a[i];\n    for(int\
     \ i = 1; i < N; ++i){\n        cin >> p[i];\n        G.add(i, p[i]);\n    }\n\n\
     \    EulerTour<int> ET(G);\n    vector<long long> Init_Data(2 * N, 0);\n    for(int\
     \ i = 0; i < N; ++i){\n        Init_Data[ET.in(i) - 1] = a[i];\n    }\n    SegmentTree<long\
@@ -195,7 +198,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddSubtreeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-20 15:07:30+09:00'
+  timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddSubtreeSum.test.cpp

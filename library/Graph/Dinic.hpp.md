@@ -168,8 +168,8 @@ data:
   timestamp: '2023-10-10 14:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-6-A-Dinic.test.cpp
   - verify/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ-GRL-6-A-Dinic.test.cpp
 documentation_of: library/Graph/Dinic.hpp
 layout: document
 redirect_from:
