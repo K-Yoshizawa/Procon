@@ -7,6 +7,10 @@
 
 ## 更新履歴
 
+### Ver 2.4.2 (2023/11/??)
+- 【修正】Lazy Segment Tree : 一点取得クエリがバグっていました
+- 【改修】Lazy Segment Tree : デバッグ出力を追加しました
+
 ### Ver 2.4.1 (2023/11/02)
 - 【追加】Binary Indexed Tree
 - 【改修】K-th Multiset

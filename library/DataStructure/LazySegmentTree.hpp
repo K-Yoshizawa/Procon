@@ -163,10 +163,23 @@ struct LazySegmentTree{
      */
     Monoid get(int k){
         __Check(k + __ZeroIndex);
-        return __Data[__Offset + k + __ZeroIndex];
+        return query(k, k + 1);
     }
 
     Monoid operator[](const int &k){
         return get(k);
+    }
+
+    void print(){
+        int cnt = 1, i = 1, depth = 1;
+        while(1){
+            if(i >= __Size * 2) break;
+            cerr << depth++ << " : ";
+            for(int c = 0; c < cnt; ++c){
+                cerr << __Data[i++] << " ";
+            }
+            cerr << endl;
+            cnt <<= 1;
+        }
     }
 };
