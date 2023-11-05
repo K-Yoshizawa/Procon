@@ -244,32 +244,37 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };\n#line 5 \"verify/AOJ-GRL-5-E.test.cpp\"\n\nstruct Data{\n    long long val{0};\n\
-    \    long long len{1};\n\n    Data() : val(0), len(1){}\n    Data(int val, int\
-    \ len) : val(val), len(len){}\n\n    bool operator==(const Data& y){\n       \
-    \ return val == y.val && len == y.len;\n    }\n\n    static Data Merge(const Data&\
-    \ x, const Data& y){\n        Data ret;\n        ret.val = x.val + y.val;\n  \
-    \      ret.len = x.len + y.len;\n        return ret;\n    }\n\n    static Data\
-    \ Mapping(const Data& x, const long long y){\n        Data ret;\n        ret.val\
-    \ = x.val + y * x.len;\n        ret.len = x.len;\n        return ret;\n    }\n\
-    };\n\nint main(){\n    int n; cin >> n;\n    Graph<long long> G(n);\n    for(int\
-    \ i = 0; i < n; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k;\
-    \ ++j){\n            int c; cin >> c;\n            G.add(i, c);\n        }\n \
-    \   }\n\n    HeavyLightDecomposition<long long> HLD(G);\n    auto vdic = HLD.get_vertex_locations();\n\
-    \    vector<Data> Init_Data(n, Data());\n    LazySegmentTree<Data, long long>\
-    \ seg(Init_Data,\n        [](const Data l, const Data r){return Data::Merge(l,\
-    \ r);},\n        [](const Data l, const long long r){return Data::Mapping(l, r);},\n\
-    \        [](const long long l, const long long r){return l + r;},\n        Data(),\
-    \ 0, true\n    );\n\n    int q; cin >> q;\n    while(q--){\n        int t; cin\
-    \ >> t;\n        if(t == 0){\n            int v, w; cin >> v >> w;\n         \
-    \   auto ret = HLD.get_vertex_segment(0, v);\n            for(auto [l, r] : ret){\n\
-    \                seg.update(l, r, w);\n            }\n            seg.update(0,\
-    \ 1, -w);\n        }\n        else{\n            int u; cin >> u;\n          \
-    \  auto ret = HLD.get_vertex_segment(0, u);\n            long long ans = 0LL;\n\
-    \            for(auto [l, r] : ret){\n                ans += seg.query(l, r).val;\n\
-    \            }\n            cout << ans << endl;\n        }\n    }\n}\n"
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};\n#line 5 \"verify/AOJ-GRL-5-E.test.cpp\"\n\nstruct Data{\n\
+    \    long long val{0};\n    long long len{1};\n\n    Data() : val(0), len(1){}\n\
+    \    Data(int val, int len) : val(val), len(len){}\n\n    bool operator==(const\
+    \ Data& y){\n        return val == y.val && len == y.len;\n    }\n\n    static\
+    \ Data Merge(const Data& x, const Data& y){\n        Data ret;\n        ret.val\
+    \ = x.val + y.val;\n        ret.len = x.len + y.len;\n        return ret;\n  \
+    \  }\n\n    static Data Mapping(const Data& x, const long long y){\n        Data\
+    \ ret;\n        ret.val = x.val + y * x.len;\n        ret.len = x.len;\n     \
+    \   return ret;\n    }\n};\n\nint main(){\n    int n; cin >> n;\n    Graph<long\
+    \ long> G(n);\n    for(int i = 0; i < n; ++i){\n        int k; cin >> k;\n   \
+    \     for(int j = 0; j < k; ++j){\n            int c; cin >> c;\n            G.add(i,\
+    \ c);\n        }\n    }\n\n    HeavyLightDecomposition<long long> HLD(G);\n  \
+    \  auto vdic = HLD.get_vertex_locations();\n    vector<Data> Init_Data(n, Data());\n\
+    \    LazySegmentTree<Data, long long> seg(Init_Data,\n        [](const Data l,\
+    \ const Data r){return Data::Merge(l, r);},\n        [](const Data l, const long\
+    \ long r){return Data::Mapping(l, r);},\n        [](const long long l, const long\
+    \ long r){return l + r;},\n        Data(), 0, true\n    );\n\n    int q; cin >>\
+    \ q;\n    while(q--){\n        int t; cin >> t;\n        if(t == 0){\n       \
+    \     int v, w; cin >> v >> w;\n            auto ret = HLD.get_vertex_segment(0,\
+    \ v);\n            for(auto [l, r] : ret){\n                seg.update(l, r, w);\n\
+    \            }\n            seg.update(0, 1, -w);\n        }\n        else{\n\
+    \            int u; cin >> u;\n            auto ret = HLD.get_vertex_segment(0,\
+    \ u);\n            long long ans = 0LL;\n            for(auto [l, r] : ret){\n\
+    \                ans += seg.query(l, r).val;\n            }\n            cout\
+    \ << ans << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E\"\
     \n\n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\n#include \"../library/DataStructure/LazySegmentTree.hpp\"\
     \n\nstruct Data{\n    long long val{0};\n    long long len{1};\n\n    Data() :\
@@ -303,7 +308,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-E.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 14:21:48+09:00'
+  timestamp: '2023-11-06 01:36:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-E.test.cpp

@@ -105,10 +105,14 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };\n#line 4 \"verify/AOJ-DSL-2-E-Lazy.test.cpp\"\n\nint main(){\n    int n, q;\
-    \ cin >> n >> q;\n    vector<long long> Init_Data(n, 0);\n    LazySegmentTree<long\
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};\n#line 4 \"verify/AOJ-DSL-2-E-Lazy.test.cpp\"\n\nint main(){\n\
+    \    int n, q; cin >> n >> q;\n    vector<long long> Init_Data(n, 0);\n    LazySegmentTree<long\
     \ long> seg(Init_Data,\n        [](const long long l, const long long r){return\
     \ min(l, r);},\n        [](const long long l, const int r){return l + r;},\n \
     \       [](const int l, const int r){return l + r;},\n        1e12, 0, false\n\
@@ -131,7 +135,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-2-E-Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-06 01:36:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-2-E-Lazy.test.cpp

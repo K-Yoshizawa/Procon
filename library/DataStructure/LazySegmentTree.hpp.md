@@ -123,9 +123,13 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };\n"
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};\n"
   code: "/**\n * @file LazySegmentTree.hpp\n * @author log K (lX57)\n * @brief Lazy\
     \ Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
     \ * @version 2.0\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing\
@@ -214,14 +218,18 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };"
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/LazySegmentTree.hpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-06 01:36:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-G.test.cpp

@@ -108,19 +108,23 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };\n#line 2 \"library/modint.hpp\"\n/**\n * @file modint.hpp\n * @author log K\
-    \ (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\n#line\
-    \ 11 \"library/modint.hpp\"\nusing namespace std;\n\nconst int mod998 = 998244353;\n\
-    const int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct ModInt {\n    int\
-    \ x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y >= 0 ? y % mod :\
-    \ (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const ModInt &p) {\n\
-    \        if((x += p.x) >= mod) x -= mod;\n        return *this;\n    }\n\n   \
-    \ ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x) >= mod) x\
-    \ -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const ModInt\
-    \ &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n   \
-    \ }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};\n#line 2 \"library/modint.hpp\"\n/**\n * @file modint.hpp\n\
+    \ * @author log K (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n\
+    \ */\n\n#line 11 \"library/modint.hpp\"\nusing namespace std;\n\nconst int mod998\
+    \ = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct\
+    \ ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y\
+    \ >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
+    \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
+    \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
+    \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
+    \ ModInt &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n\
+    \    }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
     \        return *this;\n    }\n\n    ModInt operator-() const { return ModInt(-x);\
     \ }\n\n    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p;\
     \ }\n\n    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p;\
@@ -193,7 +197,7 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-11 01:51:01+09:00'
+  timestamp: '2023-11-06 01:36:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp

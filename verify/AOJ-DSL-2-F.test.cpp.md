@@ -105,19 +105,23 @@ data:
     \u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\
     \u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @return Monoid\
     \ \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get(int k){\n    \
-    \    __Check(k + __ZeroIndex);\n        return __Data[__Offset + k + __ZeroIndex];\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        return get(k);\n    }\n\
-    };\n#line 4 \"verify/AOJ-DSL-2-F.test.cpp\"\n\nint main(){\n    int n, q; cin\
-    \ >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long long> Init_Data(n,\
-    \ INF);\n    LazySegmentTree<long long> seg(Init_Data,\n        [](long long x,\
-    \ long long y){\n            return min(x, y);\n        },\n        [](long long\
-    \ x, long long y){\n            return y;\n        },\n        [](long long x,\
-    \ long long y){\n            return y;\n        },\n        INF, INF, true\n \
-    \   );\n    while(q--){\n        int query; cin >> query;\n        if(query ==\
-    \ 0){\n            int s, t, x; cin >> s >> t >> x;\n            seg.update(s,\
-    \ t + 1, x);\n        }\n        if(query == 1){\n            int s, t; cin >>\
-    \ s >> t;\n            cout << seg.query(s, t + 1) << endl;\n        }\n    }\n\
-    }\n"
+    \    __Check(k + __ZeroIndex);\n        return query(k, k + 1);\n    }\n\n   \
+    \ Monoid operator[](const int &k){\n        return get(k);\n    }\n\n    void\
+    \ print(){\n        int cnt = 1, i = 1, depth = 1;\n        while(1){\n      \
+    \      if(i >= __Size * 2) break;\n            cerr << depth++ << \" : \";\n \
+    \           for(int c = 0; c < cnt; ++c){\n                cerr << __Data[i++]\
+    \ << \" \";\n            }\n            cerr << endl;\n            cnt <<= 1;\n\
+    \        }\n    }\n};\n#line 4 \"verify/AOJ-DSL-2-F.test.cpp\"\n\nint main(){\n\
+    \    int n, q; cin >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long\
+    \ long> Init_Data(n, INF);\n    LazySegmentTree<long long> seg(Init_Data,\n  \
+    \      [](long long x, long long y){\n            return min(x, y);\n        },\n\
+    \        [](long long x, long long y){\n            return y;\n        },\n  \
+    \      [](long long x, long long y){\n            return y;\n        },\n    \
+    \    INF, INF, true\n    );\n    while(q--){\n        int query; cin >> query;\n\
+    \        if(query == 0){\n            int s, t, x; cin >> s >> t >> x;\n     \
+    \       seg.update(s, t + 1, x);\n        }\n        if(query == 1){\n       \
+    \     int s, t; cin >> s >> t;\n            cout << seg.query(s, t + 1) << endl;\n\
+    \        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n\n#include \"../library/DataStructure/LazySegmentTree.hpp\"\n\nint main(){\n\
     \    int n, q; cin >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long\
@@ -135,7 +139,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-2-F.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 13:58:30+09:00'
+  timestamp: '2023-11-06 01:36:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-2-F.test.cpp
