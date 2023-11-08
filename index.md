@@ -158,6 +158,9 @@ data:
       path: verify/AOJ-DSL-2-E-Lazy.test.cpp
       title: verify/AOJ-DSL-2-E-Lazy.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-E.test.cpp
+      title: verify/AOJ-DSL-2-E.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-F.test.cpp
       title: verify/AOJ-DSL-2-F.test.cpp
     - icon: ':heavy_check_mark:'

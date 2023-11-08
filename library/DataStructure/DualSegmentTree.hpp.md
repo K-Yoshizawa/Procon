@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-D.test.cpp
     title: verify/AOJ-DSL-2-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-2-E.test.cpp
+    title: verify/AOJ-DSL-2-E.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -136,6 +139,7 @@ data:
   timestamp: '2023-11-08 19:28:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-DSL-2-E.test.cpp
   - verify/AOJ-DSL-2-D.test.cpp
 documentation_of: library/DataStructure/DualSegmentTree.hpp
 layout: document
