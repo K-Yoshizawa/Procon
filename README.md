@@ -7,9 +7,9 @@
 
 ## 更新履歴
 
-### Ver 2.4.2 (2023/11/??)
+### Ver 2.5.0 (2023/11/08)
+- 【追加】Dual Segment Tree - 双対セグメント木
 - 【修正】Lazy Segment Tree : 一点取得クエリがバグっていました
-- 【改修】Lazy Segment Tree : デバッグ出力を追加しました
 
 ### Ver 2.4.1 (2023/11/02)
 - 【追加】Binary Indexed Tree
