@@ -9,7 +9,7 @@ data:
     - icon: ':warning:'
       path: library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -151,6 +151,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-D-Lazy.test.cpp
       title: verify/AOJ-DSL-2-D-Lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-2-D.test.cpp
+      title: verify/AOJ-DSL-2-D.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-E-Lazy.test.cpp
       title: verify/AOJ-DSL-2-E-Lazy.test.cpp

@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-2-D.test.cpp
+    title: verify/AOJ-DSL-2-D.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
@@ -131,8 +134,9 @@ data:
   path: library/DataStructure/DualSegmentTree.hpp
   requiredBy: []
   timestamp: '2023-11-08 19:28:59+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/AOJ-DSL-2-D.test.cpp
 documentation_of: library/DataStructure/DualSegmentTree.hpp
 layout: document
 redirect_from:
