@@ -16,6 +16,9 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-RangeAffinePointGet.test.cpp
+    title: verify/LC-RangeAffinePointGet.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   _isVerificationFailed: false
@@ -97,6 +100,7 @@ data:
   - verify/LC-MatrixProduct.test.cpp
   - verify/LC-DeterminantofMatrix.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
   - verify/LC-InverseMatrix.test.cpp
 documentation_of: library/modint.hpp
 layout: document

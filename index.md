@@ -236,6 +236,9 @@ data:
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-RangeAffinePointGet.test.cpp
+      title: verify/LC-RangeAffinePointGet.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
     - icon: ':heavy_check_mark:'
