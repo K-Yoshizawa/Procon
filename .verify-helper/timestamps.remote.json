@@ -34,6 +34,7 @@
 "verify/LC-MatrixProduct.test.cpp": "2023-10-11 01:51:01 +0900",
 "verify/LC-PointAddRangeSum.test.cpp": "2023-11-02 01:25:06 +0900",
 "verify/LC-PointSetRangeComposite.test.cpp": "2023-11-02 01:25:06 +0900",
+"verify/LC-RangeAffinePointGet.test.cpp": "2023-11-10 01:41:40 +0900",
 "verify/LC-RangeAffineRangeSum.test.cpp": "2023-11-06 01:36:34 +0900",
 "verify/LC-VertexAddPathSum.test.cpp": "2023-11-02 01:25:06 +0900",
 "verify/LC-VertexAddSubtreeSum.test.cpp": "2023-11-02 01:25:06 +0900",
