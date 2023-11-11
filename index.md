@@ -140,6 +140,12 @@ data:
       path: verify/AOJ-DPL-1-F.test.cpp
       title: verify/AOJ-DPL-1-F.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-1-A.test.cpp
+      title: verify/AOJ-DSL-1-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-1-B.test.cpp
+      title: verify/AOJ-DSL-1-B.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-A.test.cpp
       title: verify/AOJ-DSL-2-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -241,6 +247,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-Unionfind.test.cpp
+      title: verify/LC-Unionfind.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
