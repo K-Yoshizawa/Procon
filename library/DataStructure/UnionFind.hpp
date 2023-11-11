@@ -1,79 +1,75 @@
 #pragma once
 
 /**
+ * @file UnionFind.hpp
+ * @author log K (lX57)
  * @brief UnionFind - 素集合データ構造
+ * @version 2.0
+ * @date 2023-11-12
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
-/**
- * @brief Union-Find
- */
+template<typename T = int>
 struct UnionFind{
-    vector<int> data;
- 
-    UnionFind(size_t sz) : data(sz, -1) {}
- 
-    /**
-     * @brief 要素xと要素yを併合する
-     * @param x 併合する要素x
-     * @param y 併合する要素y
-     * @return true 要素xと要素yがまだ未併合だった場合
-     * @return false 要素xと要素yが併合済だった場合
-     */
-    bool unite(int x, int y){
-        x = find(x), y = find(y);
-        if(x == y) return false;
-        if(data[x] > data[y]) swap(x, y);
-        data[x] += data[y];
-        data[y] = x;
-        return true;
+    private:
+    vector<int> __Data;
+    vector<T> __Weight;
+
+    T __weight(int k){
+        find(k);
+        return __Weight[k];
     }
- 
+
+    public:
     /**
-     * @brief 要素kが含まれる集合の要素を調べる。
-     * @param k 調べたい要素k
-     * @return int 含まれる集合の親
+     * @brief 要素数 `Size`, 初期重み `Init_Weight` でUnionFindを初期化する。
+     * @param Size 要素数
+     * @param Init_Weight 重み付きUnionFindの初期重み (option, default = 0)
+     */
+    UnionFind(int Size, T Init_Weight = 0) : __Data(Size, -1), __Weight(Size, Init_Weight) {}
+
+    /**
+     * @brief 要素 `k` の親を返す。ついでに経路圧縮をする。
+     * @param k 探索する要素
+     * @return int 親要素の番号
      */
     int find(int k){
-        if(data[k] < 0) return (k);
-        return data[k] = find(data[k]);
+        if(__Data[k] < 0) return k;
+        int r = find(__Data[k]);
+        __Weight[k] += __Weight[__Data[k]];
+        return __Data[k] = r;
     }
- 
+
     /**
-     * @brief 要素kが含まれる集合の要素数を求める。
-     * @param k 調べたい要素k
-     * @return int 集合の要素数
-     */
-    int size(int k){
-        return -data[find(k)];
-    }
- 
-    /**
-     * @brief 要素x、要素yが同じ集合に属するか判定する。
-     * @param x 判定する要素x
-     * @param y 判定する要素y
-     * @return true 同じ集合に属している場合
-     * @return false 同じ集合に属していない場合
+     * @brief 要素 `x` と要素 `y` が同じ集合に属しているかを判定する。
      */
     bool same(int x, int y){
         return find(x) == find(y);
     }
 
     /**
-     * @brief  すべての連結成分を取得する。
-     * @retval vector<vector<int>> 
+     * @brief `Weight(y) - Weight(x)` を計算する。
+     * @return T `Weight(y) - Weight(x)` の値
      */
-    vector<vector<int>> groups() {
-        int n = (int) data.size();
-        vector<vector<int>> ret(n);
-        for(int i = 0; i < n; i++) {
-            ret[find(i)].emplace_back(i);
-        }
-        ret.erase(remove_if(begin(ret), end(ret), [&](const vector< int > &v) {
-            return v.empty();
-        }), end(ret));
-        return ret;
+    T diff(int x, int y){
+        return __weight(y) - __weight(x);
+    }
+
+    /**
+     * @brief 要素 `x` と要素 `y` を併合する。重みを付与することもできる。
+     * @param w `Weight(y) - Weight(x) = w` という制約条件 (option, default = 0)
+     * @return 併合済の場合は `false` を返す。
+     */
+    bool unite(int x, int y, T w = 0){
+        w += __weight(x) - __weight(y);
+        x = find(x), y = find(y);
+        if(x == y) return false;
+        if(__Data[x] > __Data[y]) swap(x, y), w = -w;
+        __Data[x] += __Data[y];
+        __Data[y] = x;
+        __Weight[y] = w;
+        return true;
     }
 };
