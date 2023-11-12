@@ -42,5 +42,7 @@
 "verify/LC-VertexAddPathSum.test.cpp": "2023-11-02 01:25:06 +0900",
 "verify/LC-VertexAddSubtreeSum.test.cpp": "2023-11-02 01:25:06 +0900",
 "verify/LC-ZAlgorithm.test.cpp": "2023-10-21 20:52:39 +0900",
-"verify/yuki-649.test.cpp": "2023-11-02 01:25:06 +0900"
+"verify/yuki-649.test.cpp": "2023-11-02 01:25:06 +0900",
+"verify_icpc/AOJ-DSL-1-A.test.cpp": "2023-11-12 23:20:39 +0900",
+"verify_icpc/AOJ-DSL-2-A.test.cpp": "2023-11-12 23:20:39 +0900"
 }
