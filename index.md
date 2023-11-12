@@ -1,6 +1,17 @@
 ---
 data:
   libraryCategories:
+  - name: icpc
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: icpc/SegmentTree.hpp
+      title: icpc/SegmentTree.hpp
+    - icon: ':heavy_check_mark:'
+      path: icpc/Template.hpp
+      title: icpc/Template.hpp
+    - icon: ':heavy_check_mark:'
+      path: icpc/UnionFind.hpp
+      title: icpc/UnionFind.hpp
   - name: library/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
@@ -262,6 +273,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yuki-649.test.cpp
       title: verify/yuki-649.test.cpp
+  - name: verify_icpc
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DSL-1-A.test.cpp
+      title: verify_icpc/AOJ-DSL-1-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DSL-2-A.test.cpp
+      title: verify_icpc/AOJ-DSL-2-A.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
