@@ -10,5 +10,5 @@ ac-library/
 .vscode
 answer.exe
 !/verify/**
-!/verify_latest/**
+!/verify_icpc/**
 tools/
