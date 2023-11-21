@@ -18,7 +18,7 @@ using EdgeIndex = int;
 template<typename CostType>
 struct Edge{
     EdgeID ID{-1};
-    Vertex src, to;
+    Vertex src{-1}, to{-1};
     CostType cost, cap;
     EdgeIndex sidx, tidx;
 
@@ -87,6 +87,10 @@ struct Graph{
 
     inline int incsize(Vertex v){
         return __IL[v].size();
+    }
+
+    bool directed(){
+        return __isDirected;
     }
 
     inline EdgeSet<CostType> &get_edgeset(){

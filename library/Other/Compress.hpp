@@ -50,4 +50,16 @@ struct Compress{
     inline T iv(int index){
         return to_val[index - offset];
     }
+
+    /**
+     * @brief 値の入った配列を全てインデックスに変換した配列を返す。
+     * @note 元の値は不要で、大小関係だけ分かれば良い場合に使える
+     * @param Value 変換する値が格納された配列
+     * @return vector<int> 変換したインデックスが格納された配列
+     */
+    vector<int> convert(const vector<T> &Value){
+        vector<int> ret;
+        for(auto v : Value) ret.push_back(vi(v));
+        return ret;
+    }
 };

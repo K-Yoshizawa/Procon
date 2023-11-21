@@ -15,7 +15,7 @@
 #define REVERSE(x) reverse(ALL(x))
 #define SETPRE(digit) fixed << setprecision(digit)
 #define POPCOUNT(x) __builtin_popcount(x)
-#define ACC(x) accumulate((x).begin(), (x).end(), 0LL)
+#define SUM(x) reduce((x).begin(), (x).end())
 #define IOTA(x) iota((x).begin(), (x).end(), 0)
 #define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(), val) - (x).begin())
 #define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(), (x).end(), val) - (x).begin())
