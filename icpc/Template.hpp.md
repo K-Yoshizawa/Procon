@@ -60,13 +60,13 @@ data:
   isVerificationFile: false
   path: icpc/Template.hpp
   requiredBy:
-  - icpc/UnionFind.hpp
   - icpc/SegmentTree.hpp
+  - icpc/UnionFind.hpp
   timestamp: '2023-11-12 23:20:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_icpc/AOJ-DSL-1-A.test.cpp
   - verify_icpc/AOJ-DSL-2-A.test.cpp
+  - verify_icpc/AOJ-DSL-1-A.test.cpp
 documentation_of: icpc/Template.hpp
 layout: document
 redirect_from:

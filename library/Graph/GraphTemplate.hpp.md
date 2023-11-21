@@ -113,12 +113,12 @@ data:
     \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
-    \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
-    \ sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex\
-    \ to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n       \
-    \ ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n\
-    \    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \" ->\
-    \ \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
+    \    EdgeID ID{-1};\n    Vertex src{-1}, to{-1};\n    CostType cost, cap;\n  \
+    \  EdgeIndex sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex\
+    \ src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx)\
+    \ :\n        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\
+    \n    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \"\
+    \ -> \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
     \ = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename\
     \ CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename CostType>\n\
     using IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
@@ -142,13 +142,14 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
-    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
-    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
-    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   return __IL[v].size();\n    }\n\n    bool directed(){\n        return __isDirected;\n\
+    \    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n        return __ES;\n\
+    \    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n        return\
+    \ __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex v){\n\
+    \        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n    }\n\n\
+    \    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n    }\n\n\
+    \    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0 <= v &&\
+    \ v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -170,8 +171,8 @@ data:
     \n * @version 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nusing Vertex = int;\nusing EdgeID = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    EdgeID ID{-1};\n  \
-    \  Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\n   \
-    \ Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost,\
+    \  Vertex src{-1}, to{-1};\n    CostType cost, cap;\n    EdgeIndex sidx, tidx;\n\
+    \n    Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost,\
     \ CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n        ID(ID), src(src), to(to),\
     \ cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n    void print(){\n      \
     \  cerr << \"Edge \" << ID << \" : (\" << src << \" -> \" << to << \"), Cost =\
@@ -199,13 +200,14 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
-    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
-    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
-    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   return __IL[v].size();\n    }\n\n    bool directed(){\n        return __isDirected;\n\
+    \    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n        return __ES;\n\
+    \    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n        return\
+    \ __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex v){\n\
+    \        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n    }\n\n\
+    \    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n    }\n\n\
+    \    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0 <= v &&\
+    \ v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -226,41 +228,41 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
-  - library/Graph/BellmanFord.hpp
-  - library/Graph/FlowTemplate.hpp
   - library/Graph/Kruskal.hpp
+  - library/Graph/BipartiteMatching.hpp
+  - library/Graph/FlowTemplate.hpp
+  - library/Graph/PrimalDual.hpp
+  - library/Graph/CycleDetection.hpp
+  - library/Graph/BellmanFord.hpp
+  - library/Graph/StronglyConnectedComponents.hpp
+  - library/Graph/Dijkstra.hpp
   - library/Graph/WarshallFloyd.hpp
   - library/Graph/Dinic.hpp
-  - library/Graph/StronglyConnectedComponents.hpp
-  - library/Graph/PrimalDual.hpp
   - library/Graph/FordFulkerson.hpp
-  - library/Graph/CycleDetection.hpp
-  - library/Graph/BipartiteMatching.hpp
-  - library/Graph/Dijkstra.hpp
-  - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/EulerTour.hpp
-  - library/Tree/TreeDiamiter.hpp
   - library/Tree/LowestCommonAncestor.hpp
-  timestamp: '2023-10-10 14:21:48+09:00'
+  - library/Tree/TreeDiamiter.hpp
+  - library/Tree/HeavyLightDecomposition.hpp
+  timestamp: '2023-11-21 13:10:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-5-D.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/AOJ-GRL-5-D-HLD.test.cpp
   - verify/AOJ-GRL-2-A.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
-  - verify/AOJ-GRL-5-C-HLD.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
   - verify/AOJ-GRL-6-A.test.cpp
-  - verify/AOJ-GRL-6-B.test.cpp
+  - verify/AOJ-GRL-7-A.test.cpp
+  - verify/AOJ-GRL-5-D.test.cpp
+  - verify/AOJ-GRL-5-C-HLD.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-6-A-Dinic.test.cpp
   - verify/AOJ-ALDS1-11-A.test.cpp
   - verify/AOJ-GRL-5-E.test.cpp
+  - verify/AOJ-GRL-6-B.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-7-A.test.cpp
-  - verify/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - verify/AOJ-GRL-5-D-HLD.test.cpp
-  - verify/AOJ-GRL-6-A-Dinic.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"

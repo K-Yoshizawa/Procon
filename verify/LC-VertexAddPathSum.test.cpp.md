@@ -29,12 +29,12 @@ data:
     \u30D7\u30EC\u30FC\u30C8\n * @version 2.2\n * @date 2023-10-02\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeID =\
     \ int;\nusing EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n\
-    \    EdgeID ID{-1};\n    Vertex src, to;\n    CostType cost, cap;\n    EdgeIndex\
-    \ sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex src, Vertex\
-    \ to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :\n       \
-    \ ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\n\
-    \    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \" ->\
-    \ \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
+    \    EdgeID ID{-1};\n    Vertex src{-1}, to{-1};\n    CostType cost, cap;\n  \
+    \  EdgeIndex sidx, tidx;\n\n    Edge() = default;\n    Edge(EdgeID ID, Vertex\
+    \ src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx)\
+    \ :\n        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}\n\
+    \n    void print(){\n        cerr << \"Edge \" << ID << \" : (\" << src << \"\
+    \ -> \" << to << \"), Cost = \" << cost << \", Capacity = \" << cap << \", Place\
     \ = [\" << sidx << \", \" << tidx << \"]\" << endl;\n    }\n};\n\ntemplate<typename\
     \ CostType>\nusing EdgeSet = vector<Edge<CostType>>;\ntemplate<typename CostType>\n\
     using IncidentList = vector<vector<Edge<CostType>>>;\nusing AdjacentList = vector<vector<Vertex>>;\n\
@@ -58,13 +58,14 @@ data:
     \ = e.cost;\n            }\n        }\n        return ret;\n    }\n\n    inline\
     \ int vsize(){\n        return __CntVertex;\n    }\n\n    inline int esize(){\n\
     \        return __CntEdge;\n    }\n\n    inline int incsize(Vertex v){\n     \
-    \   return __IL[v].size();\n    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n\
-    \        return __ES;\n    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n\
-    \        return __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex\
-    \ v){\n        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n \
-    \   }\n\n    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n\
-    \    }\n\n    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0\
-    \ <= v && v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
+    \   return __IL[v].size();\n    }\n\n    bool directed(){\n        return __isDirected;\n\
+    \    }\n\n    inline EdgeSet<CostType> &get_edgeset(){\n        return __ES;\n\
+    \    }\n\n    inline IncidentList<CostType> &get_incidentlist(){\n        return\
+    \ __IL;\n    }\n\n    inline vector<Edge<CostType>> &get_incident(Vertex v){\n\
+    \        assert(0 <= v && v < __CntVertex);\n        return __IL[v];\n    }\n\n\
+    \    inline AdjacentList &get_adjacentlist(){\n        return __AL;\n    }\n\n\
+    \    inline vector<Vertex> &get_adjacent(Vertex v){\n        assert(0 <= v &&\
+    \ v < __CntVertex);\n        return __AL[v];\n    }\n\n    vector<Edge<CostType>>\
     \ operator[](Vertex v){\n        return get_incident(v);\n    }\n\n    void print_edgeset(bool\
     \ OneIndex = true){\n        for(int e = 0; e < __CntEdge; ++e){\n           \
     \ cout << e + OneIndex << \" : (\" << __ES[e].from + OneIndex << (__isDirected\
@@ -258,7 +259,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddPathSum.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 01:25:06+09:00'
+  timestamp: '2023-11-21 13:10:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddPathSum.test.cpp

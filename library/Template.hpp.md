@@ -18,7 +18,7 @@ data:
     \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
     \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n\
-    #define ACC(x) accumulate((x).begin(), (x).end(), 0LL)\n#define IOTA(x) iota((x).begin(),\
+    #define SUM(x) reduce((x).begin(), (x).end())\n#define IOTA(x) iota((x).begin(),\
     \ (x).end(), 0)\n#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(),\
     \ (x).end(), val) - (x).begin())\n#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(),\
     \ (x).end(), val) - (x).begin())\nusing namespace std;\n\ninline string Yn(bool\
@@ -77,8 +77,8 @@ data:
     \ */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n#define\
     \ RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define RSORT(x)\
     \ sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit) fixed\
-    \ << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define ACC(x)\
-    \ accumulate((x).begin(), (x).end(), 0LL)\n#define IOTA(x) iota((x).begin(), (x).end(),\
+    \ << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define SUM(x)\
+    \ reduce((x).begin(), (x).end())\n#define IOTA(x) iota((x).begin(), (x).end(),\
     \ 0)\n#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(),\
     \ val) - (x).begin())\n#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(),\
     \ (x).end(), val) - (x).begin())\nusing namespace std;\n\ninline string Yn(bool\
@@ -137,7 +137,7 @@ data:
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2023-11-02 01:25:06+09:00'
+  timestamp: '2023-11-21 13:10:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp

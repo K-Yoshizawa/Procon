@@ -97,9 +97,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-2-A.test.cpp
+  - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
-  - verify/LC-Unionfind.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:
