@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: icpc/Template.hpp
     title: icpc/Template.hpp
   - icon: ':heavy_check_mark:'

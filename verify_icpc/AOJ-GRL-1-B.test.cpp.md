@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: icpc/BellmanFord.hpp
     title: icpc/BellmanFord.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: icpc/Template.hpp
     title: icpc/Template.hpp
   _extendedRequiredBy: []

@@ -10,9 +10,8 @@ data:
     title: icpc/Dijkstra.hpp
   - icon: ':heavy_check_mark:'
     path: icpc/DualSegmentTree.hpp
-    title: "\u4F5C\u7528\u7D20\u306E\u5727\u7E2E\u90E8\u5206\u3002\u554F\u984C\u306B\
-      \u3088\u3063\u3066\u66F8\u304D\u63DB\u3048\u308B\u3002"
-  - icon: ':x:'
+    title: icpc/DualSegmentTree.hpp
+  - icon: ':heavy_check_mark:'
     path: icpc/LazySegmentTree.hpp
     title: icpc/LazySegmentTree.hpp
   - icon: ':heavy_check_mark:'
@@ -34,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_icpc/AOJ-DSL-2-D.test.cpp
     title: verify_icpc/AOJ-DSL-2-D.test.cpp
-  - icon: ':x:'
-    path: verify_icpc/AOJ-DSL-2-E.test.cpp
-    title: verify_icpc/AOJ-DSL-2-E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-DSL-2-F.test.cpp
+    title: verify_icpc/AOJ-DSL-2-F.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_icpc/AOJ-GRL-1-A.test.cpp
     title: verify_icpc/AOJ-GRL-1-A.test.cpp
@@ -46,9 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_icpc/AOJ-GRL-1-C.test.cpp
     title: verify_icpc/AOJ-GRL-1-C.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "icpc/Template.hpp"
@@ -99,11 +98,11 @@ data:
   - icpc/UnionFind.hpp
   - icpc/DualSegmentTree.hpp
   timestamp: '2023-11-12 23:20:39+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_icpc/AOJ-GRL-1-C.test.cpp
+  - verify_icpc/AOJ-DSL-2-F.test.cpp
   - verify_icpc/AOJ-GRL-1-A.test.cpp
-  - verify_icpc/AOJ-DSL-2-E.test.cpp
   - verify_icpc/AOJ-DSL-2-A.test.cpp
   - verify_icpc/AOJ-DSL-2-D.test.cpp
   - verify_icpc/AOJ-DSL-1-A.test.cpp

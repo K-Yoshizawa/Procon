@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: icpc/LazySegmentTree.hpp
     title: icpc/LazySegmentTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: icpc/Template.hpp
     title: icpc/Template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_E
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_E
-  bundledCode: "#line 1 \"verify_icpc/AOJ-DSL-2-E.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_E\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F
+  bundledCode: "#line 1 \"verify_icpc/AOJ-DSL-2-F.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n\n#line 2 \"icpc/Template.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nusing ll = long long;\nusing vi = vector<int>;\nusing vl = vector<ll>;\n\
     using vvi = vector<vi>;\nusing vvl = vector<vl>;\n#line 2 \"icpc/LazySegmentTree.hpp\"\
@@ -45,7 +45,7 @@ data:
     \ merge(dat[i * 2], dat[i * 2 + 1]);\n    }\n\n    void update(int l, int r, ll\
     \ v){\n        subupdate(l, r, v, 1, sz + 1, 1);\n    }\n\n    ll query(int l,\
     \ int r){\n        return subquery(l, r, 1, sz + 1, 1);\n    }\n\n    ll get(int\
-    \ k){\n        return query(k, k + 1);\n    }\n};\n#line 4 \"verify_icpc/AOJ-DSL-2-E.test.cpp\"\
+    \ k){\n        return query(k, k + 1);\n    }\n};\n#line 4 \"verify_icpc/AOJ-DSL-2-F.test.cpp\"\
     \n\nint main(){\n    int n, q; cin >> n >> q;\n    long long INF = (1LL << 31)\
     \ - 1;\n    vector<long long> Init_Data(n, INF);\n    segtree seg(Init_Data);\n\
     \    while(q--){\n        int com; cin >> com;\n        if(com == 0){\n      \
@@ -53,7 +53,7 @@ data:
     \ + 1, x);\n        }\n        if(com == 1){\n            int s, t; cin >> s >>\
     \ t, ++s, ++t;\n            cout << seg.query(s, t + 1) << endl;\n        }\n\
     \    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_E\"\
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n\n#include \"../icpc/LazySegmentTree.hpp\"\n\nint main(){\n    int n, q; cin\
     \ >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long long> Init_Data(n,\
     \ INF);\n    segtree seg(Init_Data);\n    while(q--){\n        int com; cin >>\
@@ -65,15 +65,15 @@ data:
   - icpc/LazySegmentTree.hpp
   - icpc/Template.hpp
   isVerificationFile: true
-  path: verify_icpc/AOJ-DSL-2-E.test.cpp
+  path: verify_icpc/AOJ-DSL-2-F.test.cpp
   requiredBy: []
-  timestamp: '2023-11-23 01:27:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-23 01:45:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify_icpc/AOJ-DSL-2-E.test.cpp
+documentation_of: verify_icpc/AOJ-DSL-2-F.test.cpp
 layout: document
 redirect_from:
-- /verify/verify_icpc/AOJ-DSL-2-E.test.cpp
-- /verify/verify_icpc/AOJ-DSL-2-E.test.cpp.html
-title: verify_icpc/AOJ-DSL-2-E.test.cpp
+- /verify/verify_icpc/AOJ-DSL-2-F.test.cpp
+- /verify/verify_icpc/AOJ-DSL-2-F.test.cpp.html
+title: verify_icpc/AOJ-DSL-2-F.test.cpp
 ---

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: icpc/Template.hpp
     title: icpc/Template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify_icpc/AOJ-DSL-2-E.test.cpp
-    title: verify_icpc/AOJ-DSL-2-E.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-DSL-2-F.test.cpp
+    title: verify_icpc/AOJ-DSL-2-F.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"icpc/Template.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
@@ -73,9 +73,9 @@ data:
   path: icpc/LazySegmentTree.hpp
   requiredBy: []
   timestamp: '2023-11-23 01:27:39+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_icpc/AOJ-DSL-2-E.test.cpp
+  - verify_icpc/AOJ-DSL-2-F.test.cpp
 documentation_of: icpc/LazySegmentTree.hpp
 layout: document
 redirect_from:
