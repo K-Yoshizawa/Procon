@@ -5,10 +5,6 @@ struct segtree{
     vl laz;
     ll oe;
 
-    /**
-     * @brief 作用素の圧縮部分。問題によって書き換える。
-     * @note これは Range Update Query の圧縮
-     */
     ll composite(ll x, ll y){
         return y;
     }
@@ -43,10 +39,6 @@ struct segtree{
         else return subquery(i, m, r, c * 2 + 1);
     }
 
-    /**
-     * @note oe は作用素の単位元。問題によって書き換える。
-     * @note これは Range Minimum Query の単位元
-     */
     segtree(vl &init) : oe((1LL << 31) - 1){
         sz = 1;
         while(sz < init.size()) sz <<= 1;
