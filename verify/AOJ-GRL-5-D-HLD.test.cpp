@@ -28,7 +28,7 @@ int main(){
         }
         else{
             int u; cin >> u;
-            auto ret = HLD.get_vertex_segment(0, u);
+            auto ret = HLD.path_query(0, u);
             long long ans = 0LL;
             for(auto [l, r] : ret){
                 ans += seg.query(l, r);

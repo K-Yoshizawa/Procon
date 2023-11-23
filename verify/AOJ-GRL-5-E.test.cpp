@@ -55,7 +55,7 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int v, w; cin >> v >> w;
-            auto ret = HLD.get_vertex_segment(0, v);
+            auto ret = HLD.path_query(0, v);
             for(auto [l, r] : ret){
                 seg.update(l, r, w);
             }
@@ -63,7 +63,7 @@ int main(){
         }
         else{
             int u; cin >> u;
-            auto ret = HLD.get_vertex_segment(0, u);
+            auto ret = HLD.path_query(0, u);
             long long ans = 0LL;
             for(auto [l, r] : ret){
                 ans += seg.query(l, r).val;
