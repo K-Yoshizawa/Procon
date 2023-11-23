@@ -79,79 +79,79 @@ data:
     \ && mat[i][j] == NotAdjacent ? \"INF\" : to_string(mat[i][j]));\n           \
     \ }\n            cout << endl;\n        }\n    }\n};\n#line 10 \"library/Tree/HeavyLightDecomposition.hpp\"\
     \n\ntemplate<typename CostType>\nstruct HeavyLightDecomposition{\n    using ColumnIndex\
-    \ = int;\n    using ColumnData = pair<bool, int>; // `{isVertex, ID(Vertex or\
-    \ EdgeID)}`\n\n    private:\n    Vertex __Root;\n\n    Graph<CostType> &G;\n \
-    \   vector<int> __SubtreeSize; // \u9802\u70B9 `i` \u3092\u6839\u3068\u3059\u308B\
-    \u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n    vector<int> __Depth; // \u9802\
-    \u70B9 `i` \u306E\u6839\u304B\u3089\u306E\u6DF1\u3055\n    vector<Vertex> __ParentVertex;\
-    \ // \u9802\u70B9 `i` \u306E\u89AA\u306E\u9802\u70B9\uFF08\u6839\u306E\u5834\u5408\
-    \u306F `-1` \uFF09\n    vector<EdgeID> __ParentEdge; // \u9802\u70B9 `i` \u3068\
-    \u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\u756A\u53F7\uFF08\u6839\u306E\u5834\
-    \u5408\u306F `-1` \uFF09\n    vector<Vertex> __ChildVertex; // \u8FBA `i` \u304C\
-    \u7D50\u30762\u9802\u70B9\u306E\u3046\u3061\u3001\u5B50\u306E\u65B9\u306E\u9802\
-    \u70B9\n\n    vector<vector<ColumnData>> __Columns; // \u5404\u5217\u306B\u542B\
-    \u307E\u308C\u308B\u9802\u70B9/\u8FBA\u306E\u30C7\u30FC\u30BF\n    vector<pair<ColumnIndex,\
-    \ int>> __VertexIndex, __EdgeIndex; // `Columns` \u5185\u306B\u304A\u3051\u308B\
-    \u5404\u9802\u70B9/\u8FBA\u306E\u4F4D\u7F6E\u60C5\u5831\n    vector<int> __Offset;\
-    \ // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u306E\u5404\u5217\u306E\u5148\
-    \u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\n\n    int __dfs1(Vertex now, Vertex\
-    \ par){\n        int ret = 0;\n        for(Edge<CostType> e : G.get_incident(now)){\n\
-    \            if(e.to == par) continue;\n            __Depth[e.to] = __Depth[now]\
-    \ + 1;\n            __ParentVertex[e.to] = now;\n            __ParentEdge[e.to]\
-    \ = e.ID;\n            __ChildVertex[e.ID] = e.to;\n            ret += __dfs1(e.to,\
-    \ now);\n        }\n        return __SubtreeSize[now] = ret + 1;\n    }\n\n  \
-    \  void __dfs2(Vertex now, Vertex par, ColumnIndex col){\n        // \u65B0\u3057\
-    \u3044\u5217\u306E\u5834\u5408\u306F\u5217\u3092\u5897\u3084\u3059\n        if(__Columns.size()\
-    \ == col) __Columns.emplace_back(vector<ColumnData>{});\n\n        // \u5217\u306B\
-    \u9802\u70B9\u3092\u8FFD\u52A0\n        __VertexIndex[now] = {col, __Columns[col].size()};\n\
-    \        __Columns[col].push_back({true, now});\n\n        Edge<CostType> heavy;\n\
-    \        int maxsubtree = 0;\n        for(Edge<CostType> e : G.get_incident(now)){\n\
-    \            if(e.to == par) continue;\n            if(maxsubtree < __SubtreeSize[e.to]){\n\
-    \                heavy = e;\n                maxsubtree = __SubtreeSize[e.to];\n\
-    \            }\n        }\n\n        if(maxsubtree){\n            // heavy\u306A\
-    \u8FBA\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u3001\u4ECA\u306E\u5217\u306B\
-    \u8FFD\u52A0\u3059\u308B\u5F62\u3067\u518D\u5E30\u3092\u884C\u3046\n         \
-    \   __dfs2(heavy.to, now, col);\n        }\n\n        // light\u306A\u8FBA\u306B\
-    \u5BFE\u3057\u3066\u65B0\u3057\u3044\u5217\u3092\u751F\u3084\u3057\u3064\u3064\
-    \u518D\u5E30\u3092\u884C\u3046\n        for(Edge<CostType> e : G.get_incident(now)){\n\
-    \            if(e.to == par || e.to == heavy.to) continue;\n            __dfs2(e.to,\
-    \ now, __Columns.size());\n        }\n    }\n\n    Vertex __gethead(Vertex v){\n\
-    \        auto [i, j] = __VertexIndex[v];\n        return __Columns[i][0].second;\n\
+    \ = int;\n\n    private:\n    Vertex __Root;\n    int __Timer;\n\n    Graph<CostType>\
+    \ &G;\n    vector<int> __SubtreeSize; // \u9802\u70B9 `i` \u3092\u6839\u3068\u3059\
+    \u308B\u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n    vector<int> __Depth; //\
+    \ \u9802\u70B9 `i` \u306E\u6839\u304B\u3089\u306E\u6DF1\u3055\n    vector<Vertex>\
+    \ __ParentVertex; // \u9802\u70B9 `i` \u306E\u89AA\u306E\u9802\u70B9\uFF08\u6839\
+    \u306E\u5834\u5408\u306F `-1` \uFF09\n    vector<EdgeID> __ParentEdge; // \u9802\
+    \u70B9 `i` \u3068\u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\u756A\u53F7\uFF08\u6839\
+    \u306E\u5834\u5408\u306F `-1` \uFF09\n    vector<Vertex> __ChildVertex; // \u8FBA\
+    \ `i` \u304C\u7D50\u30762\u9802\u70B9\u306E\u3046\u3061\u3001\u5B50\u306E\u65B9\
+    \u306E\u9802\u70B9\n    vector<int> __In, __Out; // \u9802\u70B9 `i` \u306E\u884C\
+    \u304D\u304C\u3051 / \u5E30\u308A\u304C\u3051\u306E\u9806\u756A (Euler-Tour)\n\
+    \n    vector<vector<Vertex>> __Columns; // \u5404\u5217\u306B\u542B\u307E\u308C\
+    \u308B\u9802\u70B9\n    vector<pair<ColumnIndex, int>> __VertexIndex; // `Columns`\
+    \ \u5185\u306B\u304A\u3051\u308B\u5404\u9802\u70B9\u306E\u4F4D\u7F6E\u60C5\u5831\
+    \n    vector<int> __Offset; // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u306E\
+    \u5404\u5217\u306E\u5148\u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\n\n    int\
+    \ __dfs1(Vertex now, Vertex par){\n        int ret = 0;\n        for(Edge<CostType>\
+    \ e : G.get_incident(now)){\n            if(e.to == par) continue;\n         \
+    \   __Depth[e.to] = __Depth[now] + 1;\n            __ParentVertex[e.to] = now;\n\
+    \            __ParentEdge[e.to] = e.ID;\n            __ChildVertex[e.ID] = e.to;\n\
+    \            ret += __dfs1(e.to, now);\n        }\n        return __SubtreeSize[now]\
+    \ = ret + 1;\n    }\n\n    void __dfs2(Vertex now, Vertex par, ColumnIndex col){\n\
+    \        __In[now] = __Timer++;\n\n        // \u65B0\u3057\u3044\u5217\u306E\u5834\
+    \u5408\u306F\u5217\u3092\u5897\u3084\u3059\n        if(__Columns.size() == col)\
+    \ __Columns.emplace_back(vector<Vertex>{});\n\n        // \u5217\u306B\u9802\u70B9\
+    \u3092\u8FFD\u52A0\n        __VertexIndex[now] = {col, __Columns[col].size()};\n\
+    \        __Columns[col].push_back(now);\n\n        // Heavy\u306A\u8FBA\u3092\u63A2\
+    \u7D22\n        Edge<CostType> heavy;\n        int maxsubtree = 0;\n        for(Edge<CostType>\
+    \ e : G.get_incident(now)){\n            if(e.to == par) continue;\n         \
+    \   if(maxsubtree < __SubtreeSize[e.to]){\n                heavy = e;\n      \
+    \          maxsubtree = __SubtreeSize[e.to];\n            }\n        }\n\n   \
+    \     if(maxsubtree){\n            // Heavy\u306A\u8FBA\u304C\u5B58\u5728\u3059\
+    \u308B\u5834\u5408\u3001\u4ECA\u306E\u5217\u306B\u8FFD\u52A0\u3059\u308B\u5F62\
+    \u3067\u518D\u5E30\u3092\u884C\u3046\n            __dfs2(heavy.to, now, col);\n\
+    \        }\n\n        // Light\u306A\u8FBA\u306B\u5BFE\u3057\u3066\u65B0\u3057\
+    \u3044\u5217\u3092\u751F\u3084\u3057\u3064\u3064\u518D\u5E30\u3092\u884C\u3046\
+    \n        for(Edge<CostType> e : G.get_incident(now)){\n            if(e.to ==\
+    \ par || e.to == heavy.to) continue;\n            __dfs2(e.to, now, __Columns.size());\n\
+    \        }\n\n        __Out[now] = __Timer++;\n    }\n\n    Vertex __gethead(Vertex\
+    \ v){\n        auto [i, j] = __VertexIndex[v];\n        return __Columns[i][0];\n\
     \    }\n\n    public:\n    HeavyLightDecomposition(Graph<CostType> &G, Vertex\
-    \ Root = 0) : G(G), __Root(Root){\n        __SubtreeSize.resize(G.vsize(), 0);\n\
-    \        __Depth.resize(G.vsize(), 0);\n        __ParentVertex.resize(G.vsize(),\
+    \ Root = 0) : G(G), __Root(Root), __Timer(0){\n        __SubtreeSize.resize(G.vsize(),\
+    \ 0);\n        __Depth.resize(G.vsize(), 0);\n        __ParentVertex.resize(G.vsize(),\
     \ -1);\n        __ParentEdge.resize(G.vsize(), -1);\n        __ChildVertex.resize(G.esize(),\
-    \ -1);\n        __dfs1(__Root, -1);\n        #ifdef LOGK\n            cerr <<\
-    \ \"[HLD] DFS 1 Complete.\" << endl;\n        #endif\n        __VertexIndex.resize(G.vsize());\n\
-    \        __dfs2(__Root, -1, 0);\n        #ifdef LOGK\n            cerr << \"[HLD]\
-    \ DFS 2 Complete.\" << endl;\n        #endif\n        __Offset.resize(__Columns.size(),\
-    \ 0);\n        for(int i = 1; i < __Columns.size(); ++i){\n            __Offset[i]\
-    \ = __Offset[i - 1] + __Columns[i - 1].size();\n        }\n    }\n\n    int get_vertex_locate(Vertex\
+    \ -1);\n        __dfs1(__Root, -1);\n        __VertexIndex.resize(G.vsize());\n\
+    \        __In.resize(G.vsize());\n        __Out.resize(G.vsize());\n        __dfs2(__Root,\
+    \ -1, 0);\n        __Offset.resize(__Columns.size(), 0);\n        for(int i =\
+    \ 1; i < __Columns.size(); ++i){\n            __Offset[i] = __Offset[i - 1] +\
+    \ __Columns[i - 1].size();\n        }\n    }\n\n    int get_vertex_locate(Vertex\
     \ v){\n        return __Offset[__VertexIndex[v].first] + __VertexIndex[v].second;\n\
     \    }\n\n    vector<int> get_vertex_locations(){\n        vector<int> ret(G.vsize(),\
     \ -1);\n        for(Vertex i = 0; i < G.vsize(); ++i){\n            ret[i] = __Offset[__VertexIndex[i].first]\
-    \ + __VertexIndex[i].second;\n        }\n        return ret;\n    }\n\n    vector<int>\
-    \ get_edge_locations(){\n        vector<int> ret(G.esize(), -1);\n        for(EdgeID\
-    \ e = 0; e < G.esize(); ++e){\n            Vertex i = __ChildVertex[e];\n    \
-    \        ret[e] = __Offset[__VertexIndex[i].first] + __VertexIndex[i].second;\n\
-    \        }\n        return ret;\n    }\n\n    Vertex lca(Vertex v, Vertex u){\n\
-    \        #ifdef LOGK\n            cerr << \"LCA Query [\" << v << \", \" << u\
-    \ << \"]\" << endl;\n        #endif\n        while(1){\n            Vertex hv\
-    \ = __gethead(v), hu = __gethead(u);\n            if(__Depth[hv] > __Depth[hu])\
-    \ swap(v, u), swap(hv, hu);\n            #ifdef LOGK\n                cerr <<\
-    \ \" - Head of [\" << v << \", \" << u << \"] -> [\" << hv << \", \" << hu <<\
-    \ \"]\" << endl;\n            #endif\n            if(hv == hu) return (__Depth[v]\
-    \ < __Depth[u] ? v : u);\n            u = __ParentVertex[hu];\n        }\n   \
-    \ }\n\n    vector<pair<int, int>> get_vertex_segment(Vertex v, Vertex u = -1){\n\
-    \        vector<pair<int, int>> ret;\n        if(u == -1) u = __Root;\n      \
-    \  while(1){\n            Vertex hv = __gethead(v), hu = __gethead(u);\n     \
-    \       if(__Depth[hv] > __Depth[hu]) swap(v, u), swap(hv, hu);\n            if(hv\
-    \ == hu){\n                if(__Depth[v] > __Depth[u]) swap(v, u);\n         \
-    \       auto [vc, vi] = __VertexIndex[v];\n                auto [uc, ui] = __VertexIndex[u];\n\
-    \                ret.push_back({__Offset[vc] + vi, __Offset[uc] + ui + 1});\n\
-    \                return ret;\n            }\n            auto [uc, ui] = __VertexIndex[u];\n\
-    \            ret.push_back({__Offset[uc], __Offset[uc] + ui + 1});\n         \
-    \   u = __ParentVertex[hu];\n        }\n    }\n};\n#line 4 \"verify/AOJ-GRL-5-C-HLD.test.cpp\"\
+    \ + __VertexIndex[i].second;\n        }\n        return ret;\n    }\n\n    Vertex\
+    \ lca(Vertex v, Vertex u){\n        while(1){\n            Vertex hv = __gethead(v),\
+    \ hu = __gethead(u);\n            if(__Depth[hv] > __Depth[hu]) swap(v, u), swap(hv,\
+    \ hu);\n            if(hv == hu) return (__Depth[v] < __Depth[u] ? v : u);\n \
+    \           u = __ParentVertex[hu];\n        }\n    }\n\n    /**\n     * @brief\
+    \ \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\u3076\u30D1\u30B9\u306B\
+    \u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\u3002\n     * @param v\
+    \ \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option, default = `root`)\n\
+    \     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\u89A7(\u534A\u958B\
+    \u533A\u9593)\n     */\n    vector<pair<int, int>> path_query(Vertex v, Vertex\
+    \ u = -1){\n        vector<pair<int, int>> ret;\n        if(u == -1) u = __Root;\n\
+    \        while(1){\n            Vertex hv = __gethead(v), hu = __gethead(u);\n\
+    \            if(__Depth[hv] > __Depth[hu]) swap(v, u), swap(hv, hu);\n       \
+    \     if(hv == hu){\n                if(__Depth[v] > __Depth[u]) swap(v, u);\n\
+    \                auto [vc, vi] = __VertexIndex[v];\n                auto [uc,\
+    \ ui] = __VertexIndex[u];\n                ret.push_back({__Offset[vc] + vi, __Offset[uc]\
+    \ + ui + 1});\n                return ret;\n            }\n            auto [uc,\
+    \ ui] = __VertexIndex[u];\n            ret.push_back({__Offset[uc], __Offset[uc]\
+    \ + ui + 1});\n            u = __ParentVertex[hu];\n        }\n    }\n\n    pair<int,\
+    \ int> subtree_query(Vertex v){\n        return {__In[v], __Out[v]};\n    }\n\n\
+    \    void print_columns(){\n\n    }\n};\n#line 4 \"verify/AOJ-GRL-5-C-HLD.test.cpp\"\
     \n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0;\
     \ i <= n - 1; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n\
     \            int c; cin >> c;\n            G.add(i, c);\n        }\n    }\n\n\
@@ -171,7 +171,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-C-HLD.test.cpp
   requiredBy: []
-  timestamp: '2023-11-21 13:10:32+09:00'
+  timestamp: '2023-11-24 03:01:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-C-HLD.test.cpp

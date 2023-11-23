@@ -7,14 +7,23 @@ data:
       path: icpc/BellmanFord.hpp
       title: icpc/BellmanFord.hpp
     - icon: ':heavy_check_mark:'
+      path: icpc/Combination.hpp
+      title: icpc/Combination.hpp
+    - icon: ':heavy_check_mark:'
       path: icpc/Dijkstra.hpp
       title: icpc/Dijkstra.hpp
     - icon: ':heavy_check_mark:'
       path: icpc/DualSegmentTree.hpp
       title: icpc/DualSegmentTree.hpp
+    - icon: ':warning:'
+      path: icpc/HeavyLightDecomposition.hpp
+      title: icpc/HeavyLightDecomposition.hpp
     - icon: ':heavy_check_mark:'
       path: icpc/LazySegmentTree.hpp
       title: icpc/LazySegmentTree.hpp
+    - icon: ':heavy_check_mark:'
+      path: icpc/ModInt.hpp
+      title: icpc/ModInt.hpp
     - icon: ':heavy_check_mark:'
       path: icpc/SegmentTree.hpp
       title: icpc/SegmentTree.hpp
@@ -280,6 +289,9 @@ data:
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+      title: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -290,6 +302,18 @@ data:
       title: verify/yuki-649.test.cpp
   - name: verify_icpc
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DPL-5-A.test.cpp
+      title: verify_icpc/AOJ-DPL-5-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DPL-5-B.test.cpp
+      title: verify_icpc/AOJ-DPL-5-B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DPL-5-D.test.cpp
+      title: verify_icpc/AOJ-DPL-5-D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-DPL-5-E.test.cpp
+      title: verify_icpc/AOJ-DPL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_icpc/AOJ-DSL-1-A.test.cpp
       title: verify_icpc/AOJ-DSL-1-A.test.cpp

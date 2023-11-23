@@ -25,6 +25,9 @@ data:
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
@@ -182,6 +185,7 @@ data:
   - verify/AOJ-GRL-5-D.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-VertexAddSubtreeSum-HLD.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
 documentation_of: library/DataStructure/SegmentTree.hpp
 layout: document

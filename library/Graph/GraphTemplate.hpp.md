@@ -99,6 +99,9 @@ data:
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
@@ -258,6 +261,7 @@ data:
   - verify/AOJ-GRL-5-C-HLD.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-GRL-6-A-Dinic.test.cpp
+  - verify/LC-VertexAddSubtreeSum-HLD.test.cpp
   - verify/AOJ-ALDS1-11-A.test.cpp
   - verify/AOJ-GRL-5-E.test.cpp
   - verify/AOJ-GRL-6-B.test.cpp
