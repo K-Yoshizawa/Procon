@@ -13,9 +13,12 @@ data:
       path: icpc/Dijkstra.hpp
       title: icpc/Dijkstra.hpp
     - icon: ':heavy_check_mark:'
+      path: icpc/Dinic.hpp
+      title: icpc/Dinic.hpp
+    - icon: ':heavy_check_mark:'
       path: icpc/DualSegmentTree.hpp
       title: icpc/DualSegmentTree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: icpc/HeavyLightDecomposition.hpp
       title: icpc/HeavyLightDecomposition.hpp
     - icon: ':heavy_check_mark:'
@@ -25,8 +28,14 @@ data:
       path: icpc/ModInt.hpp
       title: icpc/ModInt.hpp
     - icon: ':heavy_check_mark:'
+      path: icpc/PrimalDual.hpp
+      title: icpc/PrimalDual.hpp
+    - icon: ':heavy_check_mark:'
       path: icpc/SegmentTree.hpp
       title: icpc/SegmentTree.hpp
+    - icon: ':heavy_check_mark:'
+      path: icpc/StronglyConnectedComponents.hpp
+      title: icpc/StronglyConnectedComponents.hpp
     - icon: ':heavy_check_mark:'
       path: icpc/Template.hpp
       title: icpc/Template.hpp
@@ -335,6 +344,24 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_icpc/AOJ-GRL-1-C.test.cpp
       title: verify_icpc/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-3-C.test.cpp
+      title: verify_icpc/AOJ-GRL-3-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-5-C.test.cpp
+      title: verify_icpc/AOJ-GRL-5-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-5-D.test.cpp
+      title: verify_icpc/AOJ-GRL-5-D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-5-E.test.cpp
+      title: verify_icpc/AOJ-GRL-5-E.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-6-A.test.cpp
+      title: verify_icpc/AOJ-GRL-6-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_icpc/AOJ-GRL-6-B.test.cpp
+      title: verify_icpc/AOJ-GRL-6-B.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

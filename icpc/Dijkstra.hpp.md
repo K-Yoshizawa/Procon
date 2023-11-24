@@ -16,10 +16,10 @@ data:
     links: []
   bundledCode: "#line 2 \"icpc/Template.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nusing ll = long long;\nusing vi = vector<int>;\nusing vl = vector<ll>;\n\
-    using vvi = vector<vi>;\nusing vvl = vector<vl>;\n#line 2 \"icpc/Dijkstra.hpp\"\
-    \n\nusing Edge = pair<int, ll>;\nusing GR = vector<vector<Edge>>;\n\nll INF =\
-    \ (1LL << 31) - 1;\n\nvl dijkstra(GR &g, int s){\n    using p = pair<ll, int>;\n\
-    \    vl ret(g.size(), INF);\n    ret[s] = 0;\n    priority_queue<p, vector<p>,\
+    using vvi = vector<vi>;\nusing vvl = vector<vl>;\nusing pi = pair<int, int>;\n\
+    #line 2 \"icpc/Dijkstra.hpp\"\n\nusing Edge = pair<int, ll>;\nusing GR = vector<vector<Edge>>;\n\
+    \nll INF = (1LL << 31) - 1;\n\nvl dijkstra(GR &g, int s){\n    using p = pair<ll,\
+    \ int>;\n    vl ret(g.size(), INF);\n    ret[s] = 0;\n    priority_queue<p, vector<p>,\
     \ greater<p>> que;\n    que.push({0, s});\n    while(que.size()){\n        auto\
     \ [d, v] = que.top(); que.pop();\n        if(ret[v] < d) continue;\n        for(auto\
     \ [t, c] : g[v]){\n            if(d + c < ret[t]){\n                ret[t] = d\
@@ -38,7 +38,7 @@ data:
   isVerificationFile: false
   path: icpc/Dijkstra.hpp
   requiredBy: []
-  timestamp: '2023-11-23 01:27:39+09:00'
+  timestamp: '2023-11-24 19:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_icpc/AOJ-GRL-1-A.test.cpp

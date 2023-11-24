@@ -12,9 +12,12 @@ data:
     path: icpc/Dijkstra.hpp
     title: icpc/Dijkstra.hpp
   - icon: ':heavy_check_mark:'
+    path: icpc/Dinic.hpp
+    title: icpc/Dinic.hpp
+  - icon: ':heavy_check_mark:'
     path: icpc/DualSegmentTree.hpp
     title: icpc/DualSegmentTree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: icpc/HeavyLightDecomposition.hpp
     title: icpc/HeavyLightDecomposition.hpp
   - icon: ':heavy_check_mark:'
@@ -24,8 +27,14 @@ data:
     path: icpc/ModInt.hpp
     title: icpc/ModInt.hpp
   - icon: ':heavy_check_mark:'
+    path: icpc/PrimalDual.hpp
+    title: icpc/PrimalDual.hpp
+  - icon: ':heavy_check_mark:'
     path: icpc/SegmentTree.hpp
     title: icpc/SegmentTree.hpp
+  - icon: ':heavy_check_mark:'
+    path: icpc/StronglyConnectedComponents.hpp
+    title: icpc/StronglyConnectedComponents.hpp
   - icon: ':heavy_check_mark:'
     path: icpc/UnionFind.hpp
     title: icpc/UnionFind.hpp
@@ -66,6 +75,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_icpc/AOJ-GRL-1-C.test.cpp
     title: verify_icpc/AOJ-GRL-1-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-3-C.test.cpp
+    title: verify_icpc/AOJ-GRL-3-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-5-C.test.cpp
+    title: verify_icpc/AOJ-GRL-5-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-5-D.test.cpp
+    title: verify_icpc/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-5-E.test.cpp
+    title: verify_icpc/AOJ-GRL-5-E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-6-A.test.cpp
+    title: verify_icpc/AOJ-GRL-6-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_icpc/AOJ-GRL-6-B.test.cpp
+    title: verify_icpc/AOJ-GRL-6-B.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -89,6 +116,8 @@ data:
 
     using vvl = vector<vl>;
 
+    using pi = pair<int, int>;
+
     '
   code: '#pragma once
 
@@ -106,34 +135,45 @@ data:
 
     using vvi = vector<vi>;
 
-    using vvl = vector<vl>;'
+    using vvl = vector<vl>;
+
+    using pi = pair<int, int>;'
   dependsOn: []
   isVerificationFile: false
   path: icpc/Template.hpp
   requiredBy:
+  - icpc/PrimalDual.hpp
   - icpc/ModInt.hpp
   - icpc/BellmanFord.hpp
   - icpc/Combination.hpp
+  - icpc/StronglyConnectedComponents.hpp
   - icpc/SegmentTree.hpp
   - icpc/Dijkstra.hpp
   - icpc/WarshallFloyd.hpp
+  - icpc/Dinic.hpp
   - icpc/LazySegmentTree.hpp
   - icpc/UnionFind.hpp
   - icpc/HeavyLightDecomposition.hpp
   - icpc/DualSegmentTree.hpp
-  timestamp: '2023-11-12 23:20:39+09:00'
+  timestamp: '2023-11-24 19:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_icpc/AOJ-GRL-1-C.test.cpp
+  - verify_icpc/AOJ-GRL-5-C.test.cpp
+  - verify_icpc/AOJ-GRL-6-A.test.cpp
+  - verify_icpc/AOJ-GRL-5-D.test.cpp
   - verify_icpc/AOJ-DPL-5-D.test.cpp
   - verify_icpc/AOJ-DSL-2-F.test.cpp
   - verify_icpc/AOJ-DPL-5-E.test.cpp
   - verify_icpc/AOJ-GRL-1-A.test.cpp
   - verify_icpc/AOJ-DSL-2-A.test.cpp
   - verify_icpc/AOJ-DPL-5-B.test.cpp
+  - verify_icpc/AOJ-GRL-3-C.test.cpp
   - verify_icpc/AOJ-DSL-2-D.test.cpp
   - verify_icpc/AOJ-DSL-1-A.test.cpp
+  - verify_icpc/AOJ-GRL-5-E.test.cpp
   - verify_icpc/AOJ-DPL-5-A.test.cpp
+  - verify_icpc/AOJ-GRL-6-B.test.cpp
   - verify_icpc/AOJ-GRL-1-B.test.cpp
 documentation_of: icpc/Template.hpp
 layout: document
