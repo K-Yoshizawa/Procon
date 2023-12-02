@@ -50,7 +50,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
@@ -144,6 +144,9 @@ data:
       path: library/String/Manacher.hpp
       title: library/String/Manacher.hpp
     - icon: ':heavy_check_mark:'
+      path: library/String/RollingHash.hpp
+      title: "Rolling Hash - \u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5"
+    - icon: ':heavy_check_mark:'
       path: library/String/ZAlgorithm.hpp
       title: library/String/ZAlgorithm.hpp
   - name: library
@@ -177,6 +180,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-ALDS1-11-A.test.cpp
       title: verify/AOJ-ALDS1-11-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-ALDS1-14-B.test.cpp
+      title: verify/AOJ-ALDS1-14-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DPL-1-B.test.cpp
       title: verify/AOJ-DPL-1-B.test.cpp
@@ -225,6 +231,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-3-D.test.cpp
       title: verify/AOJ-DSL-3-D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/AOJ-DSL-5-B.test.cpp
+      title: verify/AOJ-DSL-5-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp

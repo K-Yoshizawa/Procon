@@ -7,6 +7,10 @@
 
 ## 更新履歴
 
+### Ver 2.7.0 (2023/12/03)
+- 【追加】Rolling Hash - ローリングハッシュ
+- 【改修】Cumulative Sum 2D - 実装を簡素化
+
 ### Ver 2.6.2 (2023/11/24)
 - ICPC用の簡易ライブラリの追加
 - 【改修】Heavy Light Decomposition : 部分木クエリに対応
