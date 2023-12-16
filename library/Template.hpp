@@ -3,8 +3,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.5
- * @date 2023-10-30
+ * @version 1.6
+ * @date 2023-12-15
  */
 
 #include <bits/stdc++.h>
@@ -46,6 +46,12 @@ vector<int> make_sequence(int Size){
     IOTA(ret);
     return ret;
 }
+template<typename T>
+void make_unique(vector<T> &v){
+    sort(v.begin(), v.end());
+    auto itr = unique(v.begin(), v.end());
+    v.erase(itr, v.end());
+}
 
 using ll = long long;
 using ull = unsigned long long;
@@ -68,6 +74,9 @@ using vvvi = vector<vvi>;
 using vl = vector<ll>;
 using vvl = vector<vl>;
 using vvvl = vector<vvl>;
+using vd = vector<double>;
+using vvd = vector<vd>;
+using vvvd = vector<vvd>;
 using pi = pair<int, int>;
 using pl = pair<ll, ll>;
 using pd = pair<double, double>;
@@ -124,6 +133,26 @@ template <typename T>
 istream &operator>>(istream &is, vector<T> &v){
     for (int i = 0; i < v.size(); ++i) is >> v[i];
     return is;
+}
+
+template<typename T1, typename T2>
+void disassemble_vectorpair(vector<pair<T1, T2>> &v, vector<T1> &v1, vector<T2> &v2){
+    transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return p.first;});
+    transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return p.second;});
+}
+
+/**
+ * @brief `A_i B_i` みたいな入力形式の配列を `A` `B` に格納して返す
+ * @attention `v1` `v2` は共に空で渡す必要がある
+ * @param v1 受け取りたい配列 `A`
+ * @param v2 受け取りたい配列 `B`
+ * @param size 配列のサイズ
+ */
+template<typename T1, typename T2>
+void input_pair(vector<T1> &v1, vector<T2> &v2, int size){
+    vector<pair<T1, T2>> v(size);
+    for(auto &[p, q] : v) cin >> p >> q;
+    disassemble_vectorpair(v, v1, v2);
 }
 
 template<class... T>
