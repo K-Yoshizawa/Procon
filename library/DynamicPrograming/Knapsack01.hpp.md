@@ -64,8 +64,8 @@ data:
   timestamp: '2023-10-30 14:15:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-DPL-1-B.test.cpp
   - verify/AOJ-DPL-1-F.test.cpp
+  - verify/AOJ-DPL-1-B.test.cpp
 documentation_of: library/DynamicPrograming/Knapsack01.hpp
 layout: document
 redirect_from:

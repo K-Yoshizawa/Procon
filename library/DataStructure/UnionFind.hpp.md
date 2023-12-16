@@ -96,10 +96,10 @@ data:
   timestamp: '2023-11-12 02:50:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-2-A.test.cpp
-  - verify/LC-Unionfind.test.cpp
-  - verify/AOJ-DSL-1-A.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
+  - verify/LC-Unionfind.test.cpp
+  - verify/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ-DSL-1-A.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:
