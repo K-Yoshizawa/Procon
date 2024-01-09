@@ -1,5 +1,5 @@
 ---
-title: Dijkstra - 単一始点最短距離
+title: Dijkstra - ダイクストラ法
 documentation_of: ../library/Graph/Dijkstra.hpp
 ---
 
@@ -9,32 +9,31 @@ documentation_of: ../library/Graph/Dijkstra.hpp
  MathJax.Hub.Config({
  tex2jax: {
  inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ inlineMath: [['$', '$'] ],
  }
  });
 </script>
 
-## Abstract
+### Abstract
 
-単一始点最短距離問題をDijkstra法を用いて求める。
-負辺がある場合でも、ポテンシャルを適切に与えることで求めることが可能。
+グラフ $G$ に対する単一始点最短距離問題をダイクストラ法によって解く。
 
-## Variable
+### Variable
 
 - private
-    - `Dist` : 始点 `Start` からの距離(存在しない場合は `G.INF` )
-    - `Potential` : ポテンシャル(初期値 `0` )
-    - `PrevVertex` : 各頂点の最短経路上における前の頂点(存在しない場合は `-1` )
-    - `PrevEdge` : 各頂点の最短経路上における前の辺番号(存在しない場合は `-1` )
-    - `Start` : 始点
+    - `m_dist` : 始点から各頂点への最短距離を表す。到達不可能の場合 `G.INF` が格納される。
+    - `m_potential` : 各頂点のポテンシャルを表す。適切に設定することで負辺が存在するグラフに対してダイクストラ法を適用することができる。
+    - `m_prev_vertex` : 各頂点の最短距離をとるパスにおいてその頂点の前に通る頂点番号。パスが存在しない場合、あるいは始点の場合は `-1` が格納される。
 
-## Function
+### Function
 
-- `Dijkstra(Graph G)` : `Graph` で初期化する。
-- `Dijkstra(Graph G, Vertex Start)` : `Graph` で初期化し、頂点 `Start` を始点として単一始点最短距離問題を解く。$O(E \log V)$
-- `update_potential(vector<CostType> Potential)` : グラフのポテンシャル値を `Potential` で更新する。$O(V)$
-- `build(Vertex Start)` : 頂点 `Start` を始点として単一始点最短距離問題を解く。$O(E \log V)$
-- `all(Vertex Start)` : 頂点 `Start` を始点としたときの各頂点への最短経路を返す。$O(E \log V)$
-- `dist(Vertex Start, Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短距離を求める。頂点 `Start` を始点とした最短距離が残っているなら $O(1)$ 、そうでなければ $O(E \log V)$
-- `restore_edge(Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短経路の辺を復元して返す。$O(V)$
-- `print(bool DisplayINF, char Delimiter)` : 最短距離を文字 `Delimiter` を区切り文字として出力する。$O(V)$
+- `Dijkstra(GraphV &G)` : ダイクストラ法をグラフ $G$ で初期化する。
+- `solve(Vertex s)` : グラフ $G$ に対して、頂点 `s` を始点として単一始点最短距離問題を解く。
+    - 計算量 : $\textrm{O}(E \log V)$
+    - 要件 : `s` は 0-index であること。
+    - 戻り値 : 始点 `s` から各頂点への最短距離が格納された配列 `m_dist`
+- `get()` : 各頂点への最短距離が格納された配列 `m_dist`
+- `shortest_path(Vertex t)` : 頂点 `t` までの最短経路を取得する。
+    - 計算量 : $\textrm{O}(V)$
+    - 戻り値 : 頂点 `t` までの最短経路を頂点列として返す。経路が存在しない場合は空配列を返す。
+- `operator[]` : 頂点 `v` までの最短距離を返す。
