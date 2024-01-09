@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_E"
 
 #include "../old/Tree/HeavyLightDecomposition.hpp"
-#include "../old/DataStructure/LazySegmentTree.hpp"
+#include "../library/DataStructure/LazySegmentTree.hpp"
 
 struct Data{
     long long val{0};

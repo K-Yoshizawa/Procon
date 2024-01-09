@@ -7,7 +7,7 @@
  */
 
 #include "GraphTemplate.hpp"
-#include "../DataStructure/UnionFind.hpp"
+#include "../../library/DataStructure/UnionFind.hpp"
 
 template<typename CostType>
 struct Kruskal{
