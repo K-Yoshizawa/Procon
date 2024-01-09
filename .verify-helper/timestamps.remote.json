@@ -59,5 +59,8 @@
 "verify_old/AOJ-GRL-6-A-Dinic.test.cpp": "2024-01-09 23:25:07 +0900",
 "verify_old/AOJ-GRL-6-A.test.cpp": "2024-01-09 23:25:07 +0900",
 "verify_old/AOJ-GRL-6-B.test.cpp": "2024-01-09 23:25:07 +0900",
-"verify_old/AOJ-GRL-7-A.test.cpp": "2024-01-09 23:25:07 +0900"
+"verify_old/AOJ-GRL-7-A.test.cpp": "2024-01-09 23:25:07 +0900",
+"verify_old/LC-VertexAddPathSum.test.cpp": "2024-01-09 23:33:46 +0900",
+"verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp": "2024-01-09 23:33:46 +0900",
+"verify_old/LC-VertexAddSubtreeSum.test.cpp": "2024-01-09 23:33:46 +0900"
 }
