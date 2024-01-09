@@ -45,6 +45,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: icpc/WarshallFloyd.hpp
       title: icpc/WarshallFloyd.hpp
+  - name: latest/Graph
+    pages:
+    - icon: ':warning:'
+      path: latest/Graph/Dijkstra.hpp
+      title: ''
+    - icon: ':warning:'
+      path: latest/Graph/GraphTemplate.hpp
+      title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    - icon: ':warning:'
+      path: latest/Graph/LongestDistance.hpp
+      title: ''
+    - icon: ':warning:'
+      path: latest/Graph/StronglyConnectedComponents.hpp
+      title: ''
   - name: library/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
