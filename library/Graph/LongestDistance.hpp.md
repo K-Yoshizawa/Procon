@@ -1,34 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':question:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#line 1 \"library/Graph/Dijkstra.hpp\"\n/**\n * @file Dijkstra.hpp\n * @brief\
-    \ Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @version 3.0\n * @date\
-    \ 2024-01-09\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
-    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeIndex\
-    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    public:\n    Vertex\
-    \ from, to;\n    CostType cost;\n    EdgeIndex idx{-1};\n\n    Edge() = default;\n\
-    \    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}\n\
-    \n    operator int(){\n        return to;\n    }\n};\n\ntemplate<typename CostType\
-    \ = int>\nstruct GraphV{\n    private:\n    int m_vertex_size{0}, m_edge_size{0};\n\
+    document_title: ''
+    links: []
+  bundledCode: "#line 1 \"library/Graph/LongestDistance.hpp\"\n/**\n * @file LongestDistance.hpp\n\
+    \ * @author your name (you@domain.com)\n * @brief \n * @version 0.1\n * @date\
+    \ 2024-01-09\n * \n * @copyright Copyright (c) 2024\n * \n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\
+    \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing\
+    \ EdgeIndex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    public:\n\
+    \    Vertex from, to;\n    CostType cost;\n    EdgeIndex idx{-1};\n\n    Edge()\
+    \ = default;\n    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to),\
+    \ cost(cost){}\n\n    operator int(){\n        return to;\n    }\n};\n\ntemplate<typename\
+    \ CostType = int>\nstruct GraphV{\n    private:\n    int m_vertex_size{0}, m_edge_size{0};\n\
     \    bool m_is_directed{false};\n    vector<vector<Edge<CostType>>> m_adj;\n \
     \   vector<int> m_indegree;\n\n    public:\n    CostType INF{numeric_limits<CostType>::max()\
     \ >> 2};\n\n    GraphV() = default;\n    GraphV(int vertex_size, bool directed\
@@ -91,53 +85,34 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct Dijkstra{\n    private:\n    GraphV<CostType> &G;\n    vector<CostType>\
-    \ m_dist, m_potential;\n    vector<Vertex> m_prev_vertex;\n\n    public:\n   \
-    \ Dijkstra(GraphV<CostType> &G) : G(G){\n        m_dist.resize(G.size());\n  \
-    \      m_potential.resize(G.size(), 0);\n        m_prev_vertex.resize(G.size(),\
-    \ -1);\n    }\n\n    vector<CostType> &solve(Vertex s){\n        assert(0 <= s\
-    \ and s < G.size());\n        m_dist.assign(G.size(), G.INF);\n        using p\
-    \ = pair<CostType, Vertex>;\n        priority_queue<p, vector<p>, greater<p>>\
-    \ que;\n        que.emplace(m_potential[s], s);\n        m_dist[s] = m_potential[s];\n\
-    \        while(que.size()){\n            auto [d, v] = que.top(); que.pop();\n\
-    \            if(m_dist[v] < d) continue;\n            for(auto &e : G[v]){\n \
-    \               if(d + e.cost + m_potential[e.from] - m_potential[e.to] < m_dist[e.to]){\n\
-    \                    m_dist[e.to] = d + e.cost + m_potential[e.from] - m_potential[e.to];\n\
-    \                    m_prev_vertex[e.to] = v;\n                    que.emplace(m_dist[e.to],\
-    \ e.to);\n                }\n            }\n        }\n        for(Vertex i =\
-    \ 0; i < G.size(); ++i){\n            if(m_dist[i] != G.INF){\n              \
-    \  m_dist[i] += m_potential[i] - m_potential[s];\n            }\n        }\n \
-    \       return m_dist;\n    }\n\n    vector<CostType> &get(){\n        return\
-    \ m_dist;\n    }\n\n    vector<CostType> shortest_path(Vertex t){\n        vector<CostType>\
-    \ ret{t};\n        Vertex now = t;\n        while(m_prev_vertex[now] != -1){\n\
-    \            ret.push_back(m_prev_vertex[now]);\n            now = m_prev_vertex[now];\n\
-    \        }\n        reverse(ret.begin(), ret.end());\n        return ret;\n  \
-    \  }\n\n    CostType operator[](Vertex v){\n        return m_dist.at(v);\n   \
-    \ }\n};\n#line 4 \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    int V, E,\
-    \ r; cin >> V >> E >> r;\n    GraphV<long long> G(V, true);\n    G.input(E, true,\
-    \ true);\n\n    Dijkstra dk(G);\n    for(auto &d : dk.solve(r)){\n        if(d\
-    \ == G.INF) cout << \"INF\" << endl;\n        else cout << d << endl;\n    }\n\
-    }\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#include \"../library/Graph/Dijkstra.hpp\"\n\nint main(){\n    int V, E, r;\
-    \ cin >> V >> E >> r;\n    GraphV<long long> G(V, true);\n    G.input(E, true,\
-    \ true);\n\n    Dijkstra dk(G);\n    for(auto &d : dk.solve(r)){\n        if(d\
-    \ == G.INF) cout << \"INF\" << endl;\n        else cout << d << endl;\n    }\n\
-    }"
+    \        return m_es;\n    }\n};\n#line 13 \"library/Graph/LongestDistance.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<CostType> longestdistance(GraphV<CostType>\
+    \ &G, CostType INF, Vertex start = -1, CostType init = 0){\n    vector<CostType>\
+    \ dp(G.size(), INF);\n    if(start == -1){\n        for(auto v : G.source()) dp[v]\
+    \ = init;\n    }\n    else dp[start] = init;\n    for(int i : G.sort()){\n   \
+    \     if(dp[i] == INF) continue;\n        for(auto &e : G[i]){\n            dp[e.to]\
+    \ = max(dp[e.to], dp[i] + e.cost);\n        }\n    }\n    return dp;\n}\n"
+  code: "/**\n * @file LongestDistance.hpp\n * @author your name (you@domain.com)\n\
+    \ * @brief \n * @version 0.1\n * @date 2024-01-09\n * \n * @copyright Copyright\
+    \ (c) 2024\n * \n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    vector<CostType> longestdistance(GraphV<CostType> &G, CostType INF, Vertex start\
+    \ = -1, CostType init = 0){\n    vector<CostType> dp(G.size(), INF);\n    if(start\
+    \ == -1){\n        for(auto v : G.source()) dp[v] = init;\n    }\n    else dp[start]\
+    \ = init;\n    for(int i : G.sort()){\n        if(dp[i] == INF) continue;\n  \
+    \      for(auto &e : G[i]){\n            dp[e.to] = max(dp[e.to], dp[i] + e.cost);\n\
+    \        }\n    }\n    return dp;\n}"
   dependsOn:
-  - library/Graph/Dijkstra.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify/AOJ-GRL-1-A.test.cpp
+  isVerificationFile: false
+  path: library/Graph/LongestDistance.hpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-A.test.cpp
+documentation_of: library/Graph/LongestDistance.hpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-1-A.test.cpp
-- /verify/verify/AOJ-GRL-1-A.test.cpp.html
-title: verify/AOJ-GRL-1-A.test.cpp
+- /library/library/Graph/LongestDistance.hpp
+- /library/library/Graph/LongestDistance.hpp.html
+title: ''
 ---

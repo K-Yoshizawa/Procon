@@ -22,9 +22,6 @@ data:
     path: verify/AOJ-DSL-2-I.test.cpp
     title: verify/AOJ-DSL-2-I.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-E.test.cpp
-    title: verify/AOJ-GRL-5-E.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   _isVerificationFailed: false
@@ -233,7 +230,6 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-I.test.cpp
-  - verify/AOJ-GRL-5-E.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/AOJ-DSL-2-E-Lazy.test.cpp
   - verify/AOJ-DSL-2-G.test.cpp

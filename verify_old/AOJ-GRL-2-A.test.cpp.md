@@ -14,35 +14,29 @@ data:
     \  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
     , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
+    \  File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
     \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
     \ File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../library/Tree/EulerTour.hpp:\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../DataStructure/UnionFind.hpp:\
     \ line -1: no such header\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
-    \n\n#include \"../library/Tree/EulerTour.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N), p(N);\n\
-    \    Graph<int> G(N);\n    for(int i = 0; i < N; ++i) cin >> a[i];\n    for(int\
-    \ i = 1; i < N; ++i){\n        cin >> p[i];\n        G.add(i, p[i]);\n    }\n\n\
-    \    EulerTour<int> ET(G);\n    vector<long long> Init_Data(2 * N, 0);\n    for(int\
-    \ i = 0; i < N; ++i){\n        Init_Data[ET.in(i) - 1] = a[i];\n    }\n    SegmentTree<long\
-    \ long> seg(Init_Data,\n        [](long long l, long long r){return l + r;},\n\
-    \        0, false);\n\n    while(Q--){\n        int q; cin >> q;\n        if(q\
-    \ == 0){\n            int u, x; cin >> u >> x;\n            seg.update(ET.in(u),\
-    \ seg[ET.in(u)] + x);\n        }\n        else{\n            int u; cin >> u;\n\
-    \            auto [in, out] = ET[u];\n            cout << seg.query(ET.in(u),\
-    \ ET.out(u)) << endl;\n        }\n    }\n}"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\
+    \n\n#include \"../old/Graph/Kruskal.hpp\"\n\nint main(){\n    int V, E; cin >>\
+    \ V >> E;\n    Graph<int> G(V);\n    for(int i = 0; i < E; ++i){\n        int\
+    \ s, t, w; cin >> s >> t >> w;\n        G.add(s, t, w);\n    }\n\n    Kruskal<int>\
+    \ kr(G);\n    cout << kr.get() << endl;\n}"
   dependsOn: []
   isVerificationFile: true
-  path: verify/LC-VertexAddSubtreeSum.test.cpp
+  path: verify_old/AOJ-GRL-2-A.test.cpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/LC-VertexAddSubtreeSum.test.cpp
+documentation_of: verify_old/AOJ-GRL-2-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-VertexAddSubtreeSum.test.cpp
-- /verify/verify/LC-VertexAddSubtreeSum.test.cpp.html
-title: verify/LC-VertexAddSubtreeSum.test.cpp
+- /verify/verify_old/AOJ-GRL-2-A.test.cpp
+- /verify/verify_old/AOJ-GRL-2-A.test.cpp.html
+title: verify_old/AOJ-GRL-2-A.test.cpp
 ---

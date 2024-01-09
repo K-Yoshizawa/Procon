@@ -11,10 +11,10 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_B
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
-  bundledCode: "#line 1 \"verify/AOJ-ALDS1-11-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_B
+  bundledCode: "#line 1 \"verify/AOJ-GRL-4-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_B\"\
     \n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
     \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
     \n * @version 3.0\n * @date 2024-01-09\n */\n\n#include <bits/stdc++.h>\nusing\
@@ -85,31 +85,26 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 4 \"verify/AOJ-ALDS1-11-A.test.cpp\"\n\
-    \n#line 6 \"verify/AOJ-ALDS1-11-A.test.cpp\"\nusing namespace std;\n\nint main(){\n\
-    \    int n; cin >> n;\n    Graph<int> G(n, true);\n    for(int i = 0; i < n; ++i){\n\
-    \        Vertex u; int k; cin >> u >> k, --u;\n        for(int j = 0; j < k; ++j){\n\
-    \            Vertex v; cin >> v, --v;\n            G.add(u, v);\n        }\n \
-    \   }\n    G.print_matrix(0, false);\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\"\
-    \n\n#include \"../library/Graph/GraphTemplate.hpp\"\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n,\
-    \ true);\n    for(int i = 0; i < n; ++i){\n        Vertex u; int k; cin >> u >>\
-    \ k, --u;\n        for(int j = 0; j < k; ++j){\n            Vertex v; cin >> v,\
-    \ --v;\n            G.add(u, v);\n        }\n    }\n    G.print_matrix(0, false);\n\
-    }"
+    \        return m_es;\n    }\n};\n#line 4 \"verify/AOJ-GRL-4-B.test.cpp\"\n\n\
+    int main(){\n    int V, E; cin >> V >> E;\n    GraphV G(V, true);\n    G.input(E,\
+    \ false, true);\n\n    for(auto &v : G.sort()){\n        cout << v << endl;\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_B\"\
+    \n\n#include \"../library/Graph/GraphTemplate.hpp\"\n\nint main(){\n    int V,\
+    \ E; cin >> V >> E;\n    GraphV G(V, true);\n    G.input(E, false, true);\n\n\
+    \    for(auto &v : G.sort()){\n        cout << v << endl;\n    }\n}"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-ALDS1-11-A.test.cpp
+  path: verify/AOJ-GRL-4-B.test.cpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/AOJ-ALDS1-11-A.test.cpp
+documentation_of: verify/AOJ-GRL-4-B.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-ALDS1-11-A.test.cpp
-- /verify/verify/AOJ-ALDS1-11-A.test.cpp.html
-title: verify/AOJ-ALDS1-11-A.test.cpp
+- /verify/verify/AOJ-GRL-4-B.test.cpp
+- /verify/verify/AOJ-GRL-4-B.test.cpp.html
+title: verify/AOJ-GRL-4-B.test.cpp
 ---

@@ -17,32 +17,32 @@ data:
     \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
     \ File \"/opt/hostedtoolcache/Python/3.12.1/x64/lib/python3.12/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../library/Tree/EulerTour.hpp:\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ../old/DataStructure/SegmentTree.hpp:\
     \ line -1: no such header\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
-    \n\n#include \"../library/Tree/EulerTour.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N), p(N);\n\
-    \    Graph<int> G(N);\n    for(int i = 0; i < N; ++i) cin >> a[i];\n    for(int\
-    \ i = 1; i < N; ++i){\n        cin >> p[i];\n        G.add(i, p[i]);\n    }\n\n\
-    \    EulerTour<int> ET(G);\n    vector<long long> Init_Data(2 * N, 0);\n    for(int\
-    \ i = 0; i < N; ++i){\n        Init_Data[ET.in(i) - 1] = a[i];\n    }\n    SegmentTree<long\
-    \ long> seg(Init_Data,\n        [](long long l, long long r){return l + r;},\n\
-    \        0, false);\n\n    while(Q--){\n        int q; cin >> q;\n        if(q\
-    \ == 0){\n            int u, x; cin >> u >> x;\n            seg.update(ET.in(u),\
-    \ seg[ET.in(u)] + x);\n        }\n        else{\n            int u; cin >> u;\n\
-    \            auto [in, out] = ET[u];\n            cout << seg.query(ET.in(u),\
-    \ ET.out(u)) << endl;\n        }\n    }\n}"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D\"\
+    \n\n#include \"../old/Tree/EulerTour.hpp\"\n#include \"../old/DataStructure/SegmentTree.hpp\"\
+    \n\nint main(){\n    int n; cin >> n;\n    Graph<int> G(n);\n    for(int i = 0;\
+    \ i < n; ++i){\n        int k; cin >> k;\n        for(int j = 0; j < k; ++j){\n\
+    \            int c; cin >> c;\n            G.add(i, c, 0);\n        }\n    }\n\
+    \    EulerTour<int> et(G, 0);\n    vector<long long> Init_Data(2 * n, 0);\n  \
+    \  SegmentTree<long long> seg(Init_Data,\n        [](int l, int r){return l +\
+    \ r;},\n        0, false);\n    \n    int q; cin >> q;\n    while(q--){\n    \
+    \    int query; cin >> query;\n        if(query == 0){\n            int v, w;\
+    \ cin >> v >> w;\n            auto [in, out] = et[v];\n            seg.update(in,\
+    \ seg.get(in) + w);\n            seg.update(out, seg.get(out) - w);\n        }\n\
+    \        else{\n            int u; cin >> u;\n            cout << seg.query(1,\
+    \ et.in(u) + 1) << endl;\n        }\n    }\n}"
   dependsOn: []
   isVerificationFile: true
-  path: verify/LC-VertexAddSubtreeSum.test.cpp
+  path: verify_old/AOJ-GRL-5-D.test.cpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/LC-VertexAddSubtreeSum.test.cpp
+documentation_of: verify_old/AOJ-GRL-5-D.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-VertexAddSubtreeSum.test.cpp
-- /verify/verify/LC-VertexAddSubtreeSum.test.cpp.html
-title: verify/LC-VertexAddSubtreeSum.test.cpp
+- /verify/verify_old/AOJ-GRL-5-D.test.cpp
+- /verify/verify_old/AOJ-GRL-5-D.test.cpp.html
+title: verify_old/AOJ-GRL-5-D.test.cpp
 ---

@@ -14,10 +14,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
+    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
+    - https://judge.yosupo.jp/problem/shortest_path
+  bundledCode: "#line 1 \"verify/LC-ShortestPath.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
     \n\n#line 1 \"library/Graph/Dijkstra.hpp\"\n/**\n * @file Dijkstra.hpp\n * @brief\
     \ Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @version 3.0\n * @date\
     \ 2024-01-09\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
@@ -114,30 +114,33 @@ data:
     \            ret.push_back(m_prev_vertex[now]);\n            now = m_prev_vertex[now];\n\
     \        }\n        reverse(ret.begin(), ret.end());\n        return ret;\n  \
     \  }\n\n    CostType operator[](Vertex v){\n        return m_dist.at(v);\n   \
-    \ }\n};\n#line 4 \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    int V, E,\
-    \ r; cin >> V >> E >> r;\n    GraphV<long long> G(V, true);\n    G.input(E, true,\
-    \ true);\n\n    Dijkstra dk(G);\n    for(auto &d : dk.solve(r)){\n        if(d\
-    \ == G.INF) cout << \"INF\" << endl;\n        else cout << d << endl;\n    }\n\
-    }\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#include \"../library/Graph/Dijkstra.hpp\"\n\nint main(){\n    int V, E, r;\
-    \ cin >> V >> E >> r;\n    GraphV<long long> G(V, true);\n    G.input(E, true,\
-    \ true);\n\n    Dijkstra dk(G);\n    for(auto &d : dk.solve(r)){\n        if(d\
-    \ == G.INF) cout << \"INF\" << endl;\n        else cout << d << endl;\n    }\n\
-    }"
+    \ }\n};\n#line 4 \"verify/LC-ShortestPath.test.cpp\"\n\nint main(){\n    int N,\
+    \ M, s, t; cin >> N >> M >> s >> t;\n    GraphV<long long> G(N, true);\n    G.input(M,\
+    \ true, true);\n\n    Dijkstra dk(G);\n    if(dk.solve(s)[t] == G.INF){\n    \
+    \    cout << -1 << endl;\n        return 0;\n    }\n    auto ans = dk.shortest_path(t);\n\
+    \    cout << dk[t] << \" \" << ans.size() - 1 << endl;\n    for(int i = 0; i <\
+    \ ans.size() - 1; ++i){\n        cout << ans[i] << \" \" << ans[i + 1] << endl;\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#include\
+    \ \"../library/Graph/Dijkstra.hpp\"\n\nint main(){\n    int N, M, s, t; cin >>\
+    \ N >> M >> s >> t;\n    GraphV<long long> G(N, true);\n    G.input(M, true, true);\n\
+    \n    Dijkstra dk(G);\n    if(dk.solve(s)[t] == G.INF){\n        cout << -1 <<\
+    \ endl;\n        return 0;\n    }\n    auto ans = dk.shortest_path(t);\n    cout\
+    \ << dk[t] << \" \" << ans.size() - 1 << endl;\n    for(int i = 0; i < ans.size()\
+    \ - 1; ++i){\n        cout << ans[i] << \" \" << ans[i + 1] << endl;\n    }\n}"
   dependsOn:
   - library/Graph/Dijkstra.hpp
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-1-A.test.cpp
+  path: verify/LC-ShortestPath.test.cpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-A.test.cpp
+documentation_of: verify/LC-ShortestPath.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-1-A.test.cpp
-- /verify/verify/AOJ-GRL-1-A.test.cpp.html
-title: verify/AOJ-GRL-1-A.test.cpp
+- /verify/verify/LC-ShortestPath.test.cpp
+- /verify/verify/LC-ShortestPath.test.cpp.html
+title: verify/LC-ShortestPath.test.cpp
 ---
