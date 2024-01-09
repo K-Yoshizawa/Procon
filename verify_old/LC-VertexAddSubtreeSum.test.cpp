@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 
-#include "../library/Tree/HeavyLightDecomposition.hpp"
+#include "../old/Tree/EulerTour.hpp"
 #include "../library/DataStructure/SegmentTree.hpp"
 
 int main(){
@@ -13,26 +13,25 @@ int main(){
         G.add(i, p[i]);
     }
 
-    HeavyLightDecomposition<int> HLD(G);
+    EulerTour<int> ET(G);
     vector<long long> Init_Data(2 * N, 0);
     for(int i = 0; i < N; ++i){
-        Init_Data[HLD.subtree_query(i).first] = a[i];
+        Init_Data[ET.in(i) - 1] = a[i];
     }
     SegmentTree<long long> seg(Init_Data,
         [](long long l, long long r){return l + r;},
-        0, true);
+        0, false);
 
     while(Q--){
         int q; cin >> q;
         if(q == 0){
             int u, x; cin >> u >> x;
-            int i = HLD.subtree_query(u).first;
-            seg.update(i, seg[i] + x);
+            seg.update(ET.in(u), seg[ET.in(u)] + x);
         }
         else{
             int u; cin >> u;
-            auto [in, out] = HLD.subtree_query(u);
-            cout << seg.query(in, out) << endl;
+            auto [in, out] = ET[u];
+            cout << seg.query(ET.in(u), ET.out(u)) << endl;
         }
     }
 }
