@@ -2,8 +2,7 @@
 
 #include <bits/stdc++.h>
 
-#include "../library/Graph/Dijkstra.hpp"
-#include "../library/Graph/BellmanFord.hpp"
+#include "../old/Graph/BellmanFord.hpp"
 
 using namespace std;
 
@@ -22,9 +21,13 @@ int main(){
         cout << "NEGATIVE CYCLE" << endl;
     }
     else{
-        Dijkstra<int> dk(G);
-        dk.update_potential(ans);
-        dk.build(r);
-        dk.print(true, '\n');
+        for(auto &d : ans){
+            if(d == G.INF){
+                cout << "INF" <<endl;
+            }
+            else{
+                cout << d << endl;
+            }
+        }
     }
 }

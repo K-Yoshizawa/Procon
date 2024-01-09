@@ -1,78 +1,90 @@
-#pragma once
-
 /**
+ * @file StronglyConnectedComponents.hpp
  * @brief Strongly Connected Components - 強連結成分分解
+ * @version 3.0
+ * @date 2024-01-09
  */
-
-#include <bits/stdc++.h>
-using namespace std;
 
 #include "GraphTemplate.hpp"
 
-/**
- * @brief  強連結成分分解を行う。
- */
 template<typename CostType>
 struct StronglyConnectedComponents{
-    vector<int> belong; // 頂点がどの強連結成分に所属するか
-    vector<vector<Vertex>> sc; // 各強連結成分に所属する頂点
-
     private:
-    Graph<CostType> &G, rG;
-    vector<int> order, visited;
-    vector<int> tmp;
+    GraphV<CostType> &G;
+    GraphV<CostType> rG;
+    vector<int> m_visited, m_order, m_belong;
+    vector<vector<Vertex>> m_member;
 
-    void dfs(int v){
-        visited[v] = 1;
-        for(auto &e : G.get_edges(v)){
-            if(visited[e.to] == 0) dfs(e.to);
+    void f_dfs(Vertex v){
+        m_visited[v] = 1;
+        for(auto &e : G[v]){
+            if(!m_visited[e.to]) f_dfs(e.to);
         }
-        order.push_back(v);
+        m_order.push_back(v);
     }
 
-    void rdfs(int v, int k){
-        visited[v] = 0;
-        belong[v] = k;
-        tmp.push_back(v);
-        for(auto &e : rG.get_edges(v)){
-            if(visited[e.to] == 1) rdfs(e.to, k);
+    void f_rdfs(Vertex v, int k){
+        m_visited[v] = 0;
+        m_belong[v] = k;
+        m_member[k].push_back(v);
+        for(auto &e : rG[v]){
+            if(m_visited[e.to]) f_rdfs(e.to, k);
         }
     }
 
     public:
-    StronglyConnectedComponents(Graph<CostType> &G) : G(G){
+    StronglyConnectedComponents(GraphV<CostType> &G) : G(G){
         rG = G.reverse();
-        visited.resize(G.size(), 0);
-        belong.resize(G.size(), -1);
+        m_visited.resize(G.size(), 0);
+        m_belong.resize(G.size(), -1);
         for(int i = 0; i < G.size(); ++i){
-            if(visited[i] == 0) dfs(i);
+            if(!m_visited[i]) f_dfs(i);
         }
         int k = 0;
-        for(int i = order.size() - 1; i >= 0; --i){
-            if(visited[order[i]] == 1){
-                rdfs(order[i], k++);
-                sc.push_back(tmp);
-                tmp.clear();
+        for(int i = m_order.size() - 1; i >= 0; --i){
+            if(m_visited[m_order[i]]){
+                m_member.push_back(vector<CostType>{});
+                f_rdfs(m_order[i], k++);
             }
         }
     }
 
-    /**
-     * @brief  2つの頂点が同じ強連結成分に所属するかを判定する。
-     * @param  u: 判定したい頂点u
-     * @param  v: 判定したい頂点v
-     * @retval 同じ強連結成分に所属するならtrue、そうでなければfalse
-     */
-    bool same(Vertex u, Vertex v){
-        return belong[u] == belong[v];
+    int where(Vertex v){
+        return m_belong.at(v);
     }
 
-    /**
-     * @brief 頂点vが属する強連結成分を返す。
-     * @param v 調べたい頂点v
-     * @return vector<Vertex> 頂点vが属する強連結成分
-     */
-    vector<Vertex> get(Vertex v){
-        return sc[belong[v]];
+    bool same(Vertex u, Vertex v){
+        return where(u) == where(v);
+    }
+
+    vector<vector<Vertex>> &get(){
+        return m_member;
+    }
+
+    GraphV<CostType> build(){
+        GraphV<CostType> ret(m_member.size(), true);
+        for(int i = 0; i < G.size(); ++i){
+            int from = where(i);
+            for(auto &e : G[i]){
+                int to = where(e.to);
+                if(from == to) continue;
+                ret.add(from, to, e.cost);
+            }
+        }
+        return ret;
+    }
+
+    int operator[](Vertex v){
+        return where(v);
+    }
+
+    void print(){
+        for(int i = 0; i < m_member.size(); ++i){
+            cout << "Component " << i << " : ";
+            for(auto v : m_member[i]){
+                cout << v << " ";
+            }
+            cout << endl;
+        }
     }
 };

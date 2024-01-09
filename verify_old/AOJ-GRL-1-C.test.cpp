@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C"
 
-#include "../library/Graph/WarshallFloyd.hpp"
+#include "../old/Graph/WarshallFloyd.hpp"
 
 int main(){
     int V, E;

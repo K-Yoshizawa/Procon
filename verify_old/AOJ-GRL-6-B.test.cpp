@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B"
 
-#include "../library/Graph/PrimalDual.hpp"
+#include "../old/Graph/PrimalDual.hpp"
 
 int main(){
     int V, E, F;

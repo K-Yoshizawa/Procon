@@ -11,4 +11,6 @@ ac-library/
 answer.exe
 !/verify/**
 !/verify_icpc/**
+!/verify_latest/**
+!/verify_old/**
 tools/

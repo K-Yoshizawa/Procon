@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C"
 
-#include "../library/Tree/LowestCommonAncestor.hpp"
+#include "../old/Tree/HeavyLightDecomposition.hpp"
 
 int main(){
     int n; cin >> n;
@@ -13,10 +13,10 @@ int main(){
         }
     }
 
-    LowestCommonAncestor<int> lca(G, 0);
+    HeavyLightDecomposition<int> HLD(G);
     int q; cin >> q;
     while(q--){
         int u, v; cin >> u >> v;
-        cout << lca.get(u, v) << endl;
+        cout << HLD.lca(u, v) << endl;
     }
 }

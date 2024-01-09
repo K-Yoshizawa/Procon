@@ -2,147 +2,218 @@
 
 /**
  * @file GraphTemplate.hpp
- * @author log K (lX57)
  * @brief Graph Template - グラフテンプレート
- * @version 2.2
- * @date 2023-10-02
+ * @version 3.0
+ * @date 2024-01-09
  */
 
 #include <bits/stdc++.h>
 using namespace std;
 
 using Vertex = int;
-using EdgeID = int;
 using EdgeIndex = int;
 
 template<typename CostType>
 struct Edge{
-    EdgeID ID{-1};
-    Vertex src{-1}, to{-1};
-    CostType cost, cap;
-    EdgeIndex sidx, tidx;
+    public:
+    Vertex from, to;
+    CostType cost;
+    EdgeIndex idx{-1};
 
     Edge() = default;
-    Edge(EdgeID ID, Vertex src, Vertex to, CostType cost, CostType cap, EdgeIndex sidx, EdgeIndex tidx) :
-        ID(ID), src(src), to(to), cost(cost), cap(cap), sidx(sidx), tidx(tidx){}
+    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}
 
-    void print(){
-        cerr << "Edge " << ID << " : (" << src << " -> " << to << "), Cost = " << cost << ", Capacity = " << cap << ", Place = [" << sidx << ", " << tidx << "]" << endl;
+    operator int(){
+        return to;
     }
 };
 
-template<typename CostType>
-using EdgeSet = vector<Edge<CostType>>;
-template<typename CostType>
-using IncidentList = vector<vector<Edge<CostType>>>;
-using AdjacentList = vector<vector<Vertex>>;
-
-template<typename CostType>
-struct Graph{
-    protected:
-    int __CntVertex, __CntEdge;
-    bool __isDirected;
-    EdgeSet<CostType> __ES, __RES;
-    IncidentList<CostType> __IL;
-    AdjacentList __AL;
+template<typename CostType = int>
+struct GraphV{
+    private:
+    int m_vertex_size{0}, m_edge_size{0};
+    bool m_is_directed{false};
+    vector<vector<Edge<CostType>>> m_adj;
+    vector<int> m_indegree;
 
     public:
-    CostType INF;
+    CostType INF{numeric_limits<CostType>::max() >> 2};
 
-    Graph(int VertexSize, bool isDirected = false) : __CntVertex(VertexSize), __isDirected(isDirected), __CntEdge(0), __IL(VertexSize), __AL(VertexSize), INF(numeric_limits<CostType>::max() / 2){}
-
-    Graph() = default;
-
-    void add(Vertex Source, Vertex To, CostType Cost = 1){
-        assert(0 <= Source && Source < __CntVertex);
-        assert(0 <= To && To < __CntVertex);
-        EdgeIndex sidx = __IL[Source].size(), tidx = __IL[To].size();
-        Edge<CostType> es{__CntEdge, Source, To, Cost, 1, sidx, tidx};
-        Edge<CostType> et{__CntEdge, To, Source, Cost, 1, tidx, sidx};
-        __ES.push_back(es);
-        __RES.push_back(et);
-        __IL[Source].push_back(es), __AL[Source].push_back(To);
-        if(!__isDirected) __IL[To].push_back(et), __AL[To].push_back(Source);
-        ++__CntEdge;
+    GraphV() = default;
+    GraphV(int vertex_size, bool directed = false) : m_vertex_size(vertex_size), m_is_directed(directed){
+        m_adj.resize(vertex_size);
+        m_indegree.resize(vertex_size, 0);
     }
 
-    vector<vector<CostType>> matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2){
-        vector ret(__CntVertex, vector(__CntVertex, NotAdjacent));
-        for(Vertex v = 0; v < __CntVertex; ++v){
-            ret[v][v] = 0;
-            for(auto e : __IL[v]){
-                ret[v][e.to] = e.cost;
+    void add(Vertex from, Vertex to, CostType cost = 1){
+        assert(0 <= from and from < m_vertex_size);
+        assert(0 <= to and to < m_vertex_size);
+        Edge<CostType> e1(from, to, cost);
+        e1.idx = m_adj[from].size();
+        m_adj[from].push_back(e1);
+        if(m_is_directed){
+            ++m_indegree[to];
+            return;
+        }
+        Edge<CostType> e2(to, from, cost);
+        e2.idx = m_adj[to].size();
+        m_adj[to].push_back(e2);
+        ++m_edge_size;
+    }
+
+    void input(int edge_size, bool weighted = false, bool zero_index = false){
+        for(int i = 0; i < edge_size; ++i){
+            Vertex s, t; cin >> s >> t;
+            if(!zero_index) --s, --t;
+            CostType c = 1;
+            if(weighted) cin >> c;
+            add(s, t, c);
+        }
+    }
+
+    size_t size(){
+        return m_vertex_size;
+    }
+
+    int outdegree(Vertex v){
+        return (int)m_adj.at(v).size();
+    }
+
+    int indegree(Vertex v){
+        if(m_is_directed) return m_indegree.at(v);
+        else return (int)m_adj.at(v).size();
+    }
+
+    vector<Vertex> source(){
+        assert(m_is_directed);
+        vector<Vertex> ret;
+        for(int i = 0; i < m_vertex_size; ++i){
+            if(indegree(i) == 0) ret.push_back(i);
+        }
+        return ret;
+    }
+
+    vector<Vertex> sink(){
+        vector<Vertex> ret;
+        for(int i = 0; i < m_vertex_size; ++i){
+            if(outdegree(i) == 0) ret.push_back(i);
+        }
+        return ret;
+    }
+
+    vector<Vertex> leaf(){
+        vector<Vertex> ret;
+        for(int i = 0; i < m_vertex_size; ++i){
+            if(indegree(i) == 1) ret.push_back(i);
+        }
+        return ret;
+    }
+
+    vector<Edge<CostType>> &get_adj(Vertex v){
+        return m_adj.at(v);
+    }
+
+    GraphV<CostType> reverse(){
+        assert(m_is_directed);
+        GraphV ret(m_vertex_size, true);
+        for(auto es : m_adj){
+            for(auto e : es){
+                ret.add(e.to, e.from, e.cost);
             }
         }
         return ret;
     }
 
-    inline int vsize(){
-        return __CntVertex;
-    }
-
-    inline int esize(){
-        return __CntEdge;
-    }
-
-    inline int incsize(Vertex v){
-        return __IL[v].size();
-    }
-
-    bool directed(){
-        return __isDirected;
-    }
-
-    inline EdgeSet<CostType> &get_edgeset(){
-        return __ES;
-    }
-
-    inline IncidentList<CostType> &get_incidentlist(){
-        return __IL;
-    }
-
-    inline vector<Edge<CostType>> &get_incident(Vertex v){
-        assert(0 <= v && v < __CntVertex);
-        return __IL[v];
-    }
-
-    inline AdjacentList &get_adjacentlist(){
-        return __AL;
-    }
-
-    inline vector<Vertex> &get_adjacent(Vertex v){
-        assert(0 <= v && v < __CntVertex);
-        return __AL[v];
-    }
-
-    vector<Edge<CostType>> operator[](Vertex v){
-        return get_incident(v);
-    }
-
-    void print_edgeset(bool OneIndex = true){
-        for(int e = 0; e < __CntEdge; ++e){
-            cout << e + OneIndex << " : (" << __ES[e].from + OneIndex << (__isDirected ? " -> " : " <-> ") << __ES[e].to + OneIndex << ") = " << __ES[e].cost << " (" << __ES[e].cap << ")" << endl;
+    vector<Vertex> sort(){
+        assert(m_is_directed);
+        vector<Vertex> ret;
+        queue<Vertex> que;
+        vector<int> cnt(m_vertex_size, 0);
+        for(auto v : source()) que.push(v);
+        while(que.size()){
+            Vertex v = que.front(); que.pop();
+            ret.push_back(v);
+            for(int u : m_adj[v]){
+                if(++cnt[u] == indegree(u)) que.push(u);
+            }
         }
+        return ret;
     }
 
-    void print_incidentlist(bool OneIndex = true){
-        for(int i = 0; i < __CntVertex; ++i){
-            cout << i + OneIndex << " :";
-            for(int j = 0; j < __IL[i].size(); ++j){
-                cout << " (" << __IL[i][j].to << " / " << __IL[i][j].cost << ", " << __IL[i][j].cap << ")";
+    void print(){
+        for(int i = 0; i < m_vertex_size; ++i){
+            cout << "Vertex " << i << " : ";
+            for(auto &e : m_adj[i]){
+                cout << "{" << e.to << ", " << e.cost << "} ";
             }
             cout << endl;
         }
     }
 
-    void print_matrix(CostType NotAdjacent = numeric_limits<CostType>::max() / 2, bool DisplayINF = true){
-        auto mat = matrix(NotAdjacent);
-        for(int i = 0; i < __CntVertex; ++i){
-            cout << (DisplayINF && mat[i][0] == NotAdjacent ? "INF" : to_string(mat[i][0]));
-            for(int j = 1; j < __CntVertex; ++j){
-                cout << " " << (DisplayINF && mat[i][j] == NotAdjacent ? "INF" : to_string(mat[i][j]));
-            }
-            cout << endl;
+    vector<Edge<CostType>> &operator[](Vertex v){
+        return get_adj(v);
+    }
+};
+
+template<typename CostType>
+struct GraphE{
+    private:
+    int m_vertex_size{0}, m_edge_size{0};
+    bool m_is_directed{false};
+    vector<Edge<CostType>> m_es, m_res;
+    vector<int> m_indegree, m_outdegree;
+
+    public:
+    CostType INF{numeric_limits<CostType>::max() >> 2};
+
+    GraphE() = default;
+    GraphE(int vertex_size, bool directed = false) : m_vertex_size(vertex_size), m_is_directed(directed){
+        m_indegree.resize(vertex_size, 0);
+        m_outdegree.resize(vertex_size, 0);
+    }
+
+    void add(Vertex from, Vertex to, CostType cost = 1){
+        assert(0 <= from and from < m_vertex_size);
+        assert(0 <= to and to < m_vertex_size);
+        Edge<CostType> e1(from, to, cost);
+        e1.idx = m_edge_size;
+        m_es.push_back(e1);
+        ++m_outdegree[from];
+        if(m_is_directed){
+            ++m_indegree[to];
+            return;
         }
+        Edge<CostType> e2(to, from, cost);
+        e2.idx = m_edge_size;
+        m_res.push_back(e2);
+        ++m_outdegree[to];
+        ++m_edge_size;
+    }
+
+    void input(int edge_size, bool weighted = false, bool zero_index = false){
+        for(int i = 0; i < edge_size; ++i){
+            Vertex s, t; cin >> s >> t;
+            if(!zero_index) --s, --t;
+            CostType c = 1;
+            if(weighted) cin >> c;
+            add(s, t, c);
+        }
+    }
+
+    size_t size(){
+        return m_vertex_size;
+    }
+
+    int outdegree(Vertex v){
+        return m_outdegree.at(v);
+    }
+
+    int indegree(Vertex v){
+        if(m_is_directed) return m_indegree.at(v);
+        else return m_outdegree.at(v);
+    }
+
+    vector<Edge<CostType>> &get(){
+        return m_es;
     }
 };

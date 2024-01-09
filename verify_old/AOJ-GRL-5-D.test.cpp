@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_D"
 
-#include "../library/Tree/EulerTour.hpp"
-#include "../library/DataStructure/SegmentTree.hpp"
+#include "../old/Tree/EulerTour.hpp"
+#include "../old/DataStructure/SegmentTree.hpp"
 
 int main(){
     int n; cin >> n;

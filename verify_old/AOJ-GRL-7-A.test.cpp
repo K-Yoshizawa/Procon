@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A"
 
-#include "../library/Graph/BipartiteMatching.hpp"
+#include "../old/Graph/BipartiteMatching.hpp"
 
 int main(){
     int X, Y, E;
