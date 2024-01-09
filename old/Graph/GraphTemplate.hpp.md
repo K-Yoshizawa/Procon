@@ -26,6 +26,9 @@ data:
     path: old/Graph/FordFulkerson.hpp
     title: "Ford-Fulkerson - \u6700\u5927\u6D41"
   - icon: ':heavy_check_mark:'
+    path: old/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+  - icon: ':heavy_check_mark:'
     path: old/Graph/PrimalDual.hpp
     title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
   - icon: ':warning:'
@@ -60,11 +63,23 @@ data:
     path: verify_old/AOJ-GRL-1-C.test.cpp
     title: verify_old/AOJ-GRL-1-C.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-2-A.test.cpp
+    title: verify_old/AOJ-GRL-2-A.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-5-C-HLD.test.cpp
     title: verify_old/AOJ-GRL-5-C-HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-5-C.test.cpp
     title: verify_old/AOJ-GRL-5-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+    title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D.test.cpp
+    title: verify_old/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-E.test.cpp
+    title: verify_old/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
     title: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
@@ -222,6 +237,7 @@ data:
   - old/Graph/PrimalDual.hpp
   - old/Graph/CycleDetection.hpp
   - old/Graph/Dijkstra.hpp
+  - old/Graph/Kruskal.hpp
   - old/Graph/FordFulkerson.hpp
   - old/Graph/BellmanFord.hpp
   - old/Graph/Dinic.hpp
@@ -231,16 +247,20 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
+  - verify_old/AOJ-GRL-5-E.test.cpp
   - verify_old/AOJ-GRL-1-C.test.cpp
   - verify_old/AOJ-GRL-5-C.test.cpp
   - verify_old/AOJ-GRL-7-A.test.cpp
   - verify_old/AOJ-GRL-1-B.test.cpp
+  - verify_old/AOJ-GRL-2-A.test.cpp
   - verify_old/AOJ-GRL-6-A-Dinic.test.cpp
   - verify_old/AOJ-GRL-1-A.test.cpp
   - verify_old/AOJ-GRL-5-C-HLD.test.cpp
   - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - verify_old/AOJ-GRL-5-D-HLD.test.cpp
   - verify_old/AOJ-GRL-6-B.test.cpp
   - verify_old/AOJ-GRL-6-A.test.cpp
+  - verify_old/AOJ-GRL-5-D.test.cpp
   - verify_old/LC-VertexAddPathSum.test.cpp
   - verify_old/LC-VertexAddSubtreeSum.test.cpp
 documentation_of: old/Graph/GraphTemplate.hpp

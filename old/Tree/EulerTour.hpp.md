@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D.test.cpp
+    title: verify_old/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_old/LC-VertexAddSubtreeSum.test.cpp
     title: verify_old/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
@@ -124,6 +127,7 @@ data:
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify_old/AOJ-GRL-5-D.test.cpp
   - verify_old/LC-VertexAddSubtreeSum.test.cpp
 documentation_of: old/Tree/EulerTour.hpp
 layout: document

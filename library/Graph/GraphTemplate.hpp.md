@@ -15,9 +15,6 @@ data:
     path: library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/AOJ-ALDS1-11-A.test.cpp
-    title: verify/AOJ-ALDS1-11-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
@@ -27,18 +24,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
-  - icon: ':x:'
-    path: verify/AOJ-GRL-4-B.test.cpp
-    title: verify/AOJ-GRL-4-B.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -194,15 +188,13 @@ data:
   - library/Graph/LongestDistance.hpp
   - library/Graph/BellmanFord.hpp
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-ShortestPath.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-GRL-4-B.test.cpp
-  - verify/AOJ-ALDS1-11-A.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"

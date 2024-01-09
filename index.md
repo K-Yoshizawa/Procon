@@ -89,7 +89,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -165,7 +165,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: old/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: old/Graph/Kruskal.hpp
       title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     - icon: ':heavy_check_mark:'
@@ -195,9 +195,6 @@ data:
   verificationCategories:
   - name: verify
     pages:
-    - icon: ':x:'
-      path: verify/AOJ-ALDS1-11-A.test.cpp
-      title: verify/AOJ-ALDS1-11-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-ALDS1-14-B.test.cpp
       title: verify/AOJ-ALDS1-14-B.test.cpp
@@ -261,9 +258,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-3-C.test.cpp
       title: verify/AOJ-GRL-3-C.test.cpp
-    - icon: ':x:'
-      path: verify/AOJ-GRL-4-B.test.cpp
-      title: verify/AOJ-GRL-4-B.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-DeterminantofMatrix.test.cpp
       title: verify/LC-DeterminantofMatrix.test.cpp
@@ -370,7 +364,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-1-C.test.cpp
       title: verify_old/AOJ-GRL-1-C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-2-A.test.cpp
       title: verify_old/AOJ-GRL-2-A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -379,13 +373,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-C.test.cpp
       title: verify_old/AOJ-GRL-5-C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
       title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-D.test.cpp
       title: verify_old/AOJ-GRL-5-D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-E.test.cpp
       title: verify_old/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'

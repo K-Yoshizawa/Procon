@@ -16,6 +16,12 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+    title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D.test.cpp
+    title: verify_old/AOJ-GRL-5-D.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_old/LC-VertexAddPathSum.test.cpp
     title: verify_old/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -173,6 +179,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - verify_old/AOJ-GRL-5-D-HLD.test.cpp
+  - verify_old/AOJ-GRL-5-D.test.cpp
   - verify_old/LC-VertexAddPathSum.test.cpp
   - verify_old/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp

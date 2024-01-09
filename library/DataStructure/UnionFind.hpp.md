@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: old/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-1-A.test.cpp
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-2-A.test.cpp
+    title: verify_old/AOJ-GRL-2-A.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -85,10 +91,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/UnionFind.hpp
-  requiredBy: []
+  requiredBy:
+  - old/Graph/Kruskal.hpp
   timestamp: '2023-11-12 02:50:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify_old/AOJ-GRL-2-A.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
   - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp

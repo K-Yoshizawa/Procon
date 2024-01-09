@@ -10,6 +10,12 @@ data:
     path: verify_old/AOJ-GRL-5-C-HLD.test.cpp
     title: verify_old/AOJ-GRL-5-C-HLD.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+    title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/AOJ-GRL-5-E.test.cpp
+    title: verify_old/AOJ-GRL-5-E.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify_old/LC-VertexAddPathSum.test.cpp
     title: verify_old/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -239,8 +245,10 @@ data:
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify_old/AOJ-GRL-5-E.test.cpp
   - verify_old/AOJ-GRL-5-C-HLD.test.cpp
   - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - verify_old/AOJ-GRL-5-D-HLD.test.cpp
   - verify_old/LC-VertexAddPathSum.test.cpp
 documentation_of: old/Tree/HeavyLightDecomposition.hpp
 layout: document
