@@ -15,6 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddPathSum.test.cpp
+    title: verify_old/LC-VertexAddPathSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+    title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddSubtreeSum.test.cpp
+    title: verify_old/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -163,6 +172,9 @@ data:
   timestamp: '2023-11-02 01:25:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - verify_old/LC-VertexAddPathSum.test.cpp
+  - verify_old/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp

@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: old/Graph/WarshallFloyd.hpp
     title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: old/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
@@ -77,6 +77,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-7-A.test.cpp
     title: verify_old/AOJ-GRL-7-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddPathSum.test.cpp
+    title: verify_old/LC-VertexAddPathSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+    title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddSubtreeSum.test.cpp
+    title: verify_old/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -229,8 +238,11 @@ data:
   - verify_old/AOJ-GRL-6-A-Dinic.test.cpp
   - verify_old/AOJ-GRL-1-A.test.cpp
   - verify_old/AOJ-GRL-5-C-HLD.test.cpp
+  - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
   - verify_old/AOJ-GRL-6-B.test.cpp
   - verify_old/AOJ-GRL-6-A.test.cpp
+  - verify_old/LC-VertexAddPathSum.test.cpp
+  - verify_old/LC-VertexAddSubtreeSum.test.cpp
 documentation_of: old/Graph/GraphTemplate.hpp
 layout: document
 redirect_from:

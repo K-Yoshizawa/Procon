@@ -5,10 +5,13 @@ data:
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify_old/LC-VertexAddSubtreeSum.test.cpp
+    title: verify_old/LC-VertexAddSubtreeSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     links: []
@@ -119,8 +122,9 @@ data:
   path: old/Tree/EulerTour.hpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify_old/LC-VertexAddSubtreeSum.test.cpp
 documentation_of: old/Tree/EulerTour.hpp
 layout: document
 redirect_from:

@@ -180,7 +180,7 @@ data:
       title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
   - name: old/Tree
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: old/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
@@ -297,15 +297,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp
-    - icon: ':x:'
-      path: verify/LC-VertexAddPathSum.test.cpp
-      title: verify/LC-VertexAddPathSum.test.cpp
-    - icon: ':x:'
-      path: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
-      title: verify/LC-VertexAddSubtreeSum-HLD.test.cpp
-    - icon: ':x:'
-      path: verify/LC-VertexAddSubtreeSum.test.cpp
-      title: verify/LC-VertexAddSubtreeSum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-ZAlgorithm.test.cpp
       title: verify/LC-ZAlgorithm.test.cpp
@@ -409,6 +400,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-7-A.test.cpp
       title: verify_old/AOJ-GRL-7-A.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_old/LC-VertexAddPathSum.test.cpp
+      title: verify_old/LC-VertexAddPathSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+      title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify_old/LC-VertexAddSubtreeSum.test.cpp
+      title: verify_old/LC-VertexAddSubtreeSum.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)
