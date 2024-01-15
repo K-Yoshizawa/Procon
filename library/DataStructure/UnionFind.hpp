@@ -72,4 +72,15 @@ struct UnionFind{
         __Weight[y] = w;
         return true;
     }
+
+    vector<vector<int>> group(){
+        vector<vector<int>> ret(__Data.size());
+        for(int i = 0; i < __Data.size(); ++i){
+            ret[find(i)].emplace_back(i);
+        }
+        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){
+            return v.empty();
+        }), end(ret));
+        return ret;
+    }
 };

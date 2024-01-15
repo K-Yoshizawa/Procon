@@ -216,4 +216,18 @@ struct GraphE{
     vector<Edge<CostType>> &get(){
         return m_es;
     }
+
+    vector<int> sort(){
+        vector<int> ret(m_edge_size);
+        iota(ret.begin(), ret.end(), 0);
+        std::sort(ret.begin(), ret.end(),
+            [&](int i, int j){
+                return m_es[i].cost < m_es[j].cost;
+            });
+        return ret;
+    }
+
+    Edge<CostType> &operator[](int i){
+        return m_es[i];
+    }
 };
