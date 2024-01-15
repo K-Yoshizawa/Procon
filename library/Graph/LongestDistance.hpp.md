@@ -85,7 +85,11 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 13 \"library/Graph/LongestDistance.hpp\"\
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};\n#line 13 \"library/Graph/LongestDistance.hpp\"\
     \n\ntemplate<typename CostType>\nvector<CostType> longestdistance(GraphV<CostType>\
     \ &G, CostType INF, Vertex start = -1, CostType init = 0){\n    vector<CostType>\
     \ dp(G.size(), INF);\n    if(start == -1){\n        for(auto v : G.source()) dp[v]\
@@ -106,7 +110,7 @@ data:
   isVerificationFile: false
   path: library/Graph/LongestDistance.hpp
   requiredBy: []
-  timestamp: '2024-01-09 23:25:07+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Graph/LongestDistance.hpp

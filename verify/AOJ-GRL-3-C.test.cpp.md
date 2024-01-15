@@ -91,7 +91,11 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
     \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    private:\n\
     \    GraphV<CostType> &G;\n    GraphV<CostType> rG;\n    vector<int> m_visited,\
     \ m_order, m_belong;\n    vector<vector<Vertex>> m_member;\n\n    void f_dfs(Vertex\
@@ -134,7 +138,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2024-01-09 23:25:07+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-C.test.cpp

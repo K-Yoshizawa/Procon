@@ -46,10 +46,15 @@ data:
     \ T w = 0){\n        w += __weight(x) - __weight(y);\n        x = find(x), y =\
     \ find(y);\n        if(x == y) return false;\n        if(__Data[x] > __Data[y])\
     \ swap(x, y), w = -w;\n        __Data[x] += __Data[y];\n        __Data[y] = x;\n\
-    \        __Weight[y] = w;\n        return true;\n    }\n};\n#line 4 \"verify/LC-Unionfind.test.cpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n\n    UnionFind uf(N);\n    while(Q--){\n\
-    \        int t, u, v; cin >> t >> u >> v;\n        if(t == 0) uf.unite(u, v);\n\
-    \        else cout << uf.same(u, v) << endl;\n    }\n}\n"
+    \        __Weight[y] = w;\n        return true;\n    }\n\n    vector<vector<int>>\
+    \ group(){\n        vector<vector<int>> ret(__Data.size());\n        for(int i\
+    \ = 0; i < __Data.size(); ++i){\n            ret[find(i)].emplace_back(i);\n \
+    \       }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){\n\
+    \            return v.empty();\n        }), end(ret));\n        return ret;\n\
+    \    }\n};\n#line 4 \"verify/LC-Unionfind.test.cpp\"\n\nint main(){\n    int N,\
+    \ Q; cin >> N >> Q;\n\n    UnionFind uf(N);\n    while(Q--){\n        int t, u,\
+    \ v; cin >> t >> u >> v;\n        if(t == 0) uf.unite(u, v);\n        else cout\
+    \ << uf.same(u, v) << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n\n#include\
     \ \"../library/DataStructure/UnionFind.hpp\"\n\nint main(){\n    int N, Q; cin\
     \ >> N >> Q;\n\n    UnionFind uf(N);\n    while(Q--){\n        int t, u, v; cin\
@@ -60,7 +65,7 @@ data:
   isVerificationFile: true
   path: verify/LC-Unionfind.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 02:50:04+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-Unionfind.test.cpp

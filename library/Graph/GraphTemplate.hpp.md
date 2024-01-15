@@ -9,6 +9,9 @@ data:
     path: library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   - icon: ':warning:'
+    path: library/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+  - icon: ':warning:'
     path: library/Graph/LongestDistance.hpp
     title: ''
   - icon: ':heavy_check_mark:'
@@ -107,7 +110,11 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n"
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template\
     \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n\
     \ * @date 2024-01-09\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
@@ -178,7 +185,11 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};"
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
@@ -186,8 +197,9 @@ data:
   - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/Dijkstra.hpp
   - library/Graph/LongestDistance.hpp
+  - library/Graph/Kruskal.hpp
   - library/Graph/BellmanFord.hpp
-  timestamp: '2024-01-09 23:25:07+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-ShortestPath.test.cpp

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: library/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   - icon: ':heavy_check_mark:'
     path: old/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
@@ -55,7 +58,12 @@ data:
     \ T w = 0){\n        w += __weight(x) - __weight(y);\n        x = find(x), y =\
     \ find(y);\n        if(x == y) return false;\n        if(__Data[x] > __Data[y])\
     \ swap(x, y), w = -w;\n        __Data[x] += __Data[y];\n        __Data[y] = x;\n\
-    \        __Weight[y] = w;\n        return true;\n    }\n};\n"
+    \        __Weight[y] = w;\n        return true;\n    }\n\n    vector<vector<int>>\
+    \ group(){\n        vector<vector<int>> ret(__Data.size());\n        for(int i\
+    \ = 0; i < __Data.size(); ++i){\n            ret[find(i)].emplace_back(i);\n \
+    \       }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){\n\
+    \            return v.empty();\n        }), end(ret));\n        return ret;\n\
+    \    }\n};\n"
   code: "#pragma once\n\n/**\n * @file UnionFind.hpp\n * @author log K (lX57)\n *\
     \ @brief UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version\
     \ 2.0\n * @date 2023-11-12\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
@@ -87,13 +95,18 @@ data:
     \        w += __weight(x) - __weight(y);\n        x = find(x), y = find(y);\n\
     \        if(x == y) return false;\n        if(__Data[x] > __Data[y]) swap(x, y),\
     \ w = -w;\n        __Data[x] += __Data[y];\n        __Data[y] = x;\n        __Weight[y]\
-    \ = w;\n        return true;\n    }\n};"
+    \ = w;\n        return true;\n    }\n\n    vector<vector<int>> group(){\n    \
+    \    vector<vector<int>> ret(__Data.size());\n        for(int i = 0; i < __Data.size();\
+    \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
+    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
+    \        return ret;\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/UnionFind.hpp
   requiredBy:
   - old/Graph/Kruskal.hpp
-  timestamp: '2023-11-12 02:50:04+09:00'
+  - library/Graph/Kruskal.hpp
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-2-A.test.cpp

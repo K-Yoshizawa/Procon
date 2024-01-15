@@ -89,10 +89,14 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\n\n\
-    template<typename CostType>\nvector<CostType> BellmanFord(GraphE<CostType> &G,\
-    \ Vertex s){\n    vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n  \
-    \  int updatecount = 0;\n    while(1){\n        if(updatecount == G.size()){\n\
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(GraphE<CostType>\
+    \ &G, Vertex s){\n    vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n\
+    \    int updatecount = 0;\n    while(1){\n        if(updatecount == G.size()){\n\
     \            return vector<CostType>{};\n        }\n        bool update = false;\n\
     \        for(auto e : G.get()){\n            if(ret[e.from] == G.INF) continue;\n\
     \            if(ret[e.to] > ret[e.from] + e.cost){\n                ret[e.to]\
@@ -115,7 +119,7 @@ data:
   isVerificationFile: false
   path: library/Graph/BellmanFord.hpp
   requiredBy: []
-  timestamp: '2024-01-09 23:25:07+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp

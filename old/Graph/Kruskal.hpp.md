@@ -109,17 +109,20 @@ data:
     \        w += __weight(x) - __weight(y);\n        x = find(x), y = find(y);\n\
     \        if(x == y) return false;\n        if(__Data[x] > __Data[y]) swap(x, y),\
     \ w = -w;\n        __Data[x] += __Data[y];\n        __Data[y] = x;\n        __Weight[y]\
-    \ = w;\n        return true;\n    }\n};\n#line 11 \"old/Graph/Kruskal.hpp\"\n\n\
-    template<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<EdgeID> __RemainEdge;\n    CostType __Cost;\n\n    public:\n\
-    \    Kruskal(Graph<CostType> &G) : G(G), __Cost(0){\n        UnionFind uf(G.vsize());\n\
-    \        auto es = G.get_edgeset();\n        vector<EdgeID> eid(G.esize());\n\
-    \        iota(eid.begin(), eid.end(), 0);\n        sort(eid.begin(), eid.end(),\
-    \ [&](EdgeID l, EdgeID r){return es[l].cost < es[r].cost;});\n        for(EdgeID\
-    \ i : eid){\n            if(uf.same(es[i].src, es[i].to)) continue;\n        \
-    \    uf.unite(es[i].src, es[i].to);\n            __RemainEdge.push_back(i);\n\
-    \            __Cost += es[i].cost;\n        }\n    }\n\n    CostType get(){\n\
-    \        return __Cost;\n    }\n};\n"
+    \ = w;\n        return true;\n    }\n\n    vector<vector<int>> group(){\n    \
+    \    vector<vector<int>> ret(__Data.size());\n        for(int i = 0; i < __Data.size();\
+    \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
+    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
+    \        return ret;\n    }\n};\n#line 11 \"old/Graph/Kruskal.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType> &G;\n    vector<EdgeID>\
+    \ __RemainEdge;\n    CostType __Cost;\n\n    public:\n    Kruskal(Graph<CostType>\
+    \ &G) : G(G), __Cost(0){\n        UnionFind uf(G.vsize());\n        auto es =\
+    \ G.get_edgeset();\n        vector<EdgeID> eid(G.esize());\n        iota(eid.begin(),\
+    \ eid.end(), 0);\n        sort(eid.begin(), eid.end(), [&](EdgeID l, EdgeID r){return\
+    \ es[l].cost < es[r].cost;});\n        for(EdgeID i : eid){\n            if(uf.same(es[i].src,\
+    \ es[i].to)) continue;\n            uf.unite(es[i].src, es[i].to);\n         \
+    \   __RemainEdge.push_back(i);\n            __Cost += es[i].cost;\n        }\n\
+    \    }\n\n    CostType get(){\n        return __Cost;\n    }\n};\n"
   code: "/**\n * @file Kruskal.hpp\n * @author log K (lX57)\n * @brief Kruskal - \u6700\
     \u5C0F\u5168\u57DF\u6728\n * @version 2.0\n * @date 2023-11-01\n */\n\n#include\
     \ \"GraphTemplate.hpp\"\n#include \"../../library/DataStructure/UnionFind.hpp\"\
@@ -139,7 +142,7 @@ data:
   isVerificationFile: false
   path: old/Graph/Kruskal.hpp
   requiredBy: []
-  timestamp: '2024-01-09 23:47:33+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-2-A.test.cpp

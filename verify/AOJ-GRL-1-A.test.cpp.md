@@ -91,11 +91,15 @@ data:
     \    }\n\n    int outdegree(Vertex v){\n        return m_outdegree.at(v);\n  \
     \  }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return m_outdegree.at(v);\n    }\n\n    vector<Edge<CostType>> &get(){\n\
-    \        return m_es;\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct Dijkstra{\n    private:\n    GraphV<CostType> &G;\n    vector<CostType>\
-    \ m_dist, m_potential;\n    vector<Vertex> m_prev_vertex;\n\n    public:\n   \
-    \ Dijkstra(GraphV<CostType> &G) : G(G){\n        m_dist.resize(G.size());\n  \
-    \      m_potential.resize(G.size(), 0);\n        m_prev_vertex.resize(G.size(),\
+    \        return m_es;\n    }\n\n    vector<int> sort(){\n        vector<int> ret(m_edge_size);\n\
+    \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
+    \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
+    \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
+    \ i){\n        return m_es[i];\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n    GraphV<CostType>\
+    \ &G;\n    vector<CostType> m_dist, m_potential;\n    vector<Vertex> m_prev_vertex;\n\
+    \n    public:\n    Dijkstra(GraphV<CostType> &G) : G(G){\n        m_dist.resize(G.size());\n\
+    \        m_potential.resize(G.size(), 0);\n        m_prev_vertex.resize(G.size(),\
     \ -1);\n    }\n\n    vector<CostType> &solve(Vertex s){\n        assert(0 <= s\
     \ and s < G.size());\n        m_dist.assign(G.size(), G.INF);\n        using p\
     \ = pair<CostType, Vertex>;\n        priority_queue<p, vector<p>, greater<p>>\
@@ -131,7 +135,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2024-01-09 23:25:07+09:00'
+  timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp

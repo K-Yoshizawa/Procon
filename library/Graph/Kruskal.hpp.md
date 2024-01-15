@@ -2,29 +2,25 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: library/DataStructure/UnionFind.hpp
+    title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/StronglyConnectedComponents.hpp
-    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/scc
-    links:
-    - https://judge.yosupo.jp/problem/scc
-  bundledCode: "#line 1 \"verify/LC-StronglyConnectedComponents.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#line 1 \"library/Graph/StronglyConnectedComponents.hpp\"\
-    \n/**\n * @file StronglyConnectedComponents.hpp\n * @brief Strongly Connected\
-    \ Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\n * @version 3.0\n *\
-    \ @date 2024-01-09\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n\
-    \ * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\
-    \u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeIndex\
+    document_title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+    links: []
+  bundledCode: "#line 1 \"library/Graph/Kruskal.hpp\"\n/**\n * @file Kruskal.hpp\n\
+    \ * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\n * @version 3.0\n * @date\
+    \ 2024-01-14\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
+    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\nusing EdgeIndex\
     \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    public:\n    Vertex\
     \ from, to;\n    CostType cost;\n    EdgeIndex idx{-1};\n\n    Edge() = default;\n\
     \    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}\n\
@@ -96,57 +92,92 @@ data:
     \        iota(ret.begin(), ret.end(), 0);\n        std::sort(ret.begin(), ret.end(),\n\
     \            [&](int i, int j){\n                return m_es[i].cost < m_es[j].cost;\n\
     \            });\n        return ret;\n    }\n\n    Edge<CostType> &operator[](int\
-    \ i){\n        return m_es[i];\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    private:\n\
-    \    GraphV<CostType> &G;\n    GraphV<CostType> rG;\n    vector<int> m_visited,\
-    \ m_order, m_belong;\n    vector<vector<Vertex>> m_member;\n\n    void f_dfs(Vertex\
-    \ v){\n        m_visited[v] = 1;\n        for(auto &e : G[v]){\n            if(!m_visited[e.to])\
-    \ f_dfs(e.to);\n        }\n        m_order.push_back(v);\n    }\n\n    void f_rdfs(Vertex\
-    \ v, int k){\n        m_visited[v] = 0;\n        m_belong[v] = k;\n        m_member[k].push_back(v);\n\
-    \        for(auto &e : rG[v]){\n            if(m_visited[e.to]) f_rdfs(e.to, k);\n\
-    \        }\n    }\n\n    public:\n    StronglyConnectedComponents(GraphV<CostType>\
-    \ &G) : G(G){\n        rG = G.reverse();\n        m_visited.resize(G.size(), 0);\n\
-    \        m_belong.resize(G.size(), -1);\n        for(int i = 0; i < G.size();\
-    \ ++i){\n            if(!m_visited[i]) f_dfs(i);\n        }\n        int k = 0;\n\
-    \        for(int i = m_order.size() - 1; i >= 0; --i){\n            if(m_visited[m_order[i]]){\n\
-    \                m_member.push_back(vector<CostType>{});\n                f_rdfs(m_order[i],\
-    \ k++);\n            }\n        }\n    }\n\n    int where(Vertex v){\n       \
-    \ return m_belong.at(v);\n    }\n\n    bool same(Vertex u, Vertex v){\n      \
-    \  return where(u) == where(v);\n    }\n\n    vector<vector<Vertex>> &get(){\n\
-    \        return m_member;\n    }\n\n    GraphV<CostType> build(){\n        GraphV<CostType>\
-    \ ret(m_member.size(), true);\n        for(int i = 0; i < G.size(); ++i){\n  \
-    \          int from = where(i);\n            for(auto &e : G[i]){\n          \
-    \      int to = where(e.to);\n                if(from == to) continue;\n     \
-    \           ret.add(from, to, e.cost);\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    int operator[](Vertex v){\n        return where(v);\n   \
-    \ }\n\n    void print(){\n        for(int i = 0; i < m_member.size(); ++i){\n\
-    \            cout << \"Component \" << i << \" : \";\n            for(auto v :\
-    \ m_member[i]){\n                cout << v << \" \";\n            }\n        \
-    \    cout << endl;\n        }\n    }\n};\n#line 4 \"verify/LC-StronglyConnectedComponents.test.cpp\"\
-    \n\nint main(){\n    int N, M; cin >> N >> M;\n    GraphV G(N, true);\n    G.input(M,\
-    \ false, true);\n\n    StronglyConnectedComponents scc(G);\n    auto ans = scc.get();\n\
-    \    cout << ans.size() << endl;\n    for(auto &vs : ans){\n        cout << vs.size();\n\
-    \        for(auto &v : vs){\n            cout << \" \" << v;\n        }\n    \
-    \    cout << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#include \"../library/Graph/StronglyConnectedComponents.hpp\"\
-    \n\nint main(){\n    int N, M; cin >> N >> M;\n    GraphV G(N, true);\n    G.input(M,\
-    \ false, true);\n\n    StronglyConnectedComponents scc(G);\n    auto ans = scc.get();\n\
-    \    cout << ans.size() << endl;\n    for(auto &vs : ans){\n        cout << vs.size();\n\
-    \        for(auto &v : vs){\n            cout << \" \" << v;\n        }\n    \
-    \    cout << endl;\n    }\n}"
+    \ i){\n        return m_es[i];\n    }\n};\n#line 2 \"library/DataStructure/UnionFind.hpp\"\
+    \n\n/**\n * @file UnionFind.hpp\n * @author log K (lX57)\n * @brief UnionFind\
+    \ - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version 2.0\n * @date\
+    \ 2023-11-12\n */\n\n#line 12 \"library/DataStructure/UnionFind.hpp\"\nusing namespace\
+    \ std;\n\ntemplate<typename T = int>\nstruct UnionFind{\n    private:\n    vector<int>\
+    \ __Data;\n    vector<T> __Weight;\n\n    T __weight(int k){\n        find(k);\n\
+    \        return __Weight[k];\n    }\n\n    public:\n    /**\n     * @brief \u8981\
+    \u7D20\u6570 `Size`, \u521D\u671F\u91CD\u307F `Init_Weight` \u3067UnionFind\u3092\
+    \u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u8981\u7D20\u6570\n\
+    \     * @param Init_Weight \u91CD\u307F\u4ED8\u304DUnionFind\u306E\u521D\u671F\
+    \u91CD\u307F (option, default = 0)\n     */\n    UnionFind(int Size, T Init_Weight\
+    \ = 0) : __Data(Size, -1), __Weight(Size, Init_Weight) {}\n\n    /**\n     * @brief\
+    \ \u8981\u7D20 `k` \u306E\u89AA\u3092\u8FD4\u3059\u3002\u3064\u3044\u3067\u306B\
+    \u7D4C\u8DEF\u5727\u7E2E\u3092\u3059\u308B\u3002\n     * @param k \u63A2\u7D22\
+    \u3059\u308B\u8981\u7D20\n     * @return int \u89AA\u8981\u7D20\u306E\u756A\u53F7\
+    \n     */\n    int find(int k){\n        if(__Data[k] < 0) return k;\n       \
+    \ int r = find(__Data[k]);\n        __Weight[k] += __Weight[__Data[k]];\n    \
+    \    return __Data[k] = r;\n    }\n\n    /**\n     * @brief \u8981\u7D20 `x` \u3068\
+    \u8981\u7D20 `y` \u304C\u540C\u3058\u96C6\u5408\u306B\u5C5E\u3057\u3066\u3044\u308B\
+    \u304B\u3092\u5224\u5B9A\u3059\u308B\u3002\n     */\n    bool same(int x, int\
+    \ y){\n        return find(x) == find(y);\n    }\n\n    /**\n     * @brief `Weight(y)\
+    \ - Weight(x)` \u3092\u8A08\u7B97\u3059\u308B\u3002\n     * @return T `Weight(y)\
+    \ - Weight(x)` \u306E\u5024\n     */\n    T diff(int x, int y){\n        return\
+    \ __weight(y) - __weight(x);\n    }\n\n    /**\n     * @brief \u8981\u7D20 `x`\
+    \ \u3068\u8981\u7D20 `y` \u3092\u4F75\u5408\u3059\u308B\u3002\u91CD\u307F\u3092\
+    \u4ED8\u4E0E\u3059\u308B\u3053\u3068\u3082\u3067\u304D\u308B\u3002\n     * @param\
+    \ w `Weight(y) - Weight(x) = w` \u3068\u3044\u3046\u5236\u7D04\u6761\u4EF6 (option,\
+    \ default = 0)\n     * @return \u4F75\u5408\u6E08\u306E\u5834\u5408\u306F `false`\
+    \ \u3092\u8FD4\u3059\u3002\n     */\n    bool unite(int x, int y, T w = 0){\n\
+    \        w += __weight(x) - __weight(y);\n        x = find(x), y = find(y);\n\
+    \        if(x == y) return false;\n        if(__Data[x] > __Data[y]) swap(x, y),\
+    \ w = -w;\n        __Data[x] += __Data[y];\n        __Data[y] = x;\n        __Weight[y]\
+    \ = w;\n        return true;\n    }\n\n    vector<vector<int>> group(){\n    \
+    \    vector<vector<int>> ret(__Data.size());\n        for(int i = 0; i < __Data.size();\
+    \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
+    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
+    \        return ret;\n    }\n};\n#line 10 \"library/Graph/Kruskal.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct Kruskal{\n    private:\n    GraphE<CostType> &G;\n    vector<int>\
+    \ m_used;\n    CostType m_ans;\n\n    public:\n    Kruskal(GraphE<CostType> &G)\
+    \ : G(G){\n        m_ans = 0;\n        UnionFind uf(G.size());\n        for(auto\
+    \ i : G.sort()){\n            auto e = G[i];\n            if(uf.same(e.from, e.to))\
+    \ continue;\n            uf.unite(e.from, e.to);\n            m_used.push_back(i);\n\
+    \            m_ans += e.cost;\n        }\n    }\n\n    vector<int> &get(){\n \
+    \       return m_used;\n    }\n\n    CostType val(){\n        return m_ans;\n\
+    \    }\n};\n"
+  code: "/**\n * @file Kruskal.hpp\n * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\
+    \n * @version 3.0\n * @date 2024-01-14\n */\n\n#include \"GraphTemplate.hpp\"\n\
+    #include \"../DataStructure/UnionFind.hpp\"\n\ntemplate<typename CostType>\nstruct\
+    \ Kruskal{\n    private:\n    GraphE<CostType> &G;\n    vector<int> m_used;\n\
+    \    CostType m_ans;\n\n    public:\n    Kruskal(GraphE<CostType> &G) : G(G){\n\
+    \        m_ans = 0;\n        UnionFind uf(G.size());\n        for(auto i : G.sort()){\n\
+    \            auto e = G[i];\n            if(uf.same(e.from, e.to)) continue;\n\
+    \            uf.unite(e.from, e.to);\n            m_used.push_back(i);\n     \
+    \       m_ans += e.cost;\n        }\n    }\n\n    vector<int> &get(){\n      \
+    \  return m_used;\n    }\n\n    CostType val(){\n        return m_ans;\n    }\n\
+    };"
   dependsOn:
-  - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify/LC-StronglyConnectedComponents.test.cpp
+  - library/DataStructure/UnionFind.hpp
+  isVerificationFile: false
+  path: library/Graph/Kruskal.hpp
   requiredBy: []
   timestamp: '2024-01-15 12:42:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/LC-StronglyConnectedComponents.test.cpp
+documentation_of: library/Graph/Kruskal.hpp
 layout: document
-redirect_from:
-- /verify/verify/LC-StronglyConnectedComponents.test.cpp
-- /verify/verify/LC-StronglyConnectedComponents.test.cpp.html
-title: verify/LC-StronglyConnectedComponents.test.cpp
+title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
 ---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+## Abstract
+
+最小全域木問題をKruskal法を用いて求める。
+
+## Function
+
+- `Kruskal(Graph G)` : 最小全域木問題を解く。$O(E \log V)$
+- `get()` : 最小全域木のコストを返す。
