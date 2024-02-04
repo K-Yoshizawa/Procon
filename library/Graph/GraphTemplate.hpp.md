@@ -194,18 +194,18 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
-  - library/Graph/StronglyConnectedComponents.hpp
-  - library/Graph/Dijkstra.hpp
   - library/Graph/LongestDistance.hpp
+  - library/Graph/Dijkstra.hpp
   - library/Graph/Kruskal.hpp
   - library/Graph/BellmanFord.hpp
+  - library/Graph/StronglyConnectedComponents.hpp
   timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-ShortestPath.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
+  - verify/LC-ShortestPath.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document

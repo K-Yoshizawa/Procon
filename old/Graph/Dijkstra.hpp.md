@@ -176,8 +176,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - verify_old/AOJ-GRL-1-A.test.cpp
   - verify_old/AOJ-GRL-6-B.test.cpp
+  - verify_old/AOJ-GRL-1-A.test.cpp
 documentation_of: old/Graph/Dijkstra.hpp
 layout: document
 redirect_from:
