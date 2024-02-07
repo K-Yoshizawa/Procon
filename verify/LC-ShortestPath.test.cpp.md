@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
+    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -112,10 +112,11 @@ data:
     \ e.to);\n                }\n            }\n        }\n        for(Vertex i =\
     \ 0; i < G.size(); ++i){\n            if(m_dist[i] != G.INF){\n              \
     \  m_dist[i] += m_potential[i] - m_potential[s];\n            }\n        }\n \
-    \       return m_dist;\n    }\n\n    vector<CostType> &get(){\n        return\
-    \ m_dist;\n    }\n\n    vector<CostType> shortest_path(Vertex t){\n        vector<CostType>\
-    \ ret{t};\n        Vertex now = t;\n        while(m_prev_vertex[now] != -1){\n\
-    \            ret.push_back(m_prev_vertex[now]);\n            now = m_prev_vertex[now];\n\
+    \       return m_dist;\n    }\n\n    void update_potential(vector<CostType> &potential){\n\
+    \        m_potential = potential;\n    }\n\n    vector<CostType> &get(){\n   \
+    \     return m_dist;\n    }\n\n    vector<CostType> shortest_path(Vertex t){\n\
+    \        vector<CostType> ret{t};\n        Vertex now = t;\n        while(m_prev_vertex[now]\
+    \ != -1){\n            ret.push_back(m_prev_vertex[now]);\n            now = m_prev_vertex[now];\n\
     \        }\n        reverse(ret.begin(), ret.end());\n        return ret;\n  \
     \  }\n\n    CostType operator[](Vertex v){\n        return m_dist.at(v);\n   \
     \ }\n};\n#line 4 \"verify/LC-ShortestPath.test.cpp\"\n\nint main(){\n    int N,\
@@ -138,7 +139,7 @@ data:
   isVerificationFile: true
   path: verify/LC-ShortestPath.test.cpp
   requiredBy: []
-  timestamp: '2024-01-15 12:42:20+09:00'
+  timestamp: '2024-02-08 00:45:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-ShortestPath.test.cpp

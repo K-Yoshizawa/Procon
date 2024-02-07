@@ -166,16 +166,16 @@ data:
   path: old/Graph/FlowTemplate.hpp
   requiredBy:
   - old/Graph/PrimalDual.hpp
-  - old/Graph/Dinic.hpp
   - old/Graph/FordFulkerson.hpp
   - old/Graph/BipartiteMatching.hpp
+  - old/Graph/Dinic.hpp
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-6-A-Dinic.test.cpp
+  - verify_old/AOJ-GRL-6-B.test.cpp
   - verify_old/AOJ-GRL-7-A.test.cpp
   - verify_old/AOJ-GRL-6-A.test.cpp
-  - verify_old/AOJ-GRL-6-B.test.cpp
 documentation_of: old/Graph/FlowTemplate.hpp
 layout: document
 redirect_from:

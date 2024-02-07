@@ -104,15 +104,15 @@ data:
   isVerificationFile: false
   path: library/DataStructure/UnionFind.hpp
   requiredBy:
-  - old/Graph/Kruskal.hpp
   - library/Graph/Kruskal.hpp
+  - old/Graph/Kruskal.hpp
   timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_old/AOJ-GRL-2-A.test.cpp
-  - verify/AOJ-DSL-1-B.test.cpp
-  - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
+  - verify/LC-Unionfind.test.cpp
+  - verify/AOJ-DSL-1-B.test.cpp
+  - verify_old/AOJ-GRL-2-A.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:

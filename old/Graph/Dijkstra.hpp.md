@@ -175,8 +175,8 @@ data:
   timestamp: '2024-01-09 23:25:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify_old/AOJ-GRL-6-B.test.cpp
+  - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify_old/AOJ-GRL-1-A.test.cpp
 documentation_of: old/Graph/Dijkstra.hpp
 layout: document

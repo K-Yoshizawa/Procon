@@ -91,7 +91,7 @@ data:
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
     - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
-      title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
+      title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
     - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -118,9 +118,12 @@ data:
       title: "Prime Factorize - \u7D20\u56E0\u6570\u5206\u89E3"
   - name: library/Other
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/Other/Compress.hpp
       title: "Compress - \u5EA7\u6A19\u5727\u7E2E"
+    - icon: ':heavy_check_mark:'
+      path: library/Other/Mo.hpp
+      title: Mo's Algorithm
   - name: library/String
     pages:
     - icon: ':heavy_check_mark:'
@@ -294,6 +297,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-ShortestPath.test.cpp
       title: verify/LC-ShortestPath.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-StaticRangeFrequency.test.cpp
+      title: verify/LC-StaticRangeFrequency.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-StronglyConnectedComponents.test.cpp
       title: verify/LC-StronglyConnectedComponents.test.cpp

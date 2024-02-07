@@ -7,7 +7,7 @@ data:
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
+    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':warning:'
     path: library/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
@@ -194,19 +194,19 @@ data:
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
   requiredBy:
-  - library/Graph/LongestDistance.hpp
-  - library/Graph/Dijkstra.hpp
-  - library/Graph/Kruskal.hpp
   - library/Graph/BellmanFord.hpp
+  - library/Graph/Dijkstra.hpp
+  - library/Graph/LongestDistance.hpp
   - library/Graph/StronglyConnectedComponents.hpp
+  - library/Graph/Kruskal.hpp
   timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
-  - verify/LC-ShortestPath.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-ShortestPath.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
 title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
