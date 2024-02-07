@@ -47,6 +47,10 @@ struct Dijkstra{
         return m_dist;
     }
 
+    void update_potential(vector<CostType> &potential){
+        m_potential = potential;
+    }
+
     vector<CostType> &get(){
         return m_dist;
     }

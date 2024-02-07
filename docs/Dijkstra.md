@@ -1,5 +1,5 @@
 ---
-title: Dijkstra - ダイクストラ法
+title: Dijkstra - 単一始点最短距離
 documentation_of: ../library/Graph/Dijkstra.hpp
 ---
 
