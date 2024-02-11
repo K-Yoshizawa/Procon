@@ -4,7 +4,7 @@
 
 int main(){
     int N, M; cin >> N >> M;
-    GraphV G(N, true);
+    Graph G(N, true);
     G.input(M, false, true);
 
     StronglyConnectedComponents scc(G);

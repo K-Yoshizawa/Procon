@@ -4,7 +4,7 @@
 
 int main(){
     int N, M, s, t; cin >> N >> M >> s >> t;
-    GraphV<long long> G(N, true);
+    Graph<long long> G(N, true);
     G.input(M, true, true);
 
     Dijkstra dk(G);

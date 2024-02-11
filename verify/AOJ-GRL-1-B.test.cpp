@@ -6,7 +6,7 @@ using namespace std;
 
 int main(){
     int V, E, r; cin >> V >> E >> r;
-    GraphE<int> G(V, true);
+    Graph<int> G(V, true);
     G.input(E, true, true);
 
     auto ans = BellmanFord(G, r);
