@@ -73,10 +73,11 @@ data:
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
     \ < r.cost;\n        });\n        return ret;\n    }\n\n    void print(){\n  \
     \      for(int i = 0; i < m_vertex_size; ++i){\n            cout << \"Vertex \"\
-    \ << i << \" : \";\n            for(auto &e : m_adj[i]){\n                cout\
-    \ << \"{\" << e.to << \", \" << e.cost << \"} \";\n            }\n           \
-    \ cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\
+    \ << i << \" : \";\n            if(m_adj[i].empty()){\n                cout <<\
+    \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
+    \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
+    \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\
     \n\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n    Graph<CostType>\
     \ &G;\n    vector<CostType> m_dist, m_potential;\n    vector<Vertex> m_prev_vertex;\n\
     \n    public:\n    Dijkstra(Graph<CostType> &G) : G(G){\n        m_dist.resize(G.size());\n\
@@ -120,7 +121,7 @@ data:
   isVerificationFile: true
   path: verify/LC-ShortestPath.test.cpp
   requiredBy: []
-  timestamp: '2024-02-11 14:19:40+09:00'
+  timestamp: '2024-02-11 17:55:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-ShortestPath.test.cpp

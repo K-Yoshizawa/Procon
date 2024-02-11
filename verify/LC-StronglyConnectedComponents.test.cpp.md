@@ -74,10 +74,11 @@ data:
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
     \ < r.cost;\n        });\n        return ret;\n    }\n\n    void print(){\n  \
     \      for(int i = 0; i < m_vertex_size; ++i){\n            cout << \"Vertex \"\
-    \ << i << \" : \";\n            for(auto &e : m_adj[i]){\n                cout\
-    \ << \"{\" << e.to << \", \" << e.cost << \"} \";\n            }\n           \
-    \ cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
+    \ << i << \" : \";\n            if(m_adj[i].empty()){\n                cout <<\
+    \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
+    \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
+    \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
     \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    private:\n\
     \    Graph<CostType> &G;\n    Graph<CostType> rG;\n    vector<int> m_visited,\
     \ m_order, m_belong;\n    vector<vector<Vertex>> m_member;\n\n    void f_dfs(Vertex\
@@ -121,7 +122,7 @@ data:
   isVerificationFile: true
   path: verify/LC-StronglyConnectedComponents.test.cpp
   requiredBy: []
-  timestamp: '2024-02-11 14:19:40+09:00'
+  timestamp: '2024-02-11 17:55:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-StronglyConnectedComponents.test.cpp

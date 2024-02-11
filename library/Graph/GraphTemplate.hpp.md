@@ -108,10 +108,11 @@ data:
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
     \ < r.cost;\n        });\n        return ret;\n    }\n\n    void print(){\n  \
     \      for(int i = 0; i < m_vertex_size; ++i){\n            cout << \"Vertex \"\
-    \ << i << \" : \";\n            for(auto &e : m_adj[i]){\n                cout\
-    \ << \"{\" << e.to << \", \" << e.cost << \"} \";\n            }\n           \
-    \ cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n"
+    \ << i << \" : \";\n            if(m_adj[i].empty()){\n                cout <<\
+    \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
+    \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
+    \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template\
     \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n\
     \ * @date 2024-01-09\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
@@ -164,10 +165,11 @@ data:
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
     \ < r.cost;\n        });\n        return ret;\n    }\n\n    void print(){\n  \
     \      for(int i = 0; i < m_vertex_size; ++i){\n            cout << \"Vertex \"\
-    \ << i << \" : \";\n            for(auto &e : m_adj[i]){\n                cout\
-    \ << \"{\" << e.to << \", \" << e.cost << \"} \";\n            }\n           \
-    \ cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};"
+    \ << i << \" : \";\n            if(m_adj[i].empty()){\n                cout <<\
+    \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
+    \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
+    \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
@@ -179,7 +181,7 @@ data:
   - library/Graph/Kruskal.hpp
   - library/Tree/EulerTour.hpp
   - library/Tree/LowestCommonAncestor.hpp
-  timestamp: '2024-02-11 14:19:40+09:00'
+  timestamp: '2024-02-11 17:55:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp

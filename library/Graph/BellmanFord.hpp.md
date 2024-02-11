@@ -71,10 +71,11 @@ data:
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
     \ < r.cost;\n        });\n        return ret;\n    }\n\n    void print(){\n  \
     \      for(int i = 0; i < m_vertex_size; ++i){\n            cout << \"Vertex \"\
-    \ << i << \" : \";\n            for(auto &e : m_adj[i]){\n                cout\
-    \ << \"{\" << e.to << \", \" << e.cost << \"} \";\n            }\n           \
-    \ cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\
+    \ << i << \" : \";\n            if(m_adj[i].empty()){\n                cout <<\
+    \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
+    \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
+    \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\
     \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(Graph<CostType>\
     \ &G, Vertex s){\n    vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n\
     \    int updatecount = 0;\n    auto es = G.edge_set();\n    while(1){\n      \
@@ -100,7 +101,7 @@ data:
   isVerificationFile: false
   path: library/Graph/BellmanFord.hpp
   requiredBy: []
-  timestamp: '2024-02-11 14:19:40+09:00'
+  timestamp: '2024-02-11 17:55:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp
