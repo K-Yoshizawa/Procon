@@ -51,15 +51,15 @@ struct Graph{
         e1.loc = m_adj[from].size();
         e1.id = m_edge_size;
         m_adj[from].push_back(e1);
+        ++m_edge_size;
         if(m_is_directed){
             ++m_indegree[to];
             return;
         }
         Edge<CostType> e2(to, from, cost);
         e2.loc = m_adj[to].size();
-        e2.id = m_edge_size;
+        e2.id = e1.id;
         m_adj[to].push_back(e2);
-        ++m_edge_size;
     }
 
     void input(int edge_size, bool weighted = false, bool zero_index = false){
