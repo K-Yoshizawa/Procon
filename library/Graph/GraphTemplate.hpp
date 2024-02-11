@@ -160,6 +160,10 @@ struct Graph{
     void print(){
         for(int i = 0; i < m_vertex_size; ++i){
             cout << "Vertex " << i << " : ";
+            if(m_adj[i].empty()){
+                cout << "<none>" << endl;
+                continue;
+            }
             for(auto &e : m_adj[i]){
                 cout << "{" << e.to << ", " << e.cost << "} ";
             }
