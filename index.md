@@ -148,6 +148,9 @@ data:
       title: modint
   - name: library/Tree
     pages:
+    - icon: ':warning:'
+      path: library/Tree/AuxiliaryTree.hpp
+      title: "Auxiliary Tree - \u88DC\u52A9\u6728"
     - icon: ':heavy_check_mark:'
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"

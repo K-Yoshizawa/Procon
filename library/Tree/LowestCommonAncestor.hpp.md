@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u88DC\u52A9\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor.test.cpp
@@ -19,8 +22,8 @@ data:
     document_title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
     links: []
   bundledCode: "#line 1 \"library/Tree/LowestCommonAncestor.hpp\"\n/**\n * @file LowestCommonAncestor.hpp\n\
-    \ * @author log K (lX57)\n * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\
-    \u901A\u7956\u5148\n * @version 3.0\n * @date 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \ * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version\
+    \ 3.0\n * @date 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
     \n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\
     \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\
     \n#include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
@@ -77,52 +80,61 @@ data:
     \ \"<none>\" << endl;\n                continue;\n            }\n            for(auto\
     \ &e : m_adj[i]){\n                cout << \"{\" << e.to << \", \" << e.cost <<\
     \ \"} \";\n            }\n            cout << endl;\n        }\n    }\n\n    vector<Edge<CostType>>\
-    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n#line 10 \"library/Tree/LowestCommonAncestor.hpp\"\
+    \ &operator[](Vertex v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Tree/LowestCommonAncestor.hpp\"\
     \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n\
     \    Graph<CostType> &G;\n    int m_height;\n    vector<int> m_depth;\n    vector<vector<Vertex>>\
     \ m_parent;\n\n    void m_dfs(Vertex v, Vertex p, int d){\n        m_parent[0][v]\
     \ = p;\n        m_depth[v] = d;\n        for(auto &e : G[v]){\n            if(e.to\
-    \ != p) m_dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ != p) m_dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    /**\n   \
+    \  * @brief Construct a new Lowest Common Ancestor object\n     * @param G \u6728\
+    \n     * @param Root \u6839\u306E\u9802\u70B9\u756A\u53F7(0-index)\n     */\n\
+    \    LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), m_height(32){\n\
+    \        m_depth.resize(G.size());\n        m_parent.resize(m_height, vector<Vertex>(G.size(),\
+    \ -1));\n        m_dfs(Root, -1, 0);\n        for(int k = 0; k + 1 < m_height;\
+    \ ++k){\n            for(Vertex v = 0; v < G.size(); ++v){\n                if(m_parent[k][v]\
+    \ < 0) m_parent[k + 1][v] = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
+    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
+    \u9802\u70B9 `v` \u306E LCA \u3092\u6C42\u3081\u308B\u3002\n     * @note \u9802\
+    \u70B9\u756A\u53F7\u306F 0-index\n     * @return Vertex LCA\u306E\u9802\u70B9\u756A\
+    \u53F7\n     */\n    Vertex get(Vertex u, Vertex v){\n        if(m_depth[u] >\
+    \ m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height; ++k){\n      \
+    \      if((m_depth[v] - m_depth[u]) >> k & 1){\n                v = m_parent[k][v];\n\
+    \            }\n        }\n        if(u == v) return u;\n        for(int k = m_height\
+    \ - 1; k >= 0; --k){\n            if(m_parent[k][u] != m_parent[k][v]){\n    \
+    \            u = m_parent[k][u];\n                v = m_parent[k][v];\n      \
+    \      }\n        }\n        return m_parent[0][u];\n    }\n};\n"
+  code: "/**\n * @file LowestCommonAncestor.hpp\n * @brief Lowest Common Ancestor\
+    \ - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version 3.0\n * @date 2024-02-11\n\
+    \ */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    struct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int m_height;\n\
+    \    vector<int> m_depth;\n    vector<vector<Vertex>> m_parent;\n\n    void m_dfs(Vertex\
+    \ v, Vertex p, int d){\n        m_parent[0][v] = p;\n        m_depth[v] = d;\n\
+    \        for(auto &e : G[v]){\n            if(e.to != p) m_dfs(e.to, v, d + 1);\n\
+    \        }\n    }\n\n    public:\n    /**\n     * @brief Construct a new Lowest\
+    \ Common Ancestor object\n     * @param G \u6728\n     * @param Root \u6839\u306E\
+    \u9802\u70B9\u756A\u53F7(0-index)\n     */\n    LowestCommonAncestor(Graph<CostType>\
     \ &G, Vertex Root = 0) : G(G), m_height(32){\n        m_depth.resize(G.size());\n\
     \        m_parent.resize(m_height, vector<Vertex>(G.size(), -1));\n        m_dfs(Root,\
     \ -1, 0);\n        for(int k = 0; k + 1 < m_height; ++k){\n            for(Vertex\
     \ v = 0; v < G.size(); ++v){\n                if(m_parent[k][v] < 0) m_parent[k\
     \ + 1][v] = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
-    \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
-    \    if(m_depth[u] > m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height;\
-    \ ++k){\n            if((m_depth[v] - m_depth[u]) >> k & 1){\n               \
-    \ v = m_parent[k][v];\n            }\n        }\n        if(u == v) return u;\n\
-    \        for(int k = m_height - 1; k >= 0; --k){\n            if(m_parent[k][u]\
-    \ != m_parent[k][v]){\n                u = m_parent[k][u];\n                v\
-    \ = m_parent[k][v];\n            }\n        }\n        return m_parent[0][u];\n\
-    \    }\n};\n"
-  code: "/**\n * @file LowestCommonAncestor.hpp\n * @author log K (lX57)\n * @brief\
-    \ Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version 3.0\n\
-    \ * @date 2024-02-11\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n\
-    \    int m_height;\n    vector<int> m_depth;\n    vector<vector<Vertex>> m_parent;\n\
-    \n    void m_dfs(Vertex v, Vertex p, int d){\n        m_parent[0][v] = p;\n  \
-    \      m_depth[v] = d;\n        for(auto &e : G[v]){\n            if(e.to != p)\
-    \ m_dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
-    \ &G, Vertex Root = 0) : G(G), m_height(32){\n        m_depth.resize(G.size());\n\
-    \        m_parent.resize(m_height, vector<Vertex>(G.size(), -1));\n        m_dfs(Root,\
-    \ -1, 0);\n        for(int k = 0; k + 1 < m_height; ++k){\n            for(Vertex\
-    \ v = 0; v < G.size(); ++v){\n                if(m_parent[k][v] < 0) m_parent[k\
-    \ + 1][v] = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
-    \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
-    \    if(m_depth[u] > m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height;\
-    \ ++k){\n            if((m_depth[v] - m_depth[u]) >> k & 1){\n               \
-    \ v = m_parent[k][v];\n            }\n        }\n        if(u == v) return u;\n\
-    \        for(int k = m_height - 1; k >= 0; --k){\n            if(m_parent[k][u]\
-    \ != m_parent[k][v]){\n                u = m_parent[k][u];\n                v\
-    \ = m_parent[k][v];\n            }\n        }\n        return m_parent[0][u];\n\
-    \    }\n};"
+    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
+    \u9802\u70B9 `v` \u306E LCA \u3092\u6C42\u3081\u308B\u3002\n     * @note \u9802\
+    \u70B9\u756A\u53F7\u306F 0-index\n     * @return Vertex LCA\u306E\u9802\u70B9\u756A\
+    \u53F7\n     */\n    Vertex get(Vertex u, Vertex v){\n        if(m_depth[u] >\
+    \ m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height; ++k){\n      \
+    \      if((m_depth[v] - m_depth[u]) >> k & 1){\n                v = m_parent[k][v];\n\
+    \            }\n        }\n        if(u == v) return u;\n        for(int k = m_height\
+    \ - 1; k >= 0; --k){\n            if(m_parent[k][u] != m_parent[k][v]){\n    \
+    \            u = m_parent[k][u];\n                v = m_parent[k][v];\n      \
+    \      }\n        }\n        return m_parent[0][u];\n    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: library/Tree/LowestCommonAncestor.hpp
-  requiredBy: []
-  timestamp: '2024-02-11 17:55:43+09:00'
+  requiredBy:
+  - library/Tree/AuxiliaryTree.hpp
+  timestamp: '2024-02-11 23:48:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp

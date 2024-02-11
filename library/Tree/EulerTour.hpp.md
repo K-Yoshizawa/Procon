@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u88DC\u52A9\u6728"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
@@ -79,7 +82,10 @@ data:
     \ &G;\n    vector<int> m_in, m_out;\n\n    void m_dfs(Vertex v, Vertex p, int\
     \ &t){\n        m_in[v] = t++;\n        for(auto &e : G[v]){\n            if(e.to\
     \ == p) continue;\n            m_dfs(e.to, v, t);\n        }\n        m_out[v]\
-    \ = t++;\n    }\n\n    public:\n    EulerTour(Graph<CostType> &G, Vertex Root\
+    \ = t++;\n    }\n\n    public:\n    /**\n     * @brief Construct a new Euler Tour\
+    \ object\n     * @param G \u6728\n     * @param Root \u6839\u306E\u9802\u70B9\u756A\
+    \u53F7(0-index)\n     * @param Offset \u30BF\u30A4\u30E0\u30B9\u30BF\u30F3\u30D7\
+    \u306E\u521D\u671F\u5024\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root\
     \ = 0, int Offset = 0) : G(G){\n        m_in.resize(G.size());\n        m_out.resize(G.size());\n\
     \        m_dfs(Root, -1, Offset);\n    }\n\n    int in(Vertex v){\n        assert(0\
     \ <= v && v < G.size());\n        return m_in[v];\n    }\n\n    int out(Vertex\
@@ -93,7 +99,10 @@ data:
     \ &G;\n    vector<int> m_in, m_out;\n\n    void m_dfs(Vertex v, Vertex p, int\
     \ &t){\n        m_in[v] = t++;\n        for(auto &e : G[v]){\n            if(e.to\
     \ == p) continue;\n            m_dfs(e.to, v, t);\n        }\n        m_out[v]\
-    \ = t++;\n    }\n\n    public:\n    EulerTour(Graph<CostType> &G, Vertex Root\
+    \ = t++;\n    }\n\n    public:\n    /**\n     * @brief Construct a new Euler Tour\
+    \ object\n     * @param G \u6728\n     * @param Root \u6839\u306E\u9802\u70B9\u756A\
+    \u53F7(0-index)\n     * @param Offset \u30BF\u30A4\u30E0\u30B9\u30BF\u30F3\u30D7\
+    \u306E\u521D\u671F\u5024\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root\
     \ = 0, int Offset = 0) : G(G){\n        m_in.resize(G.size());\n        m_out.resize(G.size());\n\
     \        m_dfs(Root, -1, Offset);\n    }\n\n    int in(Vertex v){\n        assert(0\
     \ <= v && v < G.size());\n        return m_in[v];\n    }\n\n    int out(Vertex\
@@ -105,8 +114,9 @@ data:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: library/Tree/EulerTour.hpp
-  requiredBy: []
-  timestamp: '2024-02-11 17:55:43+09:00'
+  requiredBy:
+  - library/Tree/AuxiliaryTree.hpp
+  timestamp: '2024-02-11 23:48:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp

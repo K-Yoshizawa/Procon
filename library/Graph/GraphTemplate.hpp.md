@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':warning:'
+    path: library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u88DC\u52A9\u6728"
   - icon: ':heavy_check_mark:'
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
@@ -180,6 +183,7 @@ data:
   - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/Kruskal.hpp
   - library/Tree/EulerTour.hpp
+  - library/Tree/AuxiliaryTree.hpp
   - library/Tree/LowestCommonAncestor.hpp
   timestamp: '2024-02-11 17:55:43+09:00'
   verificationStatus: LIBRARY_ALL_AC

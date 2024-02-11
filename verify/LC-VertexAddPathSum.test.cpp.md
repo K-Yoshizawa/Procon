@@ -88,7 +88,10 @@ data:
     \ &G;\n    vector<int> m_in, m_out;\n\n    void m_dfs(Vertex v, Vertex p, int\
     \ &t){\n        m_in[v] = t++;\n        for(auto &e : G[v]){\n            if(e.to\
     \ == p) continue;\n            m_dfs(e.to, v, t);\n        }\n        m_out[v]\
-    \ = t++;\n    }\n\n    public:\n    EulerTour(Graph<CostType> &G, Vertex Root\
+    \ = t++;\n    }\n\n    public:\n    /**\n     * @brief Construct a new Euler Tour\
+    \ object\n     * @param G \u6728\n     * @param Root \u6839\u306E\u9802\u70B9\u756A\
+    \u53F7(0-index)\n     * @param Offset \u30BF\u30A4\u30E0\u30B9\u30BF\u30F3\u30D7\
+    \u306E\u521D\u671F\u5024\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root\
     \ = 0, int Offset = 0) : G(G){\n        m_in.resize(G.size());\n        m_out.resize(G.size());\n\
     \        m_dfs(Root, -1, Offset);\n    }\n\n    int in(Vertex v){\n        assert(0\
     \ <= v && v < G.size());\n        return m_in[v];\n    }\n\n    int out(Vertex\
@@ -96,45 +99,50 @@ data:
     \ }\n\n    pair<vector<int>, vector<int>> get(){\n        return make_pair(m_in,\
     \ m_out);\n    }\n\n    pair<int, int> operator[](Vertex v){\n        return make_pair(in(v),\
     \ out(v));\n    }\n};\n#line 1 \"library/Tree/LowestCommonAncestor.hpp\"\n/**\n\
-    \ * @file LowestCommonAncestor.hpp\n * @author log K (lX57)\n * @brief Lowest\
-    \ Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version 3.0\n *\
-    \ @date 2024-02-11\n */\n\n#line 10 \"library/Tree/LowestCommonAncestor.hpp\"\n\
-    \ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    private:\n  \
-    \  Graph<CostType> &G;\n    int m_height;\n    vector<int> m_depth;\n    vector<vector<Vertex>>\
-    \ m_parent;\n\n    void m_dfs(Vertex v, Vertex p, int d){\n        m_parent[0][v]\
-    \ = p;\n        m_depth[v] = d;\n        for(auto &e : G[v]){\n            if(e.to\
-    \ != p) m_dfs(e.to, v, d + 1);\n        }\n    }\n\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ * @file LowestCommonAncestor.hpp\n * @brief Lowest Common Ancestor - \u6700\u5C0F\
+    \u5171\u901A\u7956\u5148\n * @version 3.0\n * @date 2024-02-11\n */\n\n#line 9\
+    \ \"library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename CostType>\nstruct\
+    \ LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int m_height;\n\
+    \    vector<int> m_depth;\n    vector<vector<Vertex>> m_parent;\n\n    void m_dfs(Vertex\
+    \ v, Vertex p, int d){\n        m_parent[0][v] = p;\n        m_depth[v] = d;\n\
+    \        for(auto &e : G[v]){\n            if(e.to != p) m_dfs(e.to, v, d + 1);\n\
+    \        }\n    }\n\n    public:\n    /**\n     * @brief Construct a new Lowest\
+    \ Common Ancestor object\n     * @param G \u6728\n     * @param Root \u6839\u306E\
+    \u9802\u70B9\u756A\u53F7(0-index)\n     */\n    LowestCommonAncestor(Graph<CostType>\
     \ &G, Vertex Root = 0) : G(G), m_height(32){\n        m_depth.resize(G.size());\n\
     \        m_parent.resize(m_height, vector<Vertex>(G.size(), -1));\n        m_dfs(Root,\
     \ -1, 0);\n        for(int k = 0; k + 1 < m_height; ++k){\n            for(Vertex\
     \ v = 0; v < G.size(); ++v){\n                if(m_parent[k][v] < 0) m_parent[k\
     \ + 1][v] = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
-    \            }\n        }\n    }\n\n    Vertex get(Vertex u, Vertex v){\n    \
-    \    if(m_depth[u] > m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height;\
-    \ ++k){\n            if((m_depth[v] - m_depth[u]) >> k & 1){\n               \
-    \ v = m_parent[k][v];\n            }\n        }\n        if(u == v) return u;\n\
-    \        for(int k = m_height - 1; k >= 0; --k){\n            if(m_parent[k][u]\
-    \ != m_parent[k][v]){\n                u = m_parent[k][u];\n                v\
-    \ = m_parent[k][v];\n            }\n        }\n        return m_parent[0][u];\n\
-    \    }\n};\n#line 1 \"library/DataStructure/SegmentTree.hpp\"\n/**\n * @file SegmentTree.hpp\n\
-    \ * @author log K (lX57)\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\
-    \u6728\n * @version 2.0\n * @date 2023-10-02\n */\n\n#line 10 \"library/DataStructure/SegmentTree.hpp\"\
-    \nusing namespace std;\n\ntemplate<typename Monoid>\nstruct SegmentTree{\n   \
-    \ private:\n    using F = function<Monoid(Monoid, Monoid)>;\n\n    int __Size,\
-    \ __Offset, __ZeroIndex;\n    vector<Monoid> __Data;\n    const F f;\n    const\
-    \ Monoid __M1;\n\n    inline void __Check(int x){\n        assert(1 <= x && x\
-    \ <= __Size);\n    }\n\n    Monoid __query(int ql, int qr, int left, int right,\
-    \ int cell){\n        if(qr <= left || right <= ql){\n            return __M1;\n\
-    \        }\n        if(ql <= left && right <= qr){\n            return __Data[cell];\n\
-    \        }\n        int mid = (left + right) / 2;\n        Monoid ans_left = __query(ql,\
-    \ qr, left, mid, 2 * cell);\n        Monoid ans_right = __query(ql, qr, mid, right,\
-    \ 2 * cell + 1);\n        return f(ans_left, ans_right);\n    }\n\n    public:\n\
-    \    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\
-    \u6570 `Size` \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\n     * @param Merge \u533A\
-    \u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity\
-    \ \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\
-    \u3057\u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
+    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
+    \u9802\u70B9 `v` \u306E LCA \u3092\u6C42\u3081\u308B\u3002\n     * @note \u9802\
+    \u70B9\u756A\u53F7\u306F 0-index\n     * @return Vertex LCA\u306E\u9802\u70B9\u756A\
+    \u53F7\n     */\n    Vertex get(Vertex u, Vertex v){\n        if(m_depth[u] >\
+    \ m_depth[v]) swap(u, v);\n        for(int k = 0; k < m_height; ++k){\n      \
+    \      if((m_depth[v] - m_depth[u]) >> k & 1){\n                v = m_parent[k][v];\n\
+    \            }\n        }\n        if(u == v) return u;\n        for(int k = m_height\
+    \ - 1; k >= 0; --k){\n            if(m_parent[k][u] != m_parent[k][v]){\n    \
+    \            u = m_parent[k][u];\n                v = m_parent[k][v];\n      \
+    \      }\n        }\n        return m_parent[0][u];\n    }\n};\n#line 1 \"library/DataStructure/SegmentTree.hpp\"\
+    \n/**\n * @file SegmentTree.hpp\n * @author log K (lX57)\n * @brief Segment Tree\
+    \ - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @version 2.0\n * @date 2023-10-02\n\
+    \ */\n\n#line 10 \"library/DataStructure/SegmentTree.hpp\"\nusing namespace std;\n\
+    \ntemplate<typename Monoid>\nstruct SegmentTree{\n    private:\n    using F =\
+    \ function<Monoid(Monoid, Monoid)>;\n\n    int __Size, __Offset, __ZeroIndex;\n\
+    \    vector<Monoid> __Data;\n    const F f;\n    const Monoid __M1;\n\n    inline\
+    \ void __Check(int x){\n        assert(1 <= x && x <= __Size);\n    }\n\n    Monoid\
+    \ __query(int ql, int qr, int left, int right, int cell){\n        if(qr <= left\
+    \ || right <= ql){\n            return __M1;\n        }\n        if(ql <= left\
+    \ && right <= qr){\n            return __Data[cell];\n        }\n        int mid\
+    \ = (left + right) / 2;\n        Monoid ans_left = __query(ql, qr, left, mid,\
+    \ 2 * cell);\n        Monoid ans_right = __query(ql, qr, mid, right, 2 * cell\
+    \ + 1);\n        return f(ans_left, ans_right);\n    }\n\n    public:\n    /**\n\
+    \     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `Size`\
+    \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u30BB\u30B0\u30E1\
+    \u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\n     * @param Merge \u533A\u9593\u53D6\
+    \u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\
+    \u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\
+    \u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
     \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    :\
     \ f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){\n        __Size = 1;\n\
     \        while(__Size < Size) __Size <<= 1;\n        __Offset = __Size - 1;\n\
@@ -219,7 +227,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddPathSum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-11 17:55:43+09:00'
+  timestamp: '2024-02-11 23:48:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddPathSum.test.cpp
