@@ -17,6 +17,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/EulerTour.hpp
+    title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/LowestCommonAncestor.hpp
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
@@ -28,6 +34,9 @@ data:
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-LowestCommonAncestor.test.cpp
+    title: verify/LC-LowestCommonAncestor.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,6 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddPathSum.test.cpp
+    title: verify/LC-VertexAddPathSum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -165,13 +177,17 @@ data:
   - library/Graph/LongestDistance.hpp
   - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/Kruskal.hpp
+  - library/Tree/EulerTour.hpp
+  - library/Tree/LowestCommonAncestor.hpp
   timestamp: '2024-02-11 14:19:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-ShortestPath.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp

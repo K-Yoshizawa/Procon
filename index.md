@@ -146,6 +146,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/modint.hpp
       title: modint
+  - name: library/Tree
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/EulerTour.hpp
+      title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/LowestCommonAncestor.hpp
+      title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - name: old/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -277,6 +285,9 @@ data:
       path: verify/LC-InverseMatrix.test.cpp
       title: verify/LC-InverseMatrix.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-LowestCommonAncestor.test.cpp
+      title: verify/LC-LowestCommonAncestor.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-MatrixProduct.test.cpp
       title: verify/LC-MatrixProduct.test.cpp
     - icon: ':heavy_check_mark:'
@@ -309,6 +320,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-VertexAddPathSum.test.cpp
+      title: verify/LC-VertexAddPathSum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-ZAlgorithm.test.cpp
       title: verify/LC-ZAlgorithm.test.cpp
