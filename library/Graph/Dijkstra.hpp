@@ -1,8 +1,8 @@
 /**
  * @file Dijkstra.hpp
  * @brief Dijkstra - ダイクストラ法
- * @version 3.0
- * @date 2024-01-09
+ * @version 3.1
+ * @date 2024-02-11
  */
 
 #include "GraphTemplate.hpp"
@@ -10,12 +10,12 @@
 template<typename CostType>
 struct Dijkstra{
     private:
-    GraphV<CostType> &G;
+    Graph<CostType> &G;
     vector<CostType> m_dist, m_potential;
     vector<Vertex> m_prev_vertex;
 
     public:
-    Dijkstra(GraphV<CostType> &G) : G(G){
+    Dijkstra(Graph<CostType> &G) : G(G){
         m_dist.resize(G.size());
         m_potential.resize(G.size(), 0);
         m_prev_vertex.resize(G.size(), -1);

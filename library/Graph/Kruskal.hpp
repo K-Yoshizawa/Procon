@@ -1,8 +1,8 @@
 /**
  * @file Kruskal.hpp
  * @brief Kruskal - 最小全域木
- * @version 3.0
- * @date 2024-01-14
+ * @version 3.1
+ * @date 2024-02-11
  */
 
 #include "GraphTemplate.hpp"
@@ -11,16 +11,17 @@
 template<typename CostType>
 struct Kruskal{
     private:
-    GraphE<CostType> &G;
+    Graph<CostType> &G;
     vector<int> m_used;
     CostType m_ans;
 
     public:
-    Kruskal(GraphE<CostType> &G) : G(G){
+    Kruskal(Graph<CostType> &G) : G(G){
         m_ans = 0;
         UnionFind uf(G.size());
-        for(auto i : G.sort()){
-            auto e = G[i];
+        auto es = G.edge_set();
+        for(auto &e : es){
+            int i = e.id;
             if(uf.same(e.from, e.to)) continue;
             uf.unite(e.from, e.to);
             m_used.push_back(i);
