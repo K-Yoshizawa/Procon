@@ -23,6 +23,12 @@ struct EulerTour{
     }
 
     public:
+    /**
+     * @brief Construct a new Euler Tour object
+     * @param G 木
+     * @param Root 根の頂点番号(0-index)
+     * @param Offset タイムスタンプの初期値
+     */
     EulerTour(Graph<CostType> &G, Vertex Root = 0, int Offset = 0) : G(G){
         m_in.resize(G.size());
         m_out.resize(G.size());

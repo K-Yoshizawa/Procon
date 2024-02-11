@@ -1,6 +1,5 @@
 /**
  * @file LowestCommonAncestor.hpp
- * @author log K (lX57)
  * @brief Lowest Common Ancestor - 最小共通祖先
  * @version 3.0
  * @date 2024-02-11
@@ -25,6 +24,11 @@ struct LowestCommonAncestor{
     }
 
     public:
+    /**
+     * @brief Construct a new Lowest Common Ancestor object
+     * @param G 木
+     * @param Root 根の頂点番号(0-index)
+     */
     LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), m_height(32){
         m_depth.resize(G.size());
         m_parent.resize(m_height, vector<Vertex>(G.size(), -1));
@@ -37,6 +41,11 @@ struct LowestCommonAncestor{
         }
     }
 
+    /**
+     * @brief 頂点 `u` と頂点 `v` の LCA を求める。
+     * @note 頂点番号は 0-index
+     * @return Vertex LCAの頂点番号
+     */
     Vertex get(Vertex u, Vertex v){
         if(m_depth[u] > m_depth[v]) swap(u, v);
         for(int k = 0; k < m_height; ++k){
