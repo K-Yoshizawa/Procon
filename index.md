@@ -86,13 +86,13 @@ data:
         \u5217"
   - name: library/Graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: library/Graph/BellmanFord.hpp
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -100,8 +100,8 @@ data:
       title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     - icon: ':warning:'
       path: library/Graph/LongestDistance.hpp
-      title: ''
-    - icon: ':heavy_check_mark:'
+      title: "Longest Distance - DAG\u306B\u304A\u3051\u308B\u6700\u9577\u8DDD\u96E2"
+    - icon: ':x:'
       path: library/Graph/StronglyConnectedComponents.hpp
       title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
         \u89E3"
@@ -258,13 +258,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-5-B.test.cpp
       title: verify/AOJ-DSL-5-B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/AOJ-GRL-3-C.test.cpp
       title: verify/AOJ-GRL-3-C.test.cpp
     - icon: ':heavy_check_mark:'
@@ -294,13 +294,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-RectangleSum-MST.test.cpp
       title: verify/LC-RectangleSum-MST.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-ShortestPath.test.cpp
       title: verify/LC-ShortestPath.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-StaticRangeFrequency.test.cpp
       title: verify/LC-StaticRangeFrequency.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-StronglyConnectedComponents.test.cpp
       title: verify/LC-StronglyConnectedComponents.test.cpp
     - icon: ':heavy_check_mark:'
