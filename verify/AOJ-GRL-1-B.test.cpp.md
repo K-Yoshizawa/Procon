@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B
@@ -37,9 +37,9 @@ data:
     \     assert(0 <= from and from < m_vertex_size);\n        assert(0 <= to and\
     \ to < m_vertex_size);\n        Edge<CostType> e1(from, to, cost);\n        e1.loc\
     \ = m_adj[from].size();\n        e1.id = m_edge_size;\n        m_adj[from].push_back(e1);\n\
-    \        if(m_is_directed){\n            ++m_indegree[to];\n            return;\n\
-    \        }\n        Edge<CostType> e2(to, from, cost);\n        e2.loc = m_adj[to].size();\n\
-    \        e2.id = m_edge_size;\n        m_adj[to].push_back(e2);\n        ++m_edge_size;\n\
+    \        ++m_edge_size;\n        if(m_is_directed){\n            ++m_indegree[to];\n\
+    \            return;\n        }\n        Edge<CostType> e2(to, from, cost);\n\
+    \        e2.loc = m_adj[to].size();\n        e2.id = e1.id;\n        m_adj[to].push_back(e2);\n\
     \    }\n\n    void input(int edge_size, bool weighted = false, bool zero_index\
     \ = false){\n        for(int i = 0; i < edge_size; ++i){\n            Vertex s,\
     \ t; cin >> s >> t;\n            if(!zero_index) --s, --t;\n            CostType\
@@ -106,8 +106,8 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2024-02-11 13:53:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-11 14:19:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-B.test.cpp
 layout: document

@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/BellmanFord.hpp
     title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
   - icon: ':heavy_check_mark:'
     path: library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   - icon: ':warning:'
@@ -21,21 +21,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-B.test.cpp
     title: verify/AOJ-GRL-1-B.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-MinimumSpanningTree.test.cpp
+    title: verify/LC-MinimumSpanningTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -57,9 +60,9 @@ data:
     \     assert(0 <= from and from < m_vertex_size);\n        assert(0 <= to and\
     \ to < m_vertex_size);\n        Edge<CostType> e1(from, to, cost);\n        e1.loc\
     \ = m_adj[from].size();\n        e1.id = m_edge_size;\n        m_adj[from].push_back(e1);\n\
-    \        if(m_is_directed){\n            ++m_indegree[to];\n            return;\n\
-    \        }\n        Edge<CostType> e2(to, from, cost);\n        e2.loc = m_adj[to].size();\n\
-    \        e2.id = m_edge_size;\n        m_adj[to].push_back(e2);\n        ++m_edge_size;\n\
+    \        ++m_edge_size;\n        if(m_is_directed){\n            ++m_indegree[to];\n\
+    \            return;\n        }\n        Edge<CostType> e2(to, from, cost);\n\
+    \        e2.loc = m_adj[to].size();\n        e2.id = e1.id;\n        m_adj[to].push_back(e2);\n\
     \    }\n\n    void input(int edge_size, bool weighted = false, bool zero_index\
     \ = false){\n        for(int i = 0; i < edge_size; ++i){\n            Vertex s,\
     \ t; cin >> s >> t;\n            if(!zero_index) --s, --t;\n            CostType\
@@ -113,15 +116,15 @@ data:
     \ Vertex to, CostType cost = 1){\n        assert(0 <= from and from < m_vertex_size);\n\
     \        assert(0 <= to and to < m_vertex_size);\n        Edge<CostType> e1(from,\
     \ to, cost);\n        e1.loc = m_adj[from].size();\n        e1.id = m_edge_size;\n\
-    \        m_adj[from].push_back(e1);\n        if(m_is_directed){\n            ++m_indegree[to];\n\
-    \            return;\n        }\n        Edge<CostType> e2(to, from, cost);\n\
-    \        e2.loc = m_adj[to].size();\n        e2.id = m_edge_size;\n        m_adj[to].push_back(e2);\n\
-    \        ++m_edge_size;\n    }\n\n    void input(int edge_size, bool weighted\
-    \ = false, bool zero_index = false){\n        for(int i = 0; i < edge_size; ++i){\n\
-    \            Vertex s, t; cin >> s >> t;\n            if(!zero_index) --s, --t;\n\
-    \            CostType c = 1;\n            if(weighted) cin >> c;\n           \
-    \ add(s, t, c);\n        }\n    }\n\n    size_t size(){\n        return m_vertex_size;\n\
-    \    }\n\n    int outdegree(Vertex v){\n        return (int)m_adj.at(v).size();\n\
+    \        m_adj[from].push_back(e1);\n        ++m_edge_size;\n        if(m_is_directed){\n\
+    \            ++m_indegree[to];\n            return;\n        }\n        Edge<CostType>\
+    \ e2(to, from, cost);\n        e2.loc = m_adj[to].size();\n        e2.id = e1.id;\n\
+    \        m_adj[to].push_back(e2);\n    }\n\n    void input(int edge_size, bool\
+    \ weighted = false, bool zero_index = false){\n        for(int i = 0; i < edge_size;\
+    \ ++i){\n            Vertex s, t; cin >> s >> t;\n            if(!zero_index)\
+    \ --s, --t;\n            CostType c = 1;\n            if(weighted) cin >> c;\n\
+    \            add(s, t, c);\n        }\n    }\n\n    size_t size(){\n        return\
+    \ m_vertex_size;\n    }\n\n    int outdegree(Vertex v){\n        return (int)m_adj.at(v).size();\n\
     \    }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return (int)m_adj.at(v).size();\n    }\n\n    vector<Vertex> source(){\n\
     \        assert(m_is_directed);\n        vector<Vertex> ret;\n        for(int\
@@ -162,12 +165,13 @@ data:
   - library/Graph/LongestDistance.hpp
   - library/Graph/StronglyConnectedComponents.hpp
   - library/Graph/Kruskal.hpp
-  timestamp: '2024-02-11 13:53:14+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2024-02-11 14:19:40+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-ShortestPath.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp

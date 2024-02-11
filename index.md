@@ -86,16 +86,16 @@ data:
         \u5217"
   - name: library/Graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/BellmanFord.hpp
       title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
     - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: library/Graph/Kruskal.hpp
       title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     - icon: ':warning:'
@@ -261,7 +261,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-A.test.cpp
       title: verify/AOJ-GRL-1-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp
     - icon: ':heavy_check_mark:'
@@ -279,6 +279,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-MatrixProduct.test.cpp
       title: verify/LC-MatrixProduct.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-MinimumSpanningTree.test.cpp
+      title: verify/LC-MinimumSpanningTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp

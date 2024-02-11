@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   - icon: ':heavy_check_mark:'
@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-1-B.test.cpp
     title: verify/AOJ-DSL-1-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-MinimumSpanningTree.test.cpp
+    title: verify/LC-MinimumSpanningTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
@@ -111,6 +114,7 @@ data:
   verifiedWith:
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/LC-Unionfind.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
   - verify_old/AOJ-GRL-2-A.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp

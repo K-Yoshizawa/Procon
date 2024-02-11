@@ -7,23 +7,26 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/LC-MinimumSpanningTree.test.cpp
-    title: verify/LC-MinimumSpanningTree.test.cpp
+    path: library/Graph/Kruskal.hpp
+    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
-    links: []
-  bundledCode: "#line 1 \"library/Graph/Kruskal.hpp\"\n/**\n * @file Kruskal.hpp\n\
-    \ * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\n * @version 3.1\n * @date\
-    \ 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
-    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/minimum_spanning_tree
+    links:
+    - https://judge.yosupo.jp/problem/minimum_spanning_tree
+  bundledCode: "#line 1 \"verify/LC-MinimumSpanningTree.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\n\n#line 1 \"library/Graph/Kruskal.hpp\"\
+    \n/**\n * @file Kruskal.hpp\n * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\
+    \n * @version 3.1\n * @date 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\
+    \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
     \ CostType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n\
     \    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex\
     \ to, CostType cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n\
@@ -120,49 +123,30 @@ data:
     \         if(uf.same(e.from, e.to)) continue;\n            uf.unite(e.from, e.to);\n\
     \            m_used.push_back(i);\n            m_ans += e.cost;\n        }\n \
     \   }\n\n    vector<int> &get(){\n        return m_used;\n    }\n\n    CostType\
-    \ val(){\n        return m_ans;\n    }\n};\n"
-  code: "/**\n * @file Kruskal.hpp\n * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\
-    \n * @version 3.1\n * @date 2024-02-11\n */\n\n#include \"GraphTemplate.hpp\"\n\
-    #include \"../DataStructure/UnionFind.hpp\"\n\ntemplate<typename CostType>\nstruct\
-    \ Kruskal{\n    private:\n    Graph<CostType> &G;\n    vector<int> m_used;\n \
-    \   CostType m_ans;\n\n    public:\n    Kruskal(Graph<CostType> &G) : G(G){\n\
-    \        m_ans = 0;\n        UnionFind uf(G.size());\n        auto es = G.edge_set();\n\
-    \        for(auto &e : es){\n            int i = e.id;\n            if(uf.same(e.from,\
-    \ e.to)) continue;\n            uf.unite(e.from, e.to);\n            m_used.push_back(i);\n\
-    \            m_ans += e.cost;\n        }\n    }\n\n    vector<int> &get(){\n \
-    \       return m_used;\n    }\n\n    CostType val(){\n        return m_ans;\n\
-    \    }\n};"
+    \ val(){\n        return m_ans;\n    }\n};\n#line 4 \"verify/LC-MinimumSpanningTree.test.cpp\"\
+    \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<long long> G(N);\n  \
+    \  G.input(M, true, true);\n\n    Kruskal kr(G);\n    auto ans = kr.get();\n \
+    \   cout << kr.val() << endl;\n    for(auto i : ans){\n        cout << i << \"\
+    \ \";\n    }\n    cout << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\
+    \n\n#include \"../library/Graph/Kruskal.hpp\"\n\nint main(){\n    int N, M; cin\
+    \ >> N >> M;\n    Graph<long long> G(N);\n    G.input(M, true, true);\n\n    Kruskal\
+    \ kr(G);\n    auto ans = kr.get();\n    cout << kr.val() << endl;\n    for(auto\
+    \ i : ans){\n        cout << i << \" \";\n    }\n    cout << endl;\n}"
   dependsOn:
+  - library/Graph/Kruskal.hpp
   - library/Graph/GraphTemplate.hpp
   - library/DataStructure/UnionFind.hpp
-  isVerificationFile: false
-  path: library/Graph/Kruskal.hpp
+  isVerificationFile: true
+  path: verify/LC-MinimumSpanningTree.test.cpp
   requiredBy: []
   timestamp: '2024-02-11 14:19:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/LC-MinimumSpanningTree.test.cpp
-documentation_of: library/Graph/Kruskal.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/LC-MinimumSpanningTree.test.cpp
 layout: document
-title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+redirect_from:
+- /verify/verify/LC-MinimumSpanningTree.test.cpp
+- /verify/verify/LC-MinimumSpanningTree.test.cpp.html
+title: verify/LC-MinimumSpanningTree.test.cpp
 ---
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
-
-## Abstract
-
-最小全域木問題をKruskal法を用いて求める。
-
-## Function
-
-- `Kruskal(Graph G)` : 最小全域木問題を解く。$O(E \log V)$
-- `get()` : 最小全域木のコストを返す。

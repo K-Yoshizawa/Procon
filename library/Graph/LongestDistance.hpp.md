@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -32,15 +32,15 @@ data:
     \ Vertex to, CostType cost = 1){\n        assert(0 <= from and from < m_vertex_size);\n\
     \        assert(0 <= to and to < m_vertex_size);\n        Edge<CostType> e1(from,\
     \ to, cost);\n        e1.loc = m_adj[from].size();\n        e1.id = m_edge_size;\n\
-    \        m_adj[from].push_back(e1);\n        if(m_is_directed){\n            ++m_indegree[to];\n\
-    \            return;\n        }\n        Edge<CostType> e2(to, from, cost);\n\
-    \        e2.loc = m_adj[to].size();\n        e2.id = m_edge_size;\n        m_adj[to].push_back(e2);\n\
-    \        ++m_edge_size;\n    }\n\n    void input(int edge_size, bool weighted\
-    \ = false, bool zero_index = false){\n        for(int i = 0; i < edge_size; ++i){\n\
-    \            Vertex s, t; cin >> s >> t;\n            if(!zero_index) --s, --t;\n\
-    \            CostType c = 1;\n            if(weighted) cin >> c;\n           \
-    \ add(s, t, c);\n        }\n    }\n\n    size_t size(){\n        return m_vertex_size;\n\
-    \    }\n\n    int outdegree(Vertex v){\n        return (int)m_adj.at(v).size();\n\
+    \        m_adj[from].push_back(e1);\n        ++m_edge_size;\n        if(m_is_directed){\n\
+    \            ++m_indegree[to];\n            return;\n        }\n        Edge<CostType>\
+    \ e2(to, from, cost);\n        e2.loc = m_adj[to].size();\n        e2.id = e1.id;\n\
+    \        m_adj[to].push_back(e2);\n    }\n\n    void input(int edge_size, bool\
+    \ weighted = false, bool zero_index = false){\n        for(int i = 0; i < edge_size;\
+    \ ++i){\n            Vertex s, t; cin >> s >> t;\n            if(!zero_index)\
+    \ --s, --t;\n            CostType c = 1;\n            if(weighted) cin >> c;\n\
+    \            add(s, t, c);\n        }\n    }\n\n    size_t size(){\n        return\
+    \ m_vertex_size;\n    }\n\n    int outdegree(Vertex v){\n        return (int)m_adj.at(v).size();\n\
     \    }\n\n    int indegree(Vertex v){\n        if(m_is_directed) return m_indegree.at(v);\n\
     \        else return (int)m_adj.at(v).size();\n    }\n\n    vector<Vertex> source(){\n\
     \        assert(m_is_directed);\n        vector<Vertex> ret;\n        for(int\
@@ -93,7 +93,7 @@ data:
   isVerificationFile: false
   path: library/Graph/LongestDistance.hpp
   requiredBy: []
-  timestamp: '2024-02-11 13:53:14+09:00'
+  timestamp: '2024-02-11 14:19:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Graph/LongestDistance.hpp
