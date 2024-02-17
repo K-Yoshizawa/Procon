@@ -1,8 +1,8 @@
 /**
  * @file StronglyConnectedComponents.hpp
  * @brief Strongly Connected Components - 強連結成分分解
- * @version 3.0
- * @date 2024-01-09
+ * @version 3.1
+ * @date 2024-02-11
  */
 
 #include "GraphTemplate.hpp"
@@ -10,8 +10,8 @@
 template<typename CostType>
 struct StronglyConnectedComponents{
     private:
-    GraphV<CostType> &G;
-    GraphV<CostType> rG;
+    Graph<CostType> &G;
+    Graph<CostType> rG;
     vector<int> m_visited, m_order, m_belong;
     vector<vector<Vertex>> m_member;
 
@@ -33,7 +33,7 @@ struct StronglyConnectedComponents{
     }
 
     public:
-    StronglyConnectedComponents(GraphV<CostType> &G) : G(G){
+    StronglyConnectedComponents(Graph<CostType> &G) : G(G){
         rG = G.reverse();
         m_visited.resize(G.size(), 0);
         m_belong.resize(G.size(), -1);
@@ -61,8 +61,8 @@ struct StronglyConnectedComponents{
         return m_member;
     }
 
-    GraphV<CostType> build(){
-        GraphV<CostType> ret(m_member.size(), true);
+    Graph<CostType> build(){
+        Graph<CostType> ret(m_member.size(), true);
         for(int i = 0; i < G.size(); ++i){
             int from = where(i);
             for(auto &e : G[i]){
