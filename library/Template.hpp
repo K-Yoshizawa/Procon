@@ -141,18 +141,25 @@ void disassemble_vectorpair(vector<pair<T1, T2>> &v, vector<T1> &v1, vector<T2> 
     transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return p.second;});
 }
 
-/**
- * @brief `A_i B_i` みたいな入力形式の配列を `A` `B` に格納して返す
- * @attention `v1` `v2` は共に空で渡す必要がある
- * @param v1 受け取りたい配列 `A`
- * @param v2 受け取りたい配列 `B`
- * @param size 配列のサイズ
- */
+template<typename T1, typename T2, typename T3>
+void disassemble_vectortuple(vector<tuple<T1, T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){
+    transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return get<0>(p);});
+    transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return get<1>(p);});
+    transform(v.begin(), v.end(), back_inserter(v3), [](auto p){return get<2>(p);});
+}
+
 template<typename T1, typename T2>
-void input_pair(vector<T1> &v1, vector<T2> &v2, int size){
+void readvectorpair(vector<T1> &v1, vector<T2> &v2, int size){
     vector<pair<T1, T2>> v(size);
     for(auto &[p, q] : v) cin >> p >> q;
     disassemble_vectorpair(v, v1, v2);
+}
+
+template<typename T1, typename T2, typename T3>
+void readvectortuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
+    vector<tuple<T1, T2, T3>> v(size);
+    for(auto &[p, q, r] : v) cin >> p >> q >> r;
+    disassemble_vectortuple(v, v1, v2, v3);
 }
 
 template<class... T>
