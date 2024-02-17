@@ -143,8 +143,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/AOJ-DSL-2-E.test.cpp
   - verify/AOJ-DSL-2-D.test.cpp
+  - verify/AOJ-DSL-2-E.test.cpp
 documentation_of: library/DataStructure/DualSegmentTree.hpp
 layout: document
 redirect_from:

@@ -69,27 +69,30 @@ data:
     \ is >> v[i];\n    return is;\n}\n\ntemplate<typename T1, typename T2>\nvoid disassemble_vectorpair(vector<pair<T1,\
     \ T2>> &v, vector<T1> &v1, vector<T2> &v2){\n    transform(v.begin(), v.end(),\
     \ back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(), v.end(),\
-    \ back_inserter(v2), [](auto p){return p.second;});\n}\n\n/**\n * @brief `A_i\
-    \ B_i` \u307F\u305F\u3044\u306A\u5165\u529B\u5F62\u5F0F\u306E\u914D\u5217\u3092\
-    \ `A` `B` \u306B\u683C\u7D0D\u3057\u3066\u8FD4\u3059\n * @attention `v1` `v2`\
-    \ \u306F\u5171\u306B\u7A7A\u3067\u6E21\u3059\u5FC5\u8981\u304C\u3042\u308B\n *\
-    \ @param v1 \u53D7\u3051\u53D6\u308A\u305F\u3044\u914D\u5217 `A`\n * @param v2\
-    \ \u53D7\u3051\u53D6\u308A\u305F\u3044\u914D\u5217 `B`\n * @param size \u914D\u5217\
-    \u306E\u30B5\u30A4\u30BA\n */\ntemplate<typename T1, typename T2>\nvoid input_pair(vector<T1>\
-    \ &v1, vector<T2> &v2, int size){\n    vector<pair<T1, T2>> v(size);\n    for(auto\
-    \ &[p, q] : v) cin >> p >> q;\n    disassemble_vectorpair(v, v1, v2);\n}\n\ntemplate<class...\
-    \ T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\nvoid print(){\n\
-    \    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid print(const T&\
-    \ a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout << ' ', b));\n\
-    \    cout << '\\n';\n}\n\n#ifdef LOGK\nvoid dprint(){\n    cerr << '\\n';\n}\n\
-    \ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const Ts&... b){\n \
-    \   cerr << \"Debug : \" << a;\n    (cerr << ... << (cerr << \" \", b));\n   \
-    \ cerr << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate <typename\
-    \ T>\nT ceil(T x, T y){\n    return (x + y - 1) / y;\n}\n#line 2 \"library/TemplateExtend.hpp\"\
-    \n\ntemplate <typename T>\ninline long long EuclideanDist2(const pair<T, T> &p1,\
-    \ const pair<T, T> &p2){\n    long long dx = (long long)p1.first - (long long)p2.first;\n\
-    \    long long dy = (long long)p1.second - (long long)p2.second;\n    return dx\
-    \ * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ back_inserter(v2), [](auto p){return p.second;});\n}\n\ntemplate<typename T1,\
+    \ typename T2, typename T3>\nvoid disassemble_vectortuple(vector<tuple<T1, T2,\
+    \ T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n}\n\ntemplate<typename\
+    \ T1, typename T2>\nvoid readvectorpair(vector<T1> &v1, vector<T2> &v2, int size){\n\
+    \    vector<pair<T1, T2>> v(size);\n    for(auto &[p, q] : v) cin >> p >> q;\n\
+    \    disassemble_vectorpair(v, v1, v2);\n}\n\ntemplate<typename T1, typename T2,\
+    \ typename T3>\nvoid readvectortuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
+    \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
+    \ r] : v) cin >> p >> q >> r;\n    disassemble_vectortuple(v, v1, v2, v3);\n}\n\
+    \ntemplate<class... T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\
+    \nvoid print(){\n    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid\
+    \ print(const T& a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout\
+    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\nvoid dprint(){\n    cerr\
+    \ << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const\
+    \ Ts&... b){\n    cerr << \"Debug : \" << a;\n    (cerr << ... << (cerr << \"\
+    \ \", b));\n    cerr << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate\
+    \ <typename T>\nT ceil(T x, T y){\n    return (x + y - 1) / y;\n}\n#line 2 \"\
+    library/TemplateExtend.hpp\"\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
+    \ - (long long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
+    \    return dx * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
     \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
     \ <typename T>\ninline long double EuclideanDist(const pair<T, T> &p1, const pair<T,\
     \ T> &p2){\n    return sqrtl((long double)EuclideanDist2(p1, p2));\n}\n\ntemplate\
@@ -133,7 +136,7 @@ data:
   isVerificationFile: false
   path: library/TemplateExtend.hpp
   requiredBy: []
-  timestamp: '2023-12-16 20:39:57+09:00'
+  timestamp: '2024-02-17 20:43:20+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/TemplateExtend.hpp

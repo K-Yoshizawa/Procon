@@ -112,11 +112,11 @@ data:
   timestamp: '2024-01-15 12:42:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-DSL-1-A.test.cpp
-  - verify/LC-Unionfind.test.cpp
+  - verify_old/AOJ-GRL-2-A.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
-  - verify_old/AOJ-GRL-2-A.test.cpp
+  - verify/AOJ-DSL-1-A.test.cpp
+  - verify/LC-Unionfind.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:
