@@ -21,4 +21,5 @@ documentation_of: ../library/Graph/Kruskal.hpp
 ## Function
 
 - `Kruskal(Graph G)` : 最小全域木問題を解く。$O(E \log V)$
-- `get()` : 最小全域木のコストを返す。
+- `get()` : 最小全域木で使用した辺番号の列を返す。
+- `val()` : 最小全域木のコストを返す。

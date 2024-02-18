@@ -27,13 +27,15 @@ documentation_of: ../library/Graph/Dijkstra.hpp
 
 ### Function
 
-- `Dijkstra(GraphV &G)` : ダイクストラ法をグラフ $G$ で初期化する。
+- `Dijkstra(Graph &G)` : ダイクストラ法をグラフ $G$ で初期化する。
 - `solve(Vertex s)` : グラフ $G$ に対して、頂点 `s` を始点として単一始点最短距離問題を解く。
-    - 計算量 : $\textrm{O}(E \log V)$
+    - 計算量 : $O(E \log V)$
     - 要件 : `s` は 0-index であること。
     - 戻り値 : 始点 `s` から各頂点への最短距離が格納された配列 `m_dist`
-- `get()` : 各頂点への最短距離が格納された配列 `m_dist`
+- `update_potential(vector<CostType> potential)` : ポテンシャルを `potential` の値で更新する。
+    - 要件 : `potential.size() == G.size()` であること。
+- `get()` : 各頂点への最短距離が格納された配列 `m_dist` を返す。
 - `shortest_path(Vertex t)` : 頂点 `t` までの最短経路を取得する。
-    - 計算量 : $\textrm{O}(V)$
-    - 戻り値 : 頂点 `t` までの最短経路を頂点列として返す。経路が存在しない場合は空配列を返す。
+    - 計算量 : $O(V)$
+    - 戻り値 : 頂点 `t` までの最短経路を頂点列として返す。経路が存在しない場合は空列を返す。
 - `operator[]` : 頂点 `v` までの最短距離を返す。

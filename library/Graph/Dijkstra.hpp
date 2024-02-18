@@ -48,6 +48,7 @@ struct Dijkstra{
     }
 
     void update_potential(vector<CostType> &potential){
+        assert(potential.size() == G.size());
         m_potential = potential;
     }
 
