@@ -10,18 +10,21 @@
 using namespace std;
 
 template<typename T>
+using mat = vector<vector<T>>;
+
+template<typename T>
 struct Matrix{
     public:
-    vector<vector<T>> A;
+    mat<T> A;
 
     Matrix(){}
     Matrix(int N, int M) : A(N, vector<T>(M, 0)){}
     Matrix(int N) : A(N, vector<T>(N, 0)){}
-    Matrix(vector<vector<T>> &Data) : A(Data){}
+    Matrix(mat<T> &Data) : A(Data){}
 
-    size_t Height() const {return A.size();}
-    size_t Width() const {return A[0].size();}
-    size_t Size() const {assert(Height() == Width()); return Height();}
+    size_t height() const {return A.size();}
+    size_t width() const {return A[0].size();}
+    size_t size() const {assert(height() == width()); return height();}
 
     vector<T> const &operator[](int k) const{
         return (A.at(k));
@@ -32,8 +35,8 @@ struct Matrix{
     }
 
     Matrix<T> &operator+=(const Matrix<T> &R){
-        int N = Height(), M = Width();
-        assert(N == R.Height() && M == R.Width());
+        int N = height(), M = width();
+        assert(N == R.height() && M == R.width());
         for(int i = 0; i < N; ++i)
             for(int j = 0; j < M; ++j)
                 (*this)[i][j] += R[i][j];
@@ -41,8 +44,8 @@ struct Matrix{
     }
     
     Matrix<T> &operator-=(const Matrix<T> &R){
-        int N = Height(), M = Width();
-        assert(N == R.Height() && M == R.Width());
+        int N = height(), M = width();
+        assert(N == R.height() && M == R.width());
         for(int i = 0; i < N; ++i)
             for(int j = 0; j < M; ++j)
                 (*this)[i][j] -= R[i][j];
@@ -50,9 +53,9 @@ struct Matrix{
     }
     
     Matrix<T> &operator*=(const Matrix<T> &R){
-        int N = Height(), M = R.Width(), L = Width();
-        assert(L == R.Height());
-        vector<vector<T>> tmp(N, vector<T>(M, 0));
+        int N = height(), M = R.width(), L = width();
+        assert(L == R.height());
+        mat<T> tmp(N, vector<T>(M, 0));
         for(int i = 0; i < N; ++i)
             for(int j = 0; j < M; ++j)
                 for(int k = 0; k < L; ++k)
@@ -65,8 +68,40 @@ struct Matrix{
         return (Matrix(*this) *= R);
     }
 
+    Matrix<T> &operator^=(const long long p){
+        long long q = p;
+        auto ret = Matrix<T>::I(size());
+        auto B(*this);
+        while(q){
+            if(q & 1){
+                ret *= B;
+            }
+            B *= B;
+            q >>= 1;
+        }
+        A = (mat<T>)ret;
+        return (*this);
+    }
+
+    Matrix<T> operator^(const long long p){
+        return (Matrix<T>(*this) ^= p);
+    }
+
+    operator mat<T>() const{
+        return A;
+    }
+
+    friend istream &operator>>(istream &is, Matrix<T> &p){
+        for(int i = 0; i < p.height(); ++i){
+            for(int j = 0; j < p.width(); ++j){
+                is >> p[i][j];
+            }
+        }
+        return (is);
+    }
+
     friend ostream &operator<<(ostream &os, Matrix &p){
-        int N = p.Height(), M = p.Width();
+        int N = p.height(), M = p.width();
         for(int i = 0; i < N; ++i){
             for(int j = 0; j < M; ++j){
                 os << p[i][j] << (j + 1 == M ? "" : " ");
@@ -77,7 +112,7 @@ struct Matrix{
     }
 
     void print(){
-        int N = Height(), M = Width();
+        int N = height(), M = width();
         cerr << "Matrix ===============================\n";
         for(int i = 0; i < N; ++i){
             cerr << "[";
@@ -91,7 +126,7 @@ struct Matrix{
     T det() const {
         Matrix<T> tmp(*this);
         T ret = 1;
-        int N = Size();
+        int N = size();
         int i = 0;
         for(int j = 0; i < N && j < N; ++j){
             // cerr << "i = " << i << ", j = " << j << endl;
@@ -137,8 +172,8 @@ struct Matrix{
 
     static Matrix<T> inv(const Matrix<T> &M){
         assert(M.isRegular());
-        Matrix<T> tmp(M), ret = Matrix<T>::I(M.Size());
-        int N = M.Size();
+        Matrix<T> tmp(M), ret = Matrix<T>::I(M.size());
+        int N = M.size();
         int i = 0;
         for(int j = 0; i < N && j < N; ++j){
             bool found = false;

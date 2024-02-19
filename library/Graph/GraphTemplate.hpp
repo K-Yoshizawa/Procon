@@ -217,6 +217,18 @@ struct Graph{
         return ret;
     }
 
+    vector<vector<CostType>> matrix(){
+        int n = m_vertex_size;
+        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));
+        for(int i = 0; i < n; ++i) ret[i][i] = 0;
+        for(int v = 0; v < n; ++v){
+            for(auto &e : m_adj[v]){
+                ret[v][e.to] = e.cost;
+            }
+        }
+        return ret;
+    }
+
     friend ostream &operator<<(ostream &os, Graph<CostType> &G){
         for(int i = 0; i < G.size(); ++i){
             os << "Vertex " << i << " : ";
