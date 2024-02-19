@@ -113,19 +113,23 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 2 \"library/DataStructure/UnionFind.hpp\"\n\n\
-    /**\n * @file UnionFind.hpp\n * @author log K (lX57)\n * @brief UnionFind - \u7D20\
-    \u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version 2.0\n * @date 2023-11-12\n\
-    \ */\n\n#line 12 \"library/DataStructure/UnionFind.hpp\"\nusing namespace std;\n\
-    \ntemplate<typename T = int>\nstruct UnionFind{\n    private:\n    vector<int>\
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 2 \"library/DataStructure/UnionFind.hpp\"\
+    \n\n/**\n * @file UnionFind.hpp\n * @author log K (lX57)\n * @brief UnionFind\
+    \ - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version 2.0\n * @date\
+    \ 2023-11-12\n */\n\n#line 12 \"library/DataStructure/UnionFind.hpp\"\nusing namespace\
+    \ std;\n\ntemplate<typename T = int>\nstruct UnionFind{\n    private:\n    vector<int>\
     \ __Data;\n    vector<T> __Weight;\n\n    T __weight(int k){\n        find(k);\n\
     \        return __Weight[k];\n    }\n\n    public:\n    /**\n     * @brief \u8981\
     \u7D20\u6570 `Size`, \u521D\u671F\u91CD\u307F `Init_Weight` \u3067UnionFind\u3092\
@@ -183,7 +187,7 @@ data:
   isVerificationFile: false
   path: library/Graph/Kruskal.hpp
   requiredBy: []
-  timestamp: '2024-02-19 08:23:38+09:00'
+  timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp

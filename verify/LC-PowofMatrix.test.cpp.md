@@ -14,10 +14,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/matrix_product
+    PROBLEM: https://judge.yosupo.jp/problem/pow_of_matrix
     links:
-    - https://judge.yosupo.jp/problem/matrix_product
-  bundledCode: "#line 1 \"verify/LC-MatrixProduct.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\
+    - https://judge.yosupo.jp/problem/pow_of_matrix
+  bundledCode: "#line 1 \"verify/LC-PowofMatrix.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_matrix\"\
     \n\n#line 2 \"library/modint.hpp\"\n/**\n * @file modint.hpp\n * @author log K\
     \ (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nconst int mod998 = 998244353;\nconst\
@@ -125,34 +125,26 @@ data:
     \                T mul = tmp[ti][j];\n                for(int tj = 0; tj < N;\
     \ ++tj){\n                    tmp[ti][tj] -= tmp[i][tj] * mul;\n             \
     \       ret[ti][tj] -= ret[i][tj] * mul;\n                }\n            }\n \
-    \           ++i;\n        }\n        return ret;\n    }\n};\n#line 5 \"verify/LC-MatrixProduct.test.cpp\"\
-    \n\nint main(){\n    int N, M, K; cin >> N >> M >> K;\n    vvm998 a(N, vm998(M)),\
-    \ b(M, vm998(K));\n    for(int i = 0; i < N; ++i){\n        for(int j = 0; j <\
-    \ M; ++j){\n            cin >> a[i][j];\n        }\n    }\n    for(int i = 0;\
-    \ i < M; ++i){\n        for(int j = 0; j < K; ++j){\n            cin >> b[i][j];\n\
-    \        }\n    }\n\n    Matrix<modint998> A(a), B(b), C;\n    C = A * B;\n  \
-    \  cout << C << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\n\n#include\
+    \           ++i;\n        }\n        return ret;\n    }\n};\n#line 5 \"verify/LC-PowofMatrix.test.cpp\"\
+    \n\nint main(){\n    int N; cin >> N;\n    long long K; cin >> K;\n    Matrix<modint998>\
+    \ a(N); cin >> a;\n\n    auto b = a ^ K;\n    cout << b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_matrix\"\n\n#include\
     \ \"../library/modint.hpp\"\n#include \"../library/Math/Matrix.hpp\"\n\nint main(){\n\
-    \    int N, M, K; cin >> N >> M >> K;\n    vvm998 a(N, vm998(M)), b(M, vm998(K));\n\
-    \    for(int i = 0; i < N; ++i){\n        for(int j = 0; j < M; ++j){\n      \
-    \      cin >> a[i][j];\n        }\n    }\n    for(int i = 0; i < M; ++i){\n  \
-    \      for(int j = 0; j < K; ++j){\n            cin >> b[i][j];\n        }\n \
-    \   }\n\n    Matrix<modint998> A(a), B(b), C;\n    C = A * B;\n    cout << C <<\
-    \ endl;\n}"
+    \    int N; cin >> N;\n    long long K; cin >> K;\n    Matrix<modint998> a(N);\
+    \ cin >> a;\n\n    auto b = a ^ K;\n    cout << b << endl;\n}"
   dependsOn:
   - library/modint.hpp
   - library/Math/Matrix.hpp
   isVerificationFile: true
-  path: verify/LC-MatrixProduct.test.cpp
+  path: verify/LC-PowofMatrix.test.cpp
   requiredBy: []
   timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/LC-MatrixProduct.test.cpp
+documentation_of: verify/LC-PowofMatrix.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-MatrixProduct.test.cpp
-- /verify/verify/LC-MatrixProduct.test.cpp.html
-title: verify/LC-MatrixProduct.test.cpp
+- /verify/verify/LC-PowofMatrix.test.cpp
+- /verify/verify/LC-PowofMatrix.test.cpp.html
+title: verify/LC-PowofMatrix.test.cpp
 ---

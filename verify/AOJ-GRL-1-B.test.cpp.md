@@ -113,30 +113,34 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
-    \ CostType>\nvector<CostType> BellmanFord(Graph<CostType> &G, Vertex s){\n   \
-    \ vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n    int updatecount\
-    \ = 0;\n    auto es = G.edge_set();\n    while(1){\n        if(updatecount ==\
-    \ G.size()){\n            return vector<CostType>{};\n        }\n        bool\
-    \ update = false;\n        for(auto &e : es){\n            if(ret[e.from] == G.INF)\
-    \ continue;\n            if(ret[e.to] > ret[e.from] + e.cost){\n             \
-    \   ret[e.to] = ret[e.from] + e.cost;\n                update = true;\n      \
-    \      }\n        }\n        if(!update) break;\n        ++updatecount;\n    }\n\
-    \    return ret;\n}\n#line 4 \"verify/AOJ-GRL-1-B.test.cpp\"\n\nusing namespace\
-    \ std;\n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    Graph<int> G(V,\
-    \ true);\n    G.input(E, true, true);\n\n    auto ans = BellmanFord(G, r);\n \
-    \   if(ans.empty()){\n        cout << \"NEGATIVE CYCLE\" << endl;\n    }\n   \
-    \ else{\n        for(auto &d : ans){\n            if(d == G.INF){\n          \
-    \      cout << \"INF\" <<endl;\n            }\n            else{\n           \
-    \     cout << d << endl;\n            }\n        }\n    }\n}\n"
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(Graph<CostType>\
+    \ &G, Vertex s){\n    vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n\
+    \    int updatecount = 0;\n    auto es = G.edge_set();\n    while(1){\n      \
+    \  if(updatecount == G.size()){\n            return vector<CostType>{};\n    \
+    \    }\n        bool update = false;\n        for(auto &e : es){\n           \
+    \ if(ret[e.from] == G.INF) continue;\n            if(ret[e.to] > ret[e.from] +\
+    \ e.cost){\n                ret[e.to] = ret[e.from] + e.cost;\n              \
+    \  update = true;\n            }\n        }\n        if(!update) break;\n    \
+    \    ++updatecount;\n    }\n    return ret;\n}\n#line 4 \"verify/AOJ-GRL-1-B.test.cpp\"\
+    \n\nusing namespace std;\n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n\
+    \    Graph<int> G(V, true);\n    G.input(E, true, true);\n\n    auto ans = BellmanFord(G,\
+    \ r);\n    if(ans.empty()){\n        cout << \"NEGATIVE CYCLE\" << endl;\n   \
+    \ }\n    else{\n        for(auto &d : ans){\n            if(d == G.INF){\n   \
+    \             cout << \"INF\" <<endl;\n            }\n            else{\n    \
+    \            cout << d << endl;\n            }\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
     \n\n#include \"../library/Graph/BellmanFord.hpp\"\n\nusing namespace std;\n\n\
     int main(){\n    int V, E, r; cin >> V >> E >> r;\n    Graph<int> G(V, true);\n\
@@ -151,7 +155,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2024-02-19 08:23:38+09:00'
+  timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-B.test.cpp

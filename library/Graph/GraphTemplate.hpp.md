@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
+    path: library/Graph/WarshallFloyd.hpp
+    title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - icon: ':warning:'
     path: library/Tree/AuxiliaryTree.hpp
     title: "Auxiliary Tree - \u88DC\u52A9\u6728"
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-B.test.cpp
     title: verify/AOJ-GRL-1-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-1-C.test.cpp
+    title: verify/AOJ-GRL-1-C.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
@@ -150,15 +156,19 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n"
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template\
     \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n\
     \ * @date 2024-01-09\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
@@ -251,15 +261,19 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};"
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/Graph/GraphTemplate.hpp
@@ -272,7 +286,8 @@ data:
   - library/Graph/Kruskal.hpp
   - library/Graph/BellmanFord.hpp
   - library/Graph/StronglyConnectedComponents.hpp
-  timestamp: '2024-02-19 08:23:38+09:00'
+  - library/Graph/WarshallFloyd.hpp
+  timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp
@@ -280,6 +295,7 @@ data:
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/LC-ShortestPath.test.cpp

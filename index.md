@@ -105,6 +105,9 @@ data:
       path: library/Graph/StronglyConnectedComponents.hpp
       title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
         \u89E3"
+    - icon: ':heavy_check_mark:'
+      path: library/Graph/WarshallFloyd.hpp
+      title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - name: library/Math
     pages:
     - icon: ':warning:'
@@ -276,6 +279,9 @@ data:
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/AOJ-GRL-1-C.test.cpp
+      title: verify/AOJ-GRL-1-C.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-3-C.test.cpp
       title: verify/AOJ-GRL-3-C.test.cpp
     - icon: ':heavy_check_mark:'
@@ -302,6 +308,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-PowofMatrix.test.cpp
+      title: verify/LC-PowofMatrix.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffinePointGet.test.cpp
       title: verify/LC-RangeAffinePointGet.test.cpp

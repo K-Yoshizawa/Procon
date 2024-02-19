@@ -16,6 +16,9 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-PowofMatrix.test.cpp
+    title: verify/LC-PowofMatrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffinePointGet.test.cpp
     title: verify/LC-RangeAffinePointGet.test.cpp
   - icon: ':heavy_check_mark:'
@@ -97,6 +100,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-InverseMatrix.test.cpp
+  - verify/LC-PowofMatrix.test.cpp
   - verify/LC-RangeAffinePointGet.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/LC-MatrixProduct.test.cpp

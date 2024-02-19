@@ -114,15 +114,19 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
     \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    private:\n\
     \    Graph<CostType> &G;\n    Graph<CostType> rG;\n    vector<int> m_visited,\
     \ m_order, m_belong;\n    vector<vector<Vertex>> m_member;\n\n    void f_dfs(Vertex\
@@ -183,7 +187,7 @@ data:
   isVerificationFile: false
   path: library/Graph/StronglyConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2024-02-19 08:23:38+09:00'
+  timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-3-C.test.cpp

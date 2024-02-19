@@ -2,28 +2,25 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-GRL-1-C.test.cpp
+    title: verify/AOJ-GRL-1-C.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A
-  bundledCode: "#line 1 \"verify/AOJ-GRL-1-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#line 1 \"library/Graph/Dijkstra.hpp\"\n/**\n * @file Dijkstra.hpp\n * @brief\
-    \ Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @version 3.1\n * @date\
-    \ 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
-    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
+    document_title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
+    links: []
+  bundledCode: "#line 1 \"library/Graph/WarshallFloyd.hpp\"\n/**\n * @file WarshallFloyd.hpp\n\
+    \ * @author log_K (lX57)\n * @brief WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\
+    \u77ED\u7D4C\u8DEF\n * @version 2.2\n * @date 2023-10-02\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
+    \n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\
+    \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
     \ CostType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n\
     \    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex\
     \ to, CostType cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n\
@@ -125,54 +122,90 @@ data:
     \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
     \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
     \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/Dijkstra.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct Dijkstra{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<CostType> m_dist, m_potential;\n    vector<Vertex> m_prev_vertex;\n\
-    \n    public:\n    Dijkstra(Graph<CostType> &G) : G(G){\n        m_dist.resize(G.size());\n\
-    \        m_potential.resize(G.size(), 0);\n        m_prev_vertex.resize(G.size(),\
-    \ -1);\n    }\n\n    vector<CostType> &solve(Vertex s){\n        assert(0 <= s\
-    \ and s < G.size());\n        m_dist.assign(G.size(), G.INF);\n        using p\
-    \ = pair<CostType, Vertex>;\n        priority_queue<p, vector<p>, greater<p>>\
-    \ que;\n        que.emplace(m_potential[s], s);\n        m_dist[s] = m_potential[s];\n\
-    \        while(que.size()){\n            auto [d, v] = que.top(); que.pop();\n\
-    \            if(m_dist[v] < d) continue;\n            for(auto &e : G[v]){\n \
-    \               if(d + e.cost + m_potential[e.from] - m_potential[e.to] < m_dist[e.to]){\n\
-    \                    m_dist[e.to] = d + e.cost + m_potential[e.from] - m_potential[e.to];\n\
-    \                    m_prev_vertex[e.to] = v;\n                    que.emplace(m_dist[e.to],\
-    \ e.to);\n                }\n            }\n        }\n        for(Vertex i =\
-    \ 0; i < G.size(); ++i){\n            if(m_dist[i] != G.INF){\n              \
-    \  m_dist[i] += m_potential[i] - m_potential[s];\n            }\n        }\n \
-    \       return m_dist;\n    }\n\n    void update_potential(vector<CostType> &potential){\n\
-    \        assert(potential.size() == G.size());\n        m_potential = potential;\n\
-    \    }\n\n    vector<CostType> &get(){\n        return m_dist;\n    }\n\n    vector<CostType>\
-    \ shortest_path(Vertex t){\n        vector<CostType> ret{t};\n        Vertex now\
-    \ = t;\n        while(m_prev_vertex[now] != -1){\n            ret.push_back(m_prev_vertex[now]);\n\
-    \            now = m_prev_vertex[now];\n        }\n        reverse(ret.begin(),\
-    \ ret.end());\n        return ret;\n    }\n\n    CostType operator[](Vertex v){\n\
-    \        return m_dist.at(v);\n    }\n};\n#line 4 \"verify/AOJ-GRL-1-A.test.cpp\"\
-    \n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    Graph<long long> G(V,\
-    \ true);\n    G.input(E, true, true);\n\n    Dijkstra dk(G);\n    for(auto &d\
-    \ : dk.solve(r)){\n        if(d == G.INF) cout << \"INF\" << endl;\n        else\
-    \ cout << d << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
-    \n\n#include \"../library/Graph/Dijkstra.hpp\"\n\nint main(){\n    int V, E, r;\
-    \ cin >> V >> E >> r;\n    Graph<long long> G(V, true);\n    G.input(E, true,\
-    \ true);\n\n    Dijkstra dk(G);\n    for(auto &d : dk.solve(r)){\n        if(d\
-    \ == G.INF) cout << \"INF\" << endl;\n        else cout << d << endl;\n    }\n\
-    }"
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 10 \"library/Graph/WarshallFloyd.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct WarshallFloyd{\n    private:\n    bool\
+    \ m_nc;\n    int m_size;\n    CostType m_INF;\n    vector<vector<CostType>> m_dist;\n\
+    \n    void m_solve(){\n        for(int k = 0; k < m_size; ++k){\n            for(int\
+    \ i = 0; i < m_size; ++i){\n                for(int j = 0; j < m_size; ++j){\n\
+    \                    if(m_dist[i][k] == m_INF || m_dist[k][j] == m_INF) continue;\n\
+    \                    m_dist[i][j] = min(m_dist[i][j], m_dist[i][k] + m_dist[k][j]);\n\
+    \                }\n            }\n        }\n        m_nc = false;\n        for(int\
+    \ i = 0; i < m_size; ++i) m_nc |= m_dist[i][i] < 0;\n    }\n\n    public:\n  \
+    \  WarshallFloyd(Graph<CostType> &G) : m_size(G.size()), m_INF(G.INF), m_dist(G.matrix()){\n\
+    \        m_solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>> &M) :\
+    \ m_size((int)M.size()), m_INF(numeric_limits<CostType>::max() / 2), m_dist(M){\n\
+    \        m_solve();\n    }\n\n    inline bool negative(){\n        return m_nc;\n\
+    \    }\n\n    CostType dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start\
+    \ && Start < m_size);\n        assert(0 <= Goal && Goal < m_size);\n        return\
+    \ m_dist[Start][Goal];\n    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ >> 2, bool DisplayINF = true){\n        for(int i = 0; i < m_size; ++i){\n \
+    \           cout << (DisplayINF && m_dist[i][0] == NotAdjacent ? \"INF\" : to_string(m_dist[i][0]));\n\
+    \            for(int j = 1; j < m_size; ++j){\n                cout << \" \" <<\
+    \ (DisplayINF && m_dist[i][j] == NotAdjacent ? \"INF\" : to_string(m_dist[i][j]));\n\
+    \            }\n            cout << endl;\n        }\n    }\n};\n"
+  code: "/**\n * @file WarshallFloyd.hpp\n * @author log_K (lX57)\n * @brief WarshallFloyd\
+    \ - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF\n * @version 2.2\n * @date\
+    \ 2023-10-02\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
+    struct WarshallFloyd{\n    private:\n    bool m_nc;\n    int m_size;\n    CostType\
+    \ m_INF;\n    vector<vector<CostType>> m_dist;\n\n    void m_solve(){\n      \
+    \  for(int k = 0; k < m_size; ++k){\n            for(int i = 0; i < m_size; ++i){\n\
+    \                for(int j = 0; j < m_size; ++j){\n                    if(m_dist[i][k]\
+    \ == m_INF || m_dist[k][j] == m_INF) continue;\n                    m_dist[i][j]\
+    \ = min(m_dist[i][j], m_dist[i][k] + m_dist[k][j]);\n                }\n     \
+    \       }\n        }\n        m_nc = false;\n        for(int i = 0; i < m_size;\
+    \ ++i) m_nc |= m_dist[i][i] < 0;\n    }\n\n    public:\n    WarshallFloyd(Graph<CostType>\
+    \ &G) : m_size(G.size()), m_INF(G.INF), m_dist(G.matrix()){\n        m_solve();\n\
+    \    }\n\n    WarshallFloyd(vector<vector<CostType>> &M) : m_size((int)M.size()),\
+    \ m_INF(numeric_limits<CostType>::max() / 2), m_dist(M){\n        m_solve();\n\
+    \    }\n\n    inline bool negative(){\n        return m_nc;\n    }\n\n    CostType\
+    \ dist(Vertex Start, Vertex Goal){\n        assert(0 <= Start && Start < m_size);\n\
+    \        assert(0 <= Goal && Goal < m_size);\n        return m_dist[Start][Goal];\n\
+    \    }\n    \n    void print(CostType NotAdjacent = numeric_limits<CostType>::max()\
+    \ >> 2, bool DisplayINF = true){\n        for(int i = 0; i < m_size; ++i){\n \
+    \           cout << (DisplayINF && m_dist[i][0] == NotAdjacent ? \"INF\" : to_string(m_dist[i][0]));\n\
+    \            for(int j = 1; j < m_size; ++j){\n                cout << \" \" <<\
+    \ (DisplayINF && m_dist[i][j] == NotAdjacent ? \"INF\" : to_string(m_dist[i][j]));\n\
+    \            }\n            cout << endl;\n        }\n    }\n};"
   dependsOn:
-  - library/Graph/Dijkstra.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: true
-  path: verify/AOJ-GRL-1-A.test.cpp
+  isVerificationFile: false
+  path: library/Graph/WarshallFloyd.hpp
   requiredBy: []
   timestamp: '2024-02-19 11:28:19+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: verify/AOJ-GRL-1-A.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/AOJ-GRL-1-C.test.cpp
+documentation_of: library/Graph/WarshallFloyd.hpp
 layout: document
-redirect_from:
-- /verify/verify/AOJ-GRL-1-A.test.cpp
-- /verify/verify/AOJ-GRL-1-A.test.cpp.html
-title: verify/AOJ-GRL-1-A.test.cpp
+title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
 ---
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+ tex2jax: {
+ inlineMath: [['$', '$'] ],
+ displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+ }
+ });
+</script>
+
+## Abstract
+
+全点対間最短距離問題をWarshall Floyd法を用いて求める。
+
+## Variable
+
+- private
+    - `NegativeCycle` : 負の閉路が存在するか
+    - `Size` : 頂点数
+    - `Dist` : 隣接行列形式で表された最短距離。`Dist[i][j]`は頂点`i`から頂点`j`への最短距離を表している。
+
+## Function
+
+- `WarshallFloyd(Graph G)` : `Graph` で初期化し、全点対間最短距離問題を解く。$O(V^3)$
+- `WarshallFloyd(vector<vector<CostType>> M)` : 隣接行列 `M` で初期化し、全点対間最短距離問題を解く。$O(V^3)$
+- `negative()` : 負閉路を含むかを返す。
+- `dist(Vertex Start, Vertex Goal)` : 頂点 `Start` から頂点 `Goal` への最短距離を返す。$O(1)$
+- `print(CostType NotAdjacent, bool DisplayINF)` : 隣接行列を出力する。隣接していない頂点への距離を `INF` として表示することも可能。$O(V^2)$

@@ -111,24 +111,28 @@ data:
     \                es[e.id] = 1;\n                ret.push_back(e);\n          \
     \  }\n        }\n        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType>\
     \ &r){\n            return l.cost < r.cost;\n        });\n        return ret;\n\
-    \    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n \
-    \       for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" << i\
-    \ << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
-    \ CostType>\nvector<CostType> BellmanFord(Graph<CostType> &G, Vertex s){\n   \
-    \ vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n    int updatecount\
-    \ = 0;\n    auto es = G.edge_set();\n    while(1){\n        if(updatecount ==\
-    \ G.size()){\n            return vector<CostType>{};\n        }\n        bool\
-    \ update = false;\n        for(auto &e : es){\n            if(ret[e.from] == G.INF)\
-    \ continue;\n            if(ret[e.to] > ret[e.from] + e.cost){\n             \
-    \   ret[e.to] = ret[e.from] + e.cost;\n                update = true;\n      \
-    \      }\n        }\n        if(!update) break;\n        ++updatecount;\n    }\n\
-    \    return ret;\n}\n"
+    \    }\n\n    vector<vector<CostType>> matrix(){\n        int n = m_vertex_size;\n\
+    \        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));\n        for(int\
+    \ i = 0; i < n; ++i) ret[i][i] = 0;\n        for(int v = 0; v < n; ++v){\n   \
+    \         for(auto &e : m_adj[v]){\n                ret[v][e.to] = e.cost;\n \
+    \           }\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
+    \ &os, Graph<CostType> &G){\n        for(int i = 0; i < G.size(); ++i){\n    \
+    \        os << \"Vertex \" << i << \" : \";\n            if(G[i].empty()){\n \
+    \               os << \"<none>\" << endl;\n                continue;\n       \
+    \     }\n            for(auto &e : G[i]){\n                if(G.is_weighted())\
+    \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
+    \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
+    \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Graph/BellmanFord.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<CostType> BellmanFord(Graph<CostType>\
+    \ &G, Vertex s){\n    vector<CostType> ret(G.size(), G.INF);\n    ret[s] = 0;\n\
+    \    int updatecount = 0;\n    auto es = G.edge_set();\n    while(1){\n      \
+    \  if(updatecount == G.size()){\n            return vector<CostType>{};\n    \
+    \    }\n        bool update = false;\n        for(auto &e : es){\n           \
+    \ if(ret[e.from] == G.INF) continue;\n            if(ret[e.to] > ret[e.from] +\
+    \ e.cost){\n                ret[e.to] = ret[e.from] + e.cost;\n              \
+    \  update = true;\n            }\n        }\n        if(!update) break;\n    \
+    \    ++updatecount;\n    }\n    return ret;\n}\n"
   code: "/**\n * @file BellmanFord.hpp\n * @brief BellmanFord - \u30D9\u30EB\u30DE\
     \u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\n * @version 3.1\n * @date 2024-02-11\n */\n\
     \n#include \"GraphTemplate.hpp\"\n\ntemplate<typename CostType>\nvector<CostType>\
@@ -145,7 +149,7 @@ data:
   isVerificationFile: false
   path: library/Graph/BellmanFord.hpp
   requiredBy: []
-  timestamp: '2024-02-19 08:23:38+09:00'
+  timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp
