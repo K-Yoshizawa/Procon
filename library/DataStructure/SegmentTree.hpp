@@ -2,7 +2,7 @@
  * @file SegmentTree.hpp
  * @author log K (lX57)
  * @brief Segment Tree - セグメント木
- * @version 2.0
+ * @version 2.1
  * @date 2023-10-02
  */
 
@@ -14,25 +14,25 @@ struct SegmentTree{
     private:
     using F = function<Monoid(Monoid, Monoid)>;
 
-    int __Size, __Offset, __ZeroIndex;
-    vector<Monoid> __Data;
+    int m_size, m_offset, m_zeroindex;
+    vector<Monoid> m_data;
     const F f;
-    const Monoid __M1;
+    const Monoid m_m1;
 
-    inline void __Check(int x){
-        assert(1 <= x && x <= __Size);
+    inline void m_check(int x){
+        assert(1 <= x && x <= m_size);
     }
 
-    Monoid __query(int ql, int qr, int left, int right, int cell){
+    Monoid m_query(int ql, int qr, int left, int right, int cell){
         if(qr <= left || right <= ql){
-            return __M1;
+            return m_m1;
         }
         if(ql <= left && right <= qr){
-            return __Data[cell];
+            return m_data[cell];
         }
         int mid = (left + right) / 2;
-        Monoid ans_left = __query(ql, qr, left, mid, 2 * cell);
-        Monoid ans_right = __query(ql, qr, mid, right, 2 * cell + 1);
+        Monoid ans_left = m_query(ql, qr, left, mid, 2 * cell);
+        Monoid ans_right = m_query(ql, qr, mid, right, 2 * cell + 1);
         return f(ans_left, ans_right);
     }
 
@@ -45,11 +45,11 @@ struct SegmentTree{
      * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
      */
     SegmentTree(int Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
-    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < Size) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Data.resize(2 * __Size, __M1);
+    : f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){
+        m_size = 1;
+        while(m_size < Size) m_size <<= 1;
+        m_offset = m_size - 1;
+        m_data.resize(2 * m_size, m_m1);
     }
 
     /**
@@ -57,8 +57,8 @@ struct SegmentTree{
      * @attention 必ず `set()` で初期値を代入してから呼び出すこと！
      */
     void build(){
-        for(int i = __Offset; i >= 1; --i){
-            __Data[i] = f(__Data[i * 2 + 0], __Data[i * 2 + 1]);
+        for(int i = m_offset; i >= 1; --i){
+            m_data[i] = f(m_data[i * 2 + 0], m_data[i * 2 + 1]);
         }
     }
 
@@ -68,8 +68,8 @@ struct SegmentTree{
      * @param Value 代入する値
      */
     void set(int Index, Monoid Value){
-        __Check(Index + __ZeroIndex);
-        __Data[__Offset + Index + __ZeroIndex] = Value;
+        m_check(Index + m_zeroindex);
+        m_data[m_offset + Index + m_zeroindex] = Value;
     }
 
     /**
@@ -80,13 +80,13 @@ struct SegmentTree{
      * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
      */
     SegmentTree(vector<Monoid> &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
-    : f(Merge), __M1(Monoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < (int)Init_Data.size()) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Data.resize(2 * __Size, __M1);
+    : f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){
+        m_size = 1;
+        while(m_size < (int)Init_Data.size()) m_size <<= 1;
+        m_offset = m_size - 1;
+        m_data.resize(2 * m_size, m_m1);
         for(int i = 0; i < (int)Init_Data.size(); ++i){
-            __Data[__Size + i] = Init_Data[i];
+            m_data[m_size + i] = Init_Data[i];
         }
         build();
     }
@@ -97,11 +97,11 @@ struct SegmentTree{
      * @param Value 更新する値
      */
     void update(int Index, Monoid Value){
-        __Check(Index + __ZeroIndex);
-        int k = __Offset + Index + __ZeroIndex;
-        __Data[k] = Value;
+        m_check(Index + m_zeroindex);
+        int k = m_offset + Index + m_zeroindex;
+        m_data[k] = Value;
         while(k >>= 1){
-            __Data[k] = f(__Data[2 * k], __Data[2 * k + 1]);
+            m_data[k] = f(m_data[2 * k], m_data[2 * k + 1]);
         }
     }
 
@@ -112,9 +112,10 @@ struct SegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid query(int Left, int Right){
-        __Check(Left + __ZeroIndex);
-        __Check(Right + __ZeroIndex - 1);
-        return __query(Left + __ZeroIndex, Right + __ZeroIndex, 1, __Size + 1, 1);
+        if(Left == Right) return m_m1;
+        m_check(Left + m_zeroindex);
+        m_check(Right + m_zeroindex - 1);
+        return m_query(Left + m_zeroindex, Right + m_zeroindex, 1, m_size + 1, 1);
     }
 
     /**
@@ -123,8 +124,8 @@ struct SegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid get(int k){
-        __Check(k + __ZeroIndex);
-        return __Data[__Offset + k + __ZeroIndex];
+        m_check(k + m_zeroindex);
+        return m_data[m_offset + k + m_zeroindex];
     }
 
     Monoid operator[](const int &k){

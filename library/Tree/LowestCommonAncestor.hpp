@@ -14,12 +14,16 @@ struct LowestCommonAncestor{
     int m_height;
     vector<int> m_depth;
     vector<vector<Vertex>> m_parent;
+    vector<CostType> m_cum;
 
     void m_dfs(Vertex v, Vertex p, int d){
         m_parent[0][v] = p;
         m_depth[v] = d;
         for(auto &e : G[v]){
-            if(e.to != p) m_dfs(e.to, v, d + 1);
+            if(e.to != p){
+                m_cum[e.to] = m_cum[v] + e.cost;
+                m_dfs(e.to, v, d + 1);
+            }
         }
     }
 
@@ -32,6 +36,7 @@ struct LowestCommonAncestor{
     LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), m_height(32){
         m_depth.resize(G.size());
         m_parent.resize(m_height, vector<Vertex>(G.size(), -1));
+        m_cum.resize(G.size(), 0);
         m_dfs(Root, -1, 0);
         for(int k = 0; k + 1 < m_height; ++k){
             for(Vertex v = 0; v < G.size(); ++v){
@@ -61,5 +66,14 @@ struct LowestCommonAncestor{
             }
         }
         return m_parent[0][u];
+    }
+
+    /**
+     * @brief 頂点 `u` と頂点 `v` 間のコストを求める。
+     * @note 頂点番号は 0-index
+     * @return CostType コスト
+     */
+    CostType dist(Vertex u, Vertex v){
+        return m_cum[u] + m_cum[v] - m_cum[get(u, v)] * 2;
     }
 };
