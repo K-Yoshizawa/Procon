@@ -14,7 +14,7 @@ struct HeavyLightDecomposition{
 
     private:
     Vertex m_root;
-    int m_timer;
+    int m_timer{0};
 
     Graph<CostType> &G;
     vector<int> m_subtreesize; // 頂点 `i` を根とする部分木の頂点数
@@ -25,7 +25,7 @@ struct HeavyLightDecomposition{
     vector<int> m_in, m_out; // 頂点 `i` の行きがけ / 帰りがけの順番 (Euler-Tour)
 
     vector<vector<Vertex>> m_column; // 各列に含まれる頂点
-    vector<pair<ColumnIndex, int>> m_vertexindex; // `Columns` 内における各頂点の位置情報
+    vector<pair<ColumnIndex, int>> m_vertexindex; // `Columns` 内における各頂点の位置情報「列 `first` の根から `second(0-index)` 番目にある」
     vector<int> m_offset; // 1列に並べたときの各列の先頭の位置（0-index）
 
     int m_dfs1(Vertex now, Vertex par){
@@ -76,13 +76,16 @@ struct HeavyLightDecomposition{
         m_out[now] = m_timer++;
     }
 
-    Vertex __gethead(Vertex v){
+    /**
+     * @brief 頂点 `v` が存在する列の先頭の頂点
+     */
+    Vertex m_head(Vertex v){
         auto [i, j] = m_vertexindex[v];
         return m_column[i][0];
     }
 
     public:
-    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), m_root(Root), m_timer(0){
+    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), m_root(Root){
         m_subtreesize.resize(G.size(), 0);
         m_depth.resize(G.size(), 0);
         m_parentvertex.resize(G.size(), -1);
@@ -99,10 +102,10 @@ struct HeavyLightDecomposition{
         }
     }
 
-    int get_vertex_locate(Vertex v){
-        return m_offset[m_vertexindex[v].first] + m_vertexindex[v].second;
-    }
-
+    /**
+     * @brief 木に含まれる全頂点について、HLDの列を1列に並べた列 `L` 内における位置を返す。
+     * @return vector<int> 「頂点 `i` が `L_{ret[i]}` にある」という情報
+     */
     vector<int> get_vertex_locations(){
         vector<int> ret(G.size(), -1);
         for(Vertex i = 0; i < G.size(); ++i){
@@ -111,9 +114,12 @@ struct HeavyLightDecomposition{
         return ret;
     }
 
+    /**
+     * @brief 頂点 `v` と頂点 `u` のLCAを求める。
+     */
     Vertex lca(Vertex v, Vertex u){
         while(1){
-            Vertex hv = __gethead(v), hu = __gethead(u);
+            Vertex hv = m_head(v), hu = m_head(u);
             if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);
             if(hv == hu) return (m_depth[v] < m_depth[u] ? v : u);
             u = m_parentvertex[hu];
@@ -124,13 +130,13 @@ struct HeavyLightDecomposition{
      * @brief 頂点 `v` と頂点 `u` を結ぶパスに該当する区間を返す。
      * @param v 頂点 `v`
      * @param u 頂点 `u` (option, default = `root`)
-     * @return vector<pair<int, int>> 区間の一覧(半開区間)
+     * @return vector<pair<int, int>> 区間の一覧(半開区間, 0-index)
      */
     vector<pair<int, int>> path_query(Vertex v, Vertex u = -1){
         vector<pair<int, int>> ret;
         if(u == -1) u = m_root;
         while(1){
-            Vertex hv = __gethead(v), hu = __gethead(u);
+            Vertex hv = m_head(v), hu = m_head(u);
             if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);
             if(hv == hu){
                 if(m_depth[v] > m_depth[u]) swap(v, u);
