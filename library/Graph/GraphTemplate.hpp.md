@@ -49,6 +49,9 @@ data:
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-LowestCommonAncestor-HLD.test.cpp
+    title: verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor.test.cpp
     title: verify/LC-LowestCommonAncestor.test.cpp
   - icon: ':heavy_check_mark:'
@@ -312,6 +315,7 @@ data:
   - verify/LC-VertexAddPathSum-ET.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
   - verify/LC-TreeDiameter.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/LC-VertexAddPathSum-HLD.test.cpp
   - verify/LC-ShortestPath.test.cpp

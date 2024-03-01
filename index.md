@@ -297,6 +297,9 @@ data:
       path: verify/LC-InverseMatrix.test.cpp
       title: verify/LC-InverseMatrix.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-LowestCommonAncestor-HLD.test.cpp
+      title: verify/LC-LowestCommonAncestor-HLD.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-LowestCommonAncestor.test.cpp
       title: verify/LC-LowestCommonAncestor.test.cpp
     - icon: ':heavy_check_mark:'

@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/LC-LowestCommonAncestor-HLD.test.cpp
+    title: verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum-HLD.test.cpp
     title: verify/LC-VertexAddPathSum-HLD.test.cpp
   _isVerificationFailed: false
@@ -124,7 +127,7 @@ data:
     \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
     \ v){\n        return get_adj(v);\n    }\n};\n#line 10 \"library/Tree/HeavyLightDecomposition.hpp\"\
     \n\ntemplate<typename CostType>\nstruct HeavyLightDecomposition{\n    using ColumnIndex\
-    \ = int;\n\n    private:\n    Vertex m_root;\n    int m_timer;\n\n    Graph<CostType>\
+    \ = int;\n\n    private:\n    Vertex m_root;\n    int m_timer{0};\n\n    Graph<CostType>\
     \ &G;\n    vector<int> m_subtreesize; // \u9802\u70B9 `i` \u3092\u6839\u3068\u3059\
     \u308B\u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n    vector<int> m_depth; //\
     \ \u9802\u70B9 `i` \u306E\u6839\u304B\u3089\u306E\u6DF1\u3055\n    vector<Vertex>\
@@ -138,9 +141,10 @@ data:
     \n    vector<vector<Vertex>> m_column; // \u5404\u5217\u306B\u542B\u307E\u308C\
     \u308B\u9802\u70B9\n    vector<pair<ColumnIndex, int>> m_vertexindex; // `Columns`\
     \ \u5185\u306B\u304A\u3051\u308B\u5404\u9802\u70B9\u306E\u4F4D\u7F6E\u60C5\u5831\
-    \n    vector<int> m_offset; // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u306E\
-    \u5404\u5217\u306E\u5148\u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\n\n    int\
-    \ m_dfs1(Vertex now, Vertex par){\n        int ret = 0;\n        for(Edge<CostType>\
+    \u300C\u5217 `first` \u306E\u6839\u304B\u3089 `second(0-index)` \u756A\u76EE\u306B\
+    \u3042\u308B\u300D\n    vector<int> m_offset; // 1\u5217\u306B\u4E26\u3079\u305F\
+    \u3068\u304D\u306E\u5404\u5217\u306E\u5148\u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\
+    \n\n    int m_dfs1(Vertex now, Vertex par){\n        int ret = 0;\n        for(Edge<CostType>\
     \ e : G[now]){\n            if(e.to == par) continue;\n            m_depth[e.to]\
     \ = m_depth[now] + 1;\n            m_parentvertex[e.to] = now;\n            //\
     \ m_parentedge[e.to] = e.ID;\n            // m_childvertex[e.ID] = e.to;\n   \
@@ -162,45 +166,51 @@ data:
     \u3084\u3057\u3064\u3064\u518D\u5E30\u3092\u884C\u3046\n        for(Edge<CostType>\
     \ e : G[now]){\n            if(e.to == par || e.to == heavy.to) continue;\n  \
     \          m_dfs2(e.to, now, m_column.size());\n        }\n\n        m_out[now]\
-    \ = m_timer++;\n    }\n\n    Vertex __gethead(Vertex v){\n        auto [i, j]\
-    \ = m_vertexindex[v];\n        return m_column[i][0];\n    }\n\n    public:\n\
-    \    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), m_root(Root),\
-    \ m_timer(0){\n        m_subtreesize.resize(G.size(), 0);\n        m_depth.resize(G.size(),\
-    \ 0);\n        m_parentvertex.resize(G.size(), -1);\n        // m_parentedge.resize(G.size(),\
-    \ -1);\n        // m_childvertex.resize(G.esize(), -1);\n        m_dfs1(m_root,\
-    \ -1);\n        m_vertexindex.resize(G.size());\n        m_in.resize(G.size());\n\
-    \        m_out.resize(G.size());\n        m_dfs2(m_root, -1, 0);\n        m_offset.resize(m_column.size(),\
-    \ 0);\n        for(int i = 1; i < m_column.size(); ++i){\n            m_offset[i]\
-    \ = m_offset[i - 1] + m_column[i - 1].size();\n        }\n    }\n\n    int get_vertex_locate(Vertex\
-    \ v){\n        return m_offset[m_vertexindex[v].first] + m_vertexindex[v].second;\n\
-    \    }\n\n    vector<int> get_vertex_locations(){\n        vector<int> ret(G.size(),\
+    \ = m_timer++;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u304C\u5B58\u5728\
+    \u3059\u308B\u5217\u306E\u5148\u982D\u306E\u9802\u70B9\n     */\n    Vertex m_head(Vertex\
+    \ v){\n        auto [i, j] = m_vertexindex[v];\n        return m_column[i][0];\n\
+    \    }\n\n    public:\n    HeavyLightDecomposition(Graph<CostType> &G, Vertex\
+    \ Root = 0) : G(G), m_root(Root){\n        m_subtreesize.resize(G.size(), 0);\n\
+    \        m_depth.resize(G.size(), 0);\n        m_parentvertex.resize(G.size(),\
+    \ -1);\n        // m_parentedge.resize(G.size(), -1);\n        // m_childvertex.resize(G.esize(),\
+    \ -1);\n        m_dfs1(m_root, -1);\n        m_vertexindex.resize(G.size());\n\
+    \        m_in.resize(G.size());\n        m_out.resize(G.size());\n        m_dfs2(m_root,\
+    \ -1, 0);\n        m_offset.resize(m_column.size(), 0);\n        for(int i = 1;\
+    \ i < m_column.size(); ++i){\n            m_offset[i] = m_offset[i - 1] + m_column[i\
+    \ - 1].size();\n        }\n    }\n\n    /**\n     * @brief \u6728\u306B\u542B\u307E\
+    \u308C\u308B\u5168\u9802\u70B9\u306B\u3064\u3044\u3066\u3001HLD\u306E\u5217\u3092\
+    1\u5217\u306B\u4E26\u3079\u305F\u5217 `L` \u5185\u306B\u304A\u3051\u308B\u4F4D\
+    \u7F6E\u3092\u8FD4\u3059\u3002\n     * @return vector<int> \u300C\u9802\u70B9\
+    \ `i` \u304C `L_{ret[i]}` \u306B\u3042\u308B\u300D\u3068\u3044\u3046\u60C5\u5831\
+    \n     */\n    vector<int> get_vertex_locations(){\n        vector<int> ret(G.size(),\
     \ -1);\n        for(Vertex i = 0; i < G.size(); ++i){\n            ret[i] = m_offset[m_vertexindex[i].first]\
-    \ + m_vertexindex[i].second;\n        }\n        return ret;\n    }\n\n    Vertex\
-    \ lca(Vertex v, Vertex u){\n        while(1){\n            Vertex hv = __gethead(v),\
-    \ hu = __gethead(u);\n            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv,\
-    \ hu);\n            if(hv == hu) return (m_depth[v] < m_depth[u] ? v : u);\n \
-    \           u = m_parentvertex[hu];\n        }\n    }\n\n    /**\n     * @brief\
-    \ \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\u3076\u30D1\u30B9\u306B\
-    \u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\u3002\n     * @param v\
-    \ \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option, default = `root`)\n\
-    \     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\u89A7(\u534A\u958B\
-    \u533A\u9593)\n     */\n    vector<pair<int, int>> path_query(Vertex v, Vertex\
-    \ u = -1){\n        vector<pair<int, int>> ret;\n        if(u == -1) u = m_root;\n\
-    \        while(1){\n            Vertex hv = __gethead(v), hu = __gethead(u);\n\
-    \            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);\n       \
-    \     if(hv == hu){\n                if(m_depth[v] > m_depth[u]) swap(v, u);\n\
-    \                auto [vc, vi] = m_vertexindex[v];\n                auto [uc,\
-    \ ui] = m_vertexindex[u];\n                ret.push_back({m_offset[vc] + vi, m_offset[uc]\
-    \ + ui + 1});\n                return ret;\n            }\n            auto [uc,\
-    \ ui] = m_vertexindex[u];\n            ret.push_back({m_offset[uc], m_offset[uc]\
-    \ + ui + 1});\n            u = m_parentvertex[hu];\n        }\n    }\n\n    pair<int,\
-    \ int> subtree_query(Vertex v){\n        return {m_in[v], m_out[v]};\n    }\n\n\
-    \    void print_columns(){\n\n    }\n};\n"
+    \ + m_vertexindex[i].second;\n        }\n        return ret;\n    }\n\n    /**\n\
+    \     * @brief \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u306ELCA\u3092\u6C42\u3081\
+    \u308B\u3002\n     */\n    Vertex lca(Vertex v, Vertex u){\n        while(1){\n\
+    \            Vertex hv = m_head(v), hu = m_head(u);\n            if(m_depth[hv]\
+    \ > m_depth[hu]) swap(v, u), swap(hv, hu);\n            if(hv == hu) return (m_depth[v]\
+    \ < m_depth[u] ? v : u);\n            u = m_parentvertex[hu];\n        }\n   \
+    \ }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\
+    \u3076\u30D1\u30B9\u306B\u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\
+    \u3002\n     * @param v \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option,\
+    \ default = `root`)\n     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\
+    \u89A7(\u534A\u958B\u533A\u9593, 0-index)\n     */\n    vector<pair<int, int>>\
+    \ path_query(Vertex v, Vertex u = -1){\n        vector<pair<int, int>> ret;\n\
+    \        if(u == -1) u = m_root;\n        while(1){\n            Vertex hv = m_head(v),\
+    \ hu = m_head(u);\n            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv,\
+    \ hu);\n            if(hv == hu){\n                if(m_depth[v] > m_depth[u])\
+    \ swap(v, u);\n                auto [vc, vi] = m_vertexindex[v];\n           \
+    \     auto [uc, ui] = m_vertexindex[u];\n                ret.push_back({m_offset[vc]\
+    \ + vi, m_offset[uc] + ui + 1});\n                return ret;\n            }\n\
+    \            auto [uc, ui] = m_vertexindex[u];\n            ret.push_back({m_offset[uc],\
+    \ m_offset[uc] + ui + 1});\n            u = m_parentvertex[hu];\n        }\n \
+    \   }\n\n    pair<int, int> subtree_query(Vertex v){\n        return {m_in[v],\
+    \ m_out[v]};\n    }\n\n    void print_columns(){\n\n    }\n};\n"
   code: "/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
     \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 3.0\n * @date 2023-10-04\n\
     \ */\n\n#include \"../Graph/GraphTemplate.hpp\"\n\ntemplate<typename CostType>\n\
     struct HeavyLightDecomposition{\n    using ColumnIndex = int;\n\n    private:\n\
-    \    Vertex m_root;\n    int m_timer;\n\n    Graph<CostType> &G;\n    vector<int>\
+    \    Vertex m_root;\n    int m_timer{0};\n\n    Graph<CostType> &G;\n    vector<int>\
     \ m_subtreesize; // \u9802\u70B9 `i` \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\
     \u6728\u306E\u9802\u70B9\u6570\n    vector<int> m_depth; // \u9802\u70B9 `i` \u306E\
     \u6839\u304B\u3089\u306E\u6DF1\u3055\n    vector<Vertex> m_parentvertex; // \u9802\
@@ -213,72 +223,81 @@ data:
     \ / \u5E30\u308A\u304C\u3051\u306E\u9806\u756A (Euler-Tour)\n\n    vector<vector<Vertex>>\
     \ m_column; // \u5404\u5217\u306B\u542B\u307E\u308C\u308B\u9802\u70B9\n    vector<pair<ColumnIndex,\
     \ int>> m_vertexindex; // `Columns` \u5185\u306B\u304A\u3051\u308B\u5404\u9802\
-    \u70B9\u306E\u4F4D\u7F6E\u60C5\u5831\n    vector<int> m_offset; // 1\u5217\u306B\
-    \u4E26\u3079\u305F\u3068\u304D\u306E\u5404\u5217\u306E\u5148\u982D\u306E\u4F4D\
-    \u7F6E\uFF080-index\uFF09\n\n    int m_dfs1(Vertex now, Vertex par){\n       \
-    \ int ret = 0;\n        for(Edge<CostType> e : G[now]){\n            if(e.to ==\
-    \ par) continue;\n            m_depth[e.to] = m_depth[now] + 1;\n            m_parentvertex[e.to]\
-    \ = now;\n            // m_parentedge[e.to] = e.ID;\n            // m_childvertex[e.ID]\
-    \ = e.to;\n            ret += m_dfs1(e.to, now);\n        }\n        return m_subtreesize[now]\
-    \ = ret + 1;\n    }\n\n    void m_dfs2(Vertex now, Vertex par, ColumnIndex col){\n\
-    \        m_in[now] = m_timer++;\n\n        // \u65B0\u3057\u3044\u5217\u306E\u5834\
-    \u5408\u306F\u5217\u3092\u5897\u3084\u3059\n        if(m_column.size() == col)\
-    \ m_column.emplace_back(vector<Vertex>{});\n\n        // \u5217\u306B\u9802\u70B9\
-    \u3092\u8FFD\u52A0\n        m_vertexindex[now] = {col, m_column[col].size()};\n\
-    \        m_column[col].push_back(now);\n\n        // Heavy\u306A\u8FBA\u3092\u63A2\
-    \u7D22\n        Edge<CostType> heavy;\n        int maxsubtree = 0;\n        for(Edge<CostType>\
-    \ e : G[now]){\n            if(e.to == par) continue;\n            if(maxsubtree\
-    \ < m_subtreesize[e.to]){\n                heavy = e;\n                maxsubtree\
-    \ = m_subtreesize[e.to];\n            }\n        }\n\n        if(maxsubtree){\n\
-    \            // Heavy\u306A\u8FBA\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u3001\
-    \u4ECA\u306E\u5217\u306B\u8FFD\u52A0\u3059\u308B\u5F62\u3067\u518D\u5E30\u3092\
-    \u884C\u3046\n            m_dfs2(heavy.to, now, col);\n        }\n\n        //\
-    \ Light\u306A\u8FBA\u306B\u5BFE\u3057\u3066\u65B0\u3057\u3044\u5217\u3092\u751F\
-    \u3084\u3057\u3064\u3064\u518D\u5E30\u3092\u884C\u3046\n        for(Edge<CostType>\
-    \ e : G[now]){\n            if(e.to == par || e.to == heavy.to) continue;\n  \
-    \          m_dfs2(e.to, now, m_column.size());\n        }\n\n        m_out[now]\
-    \ = m_timer++;\n    }\n\n    Vertex __gethead(Vertex v){\n        auto [i, j]\
-    \ = m_vertexindex[v];\n        return m_column[i][0];\n    }\n\n    public:\n\
-    \    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), m_root(Root),\
-    \ m_timer(0){\n        m_subtreesize.resize(G.size(), 0);\n        m_depth.resize(G.size(),\
-    \ 0);\n        m_parentvertex.resize(G.size(), -1);\n        // m_parentedge.resize(G.size(),\
-    \ -1);\n        // m_childvertex.resize(G.esize(), -1);\n        m_dfs1(m_root,\
-    \ -1);\n        m_vertexindex.resize(G.size());\n        m_in.resize(G.size());\n\
-    \        m_out.resize(G.size());\n        m_dfs2(m_root, -1, 0);\n        m_offset.resize(m_column.size(),\
-    \ 0);\n        for(int i = 1; i < m_column.size(); ++i){\n            m_offset[i]\
-    \ = m_offset[i - 1] + m_column[i - 1].size();\n        }\n    }\n\n    int get_vertex_locate(Vertex\
-    \ v){\n        return m_offset[m_vertexindex[v].first] + m_vertexindex[v].second;\n\
-    \    }\n\n    vector<int> get_vertex_locations(){\n        vector<int> ret(G.size(),\
+    \u70B9\u306E\u4F4D\u7F6E\u60C5\u5831\u300C\u5217 `first` \u306E\u6839\u304B\u3089\
+    \ `second(0-index)` \u756A\u76EE\u306B\u3042\u308B\u300D\n    vector<int> m_offset;\
+    \ // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u306E\u5404\u5217\u306E\u5148\
+    \u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\n\n    int m_dfs1(Vertex now, Vertex\
+    \ par){\n        int ret = 0;\n        for(Edge<CostType> e : G[now]){\n     \
+    \       if(e.to == par) continue;\n            m_depth[e.to] = m_depth[now] +\
+    \ 1;\n            m_parentvertex[e.to] = now;\n            // m_parentedge[e.to]\
+    \ = e.ID;\n            // m_childvertex[e.ID] = e.to;\n            ret += m_dfs1(e.to,\
+    \ now);\n        }\n        return m_subtreesize[now] = ret + 1;\n    }\n\n  \
+    \  void m_dfs2(Vertex now, Vertex par, ColumnIndex col){\n        m_in[now] =\
+    \ m_timer++;\n\n        // \u65B0\u3057\u3044\u5217\u306E\u5834\u5408\u306F\u5217\
+    \u3092\u5897\u3084\u3059\n        if(m_column.size() == col) m_column.emplace_back(vector<Vertex>{});\n\
+    \n        // \u5217\u306B\u9802\u70B9\u3092\u8FFD\u52A0\n        m_vertexindex[now]\
+    \ = {col, m_column[col].size()};\n        m_column[col].push_back(now);\n\n  \
+    \      // Heavy\u306A\u8FBA\u3092\u63A2\u7D22\n        Edge<CostType> heavy;\n\
+    \        int maxsubtree = 0;\n        for(Edge<CostType> e : G[now]){\n      \
+    \      if(e.to == par) continue;\n            if(maxsubtree < m_subtreesize[e.to]){\n\
+    \                heavy = e;\n                maxsubtree = m_subtreesize[e.to];\n\
+    \            }\n        }\n\n        if(maxsubtree){\n            // Heavy\u306A\
+    \u8FBA\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u3001\u4ECA\u306E\u5217\u306B\
+    \u8FFD\u52A0\u3059\u308B\u5F62\u3067\u518D\u5E30\u3092\u884C\u3046\n         \
+    \   m_dfs2(heavy.to, now, col);\n        }\n\n        // Light\u306A\u8FBA\u306B\
+    \u5BFE\u3057\u3066\u65B0\u3057\u3044\u5217\u3092\u751F\u3084\u3057\u3064\u3064\
+    \u518D\u5E30\u3092\u884C\u3046\n        for(Edge<CostType> e : G[now]){\n    \
+    \        if(e.to == par || e.to == heavy.to) continue;\n            m_dfs2(e.to,\
+    \ now, m_column.size());\n        }\n\n        m_out[now] = m_timer++;\n    }\n\
+    \n    /**\n     * @brief \u9802\u70B9 `v` \u304C\u5B58\u5728\u3059\u308B\u5217\
+    \u306E\u5148\u982D\u306E\u9802\u70B9\n     */\n    Vertex m_head(Vertex v){\n\
+    \        auto [i, j] = m_vertexindex[v];\n        return m_column[i][0];\n   \
+    \ }\n\n    public:\n    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root\
+    \ = 0) : G(G), m_root(Root){\n        m_subtreesize.resize(G.size(), 0);\n   \
+    \     m_depth.resize(G.size(), 0);\n        m_parentvertex.resize(G.size(), -1);\n\
+    \        // m_parentedge.resize(G.size(), -1);\n        // m_childvertex.resize(G.esize(),\
+    \ -1);\n        m_dfs1(m_root, -1);\n        m_vertexindex.resize(G.size());\n\
+    \        m_in.resize(G.size());\n        m_out.resize(G.size());\n        m_dfs2(m_root,\
+    \ -1, 0);\n        m_offset.resize(m_column.size(), 0);\n        for(int i = 1;\
+    \ i < m_column.size(); ++i){\n            m_offset[i] = m_offset[i - 1] + m_column[i\
+    \ - 1].size();\n        }\n    }\n\n    /**\n     * @brief \u6728\u306B\u542B\u307E\
+    \u308C\u308B\u5168\u9802\u70B9\u306B\u3064\u3044\u3066\u3001HLD\u306E\u5217\u3092\
+    1\u5217\u306B\u4E26\u3079\u305F\u5217 `L` \u5185\u306B\u304A\u3051\u308B\u4F4D\
+    \u7F6E\u3092\u8FD4\u3059\u3002\n     * @return vector<int> \u300C\u9802\u70B9\
+    \ `i` \u304C `L_{ret[i]}` \u306B\u3042\u308B\u300D\u3068\u3044\u3046\u60C5\u5831\
+    \n     */\n    vector<int> get_vertex_locations(){\n        vector<int> ret(G.size(),\
     \ -1);\n        for(Vertex i = 0; i < G.size(); ++i){\n            ret[i] = m_offset[m_vertexindex[i].first]\
-    \ + m_vertexindex[i].second;\n        }\n        return ret;\n    }\n\n    Vertex\
-    \ lca(Vertex v, Vertex u){\n        while(1){\n            Vertex hv = __gethead(v),\
-    \ hu = __gethead(u);\n            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv,\
-    \ hu);\n            if(hv == hu) return (m_depth[v] < m_depth[u] ? v : u);\n \
-    \           u = m_parentvertex[hu];\n        }\n    }\n\n    /**\n     * @brief\
-    \ \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\u3076\u30D1\u30B9\u306B\
-    \u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\u3002\n     * @param v\
-    \ \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option, default = `root`)\n\
-    \     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\u89A7(\u534A\u958B\
-    \u533A\u9593)\n     */\n    vector<pair<int, int>> path_query(Vertex v, Vertex\
-    \ u = -1){\n        vector<pair<int, int>> ret;\n        if(u == -1) u = m_root;\n\
-    \        while(1){\n            Vertex hv = __gethead(v), hu = __gethead(u);\n\
-    \            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);\n       \
-    \     if(hv == hu){\n                if(m_depth[v] > m_depth[u]) swap(v, u);\n\
-    \                auto [vc, vi] = m_vertexindex[v];\n                auto [uc,\
-    \ ui] = m_vertexindex[u];\n                ret.push_back({m_offset[vc] + vi, m_offset[uc]\
-    \ + ui + 1});\n                return ret;\n            }\n            auto [uc,\
-    \ ui] = m_vertexindex[u];\n            ret.push_back({m_offset[uc], m_offset[uc]\
-    \ + ui + 1});\n            u = m_parentvertex[hu];\n        }\n    }\n\n    pair<int,\
-    \ int> subtree_query(Vertex v){\n        return {m_in[v], m_out[v]};\n    }\n\n\
-    \    void print_columns(){\n\n    }\n};"
+    \ + m_vertexindex[i].second;\n        }\n        return ret;\n    }\n\n    /**\n\
+    \     * @brief \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u306ELCA\u3092\u6C42\u3081\
+    \u308B\u3002\n     */\n    Vertex lca(Vertex v, Vertex u){\n        while(1){\n\
+    \            Vertex hv = m_head(v), hu = m_head(u);\n            if(m_depth[hv]\
+    \ > m_depth[hu]) swap(v, u), swap(hv, hu);\n            if(hv == hu) return (m_depth[v]\
+    \ < m_depth[u] ? v : u);\n            u = m_parentvertex[hu];\n        }\n   \
+    \ }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\
+    \u3076\u30D1\u30B9\u306B\u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\
+    \u3002\n     * @param v \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option,\
+    \ default = `root`)\n     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\
+    \u89A7(\u534A\u958B\u533A\u9593, 0-index)\n     */\n    vector<pair<int, int>>\
+    \ path_query(Vertex v, Vertex u = -1){\n        vector<pair<int, int>> ret;\n\
+    \        if(u == -1) u = m_root;\n        while(1){\n            Vertex hv = m_head(v),\
+    \ hu = m_head(u);\n            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv,\
+    \ hu);\n            if(hv == hu){\n                if(m_depth[v] > m_depth[u])\
+    \ swap(v, u);\n                auto [vc, vi] = m_vertexindex[v];\n           \
+    \     auto [uc, ui] = m_vertexindex[u];\n                ret.push_back({m_offset[vc]\
+    \ + vi, m_offset[uc] + ui + 1});\n                return ret;\n            }\n\
+    \            auto [uc, ui] = m_vertexindex[u];\n            ret.push_back({m_offset[uc],\
+    \ m_offset[uc] + ui + 1});\n            u = m_parentvertex[hu];\n        }\n \
+    \   }\n\n    pair<int, int> subtree_query(Vertex v){\n        return {m_in[v],\
+    \ m_out[v]};\n    }\n\n    void print_columns(){\n\n    }\n};"
   dependsOn:
   - library/Graph/GraphTemplate.hpp
   isVerificationFile: false
   path: library/Tree/HeavyLightDecomposition.hpp
   requiredBy: []
-  timestamp: '2024-03-01 09:39:30+09:00'
+  timestamp: '2024-03-01 10:10:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-VertexAddPathSum-HLD.test.cpp
 documentation_of: library/Tree/HeavyLightDecomposition.hpp
 layout: document

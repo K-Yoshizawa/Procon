@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/DataStructure/SegmentTree.hpp
-    title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -17,11 +14,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
+    PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
-    - https://judge.yosupo.jp/problem/vertex_add_path_sum
-  bundledCode: "#line 1 \"verify/LC-VertexAddPathSum-HLD.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\n#line 1 \"library/Tree/HeavyLightDecomposition.hpp\"\
+    - https://judge.yosupo.jp/problem/lca
+  bundledCode: "#line 1 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/lca\"\n\n#line 1 \"library/Tree/HeavyLightDecomposition.hpp\"\
     \n/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
     \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 3.0\n * @date 2023-10-04\n\
     \ */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
@@ -208,116 +205,29 @@ data:
     \            auto [uc, ui] = m_vertexindex[u];\n            ret.push_back({m_offset[uc],\
     \ m_offset[uc] + ui + 1});\n            u = m_parentvertex[hu];\n        }\n \
     \   }\n\n    pair<int, int> subtree_query(Vertex v){\n        return {m_in[v],\
-    \ m_out[v]};\n    }\n\n    void print_columns(){\n\n    }\n};\n#line 1 \"library/DataStructure/SegmentTree.hpp\"\
-    \n/**\n * @file SegmentTree.hpp\n * @author log K (lX57)\n * @brief Segment Tree\
-    \ - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @version 2.1\n * @date 2023-10-02\n\
-    \ */\n\n#line 10 \"library/DataStructure/SegmentTree.hpp\"\nusing namespace std;\n\
-    \ntemplate<typename Monoid>\nstruct SegmentTree{\n    private:\n    using F =\
-    \ function<Monoid(Monoid, Monoid)>;\n\n    int m_size, m_offset, m_zeroindex;\n\
-    \    vector<Monoid> m_data;\n    const F f;\n    const Monoid m_m1;\n\n    inline\
-    \ void m_check(int x){\n        assert(1 <= x && x <= m_size);\n    }\n\n    Monoid\
-    \ m_query(int ql, int qr, int left, int right, int cell){\n        if(qr <= left\
-    \ || right <= ql){\n            return m_m1;\n        }\n        if(ql <= left\
-    \ && right <= qr){\n            return m_data[cell];\n        }\n        int mid\
-    \ = (left + right) / 2;\n        Monoid ans_left = m_query(ql, qr, left, mid,\
-    \ 2 * cell);\n        Monoid ans_right = m_query(ql, qr, mid, right, 2 * cell\
-    \ + 1);\n        return f(ans_left, ans_right);\n    }\n\n    public:\n    /**\n\
-    \     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `Size`\
-    \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u30BB\u30B0\u30E1\
-    \u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\n     * @param Merge \u533A\u9593\u53D6\
-    \u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\
-    \u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\
-    \u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
-    \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    :\
-    \ f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){\n        m_size = 1;\n\
-    \        while(m_size < Size) m_size <<= 1;\n        m_offset = m_size - 1;\n\
-    \        m_data.resize(2 * m_size, m_m1);\n    }\n\n    /**\n     * @brief \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention\
-    \ \u5FC5\u305A `set()` \u3067\u521D\u671F\u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\
-    \u3089\u547C\u3073\u51FA\u3059\u3053\u3068\uFF01\n     */\n    void build(){\n\
-    \        for(int i = m_offset; i >= 1; --i){\n            m_data[i] = f(m_data[i\
-    \ * 2 + 0], m_data[i * 2 + 1]);\n        }\n    }\n\n    /**\n     * @brief \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\
-    \u308B\u3002\n     * @param Index \u4EE3\u5165\u5148\u306E\u8981\u7D20\u756A\u53F7\
-    \ (default = 1-index)\n     * @param Value \u4EE3\u5165\u3059\u308B\u5024\n  \
-    \   */\n    void set(int Index, Monoid Value){\n        m_check(Index + m_zeroindex);\n\
-    \        m_data[m_offset + Index + m_zeroindex] = Value;\n    }\n\n    /**\n \
-    \    * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u914D\u5217 `Init_Data`\
-    \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Init_Data \u521D\u671F\
-    \u30C7\u30FC\u30BF\u306E\u914D\u5217\n     * @param Merge \u533A\u9593\u53D6\u5F97\
-    \u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\
-    \u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\
-    \u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid>\
-    \ &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n\
-    \    : f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){\n        m_size\
-    \ = 1;\n        while(m_size < (int)Init_Data.size()) m_size <<= 1;\n        m_offset\
-    \ = m_size - 1;\n        m_data.resize(2 * m_size, m_m1);\n        for(int i =\
-    \ 0; i < (int)Init_Data.size(); ++i){\n            m_data[m_size + i] = Init_Data[i];\n\
-    \        }\n        build();\n    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\
-    \u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n     * @param Index\
-    \ \u66F4\u65B0\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
-    \ @param Value \u66F4\u65B0\u3059\u308B\u5024\n     */\n    void update(int Index,\
-    \ Monoid Value){\n        m_check(Index + m_zeroindex);\n        int k = m_offset\
-    \ + Index + m_zeroindex;\n        m_data[k] = Value;\n        while(k >>= 1){\n\
-    \            m_data[k] = f(m_data[2 * k], m_data[2 * k + 1]);\n        }\n   \
-    \ }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[Left, Right)` \u306B\u5BFE\
-    \u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u884C\u3046\u3002\
-    \n     * @param Left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n     * @param\
-    \ Right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return Monoid \u53D6\
-    \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid query(int Left, int Right){\n\
-    \        if(Left == Right) return m_m1;\n        m_check(Left + m_zeroindex);\n\
-    \        m_check(Right + m_zeroindex - 1);\n        return m_query(Left + m_zeroindex,\
-    \ Right + m_zeroindex, 1, m_size + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\
-    \u7D20\u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n\
-    \     * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n\
-    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
-    \ get(int k){\n        m_check(k + m_zeroindex);\n        return m_data[m_offset\
-    \ + k + m_zeroindex];\n    }\n\n    Monoid operator[](const int &k){\n       \
-    \ return get(k);\n    }\n};\n\nnamespace logk{\n    template<typename T>\n   \
-    \ SegmentTree<T> SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex\
-    \ = false){\n        if(INF == 0) INF = numeric_limits<T>::max() >> 1;\n     \
-    \   return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);}, INF, ZeroIndex);\n\
-    \    }\n}\n#line 5 \"verify/LC-VertexAddPathSum-HLD.test.cpp\"\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n    for(auto &ai :\
-    \ a) cin >> ai;\n    Graph<long long> G(N);\n    G.input(N - 1, false, true);\n\
-    \n    HeavyLightDecomposition<long long> hld(G);\n    vector<long long> init(N\
-    \ * 2);\n    auto loc = hld.get_vertex_locations();\n    for(int i = 0; i < N;\
-    \ ++i){\n        init[loc[i]] = a[i];\n    }\n    SegmentTree<long long> seg(init,\n\
-    \        [&](long long l, long long r){return l + r;},\n        0, true);\n\n\
-    \    while(Q--){\n        int query; cin >> query;\n        if(query == 0){\n\
-    \            long long p, x; cin >> p >> x;\n            seg.update(loc[p], seg[loc[p]]\
-    \ + x);\n        }\n        else{\n            int u, v; cin >> u >> v;\n    \
-    \        long long ans = 0;\n            for(auto [l, r] : hld.path_query(u, v)){\n\
-    \                ans += seg.query(l, r);\n            }\n            cout << ans\
-    \ << endl;\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
-    \n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\n#include \"../library/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<long long> a(N);\n \
-    \   for(auto &ai : a) cin >> ai;\n    Graph<long long> G(N);\n    G.input(N -\
-    \ 1, false, true);\n\n    HeavyLightDecomposition<long long> hld(G);\n    vector<long\
-    \ long> init(N * 2);\n    auto loc = hld.get_vertex_locations();\n    for(int\
-    \ i = 0; i < N; ++i){\n        init[loc[i]] = a[i];\n    }\n    SegmentTree<long\
-    \ long> seg(init,\n        [&](long long l, long long r){return l + r;},\n   \
-    \     0, true);\n\n    while(Q--){\n        int query; cin >> query;\n       \
-    \ if(query == 0){\n            long long p, x; cin >> p >> x;\n            seg.update(loc[p],\
-    \ seg[loc[p]] + x);\n        }\n        else{\n            int u, v; cin >> u\
-    \ >> v;\n            long long ans = 0;\n            for(auto [l, r] : hld.path_query(u,\
-    \ v)){\n                ans += seg.query(l, r);\n            }\n            cout\
-    \ << ans << endl;\n        }\n    }\n}"
+    \ m_out[v]};\n    }\n\n    void print_columns(){\n\n    }\n};\n#line 4 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    Graph G(N);\n    for(int i\
+    \ = 1; i < N; ++i){\n        int p; cin >> p;\n        G.add(i, p);\n    }\n\n\
+    \    HeavyLightDecomposition hld(G);\n    while(Q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << hld.lca(u, v) << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    Graph G(N);\n    for(int i\
+    \ = 1; i < N; ++i){\n        int p; cin >> p;\n        G.add(i, p);\n    }\n\n\
+    \    HeavyLightDecomposition hld(G);\n    while(Q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << hld.lca(u, v) << endl;\n    }\n}"
   dependsOn:
   - library/Tree/HeavyLightDecomposition.hpp
   - library/Graph/GraphTemplate.hpp
-  - library/DataStructure/SegmentTree.hpp
   isVerificationFile: true
-  path: verify/LC-VertexAddPathSum-HLD.test.cpp
+  path: verify/LC-LowestCommonAncestor-HLD.test.cpp
   requiredBy: []
   timestamp: '2024-03-01 10:10:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/LC-VertexAddPathSum-HLD.test.cpp
+documentation_of: verify/LC-LowestCommonAncestor-HLD.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-VertexAddPathSum-HLD.test.cpp
-- /verify/verify/LC-VertexAddPathSum-HLD.test.cpp.html
-title: verify/LC-VertexAddPathSum-HLD.test.cpp
+- /verify/verify/LC-LowestCommonAncestor-HLD.test.cpp
+- /verify/verify/LC-LowestCommonAncestor-HLD.test.cpp.html
+title: verify/LC-LowestCommonAncestor-HLD.test.cpp
 ---
