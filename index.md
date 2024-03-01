@@ -158,8 +158,14 @@ data:
       path: library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
+      path: library/Tree/HeavyLightDecomposition.hpp
+      title: "Heavy Light Decomposition - HL\u5206\u89E3"
+    - icon: ':heavy_check_mark:'
       path: library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/TreeDiameter.hpp
+      title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   - name: old/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -206,9 +212,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: old/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':heavy_check_mark:'
-      path: old/Tree/HeavyLightDecomposition.hpp
-      title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: old/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
@@ -330,11 +333,17 @@ data:
       path: verify/LC-StronglyConnectedComponents.test.cpp
       title: verify/LC-StronglyConnectedComponents.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-TreeDiameter.test.cpp
+      title: verify/LC-TreeDiameter.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/LC-VertexAddPathSum.test.cpp
-      title: verify/LC-VertexAddPathSum.test.cpp
+      path: verify/LC-VertexAddPathSum-ET.test.cpp
+      title: verify/LC-VertexAddPathSum-ET.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-VertexAddPathSum-HLD.test.cpp
+      title: verify/LC-VertexAddPathSum-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-ZAlgorithm.test.cpp
       title: verify/LC-ZAlgorithm.test.cpp
@@ -411,19 +420,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-2-A.test.cpp
       title: verify_old/AOJ-GRL-2-A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify_old/AOJ-GRL-5-C-HLD.test.cpp
       title: verify_old/AOJ-GRL-5-C-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-C.test.cpp
       title: verify_old/AOJ-GRL-5-C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
       title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-D.test.cpp
       title: verify_old/AOJ-GRL-5-D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify_old/AOJ-GRL-5-E.test.cpp
       title: verify_old/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
@@ -438,10 +447,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-7-A.test.cpp
       title: verify_old/AOJ-GRL-7-A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify_old/LC-VertexAddPathSum.test.cpp
       title: verify_old/LC-VertexAddPathSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
       title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
     - icon: ':heavy_check_mark:'

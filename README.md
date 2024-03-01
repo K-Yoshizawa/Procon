@@ -7,6 +7,12 @@
 
 ## 更新履歴
 
+### Ver 3.2.1 (2024/03/01)
+- 【改修】Segment Tree : `query` の半開区間が `[i, i)` のとき単位元を返すように改修
+- 【改修】Heavy Light Decomposition : Graph Template 3.0 に対応
+- 【改修】Lowest Common Ancestor : 2頂点間の距離を求める `dist` を追加
+- 【改修】Tree Diameter : Graph Template 3.0 に対応
+
 ### Ver 3.2.0 (2024/02/08)
 - 【追加】Mo's Algorithm
 
@@ -30,7 +36,7 @@
 
 ### Ver 2.7.0 (2023/12/03)
 - 【追加】Rolling Hash - ローリングハッシュ
-- 【改修】Cumulative Sum 2D - 実装を簡素化
+- 【改修】Cumulative Sum 2D : 実装を簡素化
 
 ### Ver 2.6.2 (2023/11/24)
 - ICPC用の簡易ライブラリの追加

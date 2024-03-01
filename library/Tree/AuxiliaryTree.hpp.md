@@ -147,17 +147,19 @@ data:
     \u5171\u901A\u7956\u5148\n * @version 3.0\n * @date 2024-02-11\n */\n\n#line 9\
     \ \"library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename CostType>\nstruct\
     \ LowestCommonAncestor{\n    private:\n    Graph<CostType> &G;\n    int m_height;\n\
-    \    vector<int> m_depth;\n    vector<vector<Vertex>> m_parent;\n\n    void m_dfs(Vertex\
-    \ v, Vertex p, int d){\n        m_parent[0][v] = p;\n        m_depth[v] = d;\n\
-    \        for(auto &e : G[v]){\n            if(e.to != p) m_dfs(e.to, v, d + 1);\n\
-    \        }\n    }\n\n    public:\n    /**\n     * @brief Construct a new Lowest\
-    \ Common Ancestor object\n     * @param G \u6728\n     * @param Root \u6839\u306E\
-    \u9802\u70B9\u756A\u53F7(0-index)\n     */\n    LowestCommonAncestor(Graph<CostType>\
-    \ &G, Vertex Root = 0) : G(G), m_height(32){\n        m_depth.resize(G.size());\n\
-    \        m_parent.resize(m_height, vector<Vertex>(G.size(), -1));\n        m_dfs(Root,\
-    \ -1, 0);\n        for(int k = 0; k + 1 < m_height; ++k){\n            for(Vertex\
-    \ v = 0; v < G.size(); ++v){\n                if(m_parent[k][v] < 0) m_parent[k\
-    \ + 1][v] = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
+    \    vector<int> m_depth;\n    vector<vector<Vertex>> m_parent;\n    vector<CostType>\
+    \ m_cum;\n\n    void m_dfs(Vertex v, Vertex p, int d){\n        m_parent[0][v]\
+    \ = p;\n        m_depth[v] = d;\n        for(auto &e : G[v]){\n            if(e.to\
+    \ != p){\n                m_cum[e.to] = m_cum[v] + e.cost;\n                m_dfs(e.to,\
+    \ v, d + 1);\n            }\n        }\n    }\n\n    public:\n    /**\n     *\
+    \ @brief Construct a new Lowest Common Ancestor object\n     * @param G \u6728\
+    \n     * @param Root \u6839\u306E\u9802\u70B9\u756A\u53F7(0-index)\n     */\n\
+    \    LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), m_height(32){\n\
+    \        m_depth.resize(G.size());\n        m_parent.resize(m_height, vector<Vertex>(G.size(),\
+    \ -1));\n        m_cum.resize(G.size(), 0);\n        m_dfs(Root, -1, 0);\n   \
+    \     for(int k = 0; k + 1 < m_height; ++k){\n            for(Vertex v = 0; v\
+    \ < G.size(); ++v){\n                if(m_parent[k][v] < 0) m_parent[k + 1][v]\
+    \ = -1;\n                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];\n\
     \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
     \u9802\u70B9 `v` \u306E LCA \u3092\u6C42\u3081\u308B\u3002\n     * @note \u9802\
     \u70B9\u756A\u53F7\u306F 0-index\n     * @return Vertex LCA\u306E\u9802\u70B9\u756A\
@@ -167,21 +169,26 @@ data:
     \            }\n        }\n        if(u == v) return u;\n        for(int k = m_height\
     \ - 1; k >= 0; --k){\n            if(m_parent[k][u] != m_parent[k][v]){\n    \
     \            u = m_parent[k][u];\n                v = m_parent[k][v];\n      \
-    \      }\n        }\n        return m_parent[0][u];\n    }\n};\n#line 10 \"library/Tree/AuxiliaryTree.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct AuxiliaryTree{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<int> m_aux, m_ori, m_par;\n    EulerTour<CostType> m_et;\n \
-    \   LowestCommonAncestor<CostType> m_lca;\n\n    public:\n    AuxiliaryTree(Graph<CostType>\
-    \ &G, Vertex Root = 0) : G(G), m_et(G, Root), m_lca(G, Root){\n        int n =\
-    \ G.size();\n        m_aux.resize(n, -1);\n        m_ori.resize(n, -1);\n    \
-    \    m_par.resize(n, -1);\n    }\n\n    /**\n     * @brief \u9802\u70B9\u96C6\u5408\
-    \ `vs` \u3092\u542B\u3080\u88DC\u52A9\u6728 `T'` \u3092\u751F\u6210\u3059\u308B\
-    \u3002\n     * @param vs \u9802\u70B9\u96C6\u5408\n     * @return Graph<CostType>\
-    \ \u751F\u6210\u3057\u305F\u88DC\u52A9\u6728 `T'`\n     */\n    Graph<CostType>\
-    \ build(vector<Vertex> &vs){\n        int m = vs.size();\n        sort(vs.begin(),\
-    \ vs.end(), [&](int i, int j){\n            return m_et.in(i) < m_et.in(j);\n\
-    \        });\n        for(int i = 0; i < m - 1; ++i){\n            vs.push_back(m_lca.get(vs[i],\
-    \ vs[i + 1]));\n        }\n        sort(vs.begin(), vs.end(), [&](int i, int j){\n\
-    \            return m_et.in(i) < m_et.in(j);\n        });\n        vs.erase(unique(vs.begin(),\
+    \      }\n        }\n        return m_parent[0][u];\n    }\n\n    /**\n     *\
+    \ @brief \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u9593\u306E\u30B3\u30B9\u30C8\
+    \u3092\u6C42\u3081\u308B\u3002\n     * @note \u9802\u70B9\u756A\u53F7\u306F 0-index\n\
+    \     * @return CostType \u30B3\u30B9\u30C8\n     */\n    CostType dist(Vertex\
+    \ u, Vertex v){\n        return m_cum[u] + m_cum[v] - m_cum[get(u, v)] * 2;\n\
+    \    }\n};\n#line 10 \"library/Tree/AuxiliaryTree.hpp\"\n\ntemplate<typename CostType>\n\
+    struct AuxiliaryTree{\n    private:\n    Graph<CostType> &G;\n    vector<int>\
+    \ m_aux, m_ori, m_par;\n    EulerTour<CostType> m_et;\n    LowestCommonAncestor<CostType>\
+    \ m_lca;\n\n    public:\n    AuxiliaryTree(Graph<CostType> &G, Vertex Root = 0)\
+    \ : G(G), m_et(G, Root), m_lca(G, Root){\n        int n = G.size();\n        m_aux.resize(n,\
+    \ -1);\n        m_ori.resize(n, -1);\n        m_par.resize(n, -1);\n    }\n\n\
+    \    /**\n     * @brief \u9802\u70B9\u96C6\u5408 `vs` \u3092\u542B\u3080\u88DC\
+    \u52A9\u6728 `T'` \u3092\u751F\u6210\u3059\u308B\u3002\n     * @param vs \u9802\
+    \u70B9\u96C6\u5408\n     * @return Graph<CostType> \u751F\u6210\u3057\u305F\u88DC\
+    \u52A9\u6728 `T'`\n     */\n    Graph<CostType> build(vector<Vertex> &vs){\n \
+    \       int m = vs.size();\n        sort(vs.begin(), vs.end(), [&](int i, int\
+    \ j){\n            return m_et.in(i) < m_et.in(j);\n        });\n        for(int\
+    \ i = 0; i < m - 1; ++i){\n            vs.push_back(m_lca.get(vs[i], vs[i + 1]));\n\
+    \        }\n        sort(vs.begin(), vs.end(), [&](int i, int j){\n          \
+    \  return m_et.in(i) < m_et.in(j);\n        });\n        vs.erase(unique(vs.begin(),\
     \ vs.end()), vs.end());\n        m = vs.size();\n        for(int i = 0; i < m;\
     \ ++i) m_aux[vs[i]] = i, m_ori[i] = vs[i];\n        stack<Vertex> st;\n      \
     \  st.push(vs[0]);\n        for(int i = 1; i < m; ++i){\n            while(m_et.out(st.top())\
@@ -234,7 +241,7 @@ data:
   isVerificationFile: false
   path: library/Tree/AuxiliaryTree.hpp
   requiredBy: []
-  timestamp: '2024-02-19 11:28:19+09:00'
+  timestamp: '2024-03-01 09:39:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Tree/AuxiliaryTree.hpp

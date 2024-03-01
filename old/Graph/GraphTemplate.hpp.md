@@ -41,9 +41,6 @@ data:
     path: old/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
-    path: old/Tree/HeavyLightDecomposition.hpp
-    title: "Heavy Light Decomposition - HL\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
     path: old/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':warning:'
@@ -66,20 +63,11 @@ data:
     path: verify_old/AOJ-GRL-2-A.test.cpp
     title: verify_old/AOJ-GRL-2-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-5-C-HLD.test.cpp
-    title: verify_old/AOJ-GRL-5-C-HLD.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-5-C.test.cpp
     title: verify_old/AOJ-GRL-5-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
-    title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-5-D.test.cpp
     title: verify_old/AOJ-GRL-5-D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-5-E.test.cpp
-    title: verify_old/AOJ-GRL-5-E.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
     title: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
@@ -92,12 +80,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify_old/AOJ-GRL-7-A.test.cpp
     title: verify_old/AOJ-GRL-7-A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_old/LC-VertexAddPathSum.test.cpp
-    title: verify_old/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
-    title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify_old/LC-VertexAddSubtreeSum.test.cpp
     title: verify_old/LC-VertexAddSubtreeSum.test.cpp
@@ -230,7 +212,6 @@ data:
   requiredBy:
   - old/Tree/TreeDiamiter.hpp
   - old/Tree/LowestCommonAncestor.hpp
-  - old/Tree/HeavyLightDecomposition.hpp
   - old/Tree/EulerTour.hpp
   - old/Graph/Dijkstra.hpp
   - old/Graph/Dinic.hpp
@@ -247,9 +228,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify_old/AOJ-GRL-1-B.test.cpp
-  - verify_old/AOJ-GRL-5-D-HLD.test.cpp
   - verify_old/AOJ-GRL-2-A.test.cpp
-  - verify_old/AOJ-GRL-5-E.test.cpp
   - verify_old/AOJ-GRL-6-B.test.cpp
   - verify_old/LC-VertexAddSubtreeSum.test.cpp
   - verify_old/AOJ-GRL-5-D.test.cpp
@@ -257,10 +236,7 @@ data:
   - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
   - verify_old/AOJ-GRL-6-A-Dinic.test.cpp
   - verify_old/AOJ-GRL-1-C.test.cpp
-  - verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
-  - verify_old/AOJ-GRL-5-C-HLD.test.cpp
   - verify_old/AOJ-GRL-6-A.test.cpp
-  - verify_old/LC-VertexAddPathSum.test.cpp
   - verify_old/AOJ-GRL-7-A.test.cpp
   - verify_old/AOJ-GRL-1-A.test.cpp
 documentation_of: old/Graph/GraphTemplate.hpp

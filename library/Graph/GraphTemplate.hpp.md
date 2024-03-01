@@ -27,8 +27,14 @@ data:
     path: library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
+    path: library/Tree/HeavyLightDecomposition.hpp
+    title: "Heavy Light Decomposition - HL\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/TreeDiameter.hpp
+    title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
@@ -55,8 +61,14 @@ data:
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/LC-VertexAddPathSum.test.cpp
-    title: verify/LC-VertexAddPathSum.test.cpp
+    path: verify/LC-TreeDiameter.test.cpp
+    title: verify/LC-TreeDiameter.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddPathSum-ET.test.cpp
+    title: verify/LC-VertexAddPathSum-ET.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddPathSum-HLD.test.cpp
+    title: verify/LC-VertexAddPathSum-HLD.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -280,7 +292,9 @@ data:
   requiredBy:
   - library/Tree/AuxiliaryTree.hpp
   - library/Tree/LowestCommonAncestor.hpp
+  - library/Tree/HeavyLightDecomposition.hpp
   - library/Tree/EulerTour.hpp
+  - library/Tree/TreeDiameter.hpp
   - library/Graph/Dijkstra.hpp
   - library/Graph/LongestDistance.hpp
   - library/Graph/Kruskal.hpp
@@ -295,9 +309,11 @@ data:
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
+  - verify/LC-VertexAddPathSum-ET.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-TreeDiameter.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/LC-VertexAddPathSum-HLD.test.cpp
   - verify/LC-ShortestPath.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document

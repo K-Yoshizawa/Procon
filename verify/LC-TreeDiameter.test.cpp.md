@@ -4,26 +4,26 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: library/Tree/AuxiliaryTree.hpp
-    title: "Auxiliary Tree - \u88DC\u52A9\u6728"
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/LC-VertexAddPathSum-ET.test.cpp
-    title: verify/LC-VertexAddPathSum-ET.test.cpp
+    path: library/Tree/TreeDiameter.hpp
+    title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    links: []
-  bundledCode: "#line 1 \"library/Tree/EulerTour.hpp\"\n/**\n * @file EulerTour.hpp\n\
-    \ * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version\
-    \ 3.0\n * @date 2024-02-11\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\
-    \n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\
-    \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
+    links:
+    - https://judge.yosupo.jp/problem/tree_diameter
+  bundledCode: "#line 1 \"verify/LC-TreeDiameter.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\
+    \n\n#line 1 \"library/Tree/TreeDiameter.hpp\"\n/**\n * @file TreeDiameter.hpp\n\
+    \ * @brief Tree Diameter - \u6728\u306E\u76F4\u5F84\n * @version 1.0\n * @date\
+    \ 2024-03-01\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
+    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
     \ CostType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n\
     \    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex\
     \ to, CostType cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n\
@@ -125,53 +125,54 @@ data:
     \ os << \"{\" << e.to << \", \" << e.cost << \"} \";\n                else os\
     \ << e.to << \" \";\n            }\n            if(i + 1 < G.size()) os << endl;\n\
     \        }\n        return os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex\
-    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Tree/EulerTour.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<int> m_in, m_out;\n\n    void m_dfs(Vertex v, Vertex p, int\
-    \ &t){\n        m_in[v] = t++;\n        for(auto &e : G[v]){\n            if(e.to\
-    \ == p) continue;\n            m_dfs(e.to, v, t);\n        }\n        m_out[v]\
-    \ = t++;\n    }\n\n    public:\n    /**\n     * @brief Construct a new Euler Tour\
-    \ object\n     * @param G \u6728\n     * @param Root \u6839\u306E\u9802\u70B9\u756A\
-    \u53F7(0-index)\n     * @param Offset \u30BF\u30A4\u30E0\u30B9\u30BF\u30F3\u30D7\
-    \u306E\u521D\u671F\u5024\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root\
-    \ = 0, int Offset = 0) : G(G){\n        m_in.resize(G.size());\n        m_out.resize(G.size());\n\
-    \        m_dfs(Root, -1, Offset);\n    }\n\n    int in(Vertex v){\n        assert(0\
-    \ <= v && v < G.size());\n        return m_in[v];\n    }\n\n    int out(Vertex\
-    \ v){\n        assert(0 <= v && v < G.size());\n        return m_out[v];\n   \
-    \ }\n\n    pair<vector<int>, vector<int>> get(){\n        return make_pair(m_in,\
-    \ m_out);\n    }\n\n    pair<int, int> operator[](Vertex v){\n        return make_pair(in(v),\
-    \ out(v));\n    }\n};\n"
-  code: "/**\n * @file EulerTour.hpp\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\
-    \u30C4\u30A2\u30FC\n * @version 3.0\n * @date 2024-02-11\n */\n\n#include \"../Graph/GraphTemplate.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct EulerTour{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<int> m_in, m_out;\n\n    void m_dfs(Vertex v, Vertex p, int\
-    \ &t){\n        m_in[v] = t++;\n        for(auto &e : G[v]){\n            if(e.to\
-    \ == p) continue;\n            m_dfs(e.to, v, t);\n        }\n        m_out[v]\
-    \ = t++;\n    }\n\n    public:\n    /**\n     * @brief Construct a new Euler Tour\
-    \ object\n     * @param G \u6728\n     * @param Root \u6839\u306E\u9802\u70B9\u756A\
-    \u53F7(0-index)\n     * @param Offset \u30BF\u30A4\u30E0\u30B9\u30BF\u30F3\u30D7\
-    \u306E\u521D\u671F\u5024\n     */\n    EulerTour(Graph<CostType> &G, Vertex Root\
-    \ = 0, int Offset = 0) : G(G){\n        m_in.resize(G.size());\n        m_out.resize(G.size());\n\
-    \        m_dfs(Root, -1, Offset);\n    }\n\n    int in(Vertex v){\n        assert(0\
-    \ <= v && v < G.size());\n        return m_in[v];\n    }\n\n    int out(Vertex\
-    \ v){\n        assert(0 <= v && v < G.size());\n        return m_out[v];\n   \
-    \ }\n\n    pair<vector<int>, vector<int>> get(){\n        return make_pair(m_in,\
-    \ m_out);\n    }\n\n    pair<int, int> operator[](Vertex v){\n        return make_pair(in(v),\
-    \ out(v));\n    }\n};"
+    \ v){\n        return get_adj(v);\n    }\n};\n#line 9 \"library/Tree/TreeDiameter.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct TreeDiameter{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<CostType> m_dist;\n    vector<Vertex> m_path;\n\n    void m_dfs(int\
+    \ v, int p){\n        for(auto &e : G[v]){\n            if(p == e.to) continue;\n\
+    \            m_dist[e.to] = m_dist[v] + e.cost;\n            m_dfs(e.to, v);\n\
+    \        }\n    }\n\n    void m_recall(int v){\n        m_path.push_back(v);\n\
+    \        for(auto &e : G[v]){\n            if(m_dist[e.to] == m_dist[v] - e.cost){\n\
+    \                m_recall(e.to);\n            }\n        }\n    }\n\n    public:\n\
+    \    TreeDiameter(Graph<CostType> &G) : G(G){\n        m_dist.resize(G.size(),\
+    \ 0);\n        m_dfs(0, -1);\n        int v = 0;\n        for(int i = 1; i < G.size();\
+    \ ++i){\n            if(m_dist[v] < m_dist[i]) v = i;\n        }\n        m_dist.assign(G.size(),\
+    \ 0);\n        m_dfs(v, -1);\n        v = 0;\n        for(int i = 1; i < G.size();\
+    \ ++i){\n            if(m_dist[v] < m_dist[i]) v = i;\n        }\n        m_recall(v);\n\
+    \        reverse(m_path.begin(), m_path.end());\n    }\n\n    /**\n     * @brief\
+    \ \u76F4\u5F84\u306E\u4E21\u7AEF\u70B9\u306E\u9802\u70B9\u756A\u53F7\u3092\u8FD4\
+    \u3059\u3002\n     * @return pair<Vertex, Vertex> \u76F4\u5F84\u306E\u4E21\u7AEF\
+    \u70B9\u306E\u9802\u70B9\u756A\u53F7\n     */\n    pair<Vertex, Vertex> get(){\n\
+    \        return {m_path[0], m_path.back()};\n    }\n\n    /**\n     * @brief \u76F4\
+    \u5F84\u306E\u9577\u3055\u3092\u8FD4\u3059\u3002\n     */\n    CostType dist(){\n\
+    \        return m_dist[m_path.back()];\n    }\n\n    /**\n     * @brief \u76F4\
+    \u5F84\u306E\u9802\u70B9\u5217\u3092\u8FD4\u3059\u3002\n     */\n    vector<Vertex>\
+    \ &path(){\n        return m_path;\n    }\n};\n#line 4 \"verify/LC-TreeDiameter.test.cpp\"\
+    \n\nusing ll = long long;\n\nint main(){\n    int N; cin >> N;\n    Graph<ll>\
+    \ G(N);\n    for(int i = 0; i < N - 1; ++i){\n        int a, b, c; cin >> a >>\
+    \ b >> c;\n        G.add(a, b, c);\n    }\n\n    TreeDiameter td(G);\n    ll X\
+    \ = td.dist();\n    auto u = td.path();\n    ll Y = u.size();\n    cout << X <<\
+    \ \" \" << Y << endl;\n    for(auto &v : u){\n        cout << v << \" \";\n  \
+    \  }\n    cout << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\n\n#include\
+    \ \"../library/Tree/TreeDiameter.hpp\"\n\nusing ll = long long;\n\nint main(){\n\
+    \    int N; cin >> N;\n    Graph<ll> G(N);\n    for(int i = 0; i < N - 1; ++i){\n\
+    \        int a, b, c; cin >> a >> b >> c;\n        G.add(a, b, c);\n    }\n\n\
+    \    TreeDiameter td(G);\n    ll X = td.dist();\n    auto u = td.path();\n   \
+    \ ll Y = u.size();\n    cout << X << \" \" << Y << endl;\n    for(auto &v : u){\n\
+    \        cout << v << \" \";\n    }\n    cout << endl;\n}"
   dependsOn:
+  - library/Tree/TreeDiameter.hpp
   - library/Graph/GraphTemplate.hpp
-  isVerificationFile: false
-  path: library/Tree/EulerTour.hpp
-  requiredBy:
-  - library/Tree/AuxiliaryTree.hpp
-  timestamp: '2024-02-19 11:28:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/LC-VertexAddPathSum-ET.test.cpp
-documentation_of: library/Tree/EulerTour.hpp
+  isVerificationFile: true
+  path: verify/LC-TreeDiameter.test.cpp
+  requiredBy: []
+  timestamp: '2024-03-01 09:39:30+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/LC-TreeDiameter.test.cpp
 layout: document
 redirect_from:
-- /library/library/Tree/EulerTour.hpp
-- /library/library/Tree/EulerTour.hpp.html
-title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+- /verify/verify/LC-TreeDiameter.test.cpp
+- /verify/verify/LC-TreeDiameter.test.cpp.html
+title: verify/LC-TreeDiameter.test.cpp
 ---
