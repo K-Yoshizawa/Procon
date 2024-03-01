@@ -420,21 +420,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-2-A.test.cpp
       title: verify_old/AOJ-GRL-2-A.test.cpp
-    - icon: ':x:'
-      path: verify_old/AOJ-GRL-5-C-HLD.test.cpp
-      title: verify_old/AOJ-GRL-5-C-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-C.test.cpp
       title: verify_old/AOJ-GRL-5-C.test.cpp
-    - icon: ':x:'
-      path: verify_old/AOJ-GRL-5-D-HLD.test.cpp
-      title: verify_old/AOJ-GRL-5-D-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-5-D.test.cpp
       title: verify_old/AOJ-GRL-5-D.test.cpp
-    - icon: ':x:'
-      path: verify_old/AOJ-GRL-5-E.test.cpp
-      title: verify_old/AOJ-GRL-5-E.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
       title: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
@@ -447,12 +438,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify_old/AOJ-GRL-7-A.test.cpp
       title: verify_old/AOJ-GRL-7-A.test.cpp
-    - icon: ':x:'
-      path: verify_old/LC-VertexAddPathSum.test.cpp
-      title: verify_old/LC-VertexAddPathSum.test.cpp
-    - icon: ':x:'
-      path: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
-      title: verify_old/LC-VertexAddSubtreeSum-HLD.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify_old/LC-VertexAddSubtreeSum.test.cpp
       title: verify_old/LC-VertexAddSubtreeSum.test.cpp
