@@ -121,6 +121,16 @@ struct Graph{
         else return (int)m_adj.at(v).size();
     }
 
+    /**
+     * @brief グラフが有向グラフかどうかを返す。
+     */
+    bool is_directed(){
+        return m_is_directed;
+    }
+
+    /**
+     * @brief グラフが重み付きかどうかを返す。
+     */
     bool is_weighted(){
         return m_is_weighted;
     }

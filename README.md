@@ -7,6 +7,9 @@
 
 ## 更新履歴
 
+### Ver 3.2.2 (2024/03/08)
+- 【改修】Graph Template : `is_directed` の追加
+
 ### Ver 3.2.1 (2024/03/01)
 - 【改修】Segment Tree : `query` の半開区間が `[i, i)` のとき単位元を返すように改修
 - 【改修】Heavy Light Decomposition : Graph Template 3.0 に対応
