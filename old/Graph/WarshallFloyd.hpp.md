@@ -1,17 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-1-C.test.cpp
-    title: verify_old/AOJ-GRL-1-C.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
     links: []
@@ -124,9 +121,8 @@ data:
   path: old/Graph/WarshallFloyd.hpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify_old/AOJ-GRL-1-C.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: old/Graph/WarshallFloyd.hpp
 layout: document
 redirect_from:

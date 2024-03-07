@@ -4,17 +4,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/DataStructure/UnionFind.hpp
     title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-2-A.test.cpp
-    title: verify_old/AOJ-GRL-2-A.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
     links: []
@@ -143,9 +140,8 @@ data:
   path: old/Graph/Kruskal.hpp
   requiredBy: []
   timestamp: '2024-01-15 12:42:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify_old/AOJ-GRL-2-A.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: old/Graph/Kruskal.hpp
 layout: document
 redirect_from:

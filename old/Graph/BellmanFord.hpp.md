@@ -1,20 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
-    title: verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-1-B.test.cpp
-    title: verify_old/AOJ-GRL-1-B.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
     links: []
@@ -104,10 +98,8 @@ data:
   path: old/Graph/BellmanFord.hpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify_old/AOJ-GRL-1-B.test.cpp
-  - verify_old/AOJ-GRL-1-B-Dijkstra.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: old/Graph/BellmanFord.hpp
 layout: document
 redirect_from:

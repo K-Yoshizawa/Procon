@@ -1,27 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/BipartiteMatching.hpp
     title: "Bipartite Matching - \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\
       \u30C3\u30C1\u30F3\u30B0"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
-    title: verify_old/AOJ-GRL-6-A-Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-7-A.test.cpp
-    title: verify_old/AOJ-GRL-7-A.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Dinic - \u6700\u5927\u6D41"
     links: []
@@ -167,10 +161,8 @@ data:
   requiredBy:
   - old/Graph/BipartiteMatching.hpp
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify_old/AOJ-GRL-6-A-Dinic.test.cpp
-  - verify_old/AOJ-GRL-7-A.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: old/Graph/Dinic.hpp
 layout: document
 redirect_from:

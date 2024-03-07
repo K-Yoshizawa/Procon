@@ -1,23 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/Dijkstra.hpp
     title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/FlowTemplate.hpp
     title: "Flow Template - \u30D5\u30ED\u30FC\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: old/Graph/GraphTemplate.hpp
     title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify_old/AOJ-GRL-6-B.test.cpp
-    title: verify_old/AOJ-GRL-6-B.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Primal Dual - \u6700\u5C0F\u8CBB\u7528\u6D41"
     links: []
@@ -195,9 +192,8 @@ data:
   path: old/Graph/PrimalDual.hpp
   requiredBy: []
   timestamp: '2024-01-09 23:25:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify_old/AOJ-GRL-6-B.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: old/Graph/PrimalDual.hpp
 layout: document
 redirect_from:
