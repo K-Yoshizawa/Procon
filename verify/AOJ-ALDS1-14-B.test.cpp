@@ -5,7 +5,7 @@
 int main(){
     string T, P; cin >> T >> P;
 
-    RollingHash_createbase();
+    RollingHash::generate_base();
     RollingHash RHT(T), RHP(P);
     for(int i = 0; i < (int)T.size() - (int)P.size() + 1; ++i){
         if(RHT.substr(i + 1, i + P.size()) == RHP){
