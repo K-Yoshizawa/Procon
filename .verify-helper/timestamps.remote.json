@@ -31,6 +31,7 @@
 "verify/LC-PointAddRangeSum.test.cpp": "2024-03-01 09:39:30 +0900",
 "verify/LC-PointSetRangeComposite.test.cpp": "2024-03-01 09:39:30 +0900",
 "verify/LC-PowofMatrix.test.cpp": "2024-02-19 11:28:19 +0900",
+"verify/LC-PrimalityTest.test.cpp": "2024-03-09 17:12:11 +0900",
 "verify/LC-RangeAffinePointGet.test.cpp": "2023-11-10 01:41:40 +0900",
 "verify/LC-RangeAffineRangeSum.test.cpp": "2023-11-06 01:36:34 +0900",
 "verify/LC-RectangleSum-MST.test.cpp": "2024-02-04 22:07:23 +0900",
