@@ -9,127 +9,94 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-namespace rh{
-    const ulong MASK30 = (1UL << 30) - 1;
-    const ulong MASK31 = (1UL << 31) - 1;
-    const ulong MOD = (1UL << 61) - 1;
-    const ulong MASK61 = MOD;
-    const ulong POSITIVIZER = MOD * 4;
-    vector<ulong> base;
-    vector<vector<ulong>> pow;
-
-    ulong Mod(ulong x){
-        ulong xu = x >> 61, xd = x & MASK61;
-        ulong res = xu + xd;
-        if(res >= MOD) res -= MOD;
-        return res;
-    }
-
-    ulong Mul(ulong a, ulong b){
-        ulong au = a >> 31, ad = a & MASK31;
-        ulong bu = b >> 31, bd = b & MASK31;
-        ulong m = ad * bu + au * bd;
-        ulong mu = m >> 30, md = m & MASK30;
-        return au * bu * 2 + mu + (md << 31) + ad * bd;
-    }
-};
-
-/**
- * @brief ローリングハッシュの基底を生成する
- * @attention ローリングハッシュを使う前に必ず呼び出すこと
- * @param N 文字列の最大文字数 (default = 1e6 + 10)
- * @param Cnt 生成する基底の数 (default = 3)
- */
-void RollingHash_createbase(int N = 1000010, int Cnt = 3){
-    random_device rnd;
-    mt19937 mt(rnd());
-    uniform_int_distribution<ulong> dist(1, rh::MOD - 1);
-    for(int i = 0; i < Cnt; ++i) rh::base.push_back(dist(mt));
-    rh::pow.resize(Cnt, vector<ulong>(N + 1, 1UL));
-    for(int i = 0; i < Cnt; ++i){
-        for(int j = 1; j <= N; ++j){
-            rh::pow[i][j] = rh::Mod(rh::Mul(rh::pow[i][j - 1], rh::base[i]));
-        }
-    }
-}
-
 struct RollingHash{
+    using Hash = uint64_t;
+    using HashTable = vector<Hash>;
+
     private:
-    vector<vector<ulong>> __PrefixHash;
-    bool __ValidPrefixHash{false};
-    vector<ulong> __Hash;
-    int __Hashsize, __Length;
+    using u64 = uint64_t;
+    using u128 = __uint128_t;
+
+    static const u64 MOD = (1UL << 61) - 1;
+
+    static Hash base;
+    static HashTable power;
+
+    static inline u64 add(u64 a, u64 b){
+        if((a += b) >= MOD) a -= MOD;
+        return a;
+    }
+
+    static inline u64 mul(u64 a, u64 b){
+        u128 c = u128(a) * b;
+        return add(c >> 61, c & MOD);
+    }
 
     public:
-    RollingHash() : __Hashsize(rh::base.size()), __Hash(rh::base.size(), 0), __Length(0){}
-
     /**
-     * @brief 文字列 `S` からハッシュを生成する
-     * @note この場合に限り、 `PrefixHash` が計算され、 `substr` を使うことができる
+     * @brief ハッシュのベースを構築する。同時に部分文字列用の `power` 配列も初期化する。
+     * @attention 必ず最初に呼び出すこと
+     * @param MaxLength powerの配列長、文字列としてあり得る最大長 `(default = 10^6)`
      */
-    RollingHash(string S) : __Hashsize(rh::base.size()), __Length(S.size()){
-        __PrefixHash.resize(__Hashsize);
-        for(int i = 0; i < __Hashsize; ++i){
-            ulong x = 0, b = rh::base[i];
-            __PrefixHash[i].push_back(0);
-            for(auto c : S){
-                x = rh::Mod(rh::Mul(x, b) + c);
-                __PrefixHash[i].push_back(x);
-            }
-            __Hash.push_back(x);
+    static void generate_base(const int MaxLength = 1000020){
+        random_device rnd;
+        mt19937 mt(rnd());
+        uniform_int_distribution<u64> dist(1, MOD - 1);
+        base = dist(mt);
+        power.resize(MaxLength);
+        power[0] = 1;
+        for(int i = 1; i <= MaxLength; ++i){
+            power[i] = mul(power[i - 1], base);
         }
-        __ValidPrefixHash = true;
     }
 
     /**
-     * @brief 文字 `c` からハッシュを生成する
+     * @brief 文字列 `S` に対するハッシュテーブルを作成する。
+     * @note 文字列自体のハッシュは `HashTable.back()` の値
+     * @param S ハッシュテーブルを作成する文字列
+     * @return HashTable ハッシュテーブル、1-indexで i 番目の要素は先頭から i 文字の部分文字列のハッシュ値を表す。
      */
-    RollingHash(char c) : __Hashsize(rh::base.size()), __Length(1){
-        __Hash.resize(__Hashsize, c);
-    }
-
-    /**
-     * @brief 初期のハッシュ値と文字列長からハッシュを生成する
-     */
-    RollingHash(vector<ulong> &InitHash, int Length) : __Hashsize(rh::base.size()), __Hash(InitHash), __Length(Length){}
-
-    inline ulong get(int i) const {
-        return __Hash[i];
-    }
-
-    inline int length(){
-        return __Length;
-    }
-
-    /**
-     * @brief 文字列の部分文字列 `[l, r]` のハッシュを取得する
-     * @attention `l, r` は1-index
-     */
-    RollingHash substr(int l, int r){
-        assert(__ValidPrefixHash);
-        vector<ulong> ret;
-        for(int i = 0; i < __Hashsize; ++i){
-            ret.push_back(rh::Mod(__PrefixHash[i][r] + rh::POSITIVIZER - rh::Mul(__PrefixHash[i][l - 1], rh::pow[i][r - l + 1])));
-        }
-        return RollingHash(ret, r - l + 1);
-    }
-
-    /**
-     * @brief ハッシュ `l` とハッシュ `r` をこの順に連結する
-     */
-    static RollingHash connect(RollingHash &l, RollingHash &r){
-        vector<ulong> ret;
-        for(int i = 0; i < rh::base.size(); ++i){
-            ret.push_back(rh::Mod(rh::Mul(l.get(i), rh::pow[i][r.length()]) + r.get(i)));
-        }
-        return RollingHash(ret, l.length() + r.length());
-    }
-
-    bool operator==(const RollingHash& r) const {
-        bool ret = true;
-        for(int i = 0; i < rh::base.size(); ++i){
-            ret &= get(i) == r.get(i);
+    HashTable build(string S){
+        HashTable ret;
+        u64 x = 0;
+        ret.push_back(0);
+        for(auto c : S){
+            x = add(mul(x, base), c);
+            ret.push_back(x);
         }
         return ret;
     }
+
+    /**
+     * @brief 文字 `c` に対するハッシュ値を返す。
+     * @note セグメント木とかで使える。
+     */
+    Hash build(char c){
+        return add(0, c);
+    }
+
+    /**
+     * @brief ハッシュテーブル `hash` において、部分文字列 `[l, r]` のハッシュを取得する
+     * @attention `l`, `r` は 1-index
+     * @return 部分文字列 `[l, r]` のハッシュ値 
+     */
+    Hash substr(HashTable &hash, int l, int r){
+        return add(hash[r], MOD - mul(hash[l - 1], power[r - l + 1]));
+    }
+
+    /**
+     * @brief ハッシュで表された2つの文字列をこの順番で連結したハッシュ値を返す。
+     * @param l 連結する左側の文字列のハッシュ値
+     * @param r 連結する右側の文字列のハッシュ値
+     * @param r_len 右側の文字列の長さ
+     * @return Hash 連結した文字列のハッシュ値
+     */
+    Hash connect(Hash l, Hash r, int r_len){
+        return add(mul(l, power[r_len]), r);
+    }
 };
+
+typename RollingHash::Hash RollingHash::base;
+typename RollingHash::HashTable RollingHash::power;
+using Hash = RollingHash::Hash;
+using HashTable = RollingHash::HashTable;
