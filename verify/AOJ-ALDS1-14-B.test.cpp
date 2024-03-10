@@ -6,9 +6,11 @@ int main(){
     string T, P; cin >> T >> P;
 
     RollingHash::generate_base();
-    RollingHash RHT(T), RHP(P);
+    RollingHash rh;
+    HashTable ht_T = rh.build(T);
+    Hash hash_P = rh.build(P).back();
     for(int i = 0; i < (int)T.size() - (int)P.size() + 1; ++i){
-        if(RHT.substr(i + 1, i + P.size()) == RHP){
+        if(rh.substr(ht_T, i + 1, i + P.size()) == hash_P){
             cout << i << endl;
         }
     }
