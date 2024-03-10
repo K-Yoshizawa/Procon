@@ -18,80 +18,75 @@ data:
     \n\n#line 1 \"library/String/RollingHash.hpp\"\n/**\n * @file RollingHash.hpp\n\
     \ * @author log K (lX57)\n * @brief Rolling Hash - \u30ED\u30FC\u30EA\u30F3\u30B0\
     \u30CF\u30C3\u30B7\u30E5\n * @version 1.0\n * @date 2023-12-03\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nnamespace rh{\n    const ulong MASK30\
-    \ = (1UL << 30) - 1;\n    const ulong MASK31 = (1UL << 31) - 1;\n    const ulong\
-    \ MOD = (1UL << 61) - 1;\n    const ulong MASK61 = MOD;\n    const ulong POSITIVIZER\
-    \ = MOD * 4;\n    vector<ulong> base;\n    vector<vector<ulong>> pow;\n\n    ulong\
-    \ Mod(ulong x){\n        ulong xu = x >> 61, xd = x & MASK61;\n        ulong res\
-    \ = xu + xd;\n        if(res >= MOD) res -= MOD;\n        return res;\n    }\n\
-    \n    ulong Mul(ulong a, ulong b){\n        ulong au = a >> 31, ad = a & MASK31;\n\
-    \        ulong bu = b >> 31, bd = b & MASK31;\n        ulong m = ad * bu + au\
-    \ * bd;\n        ulong mu = m >> 30, md = m & MASK30;\n        return au * bu\
-    \ * 2 + mu + (md << 31) + ad * bd;\n    }\n};\n\n/**\n * @brief \u30ED\u30FC\u30EA\
-    \u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\u306E\u57FA\u5E95\u3092\u751F\u6210\u3059\
-    \u308B\n * @attention \u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\u3092\
-    \u4F7F\u3046\u524D\u306B\u5FC5\u305A\u547C\u3073\u51FA\u3059\u3053\u3068\n * @param\
-    \ N \u6587\u5B57\u5217\u306E\u6700\u5927\u6587\u5B57\u6570 (default = 1e6 + 10)\n\
-    \ * @param Cnt \u751F\u6210\u3059\u308B\u57FA\u5E95\u306E\u6570 (default = 3)\n\
-    \ */\nvoid RollingHash_createbase(int N = 1000010, int Cnt = 3){\n    random_device\
-    \ rnd;\n    mt19937 mt(rnd());\n    uniform_int_distribution<ulong> dist(1, rh::MOD\
-    \ - 1);\n    for(int i = 0; i < Cnt; ++i) rh::base.push_back(dist(mt));\n    rh::pow.resize(Cnt,\
-    \ vector<ulong>(N + 1, 1UL));\n    for(int i = 0; i < Cnt; ++i){\n        for(int\
-    \ j = 1; j <= N; ++j){\n            rh::pow[i][j] = rh::Mod(rh::Mul(rh::pow[i][j\
-    \ - 1], rh::base[i]));\n        }\n    }\n}\n\nstruct RollingHash{\n    private:\n\
-    \    vector<vector<ulong>> __PrefixHash;\n    bool __ValidPrefixHash{false};\n\
-    \    vector<ulong> __Hash;\n    int __Hashsize, __Length;\n\n    public:\n   \
-    \ RollingHash() : __Hashsize(rh::base.size()), __Hash(rh::base.size(), 0), __Length(0){}\n\
-    \n    /**\n     * @brief \u6587\u5B57\u5217 `S` \u304B\u3089\u30CF\u30C3\u30B7\
-    \u30E5\u3092\u751F\u6210\u3059\u308B\n     * @note \u3053\u306E\u5834\u5408\u306B\
-    \u9650\u308A\u3001 `PrefixHash` \u304C\u8A08\u7B97\u3055\u308C\u3001 `substr`\
-    \ \u3092\u4F7F\u3046\u3053\u3068\u304C\u3067\u304D\u308B\n     */\n    RollingHash(string\
-    \ S) : __Hashsize(rh::base.size()), __Length(S.size()){\n        __PrefixHash.resize(__Hashsize);\n\
-    \        for(int i = 0; i < __Hashsize; ++i){\n            ulong x = 0, b = rh::base[i];\n\
-    \            __PrefixHash[i].push_back(0);\n            for(auto c : S){\n   \
-    \             x = rh::Mod(rh::Mul(x, b) + c);\n                __PrefixHash[i].push_back(x);\n\
-    \            }\n            __Hash.push_back(x);\n        }\n        __ValidPrefixHash\
-    \ = true;\n    }\n\n    /**\n     * @brief \u6587\u5B57 `c` \u304B\u3089\u30CF\
-    \u30C3\u30B7\u30E5\u3092\u751F\u6210\u3059\u308B\n     */\n    RollingHash(char\
-    \ c) : __Hashsize(rh::base.size()), __Length(1){\n        __Hash.resize(__Hashsize,\
-    \ c);\n    }\n\n    /**\n     * @brief \u521D\u671F\u306E\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u3068\u6587\u5B57\u5217\u9577\u304B\u3089\u30CF\u30C3\u30B7\u30E5\u3092\
-    \u751F\u6210\u3059\u308B\n     */\n    RollingHash(vector<ulong> &InitHash, int\
-    \ Length) : __Hashsize(rh::base.size()), __Hash(InitHash), __Length(Length){}\n\
-    \n    inline ulong get(int i) const {\n        return __Hash[i];\n    }\n\n  \
-    \  inline int length(){\n        return __Length;\n    }\n\n    /**\n     * @brief\
-    \ \u6587\u5B57\u5217\u306E\u90E8\u5206\u6587\u5B57\u5217 `[l, r]` \u306E\u30CF\
-    \u30C3\u30B7\u30E5\u3092\u53D6\u5F97\u3059\u308B\n     * @attention `l, r` \u306F\
-    1-index\n     */\n    RollingHash substr(int l, int r){\n        assert(__ValidPrefixHash);\n\
-    \        vector<ulong> ret;\n        for(int i = 0; i < __Hashsize; ++i){\n  \
-    \          ret.push_back(rh::Mod(__PrefixHash[i][r] + rh::POSITIVIZER - rh::Mul(__PrefixHash[i][l\
-    \ - 1], rh::pow[i][r - l + 1])));\n        }\n        return RollingHash(ret,\
-    \ r - l + 1);\n    }\n\n    /**\n     * @brief \u30CF\u30C3\u30B7\u30E5 `l` \u3068\
-    \u30CF\u30C3\u30B7\u30E5 `r` \u3092\u3053\u306E\u9806\u306B\u9023\u7D50\u3059\u308B\
-    \n     */\n    static RollingHash connect(RollingHash &l, RollingHash &r){\n \
-    \       vector<ulong> ret;\n        for(int i = 0; i < rh::base.size(); ++i){\n\
-    \            ret.push_back(rh::Mod(rh::Mul(l.get(i), rh::pow[i][r.length()]) +\
-    \ r.get(i)));\n        }\n        return RollingHash(ret, l.length() + r.length());\n\
-    \    }\n\n    bool operator==(const RollingHash& r) const {\n        bool ret\
-    \ = true;\n        for(int i = 0; i < rh::base.size(); ++i){\n            ret\
-    \ &= get(i) == r.get(i);\n        }\n        return ret;\n    }\n};\n#line 4 \"\
-    verify/AOJ-ALDS1-14-B.test.cpp\"\n\nint main(){\n    string T, P; cin >> T >>\
-    \ P;\n\n    RollingHash_createbase();\n    RollingHash RHT(T), RHP(P);\n    for(int\
-    \ i = 0; i < (int)T.size() - (int)P.size() + 1; ++i){\n        if(RHT.substr(i\
-    \ + 1, i + P.size()) == RHP){\n            cout << i << endl;\n        }\n   \
-    \ }\n}\n"
+    \ <bits/stdc++.h>\nusing namespace std;\n\nstruct RollingHash{\n    using Hash\
+    \ = uint64_t;\n    using HashTable = vector<Hash>;\n\n    private:\n    using\
+    \ u64 = uint64_t;\n    using u128 = __uint128_t;\n\n    static const u64 MOD =\
+    \ (1UL << 61) - 1;\n\n    static Hash base;\n    static HashTable power;\n\n \
+    \   static inline u64 add(u64 a, u64 b){\n        if((a += b) >= MOD) a -= MOD;\n\
+    \        return a;\n    }\n\n    static inline u64 mul(u64 a, u64 b){\n      \
+    \  u128 c = u128(a) * b;\n        return add(c >> 61, c & MOD);\n    }\n\n   \
+    \ public:\n    /**\n     * @brief \u30CF\u30C3\u30B7\u30E5\u306E\u30D9\u30FC\u30B9\
+    \u3092\u69CB\u7BC9\u3059\u308B\u3002\u540C\u6642\u306B\u90E8\u5206\u6587\u5B57\
+    \u5217\u7528\u306E `power` \u914D\u5217\u3082\u521D\u671F\u5316\u3059\u308B\u3002\
+    \n     * @attention \u5FC5\u305A\u6700\u521D\u306B\u547C\u3073\u51FA\u3059\u3053\
+    \u3068\n     * @param MaxLength power\u306E\u914D\u5217\u9577\u3001\u6587\u5B57\
+    \u5217\u3068\u3057\u3066\u3042\u308A\u5F97\u308B\u6700\u5927\u9577 `(default =\
+    \ 10^6)`\n     */\n    static void generate_base(const int MaxLength = 1000020){\n\
+    \        random_device rnd;\n        mt19937 mt(rnd());\n        uniform_int_distribution<u64>\
+    \ dist(1, MOD - 1);\n        base = dist(mt);\n        power.resize(MaxLength);\n\
+    \        power[0] = 1;\n        for(int i = 1; i <= MaxLength; ++i){\n       \
+    \     power[i] = mul(power[i - 1], base);\n        }\n    }\n\n    /**\n     *\
+    \ @brief \u6587\u5B57\u5217 `S` \u306B\u5BFE\u3059\u308B\u30CF\u30C3\u30B7\u30E5\
+    \u30C6\u30FC\u30D6\u30EB\u3092\u4F5C\u6210\u3059\u308B\u3002\n     * @note \u6587\
+    \u5B57\u5217\u81EA\u4F53\u306E\u30CF\u30C3\u30B7\u30E5\u306F `HashTable.back()`\
+    \ \u306E\u5024\n     * @param S \u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\u30EB\
+    \u3092\u4F5C\u6210\u3059\u308B\u6587\u5B57\u5217\n     * @return HashTable \u30CF\
+    \u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\u30EB\u30011-index\u3067 i \u756A\u76EE\u306E\
+    \u8981\u7D20\u306F\u5148\u982D\u304B\u3089 i \u6587\u5B57\u306E\u90E8\u5206\u6587\
+    \u5B57\u5217\u306E\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u8868\u3059\u3002\n   \
+    \  */\n    HashTable build(string S){\n        HashTable ret;\n        u64 x =\
+    \ 0;\n        ret.push_back(0);\n        for(auto c : S){\n            x = add(mul(x,\
+    \ base), c);\n            ret.push_back(x);\n        }\n        return ret;\n\
+    \    }\n\n    /**\n     * @brief \u6587\u5B57 `c` \u306B\u5BFE\u3059\u308B\u30CF\
+    \u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\u3002\n     * @note \u30BB\u30B0\u30E1\
+    \u30F3\u30C8\u6728\u3068\u304B\u3067\u4F7F\u3048\u308B\u3002\n     */\n    Hash\
+    \ build(char c){\n        return add(0, c);\n    }\n\n    /**\n     * @brief \u30CF\
+    \u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\u30EB `hash` \u306B\u304A\u3044\u3066\u3001\
+    \u90E8\u5206\u6587\u5B57\u5217 `[l, r]` \u306E\u30CF\u30C3\u30B7\u30E5\u3092\u53D6\
+    \u5F97\u3059\u308B\n     * @attention `l`, `r` \u306F 1-index\n     * @return\
+    \ \u90E8\u5206\u6587\u5B57\u5217 `[l, r]` \u306E\u30CF\u30C3\u30B7\u30E5\u5024\
+    \ \n     */\n    Hash substr(HashTable &hash, int l, int r){\n        return add(hash[r],\
+    \ MOD - mul(hash[l - 1], power[r - l + 1]));\n    }\n\n    /**\n     * @brief\
+    \ \u30CF\u30C3\u30B7\u30E5\u3067\u8868\u3055\u308C\u305F2\u3064\u306E\u6587\u5B57\
+    \u5217\u3092\u3053\u306E\u9806\u756A\u3067\u9023\u7D50\u3057\u305F\u30CF\u30C3\
+    \u30B7\u30E5\u5024\u3092\u8FD4\u3059\u3002\n     * @param l \u9023\u7D50\u3059\
+    \u308B\u5DE6\u5074\u306E\u6587\u5B57\u5217\u306E\u30CF\u30C3\u30B7\u30E5\u5024\
+    \n     * @param r \u9023\u7D50\u3059\u308B\u53F3\u5074\u306E\u6587\u5B57\u5217\
+    \u306E\u30CF\u30C3\u30B7\u30E5\u5024\n     * @param r_len \u53F3\u5074\u306E\u6587\
+    \u5B57\u5217\u306E\u9577\u3055\n     * @return Hash \u9023\u7D50\u3057\u305F\u6587\
+    \u5B57\u5217\u306E\u30CF\u30C3\u30B7\u30E5\u5024\n     */\n    Hash connect(Hash\
+    \ l, Hash r, int r_len){\n        return add(mul(l, power[r_len]), r);\n    }\n\
+    };\n\ntypename RollingHash::Hash RollingHash::base;\ntypename RollingHash::HashTable\
+    \ RollingHash::power;\nusing Hash = RollingHash::Hash;\nusing HashTable = RollingHash::HashTable;\n\
+    #line 4 \"verify/AOJ-ALDS1-14-B.test.cpp\"\n\nint main(){\n    string T, P; cin\
+    \ >> T >> P;\n\n    RollingHash::generate_base();\n    RollingHash rh;\n    HashTable\
+    \ ht_T = rh.build(T);\n    Hash hash_P = rh.build(P).back();\n    for(int i =\
+    \ 0; i < (int)T.size() - (int)P.size() + 1; ++i){\n        if(rh.substr(ht_T,\
+    \ i + 1, i + P.size()) == hash_P){\n            cout << i << endl;\n        }\n\
+    \    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n\n#include \"../library/String/RollingHash.hpp\"\n\nint main(){\n    string\
-    \ T, P; cin >> T >> P;\n\n    RollingHash_createbase();\n    RollingHash RHT(T),\
-    \ RHP(P);\n    for(int i = 0; i < (int)T.size() - (int)P.size() + 1; ++i){\n \
-    \       if(RHT.substr(i + 1, i + P.size()) == RHP){\n            cout << i <<\
-    \ endl;\n        }\n    }\n}"
+    \ T, P; cin >> T >> P;\n\n    RollingHash::generate_base();\n    RollingHash rh;\n\
+    \    HashTable ht_T = rh.build(T);\n    Hash hash_P = rh.build(P).back();\n  \
+    \  for(int i = 0; i < (int)T.size() - (int)P.size() + 1; ++i){\n        if(rh.substr(ht_T,\
+    \ i + 1, i + P.size()) == hash_P){\n            cout << i << endl;\n        }\n\
+    \    }\n}"
   dependsOn:
   - library/String/RollingHash.hpp
   isVerificationFile: true
   path: verify/AOJ-ALDS1-14-B.test.cpp
   requiredBy: []
-  timestamp: '2023-12-03 07:05:58+09:00'
+  timestamp: '2024-03-10 17:58:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-ALDS1-14-B.test.cpp
