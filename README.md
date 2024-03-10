@@ -7,6 +7,9 @@
 
 ## 更新履歴
 
+### Ver 3.2.3 (2024/03/10)
+- 【改修】Rolling Hash : 高速化
+
 ### Ver 3.2.2 (2024/03/08)
 - 【改修】Graph Template : `is_directed` の追加
 
