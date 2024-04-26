@@ -1,11 +1,11 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B"
 
-#include "../library/DataStructure/UnionFind.hpp"
+#include "../library/DataStructure/WeightedUnionFind.hpp"
 
 int main(){
     int n, q; cin >> n >> q;
 
-    UnionFind<long long> uf(n);
+    WeightedUnionFind<long long> uf(n);
     while(q--){
         int query; cin >> query;
         if(query == 0){
