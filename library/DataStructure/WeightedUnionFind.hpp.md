@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-1-B.test.cpp
+    title: verify/AOJ-DSL-1-B.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind-Weighted.test.cpp
     title: verify/LC-Unionfind-Weighted.test.cpp
   _isVerificationFailed: false
@@ -96,6 +99,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-Unionfind-Weighted.test.cpp
+  - verify/AOJ-DSL-1-B.test.cpp
 documentation_of: library/DataStructure/WeightedUnionFind.hpp
 layout: document
 redirect_from:

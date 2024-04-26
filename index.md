@@ -72,7 +72,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/SlideMin.hpp
       title: "Slide-Min - \u30B9\u30E9\u30A4\u30C9\u6700\u5C0F\u5024"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
     - icon: ':heavy_check_mark:'
@@ -226,7 +226,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-A.test.cpp
       title: verify/AOJ-DSL-1-A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-B.test.cpp
       title: verify/AOJ-DSL-1-B.test.cpp
     - icon: ':heavy_check_mark:'

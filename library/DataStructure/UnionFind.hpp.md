@@ -12,18 +12,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-1-A.test.cpp
     title: verify/AOJ-DSL-1-A.test.cpp
-  - icon: ':x:'
-    path: verify/AOJ-DSL-1-B.test.cpp
-    title: verify/AOJ-DSL-1-B.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
     links: []
@@ -86,12 +83,11 @@ data:
   - old/Graph/Kruskal.hpp
   - library/Graph/Kruskal.hpp
   timestamp: '2024-04-26 23:46:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/LC-Unionfind.test.cpp
-  - verify/AOJ-DSL-1-B.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:
