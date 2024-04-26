@@ -195,8 +195,8 @@ data:
   timestamp: '2024-03-08 02:07:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
 documentation_of: library/Graph/StronglyConnectedComponents.hpp
 layout: document
 title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"

@@ -99,13 +99,13 @@ data:
   timestamp: '2023-10-11 01:51:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-InverseMatrix.test.cpp
-  - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/LC-PowofMatrix.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-DeterminantofMatrix.test.cpp
   - verify/LC-MatrixProduct.test.cpp
-  - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/LC-PowofMatrix.test.cpp
+  - verify/LC-InverseMatrix.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
 documentation_of: library/modint.hpp
 layout: document
 redirect_from:

@@ -72,9 +72,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/SlideMin.hpp
       title: "Slide-Min - \u30B9\u30E9\u30A4\u30C9\u6700\u5C0F\u5024"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: library/DataStructure/UnionFind.hpp
       title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+    - icon: ':heavy_check_mark:'
+      path: library/DataStructure/WeightedUnionFind.hpp
+      title: "Weighted UnionFind - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
+        \u30FC\u30BF\u69CB\u9020"
   - name: library/DynamicPrograming
     pages:
     - icon: ':heavy_check_mark:'
@@ -222,7 +226,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-A.test.cpp
       title: verify/AOJ-DSL-1-A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/AOJ-DSL-1-B.test.cpp
       title: verify/AOJ-DSL-1-B.test.cpp
     - icon: ':heavy_check_mark:'
@@ -327,6 +331,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-TreeDiameter.test.cpp
       title: verify/LC-TreeDiameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-Unionfind-Weighted.test.cpp
+      title: verify/LC-Unionfind-Weighted.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp
