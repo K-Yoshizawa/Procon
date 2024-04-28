@@ -30,31 +30,33 @@ data:
     \ m_offset(offset){}\n\n    /**\n     * @brief \u5EA7\u6A19\u5727\u7E2E\u3092\u5B9F\
     \u884C\u3059\u308B\u3002\n     */\n    void build(){\n        sort(m_value.begin(),\
     \ m_value.end());\n        m_value.erase(unique(m_value.begin(), m_value.end()),\
-    \ m_value.end());\n        m_size = m_value.size();\n    }\n\n    /**\n     *\
-    \ @brief \u914D\u5217\u306B\u5024\u3092\u52A0\u3048\u308B\u3002\n     * @param\
-    \ value \u52A0\u3048\u308B\u5024\n     */\n    void add(T value){\n        m_value.push_back(value);\n\
-    \    }\n\n    /**\n     * @brief `value` \u3092\u5BFE\u5FDC\u3059\u308B `index`\
-    \ \u306B\u5909\u63DB\u3059\u308B\u3002\n     */\n    int to_index(T value){\n\
-    \        int ret = (int)(lower_bound(m_value.begin(), m_value.end(), value) -\
-    \ m_value.begin());\n        assert(ret < m_size);\n        return ret + m_offset;\n\
-    \    }\n\n    /**\n     * @brief `index` \u3092\u5BFE\u5FDC\u3059\u308B `value`\
-    \ \u306B\u5909\u63DB\u3059\u308B\u3002 \n     */\n    T to_value(int index){\n\
-    \        return m_value.at(index - m_offset);\n    }\n\n    int operator[](T value){\n\
-    \        return to_index(value);\n    }\n\n    size_t size(){\n        return\
-    \ m_size;\n    }\n};\n#line 1 \"library/Other/Mo.hpp\"\n/**\n * @file Mo.hpp\n\
-    \ * @author log K (lX57)\n * @brief Mo's Algorithm\n * @version 1.0\n * @date\
-    \ 2024-02-08\n */\n\n#line 10 \"library/Other/Mo.hpp\"\nusing namespace std;\n\
-    \nstruct Mo{\n    private:\n    using q = pair<int, int>;\n    using f = function<void(int)>;\n\
-    \    int m_querysize, m_rootq, m_blocksize;\n    vector<q> m_query;\n    vector<vector<int>>\
-    \ m_index;\n\n    public:\n    /**\n     * @brief \u533A\u9593\u9577 `Segment_Size`\
-    \ \u306E\u914D\u5217\u306B\u5BFE\u3059\u308B\u30AF\u30A8\u30EA\u3092\u767B\u9332\
-    \u3059\u308B\u3002\n     * @param Segment_Size \u914D\u5217\u306E\u533A\u9593\u9577\
-    \n     * @param Query_Left \u30AF\u30A8\u30EA `[l, r)` \u306E\u534A\u958B\u533A\
-    \u9593\u5DE6\u7AEF\u306E\u914D\u5217\n     * @param Query_Right \u30AF\u30A8\u30EA\
-    \ `[l, r)` \u306E\u534A\u958B\u533A\u9593\u53F3\u7AEF\u306E\u914D\u5217\n    \
-    \ */\n    Mo(int Segment_Size, vector<int> &Query_Left, vector<int> &Query_Right){\n\
-    \        Segment_Size = max(1, Segment_Size);\n        m_querysize = (int)Query_Left.size();\n\
-    \        m_rootq = max(1, (int)sqrt(m_querysize));\n        m_blocksize = (Segment_Size\
+    \ m_value.end());\n        m_size = m_value.size();\n    }\n\n    vector<int>\
+    \ convert(vector<T> &v){\n        vector<int> ret;\n        for(auto x : v) ret.push_back(to_index(x));\n\
+    \        return ret;\n    }\n\n    /**\n     * @brief \u914D\u5217\u306B\u5024\
+    \u3092\u52A0\u3048\u308B\u3002\n     * @param value \u52A0\u3048\u308B\u5024\n\
+    \     */\n    void add(T value){\n        m_value.push_back(value);\n    }\n\n\
+    \    /**\n     * @brief `value` \u3092\u5BFE\u5FDC\u3059\u308B `index` \u306B\u5909\
+    \u63DB\u3059\u308B\u3002\n     */\n    int to_index(T value){\n        int ret\
+    \ = (int)(lower_bound(m_value.begin(), m_value.end(), value) - m_value.begin());\n\
+    \        assert(ret < m_size);\n        return ret + m_offset;\n    }\n\n    /**\n\
+    \     * @brief `index` \u3092\u5BFE\u5FDC\u3059\u308B `value` \u306B\u5909\u63DB\
+    \u3059\u308B\u3002 \n     */\n    T to_value(int index){\n        return m_value.at(index\
+    \ - m_offset);\n    }\n\n    int operator[](T value){\n        return to_index(value);\n\
+    \    }\n\n    size_t size(){\n        return m_size;\n    }\n};\n#line 1 \"library/Other/Mo.hpp\"\
+    \n/**\n * @file Mo.hpp\n * @author log K (lX57)\n * @brief Mo's Algorithm\n *\
+    \ @version 1.0\n * @date 2024-02-08\n */\n\n#line 10 \"library/Other/Mo.hpp\"\n\
+    using namespace std;\n\nstruct Mo{\n    private:\n    using q = pair<int, int>;\n\
+    \    using f = function<void(int)>;\n    int m_querysize, m_rootq, m_blocksize;\n\
+    \    vector<q> m_query;\n    vector<vector<int>> m_index;\n\n    public:\n   \
+    \ /**\n     * @brief \u533A\u9593\u9577 `Segment_Size` \u306E\u914D\u5217\u306B\
+    \u5BFE\u3059\u308B\u30AF\u30A8\u30EA\u3092\u767B\u9332\u3059\u308B\u3002\n   \
+    \  * @param Segment_Size \u914D\u5217\u306E\u533A\u9593\u9577\n     * @param Query_Left\
+    \ \u30AF\u30A8\u30EA `[l, r)` \u306E\u534A\u958B\u533A\u9593\u5DE6\u7AEF\u306E\
+    \u914D\u5217\n     * @param Query_Right \u30AF\u30A8\u30EA `[l, r)` \u306E\u534A\
+    \u958B\u533A\u9593\u53F3\u7AEF\u306E\u914D\u5217\n     */\n    Mo(int Segment_Size,\
+    \ vector<int> &Query_Left, vector<int> &Query_Right){\n        Segment_Size =\
+    \ max(1, Segment_Size);\n        m_querysize = (int)Query_Left.size();\n     \
+    \   m_rootq = max(1, (int)sqrt(m_querysize));\n        m_blocksize = (Segment_Size\
     \ + m_rootq - 1) / m_rootq;\n        m_query.resize(m_querysize);\n        m_index.resize(m_blocksize);\n\
     \        for(int i = 0; i < m_querysize; ++i){\n            m_query[i] = {Query_Left[i],\
     \ Query_Right[i]};\n            m_index[Query_Left[i] / m_rootq].push_back(i);\n\
@@ -106,7 +108,7 @@ data:
   isVerificationFile: true
   path: verify/LC-StaticRangeFrequency.test.cpp
   requiredBy: []
-  timestamp: '2024-02-08 00:45:54+09:00'
+  timestamp: '2024-04-29 00:45:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-StaticRangeFrequency.test.cpp

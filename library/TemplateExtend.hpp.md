@@ -66,28 +66,32 @@ data:
     \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ?\
     \ \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nistream\
     \ &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i)\
-    \ is >> v[i];\n    return is;\n}\n\ntemplate<typename T1, typename T2>\nvoid disassemble_vectorpair(vector<pair<T1,\
-    \ T2>> &v, vector<T1> &v1, vector<T2> &v2){\n    transform(v.begin(), v.end(),\
-    \ back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(), v.end(),\
-    \ back_inserter(v2), [](auto p){return p.second;});\n}\n\ntemplate<typename T1,\
-    \ typename T2, typename T3>\nvoid disassemble_vectortuple(vector<tuple<T1, T2,\
-    \ T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){\n    transform(v.begin(),\
+    \ is >> v[i];\n    return is;\n}\n\ntemplate<typename T1, typename T2>\nvector<pair<T1,\
+    \ T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n    assert(v1.size()\
+    \ == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i = 0; i < v1.size();\
+    \ ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\ntemplate<typename T1,\
+    \ typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\nvoid DisassembleVectorTuple(vector<tuple<T1,\
+    \ T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n}\n\ntemplate<typename\
-    \ T1, typename T2>\nvoid readvectorpair(vector<T1> &v1, vector<T2> &v2, int size){\n\
-    \    vector<pair<T1, T2>> v(size);\n    for(auto &[p, q] : v) cin >> p >> q;\n\
-    \    disassemble_vectorpair(v, v1, v2);\n}\n\ntemplate<typename T1, typename T2,\
-    \ typename T3>\nvoid readvectortuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
+    \ T1 = ll, typename T2 = ll>\npair<vector<T1>, vector<T2>> InputVectorPair(int\
+    \ size){\n    vector<pair<T1, T2>> v(size);\n    for(auto &[p, q] : v) cin >>\
+    \ p >> q;\n    return DisassembleVectorPair(v);\n}\n\ntemplate<typename T1, typename\
+    \ T2, typename T3>\nvoid InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
-    \ r] : v) cin >> p >> q >> r;\n    disassemble_vectortuple(v, v1, v2, v3);\n}\n\
+    \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
     \ntemplate<class... T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\
     \nvoid print(){\n    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid\
     \ print(const T& a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout\
-    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\nvoid dprint(){\n    cerr\
+    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\nvoid dprint(){\n    cout\
     \ << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const\
-    \ Ts&... b){\n    cerr << \"Debug : \" << a;\n    (cerr << ... << (cerr << \"\
-    \ \", b));\n    cerr << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate\
+    \ Ts&... b){\n    cout << \"Debug : \" << a;\n    (cout << ... << (cout << \"\
+    \ \", b));\n    cout << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate\
     \ <typename T>\nT ceil(T x, T y){\n    return (x + y - 1) / y;\n}\n#line 2 \"\
     library/TemplateExtend.hpp\"\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
     \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
@@ -136,7 +140,7 @@ data:
   isVerificationFile: false
   path: library/TemplateExtend.hpp
   requiredBy: []
-  timestamp: '2024-02-17 20:43:20+09:00'
+  timestamp: '2024-04-29 00:45:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/TemplateExtend.hpp
