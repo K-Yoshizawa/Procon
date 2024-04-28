@@ -136,30 +136,41 @@ istream &operator>>(istream &is, vector<T> &v){
 }
 
 template<typename T1, typename T2>
-void disassemble_vectorpair(vector<pair<T1, T2>> &v, vector<T1> &v1, vector<T2> &v2){
+vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){
+    assert(v1.size() == v2.size());
+    vector<pair<T1, T2>> v;
+    for(int i = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});
+    return v;
+}
+
+template<typename T1, typename T2>
+pair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1, T2>> &v){
+    vector<T1> v1;
+    vector<T2> v2;
     transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return p.first;});
     transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return p.second;});
+    return {v1, v2};
 }
 
 template<typename T1, typename T2, typename T3>
-void disassemble_vectortuple(vector<tuple<T1, T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){
+void DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){
     transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return get<0>(p);});
     transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return get<1>(p);});
     transform(v.begin(), v.end(), back_inserter(v3), [](auto p){return get<2>(p);});
 }
 
-template<typename T1, typename T2>
-void readvectorpair(vector<T1> &v1, vector<T2> &v2, int size){
+template<typename T1 = ll, typename T2 = ll>
+pair<vector<T1>, vector<T2>> InputVectorPair(int size){
     vector<pair<T1, T2>> v(size);
     for(auto &[p, q] : v) cin >> p >> q;
-    disassemble_vectorpair(v, v1, v2);
+    return DisassembleVectorPair(v);
 }
 
 template<typename T1, typename T2, typename T3>
-void readvectortuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
+void InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
     vector<tuple<T1, T2, T3>> v(size);
     for(auto &[p, q, r] : v) cin >> p >> q >> r;
-    disassemble_vectortuple(v, v1, v2, v3);
+    DisassembleVectorTuple(v, v1, v2, v3);
 }
 
 template<class... T>
@@ -180,14 +191,14 @@ void print(const T& a, const Ts&... b){
 
 #ifdef LOGK
 void dprint(){
-    cerr << '\n';
+    cout << '\n';
 }
 
 template<class T, class... Ts>
 void dprint(const T& a, const Ts&... b){
-    cerr << "Debug : " << a;
-    (cerr << ... << (cerr << " ", b));
-    cerr << '\n';
+    cout << "Debug : " << a;
+    (cout << ... << (cout << " ", b));
+    cout << '\n';
 }
 #else
 #define dprint(...) 42

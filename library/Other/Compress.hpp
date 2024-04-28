@@ -33,6 +33,12 @@ struct Compress{
         m_size = m_value.size();
     }
 
+    vector<int> convert(vector<T> &v){
+        vector<int> ret;
+        for(auto x : v) ret.push_back(to_index(x));
+        return ret;
+    }
+
     /**
      * @brief 配列に値を加える。
      * @param value 加える値

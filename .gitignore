@@ -2,10 +2,7 @@
 *.out
 *.cpp
 *.c
-ans.txt
-in.txt
-out.txt
-res.txt
+*.txt
 ac-library/
 .vscode
 answer.exe

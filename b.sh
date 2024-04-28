@@ -3,12 +3,10 @@
 new_atcoder(){
     oj-bundle code.cpp > submit.cpp
     echo "[Procon AtCoder] complete bundle"
-    g++ submit.cpp -std=gnu++2a -O2 \
+    g++-12 submit.cpp -std=gnu++2a -O2 \
         -DLOGK -mtune=native -march=native -fconstexpr-depth=2147483647 -fconstexpr-loop-limit=2147483647 -fconstexpr-ops-limit=2147483647 \
         -I/opt/ac-library -I/opt/boost/gcc/include -L/opt/boost/gcc/lib -o a.out 
     echo "[Procon AtCoder] complete compile"
-    cat submit.cpp | clip.exe
-    echo "[Procon AtCoder] copied to clipboard"
 }
 
 atcoder(){
@@ -19,7 +17,7 @@ atcoder(){
 
 codeforces(){
     oj-bundle code.cpp > submit.cpp
-    g++ submit.cpp -std=c++17 -O2 -o a.out
+    g++ submit.cpp -std=c++17 -O2 -DLOGK -o a.out
 }
 
 verify(){

@@ -2,7 +2,7 @@
  * @file SegmentTree.hpp
  * @author log K (lX57)
  * @brief Segment Tree - セグメント木
- * @version 2.1
+ * @version 2.2
  * @date 2023-10-02
  */
 
@@ -21,19 +21,6 @@ struct SegmentTree{
 
     inline void m_check(int x){
         assert(1 <= x && x <= m_size);
-    }
-
-    Monoid m_query(int ql, int qr, int left, int right, int cell){
-        if(qr <= left || right <= ql){
-            return m_m1;
-        }
-        if(ql <= left && right <= qr){
-            return m_data[cell];
-        }
-        int mid = (left + right) / 2;
-        Monoid ans_left = m_query(ql, qr, left, mid, 2 * cell);
-        Monoid ans_right = m_query(ql, qr, mid, right, 2 * cell + 1);
-        return f(ans_left, ans_right);
     }
 
     public:
@@ -115,7 +102,14 @@ struct SegmentTree{
         if(Left == Right) return m_m1;
         m_check(Left + m_zeroindex);
         m_check(Right + m_zeroindex - 1);
-        return m_query(Left + m_zeroindex, Right + m_zeroindex, 1, m_size + 1, 1);
+        int l = Left + m_zeroindex + m_offset, r = Right + m_zeroindex + m_offset;
+        Monoid al = m_m1, ar = m_m1;
+        while(l < r){
+            if(l & 1) al = f(al, m_data[l++]);
+            if(r & 1) ar = f(m_data[--r], ar);
+            l >>= 1, r >>= 1;
+        }
+        return f(al, ar);
     }
 
     /**
@@ -132,11 +126,3 @@ struct SegmentTree{
         return get(k);
     }
 };
-
-namespace logk{
-    template<typename T>
-    SegmentTree<T> SegmentTreeRMQ(vector<T> &InitData, T INF = 0, bool ZeroIndex = false){
-        if(INF == 0) INF = numeric_limits<T>::max() >> 1;
-        return SegmentTree<T>(InitData, [](T l, T r){return min(l, r);}, INF, ZeroIndex);
-    }
-}
