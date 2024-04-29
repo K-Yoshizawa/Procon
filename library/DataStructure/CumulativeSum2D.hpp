@@ -90,7 +90,7 @@ struct CumulativeSum2D{
      * @brief 領域全体に比較関数を適用させ、その結果を得る
      * @param Compare 比較関数 : 引数は `src, cmp` で戻り値は `T`
      */
-    T search(function<T(T, T)> &Compare){
+    T search(function<T(T, T)> Compare){
         T ret = data_[0][0];
         for(int i = 0; i < Y_; ++i){
             for(int j = 0; j < X_; ++j){
@@ -104,7 +104,7 @@ struct CumulativeSum2D{
      * @brief 領域全体の条件を満たすマスの数を数える
      * @param Condition 関数 : 引数は `T` で戻り値は `bool`
      */
-    int count(function<bool(T)> &Condition){
+    int count(function<bool(T)> Condition){
         int ret = 0;
         for(int i = 0; i < Y_; ++i){
             for(int j = 0; j < X_; ++j){

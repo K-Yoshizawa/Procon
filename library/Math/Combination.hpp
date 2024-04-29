@@ -12,21 +12,21 @@ using namespace std;
 template<typename T>
 struct Combination{
     private:
-    vector<T> __fact, __rfact, __inv;
+    vector<T> fact_, rfact_, inv_;
 
-    inline T fact(int k){return __fact[k];}
+    inline T fact(int k){return fact_[k];}
 
-    inline T rfact(int k){return __rfact[k];}
+    inline T rfact(int k){return rfact_[k];}
 
-    inline T inv(int k){return __inv[k];}
+    inline T inv(int k){return inv_[k];}
 
     public:
-    Combination(int Size) : __fact(Size + 1), __rfact(Size + 1), __inv(Size + 1){
-        __fact[0] = __rfact[Size] = __inv[0] = 1;
-        for(int i = 1; i <= Size; ++i) __fact[i] = __fact[i - 1] * i;
-        __rfact[Size] /= __fact[Size];
-        for(int i = Size - 1; i >= 0; --i) __rfact[i] = __rfact[i + 1] * (i + 1);
-        for(int i = 1; i <= Size; ++i) __inv[i] = __rfact[i] * __fact[i - 1];
+    Combination(int Size) : fact_(Size + 1), rfact_(Size + 1), inv_(Size + 1){
+        fact_[0] = rfact_[Size] = inv_[0] = 1;
+        for(int i = 1; i <= Size; ++i) fact_[i] = fact_[i - 1] * i;
+        rfact_[Size] /= fact_[Size];
+        for(int i = Size - 1; i >= 0; --i) rfact_[i] = rfact_[i + 1] * (i + 1);
+        for(int i = 1; i <= Size; ++i) inv_[i] = rfact_[i] * fact_[i - 1];
     }
 
     T P(int n, int r){

@@ -12,9 +12,9 @@ using namespace std;
 template<typename T>
 struct Compress{
     private:
-    size_t m_size;
-    int m_offset;
-    vector<T> m_value;
+    size_t size_;
+    int offset_;
+    vector<T> value_;
 
     public:
     /**
@@ -22,15 +22,15 @@ struct Compress{
      * @param values 初期配列
      * @param offset 座標圧縮後の先頭の値 (default = 0)
      */
-    Compress(vector<T> &values, int offset = 0) : m_value(values), m_offset(offset){}
+    Compress(vector<T> &values, int offset = 0) : value_(values), offset_(offset){}
 
     /**
      * @brief 座標圧縮を実行する。
      */
     void build(){
-        sort(m_value.begin(), m_value.end());
-        m_value.erase(unique(m_value.begin(), m_value.end()), m_value.end());
-        m_size = m_value.size();
+        sort(value_.begin(), value_.end());
+        value_.erase(unique(value_.begin(), value_.end()), value_.end());
+        size_ = value_.size();
     }
 
     vector<int> convert(vector<T> &v){
@@ -44,23 +44,23 @@ struct Compress{
      * @param value 加える値
      */
     void add(T value){
-        m_value.push_back(value);
+        value_.push_back(value);
     }
 
     /**
      * @brief `value` を対応する `index` に変換する。
      */
     int to_index(T value){
-        int ret = (int)(lower_bound(m_value.begin(), m_value.end(), value) - m_value.begin());
-        assert(ret < m_size);
-        return ret + m_offset;
+        int ret = (int)(lower_bound(value_.begin(), value_.end(), value) - value_.begin());
+        assert(ret < size_);
+        return ret + offset_;
     }
 
     /**
      * @brief `index` を対応する `value` に変換する。 
      */
     T to_value(int index){
-        return m_value.at(index - m_offset);
+        return value_.at(index - offset_);
     }
 
     int operator[](T value){
@@ -68,6 +68,6 @@ struct Compress{
     }
 
     size_t size(){
-        return m_size;
+        return size_;
     }
 };

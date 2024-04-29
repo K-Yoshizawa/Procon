@@ -13,92 +13,92 @@ struct HeavyLightDecomposition{
     using ColumnIndex = int;
 
     private:
-    Vertex m_root;
-    int m_timer{0};
+    Vertex root_;
+    int timer_{0};
 
     Graph<CostType> &G;
-    vector<int> m_subtreesize; // 頂点 `i` を根とする部分木の頂点数
-    vector<int> m_depth; // 頂点 `i` の根からの深さ
-    vector<Vertex> m_parentvertex; // 頂点 `i` の親の頂点（根の場合は `-1` ）
+    vector<int> subtree_size_; // 頂点 `i` を根とする部分木の頂点数
+    vector<int> depth_; // 頂点 `i` の根からの深さ
+    vector<Vertex> parent_vertex_; // 頂点 `i` の親の頂点（根の場合は `-1` ）
     // vector<EdgeID> m_parentedge; // 頂点 `i` とその親を結ぶ辺番号（根の場合は `-1` ）
-    vector<Vertex> m_childvertex; // 辺 `i` が結ぶ2頂点のうち、子の方の頂点
-    vector<int> m_in, m_out; // 頂点 `i` の行きがけ / 帰りがけの順番 (Euler-Tour)
+    vector<Vertex> child_vertex_; // 辺 `i` が結ぶ2頂点のうち、子の方の頂点
+    vector<int> in_, out_; // 頂点 `i` の行きがけ / 帰りがけの順番 (Euler-Tour)
 
-    vector<vector<Vertex>> m_column; // 各列に含まれる頂点
-    vector<pair<ColumnIndex, int>> m_vertexindex; // `Columns` 内における各頂点の位置情報「列 `first` の根から `second(0-index)` 番目にある」
-    vector<int> m_offset; // 1列に並べたときの各列の先頭の位置（0-index）
+    vector<vector<Vertex>> column_; // 各列に含まれる頂点
+    vector<pair<ColumnIndex, int>> vertex_index_; // `Columns` 内における各頂点の位置情報「列 `first` の根から `second(0-index)` 番目にある」
+    vector<int> offset_; // 1列に並べたときの各列の先頭の位置（0-index）
 
-    int m_dfs1(Vertex now, Vertex par){
+    int dfs1_(Vertex now, Vertex par){
         int ret = 0;
         for(Edge<CostType> e : G[now]){
             if(e.to == par) continue;
-            m_depth[e.to] = m_depth[now] + 1;
-            m_parentvertex[e.to] = now;
+            depth_[e.to] = depth_[now] + 1;
+            parent_vertex_[e.to] = now;
             // m_parentedge[e.to] = e.ID;
-            // m_childvertex[e.ID] = e.to;
-            ret += m_dfs1(e.to, now);
+            // child_vertex_[e.ID] = e.to;
+            ret += dfs1_(e.to, now);
         }
-        return m_subtreesize[now] = ret + 1;
+        return subtree_size_[now] = ret + 1;
     }
 
-    void m_dfs2(Vertex now, Vertex par, ColumnIndex col){
-        m_in[now] = m_timer++;
+    void dfs2_(Vertex now, Vertex par, ColumnIndex col){
+        in_[now] = timer_++;
 
         // 新しい列の場合は列を増やす
-        if(m_column.size() == col) m_column.emplace_back(vector<Vertex>{});
+        if(column_.size() == col) column_.emplace_back(vector<Vertex>{});
 
         // 列に頂点を追加
-        m_vertexindex[now] = {col, m_column[col].size()};
-        m_column[col].push_back(now);
+        vertex_index_[now] = {col, column_[col].size()};
+        column_[col].push_back(now);
 
         // Heavyな辺を探索
         Edge<CostType> heavy;
         int maxsubtree = 0;
         for(Edge<CostType> e : G[now]){
             if(e.to == par) continue;
-            if(maxsubtree < m_subtreesize[e.to]){
+            if(maxsubtree < subtree_size_[e.to]){
                 heavy = e;
-                maxsubtree = m_subtreesize[e.to];
+                maxsubtree = subtree_size_[e.to];
             }
         }
 
         if(maxsubtree){
             // Heavyな辺が存在する場合、今の列に追加する形で再帰を行う
-            m_dfs2(heavy.to, now, col);
+            dfs2_(heavy.to, now, col);
         }
 
         // Lightな辺に対して新しい列を生やしつつ再帰を行う
         for(Edge<CostType> e : G[now]){
             if(e.to == par || e.to == heavy.to) continue;
-            m_dfs2(e.to, now, m_column.size());
+            dfs2_(e.to, now, column_.size());
         }
 
-        m_out[now] = m_timer++;
+        out_[now] = timer_++;
     }
 
     /**
      * @brief 頂点 `v` が存在する列の先頭の頂点
      */
-    Vertex m_head(Vertex v){
-        auto [i, j] = m_vertexindex[v];
-        return m_column[i][0];
+    Vertex head_(Vertex v){
+        auto [i, j] = vertex_index_[v];
+        return column_[i][0];
     }
 
     public:
-    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), m_root(Root){
-        m_subtreesize.resize(G.size(), 0);
-        m_depth.resize(G.size(), 0);
-        m_parentvertex.resize(G.size(), -1);
+    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) : G(G), root_(Root){
+        subtree_size_.resize(G.size(), 0);
+        depth_.resize(G.size(), 0);
+        parent_vertex_.resize(G.size(), -1);
         // m_parentedge.resize(G.size(), -1);
-        // m_childvertex.resize(G.esize(), -1);
-        m_dfs1(m_root, -1);
-        m_vertexindex.resize(G.size());
-        m_in.resize(G.size());
-        m_out.resize(G.size());
-        m_dfs2(m_root, -1, 0);
-        m_offset.resize(m_column.size(), 0);
-        for(int i = 1; i < m_column.size(); ++i){
-            m_offset[i] = m_offset[i - 1] + m_column[i - 1].size();
+        // child_vertex_.resize(G.esize(), -1);
+        dfs1_(root_, -1);
+        vertex_index_.resize(G.size());
+        in_.resize(G.size());
+        out_.resize(G.size());
+        dfs2_(root_, -1, 0);
+        offset_.resize(column_.size(), 0);
+        for(int i = 1; i < column_.size(); ++i){
+            offset_[i] = offset_[i - 1] + column_[i - 1].size();
         }
     }
 
@@ -109,7 +109,7 @@ struct HeavyLightDecomposition{
     vector<int> get_vertex_locations(){
         vector<int> ret(G.size(), -1);
         for(Vertex i = 0; i < G.size(); ++i){
-            ret[i] = m_offset[m_vertexindex[i].first] + m_vertexindex[i].second;
+            ret[i] = offset_[vertex_index_[i].first] + vertex_index_[i].second;
         }
         return ret;
     }
@@ -119,10 +119,10 @@ struct HeavyLightDecomposition{
      */
     Vertex lca(Vertex v, Vertex u){
         while(1){
-            Vertex hv = m_head(v), hu = m_head(u);
-            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);
-            if(hv == hu) return (m_depth[v] < m_depth[u] ? v : u);
-            u = m_parentvertex[hu];
+            Vertex hv = head_(v), hu = head_(u);
+            if(depth_[hv] > depth_[hu]) swap(v, u), swap(hv, hu);
+            if(hv == hu) return (depth_[v] < depth_[u] ? v : u);
+            u = parent_vertex_[hu];
         }
     }
 
@@ -134,25 +134,25 @@ struct HeavyLightDecomposition{
      */
     vector<pair<int, int>> path_query(Vertex v, Vertex u = -1){
         vector<pair<int, int>> ret;
-        if(u == -1) u = m_root;
+        if(u == -1) u = root_;
         while(1){
-            Vertex hv = m_head(v), hu = m_head(u);
-            if(m_depth[hv] > m_depth[hu]) swap(v, u), swap(hv, hu);
+            Vertex hv = head_(v), hu = head_(u);
+            if(depth_[hv] > depth_[hu]) swap(v, u), swap(hv, hu);
             if(hv == hu){
-                if(m_depth[v] > m_depth[u]) swap(v, u);
-                auto [vc, vi] = m_vertexindex[v];
-                auto [uc, ui] = m_vertexindex[u];
-                ret.push_back({m_offset[vc] + vi, m_offset[uc] + ui + 1});
+                if(depth_[v] > depth_[u]) swap(v, u);
+                auto [vc, vi] = vertex_index_[v];
+                auto [uc, ui] = vertex_index_[u];
+                ret.push_back({offset_[vc] + vi, offset_[uc] + ui + 1});
                 return ret;
             }
-            auto [uc, ui] = m_vertexindex[u];
-            ret.push_back({m_offset[uc], m_offset[uc] + ui + 1});
-            u = m_parentvertex[hu];
+            auto [uc, ui] = vertex_index_[u];
+            ret.push_back({offset_[uc], offset_[uc] + ui + 1});
+            u = parent_vertex_[hu];
         }
     }
 
     pair<int, int> subtree_query(Vertex v){
-        return {m_in[v], m_out[v]};
+        return {in_[v], out_[v]};
     }
 
     void print_columns(){
