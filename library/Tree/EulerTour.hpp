@@ -11,15 +11,15 @@ template<typename CostType>
 struct EulerTour{
     private:
     Graph<CostType> &G;
-    vector<int> m_in, m_out;
+    vector<int> in_, out_;
 
-    void m_dfs(Vertex v, Vertex p, int &t){
-        m_in[v] = t++;
+    void dfs_(Vertex v, Vertex p, int &t){
+        in_[v] = t++;
         for(auto &e : G[v]){
             if(e.to == p) continue;
-            m_dfs(e.to, v, t);
+            dfs_(e.to, v, t);
         }
-        m_out[v] = t++;
+        out_[v] = t++;
     }
 
     public:
@@ -30,23 +30,23 @@ struct EulerTour{
      * @param Offset タイムスタンプの初期値
      */
     EulerTour(Graph<CostType> &G, Vertex Root = 0, int Offset = 0) : G(G){
-        m_in.resize(G.size());
-        m_out.resize(G.size());
-        m_dfs(Root, -1, Offset);
+        in_.resize(G.size());
+        out_.resize(G.size());
+        dfs_(Root, -1, Offset);
     }
 
     int in(Vertex v){
         assert(0 <= v && v < G.size());
-        return m_in[v];
+        return in_[v];
     }
 
     int out(Vertex v){
         assert(0 <= v && v < G.size());
-        return m_out[v];
+        return out_[v];
     }
 
     pair<vector<int>, vector<int>> get(){
-        return make_pair(m_in, m_out);
+        return make_pair(in_, out_);
     }
 
     pair<int, int> operator[](Vertex v){

@@ -11,18 +11,18 @@ template<typename CostType>
 struct LowestCommonAncestor{
     private:
     Graph<CostType> &G;
-    int m_height;
-    vector<int> m_depth;
-    vector<vector<Vertex>> m_parent;
-    vector<CostType> m_cum;
+    int height_;
+    vector<int> depth_;
+    vector<vector<Vertex>> parent_;
+    vector<CostType> cum_;
 
-    void m_dfs(Vertex v, Vertex p, int d){
-        m_parent[0][v] = p;
-        m_depth[v] = d;
+    void dfs_(Vertex v, Vertex p, int d){
+        parent_[0][v] = p;
+        depth_[v] = d;
         for(auto &e : G[v]){
             if(e.to != p){
-                m_cum[e.to] = m_cum[v] + e.cost;
-                m_dfs(e.to, v, d + 1);
+                cum_[e.to] = cum_[v] + e.cost;
+                dfs_(e.to, v, d + 1);
             }
         }
     }
@@ -33,15 +33,15 @@ struct LowestCommonAncestor{
      * @param G 木
      * @param Root 根の頂点番号(0-index)
      */
-    LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), m_height(32){
-        m_depth.resize(G.size());
-        m_parent.resize(m_height, vector<Vertex>(G.size(), -1));
-        m_cum.resize(G.size(), 0);
-        m_dfs(Root, -1, 0);
-        for(int k = 0; k + 1 < m_height; ++k){
+    LowestCommonAncestor(Graph<CostType> &G, Vertex Root = 0) : G(G), height_(32){
+        depth_.resize(G.size());
+        parent_.resize(height_, vector<Vertex>(G.size(), -1));
+        cum_.resize(G.size(), 0);
+        dfs_(Root, -1, 0);
+        for(int k = 0; k + 1 < height_; ++k){
             for(Vertex v = 0; v < G.size(); ++v){
-                if(m_parent[k][v] < 0) m_parent[k + 1][v] = -1;
-                else m_parent[k + 1][v] = m_parent[k][m_parent[k][v]];
+                if(parent_[k][v] < 0) parent_[k + 1][v] = -1;
+                else parent_[k + 1][v] = parent_[k][parent_[k][v]];
             }
         }
     }
@@ -52,20 +52,20 @@ struct LowestCommonAncestor{
      * @return Vertex LCAの頂点番号
      */
     Vertex get(Vertex u, Vertex v){
-        if(m_depth[u] > m_depth[v]) swap(u, v);
-        for(int k = 0; k < m_height; ++k){
-            if((m_depth[v] - m_depth[u]) >> k & 1){
-                v = m_parent[k][v];
+        if(depth_[u] > depth_[v]) swap(u, v);
+        for(int k = 0; k < height_; ++k){
+            if((depth_[v] - depth_[u]) >> k & 1){
+                v = parent_[k][v];
             }
         }
         if(u == v) return u;
-        for(int k = m_height - 1; k >= 0; --k){
-            if(m_parent[k][u] != m_parent[k][v]){
-                u = m_parent[k][u];
-                v = m_parent[k][v];
+        for(int k = height_ - 1; k >= 0; --k){
+            if(parent_[k][u] != parent_[k][v]){
+                u = parent_[k][u];
+                v = parent_[k][v];
             }
         }
-        return m_parent[0][u];
+        return parent_[0][u];
     }
 
     /**
@@ -74,6 +74,6 @@ struct LowestCommonAncestor{
      * @return CostType コスト
      */
     CostType dist(Vertex u, Vertex v){
-        return m_cum[u] + m_cum[v] - m_cum[get(u, v)] * 2;
+        return cum_[u] + cum_[v] - cum_[get(u, v)] * 2;
     }
 };

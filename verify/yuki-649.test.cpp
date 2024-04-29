@@ -1,10 +1,10 @@
 #define PROBLEM "https://yukicoder.me/problems/no/649"
 
-#include "../library/DataStructure/K-th_MultiSet.hpp"
+#include "../library/DataStructure/KthMultiSet.hpp"
 
 int main(){
     int Q, K; cin >> Q >> K;
-    Kth_MultiSet<long long> st(K);
+    KthMultiSet<long long> st(K);
     while(Q--){
         int query; cin >> query;
         if(query == 1){

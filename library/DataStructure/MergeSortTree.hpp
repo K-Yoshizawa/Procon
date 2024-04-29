@@ -11,71 +11,71 @@ using namespace std;
 template <typename T>
 struct MergeSortTree{
     private:
-    vector<vector<T>> m_data, m_cum, m_weight;
-    int m_size, m_offset;
+    vector<vector<T>> data_, cum_, weight_;
+    int size_, offset_;
 
-    void build(vector<T> &V, vector<T> &W){
-        m_size = 1;
-        while(m_size < V.size()) m_size <<= 1;
-        m_offset = m_size - 1;
-        m_data.resize(2 * m_size);
-        m_weight.resize(2 * m_size);
+    void build_(vector<T> &V, vector<T> &W){
+        size_ = 1;
+        while(size_ < V.size()) size_ <<= 1;
+        offset_ = size_ - 1;
+        data_.resize(2 * size_);
+        weight_.resize(2 * size_);
         for(int i = 0; i < (int)V.size(); ++i){
-            m_data[m_size + i].push_back(V[i]);
-            m_weight[m_size + i].push_back(W[i]);
+            data_[size_ + i].push_back(V[i]);
+            weight_[size_ + i].push_back(W[i]);
         }
-        for(int i = m_offset; i >= 1; --i){
+        for(int i = offset_; i >= 1; --i){
             int l = i * 2, r = i * 2 + 1, x = 0, y = 0;
-            while(x < m_data[l].size() or y < m_data[r].size()){
-                if(x == m_data[l].size()){
-                    m_data[i].push_back(m_data[r][y]);
-                    m_weight[i].push_back(m_weight[r][y++]);
+            while(x < data_[l].size() or y < data_[r].size()){
+                if(x == data_[l].size()){
+                    data_[i].push_back(data_[r][y]);
+                    weight_[i].push_back(weight_[r][y++]);
                     continue;
                 }
-                if(y == m_data[r].size()){
-                    m_data[i].push_back(m_data[l][x]);
-                    m_weight[i].push_back(m_weight[l][x++]);
+                if(y == data_[r].size()){
+                    data_[i].push_back(data_[l][x]);
+                    weight_[i].push_back(weight_[l][x++]);
                     continue;
                 }
-                if(m_data[l][x] < m_data[r][y]){
-                    m_data[i].push_back(m_data[l][x]);
-                    m_weight[i].push_back(m_weight[l][x++]);
+                if(data_[l][x] < data_[r][y]){
+                    data_[i].push_back(data_[l][x]);
+                    weight_[i].push_back(weight_[l][x++]);
                 }
                 else{
-                    m_data[i].push_back(m_data[r][y]);
-                    m_weight[i].push_back(m_weight[r][y++]);
+                    data_[i].push_back(data_[r][y]);
+                    weight_[i].push_back(weight_[r][y++]);
                 }
             }
         }
-        m_cum.resize(2 * m_size);
-        for(int i = 0; i < m_cum.size(); ++i){
-            m_cum[i].resize(m_data[i].size() + 1, 0);
-            for(int j = 0; j < m_data[i].size(); ++j){
-                m_cum[i][j + 1] += m_cum[i][j];
-                m_cum[i][j + 1] += m_weight[i][j];
+        cum_.resize(2 * size_);
+        for(int i = 0; i < cum_.size(); ++i){
+            cum_[i].resize(data_[i].size() + 1, 0);
+            for(int j = 0; j < data_[i].size(); ++j){
+                cum_[i][j + 1] += cum_[i][j];
+                cum_[i][j + 1] += weight_[i][j];
             }
         }
     }
 
-    T query(int ql, int qr, int left, int right, int cell, T x){
+    T query_(int ql, int qr, int left, int right, int cell, T x){
         if(qr <= left || right <= ql) return 0;
         if(ql <= left && right <= qr){
-            int index = upper_bound(m_data[cell].begin(), m_data[cell].end(), x) - m_data[cell].begin();
-            return m_cum[cell][index];
+            int index = upper_bound(data_[cell].begin(), data_[cell].end(), x) - data_[cell].begin();
+            return cum_[cell][index];
         }
         int mid = (left + right) / 2;
-        T al = query(ql, qr, left, mid, 2 * cell, x);
-        T ar = query(ql, qr, mid, right, 2 * cell + 1, x);
+        T al = query_(ql, qr, left, mid, 2 * cell, x);
+        T ar = query_(ql, qr, mid, right, 2 * cell + 1, x);
         return al + ar;
     }
 
     public:
     MergeSortTree(vector<T> &V){
-        build(V, vector<T>(V.size(), 1));
+        build_(V, vector<T>(V.size(), 1));
     }
 
     MergeSortTree(vector<T> &V, vector<T> &W){
-        build(V, W);
+        build_(V, W);
     }
 
     /**
@@ -86,7 +86,7 @@ struct MergeSortTree{
      * @return T クエリの答え
      */
     T query(int left, int right, T x){
-        return query(left, right, 1, m_size + 1, 1, x);
+        return query_(left, right, 1, size_ + 1, 1, x);
     }
 
     /**
@@ -106,16 +106,16 @@ struct MergeSortTree{
      */
     void print(){
         int i = 1;
-        for(int d = 1; i < m_size * 2; d <<= 1){
+        for(int d = 1; i < size_ * 2; d <<= 1){
             for(int j = 0; j < d; ++i, ++j){
                 cerr << j << " {";
-                for(int k = 0; k < m_data[i].size(); ++k){
-                    cerr << m_data[i][k] << (k + 1 == m_data[i].size() ? "} " : ", ");
+                for(int k = 0; k < data_[i].size(); ++k){
+                    cerr << data_[i][k] << (k + 1 == data_[i].size() ? "} " : ", ");
                 }
                 cerr << endl;
                 cerr << "  {";
-                for(int k = 0; k <= m_data[i].size(); ++k){
-                    cerr << m_cum[i][k] << (k == m_data[i].size() ? "} " : ", ");
+                for(int k = 0; k <= data_[i].size(); ++k){
+                    cerr << cum_[i][k] << (k == data_[i].size() ? "} " : ", ");
                 }
                 cerr << endl;
             }

@@ -13,9 +13,9 @@ struct Mo{
     private:
     using q = pair<int, int>;
     using f = function<void(int)>;
-    int m_querysize, m_rootq, m_blocksize;
-    vector<q> m_query;
-    vector<vector<int>> m_index;
+    int querysize_, rootq_, blocksize_;
+    vector<q> query_;
+    vector<vector<int>> index_;
 
     public:
     /**
@@ -26,17 +26,17 @@ struct Mo{
      */
     Mo(int Segment_Size, vector<int> &Query_Left, vector<int> &Query_Right){
         Segment_Size = max(1, Segment_Size);
-        m_querysize = (int)Query_Left.size();
-        m_rootq = max(1, (int)sqrt(m_querysize));
-        m_blocksize = (Segment_Size + m_rootq - 1) / m_rootq;
-        m_query.resize(m_querysize);
-        m_index.resize(m_blocksize);
-        for(int i = 0; i < m_querysize; ++i){
-            m_query[i] = {Query_Left[i], Query_Right[i]};
-            m_index[Query_Left[i] / m_rootq].push_back(i);
+        querysize_ = (int)Query_Left.size();
+        rootq_ = max(1, (int)sqrt(querysize_));
+        blocksize_ = (Segment_Size + rootq_ - 1) / rootq_;
+        query_.resize(querysize_);
+        index_.resize(blocksize_);
+        for(int i = 0; i < querysize_; ++i){
+            query_[i] = {Query_Left[i], Query_Right[i]};
+            index_[Query_Left[i] / rootq_].push_back(i);
         }
         bool odd = true;
-        for(auto &v : m_index){
+        for(auto &v : index_){
             if(odd){
                 sort(v.begin(), v.end(), [&](int i, int j){
                     return Query_Right[i] < Query_Right[j];
@@ -59,9 +59,9 @@ struct Mo{
      */
     void run(f add, f sub, f out){
         int left = 0, right = 0;
-        for(auto &m : m_index){
+        for(auto &m : index_){
             for(auto i : m){
-                auto [l, r] = m_query[i];
+                auto [l, r] = query_[i];
                 while(right < r) add(right++);
                 while(right > r) sub(--right);
                 while(left < l) sub(left++);

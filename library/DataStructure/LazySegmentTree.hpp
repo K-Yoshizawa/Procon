@@ -16,54 +16,54 @@ struct LazySegmentTree{
     using G = function<Monoid(Monoid, OperatorMonoid)>;
     using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
 
-    int __Size, __Offset, __ZeroIndex;
-    vector<Monoid> __Data;
-    vector<OperatorMonoid> __Lazy;
+    int size_, offset_, zeroindex_;
+    vector<Monoid> data_;
+    vector<OperatorMonoid> lazy_;
     const F f;
     const G g;
     const H h;
-    const Monoid __M1;
-    const OperatorMonoid __OM1;
+    const Monoid m1_;
+    const OperatorMonoid om1_;
 
-    inline void __Check(int x){
-        assert(1 <= x && x <= __Size);
+    inline void check_(int x){
+        assert(1 <= x && x <= size_);
     }
 
-    void __eval(int k){
-        if(__Lazy[k] == __OM1) return;
-        if(k < __Size){
-            __Lazy[k * 2 + 0] = h(__Lazy[k * 2 + 0], __Lazy[k]);
-            __Lazy[k * 2 + 1] = h(__Lazy[k * 2 + 1], __Lazy[k]);
+    void eval_(int k){
+        if(lazy_[k] == om1_) return;
+        if(k < size_){
+            lazy_[k * 2 + 0] = h(lazy_[k * 2 + 0], lazy_[k]);
+            lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);
         }
-        __Data[k] = g(__Data[k], __Lazy[k]);
-        __Lazy[k] = __OM1;
+        data_[k] = g(data_[k], lazy_[k]);
+        lazy_[k] = om1_;
     }
 
-    void __update(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
-        __eval(cell);
+    void update_(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
+        eval_(cell);
         if(ul <= left && right <= ur){
-            __Lazy[cell] = h(__Lazy[cell], x);
-            __eval(cell);
+            lazy_[cell] = h(lazy_[cell], x);
+            eval_(cell);
         }
         else if(ul < right && left < ur){
             int mid = (left + right) / 2;
-            __update(ul, ur, x, left, mid, cell * 2 + 0);
-            __update(ul, ur, x, mid, right, cell * 2 + 1);
-            __Data[cell] = f(__Data[cell * 2 + 0], __Data[cell * 2 + 1]);
+            update_(ul, ur, x, left, mid, cell * 2 + 0);
+            update_(ul, ur, x, mid, right, cell * 2 + 1);
+            data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);
         }
     }
 
-    Monoid __query(int ql, int qr, int left, int right, int cell){
-        __eval(cell);
+    Monoid query_(int ql, int qr, int left, int right, int cell){
+        eval_(cell);
         if(qr <= left || right <= ql){
-            return __M1;
+            return m1_;
         }
         if(ql <= left && right <= qr){
-            return __Data[cell];
+            return data_[cell];
         }
         int mid = (left + right) / 2;
-        Monoid ans_left = __query(ql, qr, left, mid, cell * 2 + 0);
-        Monoid ans_right = __query(ql, qr, mid, right, cell * 2 + 1);
+        Monoid ans_left = query_(ql, qr, left, mid, cell * 2 + 0);
+        Monoid ans_right = query_(ql, qr, mid, right, cell * 2 + 1);
         return f(ans_left, ans_right);
     }
 
@@ -80,12 +80,12 @@ struct LazySegmentTree{
      */
     LazySegmentTree(int Size, F Merge, G Mapping, H Composite,
     const Monoid &Monoid_Identity, const OperatorMonoid &OperatorMonoid_Identity, bool ZeroIndex = false)
-    : f(Merge), g(Mapping), h(Composite), __M1(Monoid_Identity), __OM1(OperatorMonoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < Size) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Data.resize(2 * __Size, __M1);
-        __Lazy.resize(2 * __Size, __OM1);
+    : f(Merge), g(Mapping), h(Composite), m1_(Monoid_Identity), om1_(OperatorMonoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < Size) size_ <<= 1;
+        offset_ = size_ - 1;
+        data_.resize(2 * size_, m1_);
+        lazy_.resize(2 * size_, om1_);
     }
 
     /**
@@ -93,8 +93,8 @@ struct LazySegmentTree{
      * @attention 必ず `set()` で初期値を代入してから呼び出すこと！
      */
     void build(){
-        for(int i = __Offset; i >= 1; --i){
-            __Data[i] = f(__Data[i * 2 + 0], __Data[i * 2 + 1]);
+        for(int i = offset_; i >= 1; --i){
+            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
         }
     }
 
@@ -104,8 +104,8 @@ struct LazySegmentTree{
      * @param Value 代入する値
      */
     void set(int Index, Monoid Value){
-        __Check(Index + __ZeroIndex);
-        __Data[__Offset + Index + __ZeroIndex] = Value;
+        check_(Index + zeroindex_);
+        data_[offset_ + Index + zeroindex_] = Value;
     }
 
     /**
@@ -120,14 +120,14 @@ struct LazySegmentTree{
      */
     LazySegmentTree(vector<Monoid> &Init_Data, F Merge, G Mapping, H Composite,
     const Monoid &Monoid_Identity, const OperatorMonoid &OperatorMonoid_Identity, bool ZeroIndex = false)
-    : f(Merge), g(Mapping), h(Composite), __M1(Monoid_Identity), __OM1(OperatorMonoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < (int)Init_Data.size()) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Data.resize(2 * __Size, __M1);
-        __Lazy.resize(2 * __Size, __OM1);
+    : f(Merge), g(Mapping), h(Composite), m1_(Monoid_Identity), om1_(OperatorMonoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < (int)Init_Data.size()) size_ <<= 1;
+        offset_ = size_ - 1;
+        data_.resize(2 * size_, m1_);
+        lazy_.resize(2 * size_, om1_);
         for(int i = 0; i < (int)Init_Data.size(); ++i){
-            __Data[__Size + i] = Init_Data[i];
+            data_[size_ + i] = Init_Data[i];
         }
         build();
     }
@@ -139,9 +139,9 @@ struct LazySegmentTree{
      * @param OP 更新操作
      */
     void update(int Left, int Right, OperatorMonoid OP){
-        __Check(Left + __ZeroIndex);
-        __Check(Right + __ZeroIndex - 1);
-        __update(Left + __ZeroIndex, Right + __ZeroIndex, OP, 1, __Size + 1, 1);
+        check_(Left + zeroindex_);
+        check_(Right + zeroindex_ - 1);
+        update_(Left + zeroindex_, Right + zeroindex_, OP, 1, size_ + 1, 1);
     }
 
     /**
@@ -151,9 +151,9 @@ struct LazySegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid query(int Left, int Right){
-        __Check(Left + __ZeroIndex);
-        __Check(Right + __ZeroIndex - 1);
-        return __query(Left + __ZeroIndex, Right + __ZeroIndex, 1, __Size + 1, 1);
+        check_(Left + zeroindex_);
+        check_(Right + zeroindex_ - 1);
+        return query_(Left + zeroindex_, Right + zeroindex_, 1, size_ + 1, 1);
     }
 
     /**
@@ -162,7 +162,7 @@ struct LazySegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid get(int k){
-        __Check(k + __ZeroIndex);
+        check_(k + zeroindex_);
         return query(k, k + 1);
     }
 
@@ -173,10 +173,10 @@ struct LazySegmentTree{
     void print(){
         int cnt = 1, i = 1, depth = 1;
         while(1){
-            if(i >= __Size * 2) break;
+            if(i >= size_ * 2) break;
             cerr << depth++ << " : ";
             for(int c = 0; c < cnt; ++c){
-                cerr << __Data[i++] << " ";
+                cerr << data_[i++] << " ";
             }
             cerr << endl;
             cnt <<= 1;

@@ -14,43 +14,43 @@ struct DualSegmentTree{
     private:
     using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
 
-    int __Size, __Offset, __ZeroIndex;
-    vector<OperatorMonoid> __Lazy;
+    int size_, offset_, zeroindex_;
+    vector<OperatorMonoid> lazy_;
     const H h;
-    const OperatorMonoid __OM1;
+    const OperatorMonoid om1_;
 
-    inline void __Check(int x){
-        assert(1 <= x && x <= __Size);
+    inline void check_(int x){
+        assert(1 <= x && x <= size_);
     }
 
-    void __eval(int k){
-        if(__Lazy[k] == __OM1) return;
-        if(k < __Size){
-            __Lazy[k * 2 + 0] = h(__Lazy[k * 2 + 0], __Lazy[k]);
-            __Lazy[k * 2 + 1] = h(__Lazy[k * 2 + 1], __Lazy[k]);
-            __Lazy[k] = __OM1;
+    void eval_(int k){
+        if(lazy_[k] == om1_) return;
+        if(k < size_){
+            lazy_[k * 2 + 0] = h(lazy_[k * 2 + 0], lazy_[k]);
+            lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);
+            lazy_[k] = om1_;
         }
     }
 
-    void __update(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
-        __eval(cell);
+    void update_(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
+        eval_(cell);
         if(ul <= left && right <= ur){
-            __Lazy[cell] = h(__Lazy[cell], x);
-            __eval(cell);
+            lazy_[cell] = h(lazy_[cell], x);
+            eval_(cell);
         }
         else if(ul < right && left < ur){
             int mid = (left + right) / 2;
-            __update(ul, ur, x, left, mid, cell * 2 + 0);
-            __update(ul, ur, x, mid, right, cell * 2 + 1);
+            update_(ul, ur, x, left, mid, cell * 2 + 0);
+            update_(ul, ur, x, mid, right, cell * 2 + 1);
         }
     }
     
-    OperatorMonoid __query(int k, int left, int right, int cell){
-        __eval(cell);
-        if(k == left && right - left == 1) return __Lazy[cell];
+    OperatorMonoid query_(int k, int left, int right, int cell){
+        eval_(cell);
+        if(k == left && right - left == 1) return lazy_[cell];
         int mid = (left + right) / 2;
-        if(k < mid) return __query(k, left, mid, cell * 2 + 0);
-        else return __query(k, mid, right, cell * 2 + 1);
+        if(k < mid) return query_(k, left, mid, cell * 2 + 0);
+        else return query_(k, mid, right, cell * 2 + 1);
     }
 
     public:
@@ -63,11 +63,11 @@ struct DualSegmentTree{
      */
     DualSegmentTree(int Size, H Composite,
     const OperatorMonoid &OperatorMonoid_Identity, bool ZeroIndex = false)
-    : h(Composite), __OM1(OperatorMonoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < Size) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Lazy.resize(2 * __Size, __OM1);
+    : h(Composite), om1_(OperatorMonoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < Size) size_ <<= 1;
+        offset_ = size_ - 1;
+        lazy_.resize(2 * size_, om1_);
     }
     
     /**
@@ -79,13 +79,13 @@ struct DualSegmentTree{
      */
     DualSegmentTree(vector<OperatorMonoid> &Init_Data, H Composite,
     const OperatorMonoid &OperatorMonoid_Identity, bool ZeroIndex = false)
-    : h(Composite), __OM1(OperatorMonoid_Identity), __ZeroIndex(ZeroIndex){
-        __Size = 1;
-        while(__Size < (int)Init_Data.size()) __Size <<= 1;
-        __Offset = __Size - 1;
-        __Lazy.resize(2 * __Size, __OM1);
+    : h(Composite), om1_(OperatorMonoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < (int)Init_Data.size()) size_ <<= 1;
+        offset_ = size_ - 1;
+        lazy_.resize(2 * size_, om1_);
         for(int i = 0; i < (int)Init_Data.size(); ++i){
-            __Lazy[__Size + i] = Init_Data[i];
+            lazy_[size_ + i] = Init_Data[i];
         }
     }
 
@@ -96,9 +96,9 @@ struct DualSegmentTree{
      * @param OP 更新操作
      */
     void update(int Left, int Right, OperatorMonoid OP){
-        __Check(Left + __ZeroIndex);
-        __Check(Right + __ZeroIndex - 1);
-        __update(Left + __ZeroIndex, Right + __ZeroIndex, OP, 1, __Size + 1, 1);
+        check_(Left + zeroindex_);
+        check_(Right + zeroindex_ - 1);
+        update_(Left + zeroindex_, Right + zeroindex_, OP, 1, size_ + 1, 1);
     }
 
     /**
@@ -107,8 +107,8 @@ struct DualSegmentTree{
      * @return OperatorMonoid 取得した結果
      */
     OperatorMonoid query(int k){
-        __Check(k + __ZeroIndex);
-        return __query(k + __ZeroIndex, 1, __Size + 1, 1);
+        check_(k + zeroindex_);
+        return query_(k + zeroindex_, 1, size_ + 1, 1);
     }
 
     OperatorMonoid operator[](const int &k){
