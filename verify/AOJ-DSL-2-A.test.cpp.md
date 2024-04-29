@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A
@@ -78,26 +78,26 @@ data:
     \        return m_data[m_offset + k + m_zeroindex];\n    }\n\n    Monoid operator[](const\
     \ int &k){\n        return get(k);\n    }\n};\n#line 4 \"verify/AOJ-DSL-2-A.test.cpp\"\
     \n\nint main(){\n    int n, q; cin >> n >> q;\n    long long INF = (1LL << 31)\
-    \ - 1;\n    vector<long long> Init_Data(n, INF);\n    SegmentTree<long long> seg\
-    \ = logk::SegmentTreeRMQ(Init_Data, INF, true);\n    while(q--){\n        int\
-    \ com, x, y; cin >> com >> x >> y;\n        if(com == 0){\n            seg.update(x,\
-    \ y);\n        }\n        if(com == 1){\n            cout << seg.query(x, y +\
-    \ 1) << endl;\n        }\n    }\n}\n"
+    \ - 1;\n    vector<long long> Init_Data(n, INF);\n    SegmentTree<long long> seg(Init_Data,\
+    \ [&](long long x, long long y){\n        return min(x, y);\n    }, INF, true);\n\
+    \    while(q--){\n        int com, x, y; cin >> com >> x >> y;\n        if(com\
+    \ == 0){\n            seg.update(x, y);\n        }\n        if(com == 1){\n  \
+    \          cout << seg.query(x, y + 1) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
     \n\n#include \"../library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n   \
     \ int n, q; cin >> n >> q;\n    long long INF = (1LL << 31) - 1;\n    vector<long\
-    \ long> Init_Data(n, INF);\n    SegmentTree<long long> seg = logk::SegmentTreeRMQ(Init_Data,\
-    \ INF, true);\n    while(q--){\n        int com, x, y; cin >> com >> x >> y;\n\
-    \        if(com == 0){\n            seg.update(x, y);\n        }\n        if(com\
-    \ == 1){\n            cout << seg.query(x, y + 1) << endl;\n        }\n    }\n\
-    }"
+    \ long> Init_Data(n, INF);\n    SegmentTree<long long> seg(Init_Data, [&](long\
+    \ long x, long long y){\n        return min(x, y);\n    }, INF, true);\n    while(q--){\n\
+    \        int com, x, y; cin >> com >> x >> y;\n        if(com == 0){\n       \
+    \     seg.update(x, y);\n        }\n        if(com == 1){\n            cout <<\
+    \ seg.query(x, y + 1) << endl;\n        }\n    }\n}"
   dependsOn:
   - library/DataStructure/SegmentTree.hpp
   isVerificationFile: true
   path: verify/AOJ-DSL-2-A.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 00:45:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-04-29 11:45:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-2-A.test.cpp
 layout: document

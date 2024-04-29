@@ -66,7 +66,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/MergeSortTree.hpp
       title: "Merge-Sort Tree - \u9818\u57DF\u6728"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -229,7 +229,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-1-B.test.cpp
       title: verify/AOJ-DSL-1-B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-2-A.test.cpp
       title: verify/AOJ-DSL-2-A.test.cpp
     - icon: ':heavy_check_mark:'

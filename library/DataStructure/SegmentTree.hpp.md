@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-A.test.cpp
     title: verify/AOJ-DSL-2-A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum-HLD.test.cpp
     title: verify/LC-VertexAddPathSum-HLD.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     links: []
@@ -155,7 +155,7 @@ data:
   path: library/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2024-04-29 00:45:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-B-SegmentTree.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
