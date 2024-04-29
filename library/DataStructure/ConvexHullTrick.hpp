@@ -10,24 +10,23 @@ using namespace std;
 
 /**
  * @brief 直線 `ax + b` の集合に対して、`x` における最小値(最大値)を求める
- * @tparam Line 直線の傾き `a` と切片 `b` の型
- * @tparam Point 座標 `x` の型
+ * @tparam Type 直線の傾き `a` と切片 `b` の型
  */
-template<typename Line, typename Point = Line>
+template<typename Type>
 struct ConvexHullTrick{
     private:
-    map<Line, Line, greater<Line>> slope_to_intercept_;
-    map<Line, Point> slope_to_rightend_;
-    map<Point, Line> rightend_to_slope_;
+    map<Type, Type, greater<Type>> slope_to_intercept_;
+    map<Type, Type> slope_to_rightend_;
+    map<Type, Type> rightend_to_slope_;
     
     bool is_max_{false};
-    Point inf_{numeric_limits<Point>::max() >> 2};
+    Type inf_{numeric_limits<Type>::max() >> 2};
 
-    Point calc_(Line al, Line bl, Line ar, Line br){
-        return (Point)(br - bl) / (Point)(al - ar);
+    Type calc_(Type al, Type bl, Type ar, Type br){
+        return (Type)(br - bl) / (Type)(al - ar);
     }
 
-    void add_(Line a, Line b){
+    void add_(Type a, Type b){
         if(slope_to_intercept_.find(a) != slope_to_intercept_.end() and slope_to_intercept_[a] <= b) return;
         slope_to_intercept_[a] = b;
         auto itr = slope_to_intercept_.find(a);
@@ -69,14 +68,14 @@ struct ConvexHullTrick{
         }
         if(itr != slope_to_intercept_.begin()){
             auto [al, bl] = *prev(itr);
-            Point lrht = calc_(al, bl, a, b);
+            Type lrht = calc_(al, bl, a, b);
             rightend_to_slope_.erase(slope_to_rightend_[al]);
             slope_to_rightend_[al] = lrht;
             rightend_to_slope_[lrht] = al;
         }
         if(next(itr) != slope_to_intercept_.end()){
             auto [ar, br] = *next(itr);
-            Point rht = calc_(a, b, ar, br);
+            Type rht = calc_(a, b, ar, br);
             if(slope_to_rightend_.find(a) != slope_to_rightend_.end()){
                 rightend_to_slope_.erase(slope_to_rightend_[a]);
             }
@@ -102,7 +101,7 @@ struct ConvexHullTrick{
     /**
      * @brief 直線 `ax + b` を追加する。
      */
-    void insert(Line a, Line b){
+    void insert(Type a, Type b){
         if(is_max_) a = -a, b = -b;
         else add_(a, b);
     }
@@ -110,7 +109,7 @@ struct ConvexHullTrick{
     /**
      * @brief `x` における最小値(最大値)クエリを処理する。
      */
-    Line query(Point x){
+    Type query(Type x){
         auto [r, a] = *(rightend_to_slope_.lower_bound(x));
         auto b = slope_to_intercept_[a];
         if(is_max_) a = -a, b = -b;
