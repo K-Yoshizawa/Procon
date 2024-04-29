@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 
-#include "library/DataStructure/ConvexHullTrick.hpp"
+#include "../library/DataStructure/ConvexHullTrick.hpp"
 
 using ll = int64_t;
 

@@ -28,7 +28,7 @@ struct ConvexHullTrick{
     }
 
     void add_(Line a, Line b){
-        if(slope_to_intercept_.contains(a) and slope_to_intercept_[a] <= b) return;
+        if(slope_to_intercept_.find(a) != slope_to_intercept_.end() and slope_to_intercept_[a] <= b) return;
         slope_to_intercept_[a] = b;
         auto itr = slope_to_intercept_.find(a);
         if(itr != slope_to_intercept_.begin() and next(itr) != slope_to_intercept_.end()){
@@ -36,7 +36,7 @@ struct ConvexHullTrick{
             auto [ar, br] = *next(itr);
             if(calc_(al, bl, a, b) >= calc_(a, b, ar, br)){
                 slope_to_intercept_.erase(a);
-                if(slope_to_rightend_.contains(a)){
+                if(slope_to_rightend_.find(a) != slope_to_rightend_.end()){
                     rightend_to_slope_.erase(slope_to_rightend_[a]);
                     slope_to_rightend_.erase(a);
                 }
@@ -77,14 +77,14 @@ struct ConvexHullTrick{
         if(next(itr) != slope_to_intercept_.end()){
             auto [ar, br] = *next(itr);
             Point rht = calc_(a, b, ar, br);
-            if(slope_to_rightend_.contains(a)){
+            if(slope_to_rightend_.find(a) != slope_to_rightend_.end()){
                 rightend_to_slope_.erase(slope_to_rightend_[a]);
             }
             slope_to_rightend_[a] = rht;
             rightend_to_slope_[rht] = a;
         }
         else{
-            if(slope_to_rightend_.contains(a)){
+            if(slope_to_rightend_.find(a) != slope_to_rightend_.end()){
                 rightend_to_slope_.erase(slope_to_rightend_[a]);
             }
             slope_to_rightend_[a] = inf_;
