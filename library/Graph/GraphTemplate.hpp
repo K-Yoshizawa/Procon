@@ -31,7 +31,7 @@ template<typename CostType = int>
 struct Graph{
     private:
     int vertex_size_{0}, edge_size_{0};
-    bool is_directed_{false}, is_directed_{false};
+    bool is_directed_{false}, is_weighted_{false};
     vector<vector<Edge<CostType>>> adj_;
     vector<int> indegree_;
 
@@ -61,7 +61,7 @@ struct Graph{
     void add(Vertex from, Vertex to, CostType cost = 1){
         assert(0 <= from and from < vertex_size_);
         assert(0 <= to and to < vertex_size_);
-        is_directed_ |= cost > 1;
+        is_weighted_ |= cost > 1;
         Edge<CostType> e1(from, to, cost);
         e1.loc = adj_[from].size();
         e1.id = edge_size_;
@@ -84,7 +84,7 @@ struct Graph{
      * @param zero_index 入力の頂点番号が 0-index か (option, default = `false`)
      */
     void input(int edge_size, bool weighted = false, bool zero_index = false){
-        is_directed_ = weighted;
+        is_weighted_ = weighted;
         for(int i = 0; i < edge_size; ++i){
             Vertex s, t; cin >> s >> t;
             if(!zero_index) --s, --t;
@@ -132,7 +132,7 @@ struct Graph{
      * @brief グラフが重み付きかどうかを返す。
      */
     bool is_weighted(){
-        return is_directed_;
+        return is_weighted_;
     }
 
     vector<Vertex> source(){
