@@ -57,8 +57,8 @@ data:
       path: library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
-      path: library/DataStructure/K-th_MultiSet.hpp
-      title: library/DataStructure/K-th_MultiSet.hpp
+      path: library/DataStructure/KthMultiSet.hpp
+      title: library/DataStructure/KthMultiSet.hpp
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
