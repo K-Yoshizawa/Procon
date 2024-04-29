@@ -14,13 +14,13 @@ struct SegmentTree{
     private:
     using F = function<Monoid(Monoid, Monoid)>;
 
-    int m_size, m_offset, m_zeroindex;
-    vector<Monoid> m_data;
+    int size_, offset_, zeroindex_;
+    vector<Monoid> data_;
     const F f;
-    const Monoid m_m1;
+    const Monoid m1_;
 
-    inline void m_check(int x){
-        assert(1 <= x && x <= m_size);
+    inline void check_(int x){
+        assert(1 <= x && x <= size_);
     }
 
     public:
@@ -32,11 +32,11 @@ struct SegmentTree{
      * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
      */
     SegmentTree(int Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
-    : f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){
-        m_size = 1;
-        while(m_size < Size) m_size <<= 1;
-        m_offset = m_size - 1;
-        m_data.resize(2 * m_size, m_m1);
+    : f(Merge), m1_(Monoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < Size) size_ <<= 1;
+        offset_ = size_ - 1;
+        data_.resize(2 * size_, m1_);
     }
 
     /**
@@ -44,8 +44,8 @@ struct SegmentTree{
      * @attention 必ず `set()` で初期値を代入してから呼び出すこと！
      */
     void build(){
-        for(int i = m_offset; i >= 1; --i){
-            m_data[i] = f(m_data[i * 2 + 0], m_data[i * 2 + 1]);
+        for(int i = offset_; i >= 1; --i){
+            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
         }
     }
 
@@ -55,8 +55,8 @@ struct SegmentTree{
      * @param Value 代入する値
      */
     void set(int Index, Monoid Value){
-        m_check(Index + m_zeroindex);
-        m_data[m_offset + Index + m_zeroindex] = Value;
+        check_(Index + zeroindex_);
+        data_[offset_ + Index + zeroindex_] = Value;
     }
 
     /**
@@ -67,13 +67,13 @@ struct SegmentTree{
      * @param ZeroIndex 0-indexとして扱いたいか (default = `false`)
      */
     SegmentTree(vector<Monoid> &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)
-    : f(Merge), m_m1(Monoid_Identity), m_zeroindex(ZeroIndex){
-        m_size = 1;
-        while(m_size < (int)Init_Data.size()) m_size <<= 1;
-        m_offset = m_size - 1;
-        m_data.resize(2 * m_size, m_m1);
+    : f(Merge), m1_(Monoid_Identity), zeroindex_(ZeroIndex){
+        size_ = 1;
+        while(size_ < (int)Init_Data.size()) size_ <<= 1;
+        offset_ = size_ - 1;
+        data_.resize(2 * size_, m1_);
         for(int i = 0; i < (int)Init_Data.size(); ++i){
-            m_data[m_size + i] = Init_Data[i];
+            data_[size_ + i] = Init_Data[i];
         }
         build();
     }
@@ -84,11 +84,11 @@ struct SegmentTree{
      * @param Value 更新する値
      */
     void update(int Index, Monoid Value){
-        m_check(Index + m_zeroindex);
-        int k = m_offset + Index + m_zeroindex;
-        m_data[k] = Value;
+        check_(Index + zeroindex_);
+        int k = offset_ + Index + zeroindex_;
+        data_[k] = Value;
         while(k >>= 1){
-            m_data[k] = f(m_data[2 * k], m_data[2 * k + 1]);
+            data_[k] = f(data_[2 * k], data_[2 * k + 1]);
         }
     }
 
@@ -99,14 +99,14 @@ struct SegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid query(int Left, int Right){
-        if(Left == Right) return m_m1;
-        m_check(Left + m_zeroindex);
-        m_check(Right + m_zeroindex - 1);
-        int l = Left + m_zeroindex + m_offset, r = Right + m_zeroindex + m_offset;
-        Monoid al = m_m1, ar = m_m1;
+        if(Left == Right) return m1_;
+        check_(Left + zeroindex_);
+        check_(Right + zeroindex_ - 1);
+        int l = Left + zeroindex_ + offset_, r = Right + zeroindex_ + offset_;
+        Monoid al = m1_, ar = m1_;
         while(l < r){
-            if(l & 1) al = f(al, m_data[l++]);
-            if(r & 1) ar = f(m_data[--r], ar);
+            if(l & 1) al = f(al, data_[l++]);
+            if(r & 1) ar = f(data_[--r], ar);
             l >>= 1, r >>= 1;
         }
         return f(al, ar);
@@ -118,8 +118,8 @@ struct SegmentTree{
      * @return Monoid 取得した結果
      */
     Monoid get(int k){
-        m_check(k + m_zeroindex);
-        return m_data[m_offset + k + m_zeroindex];
+        check_(k + zeroindex_);
+        return data_[offset_ + k + zeroindex_];
     }
 
     Monoid operator[](const int &k){

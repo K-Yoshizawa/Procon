@@ -12,9 +12,9 @@ using namespace std;
 template<typename T>
 struct BinaryIndexedTree{
     private:
-    int __Size;
-    vector<T> __Data;
-    bool __ZeroIndex;
+    int size_;
+    vector<T> data_;
+    bool zeroindex_;
 
     public:
     /**
@@ -22,24 +22,24 @@ struct BinaryIndexedTree{
      * @param Size 要素数
      * @param ZeroIndex `0-index` で扱いたいか (default = `false`)
      */
-    BinaryIndexedTree(int Size, bool ZeroIndex = false) : __Size(Size), __ZeroIndex(ZeroIndex){
-        __Data.resize(__Size + 1, 0);
+    BinaryIndexedTree(int Size, bool ZeroIndex = false) : size_(Size), zeroindex_(ZeroIndex){
+        data_.resize(size_ + 1, 0);
     }
 
     T sum(int i){
         T ret = 0;
-        i += __ZeroIndex;
-        for(; i > 0; i -= i & -i) ret += __Data[i];
+        i += zeroindex_;
+        for(; i > 0; i -= i & -i) ret += data_[i];
         return ret;
     }
 
     void add(int i, T x){
-        i += __ZeroIndex;
-        for(; i <= __Size; i += i & -i) __Data[i] += x;
+        i += zeroindex_;
+        for(; i <= size_; i += i & -i) data_[i] += x;
     }
 
     T query(int l, int r){
-        l += __ZeroIndex, r += __ZeroIndex;
+        l += zeroindex_, r += zeroindex_;
         return sum(r) - sum(l - 1);
     }
 };

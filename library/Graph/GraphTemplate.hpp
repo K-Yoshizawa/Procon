@@ -30,10 +30,10 @@ struct Edge{
 template<typename CostType = int>
 struct Graph{
     private:
-    int m_vertex_size{0}, m_edge_size{0};
-    bool m_is_directed{false}, m_is_weighted{false};
-    vector<vector<Edge<CostType>>> m_adj;
-    vector<int> m_indegree;
+    int vertex_size_{0}, edge_size_{0};
+    bool is_directed_{false}, is_directed_{false};
+    vector<vector<Edge<CostType>>> adj_;
+    vector<int> indegree_;
 
     public:
     CostType INF{numeric_limits<CostType>::max() >> 2};
@@ -46,9 +46,9 @@ struct Graph{
      * @param vertex_size 頂点数
      * @param directed 有向グラフを作成するか (option, default = `false`)
      */
-    Graph(int vertex_size, bool directed = false) : m_vertex_size(vertex_size), m_is_directed(directed){
-        m_adj.resize(vertex_size);
-        m_indegree.resize(vertex_size, 0);
+    Graph(int vertex_size, bool directed = false) : vertex_size_(vertex_size), is_directed_(directed){
+        adj_.resize(vertex_size);
+        indegree_.resize(vertex_size, 0);
     }
 
     /**
@@ -59,22 +59,22 @@ struct Graph{
      * @param cost 重み (option, default = `1`)
      */
     void add(Vertex from, Vertex to, CostType cost = 1){
-        assert(0 <= from and from < m_vertex_size);
-        assert(0 <= to and to < m_vertex_size);
-        m_is_weighted |= cost > 1;
+        assert(0 <= from and from < vertex_size_);
+        assert(0 <= to and to < vertex_size_);
+        is_directed_ |= cost > 1;
         Edge<CostType> e1(from, to, cost);
-        e1.loc = m_adj[from].size();
-        e1.id = m_edge_size;
-        m_adj[from].push_back(e1);
-        ++m_edge_size;
-        if(m_is_directed){
-            ++m_indegree[to];
+        e1.loc = adj_[from].size();
+        e1.id = edge_size_;
+        adj_[from].push_back(e1);
+        ++edge_size_;
+        if(is_directed_){
+            ++indegree_[to];
             return;
         }
         Edge<CostType> e2(to, from, cost);
-        e2.loc = m_adj[to].size();
+        e2.loc = adj_[to].size();
         e2.id = e1.id;
-        m_adj[to].push_back(e2);
+        adj_[to].push_back(e2);
     }
 
     /**
@@ -84,7 +84,7 @@ struct Graph{
      * @param zero_index 入力の頂点番号が 0-index か (option, default = `false`)
      */
     void input(int edge_size, bool weighted = false, bool zero_index = false){
-        m_is_weighted = weighted;
+        is_directed_ = weighted;
         for(int i = 0; i < edge_size; ++i){
             Vertex s, t; cin >> s >> t;
             if(!zero_index) --s, --t;
@@ -99,7 +99,7 @@ struct Graph{
      * @return size_t 頂点数
      */
     size_t size(){
-        return m_vertex_size;
+        return vertex_size_;
     }
 
     /**
@@ -108,7 +108,7 @@ struct Graph{
      * @return int 頂点 `v` の出次数
      */
     int outdegree(Vertex v){
-        return (int)m_adj.at(v).size();
+        return (int)adj_.at(v).size();
     }
 
     /**
@@ -117,28 +117,28 @@ struct Graph{
      * @return int 頂点 `v` の入次数
      */
     int indegree(Vertex v){
-        if(m_is_directed) return m_indegree.at(v);
-        else return (int)m_adj.at(v).size();
+        if(is_directed_) return indegree_.at(v);
+        else return (int)adj_.at(v).size();
     }
 
     /**
      * @brief グラフが有向グラフかどうかを返す。
      */
     bool is_directed(){
-        return m_is_directed;
+        return is_directed_;
     }
 
     /**
      * @brief グラフが重み付きかどうかを返す。
      */
     bool is_weighted(){
-        return m_is_weighted;
+        return is_directed_;
     }
 
     vector<Vertex> source(){
-        assert(m_is_directed);
+        assert(is_directed_);
         vector<Vertex> ret;
-        for(int i = 0; i < m_vertex_size; ++i){
+        for(int i = 0; i < vertex_size_; ++i){
             if(indegree(i) == 0) ret.push_back(i);
         }
         return ret;
@@ -146,7 +146,7 @@ struct Graph{
 
     vector<Vertex> sink(){
         vector<Vertex> ret;
-        for(int i = 0; i < m_vertex_size; ++i){
+        for(int i = 0; i < vertex_size_; ++i){
             if(outdegree(i) == 0) ret.push_back(i);
         }
         return ret;
@@ -154,7 +154,7 @@ struct Graph{
 
     vector<Vertex> leaf(){
         vector<Vertex> ret;
-        for(int i = 0; i < m_vertex_size; ++i){
+        for(int i = 0; i < vertex_size_; ++i){
             if(indegree(i) == 1) ret.push_back(i);
         }
         return ret;
@@ -166,7 +166,7 @@ struct Graph{
      * @return vector<Edge<CostType>>& 頂点 `v` の隣接リスト
      */
     vector<Edge<CostType>> &get_adj(Vertex v){
-        return m_adj.at(v);
+        return adj_.at(v);
     }
 
     /**
@@ -175,9 +175,9 @@ struct Graph{
      * @return Graph<CostType> 逆辺グラフ
      */
     Graph<CostType> reverse(){
-        assert(m_is_directed);
-        Graph ret(m_vertex_size, true);
-        for(auto es : m_adj){
+        assert(is_directed_);
+        Graph ret(vertex_size_, true);
+        for(auto es : adj_){
             for(auto e : es){
                 ret.add(e.to, e.from, e.cost);
             }
@@ -191,15 +191,15 @@ struct Graph{
      * @return vector<Vertex> トポロジカルソートした頂点列
      */
     vector<Vertex> topological_sort(){
-        assert(m_is_directed);
+        assert(is_directed_);
         vector<Vertex> ret;
         queue<Vertex> que;
-        vector<int> cnt(m_vertex_size, 0);
+        vector<int> cnt(vertex_size_, 0);
         for(auto v : source()) que.push(v);
         while(que.size()){
             Vertex v = que.front(); que.pop();
             ret.push_back(v);
-            for(int u : m_adj[v]){
+            for(int u : adj_[v]){
                 if(++cnt[u] == indegree(u)) que.push(u);
             }
         }
@@ -213,9 +213,9 @@ struct Graph{
      */
     vector<Edge<CostType>> edge_set(){
         vector<Edge<CostType>> ret;
-        vector<int> es(m_edge_size, 0);
-        for(int i = 0; i < m_vertex_size; ++i){
-            for(auto e : m_adj[i]){
+        vector<int> es(edge_size_, 0);
+        for(int i = 0; i < vertex_size_; ++i){
+            for(auto e : adj_[i]){
                 if(es[e.id]) continue;
                 es[e.id] = 1;
                 ret.push_back(e);
@@ -228,11 +228,11 @@ struct Graph{
     }
 
     vector<vector<CostType>> matrix(){
-        int n = m_vertex_size;
+        int n = vertex_size_;
         vector<vector<CostType>> ret(n, vector<CostType>(n, INF));
         for(int i = 0; i < n; ++i) ret[i][i] = 0;
         for(int v = 0; v < n; ++v){
-            for(auto &e : m_adj[v]){
+            for(auto &e : adj_[v]){
                 ret[v][e.to] = e.cost;
             }
         }
