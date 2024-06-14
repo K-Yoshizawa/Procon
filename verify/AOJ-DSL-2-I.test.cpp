@@ -2,56 +2,55 @@
 
 #include "../library/DataStructure/LazySegmentTree.hpp"
 
-long long INF = 1e12;
+using ll = int64_t;
 
-struct Data{
-    long long val{0};
-    long long len{1};
-
-    Data() : val(0), len(1){}
-    Data(int val, int len) : val(val), len(len){}
-
-    bool operator==(const Data& y){
-        return val == y.val && len == y.len;
-    }
-    
-    friend ostream &operator<<(ostream &os, const Data &p) {
-        return os << "{" << p.val << ", " << p.len << "}";
-    }
-
-    static Data Merge(const Data& x, const Data& y){
-        Data ret;
-        ret.val = x.val + y.val;
-        ret.len = x.len + y.len;
+struct Monoid{
+    ll a{0}, len{0};
+    Monoid(){}
+    Monoid(ll a) : a(a), len(1){}
+    static Monoid merge(Monoid &l, Monoid &r){
+        Monoid ret;
+        ret.a = l.a + r.a;
+        ret.len = l.len + r.len;
         return ret;
     }
+};
 
-    static Data Mapping(const Data& x, const int y){
-        Data ret;
-        if(y != INF) ret.val = y * x.len;
-        ret.len = x.len;
+struct Operate{
+    ll x{ll{1} << 31};
+    Operate(){}
+    Operate(ll x) : x(x){}
+    static Monoid mapping(Monoid &l, Operate &r){
+        Monoid ret;
+        ret.a = l.len * r.x;
+        ret.len = l.len;
+        return ret;
+    }
+    static Operate composite(Operate &l, Operate &r){
+        Operate ret;
+        ret.x = (r.x == ll{1} << 31 ? l.x : r.x);
         return ret;
     }
 };
 
 int main(){
     int n, q; cin >> n >> q;
-    vector<Data> Init_Data(n, Data(0, 1));
-    LazySegmentTree<Data, long long> seg(Init_Data,
-        [](const Data l, const Data r){return Data::Merge(l, r);},
-        [](const Data l, const long long r){return Data::Mapping(l, r);},
-        [](const long long l, const long long r){return r;},
-        Data(), INF, true
+    vector<Monoid> Init(n, Monoid(0));
+    LazySegmentTree<Monoid, Operate> seg(Init,
+        [](Monoid l, Monoid r){return Monoid::merge(l, r);},
+        [](Monoid l, Operate r){return Operate::mapping(l, r);},
+        [](Operate l, Operate r){return Operate::composite(l, r);},
+        Monoid(), Operate(), true
     );
     while(q--){
         int query; cin >> query;
         if(query == 0){
             int s, t, x; cin >> s >> t >> x;
-            seg.update(s, t + 1, x);
+            seg.update(s, t + 1, Operate(x));
         }
         if(query == 1){
             int s, t; cin >> s >> t;
-            cout << seg.query(s, t + 1).val << endl;
+            cout << seg.query(s, t + 1).a << endl;
         }
     }
 }

@@ -19,6 +19,7 @@ struct LazySegmentTree{
     int size_, offset_, zeroindex_;
     vector<Monoid> data_;
     vector<OperatorMonoid> lazy_;
+    vector<bool> is_identify_;
     const F f;
     const G g;
     const H h;
@@ -30,26 +31,30 @@ struct LazySegmentTree{
     }
 
     void eval_(int k){
-        if(lazy_[k] == om1_) return;
+        if(is_identify_[k]) return;
         if(k < size_){
-            lazy_[k * 2 + 0] = h(lazy_[k * 2 + 0], lazy_[k]);
-            lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);
+            lazy_[k << 1 | 0] = h(lazy_[k << 1 | 0], lazy_[k]);
+            is_identify_[k << 1 | 0] = false;
+            lazy_[k << 1 | 1] = h(lazy_[k << 1 | 1], lazy_[k]);
+            is_identify_[k << 1 | 1] = false;
         }
         data_[k] = g(data_[k], lazy_[k]);
         lazy_[k] = om1_;
+        is_identify_[k] = true;
     }
 
     void update_(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
         eval_(cell);
         if(ul <= left && right <= ur){
             lazy_[cell] = h(lazy_[cell], x);
+            is_identify_[cell] = false;
             eval_(cell);
         }
         else if(ul < right && left < ur){
             int mid = (left + right) / 2;
-            update_(ul, ur, x, left, mid, cell * 2 + 0);
-            update_(ul, ur, x, mid, right, cell * 2 + 1);
-            data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);
+            update_(ul, ur, x, left, mid, cell << 1 | 0);
+            update_(ul, ur, x, mid, right, cell << 1 | 1);
+            data_[cell] = f(data_[cell << 1 | 0], data_[cell << 1 | 1]);
         }
     }
 
@@ -62,8 +67,8 @@ struct LazySegmentTree{
             return data_[cell];
         }
         int mid = (left + right) / 2;
-        Monoid ans_left = query_(ql, qr, left, mid, cell * 2 + 0);
-        Monoid ans_right = query_(ql, qr, mid, right, cell * 2 + 1);
+        Monoid ans_left = query_(ql, qr, left, mid, cell << 1 | 0);
+        Monoid ans_right = query_(ql, qr, mid, right, cell << 1 | 1);
         return f(ans_left, ans_right);
     }
 
@@ -86,6 +91,7 @@ struct LazySegmentTree{
         offset_ = size_ - 1;
         data_.resize(2 * size_, m1_);
         lazy_.resize(2 * size_, om1_);
+        is_identify_.resize(2 * size_, true);
     }
 
     /**
@@ -94,7 +100,7 @@ struct LazySegmentTree{
      */
     void build(){
         for(int i = offset_; i >= 1; --i){
-            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
+            data_[i] = f(data_[i << 1 | 0], data_[i << 1 | 1]);
         }
     }
 
@@ -126,6 +132,7 @@ struct LazySegmentTree{
         offset_ = size_ - 1;
         data_.resize(2 * size_, m1_);
         lazy_.resize(2 * size_, om1_);
+        is_identify_.resize(2 * size_, true);
         for(int i = 0; i < (int)Init_Data.size(); ++i){
             data_[size_ + i] = Init_Data[i];
         }
@@ -168,18 +175,5 @@ struct LazySegmentTree{
 
     Monoid operator[](const int &k){
         return get(k);
-    }
-
-    void print(){
-        int cnt = 1, i = 1, depth = 1;
-        while(1){
-            if(i >= size_ * 2) break;
-            cerr << depth++ << " : ";
-            for(int c = 0; c < cnt; ++c){
-                cerr << data_[i++] << " ";
-            }
-            cerr << endl;
-            cnt <<= 1;
-        }
     }
 };
