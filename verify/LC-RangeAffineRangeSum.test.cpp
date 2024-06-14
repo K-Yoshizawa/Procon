@@ -19,14 +19,10 @@ struct Data{
 };
 
 struct Oper{
-    modint998 b, c;
+    modint998 b{1}, c{0};
 
-    Oper() : b(1), c(0){}
+    Oper(){}
     Oper(int b, int c) : b(b), c(c){}
-
-    bool operator==(const Oper& r){
-        return b == r.b && c == r.c;
-    }
 
     static Data mapping(const Data& left, const Oper& right){
         Data res;

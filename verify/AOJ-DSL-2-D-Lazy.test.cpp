@@ -26,7 +26,7 @@ int main(){
         }
         if(query == 1){
             int i; cin >> i;
-            cout << seg.query(i, i + 1) << endl;
+            cout << seg[i] << endl;
         }
     }
 }

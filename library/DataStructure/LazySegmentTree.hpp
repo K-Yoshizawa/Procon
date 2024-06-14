@@ -33,10 +33,10 @@ struct LazySegmentTree{
     void eval_(int k){
         if(is_identify_[k]) return;
         if(k < size_){
-            lazy_[k * 2 + 0] = h(lazy_[k * 2 + 0], lazy_[k]);
-            is_identify_[k * 2 + 0] = false;
-            lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);
-            is_identify_[k * 2 + 1] = false;
+            lazy_[k << 1 | 0] = h(lazy_[k << 1 | 0], lazy_[k]);
+            is_identify_[k << 1 | 0] = false;
+            lazy_[k << 1 | 1] = h(lazy_[k << 1 | 1], lazy_[k]);
+            is_identify_[k << 1 | 1] = false;
         }
         data_[k] = g(data_[k], lazy_[k]);
         lazy_[k] = om1_;
@@ -52,9 +52,9 @@ struct LazySegmentTree{
         }
         else if(ul < right && left < ur){
             int mid = (left + right) / 2;
-            update_(ul, ur, x, left, mid, cell * 2 + 0);
-            update_(ul, ur, x, mid, right, cell * 2 + 1);
-            data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);
+            update_(ul, ur, x, left, mid, cell << 1 | 0);
+            update_(ul, ur, x, mid, right, cell << 1 | 1);
+            data_[cell] = f(data_[cell << 1 | 0], data_[cell << 1 | 1]);
         }
     }
 
@@ -67,8 +67,8 @@ struct LazySegmentTree{
             return data_[cell];
         }
         int mid = (left + right) / 2;
-        Monoid ans_left = query_(ql, qr, left, mid, cell * 2 + 0);
-        Monoid ans_right = query_(ql, qr, mid, right, cell * 2 + 1);
+        Monoid ans_left = query_(ql, qr, left, mid, cell << 1 | 0);
+        Monoid ans_right = query_(ql, qr, mid, right, cell << 1 | 1);
         return f(ans_left, ans_right);
     }
 
@@ -100,7 +100,7 @@ struct LazySegmentTree{
      */
     void build(){
         for(int i = offset_; i >= 1; --i){
-            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
+            data_[i] = f(data_[i << 1 | 0], data_[i << 1 | 1]);
         }
     }
 

@@ -2,24 +2,55 @@
 
 #include "../library/DataStructure/LazySegmentTree.hpp"
 
+using ll = int64_t;
+
+struct Monoid{
+    ll a{0}, len{0};
+    Monoid(){}
+    Monoid(ll a) : a(a), len(1){}
+    static Monoid merge(Monoid &l, Monoid &r){
+        Monoid ret;
+        ret.a = l.a + r.a;
+        ret.len = l.len + r.len;
+        return ret;
+    }
+};
+
+struct Operate{
+    ll x{0};
+    Operate(){}
+    Operate(ll x) : x(x){}
+    static Monoid mapping(Monoid &l, Operate &r){
+        Monoid ret;
+        ret.a = l.a + l.len * r.x;
+        ret.len = l.len;
+        return ret;
+    }
+    static Operate composite(Operate &l, Operate &r){
+        Operate ret;
+        ret.x = l.x + r.x;
+        return ret;
+    }
+};
+
 int main(){
     int n, q; cin >> n >> q;
-    vector<long long> Init_Data(n, 0);
-    LazySegmentTree<long long> seg(Init_Data,
-        [](const long long l, const long long r){return min(l, r);},
-        [](const long long l, const int r){return l + r;},
-        [](const int l, const int r){return l + r;},
-        1e12, 0, false
+    vector<Monoid> Init_Data(n, Monoid(0));
+    LazySegmentTree<Monoid, Operate> seg(Init_Data,
+        [](Monoid l, Monoid r){return Monoid::merge(l, r);},
+        [](Monoid l, Operate r){return Operate::mapping(l, r);},
+        [](Operate l, Operate r){return Operate::composite(l, r);},
+        Monoid(), Operate(), false
     );
     while(q--){
         int query; cin >> query;
         if(query == 0){
             int s, t, x; cin >> s >> t >> x;
-            seg.update(s, t + 1, x);
+            seg.update(s, t + 1, Operate(x));
         }
         if(query == 1){
             int i; cin >> i;
-            cout << seg.query(i, i + 1) << endl;
+            cout << seg[i].a << endl;
         }
     }
 }
