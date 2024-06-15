@@ -13,14 +13,14 @@ data:
     links: []
   bundledCode: "#line 2 \"library/Template.hpp\"\n/**\n * @file Template.hpp\n * @author\
     \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.6\n * @date 2023-12-15\n */\n\n#include <bits/stdc++.h>\n#define\
+    \ @version 1.7\n * @date 2024-06-15\n */\n\n#include <bits/stdc++.h>\n#define\
     \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
     \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n\
     #define SUM(x) reduce((x).begin(), (x).end())\n#define IOTA(x) iota((x).begin(),\
-    \ (x).end(), 0)\n#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(),\
-    \ (x).end(), val) - (x).begin())\n#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(),\
-    \ (x).end(), val) - (x).begin())\nusing namespace std;\n\ninline string Yn(bool\
+    \ (x).end(), 0)\n#define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(),\
+    \ (arr).end(), val) - (arr).begin())\n#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(),\
+    \ (arr).end(), val) - (arr).begin())\nusing namespace std;\n\ninline string Yn(bool\
     \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
     \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
     \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
@@ -38,39 +38,38 @@ data:
     vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
     \    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T> &v){\n \
     \   sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n  \
-    \  v.erase(itr, v.end());\n}\n\nusing ll = long long;\nusing ull = unsigned long\
-    \ long;\nusing ld = long double;\n\nconst long double PI = acosl(-1);\nconst long\
-    \ double PI2 = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT\
-    \ = numeric_limits<int>::max() / 2;\nconst long long INF_LL = numeric_limits<long\
-    \ long>::max() / 2LL;\n\ntemplate <typename T>\nusing vec = vector<T>;\ntemplate\
-    \ <typename T>\nusing mat = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vvi = vector<vi>;\nusing vvvi = vector<vvi>;\nusing vl = vector<ll>;\nusing\
-    \ vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing vd = vector<double>;\nusing\
-    \ vvd = vector<vd>;\nusing vvvd = vector<vvd>;\nusing pi = pair<int, int>;\nusing\
-    \ pl = pair<ll, ll>;\nusing pd = pair<double, double>;\nusing vpi = vector<pi>;\n\
-    using vpl = vector<pl>;\nusing vpd = vector<pd>;\nusing vvpi = vector<vpi>;\n\
-    using vvpl = vector<vpl>;\nusing vvpd = vector<vpd>;\nusing ti3 = tuple<int, int,\
-    \ int>;\nusing tl3 = tuple<ll, ll, ll>;\nusing ti4 = tuple<int, int, int, int>;\n\
-    using tl4 = tuple<ll, ll, ll, ll>;\nusing vs = vector<string>;\ntemplate <typename\
-    \ T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\nusing rpq = priority_queue<T,\
-    \ vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4]\
-    \ = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int\
-    \ dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate <typename T1, typename T2>\n\
-    ostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << p.first <<\
-    \ \" \" << p.second;\n    return os;\n}\n\ntemplate <typename T1, typename T2>\n\
-    istream &operator>>(istream &is, pair<T1, T2> &p){\n    is >> p.first >> p.second;\n\
-    \    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os,\
-    \ vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i]\
-    \ << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
-    \ <typename T>\nostream &operator<<(ostream &os, vector<vector<T>> &v){\n    for\
-    \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ?\
-    \ \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nistream\
-    \ &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i)\
-    \ is >> v[i];\n    return is;\n}\n\ntemplate<typename T1, typename T2>\nvector<pair<T1,\
-    \ T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n    assert(v1.size()\
-    \ == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i = 0; i < v1.size();\
-    \ ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\ntemplate<typename T1,\
-    \ typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \  v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\nusing\
+    \ ld = long double;\n\nconst long double PI = acosl(-1);\nconst long double PI2\
+    \ = PI * 2;\nconst long double PI_2 = PI / 2;\n\nconst int INF_INT = numeric_limits<int>::max()\
+    \ >> 2;\nconst ll INF_LL = numeric_limits<ll>::max() >> 2;\n\ntemplate <typename\
+    \ T>\nusing vec = vector<T>;\ntemplate <typename T>\nusing mat = vector<vector<T>>;\n\
+    using vi = vector<int>;\nusing vvi = vector<vi>;\nusing vvvi = vector<vvi>;\n\
+    using vl = vector<ll>;\nusing vvl = vector<vl>;\nusing vvvl = vector<vvl>;\nusing\
+    \ vd = vector<double>;\nusing vvd = vector<vd>;\nusing vvvd = vector<vvd>;\nusing\
+    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing pd = pair<double, double>;\n\
+    using vpi = vector<pi>;\nusing vpl = vector<pl>;\nusing vpd = vector<pd>;\nusing\
+    \ vvpi = vector<vpi>;\nusing vvpl = vector<vpl>;\nusing vvpd = vector<vpd>;\n\
+    using ti3 = tuple<int, int, int>;\nusing tl3 = tuple<ll, ll, ll>;\nusing ti4 =\
+    \ tuple<int, int, int, int>;\nusing tl4 = tuple<ll, ll, ll, ll>;\nusing vs = vector<string>;\n\
+    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
+    using rpq = priority_queue<T, vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0,\
+    \ -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1,\
+    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate\
+    \ <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
+    \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
+    \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
+    ostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i < v.size();\
+    \ ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n  \
+    \  return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, vector<vector<T>>\
+    \ &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1\
+    \ != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename\
+    \ T>\nistream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i <\
+    \ v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate<typename T1, typename\
+    \ T2>\nvector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n\
+    \    assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int\
+    \ i = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\n\
+    template<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
     \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
@@ -88,15 +87,14 @@ data:
     \ntemplate<class... T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\
     \nvoid print(){\n    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid\
     \ print(const T& a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout\
-    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\nvoid dprint(){\n    cout\
-    \ << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid dprint(const T& a, const\
-    \ Ts&... b){\n    cout << \"Debug : \" << a;\n    (cout << ... << (cout << \"\
-    \ \", b));\n    cout << '\\n';\n}\n#else\n#define dprint(...) 42\n#endif\n\ntemplate\
-    \ <typename T>\nT ceil(T x, T y){\n    return (x + y - 1) / y;\n}\n#line 2 \"\
-    library/TemplateExtend.hpp\"\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
-    \ pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx = (long long)p1.first\
-    \ - (long long)p2.first;\n    long long dy = (long long)p1.second - (long long)p2.second;\n\
-    \    return dx * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\n#define DEBUG(fmt, ...)\
+    \ fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,) __VA_ARGS__)\n#else\n#define\
+    \ DEBUG(fmt, ...) 42\n#endif\n\ntemplate <typename T>\nT ceil(T x, T y){\n   \
+    \ return (x + y - 1) / y;\n}\n#line 2 \"library/TemplateExtend.hpp\"\n\ntemplate\
+    \ <typename T>\ninline long long EuclideanDist2(const pair<T, T> &p1, const pair<T,\
+    \ T> &p2){\n    long long dx = (long long)p1.first - (long long)p2.first;\n  \
+    \  long long dy = (long long)p1.second - (long long)p2.second;\n    return dx\
+    \ * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
     \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
     \ <typename T>\ninline long double EuclideanDist(const pair<T, T> &p1, const pair<T,\
     \ T> &p2){\n    return sqrtl((long double)EuclideanDist2(p1, p2));\n}\n\ntemplate\
@@ -140,7 +138,7 @@ data:
   isVerificationFile: false
   path: library/TemplateExtend.hpp
   requiredBy: []
-  timestamp: '2024-04-29 00:45:37+09:00'
+  timestamp: '2024-06-15 12:24:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/TemplateExtend.hpp
