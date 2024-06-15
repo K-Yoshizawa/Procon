@@ -10,6 +10,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+using Vertex = int;
+
 template<typename CostType>
 struct Edge{
     int from{-1}, to{-1}, id{-1};
@@ -23,7 +25,7 @@ template<typename CostType = int32_t>
 class Graph{
     using ED = Edge<CostType>;
 
-    int vertex_{0}, edge_{0};
+    size_t vertex_{0}, edge_{0};
     vector<vector<ED>> adjacent_list_;
 
     bool directed_flag_;
@@ -34,6 +36,14 @@ class Graph{
 
     public:
     Graph() = default;
+
+    size_t get_vertex_size(){
+        return vertex_;
+    }
+
+    size_t get_edge_size(){
+        return edge_;
+    }
 
     /**
      * @brief 頂点数 `vertex_size` のグラフを構築する。
@@ -46,7 +56,14 @@ class Graph{
 
     }
 
-    void add_edge(int s, int t, CostType c = 1){
+    /**
+     * @brief 2頂点 `s` `t` 間に重み `c` の辺を張る。有向グラフの場合は `s` から `t` への有向辺が、無向グラフの場合は `s` `t` 間の無向辺が張られる。
+     * 
+     * @param s 始点の頂点(有向辺)
+     * @param t 終点の頂点(有向辺)
+     * @param c 重み `(default = 1)`
+     */
+    void add_edge(Vertex s, Vertex t, CostType c = 1){
         validate(s);
         validate(t);
         int edge_id = edge_++;
@@ -70,5 +87,9 @@ class Graph{
             }
         }
         return ret;
+    }
+
+    vector<ED> &operator[](Vertex v){
+        return adjacent_list_[v];
     }
 };

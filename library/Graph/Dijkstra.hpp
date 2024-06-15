@@ -1,73 +1,89 @@
 /**
  * @file Dijkstra.hpp
  * @brief Dijkstra - ダイクストラ法
- * @version 3.1
- * @date 2024-02-11
+ * @version 4.0
+ * @date 2024-06-15
  */
 
-#include "GraphTemplate.hpp"
+#include "Graph.hpp"
 
 template<typename CostType>
-struct Dijkstra{
-    private:
-    Graph<CostType> &G;
-    vector<CostType> dist_, potential_;
+class Dijkstra{
+    Graph<CostType> &graph_;
+
+    CostType infty_{numeric_limits<CostType>::max() >> 2};
+    vector<CostType> distance_;
     vector<Vertex> prev_vertex_;
+    Vertex start_vertex_{-1};
 
     public:
-    Dijkstra(Graph<CostType> &G) : G(G){
-        dist_.resize(G.size());
-        potential_.resize(G.size(), 0);
-        prev_vertex_.resize(G.size(), -1);
+    Dijkstra(Graph<CostType> &G) : 
+        graph_(G), distance_(G.get_vertex_size(), infty_),
+        prev_vertex_(G.get_vertex_size(), -1){
+        
     }
 
-    vector<CostType> &solve(Vertex s){
-        assert(0 <= s and s < G.size());
-        dist_.assign(G.size(), G.INF);
-        using p = pair<CostType, Vertex>;
-        priority_queue<p, vector<p>, greater<p>> que;
-        que.emplace(potential_[s], s);
-        dist_[s] = potential_[s];
+    /**
+     * @brief 頂点 `s` から他の全頂点への最短距離を求める。
+     * @note 到達不能の場合、`infty` となる。
+     * @param s 始点の頂点
+     */
+    void solve(Vertex s){
+        if(start_vertex_ == s) return;
+        distance_.assign(distance_.size(), infty_);
+        prev_vertex_.assign(prev_vertex_.size(), -1);
+        distance_[s] = 0;
+        using P = pair<CostType, Vertex>;
+        priority_queue<P, vector<P>, greater<P>> que;
+        que.emplace(0, s);
         while(que.size()){
             auto [d, v] = que.top(); que.pop();
-            if(dist_[v] < d) continue;
-            for(auto &e : G[v]){
-                if(d + e.cost + potential_[e.from] - potential_[e.to] < dist_[e.to]){
-                    dist_[e.to] = d + e.cost + potential_[e.from] - potential_[e.to];
+            if(distance_[v] != d) continue;
+            for(Edge<CostType> &e : graph_[v]){
+                CostType nd = d + e.cost;
+                if(nd < distance_[e.to]){
+                    distance_[e.to] = nd;
                     prev_vertex_[e.to] = v;
-                    que.emplace(dist_[e.to], e.to);
+                    que.emplace(nd, e.to);
                 }
             }
         }
-        for(Vertex i = 0; i < G.size(); ++i){
-            if(dist_[i] != G.INF){
-                dist_[i] += potential_[i] - potential_[s];
-            }
-        }
-        return dist_;
+        start_vertex_ = s;
     }
 
-    void update_potential(vector<CostType> &potential){
-        assert(potential.size() == G.size());
-        potential_ = potential;
+    /**
+     * @brief 頂点 `s` から頂点 `t` に到達可能かを返す。
+     * 
+     * @param s 始点の頂点
+     * @param t 終点の頂点
+     * @return true 到達可能
+     * @return false 到達不能
+     */
+    bool reachable(Vertex s, Vertex t){
+        solve(s);
+        return distance_[t] != infty_;
     }
 
-    vector<CostType> &get(){
-        return dist_;
-    }
-
-    vector<CostType> shortest_path(Vertex t){
-        vector<CostType> ret{t};
-        Vertex now = t;
-        while(prev_vertex_[now] != -1){
-            ret.push_back(prev_vertex_[now]);
-            now = prev_vertex_[now];
+    /**
+     * @brief 頂点 `s` から頂点 `t` への最短パスを返す。
+     * @attention 頂点 `s` から頂点 `t` に到達不能の場合、空列を返す。
+     * @param s 始点の頂点
+     * @param t 終点の頂点
+     * @return vector<Vertex> 最短パスに含まれる頂点列を `s` から `t` の順に並べたもの。到達不能の場合は空列が返される。
+     */
+    vector<Vertex> restore(Vertex s, Vertex t){
+        if(!reachable(s, t)) return vector<Vertex>{};
+        vector<Vertex> ret{t};
+        Vertex v = t;
+        while(v != s){
+            v = prev_vertex_[v];
+            ret.push_back(v);
         }
         reverse(ret.begin(), ret.end());
         return ret;
     }
 
-    CostType operator[](Vertex v){
-        return dist_.at(v);
+    CostType operator[](Vertex t){
+        return distance_[t];
     }
 };
