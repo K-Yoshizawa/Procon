@@ -153,15 +153,16 @@ data:
     \        vector<vector<int>> ret(data_.size());\n        for(int i = 0; i < data_.size();\
     \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
-    \        return ret;\n    }\n};\n#line 10 \"library/Graph/Kruskal.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType> &G;\n    vector<int>\
-    \ used_;\n    CostType ans_;\n\n    public:\n    Kruskal(Graph<CostType> &G) :\
-    \ G(G){\n        ans_ = 0;\n        UnionFind uf(G.size());\n        auto es =\
-    \ G.edge_set();\n        for(auto &e : es){\n            int i = e.id;\n     \
-    \       if(uf.same(e.from, e.to)) continue;\n            uf.unite(e.from, e.to);\n\
-    \            used_.push_back(i);\n            ans_ += e.cost;\n        }\n   \
-    \ }\n\n    vector<int> &get(){\n        return used_;\n    }\n\n    CostType val(){\n\
-    \        return ans_;\n    }\n};\n"
+    \        return ret;\n    }\n\n    int size(int k){\n        int v = find(k);\n\
+    \        return -data_[v];\n    }\n};\n#line 10 \"library/Graph/Kruskal.hpp\"\n\
+    \ntemplate<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<int> used_;\n    CostType ans_;\n\n    public:\n    Kruskal(Graph<CostType>\
+    \ &G) : G(G){\n        ans_ = 0;\n        UnionFind uf(G.size());\n        auto\
+    \ es = G.edge_set();\n        for(auto &e : es){\n            int i = e.id;\n\
+    \            if(uf.same(e.from, e.to)) continue;\n            uf.unite(e.from,\
+    \ e.to);\n            used_.push_back(i);\n            ans_ += e.cost;\n     \
+    \   }\n    }\n\n    vector<int> &get(){\n        return used_;\n    }\n\n    CostType\
+    \ val(){\n        return ans_;\n    }\n};\n"
   code: "/**\n * @file Kruskal.hpp\n * @brief Kruskal - \u6700\u5C0F\u5168\u57DF\u6728\
     \n * @version 3.1\n * @date 2024-02-11\n */\n\n#include \"GraphTemplate.hpp\"\n\
     #include \"../DataStructure/UnionFind.hpp\"\n\ntemplate<typename CostType>\nstruct\
@@ -179,7 +180,7 @@ data:
   isVerificationFile: false
   path: library/Graph/Kruskal.hpp
   requiredBy: []
-  timestamp: '2024-04-29 19:12:40+09:00'
+  timestamp: '2024-06-15 11:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp

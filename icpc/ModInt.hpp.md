@@ -90,10 +90,10 @@ data:
   timestamp: '2023-11-24 19:51:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify_icpc/AOJ-DPL-5-D.test.cpp
-  - verify_icpc/AOJ-DPL-5-E.test.cpp
-  - verify_icpc/AOJ-DPL-5-A.test.cpp
   - verify_icpc/AOJ-DPL-5-B.test.cpp
+  - verify_icpc/AOJ-DPL-5-D.test.cpp
+  - verify_icpc/AOJ-DPL-5-A.test.cpp
+  - verify_icpc/AOJ-DPL-5-E.test.cpp
 documentation_of: icpc/ModInt.hpp
 layout: document
 redirect_from:

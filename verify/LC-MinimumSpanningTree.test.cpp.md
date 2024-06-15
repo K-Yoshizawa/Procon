@@ -156,15 +156,16 @@ data:
     \        vector<vector<int>> ret(data_.size());\n        for(int i = 0; i < data_.size();\
     \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
-    \        return ret;\n    }\n};\n#line 10 \"library/Graph/Kruskal.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType> &G;\n    vector<int>\
-    \ used_;\n    CostType ans_;\n\n    public:\n    Kruskal(Graph<CostType> &G) :\
-    \ G(G){\n        ans_ = 0;\n        UnionFind uf(G.size());\n        auto es =\
-    \ G.edge_set();\n        for(auto &e : es){\n            int i = e.id;\n     \
-    \       if(uf.same(e.from, e.to)) continue;\n            uf.unite(e.from, e.to);\n\
-    \            used_.push_back(i);\n            ans_ += e.cost;\n        }\n   \
-    \ }\n\n    vector<int> &get(){\n        return used_;\n    }\n\n    CostType val(){\n\
-    \        return ans_;\n    }\n};\n#line 4 \"verify/LC-MinimumSpanningTree.test.cpp\"\
+    \        return ret;\n    }\n\n    int size(int k){\n        int v = find(k);\n\
+    \        return -data_[v];\n    }\n};\n#line 10 \"library/Graph/Kruskal.hpp\"\n\
+    \ntemplate<typename CostType>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
+    \ &G;\n    vector<int> used_;\n    CostType ans_;\n\n    public:\n    Kruskal(Graph<CostType>\
+    \ &G) : G(G){\n        ans_ = 0;\n        UnionFind uf(G.size());\n        auto\
+    \ es = G.edge_set();\n        for(auto &e : es){\n            int i = e.id;\n\
+    \            if(uf.same(e.from, e.to)) continue;\n            uf.unite(e.from,\
+    \ e.to);\n            used_.push_back(i);\n            ans_ += e.cost;\n     \
+    \   }\n    }\n\n    vector<int> &get(){\n        return used_;\n    }\n\n    CostType\
+    \ val(){\n        return ans_;\n    }\n};\n#line 4 \"verify/LC-MinimumSpanningTree.test.cpp\"\
     \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<long long> G(N);\n  \
     \  G.input(M, true, true);\n\n    Kruskal kr(G);\n    auto ans = kr.get();\n \
     \   cout << kr.val() << endl;\n    for(auto i : ans){\n        cout << i << \"\
@@ -181,7 +182,7 @@ data:
   isVerificationFile: true
   path: verify/LC-MinimumSpanningTree.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 19:12:40+09:00'
+  timestamp: '2024-06-15 11:32:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-MinimumSpanningTree.test.cpp

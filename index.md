@@ -56,6 +56,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':warning:'
+      path: library/DataStructure/ErasablePriorityQueue.hpp
+      title: "Erasable Priority Queue - \u6D88\u305B\u308B Priority Queue"
     - icon: ':heavy_check_mark:'
       path: library/DataStructure/KthMultiSet.hpp
       title: library/DataStructure/KthMultiSet.hpp

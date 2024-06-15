@@ -49,6 +49,7 @@ data:
     \ = 0; i < data_.size(); ++i){\n            ret[find(i)].emplace_back(i);\n  \
     \      }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){\n\
     \            return v.empty();\n        }), end(ret));\n        return ret;\n\
+    \    }\n\n    int size(int k){\n        int v = find(k);\n        return -data_[v];\n\
     \    }\n};\n"
   code: "#pragma once\n\n/**\n * @file UnionFind.hpp\n * @author log K (lX57)\n *\
     \ @brief UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version\
@@ -74,19 +75,20 @@ data:
     \        vector<vector<int>> ret(data_.size());\n        for(int i = 0; i < data_.size();\
     \ ++i){\n            ret[find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
-    \        return ret;\n    }\n};"
+    \        return ret;\n    }\n\n    int size(int k){\n        int v = find(k);\n\
+    \        return -data_[v];\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: library/DataStructure/UnionFind.hpp
   requiredBy:
-  - old/Graph/Kruskal.hpp
   - library/Graph/Kruskal.hpp
-  timestamp: '2024-04-29 18:47:07+09:00'
+  - old/Graph/Kruskal.hpp
+  timestamp: '2024-06-15 11:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/AOJ-DSL-1-A.test.cpp
   - verify/LC-Unionfind.test.cpp
+  - verify/AOJ-DSL-1-A.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:

@@ -40,6 +40,7 @@ data:
     \ = 0; i < data_.size(); ++i){\n            ret[find(i)].emplace_back(i);\n  \
     \      }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){\n\
     \            return v.empty();\n        }), end(ret));\n        return ret;\n\
+    \    }\n\n    int size(int k){\n        int v = find(k);\n        return -data_[v];\n\
     \    }\n};\n#line 4 \"verify/AOJ-DSL-1-A.test.cpp\"\n\nint main(){\n    int n,\
     \ q; cin >> n >> q;\n\n    UnionFind uf(n);\n    while(q--){\n        int com,\
     \ x, y; cin >> com >> x >> y;\n        if(com == 0) uf.unite(x, y);\n        else\
@@ -54,7 +55,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 18:47:07+09:00'
+  timestamp: '2024-06-15 11:32:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-1-A.test.cpp

@@ -200,8 +200,8 @@ data:
   timestamp: '2024-04-29 19:12:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-LowestCommonAncestor.test.cpp
   - verify/LC-VertexAddPathSum-ET.test.cpp
+  - verify/LC-LowestCommonAncestor.test.cpp
 documentation_of: library/Tree/LowestCommonAncestor.hpp
 layout: document
 redirect_from:
