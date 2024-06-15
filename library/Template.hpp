@@ -3,8 +3,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.6
- * @date 2023-12-15
+ * @version 1.7
+ * @date 2024-06-15
  */
 
 #include <bits/stdc++.h>
@@ -17,8 +17,8 @@
 #define POPCOUNT(x) __builtin_popcount(x)
 #define SUM(x) reduce((x).begin(), (x).end())
 #define IOTA(x) iota((x).begin(), (x).end(), 0)
-#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(), val) - (x).begin())
-#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(), (x).end(), val) - (x).begin())
+#define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(), (arr).end(), val) - (arr).begin())
+#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(), (arr).end(), val) - (arr).begin())
 using namespace std;
 
 inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
@@ -53,16 +53,16 @@ void make_unique(vector<T> &v){
     v.erase(itr, v.end());
 }
 
-using ll = long long;
-using ull = unsigned long long;
+using ll = int64_t;
+using ull = uint64_t;
 using ld = long double;
 
 const long double PI = acosl(-1);
 const long double PI2 = PI * 2;
 const long double PI_2 = PI / 2;
 
-const int INF_INT = numeric_limits<int>::max() / 2;
-const long long INF_LL = numeric_limits<long long>::max() / 2LL;
+const int INF_INT = numeric_limits<int>::max() >> 2;
+const ll INF_LL = numeric_limits<ll>::max() >> 2;
 
 template <typename T>
 using vec = vector<T>;
@@ -190,18 +190,9 @@ void print(const T& a, const Ts&... b){
 }
 
 #ifdef LOGK
-void dprint(){
-    cout << '\n';
-}
-
-template<class T, class... Ts>
-void dprint(const T& a, const Ts&... b){
-    cout << "Debug : " << a;
-    (cout << ... << (cout << " ", b));
-    cout << '\n';
-}
+#define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
 #else
-#define dprint(...) 42
+#define DEBUG(fmt, ...) 42
 #endif
 
 template <typename T>
