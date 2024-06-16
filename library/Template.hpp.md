@@ -14,13 +14,14 @@ data:
     links: []
   bundledCode: "#line 2 \"library/Template.hpp\"\n/**\n * @file Template.hpp\n * @author\
     \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.7\n * @date 2024-06-15\n */\n\n#include <bits/stdc++.h>\n#define\
+    \ @version 1.8\n * @date 2024-06-16\n */\n\n#include <bits/stdc++.h>\n#define\
     \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
     \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
     #define SETPRE(digit) fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n\
-    #define SUM(x) reduce((x).begin(), (x).end())\n#define IOTA(x) iota((x).begin(),\
-    \ (x).end(), 0)\n#define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(),\
-    \ (arr).end(), val) - (arr).begin())\n#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(),\
+    #define SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume)\
+    \ + (deno) - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define\
+    \ LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(), (arr).end(), val)\
+    \ - (arr).begin())\n#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(),\
     \ (arr).end(), val) - (arr).begin())\nusing namespace std;\n\ninline string Yn(bool\
     \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
     \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
@@ -85,30 +86,27 @@ data:
     \ T2, typename T3>\nvoid InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
     \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
-    \ntemplate<class... T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\
-    \nvoid print(){\n    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid\
-    \ print(const T& a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout\
-    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\n#define DEBUG(fmt, ...)\
-    \ fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,) __VA_ARGS__)\n#else\n#define\
-    \ DEBUG(fmt, ...) 42\n#endif\n\ntemplate <typename T>\nT ceil(T x, T y){\n   \
-    \ return (x + y - 1) / y;\n}\n"
+    \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
+    \ __VA_ARGS__)\n#else\n#define DEBUG(fmt, ...) 42\n#endif\n\n// ==============================================================\n\
+    // \n// Main Program Start\n// \n// ==============================================================\n"
   code: "#pragma once\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
-    \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.7\n * @date 2024-06-15\n\
+    \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n\
     \ */\n\n#include <bits/stdc++.h>\n#define ALL(x) (x).begin(), (x).end()\n#define\
     \ RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define RSORT(x)\
     \ sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit) fixed\
     \ << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define SUM(x)\
-    \ reduce((x).begin(), (x).end())\n#define IOTA(x) iota((x).begin(), (x).end(),\
-    \ 0)\n#define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(), (arr).end(),\
-    \ val) - (arr).begin())\n#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(),\
-    \ (arr).end(), val) - (arr).begin())\nusing namespace std;\n\ninline string Yn(bool\
-    \ flag){return (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout\
-    \ << Yn(flag) << endl;return flag;}\ninline string YN(bool flag){return (flag)\
-    \ ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return\
-    \ flag;}\ntemplate<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src\
-    \ = cmp; return true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const\
-    \ T &cmp){if(src < cmp){src = cmp; return true;}return false;}\ntemplate<typename\
-    \ T>\ninline bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno) -\
+    \ 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
+    \ val) (int)(lower_bound((arr).begin(), (arr).end(), val) - (arr).begin())\n#define\
+    \ UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(), (arr).end(), val)\
+    \ - (arr).begin())\nusing namespace std;\n\ninline string Yn(bool flag){return\
+    \ (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag)\
+    \ << endl;return flag;}\ninline string YN(bool flag){return (flag) ? \"YES\" :\
+    \ \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}\n\
+    template<class T>\nbool minin(T &src, const T &cmp){if(src > cmp){src = cmp; return\
+    \ true;}return false;}\ntemplate<class T>\nbool maxin(T &src, const T &cmp){if(src\
+    \ < cmp){src = cmp; return true;}return false;}\ntemplate<typename T>\ninline\
+    \ bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
     \ T>\ninline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax -\
     \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
     \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
@@ -165,19 +163,15 @@ data:
     \ T2, typename T3>\nvoid InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
     \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
-    \ntemplate<class... T>\nvoid input(T&... vars){\n    (cin >> ... >> vars);\n}\n\
-    \nvoid print(){\n    cout << '\\n';\n}\n\ntemplate<class T, class... Ts>\nvoid\
-    \ print(const T& a, const Ts&... b){\n    cout << a;\n    (cout << ... << (cout\
-    \ << ' ', b));\n    cout << '\\n';\n}\n\n#ifdef LOGK\n#define DEBUG(fmt, ...)\
-    \ fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,) __VA_ARGS__)\n#else\n#define\
-    \ DEBUG(fmt, ...) 42\n#endif\n\ntemplate <typename T>\nT ceil(T x, T y){\n   \
-    \ return (x + y - 1) / y;\n}"
+    \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
+    \ __VA_ARGS__)\n#else\n#define DEBUG(fmt, ...) 42\n#endif\n\n// ==============================================================\n\
+    // \n// Main Program Start\n// \n// =============================================================="
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2024-06-15 12:24:39+09:00'
+  timestamp: '2024-06-16 11:17:44+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp
