@@ -3,8 +3,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.7
- * @date 2024-06-15
+ * @version 1.8
+ * @date 2024-06-16
  */
 
 #include <bits/stdc++.h>
@@ -16,6 +16,7 @@
 #define SETPRE(digit) fixed << setprecision(digit)
 #define POPCOUNT(x) __builtin_popcount(x)
 #define SUM(x) reduce((x).begin(), (x).end())
+#define CEIL(nume, deno) ((nume) + (deno) - 1) / (deno)
 #define IOTA(x) iota((x).begin(), (x).end(), 0)
 #define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(), (arr).end(), val) - (arr).begin())
 #define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(), (arr).end(), val) - (arr).begin())
@@ -173,29 +174,14 @@ void InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
     DisassembleVectorTuple(v, v1, v2, v3);
 }
 
-template<class... T>
-void input(T&... vars){
-    (cin >> ... >> vars);
-}
-
-void print(){
-    cout << '\n';
-}
-
-template<class T, class... Ts>
-void print(const T& a, const Ts&... b){
-    cout << a;
-    (cout << ... << (cout << ' ', b));
-    cout << '\n';
-}
-
 #ifdef LOGK
 #define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
 #else
 #define DEBUG(fmt, ...) 42
 #endif
 
-template <typename T>
-T ceil(T x, T y){
-    return (x + y - 1) / y;
-}
+// ==============================================================
+// 
+// Main Program Start
+// 
+// ==============================================================
