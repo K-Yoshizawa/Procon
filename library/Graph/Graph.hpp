@@ -37,11 +37,11 @@ class Graph{
     public:
     Graph() = default;
 
-    size_t get_vertex_size(){
+    size_t get_vertex_size() const {
         return vertex_;
     }
 
-    size_t get_edge_size(){
+    size_t get_edge_size() const {
         return edge_;
     }
 
@@ -73,6 +73,10 @@ class Graph{
     vector<ED> &operator[](Vertex v){
         return adjacent_list_[v];
     }
+
+    const vector<ED> &operator[](Vertex v) const {
+        return adjacent_list_[v];
+    }
 };
 
 /**
@@ -84,7 +88,7 @@ class Graph{
  * @return vector<vector<CostType>> V × V の隣接行列
  */
 template<typename CostType>
-vector<vector<CostType>> convert_to_matrix(const Graph<CostType> &G, CostType not_adjacent_value = 0){
+vector<vector<CostType>> convert_to_matrix(Graph<CostType> &G, CostType not_adjacent_value = 0){
     size_t V = G.get_vertex_size();
     vector<vector<CostType>> ret(V, vector<CostType>(V, not_adjacent_value));
     for(int i = 0; i < V; ++i){
@@ -95,8 +99,13 @@ vector<vector<CostType>> convert_to_matrix(const Graph<CostType> &G, CostType no
     return ret;
 }
 
+/**
+ * @brief グラフの辺を逆順にしたグラフを返す。
+ * @param G 頂点数 V のグラフ
+ * @return Graph<CostType> G の辺を逆にしたグラフ
+ */
 template<typename CostType>
-Graph<CostType> reverse(const Graph<CostType> &G){
+Graph<CostType> reverse(Graph<CostType> &G){
     size_t V = G.get_vertex_size();
     Graph<CostType> ret(V, true);
     for(int i = 0; i < V; ++i){
