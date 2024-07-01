@@ -1,7 +1,7 @@
 #!/bin/bash
 
 new_atcoder(){
-    oj-bundle code.cpp > submit.cpp
+    oj-bundle code.cpp > submit.cpp 2> /dev/null
     echo "[Procon AtCoder] complete bundle"
     g++-12 submit.cpp -std=gnu++2a -O2 \
         -DLOGK -mtune=native -march=native -fconstexpr-depth=2147483647 -fconstexpr-loop-limit=2147483647 -fconstexpr-ops-limit=2147483647 \

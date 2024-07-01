@@ -177,7 +177,7 @@ void InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
 #ifdef LOGK
 #define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
 #else
-#define DEBUG(fmt, ...) 42
+#define DEBUG(...) 42
 #endif
 
 // ==============================================================
