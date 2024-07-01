@@ -52,13 +52,10 @@ class Graph{
      */
     Graph(int vertex_size, bool directed = false) : 
         vertex_(vertex_size), adjacent_list_(vertex_size),
-        directed_flag_(directed){
-
-    }
+        directed_flag_(directed){}
 
     /**
      * @brief 2頂点 `s` `t` 間に重み `c` の辺を張る。有向グラフの場合は `s` から `t` への有向辺が、無向グラフの場合は `s` `t` 間の無向辺が張られる。
-     * 
      * @param s 始点の頂点(有向辺)
      * @param t 終点の頂点(有向辺)
      * @param c 重み `(default = 1)`
@@ -73,23 +70,39 @@ class Graph{
         }
     }
 
-    /**
-     * @brief グラフの隣接行列を返す。
-     * @note verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
-     * @param not_adjacent_value 2頂点 u, v 間に辺が存在しない場合の値 `(default = 0)`
-     * @return vector<vector<CostType>> V × V の隣接行列
-     */
-    vector<vector<CostType>> convert_to_matrix(CostType not_adjacent_value = 0){
-        vector<vector<CostType>> ret(vertex_, vector<CostType>(vertex_, not_adjacent_value));
-        for(int i = 0; i < vertex_; ++i){
-            for(ED e : adjacent_list_[i]){
-                ret[i][e.to] = e.cost;
-            }
-        }
-        return ret;
-    }
-
     vector<ED> &operator[](Vertex v){
         return adjacent_list_[v];
     }
 };
+
+/**
+ * @brief グラフの隣接行列を返す。
+ * @note verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
+ * @note 計算量 : O(|V| + |E|)
+ * @param G 頂点数 V のグラフ
+ * @param not_adjacent_value 2頂点 u, v 間に辺が存在しない場合の値 `(default = 0)`
+ * @return vector<vector<CostType>> V × V の隣接行列
+ */
+template<typename CostType>
+vector<vector<CostType>> convert_to_matrix(const Graph<CostType> &G, CostType not_adjacent_value = 0){
+    size_t V = G.get_vertex_size();
+    vector<vector<CostType>> ret(V, vector<CostType>(V, not_adjacent_value));
+    for(int i = 0; i < V; ++i){
+        for(Edge<CostType> &e : G[i]){
+            ret[i][e.to] = e.cost;
+        }
+    }
+    return ret;
+}
+
+template<typename CostType>
+Graph<CostType> reverse(const Graph<CostType> &G){
+    size_t V = G.get_vertex_size();
+    Graph<CostType> ret(V, true);
+    for(int i = 0; i < V; ++i){
+        for(Edge<CostType> &e : G[i]){
+            ret.add_edge(e.to, e.from, e.cost);
+        }
+    }
+    return ret;
+}

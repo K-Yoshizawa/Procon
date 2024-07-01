@@ -5,86 +5,43 @@
  * @date 2024-02-11
  */
 
-#include "GraphTemplate.hpp"
+#include "Graph.hpp"
 
 template<typename CostType>
 struct StronglyConnectedComponents{
     private:
     Graph<CostType> &G;
     Graph<CostType> rG;
-    vector<int> visited_, order_, belong_;
-    vector<vector<Vertex>> member_;
 
-    void f_dfs(Vertex v){
-        visited_[v] = 1;
+    size_t V;
+
+    int dfs1(Vertex v, Vertex p, vector<int> &label, int nex){
+        label[v] = nex;
+        int ret = 1;
         for(auto &e : G[v]){
-            if(!visited_[e.to]) f_dfs(e.to);
-        }
-        order_.push_back(v);
-    }
-
-    void f_rdfs(Vertex v, int k){
-        visited_[v] = 0;
-        belong_[v] = k;
-        member_[k].push_back(v);
-        for(auto &e : rG[v]){
-            if(visited_[e.to]) f_rdfs(e.to, k);
-        }
-    }
-
-    public:
-    StronglyConnectedComponents(Graph<CostType> &G) : G(G){
-        rG = G.reverse();
-        visited_.resize(G.size(), 0);
-        belong_.resize(G.size(), -1);
-        for(int i = 0; i < G.size(); ++i){
-            if(!visited_[i]) f_dfs(i);
-        }
-        int k = 0;
-        for(int i = order_.size() - 1; i >= 0; --i){
-            if(visited_[order_[i]]){
-                member_.push_back(vector<CostType>{});
-                f_rdfs(order_[i], k++);
-            }
-        }
-    }
-
-    int where(Vertex v){
-        return belong_.at(v);
-    }
-
-    bool same(Vertex u, Vertex v){
-        return where(u) == where(v);
-    }
-
-    vector<vector<Vertex>> &get(){
-        return member_;
-    }
-
-    Graph<CostType> build(){
-        Graph<CostType> ret(member_.size(), true);
-        for(int i = 0; i < G.size(); ++i){
-            int from = where(i);
-            for(auto &e : G[i]){
-                int to = where(e.to);
-                if(from == to) continue;
-                ret.add(from, to, e.cost);
-            }
+            if(e.to == p || label_[e.to] != -1) continue;
+            int used = dfs1(e.to, v, label, nex + ret);
+            ret += used;
         }
         return ret;
     }
 
-    int operator[](Vertex v){
-        return where(v);
+    // void dfs2(Vertex v, Vertex p, vector<int> &vis, )
+
+    public:
+    StronglyConnectedComponents(Graph<CostType> &G) : G(G), V(G.get_vertex_size()){
+        rG = reverse(G);
+        vector<int> label(V, -1);
+        int nex = 0;
+        vector<Vertex> vs(V);
+        for(auto v : vs){
+            if(label[v] == -1) nex += dfs1(v, -1, label, nex);
+        }
+        iota(vs.begin(), vs.end(), 0);
+        sort(vs.begin(), vs.end(), [&](Vertex u, Vertex v){
+            return label[u] > label[v];
+        });
     }
 
-    void print(){
-        for(int i = 0; i < member_.size(); ++i){
-            cout << "Component " << i << " : ";
-            for(auto v : member_[i]){
-                cout << v << " ";
-            }
-            cout << endl;
-        }
-    }
+
 };
