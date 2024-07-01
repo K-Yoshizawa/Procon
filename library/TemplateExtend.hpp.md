@@ -86,7 +86,7 @@ data:
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
     \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
     \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
-    \ __VA_ARGS__)\n#else\n#define DEBUG(fmt, ...) 42\n#endif\n\n// ==============================================================\n\
+    \ __VA_ARGS__)\n#else\n#define DEBUG(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
     #line 2 \"library/TemplateExtend.hpp\"\n\ntemplate <typename T>\ninline long long\
     \ EuclideanDist2(const pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx\
@@ -135,7 +135,7 @@ data:
   isVerificationFile: false
   path: library/TemplateExtend.hpp
   requiredBy: []
-  timestamp: '2024-06-16 11:17:44+09:00'
+  timestamp: '2024-07-01 15:20:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/TemplateExtend.hpp

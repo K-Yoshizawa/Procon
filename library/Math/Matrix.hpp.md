@@ -183,9 +183,9 @@ data:
   timestamp: '2024-02-19 11:28:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/LC-DeterminantofMatrix.test.cpp
   - verify/LC-PowofMatrix.test.cpp
   - verify/LC-InverseMatrix.test.cpp
-  - verify/LC-DeterminantofMatrix.test.cpp
   - verify/LC-MatrixProduct.test.cpp
 documentation_of: library/Math/Matrix.hpp
 layout: document

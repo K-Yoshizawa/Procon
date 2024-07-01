@@ -87,7 +87,7 @@ data:
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
     \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
     \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
-    \ __VA_ARGS__)\n#else\n#define DEBUG(fmt, ...) 42\n#endif\n\n// ==============================================================\n\
+    \ __VA_ARGS__)\n#else\n#define DEBUG(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n"
   code: "#pragma once\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
     \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n\
@@ -164,14 +164,14 @@ data:
     \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
     \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
     \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
-    \ __VA_ARGS__)\n#else\n#define DEBUG(fmt, ...) 42\n#endif\n\n// ==============================================================\n\
+    \ __VA_ARGS__)\n#else\n#define DEBUG(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// =============================================================="
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2024-06-16 11:17:44+09:00'
+  timestamp: '2024-07-01 15:20:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp

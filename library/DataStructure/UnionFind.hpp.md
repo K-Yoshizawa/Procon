@@ -81,14 +81,14 @@ data:
   isVerificationFile: false
   path: library/DataStructure/UnionFind.hpp
   requiredBy:
-  - library/Graph/Kruskal.hpp
   - old/Graph/Kruskal.hpp
+  - library/Graph/Kruskal.hpp
   timestamp: '2024-06-15 11:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
+  - verify/LC-Unionfind.test.cpp
 documentation_of: library/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:
