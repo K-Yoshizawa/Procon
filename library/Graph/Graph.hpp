@@ -70,6 +70,16 @@ class Graph{
         }
     }
 
+    void input(int edge_count, bool weighted_graph = true, bool one_index = true){
+        for(int i = 0; i < edge_count; ++i){
+            int s, t; cin >> s >> t;
+            if(one_index) --s, --t;
+            CostType w = 1;
+            if(weighted_graph) cin >> w;
+            add_edge(s, t, w);
+        }
+    }
+
     vector<ED> &operator[](Vertex v){
         return adjacent_list_[v];
     }
@@ -112,6 +122,30 @@ Graph<CostType> reverse(Graph<CostType> &G){
         for(Edge<CostType> &e : G[i]){
             ret.add_edge(e.to, e.from, e.cost);
         }
+    }
+    return ret;
+}
+
+/**
+ * @brief グラフの辺集合を返す。
+ * @param G 頂点数 V のグラフ
+ * @param sorted 辺集合をコストでソートした状態で返すか (default = true)
+ * @return vector<Edge<CostType>> G の辺集合
+ */
+template<typename CostType>
+vector<Edge<CostType>> convert_to_edge_set(Graph<CostType> &G, bool sorted = true){
+    vector<Edge<CostType>> ret;
+    vector<bool> picked(G.get_edge_size(), false);
+    for(int v = 0; v < G.get_vertex_size(); ++v){
+        for(Edge<CostType> e : G[v]){
+            if(!picked[e.id]) ret.push_back(e);
+            picked[e.id] = true;
+        }
+    }
+    if(sorted){
+        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){
+            return l.cost < r.cost;
+        });
     }
     return ret;
 }

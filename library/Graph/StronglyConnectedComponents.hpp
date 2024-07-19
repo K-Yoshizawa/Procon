@@ -1,8 +1,8 @@
 /**
  * @file StronglyConnectedComponents.hpp
  * @brief Strongly Connected Components - 強連結成分分解
- * @version 3.1
- * @date 2024-02-11
+ * @version 4.0
+ * @date 2024-07-19
  */
 
 #include "Graph.hpp"
@@ -68,6 +68,7 @@ struct StronglyConnectedComponents{
     /**
      * @brief 強連結成分を取得する。
      * @note 強連結成分はトポロジカル順に並んでいる。
+     * @note verify : https://judge.yosupo.jp/problem/scc
      * @return vector<vector<Vertex>>& 強連結成分の一覧
      */
     vector<vector<Vertex>> &get_components(){
