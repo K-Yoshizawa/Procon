@@ -75,19 +75,22 @@ data:
     \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
-    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\nvoid DisassembleVectorTuple(vector<tuple<T1,\
-    \ T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){\n    transform(v.begin(),\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
+    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n}\n\ntemplate<typename\
-    \ T1 = ll, typename T2 = ll>\npair<vector<T1>, vector<T2>> InputVectorPair(int\
-    \ size){\n    vector<pair<T1, T2>> v(size);\n    for(auto &[p, q] : v) cin >>\
-    \ p >> q;\n    return DisassembleVectorPair(v);\n}\n\ntemplate<typename T1, typename\
-    \ T2, typename T3>\nvoid InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
-    \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
-    \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
-    \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
-    \ __VA_ARGS__)\n#else\n#define DEBUG(...) 42\n#endif\n\n// ==============================================================\n\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
+    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
+    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
+    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
+    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
+    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
+    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr,\
+    \ \"[Debug]    \" fmt __VA_OPT__(,) __VA_ARGS__)\n#define VARIABLE(var) cerr <<\
+    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define DEBUG(...) 42\n#define\
+    \ VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n"
   code: "#pragma once\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
     \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n\
@@ -152,26 +155,29 @@ data:
     \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
-    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\nvoid DisassembleVectorTuple(vector<tuple<T1,\
-    \ T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){\n    transform(v.begin(),\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
+    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n}\n\ntemplate<typename\
-    \ T1 = ll, typename T2 = ll>\npair<vector<T1>, vector<T2>> InputVectorPair(int\
-    \ size){\n    vector<pair<T1, T2>> v(size);\n    for(auto &[p, q] : v) cin >>\
-    \ p >> q;\n    return DisassembleVectorPair(v);\n}\n\ntemplate<typename T1, typename\
-    \ T2, typename T3>\nvoid InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3>\
-    \ &v3, int size){\n    vector<tuple<T1, T2, T3>> v(size);\n    for(auto &[p, q,\
-    \ r] : v) cin >> p >> q >> r;\n    DisassembleVectorTuple(v, v1, v2, v3);\n}\n\
-    \n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr, \"[Debug]    \" fmt __VA_OPT__(,)\
-    \ __VA_ARGS__)\n#else\n#define DEBUG(...) 42\n#endif\n\n// ==============================================================\n\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
+    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
+    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
+    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
+    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
+    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
+    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define DEBUG(fmt, ...) fprintf(stderr,\
+    \ \"[Debug]    \" fmt __VA_OPT__(,) __VA_ARGS__)\n#define VARIABLE(var) cerr <<\
+    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define DEBUG(...) 42\n#define\
+    \ VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// =============================================================="
   dependsOn: []
   isVerificationFile: false
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2024-07-01 15:20:57+09:00'
+  timestamp: '2024-07-26 22:56:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp

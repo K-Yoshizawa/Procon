@@ -142,9 +142,9 @@ data:
   timestamp: '2024-04-29 18:47:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/AOJ-DSL-2-E.test.cpp
   - verify/AOJ-DSL-2-D.test.cpp
   - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/AOJ-DSL-2-E.test.cpp
 documentation_of: library/DataStructure/DualSegmentTree.hpp
 layout: document
 redirect_from:
