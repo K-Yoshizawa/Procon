@@ -154,30 +154,36 @@ pair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1, T2>> &v){
 }
 
 template<typename T1, typename T2, typename T3>
-void DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){
+tuple<vector<T1>, vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){
+    vector<T1> v1;
+    vector<T2> v2;
+    vector<T3> v3;
     transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return get<0>(p);});
     transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return get<1>(p);});
     transform(v.begin(), v.end(), back_inserter(v3), [](auto p){return get<2>(p);});
+    return {v1, v2, v3};
 }
 
-template<typename T1 = ll, typename T2 = ll>
+template<typename T1 = int, typename T2 = T1>
 pair<vector<T1>, vector<T2>> InputVectorPair(int size){
     vector<pair<T1, T2>> v(size);
     for(auto &[p, q] : v) cin >> p >> q;
     return DisassembleVectorPair(v);
 }
 
-template<typename T1, typename T2, typename T3>
-void InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
+template<typename T1 = int, typename T2 = T1, typename T3 = T1>
+tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
     vector<tuple<T1, T2, T3>> v(size);
     for(auto &[p, q, r] : v) cin >> p >> q >> r;
-    DisassembleVectorTuple(v, v1, v2, v3);
+    return DisassembleVectorTuple(v);
 }
 
 #ifdef LOGK
 #define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
+#define VARIABLE(var) cerr << "# " << #var << " = " << var << endl;
 #else
 #define DEBUG(...) 42
+#define VARIABLE(...) 42
 #endif
 
 // ==============================================================
