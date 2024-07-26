@@ -5,10 +5,7 @@
 int main(){
     int N, M, s, t; cin >> N >> M >> s >> t;
     Graph<int64_t> G(N, true);
-    for(int i = 0; i < M; ++i){
-        int a, b, c; cin >> a >> b >> c;
-        G.add_edge(a, b, c);
-    }
+    G.input(M, true, false);
 
     Dijkstra dk(G);
     if(dk.reachable(s, t)){
