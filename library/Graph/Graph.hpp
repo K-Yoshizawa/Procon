@@ -23,6 +23,7 @@ struct Edge{
 
 template<typename CostType = int32_t>
 class Graph{
+    protected:
     using ED = Edge<CostType>;
 
     size_t vertex_{0}, edge_{0};
