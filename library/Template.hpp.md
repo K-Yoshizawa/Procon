@@ -56,8 +56,14 @@ data:
     template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
     using rpq = priority_queue<T, vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0,\
     \ -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1,\
-    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate\
-    \ <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
+    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
+    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
+    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
+    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
+    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
+    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
+    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
     \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
     \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
     \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
@@ -136,8 +142,14 @@ data:
     template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
     using rpq = priority_queue<T, vec<T>, greater<T>>;\n\nconst int dx4[4] = {1, 0,\
     \ -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1,\
-    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\ntemplate\
-    \ <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
+    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
+    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
+    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
+    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
+    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
+    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
+    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
     \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
     \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
     \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
@@ -177,7 +189,7 @@ data:
   path: library/Template.hpp
   requiredBy:
   - library/TemplateExtend.hpp
-  timestamp: '2024-07-26 22:56:45+09:00'
+  timestamp: '2024-07-28 22:54:18+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: library/Template.hpp
