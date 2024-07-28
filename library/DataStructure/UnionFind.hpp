@@ -64,4 +64,9 @@ struct UnionFind{
         }), end(ret));
         return ret;
     }
+
+    int size(int k){
+        int v = find(k);
+        return -data_[v];
+    }
 };

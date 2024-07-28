@@ -3,8 +3,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.6
- * @date 2023-12-15
+ * @version 1.8
+ * @date 2024-06-16
  */
 
 #include <bits/stdc++.h>
@@ -16,9 +16,10 @@
 #define SETPRE(digit) fixed << setprecision(digit)
 #define POPCOUNT(x) __builtin_popcount(x)
 #define SUM(x) reduce((x).begin(), (x).end())
+#define CEIL(nume, deno) ((nume) + (deno) - 1) / (deno)
 #define IOTA(x) iota((x).begin(), (x).end(), 0)
-#define LOWERBOUND_IDX(x,val) (int)(lower_bound((x).begin(), (x).end(), val) - (x).begin())
-#define UPPERBOUND_IDX(x,val) (int)(upper_bound((x).begin(), (x).end(), val) - (x).begin())
+#define LOWERBOUND_IDX(arr, val) (int)(lower_bound((arr).begin(), (arr).end(), val) - (arr).begin())
+#define UPPERBOUND_IDX(arr, val) (int)(upper_bound((arr).begin(), (arr).end(), val) - (arr).begin())
 using namespace std;
 
 inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
@@ -53,16 +54,16 @@ void make_unique(vector<T> &v){
     v.erase(itr, v.end());
 }
 
-using ll = long long;
-using ull = unsigned long long;
+using ll = int64_t;
+using ull = uint64_t;
 using ld = long double;
 
 const long double PI = acosl(-1);
 const long double PI2 = PI * 2;
 const long double PI_2 = PI / 2;
 
-const int INF_INT = numeric_limits<int>::max() / 2;
-const long long INF_LL = numeric_limits<long long>::max() / 2LL;
+const int INF_INT = numeric_limits<int>::max() >> 2;
+const ll INF_LL = numeric_limits<ll>::max() >> 2;
 
 template <typename T>
 using vec = vector<T>;
@@ -100,6 +101,18 @@ const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, -1, 0, 1};
 const int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 const int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};
+
+vector<pair<int, int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){
+    vector<pair<int, int>> ret;
+    for(int d = 0; d < 4 * (1 + dir_8); ++d){
+        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);
+        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);
+        if(0 <= next_y and next_y < max_y and 0 <= next_x and next_x < max_x){
+            ret.emplace_back(next_y, next_x);
+        }
+    }
+    return ret;
+}
 
 template <typename T1, typename T2>
 ostream &operator<<(ostream &os, const pair<T1, T2> &p){
@@ -153,58 +166,40 @@ pair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1, T2>> &v){
 }
 
 template<typename T1, typename T2, typename T3>
-void DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v, vector<T1> &v1, vector<T2> &v2, vector<T3> &v3){
+tuple<vector<T1>, vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){
+    vector<T1> v1;
+    vector<T2> v2;
+    vector<T3> v3;
     transform(v.begin(), v.end(), back_inserter(v1), [](auto p){return get<0>(p);});
     transform(v.begin(), v.end(), back_inserter(v2), [](auto p){return get<1>(p);});
     transform(v.begin(), v.end(), back_inserter(v3), [](auto p){return get<2>(p);});
+    return {v1, v2, v3};
 }
 
-template<typename T1 = ll, typename T2 = ll>
+template<typename T1 = int, typename T2 = T1>
 pair<vector<T1>, vector<T2>> InputVectorPair(int size){
     vector<pair<T1, T2>> v(size);
     for(auto &[p, q] : v) cin >> p >> q;
     return DisassembleVectorPair(v);
 }
 
-template<typename T1, typename T2, typename T3>
-void InputVectorTuple(vector<T1> &v1, vector<T2> &v2, vector<T3> &v3, int size){
+template<typename T1 = int, typename T2 = T1, typename T3 = T1>
+tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
     vector<tuple<T1, T2, T3>> v(size);
     for(auto &[p, q, r] : v) cin >> p >> q >> r;
-    DisassembleVectorTuple(v, v1, v2, v3);
-}
-
-template<class... T>
-void input(T&... vars){
-    (cin >> ... >> vars);
-}
-
-void print(){
-    cout << '\n';
-}
-
-template<class T, class... Ts>
-void print(const T& a, const Ts&... b){
-    cout << a;
-    (cout << ... << (cout << ' ', b));
-    cout << '\n';
+    return DisassembleVectorTuple(v);
 }
 
 #ifdef LOGK
-void dprint(){
-    cout << '\n';
-}
-
-template<class T, class... Ts>
-void dprint(const T& a, const Ts&... b){
-    cout << "Debug : " << a;
-    (cout << ... << (cout << " ", b));
-    cout << '\n';
-}
+#define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
+#define VARIABLE(var) cerr << "# " << #var << " = " << var << endl;
 #else
-#define dprint(...) 42
+#define DEBUG(...) 42
+#define VARIABLE(...) 42
 #endif
 
-template <typename T>
-T ceil(T x, T y){
-    return (x + y - 1) / y;
-}
+// ==============================================================
+// 
+// Main Program Start
+// 
+// ==============================================================
