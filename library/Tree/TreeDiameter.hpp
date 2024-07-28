@@ -1,73 +1,83 @@
 /**
  * @file TreeDiameter.hpp
  * @brief Tree Diameter - 木の直径
- * @version 1.0
- * @date 2024-03-01
+ * @version 2.0
+ * @date 2024-07-29
  */
 
-#include "../Graph/GraphTemplate.hpp"
+#include "Tree.hpp"
 
 template<typename CostType>
-struct TreeDiameter{
+class TreeDiameter{
     private:
-    Graph<CostType> &G;
-    vector<CostType> dist_;
-    vector<Vertex> path_;
-
-    void dfs_(int v, int p){
-        for(auto &e : G[v]){
-            if(p == e.to) continue;
-            dist_[e.to] = dist_[v] + e.cost;
-            dfs_(e.to, v);
-        }
-    }
-
-    void recall_(int v){
-        path_.push_back(v);
-        for(auto &e : G[v]){
-            if(dist_[e.to] == dist_[v] - e.cost){
-                recall_(e.to);
+    Tree<CostType> &T;
+    vector<Vertex> diameter_path_;
+    CostType diameter_cost_;
+    vector<CostType> branch_cost_;
+    
+    void build(){
+        // 直径構築パート
+        vector<CostType> dist(T.get_vertex_size(), 0);
+        vector<Vertex> parent(T.get_vertex_size(), -1);
+        auto dfs1 = [&](auto self, Vertex current_vertex, Vertex prev_vertex) -> void {
+            for(Edge<CostType> &e : T[current_vertex]){
+                if(e.to == prev_vertex) continue;
+                dist[e.to] = dist[current_vertex] + e.cost;
+                parent[e.to] = current_vertex;
+                self(self, e.to, current_vertex);
             }
+        };
+        Vertex start = 0;
+        dfs1(dfs1, start, -1);
+        start = distance(dist.begin(), max_element(dist.begin(), dist.end()));
+        dist.assign(T.get_vertex_size(), 0);
+        parent.assign(T.get_vertex_size(), -1);
+        dfs1(dfs1, start, -1);
+        auto itr = max_element(dist.begin(), dist.end());
+        diameter_cost_ = *itr;
+        vector<bool> included_diameter(T.get_vertex_size(), false);
+        Vertex current = distance(dist.begin(), itr);
+        diameter_path_.push_back(current);
+        included_diameter[current] = true;
+        while(parent[current] != -1){
+            current = parent[current];
+            diameter_path_.push_back(current);
+            included_diameter[current] = true;
+        }
+
+        // 枝構築パート
+        branch_cost_.resize(T.get_vertex_size(), 0);
+        auto dfs2 = [&](auto self, Vertex current_vertex, Vertex prev_vertex) -> void {
+            for(Edge<CostType> &e : T[current_vertex]){
+                if(e.to == prev_vertex) continue;
+                if(included_diameter[e.to]) continue;
+                branch_cost_[e.to] = branch_cost_[current_vertex] + e.cost;
+                self(self, e.to, current_vertex);
+            }
+        };
+        for(auto &v : diameter_path_){
+            dfs2(dfs2, v, -1);
         }
     }
 
     public:
-    TreeDiameter(Graph<CostType> &G) : G(G){
-        dist_.resize(G.size(), 0);
-        dfs_(0, -1);
-        int v = 0;
-        for(int i = 1; i < G.size(); ++i){
-            if(dist_[v] < dist_[i]) v = i;
-        }
-        dist_.assign(G.size(), 0);
-        dfs_(v, -1);
-        v = 0;
-        for(int i = 1; i < G.size(); ++i){
-            if(dist_[v] < dist_[i]) v = i;
-        }
-        recall_(v);
-        reverse(path_.begin(), path_.end());
+    TreeDiameter(Tree<CostType> &T) : T(T){
+        build();
     }
 
-    /**
-     * @brief 直径の両端点の頂点番号を返す。
-     * @return pair<Vertex, Vertex> 直径の両端点の頂点番号
-     */
-    pair<Vertex, Vertex> get(){
-        return {path_[0], path_.back()};
+    vector<Vertex> &get_path(){
+        return diameter_path_;
     }
 
-    /**
-     * @brief 直径の長さを返す。
-     */
-    CostType dist(){
-        return dist_[path_.back()];
+    pair<Vertex, Vertex> get_endpoints() const {
+        return {diameter_path_.front(), diameter_path_.back()};
     }
 
-    /**
-     * @brief 直径の頂点列を返す。
-     */
-    vector<Vertex> &path(){
-        return path_;
+    CostType get_cost() const {
+        return diameter_cost_;
+    }
+
+    vector<CostType> &get_branch_cost(){
+        return branch_cost_;
     }
 };

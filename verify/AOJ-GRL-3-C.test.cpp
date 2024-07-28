@@ -5,12 +5,15 @@
 int main(){
     int V, E; cin >> V >> E;
     Graph G(V, true);
-    G.input(E, false, true);
-
+    for(int i = 0; i < E; ++i){
+        int s, t; cin >> s >> t;
+        G.add_edge(s, t);
+    }
+    
     StronglyConnectedComponents scc(G);
     int Q; cin >> Q;
-    while(Q--){
+    for(int i = 0; i < Q; ++i){
         int u, v; cin >> u >> v;
-        cout << scc.same(u, v) << endl;
+        cout << (scc.where(u) == scc.where(v)) << endl;
     }
 }
