@@ -102,6 +102,18 @@ const int dy4[4] = {0, -1, 0, 1};
 const int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 const int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};
 
+vector<pair<int, int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){
+    vector<pair<int, int>> ret;
+    for(int d = 0; d < 4 * (1 + dir_8); ++d){
+        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);
+        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);
+        if(0 <= next_y and next_y < max_y and 0 <= next_x and next_x < max_x){
+            ret.emplace_back(next_y, next_x);
+        }
+    }
+    return ret;
+}
+
 template <typename T1, typename T2>
 ostream &operator<<(ostream &os, const pair<T1, T2> &p){
     os << p.first << " " << p.second;

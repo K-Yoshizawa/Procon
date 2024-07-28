@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compile",
+            "type": "shell",
+            "command": "oj-bundle ${file} > submit.cpp 2>/dev/null; g++-12 submit.cpp -std=c++2a -O2 -fsplit-stack -DLOGK"
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "./a.out < in.txt"
+        }
+    ]
+}

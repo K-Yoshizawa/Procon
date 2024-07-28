@@ -1,11 +1,8 @@
-*.o
 *.out
 *.cpp
 *.c
 *.txt
 ac-library/
-.vscode
-answer.exe
 !/verify/**
 !/verify_icpc/**
 !/verify_latest/**
