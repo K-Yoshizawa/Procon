@@ -2,24 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/BellmanFord.hpp
-    title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/Dijkstra.hpp
-    title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/Kruskal.hpp
-    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
   - icon: ':warning:'
     path: library/Graph/LongestDistance.hpp
     title: "Longest Distance - DAG\u306B\u304A\u3051\u308B\u6700\u9577\u8DDD\u96E2"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/StronglyConnectedComponents.hpp
-    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
-    path: library/Graph/WarshallFloyd.hpp
-    title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
   - icon: ':warning:'
     path: library/Tree/AuxiliaryTree.hpp
     title: "Auxiliary Tree - \u88DC\u52A9\u6728"
@@ -32,40 +17,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-  - icon: ':heavy_check_mark:'
-    path: library/Tree/TreeDiameter.hpp
-    title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-A.test.cpp
-    title: verify/AOJ-GRL-1-A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-B.test.cpp
-    title: verify/AOJ-GRL-1-B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-1-C.test.cpp
-    title: verify/AOJ-GRL-1-C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-3-C.test.cpp
-    title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor.test.cpp
     title: verify/LC-LowestCommonAncestor.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-MinimumSpanningTree.test.cpp
-    title: verify/LC-MinimumSpanningTree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-ShortestPath.test.cpp
-    title: verify/LC-ShortestPath.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-StronglyConnectedComponents.test.cpp
-    title: verify/LC-StronglyConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TreeDiameter.test.cpp
-    title: verify/LC-TreeDiameter.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum-ET.test.cpp
     title: verify/LC-VertexAddPathSum-ET.test.cpp
@@ -303,31 +261,17 @@ data:
   - library/Tree/AuxiliaryTree.hpp
   - library/Tree/LowestCommonAncestor.hpp
   - library/Tree/EulerTour.hpp
-  - library/Tree/TreeDiameter.hpp
-  - library/Graph/Dijkstra.hpp
-  - library/Graph/WarshallFloyd.hpp
-  - library/Graph/Kruskal.hpp
-  - library/Graph/StronglyConnectedComponents.hpp
-  - library/Graph/BellmanFord.hpp
   - library/Graph/LongestDistance.hpp
   timestamp: '2024-04-29 19:12:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-VertexAddPathSum-ET.test.cpp
-  - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/LC-VertexAddPathSum-HLD.test.cpp
-  - verify/LC-ShortestPath.test.cpp
-  - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
 documentation_of: library/Graph/GraphTemplate.hpp
 layout: document
-title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+title: "Graph - \u30B0\u30E9\u30D5"
 ---
 
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -347,47 +291,49 @@ title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
 
 グラフを頂点集合(隣接リスト)で表現するもの。
 
-### Variable
+### Member Variable
 
 - private
-    - `m_vertex_size` : グラフの頂点数
-    - `m_edge_size` : グラフの辺数
-    - `m_is_directed` : 有向グラフであるかのフラグ
-    - `m_adj` : 隣接リスト形式で表されたグラフ本体
-    - `m_indegree` : 各頂点の入次数(有向グラフのみ利用可能)
+    - `vertex_` : グラフの頂点数 $V$
+    - `edge_` : グラフの辺数 $E$
+    - `adjacent_list_` : 隣接リスト形式で表されたグラフ本体
+    - `directed_flag_` : 有向グラフであるかのフラグ
+    - `inf_` : 十分大きな定数
 - public
-    - `INF` : 無限大を表す値で、デフォルトでは `numeric_limits<CostType>::max() >> 2` が入る
 
 ### Function
 
 - `Graph(int vertex_size, bool directed = false)` : 頂点数 $V$ = `vertex_size` のグラフ $G$ を作成する。 `directed` を `true` に設定すると有向グラフとして作成する。
-- `add(Vertex from, Vertex to, CostType cost = 1)` : $G$ に頂点 `from` から頂点 `to` に重み `cost` の辺を張る。
+- `get_vertex_size()` : $G$ の頂点数 $V$ を返す。
+- `get_edge_size()` : $G$ の辺数 $E$ を返す。
+- `get_inf()` : $G$ の十分大きな定数 `INF` を返す。
+- `add(Vertex s, Vertex t, CostType c = 1)` : $G$ において、 $2$ 頂点 `s` `t` 間に重み `c` の辺を張る。有向グラフの場合は `s` から `t` への有向辺が、無向グラフの場合は `s` `t` 間の無向辺が張られる。
     - 引数 :
-        - `from` : 辺の始点
-        - `to` : 辺の終点
-        - `cost = 1` : 辺の重み、省略すれば重み1として扱われる。
-    - 要件 : `from` および `to` は 0-index であること。
-- `input(int edge_size, bool weighted = false, bool zero_index = false)` : $G$ に $E =$ `edge_size` 本の辺を入力させる。
-    - 計算量 : $O(E)$
+        - `s` : 始点の頂点(有向辺)
+        - `t` : 終点の頂点(有向辺)
+        - `c = 1` : 重み
+    - 要件 : `s` および `t` は 0-index であること。
+- `input(int edge_count, bool weighted_graph = false, bool one_index = true)` : $G$ に $E =$ `edge_count` 本の辺を入力させる。
     - 引数 :
-        - `weighted = false` : 読み込む辺が重み付きかを設定する。 `true` にすれば重み付き辺を読み込むことができる。
-        - `zero_index = false` : 読み込む辺が 0-indexとして与えられるかを設定する。 `true` にすれば0-indexとして読み込む。
-- `size()` : 頂点数 $V$ (= `m_vertex_size`)を返す。
-- `outdegree(Vertex v)` : 頂点 `v` の出次数を返す。無向グラフの場合は単に頂点 `v` の次数を返す。
-- `indegree(Vertex v)` : 頂点 `v` の入次数を返す。無向グラフの場合は単に頂点 `v` の次数を返す。
-- `source()` : $G$ の源点(入次数が0である頂点)を返す。無向グラフの場合は $G$ の孤立点(次数が0である頂点)を返す。
-    - 計算量 : $O(V)$
-- `sink()` : $G$ の沈点(出次数が0である頂点)を返す。無向グラフの場合は $G$ の孤立点(次数が0である頂点)を返す。
-    - 計算量 : $O(V)$
-- `leaf()` : $G$ の葉頂点(次数が1である頂点)を返す。有向グラフの場合は入次数が1である頂点を返す。
-    - 計算量 : $O(V)$
-- `get_adj(Vertex v)` : 頂点 `v` の隣接リストを返す。
-- `reverse()` : $G$ の有向辺をすべて反転させたグラフ $G^\prime$ を返す。
-    - 計算量 : $O(E)$
-    - 要件 : $G$ が有向グラフであること。
-- `topological_sort()` : $G$ をトポロジカルソートした頂点列を返す。
-    - 計算量 : $O(E)$
-    - 要件 : $G$ が有向グラフであること。
-- `edge_set()` : $G$ から辺集合を作成する。辺集合は辺の重みで昇順ソートされて返す。
-    - 計算量 : $O(E \log E)$
-- `operator[]` : `get_adj(v)` を返す。
+        - `edge_count` : 入力する辺数 $E$
+        - `weighted_graph = false` : 読み込む辺が重み付きかを設定する。 `true` にすれば重み付き辺を読み込むことができる。
+        - `one_index = true` : 読み込む辺が 1-index として与えられるかを設定する。 `false` にすれば 0-index として読み込む。
+- `operator[v]` : 頂点 `v` に接続している辺集合を返す。
+
+## 補助関数
+
+- `convert_to_matrix(Graph<CostType> &G, CostType not_adjacent_value = 0)` : $G$ を隣接行列に変換した $V \times V$ 行列を返す。
+    - 引数 :
+        - `G` : 頂点数 $V$ のグラフ
+        - `not_adjacent_value = 0` : $2$ 頂点 $u, v$ が隣接していないときに設定する値
+    - 注意 :
+        - 自己ループや多重辺が含まれるグラフにおける動作は未定義である。
+- `reverse(Graph<CostType> &G)` : $G$ の辺を逆転させた有向グラフ $G^R$ を返す。
+    - 引数 :
+        - `G` : 頂点数 $V$ のグラフ
+    - 注意 :
+        - 無向グラフに対する動作は未定義である。
+- `convert_to_edge_set(Graph<CostType> &G, bool sorted = true)` : $G$ の辺集合を返す。
+    - 引数 :
+        - `G` : 頂点数 $V$ のグラフ
+        - `bool sorted = true` : 辺集合をソートした状態で返すかを設定する。設定した場合、辺の重みの昇順にソートされた状態で返される。

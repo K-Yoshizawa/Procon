@@ -95,13 +95,19 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: library/Graph/BellmanFord.hpp
-      title: "BellmanFord - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+      title: "BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
     - icon: ':heavy_check_mark:'
       path: library/Graph/Dijkstra.hpp
-      title: "Dijkstra - \u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DDD\u96E2"
+      title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
+    - icon: ':warning:'
+      path: library/Graph/FunctionalGraph.hpp
+      title: Functional Graph
+    - icon: ':heavy_check_mark:'
+      path: library/Graph/Graph.hpp
+      title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
       path: library/Graph/GraphTemplate.hpp
-      title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+      title: "Graph - \u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
       path: library/Graph/Kruskal.hpp
       title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
@@ -114,7 +120,7 @@ data:
         \u89E3"
     - icon: ':heavy_check_mark:'
       path: library/Graph/WarshallFloyd.hpp
-      title: "Warshall Floyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u8DDD\u96E2"
+      title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
   - name: library/Math
     pages:
     - icon: ':warning:'
@@ -170,6 +176,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
+    - icon: ':heavy_check_mark:'
+      path: library/Tree/Tree.hpp
+      title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
       path: library/Tree/TreeDiameter.hpp
       title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
@@ -271,9 +280,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-DSL-5-B.test.cpp
       title: verify/AOJ-DSL-5-B.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-1-A.test.cpp
-      title: verify/AOJ-GRL-1-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-1-B.test.cpp
       title: verify/AOJ-GRL-1-B.test.cpp

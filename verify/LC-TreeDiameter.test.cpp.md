@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/Graph/GraphTemplate.hpp
-    title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    path: library/Graph/Graph.hpp
+    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: library/Tree/Tree.hpp
+    title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
@@ -19,157 +22,200 @@ data:
     - https://judge.yosupo.jp/problem/tree_diameter
   bundledCode: "#line 1 \"verify/LC-TreeDiameter.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\
     \n\n#line 1 \"library/Tree/TreeDiameter.hpp\"\n/**\n * @file TreeDiameter.hpp\n\
-    \ * @brief Tree Diameter - \u6728\u306E\u76F4\u5F84\n * @version 1.0\n * @date\
-    \ 2024-03-01\n */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file\
-    \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n\
-    \    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex\
-    \ to, CostType cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n\
-    \        return to;\n    }\n};\n\ntemplate<typename CostType = int>\nstruct Graph{\n\
-    \    private:\n    int vertex_size_{0}, edge_size_{0};\n    bool is_directed_{false},\
-    \ is_weighted_{false};\n    vector<vector<Edge<CostType>>> adj_;\n    vector<int>\
-    \ indegree_;\n\n    public:\n    CostType INF{numeric_limits<CostType>::max()\
-    \ >> 2};\n\n    Graph() = default;\n\n    /**\n     * @brief `vertex_size` \u9802\
-    \u70B9 `0` \u8FBA\u306E\u30B0\u30E9\u30D5\u3092\u4F5C\u6210\u3059\u308B\u3002\n\
-    \     * @note `directed` \u3092 `true` \u306B\u3059\u308B\u3068\u6709\u5411\u30B0\
-    \u30E9\u30D5\u306B\u306A\u308B\u3002\n     * @param vertex_size \u9802\u70B9\u6570\
-    \n     * @param directed \u6709\u5411\u30B0\u30E9\u30D5\u3092\u4F5C\u6210\u3059\
-    \u308B\u304B (option, default = `false`)\n     */\n    Graph(int vertex_size,\
-    \ bool directed = false) : vertex_size_(vertex_size), is_directed_(directed){\n\
-    \        adj_.resize(vertex_size);\n        indegree_.resize(vertex_size, 0);\n\
-    \    }\n\n    /**\n     * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\u70B9\
-    \ `to` \u306B\u8FBA\u3092\u5F35\u308B\u3002\n     * @note `cost` \u3092\u6307\u5B9A\
-    \u3059\u308B\u3053\u3068\u3067\u91CD\u307F\u3092\u3064\u3051\u308B\u3053\u3068\
-    \u304C\u3067\u304D\u308B\u3002\n     * @param from \u9802\u70B9\u756A\u53F7\n\
-    \     * @param to \u9802\u70B9\u756A\u53F7\n     * @param cost \u91CD\u307F (option,\
-    \ default = `1`)\n     */\n    void add(Vertex from, Vertex to, CostType cost\
-    \ = 1){\n        assert(0 <= from and from < vertex_size_);\n        assert(0\
-    \ <= to and to < vertex_size_);\n        is_weighted_ |= cost > 1;\n        Edge<CostType>\
-    \ e1(from, to, cost);\n        e1.loc = adj_[from].size();\n        e1.id = edge_size_;\n\
-    \        adj_[from].push_back(e1);\n        ++edge_size_;\n        if(is_directed_){\n\
-    \            ++indegree_[to];\n            return;\n        }\n        Edge<CostType>\
-    \ e2(to, from, cost);\n        e2.loc = adj_[to].size();\n        e2.id = e1.id;\n\
-    \        adj_[to].push_back(e2);\n    }\n\n    /**\n     * @brief \u30B0\u30E9\
-    \u30D5\u306B `edge_size` \u672C\u306E\u8FBA\u3092\u5165\u529B\u3055\u305B\u308B\
-    \u3002\n     * @param edge_size \u5165\u529B\u3059\u308B\u8FBA\u6570\n     * @param\
-    \ weighted \u91CD\u307F\u4ED8\u304D\u8FBA\u304B (option, default = `false`)\n\
-    \     * @param zero_index \u5165\u529B\u306E\u9802\u70B9\u756A\u53F7\u304C 0-index\
-    \ \u304B (option, default = `false`)\n     */\n    void input(int edge_size, bool\
-    \ weighted = false, bool zero_index = false){\n        is_weighted_ = weighted;\n\
-    \        for(int i = 0; i < edge_size; ++i){\n            Vertex s, t; cin >>\
-    \ s >> t;\n            if(!zero_index) --s, --t;\n            CostType c = 1;\n\
-    \            if(weighted) cin >> c;\n            add(s, t, c);\n        }\n  \
-    \  }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\
-    \u8FD4\u3059\u3002\n     * @return size_t \u9802\u70B9\u6570\n     */\n    size_t\
-    \ size(){\n        return vertex_size_;\n    }\n\n    /**\n     * @brief \u9802\
-    \u70B9 `v` \u306E\u51FA\u6B21\u6570\u3092\u8FD4\u3059\u3002\n     * @param v \u9802\
-    \u70B9\u756A\u53F7\n     * @return int \u9802\u70B9 `v` \u306E\u51FA\u6B21\u6570\
-    \n     */\n    int outdegree(Vertex v){\n        return (int)adj_.at(v).size();\n\
-    \    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u5165\u6B21\u6570\u3092\
-    \u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return int\
-    \ \u9802\u70B9 `v` \u306E\u5165\u6B21\u6570\n     */\n    int indegree(Vertex\
-    \ v){\n        if(is_directed_) return indegree_.at(v);\n        else return (int)adj_.at(v).size();\n\
-    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u304C\u6709\u5411\u30B0\u30E9\
-    \u30D5\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\u3002\n     */\n    bool is_directed(){\n\
-    \        return is_directed_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
-    \u304C\u91CD\u307F\u4ED8\u304D\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\u3002\
-    \n     */\n    bool is_weighted(){\n        return is_weighted_;\n    }\n\n  \
-    \  vector<Vertex> source(){\n        assert(is_directed_);\n        vector<Vertex>\
-    \ ret;\n        for(int i = 0; i < vertex_size_; ++i){\n            if(indegree(i)\
-    \ == 0) ret.push_back(i);\n        }\n        return ret;\n    }\n\n    vector<Vertex>\
-    \ sink(){\n        vector<Vertex> ret;\n        for(int i = 0; i < vertex_size_;\
-    \ ++i){\n            if(outdegree(i) == 0) ret.push_back(i);\n        }\n    \
-    \    return ret;\n    }\n\n    vector<Vertex> leaf(){\n        vector<Vertex>\
-    \ ret;\n        for(int i = 0; i < vertex_size_; ++i){\n            if(indegree(i)\
-    \ == 1) ret.push_back(i);\n        }\n        return ret;\n    }\n\n    /**\n\
-    \     * @brief \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\u3092\u8FD4\
-    \u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return vector<Edge<CostType>>&\
-    \ \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\n     */\n    vector<Edge<CostType>>\
-    \ &get_adj(Vertex v){\n        return adj_.at(v);\n    }\n\n    /**\n     * @brief\
-    \ \u8FBA\u306E\u5411\u304D\u3092\u3059\u3079\u3066\u9006\u306B\u3057\u305F\u30B0\
-    \u30E9\u30D5\u3092\u8FD4\u3059\u3002\n     * @attention \u6709\u5411\u30B0\u30E9\
-    \u30D5\u3067\u3042\u308B\u3053\u3068\u3092\u8981\u4EF6\u3068\u3059\u308B\u3002\
-    \n     * @return Graph<CostType> \u9006\u8FBA\u30B0\u30E9\u30D5\n     */\n   \
-    \ Graph<CostType> reverse(){\n        assert(is_directed_);\n        Graph ret(vertex_size_,\
-    \ true);\n        for(auto es : adj_){\n            for(auto e : es){\n      \
-    \          ret.add(e.to, e.from, e.cost);\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    /**\n     * @brief \u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\
-    \u30FC\u30C8\u3057\u305F\u9802\u70B9\u5217\u3092\u8FD4\u3059\u3002\n     * @attention\
-    \ \u6709\u5411\u30B0\u30E9\u30D5\u3067\u3042\u308B\u3053\u3068\u3092\u8981\u4EF6\
-    \u3068\u3059\u308B\u3002\n     * @return vector<Vertex> \u30C8\u30DD\u30ED\u30B8\
-    \u30AB\u30EB\u30BD\u30FC\u30C8\u3057\u305F\u9802\u70B9\u5217\n     */\n    vector<Vertex>\
-    \ topological_sort(){\n        assert(is_directed_);\n        vector<Vertex> ret;\n\
-    \        queue<Vertex> que;\n        vector<int> cnt(vertex_size_, 0);\n     \
-    \   for(auto v : source()) que.push(v);\n        while(que.size()){\n        \
-    \    Vertex v = que.front(); que.pop();\n            ret.push_back(v);\n     \
-    \       for(int u : adj_[v]){\n                if(++cnt[u] == indegree(u)) que.push(u);\n\
-    \            }\n        }\n        return ret;\n    }\n\n    /**\n     * @brief\
-    \ \u30B0\u30E9\u30D5\u304B\u3089\u8FBA\u96C6\u5408\u3092\u4F5C\u6210\u3059\u308B\
-    \u3002\n     * @note \u8FBA\u96C6\u5408\u306F\u91CD\u307F\u3067\u6607\u9806\u30BD\
-    \u30FC\u30C8\u3055\u308C\u305F\u72B6\u614B\u3067\u8FD4\u3055\u308C\u308B\u3002\
-    \n     * @return vector<Edge<CostType>> \u8FBA\u96C6\u5408\n     */\n    vector<Edge<CostType>>\
-    \ edge_set(){\n        vector<Edge<CostType>> ret;\n        vector<int> es(edge_size_,\
-    \ 0);\n        for(int i = 0; i < vertex_size_; ++i){\n            for(auto e\
-    \ : adj_[i]){\n                if(es[e.id]) continue;\n                es[e.id]\
-    \ = 1;\n                ret.push_back(e);\n            }\n        }\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n        return ret;\n    }\n\n    vector<vector<CostType>>\
-    \ matrix(){\n        int n = vertex_size_;\n        vector<vector<CostType>> ret(n,\
-    \ vector<CostType>(n, INF));\n        for(int i = 0; i < n; ++i) ret[i][i] = 0;\n\
-    \        for(int v = 0; v < n; ++v){\n            for(auto &e : adj_[v]){\n  \
-    \              ret[v][e.to] = e.cost;\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n\
-    \        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" <<\
-    \ i << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 9 \"library/Tree/TreeDiameter.hpp\"\n\ntemplate<typename\
-    \ CostType>\nstruct TreeDiameter{\n    private:\n    Graph<CostType> &G;\n   \
-    \ vector<CostType> dist_;\n    vector<Vertex> path_;\n\n    void dfs_(int v, int\
-    \ p){\n        for(auto &e : G[v]){\n            if(p == e.to) continue;\n   \
-    \         dist_[e.to] = dist_[v] + e.cost;\n            dfs_(e.to, v);\n     \
-    \   }\n    }\n\n    void recall_(int v){\n        path_.push_back(v);\n      \
-    \  for(auto &e : G[v]){\n            if(dist_[e.to] == dist_[v] - e.cost){\n \
-    \               recall_(e.to);\n            }\n        }\n    }\n\n    public:\n\
-    \    TreeDiameter(Graph<CostType> &G) : G(G){\n        dist_.resize(G.size(),\
-    \ 0);\n        dfs_(0, -1);\n        int v = 0;\n        for(int i = 1; i < G.size();\
-    \ ++i){\n            if(dist_[v] < dist_[i]) v = i;\n        }\n        dist_.assign(G.size(),\
-    \ 0);\n        dfs_(v, -1);\n        v = 0;\n        for(int i = 1; i < G.size();\
-    \ ++i){\n            if(dist_[v] < dist_[i]) v = i;\n        }\n        recall_(v);\n\
-    \        reverse(path_.begin(), path_.end());\n    }\n\n    /**\n     * @brief\
-    \ \u76F4\u5F84\u306E\u4E21\u7AEF\u70B9\u306E\u9802\u70B9\u756A\u53F7\u3092\u8FD4\
-    \u3059\u3002\n     * @return pair<Vertex, Vertex> \u76F4\u5F84\u306E\u4E21\u7AEF\
-    \u70B9\u306E\u9802\u70B9\u756A\u53F7\n     */\n    pair<Vertex, Vertex> get(){\n\
-    \        return {path_[0], path_.back()};\n    }\n\n    /**\n     * @brief \u76F4\
-    \u5F84\u306E\u9577\u3055\u3092\u8FD4\u3059\u3002\n     */\n    CostType dist(){\n\
-    \        return dist_[path_.back()];\n    }\n\n    /**\n     * @brief \u76F4\u5F84\
-    \u306E\u9802\u70B9\u5217\u3092\u8FD4\u3059\u3002\n     */\n    vector<Vertex>\
-    \ &path(){\n        return path_;\n    }\n};\n#line 4 \"verify/LC-TreeDiameter.test.cpp\"\
-    \n\nusing ll = long long;\n\nint main(){\n    int N; cin >> N;\n    Graph<ll>\
-    \ G(N);\n    for(int i = 0; i < N - 1; ++i){\n        int a, b, c; cin >> a >>\
-    \ b >> c;\n        G.add(a, b, c);\n    }\n\n    TreeDiameter td(G);\n    ll X\
-    \ = td.dist();\n    auto u = td.path();\n    ll Y = u.size();\n    cout << X <<\
-    \ \" \" << Y << endl;\n    for(auto &v : u){\n        cout << v << \" \";\n  \
-    \  }\n    cout << endl;\n}\n"
+    \ * @brief Tree Diameter - \u6728\u306E\u76F4\u5F84\n * @version 2.0\n * @date\
+    \ 2024-07-29\n */\n\n#line 2 \"library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n\
+    \ * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n\
+    \ * @date 2024-07-29\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
+    #line 2 \"library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief Graph\
+    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n\
+    \ * @date 2024-06-14\n */\n\n#line 11 \"library/Graph/Graph.hpp\"\nusing namespace\
+    \ std;\n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n \
+    \   int from{-1}, to{-1}, id{-1};\n    CostType cost{1};\n\n    Edge() = default;\n\
+    \    Edge(int from, int to, CostType cost, int id = -1) : from(from), to(to),\
+    \ cost(cost), id(id){}\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
+    \    protected:\n    using ED = Edge<CostType>;\n\n    size_t vertex_{0}, edge_{0};\n\
+    \    vector<vector<ED>> adjacent_list_;\n\n    bool directed_flag_;\n    CostType\
+    \ inf_{numeric_limits<CostType>::max() / 4};\n\n    inline void validate(int vertex){\n\
+    \        assert(0 <= vertex && vertex < vertex_);\n    }\n\n    public:\n    Graph()\
+    \ = default;\n\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex_size` \u306E\
+    \u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param vertex_size\
+    \ \u9802\u70B9\u6570\n     * @param directed `true` \u306E\u5834\u5408\u3001\u6709\
+    \u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u69CB\u7BC9\u3059\u308B `(default =\
+    \ false)`\n     */\n    Graph(int vertex_size, bool directed = false) : \n   \
+    \     vertex_(vertex_size), adjacent_list_(vertex_size),\n        directed_flag_(directed){}\n\
+    \n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\u6570\u3092\u53D6\
+    \u5F97\u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\u9802\
+    \u70B9\u6570\n     */\n    size_t get_vertex_size() const {\n        return vertex_;\n\
+    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306E\u8FBA\u6570\u3092\
+    \u53D6\u5F97\u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\
+    \u8FBA\u6570\n     */\n    size_t get_edge_size() const {\n        return edge_;\n\
+    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306B\u5BFE\u3059\u308B\
+    \u5341\u5206\u5927\u304D\u306A\u5024(`INF`)\u3092\u53D6\u5F97\u3059\u308B\u3002\
+    \n     * @note `numeric_limits<CostType>::max() / 4` \u3092\u63A1\u7528\u3057\u3066\
+    \u3044\u308B\u3002\n     * @return CostType `INF`\n     */\n    CostType get_inf()\
+    \ const {\n        return inf_;\n    }\n\n    /**\n     * @brief 2\u9802\u70B9\
+    \ `s` `t` \u9593\u306B\u91CD\u307F `c` \u306E\u8FBA\u3092\u5F35\u308B\u3002\u6709\
+    \u5411\u30B0\u30E9\u30D5\u306E\u5834\u5408\u306F `s` \u304B\u3089 `t` \u3078\u306E\
+    \u6709\u5411\u8FBA\u304C\u3001\u7121\u5411\u30B0\u30E9\u30D5\u306E\u5834\u5408\
+    \u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\u304C\u5F35\u3089\u308C\u308B\u3002\
+    \n     * @param s \u59CB\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param\
+    \ t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param c \u91CD\
+    \u307F `(default = 1)`\n     */\n    void add_edge(Vertex s, Vertex t, CostType\
+    \ c = 1){\n        validate(s);\n        validate(t);\n        int edge_id = edge_++;\n\
+    \        adjacent_list_[s].push_back(Edge(s, t, c, edge_id));\n        if(!directed_flag_){\n\
+    \            adjacent_list_[t].push_back(Edge(t, s, c, edge_id));\n        }\n\
+    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306B\u6307\u5B9A\u3057\u305F\
+    \u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\u3059\u308B\u3002\n     * @note\
+    \ \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\u305F\u306F `u v` \u306E\u5F62\
+    \u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\u5F62\u5F0F\u306B\u5BFE\u5FDC\
+    \u3057\u3066\u3044\u308B\u3002\n     * @param edge_count \u8FBA\u6570 E\n    \
+    \ * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\u3042\u308B\u304B\
+    \ `(default = true)`\n     * @param one_index \u9802\u70B9\u304C1-index\u3067\u3042\
+    \u308B\u304B `(default = true)`\n     */\n    void input(int edge_count, bool\
+    \ weighted_graph = true, bool one_index = true){\n        for(int i = 0; i < edge_count;\
+    \ ++i){\n            int s, t; cin >> s >> t;\n            if(one_index) --s,\
+    \ --t;\n            CostType w = 1;\n            if(weighted_graph) cin >> w;\n\
+    \            add_edge(s, t, w);\n        }\n    }\n\n    vector<ED> &operator[](Vertex\
+    \ v){\n        return adjacent_list_[v];\n    }\n\n    const vector<ED> &operator[](Vertex\
+    \ v) const {\n        return adjacent_list_[v];\n    }\n};\n\n/**\n * @brief \u30B0\
+    \u30E9\u30D5\u306E\u96A3\u63A5\u884C\u5217\u3092\u8FD4\u3059\u3002\n * @note verify\
+    \ : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\n *\
+    \ @note \u8A08\u7B97\u91CF : O(V + E)\n * @param G \u9802\u70B9\u6570 V \u306E\
+    \u30B0\u30E9\u30D5\n * @param not_adjacent_value 2\u9802\u70B9 u, v \u9593\u306B\
+    \u8FBA\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306E\u5024 `(default =\
+    \ 0)`\n * @attention \u81EA\u5DF1\u30EB\u30FC\u30D7\u3084\u591A\u91CD\u8FBA\u304C\
+    \u542B\u307E\u308C\u308B\u30B0\u30E9\u30D5\u306B\u3064\u3044\u3066\u306F\u672A\
+    \u5B9A\u7FA9\n * @return vector<vector<CostType>> V \xD7 V \u306E\u96A3\u63A5\u884C\
+    \u5217\n */\ntemplate<typename CostType>\nvector<vector<CostType>> convert_to_matrix(Graph<CostType>\
+    \ &G, CostType not_adjacent_value = 0){\n    size_t V = G.get_vertex_size();\n\
+    \    vector<vector<CostType>> ret(V, vector<CostType>(V, not_adjacent_value));\n\
+    \    for(int i = 0; i < V; ++i){\n        for(Edge<CostType> &e : G[i]){\n   \
+    \         ret[i][e.to] = e.cost;\n        }\n    }\n    return ret;\n}\n\n/**\n\
+    \ * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\u3092\u9006\u9806\u306B\u3057\u305F\u30B0\
+    \u30E9\u30D5\u3092\u8FD4\u3059\u3002\n * @param G \u9802\u70B9\u6570 V \u306E\u30B0\
+    \u30E9\u30D5\n * @attention \u7121\u5411\u30B0\u30E9\u30D5\u306B\u5BFE\u3059\u308B\
+    \u52D5\u4F5C\u306F\u672A\u5B9A\u7FA9\n * @return Graph<CostType> G \u306E\u8FBA\
+    \u3092\u9006\u306B\u3057\u305F\u30B0\u30E9\u30D5\n */\ntemplate<typename CostType>\n\
+    Graph<CostType> reverse(Graph<CostType> &G){\n    size_t V = G.get_vertex_size();\n\
+    \    Graph<CostType> ret(V, true);\n    for(int i = 0; i < V; ++i){\n        for(Edge<CostType>\
+    \ &e : G[i]){\n            ret.add_edge(e.to, e.from, e.cost);\n        }\n  \
+    \  }\n    return ret;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\u96C6\
+    \u5408\u3092\u8FD4\u3059\u3002\n * @param G \u9802\u70B9\u6570 V \u306E\u30B0\u30E9\
+    \u30D5\n * @param sorted \u8FBA\u96C6\u5408\u3092\u30B3\u30B9\u30C8\u3067\u30BD\
+    \u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B (default = true)\n\
+    \ * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\n */\ntemplate<typename\
+    \ CostType>\nvector<Edge<CostType>> convert_to_edge_set(Graph<CostType> &G, bool\
+    \ sorted = true){\n    vector<Edge<CostType>> ret;\n    vector<bool> picked(G.get_edge_size(),\
+    \ false);\n    for(int v = 0; v < G.get_vertex_size(); ++v){\n        for(Edge<CostType>\
+    \ e : G[v]){\n            if(!picked[e.id]) ret.push_back(e);\n            picked[e.id]\
+    \ = true;\n        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(),\
+    \ [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n\
+    \        });\n    }\n    return ret;\n}\n#line 14 \"library/Tree/Tree.hpp\"\n\n\
+    template<typename CostType = int32_t>\nclass Tree : public Graph<CostType>{\n\
+    \    public:\n    using Graph<CostType>::Graph;\n\n    void input(bool weighted_graph\
+    \ = true, bool one_index = true){\n        for(int i = 0; i < this->get_vertex_size()\
+    \ - 1; ++i){\n            int s, t; cin >> s >> t;\n            if(one_index)\
+    \ --s, --t;\n            CostType w = 1;\n            if(weighted_graph) cin >>\
+    \ w;\n            this->add_edge(s, t, w);\n        }\n    }\n\n    void input(const\
+    \ vector<Vertex> &A, const vector<Vertex> &B, const vector<CostType> &C, bool\
+    \ one_index = true){\n        assert(A.size() == this->get_vertex_size() - 1);\n\
+    \        assert(B.size() == this->get_vertex_size() - 1);\n        assert(C.size()\
+    \ == this->get_vertex_size() - 1);\n        for(int i = 0; i < this->get_vertex_size()\
+    \ - 1; ++i){\n            int s = A[i], t = B[i];\n            if(one_index) --s,\
+    \ --t;\n            this->add_edge(s, t, C[i]);\n        }\n    }\n};\n\ntemplate<typename\
+    \ CostType>\nstruct TreeEdge{\n    Vertex vertex;\n    CostType cost;\n    TreeEdge(Vertex\
+    \ v = -1, CostType c = 1) : vertex(v), cost(c){}\n};\n\ntemplate<typename CostType\
+    \ = int32_t>\nclass RootedTree{\n    private:\n    size_t vertex_size_;\n    Vertex\
+    \ root_vertex_{0};\n    vector<TreeEdge<CostType>> parent_;\n    vector<vector<TreeEdge<CostType>>>\
+    \ children_;\n\n    public:\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex`\
+    \ \u3067\u9802\u70B9 `root = 0` \u3092\u6839\u3068\u3059\u308B\u6839\u4ED8\u304D\
+    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention `input()` \u3067\
+    \u5165\u529B\u3092\u53D7\u3051\u53D6\u308B\u5F62\u5F0F\u306E\u3068\u304D\u306E\
+    \u307F\u4F7F\u7528\u53EF\u80FD\n     * @param vertex \u9802\u70B9\u6570\n    \
+    \ * @param root \u6839\u306E\u9802\u70B9 `(default = 0)`\n     */\n    RootedTree(int\
+    \ vertex, int root = 0) : \n        vertex_size_(vertex), root_vertex_(root),\n\
+    \        parent_(vertex_size_), children_(vertex_size_){}\n\n    /**\n     * @brief\
+    \ \u30B0\u30E9\u30D5 `G` \u304B\u3089\u9802\u70B9 `root = 0` \u3092\u6839\u3068\
+    \u3059\u308B\u6839\u4ED8\u304D\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n   \
+    \  * @attention `G` \u306F\u6728\u3067\u306A\u304F\u3066\u306F\u306A\u3089\u306A\
+    \u3044\n     * @param G \u69CB\u7BC9\u5143\u306E\u30B0\u30E9\u30D5\n     * @param\
+    \ root \u6839\u306E\u9802\u70B9 `(default = 0)`\n     */\n    RootedTree(Graph<CostType>\
+    \ &G, Vertex root = 0) :\n        vertex_size_(G.get_vertex_size()), root_vertex_(root),\n\
+    \        parent_(vertex_size_), children_(vertex_size_){\n        auto dfs = [&](auto\
+    \ self, Vertex v, Vertex p) -> void {\n            for(Edge<CostType> &e : G[v]){\n\
+    \                if(e.to == p) continue;\n                parent_[e.to] = TreeEdge<CostType>(v,\
+    \ e.cost);\n                children_[v].push_back(TreeEdge<CostType>(e.to, e.cost));\n\
+    \                self(self, e.to, v);\n            }\n        };\n        dfs(dfs,\
+    \ root_vertex_, -1);\n    }\n\n    size_t get_vertex_size() const {\n        return\
+    \ vertex_size_;\n    }\n\n    Vertex get_root() const {\n        return root_vertex_;\n\
+    \    }\n\n    TreeEdge<CostType> get_parent(Vertex v) const {\n        return\
+    \ parent_[v];\n    }\n\n    void input(bool weighted_edge = false, bool one_index\
+    \ = true){\n        for(Vertex v = 1; v < vertex_size_; ++v){\n            Vertex\
+    \ p; cin >> p;\n            if(one_index) --p;\n            CostType c = 1;\n\
+    \            if(weighted_edge) cin >> c;\n            parent_[v] = TreeEdge<CostType>(p,\
+    \ c);\n            children_[p].push_back(TreeEdge<CostType>(v, c));\n       \
+    \ }\n    }\n\n    vector<TreeEdge<CostType>> &operator[](Vertex v){\n        return\
+    \ children_[v];\n    }\n\n    const vector<TreeEdge<CostType>> &operator[](Vertex\
+    \ v) const {\n        return children_[v];\n    }\n};\n\ntemplate<typename CostType>\n\
+    vector<int> calculate_subtree_size(RootedTree<CostType> &T){\n    vector<int>\
+    \ ret(T.get_vertex_size(), 1);\n    auto dfs = [&](auto self, Vertex v) -> void\
+    \ {\n        for(TreeEdge<CostType> &e : T[v]){\n            self(self, e.vertex);\n\
+    \            ret[v] += ret[e.vertex];\n        }\n        return;\n    };\n  \
+    \  dfs(dfs, T.get_root());\n    return ret;\n}\n\ntemplate<typename CostType>\n\
+    vector<int> calculate_depth(RootedTree<CostType> &T){\n    vector<int> ret(T.get_vertex_size(),\
+    \ 0);\n    auto dfs = [&](auto self, Vertex v) -> void {\n        for(TreeEdge<CostType>\
+    \ &e : T[v]){\n            ret[e.vertex] = ret[v] + 1;\n            self(self,\
+    \ e.vertex);\n        }\n        return;\n    };\n    dfs(dfs, T.get_root());\n\
+    \    return ret;\n}\n#line 9 \"library/Tree/TreeDiameter.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass TreeDiameter{\n    private:\n    Tree<CostType> &T;\n    vector<Vertex>\
+    \ diameter_path_;\n    CostType diameter_cost_;\n    vector<CostType> branch_cost_;\n\
+    \    \n    void build(){\n        // \u76F4\u5F84\u69CB\u7BC9\u30D1\u30FC\u30C8\
+    \n        vector<CostType> dist(T.get_vertex_size(), 0);\n        vector<Vertex>\
+    \ parent(T.get_vertex_size(), -1);\n        auto dfs1 = [&](auto self, Vertex\
+    \ current_vertex, Vertex prev_vertex) -> void {\n            for(Edge<CostType>\
+    \ &e : T[current_vertex]){\n                if(e.to == prev_vertex) continue;\n\
+    \                dist[e.to] = dist[current_vertex] + e.cost;\n               \
+    \ parent[e.to] = current_vertex;\n                self(self, e.to, current_vertex);\n\
+    \            }\n        };\n        Vertex start = 0;\n        dfs1(dfs1, start,\
+    \ -1);\n        start = distance(dist.begin(), max_element(dist.begin(), dist.end()));\n\
+    \        dist.assign(T.get_vertex_size(), 0);\n        parent.assign(T.get_vertex_size(),\
+    \ -1);\n        dfs1(dfs1, start, -1);\n        auto itr = max_element(dist.begin(),\
+    \ dist.end());\n        diameter_cost_ = *itr;\n        vector<bool> included_diameter(T.get_vertex_size(),\
+    \ false);\n        Vertex current = distance(dist.begin(), itr);\n        diameter_path_.push_back(current);\n\
+    \        included_diameter[current] = true;\n        while(parent[current] !=\
+    \ -1){\n            current = parent[current];\n            diameter_path_.push_back(current);\n\
+    \            included_diameter[current] = true;\n        }\n\n        // \u679D\
+    \u69CB\u7BC9\u30D1\u30FC\u30C8\n        branch_cost_.resize(T.get_vertex_size(),\
+    \ 0);\n        auto dfs2 = [&](auto self, Vertex current_vertex, Vertex prev_vertex)\
+    \ -> void {\n            for(Edge<CostType> &e : T[current_vertex]){\n       \
+    \         if(e.to == prev_vertex) continue;\n                if(included_diameter[e.to])\
+    \ continue;\n                branch_cost_[e.to] = branch_cost_[current_vertex]\
+    \ + e.cost;\n                self(self, e.to, current_vertex);\n            }\n\
+    \        };\n        for(auto &v : diameter_path_){\n            dfs2(dfs2, v,\
+    \ -1);\n        }\n    }\n\n    public:\n    TreeDiameter(Tree<CostType> &T) :\
+    \ T(T){\n        build();\n    }\n\n    vector<Vertex> &get_path(){\n        return\
+    \ diameter_path_;\n    }\n\n    pair<Vertex, Vertex> get_endpoints() const {\n\
+    \        return {diameter_path_.front(), diameter_path_.back()};\n    }\n\n  \
+    \  CostType get_cost() const {\n        return diameter_cost_;\n    }\n\n    vector<CostType>\
+    \ &get_branch_cost(){\n        return branch_cost_;\n    }\n};\n#line 4 \"verify/LC-TreeDiameter.test.cpp\"\
+    \n\nint main(){\n    int N; cin >> N;\n    Tree<int64_t> T(N);\n    T.input(true,\
+    \ false);\n\n    TreeDiameter td(T);\n    auto ans = td.get_path();\n    cout\
+    \ << td.get_cost() << \" \" << ans.size() << endl;\n    for(auto v : ans){\n \
+    \       cout << v << \" \";\n    }\n    cout << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\n\n#include\
-    \ \"../library/Tree/TreeDiameter.hpp\"\n\nusing ll = long long;\n\nint main(){\n\
-    \    int N; cin >> N;\n    Graph<ll> G(N);\n    for(int i = 0; i < N - 1; ++i){\n\
-    \        int a, b, c; cin >> a >> b >> c;\n        G.add(a, b, c);\n    }\n\n\
-    \    TreeDiameter td(G);\n    ll X = td.dist();\n    auto u = td.path();\n   \
-    \ ll Y = u.size();\n    cout << X << \" \" << Y << endl;\n    for(auto &v : u){\n\
-    \        cout << v << \" \";\n    }\n    cout << endl;\n}"
+    \ \"../library/Tree/TreeDiameter.hpp\"\n\nint main(){\n    int N; cin >> N;\n\
+    \    Tree<int64_t> T(N);\n    T.input(true, false);\n\n    TreeDiameter td(T);\n\
+    \    auto ans = td.get_path();\n    cout << td.get_cost() << \" \" << ans.size()\
+    \ << endl;\n    for(auto v : ans){\n        cout << v << \" \";\n    }\n    cout\
+    \ << endl;\n}"
   dependsOn:
   - library/Tree/TreeDiameter.hpp
-  - library/Graph/GraphTemplate.hpp
+  - library/Tree/Tree.hpp
+  - library/Graph/Graph.hpp
   isVerificationFile: true
   path: verify/LC-TreeDiameter.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 19:12:40+09:00'
+  timestamp: '2024-07-29 03:11:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreeDiameter.test.cpp

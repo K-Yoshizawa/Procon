@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: library/Tree/Tree.hpp
-    title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
+    path: library/Tree/TreeDiameter.hpp
+    title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
@@ -16,33 +16,31 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
+    document_title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
-  bundledCode: "#line 1 \"library/Tree/TreeDiameter.hpp\"\n/**\n * @file TreeDiameter.hpp\n\
-    \ * @brief Tree Diameter - \u6728\u306E\u76F4\u5F84\n * @version 2.0\n * @date\
-    \ 2024-07-29\n */\n\n#line 2 \"library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n\
-    \ * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n\
-    \ * @date 2024-07-29\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n\
-    #line 2 \"library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief Graph\
-    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n\
-    \ * @date 2024-06-14\n */\n\n#line 11 \"library/Graph/Graph.hpp\"\nusing namespace\
-    \ std;\n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n \
-    \   int from{-1}, to{-1}, id{-1};\n    CostType cost{1};\n\n    Edge() = default;\n\
-    \    Edge(int from, int to, CostType cost, int id = -1) : from(from), to(to),\
-    \ cost(cost), id(id){}\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    protected:\n    using ED = Edge<CostType>;\n\n    size_t vertex_{0}, edge_{0};\n\
-    \    vector<vector<ED>> adjacent_list_;\n\n    bool directed_flag_;\n    CostType\
-    \ inf_{numeric_limits<CostType>::max() / 4};\n\n    inline void validate(int vertex){\n\
-    \        assert(0 <= vertex && vertex < vertex_);\n    }\n\n    public:\n    Graph()\
-    \ = default;\n\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex_size` \u306E\
-    \u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param vertex_size\
-    \ \u9802\u70B9\u6570\n     * @param directed `true` \u306E\u5834\u5408\u3001\u6709\
-    \u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u69CB\u7BC9\u3059\u308B `(default =\
-    \ false)`\n     */\n    Graph(int vertex_size, bool directed = false) : \n   \
-    \     vertex_(vertex_size), adjacent_list_(vertex_size),\n        directed_flag_(directed){}\n\
-    \n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\u6570\u3092\u53D6\
-    \u5F97\u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\u9802\
-    \u70B9\u6570\n     */\n    size_t get_vertex_size() const {\n        return vertex_;\n\
+  bundledCode: "#line 2 \"library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n * @brief\
+    \ Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n * @date\
+    \ 2024-07-29\n */\n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#line 2\
+    \ \"library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief Graph - \u30B0\
+    \u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n * @date 2024-06-14\n\
+    \ */\n\n#line 11 \"library/Graph/Graph.hpp\"\nusing namespace std;\n\nusing Vertex\
+    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    int from{-1}, to{-1},\
+    \ id{-1};\n    CostType cost{1};\n\n    Edge() = default;\n    Edge(int from,\
+    \ int to, CostType cost, int id = -1) : from(from), to(to), cost(cost), id(id){}\n\
+    };\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n    protected:\n  \
+    \  using ED = Edge<CostType>;\n\n    size_t vertex_{0}, edge_{0};\n    vector<vector<ED>>\
+    \ adjacent_list_;\n\n    bool directed_flag_;\n    CostType inf_{numeric_limits<CostType>::max()\
+    \ / 4};\n\n    inline void validate(int vertex){\n        assert(0 <= vertex &&\
+    \ vertex < vertex_);\n    }\n\n    public:\n    Graph() = default;\n\n    /**\n\
+    \     * @brief \u9802\u70B9\u6570 `vertex_size` \u306E\u30B0\u30E9\u30D5\u3092\
+    \u69CB\u7BC9\u3059\u308B\u3002\n     * @param vertex_size \u9802\u70B9\u6570\n\
+    \     * @param directed `true` \u306E\u5834\u5408\u3001\u6709\u5411\u30B0\u30E9\
+    \u30D5\u3068\u3057\u3066\u69CB\u7BC9\u3059\u308B `(default = false)`\n     */\n\
+    \    Graph(int vertex_size, bool directed = false) : \n        vertex_(vertex_size),\
+    \ adjacent_list_(vertex_size),\n        directed_flag_(directed){}\n\n    /**\n\
+    \     * @brief \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\u6570\u3092\u53D6\u5F97\
+    \u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\
+    \u6570\n     */\n    size_t get_vertex_size() const {\n        return vertex_;\n\
     \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306E\u8FBA\u6570\u3092\
     \u53D6\u5F97\u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\
     \u8FBA\u6570\n     */\n    size_t get_edge_size() const {\n        return edge_;\n\
@@ -163,85 +161,80 @@ data:
     \ 0);\n    auto dfs = [&](auto self, Vertex v) -> void {\n        for(TreeEdge<CostType>\
     \ &e : T[v]){\n            ret[e.vertex] = ret[v] + 1;\n            self(self,\
     \ e.vertex);\n        }\n        return;\n    };\n    dfs(dfs, T.get_root());\n\
-    \    return ret;\n}\n#line 9 \"library/Tree/TreeDiameter.hpp\"\n\ntemplate<typename\
-    \ CostType>\nclass TreeDiameter{\n    private:\n    Tree<CostType> &T;\n    vector<Vertex>\
-    \ diameter_path_;\n    CostType diameter_cost_;\n    vector<CostType> branch_cost_;\n\
-    \    \n    void build(){\n        // \u76F4\u5F84\u69CB\u7BC9\u30D1\u30FC\u30C8\
-    \n        vector<CostType> dist(T.get_vertex_size(), 0);\n        vector<Vertex>\
-    \ parent(T.get_vertex_size(), -1);\n        auto dfs1 = [&](auto self, Vertex\
-    \ current_vertex, Vertex prev_vertex) -> void {\n            for(Edge<CostType>\
-    \ &e : T[current_vertex]){\n                if(e.to == prev_vertex) continue;\n\
-    \                dist[e.to] = dist[current_vertex] + e.cost;\n               \
-    \ parent[e.to] = current_vertex;\n                self(self, e.to, current_vertex);\n\
-    \            }\n        };\n        Vertex start = 0;\n        dfs1(dfs1, start,\
-    \ -1);\n        start = distance(dist.begin(), max_element(dist.begin(), dist.end()));\n\
-    \        dist.assign(T.get_vertex_size(), 0);\n        parent.assign(T.get_vertex_size(),\
-    \ -1);\n        dfs1(dfs1, start, -1);\n        auto itr = max_element(dist.begin(),\
-    \ dist.end());\n        diameter_cost_ = *itr;\n        vector<bool> included_diameter(T.get_vertex_size(),\
-    \ false);\n        Vertex current = distance(dist.begin(), itr);\n        diameter_path_.push_back(current);\n\
-    \        included_diameter[current] = true;\n        while(parent[current] !=\
-    \ -1){\n            current = parent[current];\n            diameter_path_.push_back(current);\n\
-    \            included_diameter[current] = true;\n        }\n\n        // \u679D\
-    \u69CB\u7BC9\u30D1\u30FC\u30C8\n        branch_cost_.resize(T.get_vertex_size(),\
-    \ 0);\n        auto dfs2 = [&](auto self, Vertex current_vertex, Vertex prev_vertex)\
-    \ -> void {\n            for(Edge<CostType> &e : T[current_vertex]){\n       \
-    \         if(e.to == prev_vertex) continue;\n                if(included_diameter[e.to])\
-    \ continue;\n                branch_cost_[e.to] = branch_cost_[current_vertex]\
-    \ + e.cost;\n                self(self, e.to, current_vertex);\n            }\n\
-    \        };\n        for(auto &v : diameter_path_){\n            dfs2(dfs2, v,\
-    \ -1);\n        }\n    }\n\n    public:\n    TreeDiameter(Tree<CostType> &T) :\
-    \ T(T){\n        build();\n    }\n\n    vector<Vertex> &get_path(){\n        return\
-    \ diameter_path_;\n    }\n\n    pair<Vertex, Vertex> get_endpoints() const {\n\
-    \        return {diameter_path_.front(), diameter_path_.back()};\n    }\n\n  \
-    \  CostType get_cost() const {\n        return diameter_cost_;\n    }\n\n    vector<CostType>\
-    \ &get_branch_cost(){\n        return branch_cost_;\n    }\n};\n"
-  code: "/**\n * @file TreeDiameter.hpp\n * @brief Tree Diameter - \u6728\u306E\u76F4\
-    \u5F84\n * @version 2.0\n * @date 2024-07-29\n */\n\n#include \"Tree.hpp\"\n\n\
-    template<typename CostType>\nclass TreeDiameter{\n    private:\n    Tree<CostType>\
-    \ &T;\n    vector<Vertex> diameter_path_;\n    CostType diameter_cost_;\n    vector<CostType>\
-    \ branch_cost_;\n    \n    void build(){\n        // \u76F4\u5F84\u69CB\u7BC9\u30D1\
-    \u30FC\u30C8\n        vector<CostType> dist(T.get_vertex_size(), 0);\n       \
-    \ vector<Vertex> parent(T.get_vertex_size(), -1);\n        auto dfs1 = [&](auto\
-    \ self, Vertex current_vertex, Vertex prev_vertex) -> void {\n            for(Edge<CostType>\
-    \ &e : T[current_vertex]){\n                if(e.to == prev_vertex) continue;\n\
-    \                dist[e.to] = dist[current_vertex] + e.cost;\n               \
-    \ parent[e.to] = current_vertex;\n                self(self, e.to, current_vertex);\n\
-    \            }\n        };\n        Vertex start = 0;\n        dfs1(dfs1, start,\
-    \ -1);\n        start = distance(dist.begin(), max_element(dist.begin(), dist.end()));\n\
-    \        dist.assign(T.get_vertex_size(), 0);\n        parent.assign(T.get_vertex_size(),\
-    \ -1);\n        dfs1(dfs1, start, -1);\n        auto itr = max_element(dist.begin(),\
-    \ dist.end());\n        diameter_cost_ = *itr;\n        vector<bool> included_diameter(T.get_vertex_size(),\
-    \ false);\n        Vertex current = distance(dist.begin(), itr);\n        diameter_path_.push_back(current);\n\
-    \        included_diameter[current] = true;\n        while(parent[current] !=\
-    \ -1){\n            current = parent[current];\n            diameter_path_.push_back(current);\n\
-    \            included_diameter[current] = true;\n        }\n\n        // \u679D\
-    \u69CB\u7BC9\u30D1\u30FC\u30C8\n        branch_cost_.resize(T.get_vertex_size(),\
-    \ 0);\n        auto dfs2 = [&](auto self, Vertex current_vertex, Vertex prev_vertex)\
-    \ -> void {\n            for(Edge<CostType> &e : T[current_vertex]){\n       \
-    \         if(e.to == prev_vertex) continue;\n                if(included_diameter[e.to])\
-    \ continue;\n                branch_cost_[e.to] = branch_cost_[current_vertex]\
-    \ + e.cost;\n                self(self, e.to, current_vertex);\n            }\n\
-    \        };\n        for(auto &v : diameter_path_){\n            dfs2(dfs2, v,\
-    \ -1);\n        }\n    }\n\n    public:\n    TreeDiameter(Tree<CostType> &T) :\
-    \ T(T){\n        build();\n    }\n\n    vector<Vertex> &get_path(){\n        return\
-    \ diameter_path_;\n    }\n\n    pair<Vertex, Vertex> get_endpoints() const {\n\
-    \        return {diameter_path_.front(), diameter_path_.back()};\n    }\n\n  \
-    \  CostType get_cost() const {\n        return diameter_cost_;\n    }\n\n    vector<CostType>\
-    \ &get_branch_cost(){\n        return branch_cost_;\n    }\n};"
+    \    return ret;\n}\n"
+  code: "#pragma once\n\n/**\n * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\n * @version 0.1\n * @date 2024-07-29\n */\n\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\n#include \"../Graph/Graph.hpp\"\n\n\
+    template<typename CostType = int32_t>\nclass Tree : public Graph<CostType>{\n\
+    \    public:\n    using Graph<CostType>::Graph;\n\n    void input(bool weighted_graph\
+    \ = true, bool one_index = true){\n        for(int i = 0; i < this->get_vertex_size()\
+    \ - 1; ++i){\n            int s, t; cin >> s >> t;\n            if(one_index)\
+    \ --s, --t;\n            CostType w = 1;\n            if(weighted_graph) cin >>\
+    \ w;\n            this->add_edge(s, t, w);\n        }\n    }\n\n    void input(const\
+    \ vector<Vertex> &A, const vector<Vertex> &B, const vector<CostType> &C, bool\
+    \ one_index = true){\n        assert(A.size() == this->get_vertex_size() - 1);\n\
+    \        assert(B.size() == this->get_vertex_size() - 1);\n        assert(C.size()\
+    \ == this->get_vertex_size() - 1);\n        for(int i = 0; i < this->get_vertex_size()\
+    \ - 1; ++i){\n            int s = A[i], t = B[i];\n            if(one_index) --s,\
+    \ --t;\n            this->add_edge(s, t, C[i]);\n        }\n    }\n};\n\ntemplate<typename\
+    \ CostType>\nstruct TreeEdge{\n    Vertex vertex;\n    CostType cost;\n    TreeEdge(Vertex\
+    \ v = -1, CostType c = 1) : vertex(v), cost(c){}\n};\n\ntemplate<typename CostType\
+    \ = int32_t>\nclass RootedTree{\n    private:\n    size_t vertex_size_;\n    Vertex\
+    \ root_vertex_{0};\n    vector<TreeEdge<CostType>> parent_;\n    vector<vector<TreeEdge<CostType>>>\
+    \ children_;\n\n    public:\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex`\
+    \ \u3067\u9802\u70B9 `root = 0` \u3092\u6839\u3068\u3059\u308B\u6839\u4ED8\u304D\
+    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention `input()` \u3067\
+    \u5165\u529B\u3092\u53D7\u3051\u53D6\u308B\u5F62\u5F0F\u306E\u3068\u304D\u306E\
+    \u307F\u4F7F\u7528\u53EF\u80FD\n     * @param vertex \u9802\u70B9\u6570\n    \
+    \ * @param root \u6839\u306E\u9802\u70B9 `(default = 0)`\n     */\n    RootedTree(int\
+    \ vertex, int root = 0) : \n        vertex_size_(vertex), root_vertex_(root),\n\
+    \        parent_(vertex_size_), children_(vertex_size_){}\n\n    /**\n     * @brief\
+    \ \u30B0\u30E9\u30D5 `G` \u304B\u3089\u9802\u70B9 `root = 0` \u3092\u6839\u3068\
+    \u3059\u308B\u6839\u4ED8\u304D\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n   \
+    \  * @attention `G` \u306F\u6728\u3067\u306A\u304F\u3066\u306F\u306A\u3089\u306A\
+    \u3044\n     * @param G \u69CB\u7BC9\u5143\u306E\u30B0\u30E9\u30D5\n     * @param\
+    \ root \u6839\u306E\u9802\u70B9 `(default = 0)`\n     */\n    RootedTree(Graph<CostType>\
+    \ &G, Vertex root = 0) :\n        vertex_size_(G.get_vertex_size()), root_vertex_(root),\n\
+    \        parent_(vertex_size_), children_(vertex_size_){\n        auto dfs = [&](auto\
+    \ self, Vertex v, Vertex p) -> void {\n            for(Edge<CostType> &e : G[v]){\n\
+    \                if(e.to == p) continue;\n                parent_[e.to] = TreeEdge<CostType>(v,\
+    \ e.cost);\n                children_[v].push_back(TreeEdge<CostType>(e.to, e.cost));\n\
+    \                self(self, e.to, v);\n            }\n        };\n        dfs(dfs,\
+    \ root_vertex_, -1);\n    }\n\n    size_t get_vertex_size() const {\n        return\
+    \ vertex_size_;\n    }\n\n    Vertex get_root() const {\n        return root_vertex_;\n\
+    \    }\n\n    TreeEdge<CostType> get_parent(Vertex v) const {\n        return\
+    \ parent_[v];\n    }\n\n    void input(bool weighted_edge = false, bool one_index\
+    \ = true){\n        for(Vertex v = 1; v < vertex_size_; ++v){\n            Vertex\
+    \ p; cin >> p;\n            if(one_index) --p;\n            CostType c = 1;\n\
+    \            if(weighted_edge) cin >> c;\n            parent_[v] = TreeEdge<CostType>(p,\
+    \ c);\n            children_[p].push_back(TreeEdge<CostType>(v, c));\n       \
+    \ }\n    }\n\n    vector<TreeEdge<CostType>> &operator[](Vertex v){\n        return\
+    \ children_[v];\n    }\n\n    const vector<TreeEdge<CostType>> &operator[](Vertex\
+    \ v) const {\n        return children_[v];\n    }\n};\n\ntemplate<typename CostType>\n\
+    vector<int> calculate_subtree_size(RootedTree<CostType> &T){\n    vector<int>\
+    \ ret(T.get_vertex_size(), 1);\n    auto dfs = [&](auto self, Vertex v) -> void\
+    \ {\n        for(TreeEdge<CostType> &e : T[v]){\n            self(self, e.vertex);\n\
+    \            ret[v] += ret[e.vertex];\n        }\n        return;\n    };\n  \
+    \  dfs(dfs, T.get_root());\n    return ret;\n}\n\ntemplate<typename CostType>\n\
+    vector<int> calculate_depth(RootedTree<CostType> &T){\n    vector<int> ret(T.get_vertex_size(),\
+    \ 0);\n    auto dfs = [&](auto self, Vertex v) -> void {\n        for(TreeEdge<CostType>\
+    \ &e : T[v]){\n            ret[e.vertex] = ret[v] + 1;\n            self(self,\
+    \ e.vertex);\n        }\n        return;\n    };\n    dfs(dfs, T.get_root());\n\
+    \    return ret;\n}"
   dependsOn:
-  - library/Tree/Tree.hpp
   - library/Graph/Graph.hpp
   isVerificationFile: false
-  path: library/Tree/TreeDiameter.hpp
-  requiredBy: []
-  timestamp: '2024-07-29 03:11:26+09:00'
+  path: library/Tree/Tree.hpp
+  requiredBy:
+  - library/Tree/TreeDiameter.hpp
+  timestamp: '2024-07-29 03:11:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreeDiameter.test.cpp
-documentation_of: library/Tree/TreeDiameter.hpp
+documentation_of: library/Tree/Tree.hpp
 layout: document
 redirect_from:
-- /library/library/Tree/TreeDiameter.hpp
-- /library/library/Tree/TreeDiameter.hpp.html
-title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
+- /library/library/Tree/Tree.hpp
+- /library/library/Tree/Tree.hpp.html
+title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
 ---
