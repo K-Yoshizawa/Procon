@@ -3,16 +3,10 @@
 #include "../library/Graph/WarshallFloyd.hpp"
 
 int main(){
-    int V, E;
-    cin >> V >> E;
-    Graph<long long> G(V, true);
-    G.input(E, true, true);
-
-    WarshallFloyd<long long> wf(G);
-    if(wf.negative()){
-        cout << "NEGATIVE CYCLE\n";
-    }
-    else{
-        wf.print();
-    }
+    int V, E; cin >> V >> E;
+    Graph<int64_t> G(V, true);
+    G.input(E, true, false);
+    
+    WarshallFloyd wf(G);
+    wf.print();
 }
