@@ -31,6 +31,11 @@ struct CumulativeSum2D{
         }
     }
 
+    CumulativeSum2D(int H, int W, T V){
+        Y_ = H, X_ =W;
+        data_.resize(Y_, vector<T>(X_, V));
+    }
+
     /**
      * @brief 二次元累積和を構築する
      */
