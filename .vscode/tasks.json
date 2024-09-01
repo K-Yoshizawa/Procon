@@ -10,6 +10,11 @@
             "label": "test",
             "type": "shell",
             "command": "./a.out < in.txt"
+        },
+        {
+            "label": "debug",
+            "type": "shell",
+            "command": "./a.out < in.txt > out.txt 2> debug.txt"
         }
     ]
 }

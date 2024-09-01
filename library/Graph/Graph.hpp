@@ -119,9 +119,10 @@ class Graph{
  * @brief グラフの隣接行列を返す。
  * @note verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A
  * @note 計算量 : O(V + E)
+ * @note 多重辺については、最も重みが小さい辺を採用
  * @param G 頂点数 V のグラフ
  * @param not_adjacent_value 2頂点 u, v 間に辺が存在しない場合の値 `(default = 0)`
- * @attention 自己ループや多重辺が含まれるグラフについては未定義
+ * @attention 自己ループが含まれるグラフについては未定義
  * @return vector<vector<CostType>> V × V の隣接行列
  */
 template<typename CostType>
@@ -130,7 +131,9 @@ vector<vector<CostType>> convert_to_matrix(Graph<CostType> &G, CostType not_adja
     vector<vector<CostType>> ret(V, vector<CostType>(V, not_adjacent_value));
     for(int i = 0; i < V; ++i){
         for(Edge<CostType> &e : G[i]){
-            ret[i][e.to] = e.cost;
+            if(ret[i][e.to] == not_adjacent_value || ret[i][e.to] > e.cost){
+                ret[i][e.to] = e.cost;
+            }
         }
     }
     return ret;

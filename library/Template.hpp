@@ -58,10 +58,6 @@ using ll = int64_t;
 using ull = uint64_t;
 using ld = long double;
 
-const long double PI = acosl(-1);
-const long double PI2 = PI * 2;
-const long double PI_2 = PI / 2;
-
 const int INF_INT = numeric_limits<int>::max() >> 2;
 const ll INF_LL = numeric_limits<ll>::max() >> 2;
 
@@ -148,6 +144,14 @@ istream &operator>>(istream &is, vector<T> &v){
     return is;
 }
 
+template <typename T>
+ostream &operator<<(ostream &os, set<T> &v){
+    for (auto &u : v){
+        os << u << " ";
+    }
+    return os;
+}
+
 template<typename T1, typename T2>
 vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){
     assert(v1.size() == v2.size());
@@ -191,7 +195,7 @@ tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
 }
 
 #ifdef LOGK
-#define DEBUG(fmt, ...) fprintf(stderr, "[Debug]    " fmt __VA_OPT__(,) __VA_ARGS__)
+#define DEBUG(fmt, ...) fprintf(stderr, fmt __VA_OPT__(,) __VA_ARGS__)
 #define VARIABLE(var) cerr << "# " << #var << " = " << var << endl;
 #else
 #define DEBUG(...) 42

@@ -66,7 +66,7 @@ class BellmanFord{
      * @return CostType 頂点 `start` から頂点 `goal` までの最短経路長
      */
     CostType distance(Vertex goal) const {
-        validate(goal);
+        // validate(goal);
         return dist_[goal];
     }
 
