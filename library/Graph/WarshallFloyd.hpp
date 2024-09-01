@@ -16,8 +16,11 @@ class WarshallFloyd{
     CostType inf_;
     vector<vector<CostType>> dist_{};
 
-    inline void validate(int vertex){
-        assert(0 <= vertex && vertex < vertex_size_);
+    inline void validate(int vertex) const {
+        if(!(0 <= vertex && vertex < vertex_size_)){
+            cerr << "# [Warshall-Floyd] Failed Validate : Vertex " << vertex << endl;
+            assert(false);
+        }
     }
 
     void solve(){
