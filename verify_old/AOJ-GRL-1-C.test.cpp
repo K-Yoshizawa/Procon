@@ -1,13 +1,12 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C"
 
-#include "../Library/Template.hpp"
-#include "../Library/Graph/WarshallFloyd.hpp"
+#include "../library/Graph/WarshallFloyd.hpp"
 
 int main(){
     int V, E; cin >> V >> E;
-    Graph<ll> G(V, true);
-    G.InputGraph(E, true, false);
+    Graph<int64_t> G(V, true);
+    G.input(E, true, false);
     
     WarshallFloyd wf(G);
-    wf.Print();
+    wf.print();
 }

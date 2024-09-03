@@ -1,18 +1,16 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "../library/Tree/LowestCommonAncestor.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/Tree/LowestCommonAncestor.hpp"
 
 int main(){
     int N, Q; cin >> N >> Q;
-    Graph G(N);
-    for(int i = 1; i < N; ++i){
-        int p; cin >> p;
-        G.add(i, p);
-    }
+    RootedTree T(N);
+    T.InputRootedTreeFormat(false, false);
 
-    LowestCommonAncestor lca(G, 0);
+    LowestCommonAncestor lca(T);
     while(Q--){
         int u, v; cin >> u >> v;
-        cout << lca.get(u, v) << endl;
+        cout << lca.Query(u, v) << endl;
     }
 }
