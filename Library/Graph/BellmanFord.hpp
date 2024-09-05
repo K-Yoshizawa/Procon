@@ -85,7 +85,7 @@ class BellmanFord{
     vector<CostType> dist_;
     bool negative_cycle_{false};
 
-    inline void validate(int vertex) const {
+    inline void Validate(int vertex) const {
         if(!(0 <= vertex && vertex < vertex_size_)){
             cerr << "# [Bellman-Ford] Failed Validate : Vertex " << vertex << endl;
             assert(false);

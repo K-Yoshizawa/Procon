@@ -10,21 +10,19 @@
 template<typename CostType>
 class LowLink{
     public:
-    enum class EdgeClass{
-        kTreeEdge,
-        kBackEdge,
-        kForwardEdge,
-        kCrossEdge,
-    };
-
-    LowLink() = default;
-
     LowLink(Graph<CostType> &graph) :
             graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),
             child_(graph.get_vertex_size()), state_(graph.get_vertex_size(), 0){
         for(int i = 0; i < graph.get_vertex_size(); ++i){
             if(!state_[i]) dfs(i, -1, 0);
         }
+        // for(int i = 0; i < graph.get_vertex_size(); ++i){
+        //     cerr << i << " (state = " << state_[i] << ") :";
+        //     for(auto v : child_[i]){
+        //         cerr << " " << v;
+        //     }
+        //     cerr << endl;
+        // }
     }
 
     /**
@@ -87,15 +85,17 @@ class LowLink{
     private:
     bool dfs(Vertex v, Vertex p, int order){
         if(state_[v] != 0) return false;
-        state_[v] = 1 + (p != -1);
+        // cerr << "# (v, p, order) = (" << v << ", " << p << ", " << order << ")" << endl;
+        state_[v] = 1 + (p == -1);
         ord_[v] = low_[v] = order;
         for(Edge<CostType> &e : graph_[v]){
             if(e.to == p) continue;
+            child_[v].push_back(e.to);
             if(dfs(e.to, v, order + 1)){
-                child_[v].push_back(e.to);
                 low_[v] = min(low_[v], low_[e.to]);
             }
             else{
+                child_[v].pop_back();
                 low_[v] = min(low_[v], ord_[e.to]);
             }
         }
