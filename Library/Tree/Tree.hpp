@@ -203,7 +203,7 @@ class RootedTree{
             cerr << node_[i].cost;
             fprintf(stderr, "), children = [");
             for(int j = 0; j < node_[i].children.size(); ++j){
-                fprintf(stderr, "%d", node_[i].children[j]);
+                fprintf(stderr, "%d", node_[i].children[j] + int(one_index));
                 if(j + 1 < node_[i].children.size()){
                     fprintf(stderr, ", ");
                 }

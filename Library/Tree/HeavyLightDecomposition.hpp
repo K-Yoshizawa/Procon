@@ -27,6 +27,7 @@ class HeavyLightDecomposition{
     HeavyLightDecomposition(RootedTree<CostType> &tree) : tree_(tree){
         vertex_size_ = tree_.get_vertex_size();
         vector<int> subtree_size = CalculateSubtreeSize(tree_);
+        vertex_depth_ = CalculateTreeDepth(tree_);
         for(int i = 0; i < vertex_size_; ++i){
             auto &children = tree_.get_child(i);
             nth_element(children.begin(), children.begin(), children.end(), [&](Vertex i, Vertex j){
@@ -38,12 +39,11 @@ class HeavyLightDecomposition{
         heavy_path_depth_.push_back(0);
         belong_heavy_path_index_.resize(vertex_size_, -1);
         belong_heavy_path_index_[root] = 0;
-        belong_heavy_path_order_.resize(vertex_size_, -1);
-        belong_heavy_path_order_[root] = 0;
         preorder_index_.resize(vertex_size_, -1);
         postorder_index_.resize(vertex_size_, -1);
+        vertex_order_.resize(vertex_size_);
         int timer = 0;
-        dfs(root, 0, 0, 0, timer);
+        dfs(root, 0, 0, timer);
     }
 
     /**
@@ -53,15 +53,55 @@ class HeavyLightDecomposition{
      * @return Vertex 最小共通祖先の頂点番号 (0-index)
      */
     Vertex LowestCommonAncestor(Vertex u, Vertex v){
-        if(depth(u) < depth(v)) swap(u, v);
-        while(depth(u) != depth(v)){
+        if(path_depth(u) < path_depth(v)) swap(u, v);
+        while(path_depth(u) != path_depth(v)){
             u = tree_.get_parent(head(u));
         }
         while(belong(u) != belong(v)){
             u = tree_.get_parent(head(u));
             v = tree_.get_parent(head(v));
         }
-        return order(u) < order(v) ? u : v;
+        return vertex_depth(u) < vertex_depth(v) ? u : v;
+    }
+
+    /**
+     * @brief 頂点 `v` の祖先であって、深さが `level` である頂点を返す。
+     * @note そのような頂点が存在しないとき、`-1` を返す。
+     * @param v 頂点番号 (0-index)
+     * @param level 深さ (0-index)
+     * @return Vertex 答えとなる頂点 (または `-1`)
+     */
+    Vertex LevelAncestor(Vertex v, int level){
+        if(level < 0 || vertex_depth(v) < level) return -1;
+        Vertex u = head(v);
+        while(1){
+            if(vertex_depth(u) <= level){
+                int delta = level - vertex_depth(u);
+                return order(preorder(u) + delta);
+            }
+            u = tree_.get_parent(u);
+        }
+    }
+
+    /**
+     * @brief 頂点 `from` から頂点 `to` への最短路において、`from` から `dist` 個移動した頂点番号を求める。
+     * @note 最短路の長さを `k` として、`dist < 0` または `k < dist` のとき `-1` を返す。
+     * @param from 始点の頂点番号 (0-index)
+     * @param to 終点の頂点番号 (0-index)
+     * @param dist 移動する頂点数
+     * @return Vertex 答えの頂点番号 (0-index) または `-1`
+     */
+    Vertex Jump(Vertex from, Vertex to, int dist){
+        Vertex lca = LowestCommonAncestor(from, to);
+        int dist_from_lca = vertex_depth(from) - vertex_depth(lca);
+        int dist_lca_to = vertex_depth(to) - vertex_depth(lca);
+        if(dist < 0 or dist > dist_from_lca + dist_lca_to) return -1;
+        if(dist <= dist_from_lca){
+            return LevelAncestor(from, vertex_depth(from) - dist);
+        }
+        else{
+            return LevelAncestor(to, vertex_depth(lca) + dist - dist_from_lca);
+        }
     }
 
     /**
@@ -121,7 +161,7 @@ class HeavyLightDecomposition{
     /**
      * @brief 頂点 `v` を根とする部分木に対応したインデックスを半開区間で返す。
      * @param v 頂点番号 (0-index)
-     * @return pair<int, int> インデックス (半開区間)
+     * @return pair<int, int> インデックス (0-index, 半開区間)
      */
     pair<int, int> SubtreeQuery(Vertex v) const {
         return make_pair(preorder(v), postorder(v) + 1);
@@ -151,23 +191,22 @@ class HeavyLightDecomposition{
     }
 
     private:
-    int dfs(Vertex v, int h, int d, int o, int &t){
+    int dfs(Vertex v, int h, int d, int &t){
         preorder_index_[v] = t;
+        vertex_order_[t] = v;
         int ret = t;
         ++t;
         auto cs = tree_.get_child(v);
         if(!cs.empty()){
             int c = cs.size();
             belong_heavy_path_index_[cs.front()] = h;
-            belong_heavy_path_order_[cs.front()] = o + 1;
-            ret = max(ret, dfs(cs.front(), h, d, o + 1, t));
+            ret = max(ret, dfs(cs.front(), h, d, t));
             for(int i = 1; i < c; ++i){
                 int nh = (int)heavy_path_head_.size();
                 heavy_path_head_.push_back(cs[i]);
                 heavy_path_depth_.push_back(d + 1);
                 belong_heavy_path_index_[cs[i]] = nh;
-                belong_heavy_path_order_[cs[i]] = 0;
-                ret = max(ret, dfs(cs[i], nh, d + 1, 0, t));
+                ret = max(ret, dfs(cs[i], nh, d + 1, t));
             }
         }
         postorder_index_[v] = ret;
@@ -178,16 +217,20 @@ class HeavyLightDecomposition{
         return heavy_path_head_[belong_heavy_path_index_[v]];
     }
 
-    int depth(Vertex v) const {
+    int path_depth(Vertex v) const {
         return heavy_path_depth_[belong_heavy_path_index_[v]];
+    }
+
+    int vertex_depth(Vertex v) const {
+        return vertex_depth_[v];
     }
 
     int belong(Vertex v) const {
         return belong_heavy_path_index_[v];
     }
 
-    int order(Vertex v) const {
-        return belong_heavy_path_order_[v];
+    Vertex order(int idx) const {
+        return vertex_order_[idx];
     }
 
     int preorder(Vertex v) const {
@@ -201,7 +244,8 @@ class HeavyLightDecomposition{
     RootedTree<CostType> &tree_;
 
     int vertex_size_;
-    vector<Vertex> heavy_path_head_;
+    vector<Vertex> heavy_path_head_, vertex_order_;
     vector<int> belong_heavy_path_index_, belong_heavy_path_order_, heavy_path_depth_;
     vector<int> preorder_index_, postorder_index_;
+    vector<int> vertex_depth_;
 };
