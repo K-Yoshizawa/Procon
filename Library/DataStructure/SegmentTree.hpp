@@ -14,7 +14,7 @@ class SegmentTree{
     using F = function<Monoid(Monoid, Monoid)>;
 
     /**
-     * @brief セグメント木を要素数 `Size` で初期化する。
+     * @brief セグメント木を要素数 `size` で初期化する。
      * @param size セグメント木の要素数
      * @param merge 区間取得を行う演算
      * @param monoid_identity モノイドの単位元
