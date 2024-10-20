@@ -2,11 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/Graph/Graph.hpp
+    path: Library/Common.hpp
+    title: Library/Common.hpp
+  - icon: ':heavy_check_mark:'
+    path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
-    path: library/Graph/StronglyConnectedComponents.hpp
+    path: Library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
+    path: Library/Template.hpp
+    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,23 +20,103 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_C
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C
-  bundledCode: "#line 1 \"verify/AOJ-GRL-3-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
-    \n\n#line 1 \"library/Graph/StronglyConnectedComponents.hpp\"\n/**\n * @file StronglyConnectedComponents.hpp\n\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_C
+  bundledCode: "#line 1 \"verify/AOJ-GRL-3-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_C\"\
+    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
+    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
+    \ @version 1.8\n * @date 2024-06-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
+    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
+    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
+    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
+    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
+    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n#line 12 \"Library/Template.hpp\"\n#define ALL(x) (x).begin(),\
+    \ (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n\
+    #define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
+    \ fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define\
+    \ SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno)\
+    \ - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
+    \ val) distance((arr).begin(), lower_bound((arr).begin(), (arr).end(), val))\n\
+    #define UPPERBOUND_IDX(arr, val) distance((arr).begin(), upper_bound((arr).begin(),\
+    \ (arr).end(), val))\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" :\
+    \ \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\n\
+    inline string YN(bool flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool\
+    \ flag){cout << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool chmin(T\
+    \ &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
+    \ T>\nbool chmax(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
+    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
+    \ min <= x && x <= max;}\ntemplate<typename T>\ninline bool ingrid(T y, T x, T\
+    \ ymax, T xmax){return between(0, y, ymax - 1) && between(0, x, xmax - 1);}\n\
+    template<typename T>\ninline T median(T a, T b, T c){return between(b, a, c) ||\
+    \ between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\ntemplate<typename\
+    \ T>\ninline T except(T src, T cond, T excp){return (src == cond ? excp : src);}\n\
+    template<typename T>\ninline T min(vector<T> &v){return *min_element((v).begin(),\
+    \ (v).end());}\ntemplate<typename T>\ninline T max(vector<T> &v){return *max_element((v).begin(),\
+    \ (v).end());}\nvector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n\
+    \    IOTA(ret);\n    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T>\
+    \ &v){\n    sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n\
+    \    v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
+    using ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
+    const ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nusing vi = vector<int>;\n\
+    using vvi = vector<vi>;\nusing vl = vector<ll>;\nusing vvl = vector<vl>;\nusing\
+    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing vs = vector<string>;\n\
+    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
+    using rpq = priority_queue<T, vector<T>, greater<T>>;\n\nconst int dx4[4] = {1,\
+    \ 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0,\
+    \ -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
+    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
+    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
+    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
+    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
+    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
+    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
+    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
+    \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
+    \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
+    ostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i < v.size();\
+    \ ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n  \
+    \  return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, vector<vector<T>>\
+    \ &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1\
+    \ != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename\
+    \ T>\nistream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i <\
+    \ v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream\
+    \ &operator<<(ostream &os, set<T> &v){\n    for (auto &u : v){\n        os <<\
+    \ u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename T1, typename T2>\n\
+    vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n   \
+    \ assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i\
+    \ = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\n\
+    template<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
+    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
+    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
+    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
+    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
+    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
+    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
+    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
+    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
+    #endif\n\n// ==============================================================\n\
+    // \n// Main Program Start\n// \n// ==============================================================\n\
+    #line 1 \"Library/Graph/StronglyConnectedComponents.hpp\"\n/**\n * @file StronglyConnectedComponents.hpp\n\
     \ * @brief Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
-    \u89E3\n * @version 4.0\n * @date 2024-07-19\n */\n\n#line 2 \"library/Graph/Graph.hpp\"\
+    \u89E3\n * @version 4.0\n * @date 2024-07-19\n */\n\n#line 2 \"Library/Graph/Graph.hpp\"\
     \n\n/**\n * @file Graph.hpp\n * @brief Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\n * @version 0.1\n * @date 2024-06-14\n */\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct\
-    \ Edge{\n    int from{-1}, to{-1}, id{-1};\n    CostType cost{1};\n\n    Edge()\
+    \u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge()\
     \ = default;\n    Edge(int from, int to, CostType cost, int id = -1) : from(from),\
-    \ to(to), cost(cost), id(id){}\n};\n\ntemplate<typename CostType = int32_t>\n\
-    class Graph{\n    protected:\n    using ED = Edge<CostType>;\n\n    size_t vertex_{0},\
-    \ edge_{0};\n    vector<vector<ED>> adjacent_list_;\n\n    bool directed_flag_;\n\
-    \    CostType inf_{numeric_limits<CostType>::max() / 4};\n\n    inline void validate(int\
-    \ vertex){\n        assert(0 <= vertex && vertex < vertex_);\n    }\n\n    public:\n\
+    \ to(to), cost(cost), id(id){}\n\t\n    int from{-1}, to{-1}, id{-1};\n    CostType\
+    \ cost{1};\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n\
     \    Graph() = default;\n\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex_size`\
     \ \u306E\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param\
     \ vertex_size \u9802\u70B9\u6570\n     * @param directed `true` \u306E\u5834\u5408\
@@ -54,8 +140,8 @@ data:
     \u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\u304C\u5F35\u3089\u308C\u308B\u3002\
     \n     * @param s \u59CB\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param\
     \ t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param c \u91CD\
-    \u307F `(default = 1)`\n     */\n    void add_edge(Vertex s, Vertex t, CostType\
-    \ c = 1){\n        validate(s);\n        validate(t);\n        int edge_id = edge_++;\n\
+    \u307F `(default = 1)`\n     */\n    void AddEdge(Vertex s, Vertex t, CostType\
+    \ c = 1){\n        Validate(s);\n        Validate(t);\n        int edge_id = edge_++;\n\
     \        adjacent_list_[s].push_back(Edge(s, t, c, edge_id));\n        if(!directed_flag_){\n\
     \            adjacent_list_[t].push_back(Edge(t, s, c, edge_id));\n        }\n\
     \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306B\u6307\u5B9A\u3057\u305F\
@@ -65,66 +151,65 @@ data:
     \u3057\u3066\u3044\u308B\u3002\n     * @param edge_count \u8FBA\u6570 E\n    \
     \ * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\u3042\u308B\u304B\
     \ `(default = true)`\n     * @param one_index \u9802\u70B9\u304C1-index\u3067\u3042\
-    \u308B\u304B `(default = true)`\n     */\n    void input(int edge_count, bool\
-    \ weighted_graph = true, bool one_index = true){\n        for(int i = 0; i < edge_count;\
-    \ ++i){\n            int s, t; cin >> s >> t;\n            if(one_index) --s,\
-    \ --t;\n            CostType w = 1;\n            if(weighted_graph) cin >> w;\n\
-    \            add_edge(s, t, w);\n        }\n    }\n\n    vector<ED> &operator[](Vertex\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    const vector<ED> &operator[](Vertex\
-    \ v) const {\n        return adjacent_list_[v];\n    }\n};\n\n/**\n * @brief \u30B0\
-    \u30E9\u30D5\u306E\u96A3\u63A5\u884C\u5217\u3092\u8FD4\u3059\u3002\n * @note verify\
-    \ : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\n *\
-    \ @note \u8A08\u7B97\u91CF : O(V + E)\n * @param G \u9802\u70B9\u6570 V \u306E\
-    \u30B0\u30E9\u30D5\n * @param not_adjacent_value 2\u9802\u70B9 u, v \u9593\u306B\
-    \u8FBA\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306E\u5024 `(default =\
-    \ 0)`\n * @attention \u81EA\u5DF1\u30EB\u30FC\u30D7\u3084\u591A\u91CD\u8FBA\u304C\
-    \u542B\u307E\u308C\u308B\u30B0\u30E9\u30D5\u306B\u3064\u3044\u3066\u306F\u672A\
-    \u5B9A\u7FA9\n * @return vector<vector<CostType>> V \xD7 V \u306E\u96A3\u63A5\u884C\
-    \u5217\n */\ntemplate<typename CostType>\nvector<vector<CostType>> convert_to_matrix(Graph<CostType>\
-    \ &G, CostType not_adjacent_value = 0){\n    size_t V = G.get_vertex_size();\n\
-    \    vector<vector<CostType>> ret(V, vector<CostType>(V, not_adjacent_value));\n\
-    \    for(int i = 0; i < V; ++i){\n        for(Edge<CostType> &e : G[i]){\n   \
-    \         ret[i][e.to] = e.cost;\n        }\n    }\n    return ret;\n}\n\n/**\n\
-    \ * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\u3092\u9006\u9806\u306B\u3057\u305F\u30B0\
-    \u30E9\u30D5\u3092\u8FD4\u3059\u3002\n * @param G \u9802\u70B9\u6570 V \u306E\u30B0\
+    \u308B\u304B `(default = true)`\n     */\n    void InputGraph(int edge_count,\
+    \ bool weighted_graph = true, bool one_index = true){\n        for(int i = 0;\
+    \ i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n            if(one_index)\
+    \ --s, --t;\n            CostType w = 1;\n            if(weighted_graph) cin >>\
+    \ w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \ &operator[](Vertex v){\n        return adjacent_list_[v];\n    }\n\n    const\
+    \ vector<Edge<CostType>> &operator[](Vertex v) const {\n        return adjacent_list_[v];\n\
+    \    }\n\n    inline void Validate(int vertex) const {\n        assert(0 <= vertex\
+    \ && vertex < vertex_);\n    }\n\n    private:\n    size_t vertex_{0}, edge_{0};\n\
+    \    vector<vector<Edge<CostType>>> adjacent_list_;\n\n    bool directed_flag_;\n\
+    \    CostType inf_{numeric_limits<CostType>::max() / 4};\n};\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u306E\u96A3\u63A5\u884C\u5217\u3092\u8FD4\u3059\u3002\n *\
+    \ @note verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\n\
+    \ * @note \u8A08\u7B97\u91CF : O(V + E)\n * @note \u591A\u91CD\u8FBA\u306B\u3064\
+    \u3044\u3066\u306F\u3001\u6700\u3082\u91CD\u307F\u304C\u5C0F\u3055\u3044\u8FBA\
+    \u3092\u63A1\u7528\n * @param graph \u9802\u70B9\u6570 V \u306E\u30B0\u30E9\u30D5\
+    \n * @param not_adjacent_value 2\u9802\u70B9 u, v \u9593\u306B\u8FBA\u304C\u5B58\
+    \u5728\u3057\u306A\u3044\u5834\u5408\u306E\u5024 `(default = 0)`\n * @attention\
+    \ \u81EA\u5DF1\u30EB\u30FC\u30D7\u304C\u542B\u307E\u308C\u308B\u30B0\u30E9\u30D5\
+    \u306B\u3064\u3044\u3066\u306F\u672A\u5B9A\u7FA9\n * @return vector<vector<CostType>>\
+    \ V \xD7 V \u306E\u96A3\u63A5\u884C\u5217\n */\ntemplate<typename CostType>\n\
+    vector<vector<CostType>> GraphConvertMatrix(const Graph<CostType> &graph, CostType\
+    \ not_adjacent_value = 0){\n    size_t V = graph.get_vertex_size();\n    vector<vector<CostType>>\
+    \ ret(V, vector<CostType>(V, not_adjacent_value));\n    for(int i = 0; i < V;\
+    \ ++i){\n        for(const Edge<CostType> &e : graph[i]){\n            if(ret[i][e.to]\
+    \ == not_adjacent_value || ret[i][e.to] > e.cost){\n                ret[i][e.to]\
+    \ = e.cost;\n            }\n        }\n    }\n    return ret;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u306E\u8FBA\u3092\u9006\u9806\u306B\u3057\u305F\u30B0\u30E9\
+    \u30D5\u3092\u8FD4\u3059\u3002\n * @param graph \u9802\u70B9\u6570 V \u306E\u30B0\
     \u30E9\u30D5\n * @attention \u7121\u5411\u30B0\u30E9\u30D5\u306B\u5BFE\u3059\u308B\
     \u52D5\u4F5C\u306F\u672A\u5B9A\u7FA9\n * @return Graph<CostType> G \u306E\u8FBA\
     \u3092\u9006\u306B\u3057\u305F\u30B0\u30E9\u30D5\n */\ntemplate<typename CostType>\n\
-    Graph<CostType> reverse(Graph<CostType> &G){\n    size_t V = G.get_vertex_size();\n\
-    \    Graph<CostType> ret(V, true);\n    for(int i = 0; i < V; ++i){\n        for(Edge<CostType>\
-    \ &e : G[i]){\n            ret.add_edge(e.to, e.from, e.cost);\n        }\n  \
-    \  }\n    return ret;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\u8FBA\u96C6\
-    \u5408\u3092\u8FD4\u3059\u3002\n * @param G \u9802\u70B9\u6570 V \u306E\u30B0\u30E9\
-    \u30D5\n * @param sorted \u8FBA\u96C6\u5408\u3092\u30B3\u30B9\u30C8\u3067\u30BD\
-    \u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B (default = true)\n\
-    \ * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\n */\ntemplate<typename\
-    \ CostType>\nvector<Edge<CostType>> convert_to_edge_set(Graph<CostType> &G, bool\
-    \ sorted = true){\n    vector<Edge<CostType>> ret;\n    vector<bool> picked(G.get_edge_size(),\
-    \ false);\n    for(int v = 0; v < G.get_vertex_size(); ++v){\n        for(Edge<CostType>\
-    \ e : G[v]){\n            if(!picked[e.id]) ret.push_back(e);\n            picked[e.id]\
-    \ = true;\n        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(),\
-    \ [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n\
-    \        });\n    }\n    return ret;\n}\n#line 9 \"library/Graph/StronglyConnectedComponents.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    private:\n\
-    \    Graph<CostType> &G;\n    Graph<CostType> rG;\n\n    size_t V;\n    vector<vector<Vertex>>\
-    \ components_;\n    vector<int> belong_;\n\n    void dfs1(Vertex v, vector<int>\
-    \ &label, int &nex, vector<bool> &state){\n        state[v] = true;\n        for(auto\
-    \ &e : G[v]){\n            if(state[e.to]) continue;\n            dfs1(e.to, label,\
-    \ nex, state);\n        }\n        label[v] = nex++;\n        return;\n    }\n\
-    \n    void dfs2(Vertex v, vector<int> &label, int component, vector<bool> &state){\n\
-    \        components_[component].push_back(v);\n        belong_[v] = component;\n\
-    \        state[v] = false;\n        for(auto &e : rG[v]){\n            if(!state[e.to])\
-    \ continue;\n            dfs2(e.to, label, component, state);\n        }\n   \
-    \     return;\n    }\n\n    public:\n    /**\n     * @brief \u6709\u5411\u30B0\
-    \u30E9\u30D5 G \u3092\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\u3059\u308B\u3002\
-    \n     */\n    StronglyConnectedComponents(Graph<CostType> &G) : G(G), V(G.get_vertex_size()){\n\
-    \        rG = reverse(G);\n        vector<int> label(V, -1);\n        vector<bool>\
-    \ state(V, false);\n        int nex = 0;\n        vector<Vertex> vs(V);\n    \
-    \    iota(vs.begin(), vs.end(), 0);\n        for(auto v : vs){\n            if(!state[v])\
-    \ dfs1(v, label, nex, state);\n        }\n        sort(vs.begin(), vs.end(), [&](Vertex\
-    \ u, Vertex v){\n            return label[u] > label[v];\n        });\n      \
-    \  belong_.resize(V, -1);\n        for(auto v : vs){\n            if(state[v]){\n\
-    \                int c = components_.size();\n                components_.push_back(vector<Vertex>{});\n\
+    Graph<CostType> GraphReverse(const Graph<CostType> &graph){\n    size_t V = graph.get_vertex_size();\n\
+    \    Graph<CostType> ret(V, true);\n    for(int i = 0; i < V; ++i){\n        for(const\
+    \ Edge<CostType> &e : graph[i]){\n            ret.AddEdge(e.to, e.from, e.cost);\n\
+    \        }\n    }\n    return ret;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\
+    \u8FBA\u96C6\u5408\u3092\u8FD4\u3059\u3002\n * @param graph \u9802\u70B9\u6570\
+    \ V \u306E\u30B0\u30E9\u30D5\n * @param sorted \u8FBA\u96C6\u5408\u3092\u30B3\u30B9\
+    \u30C8\u3067\u30BD\u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B\
+    \ `(default = false)`\n * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\
+    \n */\ntemplate<typename CostType>\nvector<Edge<CostType>> GraphConvertEdgeSet(const\
+    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret(graph.get_edge_size());\n\
+    \    vector<bool> picked(graph.get_edge_size(), false);\n    for(int v = 0; v\
+    \ < graph.get_vertex_size(); ++v){\n        for(Edge<CostType> e : graph[v]){\n\
+    \            if(!picked[e.id]){\n\t\t\t\tret[e.id] = e;\n            \tpicked[e.id]\
+    \ = true;\n\t\t\t}\n        }\n    }\n    if(sorted){\n        sort(ret.begin(),\
+    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
+    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 9 \"Library/Graph/StronglyConnectedComponents.hpp\"\
+    \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    public:\n\
+    \    /**\n     * @brief \u6709\u5411\u30B0\u30E9\u30D5 G \u3092\u5F37\u9023\u7D50\
+    \u6210\u5206\u5206\u89E3\u3059\u308B\u3002\n     */\n    StronglyConnectedComponents(Graph<CostType>\
+    \ &G) : graph_(G), V(G.get_vertex_size()){\n        rev_graph_ = GraphReverse(G);\n\
+    \        vector<int> label(V, -1);\n        vector<bool> state(V, false);\n  \
+    \      int nex = 0;\n        vector<Vertex> vs(V);\n        iota(vs.begin(), vs.end(),\
+    \ 0);\n        for(auto v : vs){\n            if(!state[v]) dfs1(v, label, nex,\
+    \ state);\n        }\n        sort(vs.begin(), vs.end(), [&](Vertex u, Vertex\
+    \ v){\n            return label[u] > label[v];\n        });\n        belong_.resize(V,\
+    \ -1);\n        for(auto v : vs){\n            if(state[v]){\n               \
+    \ int c = components_.size();\n                components_.push_back(vector<Vertex>{});\n\
     \                dfs2(v, label, c, state);\n            }\n        }\n    }\n\n\
     \    /**\n     * @brief \u5F37\u9023\u7D50\u6210\u5206\u3092\u53D6\u5F97\u3059\
     \u308B\u3002\n     * @note \u5F37\u9023\u7D50\u6210\u5206\u306F\u30C8\u30DD\u30ED\
@@ -139,27 +224,49 @@ data:
     \u306E\u5F37\u9023\u7D50\u6210\u5206\u306B\u5C5E\u3059\u308B\u304B\u3092\u8FD4\
     \u3059\u3002\n     * @param v \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\n     *\
     \ @return int \u6240\u5C5E\u3059\u308B\u5F37\u9023\u7D50\u6210\u5206\u306E\u756A\
-    \u53F7\n     */\n    int where(Vertex v){\n        return belong_[v];\n    }\n\
-    };\n#line 4 \"verify/AOJ-GRL-3-C.test.cpp\"\n\nint main(){\n    int V, E; cin\
-    \ >> V >> E;\n    Graph G(V, true);\n    for(int i = 0; i < E; ++i){\n       \
-    \ int s, t; cin >> s >> t;\n        G.add_edge(s, t);\n    }\n    \n    StronglyConnectedComponents\
-    \ scc(G);\n    int Q; cin >> Q;\n    for(int i = 0; i < Q; ++i){\n        int\
-    \ u, v; cin >> u >> v;\n        cout << (scc.where(u) == scc.where(v)) << endl;\n\
-    \    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
-    \n\n#include \"../library/Graph/StronglyConnectedComponents.hpp\"\n\nint main(){\n\
-    \    int V, E; cin >> V >> E;\n    Graph G(V, true);\n    for(int i = 0; i < E;\
-    \ ++i){\n        int s, t; cin >> s >> t;\n        G.add_edge(s, t);\n    }\n\
-    \    \n    StronglyConnectedComponents scc(G);\n    int Q; cin >> Q;\n    for(int\
-    \ i = 0; i < Q; ++i){\n        int u, v; cin >> u >> v;\n        cout << (scc.where(u)\
-    \ == scc.where(v)) << endl;\n    }\n}"
+    \u53F7\n     */\n    int BelongComponent(Vertex v){\n        return belong_[v];\n\
+    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u3092\u30C8\
+    \u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\u30FC\u30C8\u3057\u305F\u7D50\u679C\u3092\
+    \u8FD4\u3059\u3002\n     * @return vector<Vertex> \u30C8\u30DD\u30ED\u30B8\u30AB\
+    \u30EB\u30BD\u30FC\u30C8\u9806\u306B\u4E26\u3093\u3060\u9802\u70B9\u756A\u53F7\
+    \u5217\n     */\n    vector<Vertex> TopologicalSort(){\n        vector<Vertex>\
+    \ ret;\n        for(auto &vs : components_){\n            for(auto &v : vs){\n\
+    \                ret.emplace_back(v);\n            }\n        }\n        return\
+    \ ret;\n    }\n\n    private:\n    Graph<CostType> &graph_;\n    Graph<CostType>\
+    \ rev_graph_;\n\n    size_t V;\n    vector<vector<Vertex>> components_;\n    vector<int>\
+    \ belong_;\n\n    void dfs1(Vertex v, vector<int> &label, int &nex, vector<bool>\
+    \ &state){\n        state[v] = true;\n        for(auto &e : graph_[v]){\n    \
+    \        if(state[e.to]) continue;\n            dfs1(e.to, label, nex, state);\n\
+    \        }\n        label[v] = nex++;\n        return;\n    }\n\n    void dfs2(Vertex\
+    \ v, vector<int> &label, int component, vector<bool> &state){\n        components_[component].push_back(v);\n\
+    \        belong_[v] = component;\n        state[v] = false;\n        for(auto\
+    \ &e : rev_graph_[v]){\n            if(!state[e.to]) continue;\n            dfs2(e.to,\
+    \ label, component, state);\n        }\n        return;\n    }\n};\n#line 5 \"\
+    verify/AOJ-GRL-3-C.test.cpp\"\n\nint main(){\n    int V, E; cin >> V >> E;\n \
+    \   Graph G(V, true);\n    G.InputGraph(E, false, false);\n    \n    StronglyConnectedComponents\
+    \ scc(G);\n    // auto cs = scc.get_components();\n    // for(auto &vs : cs){\n\
+    \    //     cerr << \"#\";\n    //     for(auto v : vs){\n    //         cerr\
+    \ << \" \" << v;\n    //     }\n    //     cerr << endl;\n    // }\n    int Q;\
+    \ cin >> Q;\n    while(Q--){\n        int u, v; cin >> u >> v;\n        cout <<\
+    \ int(scc.BelongComponent(u) == scc.BelongComponent(v)) << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_C\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/StronglyConnectedComponents.hpp\"\
+    \n\nint main(){\n    int V, E; cin >> V >> E;\n    Graph G(V, true);\n    G.InputGraph(E,\
+    \ false, false);\n    \n    StronglyConnectedComponents scc(G);\n    // auto cs\
+    \ = scc.get_components();\n    // for(auto &vs : cs){\n    //     cerr << \"#\"\
+    ;\n    //     for(auto v : vs){\n    //         cerr << \" \" << v;\n    //  \
+    \   }\n    //     cerr << endl;\n    // }\n    int Q; cin >> Q;\n    while(Q--){\n\
+    \        int u, v; cin >> u >> v;\n        cout << int(scc.BelongComponent(u)\
+    \ == scc.BelongComponent(v)) << endl;\n    }\n}"
   dependsOn:
-  - library/Graph/StronglyConnectedComponents.hpp
-  - library/Graph/Graph.hpp
+  - Library/Template.hpp
+  - Library/Common.hpp
+  - Library/Graph/StronglyConnectedComponents.hpp
+  - Library/Graph/Graph.hpp
   isVerificationFile: true
   path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2024-07-29 03:11:04+09:00'
+  timestamp: '2024-10-20 23:59:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-C.test.cpp

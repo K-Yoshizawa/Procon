@@ -2,11 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/Graph/GraphTemplate.hpp
-    title: "Graph - \u30B0\u30E9\u30D5"
+    path: Library/Common.hpp
+    title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: library/Tree/HeavyLightDecomposition.hpp
+    path: Library/Template.hpp
+    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
+    path: Library/Tree/Tree.hpp
+    title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -18,213 +24,387 @@ data:
     links:
     - https://judge.yosupo.jp/problem/lca
   bundledCode: "#line 1 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/lca\"\n\n#line 1 \"library/Tree/HeavyLightDecomposition.hpp\"\
-    \n/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
-    \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 3.0\n * @date 2023-10-04\n\
-    \ */\n\n#line 2 \"library/Graph/GraphTemplate.hpp\"\n\n/**\n * @file GraphTemplate.hpp\n\
-    \ * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @version 3.0\n * @date 2024-01-09\n */\n\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct\
-    \ Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n    int loc{-1},\
-    \ id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex to, CostType\
-    \ cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n        return\
-    \ to;\n    }\n};\n\ntemplate<typename CostType = int>\nstruct Graph{\n    private:\n\
-    \    int vertex_size_{0}, edge_size_{0};\n    bool is_directed_{false}, is_weighted_{false};\n\
-    \    vector<vector<Edge<CostType>>> adj_;\n    vector<int> indegree_;\n\n    public:\n\
-    \    CostType INF{numeric_limits<CostType>::max() >> 2};\n\n    Graph() = default;\n\
-    \n    /**\n     * @brief `vertex_size` \u9802\u70B9 `0` \u8FBA\u306E\u30B0\u30E9\
-    \u30D5\u3092\u4F5C\u6210\u3059\u308B\u3002\n     * @note `directed` \u3092 `true`\
-    \ \u306B\u3059\u308B\u3068\u6709\u5411\u30B0\u30E9\u30D5\u306B\u306A\u308B\u3002\
-    \n     * @param vertex_size \u9802\u70B9\u6570\n     * @param directed \u6709\u5411\
-    \u30B0\u30E9\u30D5\u3092\u4F5C\u6210\u3059\u308B\u304B (option, default = `false`)\n\
-    \     */\n    Graph(int vertex_size, bool directed = false) : vertex_size_(vertex_size),\
-    \ is_directed_(directed){\n        adj_.resize(vertex_size);\n        indegree_.resize(vertex_size,\
-    \ 0);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\u70B9\
-    \ `to` \u306B\u8FBA\u3092\u5F35\u308B\u3002\n     * @note `cost` \u3092\u6307\u5B9A\
-    \u3059\u308B\u3053\u3068\u3067\u91CD\u307F\u3092\u3064\u3051\u308B\u3053\u3068\
-    \u304C\u3067\u304D\u308B\u3002\n     * @param from \u9802\u70B9\u756A\u53F7\n\
-    \     * @param to \u9802\u70B9\u756A\u53F7\n     * @param cost \u91CD\u307F (option,\
-    \ default = `1`)\n     */\n    void add(Vertex from, Vertex to, CostType cost\
-    \ = 1){\n        assert(0 <= from and from < vertex_size_);\n        assert(0\
-    \ <= to and to < vertex_size_);\n        is_weighted_ |= cost > 1;\n        Edge<CostType>\
-    \ e1(from, to, cost);\n        e1.loc = adj_[from].size();\n        e1.id = edge_size_;\n\
-    \        adj_[from].push_back(e1);\n        ++edge_size_;\n        if(is_directed_){\n\
-    \            ++indegree_[to];\n            return;\n        }\n        Edge<CostType>\
-    \ e2(to, from, cost);\n        e2.loc = adj_[to].size();\n        e2.id = e1.id;\n\
-    \        adj_[to].push_back(e2);\n    }\n\n    /**\n     * @brief \u30B0\u30E9\
-    \u30D5\u306B `edge_size` \u672C\u306E\u8FBA\u3092\u5165\u529B\u3055\u305B\u308B\
-    \u3002\n     * @param edge_size \u5165\u529B\u3059\u308B\u8FBA\u6570\n     * @param\
-    \ weighted \u91CD\u307F\u4ED8\u304D\u8FBA\u304B (option, default = `false`)\n\
-    \     * @param zero_index \u5165\u529B\u306E\u9802\u70B9\u756A\u53F7\u304C 0-index\
-    \ \u304B (option, default = `false`)\n     */\n    void input(int edge_size, bool\
-    \ weighted = false, bool zero_index = false){\n        is_weighted_ = weighted;\n\
-    \        for(int i = 0; i < edge_size; ++i){\n            Vertex s, t; cin >>\
-    \ s >> t;\n            if(!zero_index) --s, --t;\n            CostType c = 1;\n\
-    \            if(weighted) cin >> c;\n            add(s, t, c);\n        }\n  \
-    \  }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\
-    \u8FD4\u3059\u3002\n     * @return size_t \u9802\u70B9\u6570\n     */\n    size_t\
-    \ size(){\n        return vertex_size_;\n    }\n\n    /**\n     * @brief \u9802\
-    \u70B9 `v` \u306E\u51FA\u6B21\u6570\u3092\u8FD4\u3059\u3002\n     * @param v \u9802\
-    \u70B9\u756A\u53F7\n     * @return int \u9802\u70B9 `v` \u306E\u51FA\u6B21\u6570\
-    \n     */\n    int outdegree(Vertex v){\n        return (int)adj_.at(v).size();\n\
-    \    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u5165\u6B21\u6570\u3092\
-    \u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return int\
-    \ \u9802\u70B9 `v` \u306E\u5165\u6B21\u6570\n     */\n    int indegree(Vertex\
-    \ v){\n        if(is_directed_) return indegree_.at(v);\n        else return (int)adj_.at(v).size();\n\
-    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u304C\u6709\u5411\u30B0\u30E9\
-    \u30D5\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\u3002\n     */\n    bool is_directed(){\n\
-    \        return is_directed_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
-    \u304C\u91CD\u307F\u4ED8\u304D\u304B\u3069\u3046\u304B\u3092\u8FD4\u3059\u3002\
-    \n     */\n    bool is_weighted(){\n        return is_weighted_;\n    }\n\n  \
-    \  vector<Vertex> source(){\n        assert(is_directed_);\n        vector<Vertex>\
-    \ ret;\n        for(int i = 0; i < vertex_size_; ++i){\n            if(indegree(i)\
-    \ == 0) ret.push_back(i);\n        }\n        return ret;\n    }\n\n    vector<Vertex>\
-    \ sink(){\n        vector<Vertex> ret;\n        for(int i = 0; i < vertex_size_;\
-    \ ++i){\n            if(outdegree(i) == 0) ret.push_back(i);\n        }\n    \
-    \    return ret;\n    }\n\n    vector<Vertex> leaf(){\n        vector<Vertex>\
-    \ ret;\n        for(int i = 0; i < vertex_size_; ++i){\n            if(indegree(i)\
-    \ == 1) ret.push_back(i);\n        }\n        return ret;\n    }\n\n    /**\n\
-    \     * @brief \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\u3092\u8FD4\
-    \u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return vector<Edge<CostType>>&\
-    \ \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\n     */\n    vector<Edge<CostType>>\
-    \ &get_adj(Vertex v){\n        return adj_.at(v);\n    }\n\n    /**\n     * @brief\
-    \ \u8FBA\u306E\u5411\u304D\u3092\u3059\u3079\u3066\u9006\u306B\u3057\u305F\u30B0\
-    \u30E9\u30D5\u3092\u8FD4\u3059\u3002\n     * @attention \u6709\u5411\u30B0\u30E9\
-    \u30D5\u3067\u3042\u308B\u3053\u3068\u3092\u8981\u4EF6\u3068\u3059\u308B\u3002\
-    \n     * @return Graph<CostType> \u9006\u8FBA\u30B0\u30E9\u30D5\n     */\n   \
-    \ Graph<CostType> reverse(){\n        assert(is_directed_);\n        Graph ret(vertex_size_,\
-    \ true);\n        for(auto es : adj_){\n            for(auto e : es){\n      \
-    \          ret.add(e.to, e.from, e.cost);\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    /**\n     * @brief \u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\
-    \u30FC\u30C8\u3057\u305F\u9802\u70B9\u5217\u3092\u8FD4\u3059\u3002\n     * @attention\
-    \ \u6709\u5411\u30B0\u30E9\u30D5\u3067\u3042\u308B\u3053\u3068\u3092\u8981\u4EF6\
-    \u3068\u3059\u308B\u3002\n     * @return vector<Vertex> \u30C8\u30DD\u30ED\u30B8\
-    \u30AB\u30EB\u30BD\u30FC\u30C8\u3057\u305F\u9802\u70B9\u5217\n     */\n    vector<Vertex>\
-    \ topological_sort(){\n        assert(is_directed_);\n        vector<Vertex> ret;\n\
-    \        queue<Vertex> que;\n        vector<int> cnt(vertex_size_, 0);\n     \
-    \   for(auto v : source()) que.push(v);\n        while(que.size()){\n        \
-    \    Vertex v = que.front(); que.pop();\n            ret.push_back(v);\n     \
-    \       for(int u : adj_[v]){\n                if(++cnt[u] == indegree(u)) que.push(u);\n\
-    \            }\n        }\n        return ret;\n    }\n\n    /**\n     * @brief\
-    \ \u30B0\u30E9\u30D5\u304B\u3089\u8FBA\u96C6\u5408\u3092\u4F5C\u6210\u3059\u308B\
-    \u3002\n     * @note \u8FBA\u96C6\u5408\u306F\u91CD\u307F\u3067\u6607\u9806\u30BD\
-    \u30FC\u30C8\u3055\u308C\u305F\u72B6\u614B\u3067\u8FD4\u3055\u308C\u308B\u3002\
-    \n     * @return vector<Edge<CostType>> \u8FBA\u96C6\u5408\n     */\n    vector<Edge<CostType>>\
-    \ edge_set(){\n        vector<Edge<CostType>> ret;\n        vector<int> es(edge_size_,\
-    \ 0);\n        for(int i = 0; i < vertex_size_; ++i){\n            for(auto e\
-    \ : adj_[i]){\n                if(es[e.id]) continue;\n                es[e.id]\
-    \ = 1;\n                ret.push_back(e);\n            }\n        }\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n        return ret;\n    }\n\n    vector<vector<CostType>>\
-    \ matrix(){\n        int n = vertex_size_;\n        vector<vector<CostType>> ret(n,\
-    \ vector<CostType>(n, INF));\n        for(int i = 0; i < n; ++i) ret[i][i] = 0;\n\
-    \        for(int v = 0; v < n; ++v){\n            for(auto &e : adj_[v]){\n  \
-    \              ret[v][e.to] = e.cost;\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n\
-    \        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" <<\
-    \ i << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
-    \ get_adj(v);\n    }\n};\n#line 10 \"library/Tree/HeavyLightDecomposition.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct HeavyLightDecomposition{\n    using ColumnIndex\
-    \ = int;\n\n    private:\n    Vertex root_;\n    int timer_{0};\n\n    Graph<CostType>\
-    \ &G;\n    vector<int> subtree_size_; // \u9802\u70B9 `i` \u3092\u6839\u3068\u3059\
-    \u308B\u90E8\u5206\u6728\u306E\u9802\u70B9\u6570\n    vector<int> depth_; // \u9802\
-    \u70B9 `i` \u306E\u6839\u304B\u3089\u306E\u6DF1\u3055\n    vector<Vertex> parent_vertex_;\
-    \ // \u9802\u70B9 `i` \u306E\u89AA\u306E\u9802\u70B9\uFF08\u6839\u306E\u5834\u5408\
-    \u306F `-1` \uFF09\n    // vector<EdgeID> m_parentedge; // \u9802\u70B9 `i` \u3068\
-    \u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\u756A\u53F7\uFF08\u6839\u306E\u5834\
-    \u5408\u306F `-1` \uFF09\n    vector<Vertex> child_vertex_; // \u8FBA `i` \u304C\
-    \u7D50\u30762\u9802\u70B9\u306E\u3046\u3061\u3001\u5B50\u306E\u65B9\u306E\u9802\
-    \u70B9\n    vector<int> in_, out_; // \u9802\u70B9 `i` \u306E\u884C\u304D\u304C\
-    \u3051 / \u5E30\u308A\u304C\u3051\u306E\u9806\u756A (Euler-Tour)\n\n    vector<vector<Vertex>>\
-    \ column_; // \u5404\u5217\u306B\u542B\u307E\u308C\u308B\u9802\u70B9\n    vector<pair<ColumnIndex,\
-    \ int>> vertex_index_; // `Columns` \u5185\u306B\u304A\u3051\u308B\u5404\u9802\
-    \u70B9\u306E\u4F4D\u7F6E\u60C5\u5831\u300C\u5217 `first` \u306E\u6839\u304B\u3089\
-    \ `second(0-index)` \u756A\u76EE\u306B\u3042\u308B\u300D\n    vector<int> offset_;\
-    \ // 1\u5217\u306B\u4E26\u3079\u305F\u3068\u304D\u306E\u5404\u5217\u306E\u5148\
-    \u982D\u306E\u4F4D\u7F6E\uFF080-index\uFF09\n\n    int dfs1_(Vertex now, Vertex\
-    \ par){\n        int ret = 0;\n        for(Edge<CostType> e : G[now]){\n     \
-    \       if(e.to == par) continue;\n            depth_[e.to] = depth_[now] + 1;\n\
-    \            parent_vertex_[e.to] = now;\n            // m_parentedge[e.to] =\
-    \ e.ID;\n            // child_vertex_[e.ID] = e.to;\n            ret += dfs1_(e.to,\
-    \ now);\n        }\n        return subtree_size_[now] = ret + 1;\n    }\n\n  \
-    \  void dfs2_(Vertex now, Vertex par, ColumnIndex col){\n        in_[now] = timer_++;\n\
-    \n        // \u65B0\u3057\u3044\u5217\u306E\u5834\u5408\u306F\u5217\u3092\u5897\
-    \u3084\u3059\n        if(column_.size() == col) column_.emplace_back(vector<Vertex>{});\n\
-    \n        // \u5217\u306B\u9802\u70B9\u3092\u8FFD\u52A0\n        vertex_index_[now]\
-    \ = {col, column_[col].size()};\n        column_[col].push_back(now);\n\n    \
-    \    // Heavy\u306A\u8FBA\u3092\u63A2\u7D22\n        Edge<CostType> heavy;\n \
-    \       int maxsubtree = 0;\n        for(Edge<CostType> e : G[now]){\n       \
-    \     if(e.to == par) continue;\n            if(maxsubtree < subtree_size_[e.to]){\n\
-    \                heavy = e;\n                maxsubtree = subtree_size_[e.to];\n\
-    \            }\n        }\n\n        if(maxsubtree){\n            // Heavy\u306A\
-    \u8FBA\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u3001\u4ECA\u306E\u5217\u306B\
-    \u8FFD\u52A0\u3059\u308B\u5F62\u3067\u518D\u5E30\u3092\u884C\u3046\n         \
-    \   dfs2_(heavy.to, now, col);\n        }\n\n        // Light\u306A\u8FBA\u306B\
-    \u5BFE\u3057\u3066\u65B0\u3057\u3044\u5217\u3092\u751F\u3084\u3057\u3064\u3064\
-    \u518D\u5E30\u3092\u884C\u3046\n        for(Edge<CostType> e : G[now]){\n    \
-    \        if(e.to == par || e.to == heavy.to) continue;\n            dfs2_(e.to,\
-    \ now, column_.size());\n        }\n\n        out_[now] = timer_++;\n    }\n\n\
-    \    /**\n     * @brief \u9802\u70B9 `v` \u304C\u5B58\u5728\u3059\u308B\u5217\u306E\
-    \u5148\u982D\u306E\u9802\u70B9\n     */\n    Vertex head_(Vertex v){\n       \
-    \ auto [i, j] = vertex_index_[v];\n        return column_[i][0];\n    }\n\n  \
-    \  public:\n    HeavyLightDecomposition(Graph<CostType> &G, Vertex Root = 0) :\
-    \ G(G), root_(Root){\n        subtree_size_.resize(G.size(), 0);\n        depth_.resize(G.size(),\
-    \ 0);\n        parent_vertex_.resize(G.size(), -1);\n        // m_parentedge.resize(G.size(),\
-    \ -1);\n        // child_vertex_.resize(G.esize(), -1);\n        dfs1_(root_,\
-    \ -1);\n        vertex_index_.resize(G.size());\n        in_.resize(G.size());\n\
-    \        out_.resize(G.size());\n        dfs2_(root_, -1, 0);\n        offset_.resize(column_.size(),\
-    \ 0);\n        for(int i = 1; i < column_.size(); ++i){\n            offset_[i]\
-    \ = offset_[i - 1] + column_[i - 1].size();\n        }\n    }\n\n    /**\n   \
-    \  * @brief \u6728\u306B\u542B\u307E\u308C\u308B\u5168\u9802\u70B9\u306B\u3064\
-    \u3044\u3066\u3001HLD\u306E\u5217\u30921\u5217\u306B\u4E26\u3079\u305F\u5217 `L`\
-    \ \u5185\u306B\u304A\u3051\u308B\u4F4D\u7F6E\u3092\u8FD4\u3059\u3002\n     * @return\
-    \ vector<int> \u300C\u9802\u70B9 `i` \u304C `L_{ret[i]}` \u306B\u3042\u308B\u300D\
-    \u3068\u3044\u3046\u60C5\u5831\n     */\n    vector<int> get_vertex_locations(){\n\
-    \        vector<int> ret(G.size(), -1);\n        for(Vertex i = 0; i < G.size();\
-    \ ++i){\n            ret[i] = offset_[vertex_index_[i].first] + vertex_index_[i].second;\n\
-    \        }\n        return ret;\n    }\n\n    /**\n     * @brief \u9802\u70B9\
-    \ `v` \u3068\u9802\u70B9 `u` \u306ELCA\u3092\u6C42\u3081\u308B\u3002\n     */\n\
-    \    Vertex lca(Vertex v, Vertex u){\n        while(1){\n            Vertex hv\
-    \ = head_(v), hu = head_(u);\n            if(depth_[hv] > depth_[hu]) swap(v,\
-    \ u), swap(hv, hu);\n            if(hv == hu) return (depth_[v] < depth_[u] ?\
-    \ v : u);\n            u = parent_vertex_[hu];\n        }\n    }\n\n    /**\n\
-    \     * @brief \u9802\u70B9 `v` \u3068\u9802\u70B9 `u` \u3092\u7D50\u3076\u30D1\
-    \u30B9\u306B\u8A72\u5F53\u3059\u308B\u533A\u9593\u3092\u8FD4\u3059\u3002\n   \
-    \  * @param v \u9802\u70B9 `v`\n     * @param u \u9802\u70B9 `u` (option, default\
-    \ = `root`)\n     * @return vector<pair<int, int>> \u533A\u9593\u306E\u4E00\u89A7\
-    (\u534A\u958B\u533A\u9593, 0-index)\n     */\n    vector<pair<int, int>> path_query(Vertex\
-    \ v, Vertex u = -1){\n        vector<pair<int, int>> ret;\n        if(u == -1)\
-    \ u = root_;\n        while(1){\n            Vertex hv = head_(v), hu = head_(u);\n\
-    \            if(depth_[hv] > depth_[hu]) swap(v, u), swap(hv, hu);\n         \
-    \   if(hv == hu){\n                if(depth_[v] > depth_[u]) swap(v, u);\n   \
-    \             auto [vc, vi] = vertex_index_[v];\n                auto [uc, ui]\
-    \ = vertex_index_[u];\n                ret.push_back({offset_[vc] + vi, offset_[uc]\
-    \ + ui + 1});\n                return ret;\n            }\n            auto [uc,\
-    \ ui] = vertex_index_[u];\n            ret.push_back({offset_[uc], offset_[uc]\
-    \ + ui + 1});\n            u = parent_vertex_[hu];\n        }\n    }\n\n    pair<int,\
-    \ int> subtree_query(Vertex v){\n        return {in_[v], out_[v]};\n    }\n\n\
-    \    void print_columns(){\n\n    }\n};\n#line 4 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    Graph G(N);\n    for(int i\
-    \ = 1; i < N; ++i){\n        int p; cin >> p;\n        G.add(i, p);\n    }\n\n\
-    \    HeavyLightDecomposition hld(G);\n    while(Q--){\n        int u, v; cin >>\
-    \ u >> v;\n        cout << hld.lca(u, v) << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../library/Tree/HeavyLightDecomposition.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    Graph G(N);\n    for(int i\
-    \ = 1; i < N; ++i){\n        int p; cin >> p;\n        G.add(i, p);\n    }\n\n\
-    \    HeavyLightDecomposition hld(G);\n    while(Q--){\n        int u, v; cin >>\
-    \ u >> v;\n        cout << hld.lca(u, v) << endl;\n    }\n}"
+    \ \"https://judge.yosupo.jp/problem/lca\"\n\n#line 2 \"Library/Template.hpp\"\n\
+    \n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template - \u30C6\
+    \u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n */\n\n\
+    #line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cstdint>\n\
+    #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
+    #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
+    \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
+    #include <vector>\nusing namespace std;\n#line 12 \"Library/Template.hpp\"\n#define\
+    \ ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define\
+    \ SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n\
+    #define SETPRE(digit) fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n\
+    #define SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume)\
+    \ + (deno) - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define\
+    \ LOWERBOUND_IDX(arr, val) distance((arr).begin(), lower_bound((arr).begin(),\
+    \ (arr).end(), val))\n#define UPPERBOUND_IDX(arr, val) distance((arr).begin(),\
+    \ upper_bound((arr).begin(), (arr).end(), val))\n\ninline string Yn(bool flag){return\
+    \ (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag)\
+    \ << endl;return flag;}\ninline string YN(bool flag){return (flag) ? \"YES\" :\
+    \ \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}\n\
+    template<class T>\nbool chmin(T &src, const T &cmp){if(src > cmp){src = cmp; return\
+    \ true;}return false;}\ntemplate<class T>\nbool chmax(T &src, const T &cmp){if(src\
+    \ < cmp){src = cmp; return true;}return false;}\ntemplate<typename T>\ninline\
+    \ bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax -\
+    \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
+    \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
+    \ || between(c, b, a) ? b : c);}\ntemplate<typename T>\ninline T except(T src,\
+    \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
+    inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
+    \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
+    vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
+    \    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T> &v){\n \
+    \   sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n  \
+    \  v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\nusing\
+    \ ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
+    const ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nusing vi = vector<int>;\n\
+    using vvi = vector<vi>;\nusing vl = vector<ll>;\nusing vvl = vector<vl>;\nusing\
+    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing vs = vector<string>;\n\
+    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
+    using rpq = priority_queue<T, vector<T>, greater<T>>;\n\nconst int dx4[4] = {1,\
+    \ 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0,\
+    \ -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
+    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
+    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
+    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
+    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
+    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
+    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
+    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
+    \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
+    \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
+    ostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i < v.size();\
+    \ ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n  \
+    \  return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, vector<vector<T>>\
+    \ &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1\
+    \ != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename\
+    \ T>\nistream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i <\
+    \ v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream\
+    \ &operator<<(ostream &os, set<T> &v){\n    for (auto &u : v){\n        os <<\
+    \ u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename T1, typename T2>\n\
+    vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n   \
+    \ assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i\
+    \ = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\n\
+    template<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
+    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
+    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
+    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
+    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
+    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
+    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
+    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
+    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
+    #endif\n\n// ==============================================================\n\
+    // \n// Main Program Start\n// \n// ==============================================================\n\
+    #line 1 \"Library/Tree/HeavyLightDecomposition.hpp\"\n/**\n * @file HeavyLightDecomposition.hpp\n\
+    \ * @author log K (lX57)\n * @brief Heavy Light Decomposition - HL\u5206\u89E3\
+    \n * @version 4.0\n * @date 2024-09-04\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\
+    \n\n/**\n * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\
+    \u30C8\n * @version 1.0\n * @date 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
+    \    public:\n    struct Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\
+    \n        Vertex parent{-1};\n        CostType cost{};\n        vector<Vertex>\
+    \ children{};\n    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\
+    \u6839\u3068\u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\
+    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\
+    \u3067\u4E0E\u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\
+    \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
+    \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
+    \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
+    \ = 0)\n     */\n    RootedTree(int vertex_size, Vertex root_vertex = 0) :\n \
+    \           vertex_size_(vertex_size), root_vertex_(root_vertex),\n          \
+    \  node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
+    \u3092\u8FD4\u3059\u3002\n     * @return int \u6728\u306E\u9802\u70B9\u6570\n\
+    \     */\n    int get_vertex_size() const {\n        return vertex_size_;\n  \
+    \  }\n\n    /**\n     * @brief \u6728\u306E\u6839\u306E\u9802\u70B9\u3092\u8FD4\
+    \u3059\u3002\n     * @return Vertex \u6728\u306E\u6839\u306E\u9802\u70B9\u756A\
+    \u53F7 (0-index)\n     */\n    Vertex get_root() const {\n        return root_vertex_;\n\
+    \    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u89AA\u306E\u9802\u70B9\
+    \u756A\u53F7\u3092\u8FD4\u3059\u3002\n     * @note `v` \u304C\u6839\u306E\u5834\
+    \u5408\u3001`-1` \u304C\u8FD4\u3055\u308C\u308B\u3002\n     * @param v \u5B50\u306E\
+    \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return Vertex \u89AA\u306E\u9802\u70B9\
+    \u756A\u53F7 (0-index)\n     */\n    Vertex get_parent(Vertex v) const {\n   \
+    \     Validate(v);\n        return node_[v].parent;\n    }\n\n    /**\n     *\
+    \ @brief \u9802\u70B9 `v` \u306E\u5B50\u306E\u9802\u70B9\u756A\u53F7\u5217\u3092\
+    \u8FD4\u3059\u3002\n     * @note \u9802\u70B9\u756A\u53F7\u5217\u306F\u5165\u529B\
+    \u9806\u306B\u8FD4\u3055\u308C\u308B\u3002\n     * @param v \u89AA\u306E\u9802\
+    \u70B9\u756A\u53F7 (0-index)\n     * @return vector<Vertex> \u5B50\u306E\u9802\
+    \u70B9\u756A\u53F7\u5217 (0-index)\n     */\n    vector<Vertex> &get_child(Vertex\
+    \ v){\n        Validate(v);\n        return node_[v].children;\n    }\n\n    /**\n\
+    \     * @brief \u9802\u70B9 `v` \u3068\u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\
+    \u306E\u91CD\u307F\u3092\u8FD4\u3059\u3002\n     * @attention `v` \u304C\u6839\
+    \u306E\u5834\u5408\u306E\u8FD4\u308A\u5024\u306F\u672A\u5B9A\u7FA9\u3067\u3042\
+    \u308B\u3002\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return\
+    \ CostType \u8FBA\u306E\u91CD\u307F\n     */\n    CostType get_cost(Vertex v){\n\
+    \        Validate(v);\n        return node_[v].cost;\n    }\n\n    /**\n     *\
+    \ @brief \u9802\u70B9 `parent` \u304B\u3089\u9802\u70B9 `child` \u3078\u306E\u91CD\
+    \u3055 `cost` \u306E\u8FBA\u3092\u5F35\u308B\u3002\n     * @note `cost` \u3092\
+    \u7701\u7565\u3059\u308B\u3053\u3068\u3067\u91CD\u307F\u306A\u3057\u8FBA\u3092\
+    \u5F35\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3002\n     * @param parent \u89AA\
+    \u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     * @param child \u5B50\u306E\u9802\
+    \u70B9\u756A\u53F7 (0-index)\n     * @param cost \u8FBA\u306E\u91CD\u307F (default\
+    \ = 1)\n     */\n    void AddEdge(Vertex parent, Vertex child, CostType cost =\
+    \ 1){\n        Validate(parent);\n        Validate(child);\n        node_[parent].children.push_back(child);\n\
+    \        node_[child].parent = parent;\n        node_[child].cost = cost;\n  \
+    \  }\n\n    /**\n     * @brief `u v w` \u306E\u3088\u3046\u306A\u5165\u529B\u5F62\
+    \u5F0F\u3092\u53D7\u3051\u53D6\u308B\u3002\n     * @param weighted \u91CD\u307F\
+    \u4ED8\u304D\u306E\u6728\u3067\u3042\u308B\u304B (default = true)\n     * @param\
+    \ one_index \u5165\u529B\u3055\u308C\u308B\u9802\u70B9\u756A\u53F7\u304C 1-index\
+    \ \u304B\u3069\u3046\u304B (default = true)\n     */\n    void InputGraphFormat(bool\
+    \ weighted = true, bool one_index = true){\n        vector<vector<pair<Vertex,\
+    \ CostType>>> graph(vertex_size_);\n        for(int i = 0; i < vertex_size_ -\
+    \ 1; ++i){\n            int u, v; cin >> u >> v;\n            if(one_index) --u,\
+    \ --v;\n            CostType w = 1;\n            if(weighted) cin >> w;\n    \
+    \        graph[u].emplace_back(v, w);\n            graph[v].emplace_back(u, w);\n\
+    \        }\n        auto rec = [&](auto self, Vertex v, Vertex p) -> void {\n\
+    \            for(auto [u, w] : graph[v]){\n                if(u == p) continue;\n\
+    \                AddEdge(v, u, w);\n                self(self, u, v);\n      \
+    \      }\n        };\n        rec(rec, root_vertex_, -1);\n    }\n\n    /**\n\
+    \     * @brief `p_1 p_2 ... p_N` \u306E\u3088\u3046\u306A\u5165\u529B\u5F62\u5F0F\
+    \u3092\u53D7\u3051\u53D6\u308B\u3002\n     * @attention weighted \u306E\u51E6\u7406\
+    \u3092\u66F8\u3044\u3066\u3044\u306A\u3044\u306E\u3067\u3001`weighted` \u306E\u30D1\
+    \u30E9\u30E1\u30FC\u30BF\u306B\u610F\u5473\u306F\u306A\u3044\n     * @param weighted\
+    \ \u91CD\u307F\u4ED8\u304D\u306E\u6728\u3067\u3042\u308B\u304B (default = true)\n\
+    \     * @param one_index \u5165\u529B\u3055\u308C\u308B\u9802\u70B9\u756A\u53F7\
+    \u304C 1-index \u304B\u3069\u3046\u304B (default = true)\n     */\n    void InputRootedTreeFormat(bool\
+    \ weighted = true, bool one_index = true){\n        assert(root_vertex_ == 0);\n\
+    \        for(int i = 1; i < vertex_size_; ++i){\n            int p; cin >> p;\n\
+    \            if(one_index) --p;\n            AddEdge(p, i);\n        }\n    }\n\
+    \n    /**\n     * @brief \u9802\u70B9 `v` \u304C\u6839\u306E\u9802\u70B9\u304B\
+    \u5224\u5B9A\u3059\u308B\u3002\n     * @param v \u5224\u5B9A\u3059\u308B\u9802\
+    \u70B9\u756A\u53F7 (0-index)\n     */\n    bool RootVertex(Vertex v){\n      \
+    \  Validate(v);\n        return node_[v].parent == -1;\n    }\n    \n    /**\n\
+    \     * @brief \u9802\u70B9 `v` \u304C\u8449\u306E\u9802\u70B9\u304B\u5224\u5B9A\
+    \u3059\u308B\u3002\n     * @param v \u5224\u5B9A\u3059\u308B\u9802\u70B9\u756A\
+    \u53F7 (0-index)\n     */\n    bool LeafVertex(Vertex v){\n        Validate(v);\n\
+    \        return node_[v].children.empty();\n    }\n\n    /**\n     * @brief \u6728\
+    \u306E\u6839\u306E\u9802\u70B9\u3092\u6C42\u3081\u308B\u3002\n     * @attention\
+    \ \u57FA\u672C\u7684\u306B\u306F\u4E0D\u8981\u3067\u3001\u6839\u306E\u9802\u70B9\
+    \u756A\u53F7\u304C\u4E0E\u3048\u3089\u308C\u3066\u3044\u306A\u3044\u5834\u5408\
+    \u306B\u7528\u3044\u308B\u3002\n     * @note Verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\n\
+    \     * @return Vertex \u6839\u306E\u9802\u70B9\u756A\u53F7\n     */\n    Vertex\
+    \ FindRoot(){\n        for(int i = 0; i < vertex_size_; ++i){\n            if(RootVertex(i)){\n\
+    \                root_vertex_ = i;\n                return i;\n            }\n\
+    \        }\n        assert(false);\n    }\n\n    /**\n     * @brief \u6728\u306E\
+    \u6839\u3092\u5909\u66F4\u3057\u3066\u518D\u69CB\u7BC9\u3059\u308B\u3002\n   \
+    \  * @param root \u65B0\u3057\u3044\u6839\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
+    \     */\n    void Rerooting(Vertex root){\n        if(root == root_vertex_) return;\n\
+    \        vector<Node> new_node_(vertex_size_);\n        auto rec = [&](auto self,\
+    \ Vertex v, Vertex p, CostType c) -> void {\n            new_node_[v].parent =\
+    \ p;\n            new_node_[v].cost = c;\n            if(node_[v].parent != p\
+    \ && node_[v].parent != -1){\n                new_node_[v].children.push_back(node_[v].parent);\n\
+    \                self(self, node_[v].parent, v, node_[v].cost);\n            }\n\
+    \            for(Vertex u : node_[v].children){\n                if(u != p){\n\
+    \                    new_node_[v].children.push_back(u);\n                   \
+    \ self(self, u, v, node_[u].cost);\n                }\n            }\n       \
+    \ };\n        rec(rec, root, -1, 0);\n        swap(new_node_, node_);\n      \
+    \  root_vertex_ = root;\n    }\n\n    void Print(bool one_index = true) const\
+    \ {\n        for(int i = 0; i < vertex_size_; ++i){\n            // fprintf(stderr,\
+    \ \"# Vertex %d : parent = %d (cost = %d), children = [\", i + int(one_index),\
+    \ get_parent(i) + int(one_index), node_[i].cost);\n            fprintf(stderr,\
+    \ \"# Vertex %d : parent = %d (cost = \", i + int(one_index), get_parent(i) +\
+    \ int(one_index));\n            cerr << node_[i].cost;\n            fprintf(stderr,\
+    \ \"), children = [\");\n            for(int j = 0; j < node_[i].children.size();\
+    \ ++j){\n                fprintf(stderr, \"%d\", node_[i].children[j] + int(one_index));\n\
+    \                if(j + 1 < node_[i].children.size()){\n                    fprintf(stderr,\
+    \ \", \");\n                }\n            }\n            fprintf(stderr, \"]\\\
+    n\");\n        }\n    }\n\n    private:\n    inline void Validate(Vertex v) const\
+    \ {\n        assert(0 <= v && v < vertex_size_);\n    }\n\n    int vertex_size_,\
+    \ root_vertex_{-1};\n    vector<Node> node_;\n};\n\n/**\n * @brief \u6728 `tree`\
+    \ \u306E\u5404\u9802\u70B9\u306E\u6DF1\u3055\u3092\u6C42\u3081\u308B\u3002\n *\
+    \ @note \u6839\u306E\u9802\u70B9\u306F\u6DF1\u3055 0 \u3067\u3042\u308B\u3002\n\
+    \ * @note Verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\n\
+    \ * @param tree \u6728\n * @param root \u6839\u306E\u9802\u70B9\u756A\u53F7 (default\
+    \ = 0)\n * @return vector<int> \u5404\u9802\u70B9\u306E\u6DF1\u3055\n */\ntemplate<typename\
+    \ CostType>\nvector<int> CalculateTreeDepth(RootedTree<CostType> &tree){\n   \
+    \ int V = tree.get_vertex_size();\n    vector<int> ret(V, 0);\n    auto rec =\
+    \ [&](auto self, Vertex v, int d) -> void {\n        ret[v] = d;\n        for(Vertex\
+    \ u : tree.get_child(v)){\n            self(self, u, d + 1);\n        }\n    };\n\
+    \    Vertex root = tree.get_root();\n    if(root < 0) root = tree.FindRoot();\n\
+    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u6728\u306E\u6839\
+    \u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u8FBA\u306E\u91CD\u307F\u306E\u7D2F\
+    \u7A4D\u548C\u3092\u8A08\u7B97\u3059\u308B\u3002\n * @param tree \u6728\n * @return\
+    \ vector<CostType> \u6839\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u91CD\u307F\
+    \u306E\u7D2F\u7A4D\u548C\n */\ntemplate<typename CostType>\nvector<CostType> CalculateTreeCumlativeSum(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
+    \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
+    \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
+    \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
+    \    rec(rec, root, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
+    \ CalculateSubtreeSize(RootedTree<CostType> &tree){\n    Vertex root = tree.get_root();\n\
+    \    int V = tree.get_vertex_size();\n    vector<int> ret(V, 1);\n    auto rec\
+    \ = [&](auto self, Vertex v) -> int {\n        for(Vertex u : tree.get_child(v)){\n\
+    \            ret[v] += self(self, u);\n        }\n        return ret[v];\n   \
+    \ };\n    rec(rec, root);\n    return ret;\n}\n#line 10 \"Library/Tree/HeavyLightDecomposition.hpp\"\
+    \n\nstruct PathSegment{\n    PathSegment() = default;\n    Vertex head_vertex;\
+    \ // `head_vertex` : \u30D1\u30B9\u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\
+    \u70B9\u306E\u9802\u70B9\u756A\u53F7\n    Vertex tail_vertex; // `tail_vertex`\
+    \ : \u30D1\u30B9\u306E\u6700\u3082\u8449\u306B\u8FD1\u3044\u9802\u70B9\u306E\u9802\
+    \u70B9\u756A\u53F7\n    int head_index; // `head_index` : `head_vertex` \u306E\
+    \u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u756A\
+    \u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    int tail_index; // `tail_index`\
+    \ : `tail_vertex` \u306E\u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\
+    \u30C3\u30AF\u30B9\u756A\u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    bool highest;\
+    \ // \u3053\u306E `PathSegment` \u304C\u6700\u3082\u6839\u306B\u8FD1\u3044(\u3064\
+    \u307E\u308A LCA \u3092\u542B\u3093\u3067\u3044\u308B)\u30D1\u30B9\u3067\u3042\
+    \u308B\u3053\u3068\u3092\u8868\u3059\u3002\u8FBA\u5C5E\u6027\u306E\u30AF\u30A8\
+    \u30EA\u3067 LCA \u3092\u9664\u304F\u305F\u3081\u306B\u4F7F\u7528\u3002\n    bool\
+    \ reverse; // \u30AF\u30A8\u30EA\u3067\u6295\u3052\u305F `from -> to` \u306B\u5BFE\
+    \u3057\u3066\u3001`from` \u5074\u304C `tail_vertex` \u3067\u3042\u308B\u3053\u3068\
+    \u3092\u8868\u3059\u3002\u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\
+    \u3067\u4F7F\u7528\u3002\n    friend ostream &operator<<(ostream &os, const PathSegment\
+    \ &p){\n        return os << \"# Path (\" << p.head_vertex << \" -> \" << p.tail_vertex\
+    \ << \", \" << p.head_index << \" -> \" << p.tail_index << \", \" << boolalpha\
+    \ << p.highest << \", \" << p.reverse << \")\";\n    }\n};\n\ntemplate<typename\
+    \ CostType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(RootedTree<CostType>\
+    \ &tree) : tree_(tree){\n        vertex_size_ = tree_.get_vertex_size();\n   \
+    \     vector<int> subtree_size = CalculateSubtreeSize(tree_);\n        vertex_depth_\
+    \ = CalculateTreeDepth(tree_);\n        for(int i = 0; i < vertex_size_; ++i){\n\
+    \            auto &children = tree_.get_child(i);\n            nth_element(children.begin(),\
+    \ children.begin(), children.end(), [&](Vertex i, Vertex j){\n               \
+    \ return subtree_size[i] > subtree_size[j];\n            });\n        }\n    \
+    \    Vertex root = tree_.get_root();\n        heavy_path_head_.push_back(root);\n\
+    \        heavy_path_depth_.push_back(0);\n        belong_heavy_path_index_.resize(vertex_size_,\
+    \ -1);\n        belong_heavy_path_index_[root] = 0;\n        preorder_index_.resize(vertex_size_,\
+    \ -1);\n        postorder_index_.resize(vertex_size_, -1);\n        vertex_order_.resize(vertex_size_);\n\
+    \        int timer = 0;\n        dfs(root, 0, 0, timer);\n    }\n\n    /**\n \
+    \    * @brief \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\
+    \u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\n     * @param u \u9802\u70B9\u756A\
+    \u53F7 (0-index)\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return\
+    \ Vertex \u6700\u5C0F\u5171\u901A\u7956\u5148\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
+    \     */\n    Vertex LowestCommonAncestor(Vertex u, Vertex v){\n        if(path_depth(u)\
+    \ < path_depth(v)) swap(u, v);\n        while(path_depth(u) != path_depth(v)){\n\
+    \            u = tree_.get_parent(head(u));\n        }\n        while(belong(u)\
+    \ != belong(v)){\n            u = tree_.get_parent(head(u));\n            v =\
+    \ tree_.get_parent(head(v));\n        }\n        return vertex_depth(u) < vertex_depth(v)\
+    \ ? u : v;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u7956\u5148\
+    \u3067\u3042\u3063\u3066\u3001\u6DF1\u3055\u304C `level` \u3067\u3042\u308B\u9802\
+    \u70B9\u3092\u8FD4\u3059\u3002\n     * @note \u305D\u306E\u3088\u3046\u306A\u9802\
+    \u70B9\u304C\u5B58\u5728\u3057\u306A\u3044\u3068\u304D\u3001`-1` \u3092\u8FD4\u3059\
+    \u3002\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param level\
+    \ \u6DF1\u3055 (0-index)\n     * @return Vertex \u7B54\u3048\u3068\u306A\u308B\
+    \u9802\u70B9 (\u307E\u305F\u306F `-1`)\n     */\n    Vertex LevelAncestor(Vertex\
+    \ v, int level){\n        if(level < 0 || vertex_depth(v) < level) return -1;\n\
+    \        Vertex u = head(v);\n        while(1){\n            if(vertex_depth(u)\
+    \ <= level){\n                int delta = level - vertex_depth(u);\n         \
+    \       return order(preorder(u) + delta);\n            }\n            u = tree_.get_parent(u);\n\
+    \        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\
+    \u70B9 `to` \u3078\u306E\u6700\u77ED\u8DEF\u306B\u304A\u3044\u3066\u3001`from`\
+    \ \u304B\u3089 `dist` \u500B\u79FB\u52D5\u3057\u305F\u9802\u70B9\u756A\u53F7\u3092\
+    \u6C42\u3081\u308B\u3002\n     * @note \u6700\u77ED\u8DEF\u306E\u9577\u3055\u3092\
+    \ `k` \u3068\u3057\u3066\u3001`dist < 0` \u307E\u305F\u306F `k < dist` \u306E\u3068\
+    \u304D `-1` \u3092\u8FD4\u3059\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\
+    \u70B9\u756A\u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\
+    \u53F7 (0-index)\n     * @param dist \u79FB\u52D5\u3059\u308B\u9802\u70B9\u6570\
+    \n     * @return Vertex \u7B54\u3048\u306E\u9802\u70B9\u756A\u53F7 (0-index) \u307E\
+    \u305F\u306F `-1`\n     */\n    Vertex Jump(Vertex from, Vertex to, int dist){\n\
+    \        Vertex lca = LowestCommonAncestor(from, to);\n        int dist_from_lca\
+    \ = vertex_depth(from) - vertex_depth(lca);\n        int dist_lca_to = vertex_depth(to)\
+    \ - vertex_depth(lca);\n        if(dist < 0 or dist > dist_from_lca + dist_lca_to)\
+    \ return -1;\n        if(dist <= dist_from_lca){\n            return LevelAncestor(from,\
+    \ vertex_depth(from) - dist);\n        }\n        else{\n            return LevelAncestor(to,\
+    \ vertex_depth(lca) + dist - dist_from_lca);\n        }\n    }\n\n    /**\n  \
+    \   * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\u70B9 `to` \u3078\u306E\u30D1\
+    \u30B9\u3092\u5206\u89E3\u3057\u305F\u7D50\u679C\u3092\u8FD4\u3059\u3002\n   \
+    \  * @note \u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\u306B\u5BFE\u3057\
+    \u3066\u3082\u5BFE\u5FDC\u3002\u8A73\u3057\u304F\u306F `PathSegment` \u306E `reverse`\
+    \ \u3092\u53C2\u7167\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\u70B9\u756A\
+    \u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\u53F7\
+    \ (0-index)\n     * @return vector<PathSegment> \u5206\u89E3\u3057\u305F\u7D50\
+    \u679C\n     */\n    vector<PathSegment> PathQuery(Vertex from, Vertex to){\n\
+    \        vector<PathSegment> ret;\n        Vertex lca = LowestCommonAncestor(from,\
+    \ to);\n        while(belong(from) != belong(lca)){\n            PathSegment path;\n\
+    \            Vertex h = head(from);\n            path.head_vertex = h, path.tail_vertex\
+    \ = from;\n            path.head_index = preorder(h), path.tail_index = preorder(from)\
+    \ + 1;\n            path.highest = false, path.reverse = true;\n            ret.push_back(path);\n\
+    \            from = tree_.get_parent(h);\n        }\n        if(from != lca){\n\
+    \            PathSegment path;\n            path.head_vertex = lca, path.tail_vertex\
+    \ = from;\n            path.head_index = preorder(lca), path.tail_index = preorder(from)\
+    \ + 1;\n            path.highest = true, path.reverse = true;\n            ret.push_back(path);\n\
+    \        }\n        int size = ret.size();\n        while(belong(to) != belong(lca)){\n\
+    \            PathSegment path;\n            Vertex h = head(to);\n           \
+    \ path.head_vertex = h, path.tail_vertex = to;\n            path.head_index =\
+    \ preorder(h), path.tail_index = preorder(to) + 1;\n            path.highest =\
+    \ false, path.reverse = false;\n            ret.push_back(path);\n           \
+    \ to = tree_.get_parent(h);\n        }\n        if(to != lca){\n            PathSegment\
+    \ path;\n            path.head_vertex = lca, path.tail_vertex = to;\n        \
+    \    path.head_index = preorder(lca), path.tail_index = preorder(to) + 1;\n  \
+    \          path.highest = true, path.reverse = false;\n            ret.push_back(path);\n\
+    \        }\n        if(from == lca && to == lca){\n            PathSegment path;\n\
+    \            path.head_vertex = path.tail_vertex = lca;\n            path.head_index\
+    \ = preorder(lca), path.tail_index = preorder(lca) + 1;\n            path.highest\
+    \ = true, path.reverse = false;\n            ret.push_back(path);\n        }\n\
+    \        reverse(ret.begin() + size, ret.end());\n        return ret;\n    }\n\
+    \n    /**\n     * @brief \u9802\u70B9 `v` \u3092\u6839\u3068\u3059\u308B\u90E8\
+    \u5206\u6728\u306B\u5BFE\u5FDC\u3057\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
+    \u3092\u534A\u958B\u533A\u9593\u3067\u8FD4\u3059\u3002\n     * @param v \u9802\
+    \u70B9\u756A\u53F7 (0-index)\n     * @return pair<int, int> \u30A4\u30F3\u30C7\
+    \u30C3\u30AF\u30B9 (0-index, \u534A\u958B\u533A\u9593)\n     */\n    pair<int,\
+    \ int> SubtreeQuery(Vertex v) const {\n        return make_pair(preorder(v), postorder(v)\
+    \ + 1);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `i` \u306B\u8F09\u305B\u308B\
+    \u30C7\u30FC\u30BF\u3092\u683C\u7D0D\u3057\u305F\u914D\u5217 `data[i]` \u3092\u3001\
+    \u9802\u70B9\u306E\u884C\u304D\u304B\u3051\u9806\u306B\u306A\u308B\u3088\u3046\
+    \u306B\u4E26\u3079\u66FF\u3048\u308B\u3002\n     * @note \u30BB\u30B0\u30E1\u30F3\
+    \u30C8\u6728\u306A\u3069\u306B\u8F09\u305B\u308B\u524D\u306B\u4F7F\u7528\u3059\
+    \u308B\u3002\n     * @param data \u5404\u9802\u70B9\u306B\u8F09\u305B\u308B\u30C7\
+    \u30FC\u30BF\n     */\n    template<typename T>\n    void SortVertex(vector<T>\
+    \ &data){\n        assert(data.size() == vertex_size_);\n        vector<T> sub(data.size());\n\
+    \        for(int i = 0; i < vertex_size_; ++i){\n            sub[preorder(i)]\
+    \ = data[i];\n        }\n        swap(data, sub);\n    }\n\n    int operator[](Vertex\
+    \ v){\n        return preorder(v);\n    }\n\n    const int operator[](Vertex v)\
+    \ const {\n        return preorder(v);\n    }\n\n    private:\n    int dfs(Vertex\
+    \ v, int h, int d, int &t){\n        preorder_index_[v] = t;\n        vertex_order_[t]\
+    \ = v;\n        int ret = t;\n        ++t;\n        auto cs = tree_.get_child(v);\n\
+    \        if(!cs.empty()){\n            int c = cs.size();\n            belong_heavy_path_index_[cs.front()]\
+    \ = h;\n            ret = max(ret, dfs(cs.front(), h, d, t));\n            for(int\
+    \ i = 1; i < c; ++i){\n                int nh = (int)heavy_path_head_.size();\n\
+    \                heavy_path_head_.push_back(cs[i]);\n                heavy_path_depth_.push_back(d\
+    \ + 1);\n                belong_heavy_path_index_[cs[i]] = nh;\n             \
+    \   ret = max(ret, dfs(cs[i], nh, d + 1, t));\n            }\n        }\n    \
+    \    postorder_index_[v] = ret;\n        return ret;\n    }\n\n    Vertex head(Vertex\
+    \ v) const {\n        return heavy_path_head_[belong_heavy_path_index_[v]];\n\
+    \    }\n\n    int path_depth(Vertex v) const {\n        return heavy_path_depth_[belong_heavy_path_index_[v]];\n\
+    \    }\n\n    int vertex_depth(Vertex v) const {\n        return vertex_depth_[v];\n\
+    \    }\n\n    int belong(Vertex v) const {\n        return belong_heavy_path_index_[v];\n\
+    \    }\n\n    Vertex order(int idx) const {\n        return vertex_order_[idx];\n\
+    \    }\n\n    int preorder(Vertex v) const {\n        return preorder_index_[v];\n\
+    \    }\n\n    int postorder(Vertex v) const {\n        return postorder_index_[v];\n\
+    \    }\n\n    RootedTree<CostType> &tree_;\n\n    int vertex_size_;\n    vector<Vertex>\
+    \ heavy_path_head_, vertex_order_;\n    vector<int> belong_heavy_path_index_,\
+    \ belong_heavy_path_order_, heavy_path_depth_;\n    vector<int> preorder_index_,\
+    \ postorder_index_;\n    vector<int> vertex_depth_;\n};\n#line 5 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
+    \ false);\n\n    HeavyLightDecomposition hld(T);\n    while(Q--){\n        int\
+    \ u, v; cin >> u >> v;\n        cout << hld.LowestCommonAncestor(u, v) << endl;\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../Library/Template.hpp\"\
+    \n#include \"../Library/Tree/HeavyLightDecomposition.hpp\"\n\nint main(){\n  \
+    \  int N, Q; cin >> N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
+    \ false);\n\n    HeavyLightDecomposition hld(T);\n    while(Q--){\n        int\
+    \ u, v; cin >> u >> v;\n        cout << hld.LowestCommonAncestor(u, v) << endl;\n\
+    \    }\n}"
   dependsOn:
-  - library/Tree/HeavyLightDecomposition.hpp
-  - library/Graph/GraphTemplate.hpp
+  - Library/Template.hpp
+  - Library/Common.hpp
+  - Library/Tree/HeavyLightDecomposition.hpp
+  - Library/Tree/Tree.hpp
   isVerificationFile: true
   path: verify/LC-LowestCommonAncestor-HLD.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 19:12:40+09:00'
+  timestamp: '2024-10-20 22:40:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LowestCommonAncestor-HLD.test.cpp

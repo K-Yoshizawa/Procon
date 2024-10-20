@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: library/DataStructure/SegmentTree.hpp
+    path: Library/Common.hpp
+    title: Library/Common.hpp
+  - icon: ':heavy_check_mark:'
+    path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
-    path: library/modint.hpp
+    path: Library/Template.hpp
+    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -18,74 +24,158 @@ data:
     links:
     - https://judge.yosupo.jp/problem/point_set_range_composite
   bundledCode: "#line 1 \"verify/LC-PointSetRangeComposite.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/point_set_range_composite\"\n\n#line 1 \"\
-    library/DataStructure/SegmentTree.hpp\"\n/**\n * @file SegmentTree.hpp\n * @author\
-    \ log K (lX57)\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
-    \ * @version 2.2\n * @date 2023-10-02\n */\n\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\ntemplate<typename Monoid>\nstruct SegmentTree{\n    private:\n\
-    \    using F = function<Monoid(Monoid, Monoid)>;\n\n    int size_, offset_, zeroindex_;\n\
-    \    vector<Monoid> data_;\n    const F f;\n    const Monoid m1_;\n\n    inline\
-    \ void check_(int x){\n        assert(1 <= x && x <= size_);\n    }\n\n    public:\n\
-    \    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\
-    \u6570 `Size` \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Size \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\u7D20\u6570\n     * @param Merge \u533A\
-    \u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity\
-    \ \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\
-    \u3057\u3066\u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(int\
-    \ Size, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n    :\
-    \ f(Merge), m1_(Monoid_Identity), zeroindex_(ZeroIndex){\n        size_ = 1;\n\
-    \        while(size_ < Size) size_ <<= 1;\n        offset_ = size_ - 1;\n    \
-    \    data_.resize(2 * size_, m1_);\n    }\n\n    /**\n     * @brief \u30BB\u30B0\
-    \u30E1\u30F3\u30C8\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @attention\
-    \ \u5FC5\u305A `set()` \u3067\u521D\u671F\u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\
-    \u3089\u547C\u3073\u51FA\u3059\u3053\u3068\uFF01\n     */\n    void build(){\n\
-    \        for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i\
-    \ * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    /**\n     * @brief \u30BB\
-    \u30B0\u30E1\u30F3\u30C8\u6728\u306E\u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\
-    \u308B\u3002\n     * @param Index \u4EE3\u5165\u5148\u306E\u8981\u7D20\u756A\u53F7\
-    \ (default = 1-index)\n     * @param Value \u4EE3\u5165\u3059\u308B\u5024\n  \
-    \   */\n    void set(int Index, Monoid Value){\n        check_(Index + zeroindex_);\n\
-    \        data_[offset_ + Index + zeroindex_] = Value;\n    }\n\n    /**\n    \
-    \ * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u914D\u5217 `Init_Data`\
-    \ \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param Init_Data \u521D\u671F\
-    \u30C7\u30FC\u30BF\u306E\u914D\u5217\n     * @param Merge \u533A\u9593\u53D6\u5F97\
-    \u3092\u884C\u3046\u6F14\u7B97\n     * @param Monoid_Identity \u30E2\u30CE\u30A4\
-    \u30C9\u306E\u5358\u4F4D\u5143\n     * @param ZeroIndex 0-index\u3068\u3057\u3066\
-    \u6271\u3044\u305F\u3044\u304B (default = `false`)\n     */\n    SegmentTree(vector<Monoid>\
-    \ &Init_Data, F Merge, const Monoid &Monoid_Identity, bool ZeroIndex = false)\n\
-    \    : f(Merge), m1_(Monoid_Identity), zeroindex_(ZeroIndex){\n        size_ =\
-    \ 1;\n        while(size_ < (int)Init_Data.size()) size_ <<= 1;\n        offset_\
-    \ = size_ - 1;\n        data_.resize(2 * size_, m1_);\n        for(int i = 0;\
-    \ i < (int)Init_Data.size(); ++i){\n            data_[size_ + i] = Init_Data[i];\n\
-    \        }\n        build();\n    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\
-    \u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n     * @param Index\
-    \ \u66F4\u65B0\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
-    \ @param Value \u66F4\u65B0\u3059\u308B\u5024\n     */\n    void update(int Index,\
-    \ Monoid Value){\n        check_(Index + zeroindex_);\n        int k = offset_\
-    \ + Index + zeroindex_;\n        data_[k] = Value;\n        while(k >>= 1){\n\
-    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[Left, Right)` \u306B\u5BFE\
-    \u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u884C\u3046\u3002\
-    \n     * @param Left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n     * @param\
-    \ Right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return Monoid \u53D6\
-    \u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid query(int Left, int Right){\n\
-    \        if(Left == Right) return m1_;\n        check_(Left + zeroindex_);\n \
-    \       check_(Right + zeroindex_ - 1);\n        int l = Left + zeroindex_ + offset_,\
-    \ r = Right + zeroindex_ + offset_;\n        Monoid al = m1_, ar = m1_;\n    \
-    \    while(l < r){\n            if(l & 1) al = f(al, data_[l++]);\n          \
-    \  if(r & 1) ar = f(data_[--r], ar);\n            l >>= 1, r >>= 1;\n        }\n\
-    \        return f(al, ar);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\
-    \u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param\
-    \ k \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n   \
-    \  * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
-    \ get(int k){\n        check_(k + zeroindex_);\n        return data_[offset_ +\
-    \ k + zeroindex_];\n    }\n\n    Monoid operator[](const int &k){\n        return\
-    \ get(k);\n    }\n};\n#line 2 \"library/modint.hpp\"\n/**\n * @file modint.hpp\n\
-    \ * @author log K (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n\
-    \ */\n\n#line 11 \"library/modint.hpp\"\nusing namespace std;\n\nconst int mod998\
-    \ = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct\
-    \ ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y\
-    \ >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
+    \ \"https://judge.yosupo.jp/problem/point_set_range_composite\"\n\n#line 2 \"\
+    Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n\
+    \ * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n\
+    \ * @date 2024-06-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n\
+    \ */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
+    #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n#line 12 \"Library/Template.hpp\"\
+    \n#define ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n\
+    #define SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x)\
+    \ reverse(ALL(x))\n#define SETPRE(digit) fixed << setprecision(digit)\n#define\
+    \ POPCOUNT(x) __builtin_popcount(x)\n#define SUM(x) reduce((x).begin(), (x).end())\n\
+    #define CEIL(nume, deno) ((nume) + (deno) - 1) / (deno)\n#define IOTA(x) iota((x).begin(),\
+    \ (x).end(), 0)\n#define LOWERBOUND_IDX(arr, val) distance((arr).begin(), lower_bound((arr).begin(),\
+    \ (arr).end(), val))\n#define UPPERBOUND_IDX(arr, val) distance((arr).begin(),\
+    \ upper_bound((arr).begin(), (arr).end(), val))\n\ninline string Yn(bool flag){return\
+    \ (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag)\
+    \ << endl;return flag;}\ninline string YN(bool flag){return (flag) ? \"YES\" :\
+    \ \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}\n\
+    template<class T>\nbool chmin(T &src, const T &cmp){if(src > cmp){src = cmp; return\
+    \ true;}return false;}\ntemplate<class T>\nbool chmax(T &src, const T &cmp){if(src\
+    \ < cmp){src = cmp; return true;}return false;}\ntemplate<typename T>\ninline\
+    \ bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax -\
+    \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
+    \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
+    \ || between(c, b, a) ? b : c);}\ntemplate<typename T>\ninline T except(T src,\
+    \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
+    inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
+    \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
+    vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
+    \    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T> &v){\n \
+    \   sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n  \
+    \  v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\nusing\
+    \ ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
+    const ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nusing vi = vector<int>;\n\
+    using vvi = vector<vi>;\nusing vl = vector<ll>;\nusing vvl = vector<vl>;\nusing\
+    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing vs = vector<string>;\n\
+    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
+    using rpq = priority_queue<T, vector<T>, greater<T>>;\n\nconst int dx4[4] = {1,\
+    \ 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0,\
+    \ -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
+    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
+    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
+    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
+    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
+    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
+    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
+    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
+    \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
+    \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
+    \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
+    ostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i < v.size();\
+    \ ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n  \
+    \  return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, vector<vector<T>>\
+    \ &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1\
+    \ != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename\
+    \ T>\nistream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i <\
+    \ v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream\
+    \ &operator<<(ostream &os, set<T> &v){\n    for (auto &u : v){\n        os <<\
+    \ u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename T1, typename T2>\n\
+    vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n   \
+    \ assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i\
+    \ = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\n\
+    template<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
+    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
+    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
+    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
+    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
+    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
+    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
+    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
+    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
+    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
+    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
+    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
+    #endif\n\n// ==============================================================\n\
+    // \n// Main Program Start\n// \n// ==============================================================\n\
+    #line 1 \"Library/DataStructure/SegmentTree.hpp\"\n/**\n * @file SegmentTree.hpp\n\
+    \ * @author log K (lX57)\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\
+    \u6728\n * @version 3.0\n * @date 2024-09-04\n */\n\n#line 10 \"Library/DataStructure/SegmentTree.hpp\"\
+    \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using F =\
+    \ function<Monoid(Monoid, Monoid)>;\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\
+    \u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `size` \u3067\u521D\u671F\u5316\u3059\
+    \u308B\u3002\n     * @param size \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\
+    \u7D20\u6570\n     * @param merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\
+    \u7B97\n     * @param monoid_identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\
+    \u5143\n     * @param zero_index 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B (default = `false`)\n     */\n    SegmentTree(int size, F merge, const\
+    \ Monoid &monoid_identity, bool zero_index = false) :\n            f(merge), id_(monoid_identity),\
+    \ zero_index_(zero_index){\n        size_ = 1;\n        while(size_ < size) size_\
+    \ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2 * size_, id_);\n\
+    \    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\
+    \u7BC9\u3059\u308B\u3002\n     * @attention \u5FC5\u305A `Set()` \u3067\u521D\u671F\
+    \u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\u3089\u547C\u3073\u51FA\u3059\u3053\
+    \u3068\uFF01\n     */\n    void Build(){\n        for(int i = offset_; i >= 1;\
+    \ --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n     \
+    \   }\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\
+    \u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\u308B\u3002\n     * @param index \u4EE3\
+    \u5165\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @param\
+    \ value \u4EE3\u5165\u3059\u308B\u5024\n     */\n    void Set(int index, Monoid\
+    \ value){\n        Validate(index + zero_index_);\n        data_[offset_ + index\
+    \ + zero_index_] = value;\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\
+    \u30C8\u6728\u3092\u914D\u5217 `init_data` \u3067\u521D\u671F\u5316\u3059\u308B\
+    \u3002\n     * @param init_data \u521D\u671F\u30C7\u30FC\u30BF\u306E\u914D\u5217\
+    \n     * @param merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n\
+    \     * @param monoid_identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\
+    \n     * @param zero_index 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\u304B\
+    \ (default = `false`)\n     */\n    SegmentTree(vector<Monoid> &init_data, F merge,\
+    \ const Monoid &monoid_identity, bool zero_index = false) :\n            f(merge),\
+    \ id_(monoid_identity), zero_index_(zero_index){\n        size_ = 1;\n       \
+    \ while(size_ < (int)init_data.size()) size_ <<= 1;\n        offset_ = size_ -\
+    \ 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)init_data.size();\
+    \ ++i){\n            data_[size_ + i] = init_data[i];\n        }\n        Build();\n\
+    \    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\
+    \u51E6\u7406\u3059\u308B\u3002\n     * @param index \u66F4\u65B0\u5148\u306E\u8981\
+    \u7D20\u756A\u53F7 (default = 1-index)\n     * @param value \u66F4\u65B0\u3059\
+    \u308B\u5024\n     */\n    void Update(int index, Monoid value){\n        Validate(index\
+    \ + zero_index_);\n        int k = offset_ + index + zero_index_;\n        data_[k]\
+    \ = value;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
+    \ * k + 1]);\n        }\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593\
+    \ `[left, Right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\
+    \u30EA\u3092\u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\
+    \u5DE6\u7AEF\n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n\
+    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ Query(int left, int right){\n        if(left == right) return id_;\n       \
+    \ Validate(left + zero_index_);\n        Validate(right + zero_index_ - 1);\n\
+    \        int l = left + zero_index_ + offset_, r = right + zero_index_ + offset_;\n\
+    \        Monoid al = id_, ar = id_;\n        while(l < r){\n            if(l &\
+    \ 1) al = f(al, data_[l++]);\n            if(r & 1) ar = f(data_[--r], ar);\n\
+    \            l >>= 1, r >>= 1;\n        }\n        return f(al, ar);\n    }\n\n\
+    \    /**\n     * @brief \u8981\u7D20\u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\
+    \u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\
+    \u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\u5F97\u3057\u305F\
+    \u7D50\u679C\n     */\n    Monoid get_value(int k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    Monoid operator[](const\
+    \ int &k){\n        return get_value(k);\n    }\n\n    private:\n    int size_,\
+    \ offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const\
+    \ Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1 <=\
+    \ x && x <= size_);\n    }\n};\n#line 2 \"Library/modint.hpp\"\n\n/**\n * @file\
+    \ modint.hpp\n * @author log K (lX57)\n * @brief modint\n * @version 1.0\n * @date\
+    \ 2023-08-24\n */\n\n#line 12 \"Library/modint.hpp\"\nusing namespace std;\n\n\
+    const int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate< int\
+    \ mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
+    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
     \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
     \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
     \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
@@ -107,43 +197,44 @@ data:
     \ ostream &operator<<(ostream &os, const ModInt &p) {\n        return os << p.x;\n\
     \    }\n\n    friend istream &operator>>(istream &is, ModInt &a) {\n        int64_t\
     \ t;\n        is >> t;\n        a = ModInt< mod >(t);\n        return (is);\n\
-    \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing modint998 = ModInt<\
-    \ mod998 >;\nusing modint107 = ModInt< mod107 >;\n\nusing vm998 = vector< modint998\
-    \ >;\nusing vvm998 = vector< vector< modint998 > >;\nusing vm107 = vector< modint107\
-    \ >;\nusing vvm107 = vector< vector< modint107 > >;\n#line 5 \"verify/LC-PointSetRangeComposite.test.cpp\"\
-    \n\nstruct Data{\n    modint998 a, b;\n\n    Data() : a(1), b(0){}\n    Data(int\
-    \ a, int b) : a(a), b(b){} \n\n    static Data op(const Data& left, const Data&\
-    \ right){\n        Data res;\n        res.a = left.a * right.a;\n        res.b\
-    \ = right.a * left.b + right.b;\n        return res;\n    }\n};\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<Data> Init_Data;\n    for(int i = 0;\
-    \ i < N; ++i){\n        int a, b; cin >> a >> b;\n        Init_Data.push_back(Data(a,\
-    \ b));\n    }\n    SegmentTree<Data> seg(Init_Data, [](Data l, Data r){return\
-    \ Data::op(l, r);}, Data(), true);\n    while(Q--){\n        int q; cin >> q;\n\
-    \        if(q == 0){\n            int p, c, d; cin >> p >> c >> d;\n         \
-    \   seg.update(p, Data(c, d));\n        }\n        if(q == 1){\n            int\
-    \ l, r, x; cin >> l >> r >> x;\n            Data ret = seg.query(l, r);\n    \
-    \        cout << ret.a * x + ret.b << endl;\n        }\n    }\n}\n"
+    \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing mint = ModInt<mod998>;\n\
+    using mint107 = ModInt<mod107>;\n\nusing vm = vector<mint>;\nusing vvm = vector<vector<mint>>;\n\
+    using vm107 = vector<mint107>;\nusing vvm107 = vector<vector<mint107>>;\n#line\
+    \ 6 \"verify/LC-PointSetRangeComposite.test.cpp\"\n\nstruct Affine{\n    Affine(mint\
+    \ a = 1, mint b = 0) : a(a), b(b){}\n    mint Value(mint x) const {\n        return\
+    \ a * x + b;\n    }\n    static Affine Merge(Affine l, Affine r){\n        return\
+    \ Affine(l.a * r.a, l.b * r.a + r.b);\n    }\n    mint a, b;\n};\n\nint main(){\n\
+    \    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n    for(int i =\
+    \ 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
+    \ b));\n    }\n\n    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return\
+    \ Affine::Merge(l, r);}, Affine(), true);\n    while(Q--){\n        int t; cin\
+    \ >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >> d;\n \
+    \           seg.Update(p, Affine(c, d));\n        }\n        else{\n         \
+    \   int l, r, x; cin >> l >> r >> x;\n            cout << seg.Query(l, r).Value(x)\
+    \ << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n\n#include \"../library/DataStructure/SegmentTree.hpp\"\n#include \"../library/modint.hpp\"\
-    \n\nstruct Data{\n    modint998 a, b;\n\n    Data() : a(1), b(0){}\n    Data(int\
-    \ a, int b) : a(a), b(b){} \n\n    static Data op(const Data& left, const Data&\
-    \ right){\n        Data res;\n        res.a = left.a * right.a;\n        res.b\
-    \ = right.a * left.b + right.b;\n        return res;\n    }\n};\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<Data> Init_Data;\n    for(int i = 0;\
-    \ i < N; ++i){\n        int a, b; cin >> a >> b;\n        Init_Data.push_back(Data(a,\
-    \ b));\n    }\n    SegmentTree<Data> seg(Init_Data, [](Data l, Data r){return\
-    \ Data::op(l, r);}, Data(), true);\n    while(Q--){\n        int q; cin >> q;\n\
-    \        if(q == 0){\n            int p, c, d; cin >> p >> c >> d;\n         \
-    \   seg.update(p, Data(c, d));\n        }\n        if(q == 1){\n            int\
-    \ l, r, x; cin >> l >> r >> x;\n            Data ret = seg.query(l, r);\n    \
-    \        cout << ret.a * x + ret.b << endl;\n        }\n    }\n}\n"
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
+    \n#include \"../Library/modint.hpp\"\n\nstruct Affine{\n    Affine(mint a = 1,\
+    \ mint b = 0) : a(a), b(b){}\n    mint Value(mint x) const {\n        return a\
+    \ * x + b;\n    }\n    static Affine Merge(Affine l, Affine r){\n        return\
+    \ Affine(l.a * r.a, l.b * r.a + r.b);\n    }\n    mint a, b;\n};\n\nint main(){\n\
+    \    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n    for(int i =\
+    \ 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
+    \ b));\n    }\n\n    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return\
+    \ Affine::Merge(l, r);}, Affine(), true);\n    while(Q--){\n        int t; cin\
+    \ >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >> d;\n \
+    \           seg.Update(p, Affine(c, d));\n        }\n        else{\n         \
+    \   int l, r, x; cin >> l >> r >> x;\n            cout << seg.Query(l, r).Value(x)\
+    \ << endl;\n        }\n    }\n}"
   dependsOn:
-  - library/DataStructure/SegmentTree.hpp
-  - library/modint.hpp
+  - Library/Template.hpp
+  - Library/Common.hpp
+  - Library/DataStructure/SegmentTree.hpp
+  - Library/modint.hpp
   isVerificationFile: true
   path: verify/LC-PointSetRangeComposite.test.cpp
   requiredBy: []
-  timestamp: '2024-04-29 18:47:07+09:00'
+  timestamp: '2024-10-20 22:40:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointSetRangeComposite.test.cpp
