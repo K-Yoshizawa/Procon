@@ -175,10 +175,8 @@ tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
 }
 
 #ifdef LOGK
-#define DEBUG(fmt, ...) fprintf(stderr, fmt __VA_OPT__(,) __VA_ARGS__)
 #define VARIABLE(var) cerr << "# " << #var << " = " << var << endl;
 #else
-#define DEBUG(...) 42
 #define VARIABLE(...) 42
 #endif
 
