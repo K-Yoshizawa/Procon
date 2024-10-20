@@ -1,40 +1,38 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
-#include "../library/DataStructure/SegmentTree.hpp"
-#include "../library/modint.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/DataStructure/SegmentTree.hpp"
+#include "../Library/modint.hpp"
 
-struct Data{
-    modint998 a, b;
-
-    Data() : a(1), b(0){}
-    Data(int a, int b) : a(a), b(b){} 
-
-    static Data op(const Data& left, const Data& right){
-        Data res;
-        res.a = left.a * right.a;
-        res.b = right.a * left.b + right.b;
-        return res;
+struct Affine{
+    Affine(mint a = 1, mint b = 0) : a(a), b(b){}
+    mint Value(mint x) const {
+        return a * x + b;
     }
+    static Affine Merge(Affine l, Affine r){
+        return Affine(l.a * r.a, l.b * r.a + r.b);
+    }
+    mint a, b;
 };
 
 int main(){
     int N, Q; cin >> N >> Q;
-    vector<Data> Init_Data;
+    vector<Affine> init_data;
     for(int i = 0; i < N; ++i){
         int a, b; cin >> a >> b;
-        Init_Data.push_back(Data(a, b));
+        init_data.push_back(Affine(a, b));
     }
-    SegmentTree<Data> seg(Init_Data, [](Data l, Data r){return Data::op(l, r);}, Data(), true);
+
+    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(), true);
     while(Q--){
-        int q; cin >> q;
-        if(q == 0){
+        int t; cin >> t;
+        if(t == 0){
             int p, c, d; cin >> p >> c >> d;
-            seg.update(p, Data(c, d));
+            seg.Update(p, Affine(c, d));
         }
-        if(q == 1){
+        else{
             int l, r, x; cin >> l >> r >> x;
-            Data ret = seg.query(l, r);
-            cout << ret.a * x + ret.b << endl;
+            cout << seg.Query(l, r).Value(x) << endl;
         }
     }
 }

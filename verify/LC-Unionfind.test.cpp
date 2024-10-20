@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 
-#include "../library/DataStructure/UnionFind.hpp"
+#include "../Library/DataStructure/UnionFind.hpp"
 
 int main(){
     int N, Q; cin >> N >> Q;
@@ -8,7 +8,7 @@ int main(){
     UnionFind uf(N);
     while(Q--){
         int t, u, v; cin >> t >> u >> v;
-        if(t == 0) uf.unite(u, v);
-        else cout << uf.same(u, v) << endl;
+        if(t == 0) uf.Unite(u, v);
+        else cout << uf.Same(u, v) << endl;
     }
 }

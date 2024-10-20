@@ -1,70 +1,53 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
-#include "../library/DataStructure/LazySegmentTree.hpp"
-#include "../library/modint.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/modint.hpp"
+#include "../Library/DataStructure/LazySegmentTree.hpp"
 
-struct Data{
-    modint998 val;
+struct Monoid{
+    mint a;
     int len;
-
-    Data() : val(0), len(1){}
-    Data(int val, int len) : val(val), len(len){}
-
-    static Data Merge(const Data& left, const Data& right){
-        Data res;
-        res.val = left.val + right.val;
-        res.len = left.len + right.len;
-        return res;
+    Monoid(mint a_ = 0, int len_ = 1) : a(a_), len(len_){}
+    static Monoid Merge(Monoid &l, Monoid &r){
+        return Monoid(l.a + r.a, l.len + r.len);
     }
 };
 
-struct Oper{
-    modint998 b, c;
-
-    Oper() : b(1), c(0){}
-    Oper(int b, int c) : b(b), c(c){}
-
-    bool operator==(const Oper& r){
-        return b == r.b && c == r.c;
+struct OperatorMonoid{
+    mint b, c;
+    OperatorMonoid(mint b_ = 1, mint c_ = 0) : b(b_), c(c_){}
+    static Monoid Mapping(Monoid &m, OperatorMonoid &op){
+        return Monoid(op.b * m.a + op.c * m.len, m.len);
     }
-
-    static Data mapping(const Data& left, const Oper& right){
-        Data res;
-        res.val = left.val * right.b + right.c * left.len;
-        res.len = left.len;
-        return res;
-    }
-
-    static Oper composite(const Oper& left, const Oper& right){
-        Oper res;
-        res.b = left.b * right.b;
-        res.c = right.b * left.c + right.c;
-        return res;
+    static OperatorMonoid Composite(OperatorMonoid &l, OperatorMonoid &r){
+        return OperatorMonoid(r.b * l.b, r.b * l.c + r.c);
     }
 };
 
 int main(){
     int N, Q; cin >> N >> Q;
-    vector<Data> Init_Data;
+    vector<Monoid> A(N);
     for(int i = 0; i < N; ++i){
-        int a; cin >> a;
-        Init_Data.push_back({a, 1});
+        mint a; cin >> a;
+        A[i] = Monoid(a);
     }
-    LazySegmentTree<Data, Oper> seg(Init_Data,
-        [](Data x, Data y){return Data::Merge(x, y);},
-        [](Data x, Oper y){return Oper::mapping(x, y);},
-        [](Oper x, Oper y){return Oper::composite(x, y);},
-        Data(), Oper(), true
-    );
+
+    LazySegmentTree<Monoid, OperatorMonoid> seg(A,
+        [](Monoid l, Monoid r){return Monoid::Merge(l, r);},
+        [](Monoid m, OperatorMonoid op){return OperatorMonoid::Mapping(m, op);},
+        [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l, r);},
+        Monoid(),
+        OperatorMonoid(),
+        true);
     while(Q--){
-        int q; cin >> q;
-        if(q == 0){
+        int t; cin >> t;
+        if(t == 0){
             int l, r, b, c; cin >> l >> r >> b >> c;
-            seg.update(l, r, Oper(b, c));
+            seg.Update(l, r, OperatorMonoid(b, c));
         }
-        if(q == 1){
+        else{
             int l, r; cin >> l >> r;
-            cout << seg.query(l, r).val << endl;
+            cout << seg.Query(l, r).a << endl;
         }
     }
 }

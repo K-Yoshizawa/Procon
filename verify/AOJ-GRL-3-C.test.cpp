@@ -1,19 +1,25 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C"
+#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_C"
 
-#include "../library/Graph/StronglyConnectedComponents.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/Graph/StronglyConnectedComponents.hpp"
 
 int main(){
     int V, E; cin >> V >> E;
     Graph G(V, true);
-    for(int i = 0; i < E; ++i){
-        int s, t; cin >> s >> t;
-        G.add_edge(s, t);
-    }
+    G.InputGraph(E, false, false);
     
     StronglyConnectedComponents scc(G);
+    // auto cs = scc.get_components();
+    // for(auto &vs : cs){
+    //     cerr << "#";
+    //     for(auto v : vs){
+    //         cerr << " " << v;
+    //     }
+    //     cerr << endl;
+    // }
     int Q; cin >> Q;
-    for(int i = 0; i < Q; ++i){
+    while(Q--){
         int u, v; cin >> u >> v;
-        cout << (scc.where(u) == scc.where(v)) << endl;
+        cout << int(scc.BelongComponent(u) == scc.BelongComponent(v)) << endl;
     }
 }

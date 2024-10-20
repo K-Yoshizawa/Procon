@@ -1,18 +1,20 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_B"
 
-#include "../library/DataStructure/BinaryIndexedTree.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
     int n, q; cin >> n >> q;
-    vector<long long> Init_Data(n, 0);
-    BinaryIndexedTree<long long> BIT(n);
+
+    SegmentTree<int> seg(n, [](int l, int r){return l + r;}, 0, false);
+    seg.Build();
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){
-            BIT.add(x, y);
+            seg.Update(x, seg[x] + y);
         }
-        if(com == 1){
-            cout << BIT.query(x, y) << endl;
+        else{
+            cout << seg.Query(x, y + 1) << endl;
         }
     }
 }

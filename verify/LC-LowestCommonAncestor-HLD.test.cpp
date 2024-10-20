@@ -1,18 +1,16 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "../library/Tree/HeavyLightDecomposition.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/Tree/HeavyLightDecomposition.hpp"
 
 int main(){
     int N, Q; cin >> N >> Q;
-    Graph G(N);
-    for(int i = 1; i < N; ++i){
-        int p; cin >> p;
-        G.add(i, p);
-    }
+    RootedTree T(N);
+    T.InputRootedTreeFormat(false, false);
 
-    HeavyLightDecomposition hld(G);
+    HeavyLightDecomposition hld(T);
     while(Q--){
         int u, v; cin >> u >> v;
-        cout << hld.lca(u, v) << endl;
+        cout << hld.LowestCommonAncestor(u, v) << endl;
     }
 }
