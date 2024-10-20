@@ -157,7 +157,7 @@ Graph<CostType> GraphReverse(const Graph<CostType> &graph){
 /**
  * @brief グラフの辺集合を返す。
  * @param graph 頂点数 V のグラフ
- * @param sorted 辺集合をコストでソートした状態で返すか `(default = true)`
+ * @param sorted 辺集合をコストでソートした状態で返すか `(default = false)`
  * @return vector<Edge<CostType>> G の辺集合
  */
 template<typename CostType>
