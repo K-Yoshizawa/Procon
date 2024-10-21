@@ -16,7 +16,7 @@ class TwoEdgeConnectedComponents{
     TwoEdgeConnectedComponents(Graph<CostType> &graph) : G(graph){
         LowLink<CostType> lowlink(G);
         vector<bool> is_bridge(G.get_edge_size(), false);
-        for(Edge<CostType> &es : lowlink.EnumrateBridge()){
+        for(Edge<CostType> &es : lowlink.get_bridge()){
             is_bridge[es.id] = true;
         }
         vector<bool> visited(G.get_vertex_size(), false);

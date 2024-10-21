@@ -9,7 +9,7 @@ int main(){
     G.InputGraph(E, false, false);
     
     LowLink lol(G);
-    auto ans = lol.EnumrateBridge();
+    auto ans = lol.get_bridge();
     sort(ans.begin(), ans.end(), [](Edge<int> le, Edge<int> re){
         if(le.from == re.from) return le.to < re.to;
         return le.from < re.from;

@@ -9,7 +9,7 @@ int main(){
     G.InputGraph(E, false, false);
     
     LowLink lol(G);
-    auto ans = lol.EnumrateArticulationVertex();
+    auto ans = lol.get_articulation_vertex();
     for(auto v : ans){
         cout << v << endl;
     }

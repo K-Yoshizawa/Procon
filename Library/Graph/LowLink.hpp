@@ -18,6 +18,8 @@ class LowLink{
         for(int i = 0; i < graph.get_vertex_size(); ++i){
             if(!state_[i]) dfs(i, -1, 0);
         }
+        BuildArticulationVertex();
+        BuildBridge();
     }
 
     /**
@@ -45,20 +47,8 @@ class LowLink{
      * @note 関節点 : その頂点を除くと連結成分が増えるような頂点
      * @return vector<Vertex> 関節点の頂点番号 (0-index)
      */
-    vector<Vertex> EnumrateArticulationVertex() const {
-        vector<Vertex> ret;
-        for(int u = 0; u < graph_.get_vertex_size(); ++u){
-            if(state_[u] == 2){
-                if(child_[u].size() > 1) ret.push_back(u);
-                continue;
-            }
-            bool exist = false;
-            for(Vertex v : child_[u]){
-                exist |= (get_ord(u) <= get_low(v));
-            }
-            if(exist) ret.push_back(u);
-        }
-        return ret;
+    vector<Vertex> &get_articulation_vertex(){
+        return articulation_vertex_;
     }
 
     /**
@@ -66,15 +56,8 @@ class LowLink{
      * @note 橋 : その辺を除くと連結成分が増えるような頂点
      * @return vector<Edge<CostType>> 橋である辺
      */
-    vector<Edge<CostType>> EnumrateBridge() const {
-        vector<Edge<CostType>> ret;
-        auto es = GraphConvertEdgeSet(graph_, false);
-        for(Edge<CostType> e : es){
-            Vertex u = e.from, v = e.to;
-            if(get_ord(u) >= get_ord(v)) swap(u, v);
-            if(get_ord(u) < get_low(v)) ret.push_back(e);
-        }
-        return ret;
+    vector<Edge<CostType>> &get_bridge(){
+        return bridge_;
     }
 
     private:
@@ -97,7 +80,33 @@ class LowLink{
         return true;
     }
 
+    void BuildArticulationVertex(){
+        for(int u = 0; u < graph_.get_vertex_size(); ++u){
+            if(state_[u] == 2){
+                if(child_[u].size() > 1) articulation_vertex_.push_back(u);
+                continue;
+            }
+            bool exist = false;
+            for(Vertex v : child_[u]){
+                exist |= (get_ord(u) <= get_low(v));
+            }
+            if(exist) articulation_vertex_.push_back(u);
+        }
+    }
+
+    void BuildBridge(){
+        auto es = GraphConvertEdgeSet(graph_, false);
+        for(Edge<CostType> e : es){
+            Vertex u = e.from, v = e.to;
+            if(get_ord(u) >= get_ord(v)) swap(u, v);
+            if(get_ord(u) < get_low(v)) bridge_.push_back(e);
+        }
+    }
+
     Graph<CostType> &graph_;
     vector<int> ord_, low_, state_;
     vector<vector<Vertex>> child_;
+
+    vector<Vertex> articulation_vertex_;
+    vector<Edge<CostType>> bridge_;
 };
