@@ -9,11 +9,6 @@
 
 template<typename CostType>
 class TwoEdgeConnectedComponents{
-    private:
-    Graph<CostType> &G;
-
-    vector<vector<Vertex>> components_;
-
     public:
     /**
      * @brief グラフから二辺連結成分分解を行う。
@@ -51,4 +46,9 @@ class TwoEdgeConnectedComponents{
     vector<vector<Vertex>> &get_components(){
         return components_;
     }
+    
+    private:
+    Graph<CostType> &G;
+
+    vector<vector<Vertex>> components_;
 };
