@@ -85,6 +85,9 @@ data:
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-TwoEdgeConnectedComponents.test.cpp
+    title: verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -289,6 +292,7 @@ data:
   - verify/AOJ-DSL-2-A.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp

@@ -21,6 +21,10 @@ data:
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
+    path: Library/Graph/TwoEdgeConnectedComponents.hpp
+    title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
+      \u89E3"
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
     title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
   _extendedVerifiedWith:
@@ -48,6 +52,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-TwoEdgeConnectedComponents.test.cpp
+    title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -246,6 +253,7 @@ data:
   - Library/Graph/Kruskal.hpp
   - Library/Graph/LowLink.hpp
   - Library/Graph/StronglyConnectedComponents.hpp
+  - Library/Graph/TwoEdgeConnectedComponents.hpp
   - Library/Graph/BellmanFord.hpp
   - Library/Graph/Dijkstra.hpp
   timestamp: '2024-10-20 23:59:02+09:00'
@@ -259,6 +267,7 @@ data:
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
 documentation_of: Library/Graph/Graph.hpp
 layout: document
 redirect_from:

@@ -108,12 +108,12 @@ data:
     \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
     #endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Graph/LowLink.hpp\"\n/**\n * @file LowLink.hpp\n * @brief LowLink\
-    \ - \u6A4B\u3068\u95A2\u7BC0\u70B9\n * @version 1.0\n * @date 2024-09-02\n */\n\
-    \n#line 2 \"Library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief Graph\
-    \ - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n\
-    \ * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\n\nusing Vertex\
-    \ = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge() = default;\n\
+    #line 2 \"Library/Graph/LowLink.hpp\"\n\n/**\n * @file LowLink.hpp\n * @brief\
+    \ LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9\n * @version 1.0\n * @date 2024-09-02\n\
+    \ */\n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief\
+    \ Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
+    \ 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\n\nusing\
+    \ Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge() = default;\n\
     \    Edge(int from, int to, CostType cost, int id = -1) : from(from), to(to),\
     \ cost(cost), id(id){}\n\t\n    int from{-1}, to{-1}, id{-1};\n    CostType cost{1};\n\
     };\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
@@ -198,26 +198,23 @@ data:
     \            if(!picked[e.id]){\n\t\t\t\tret[e.id] = e;\n            \tpicked[e.id]\
     \ = true;\n\t\t\t}\n        }\n    }\n    if(sorted){\n        sort(ret.begin(),\
     \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 9 \"Library/Graph/LowLink.hpp\"\
+    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 11 \"Library/Graph/LowLink.hpp\"\
     \n\ntemplate<typename CostType>\nclass LowLink{\n    public:\n    LowLink(Graph<CostType>\
     \ &graph) :\n            graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),\n\
     \            child_(graph.get_vertex_size()), state_(graph.get_vertex_size(),\
     \ 0){\n        for(int i = 0; i < graph.get_vertex_size(); ++i){\n           \
-    \ if(!state_[i]) dfs(i, -1, 0);\n        }\n        // for(int i = 0; i < graph.get_vertex_size();\
-    \ ++i){\n        //     cerr << i << \" (state = \" << state_[i] << \") :\";\n\
-    \        //     for(auto v : child_[i]){\n        //         cerr << \" \" <<\
-    \ v;\n        //     }\n        //     cerr << endl;\n        // }\n    }\n\n\
-    \    /**\n     * @brief \u9802\u70B9 `v` \u306E `ord[v]` \u3092\u8FD4\u3059\u3002\
+    \ if(!state_[i]) dfs(i, -1, 0);\n        }\n    }\n\n    /**\n     * @brief \u9802\
+    \u70B9 `v` \u306E `ord[v]` \u3092\u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\
+    \u756A\u53F7 (0-index)\n     * @return int \n     */\n    int get_ord(Vertex v)\
+    \ const {\n        graph_.Validate(v);\n        return ord_[v];\n    }\n\n   \
+    \ /**\n     * @brief \u9802\u70B9 `v` \u306E `low[v]` \u3092\u8FD4\u3059\u3002\
     \n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return int \n  \
-    \   */\n    int get_ord(Vertex v) const {\n        graph_.Validate(v);\n     \
-    \   return ord_[v];\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E `low[v]`\
-    \ \u3092\u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     * @return int \n     */\n    int get_low(Vertex v) const {\n        graph_.Validate(v);\n\
-    \        return low_[v];\n    }\n\n    /**\n     * @brief \u95A2\u7BC0\u70B9\u3092\
-    \u5217\u6319\u3059\u308B\u3002\n     * @note \u95A2\u7BC0\u70B9 : \u305D\u306E\
-    \u9802\u70B9\u3092\u9664\u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\
-    \u308B\u3088\u3046\u306A\u9802\u70B9\n     * @return vector<Vertex> \u95A2\u7BC0\
-    \u70B9\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     */\n    vector<Vertex> EnumrateArticulationVertex()\
+    \   */\n    int get_low(Vertex v) const {\n        graph_.Validate(v);\n     \
+    \   return low_[v];\n    }\n\n    /**\n     * @brief \u95A2\u7BC0\u70B9\u3092\u5217\
+    \u6319\u3059\u308B\u3002\n     * @note \u95A2\u7BC0\u70B9 : \u305D\u306E\u9802\
+    \u70B9\u3092\u9664\u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\u308B\
+    \u3088\u3046\u306A\u9802\u70B9\n     * @return vector<Vertex> \u95A2\u7BC0\u70B9\
+    \u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     */\n    vector<Vertex> EnumrateArticulationVertex()\
     \ const {\n        vector<Vertex> ret;\n        for(int u = 0; u < graph_.get_vertex_size();\
     \ ++u){\n            if(state_[u] == 2){\n                if(child_[u].size()\
     \ > 1) ret.push_back(u);\n                continue;\n            }\n         \
@@ -232,12 +229,12 @@ data:
     \ false);\n        for(Edge<CostType> e : es){\n            Vertex u = e.from,\
     \ v = e.to;\n            if(get_ord(u) >= get_ord(v)) swap(u, v);\n          \
     \  if(get_ord(u) < get_low(v)) ret.push_back(e);\n        }\n        return ret;\n\
-    \    }\n\n    private:\n    bool dfs(Vertex v, Vertex p, int order){\n       \
-    \ if(state_[v] != 0) return false;\n        // cerr << \"# (v, p, order) = (\"\
-    \ << v << \", \" << p << \", \" << order << \")\" << endl;\n        state_[v]\
-    \ = 1 + (p == -1);\n        ord_[v] = low_[v] = order;\n        for(Edge<CostType>\
-    \ &e : graph_[v]){\n            if(e.to == p) continue;\n            child_[v].push_back(e.to);\n\
-    \            if(dfs(e.to, v, order + 1)){\n                low_[v] = min(low_[v],\
+    \    }\n\n    private:\n    bool dfs(Vertex v, int p, int order){\n        if(state_[v]\
+    \ != 0) return false;\n        // cerr << \"# (v, p, order) = (\" << v << \",\
+    \ \" << p << \", \" << order << \")\" << endl;\n        state_[v] = 1 + (p ==\
+    \ -1);\n        ord_[v] = low_[v] = order;\n        for(Edge<CostType> &e : graph_[v]){\n\
+    \            if(e.id == p) continue;\n            child_[v].push_back(e.to);\n\
+    \            if(dfs(e.to, e.id, order + 1)){\n                low_[v] = min(low_[v],\
     \ low_[e.to]);\n            }\n            else{\n                child_[v].pop_back();\n\
     \                low_[v] = min(low_[v], ord_[e.to]);\n            }\n        }\n\
     \        return true;\n    }\n\n    Graph<CostType> &graph_;\n    vector<int>\
@@ -258,7 +255,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-A.test.cpp
   requiredBy: []
-  timestamp: '2024-10-20 23:59:02+09:00'
+  timestamp: '2024-10-21 10:22:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-A.test.cpp

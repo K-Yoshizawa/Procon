@@ -11,6 +11,10 @@ data:
     path: Library/Graph/LowLink.hpp
     title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
   - icon: ':heavy_check_mark:'
+    path: Library/Graph/TwoEdgeConnectedComponents.hpp
+    title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
+      \u89E3"
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -20,24 +24,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_B
+    PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_B
-  bundledCode: "#line 1 \"verify/AOJ-GRL-3-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_B\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.8\n * @date 2024-06-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n#line 12 \"Library/Template.hpp\"\n#define ALL(x) (x).begin(),\
-    \ (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n\
-    #define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
-    \ fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define\
-    \ SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno)\
-    \ - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
+    - https://judge.yosupo.jp/problem/two_edge_connected_components
+  bundledCode: "#line 1 \"verify/LC-TwoEdgeConnectedComponents.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\n\n\
+    #line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author log\
+    \ K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
+    \ 1.8\n * @date 2024-06-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file\
+    \ Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
+    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
+    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
+    #line 12 \"Library/Template.hpp\"\n#define ALL(x) (x).begin(), (x).end()\n#define\
+    \ RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define RSORT(x)\
+    \ sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit) fixed\
+    \ << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define SUM(x)\
+    \ reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno) -\
+    \ 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
     \ val) distance((arr).begin(), lower_bound((arr).begin(), (arr).end(), val))\n\
     #define UPPERBOUND_IDX(arr, val) distance((arr).begin(), upper_bound((arr).begin(),\
     \ (arr).end(), val))\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" :\
@@ -108,21 +113,23 @@ data:
     \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
     #endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 2 \"Library/Graph/LowLink.hpp\"\n\n/**\n * @file LowLink.hpp\n * @brief\
-    \ LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9\n * @version 1.0\n * @date 2024-09-02\n\
-    \ */\n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief\
-    \ Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge() = default;\n\
-    \    Edge(int from, int to, CostType cost, int id = -1) : from(from), to(to),\
-    \ cost(cost), id(id){}\n\t\n    int from{-1}, to{-1}, id{-1};\n    CostType cost{1};\n\
-    };\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
-    \ = default;\n\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex_size` \u306E\
-    \u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param vertex_size\
-    \ \u9802\u70B9\u6570\n     * @param directed `true` \u306E\u5834\u5408\u3001\u6709\
-    \u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u69CB\u7BC9\u3059\u308B `(default =\
-    \ false)`\n     */\n    Graph(int vertex_size, bool directed = false) : \n   \
-    \     vertex_(vertex_size), adjacent_list_(vertex_size),\n        directed_flag_(directed){}\n\
+    #line 1 \"Library/Graph/TwoEdgeConnectedComponents.hpp\"\n/**\n * @file TwoEdgeConnectedComponents.hpp\n\
+    \ * @brief Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
+    \u5206\u89E3\n * @version 1.0\n * @date 2024-10-21\n */\n\n#line 2 \"Library/Graph/LowLink.hpp\"\
+    \n\n/**\n * @file LowLink.hpp\n * @brief LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9\
+    \n * @version 1.0\n * @date 2024-09-02\n */\n\n#line 2 \"Library/Graph/Graph.hpp\"\
+    \n\n/**\n * @file Graph.hpp\n * @brief Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge()\
+    \ = default;\n    Edge(int from, int to, CostType cost, int id = -1) : from(from),\
+    \ to(to), cost(cost), id(id){}\n\t\n    int from{-1}, to{-1}, id{-1};\n    CostType\
+    \ cost{1};\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n\
+    \    Graph() = default;\n\n    /**\n     * @brief \u9802\u70B9\u6570 `vertex_size`\
+    \ \u306E\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param\
+    \ vertex_size \u9802\u70B9\u6570\n     * @param directed `true` \u306E\u5834\u5408\
+    \u3001\u6709\u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u69CB\u7BC9\u3059\u308B\
+    \ `(default = false)`\n     */\n    Graph(int vertex_size, bool directed = false)\
+    \ : \n        vertex_(vertex_size), adjacent_list_(vertex_size),\n        directed_flag_(directed){}\n\
     \n    /**\n     * @brief \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\u6570\u3092\u53D6\
     \u5F97\u3059\u308B\u3002\n     * @return size_t \u30B0\u30E9\u30D5 G \u306E\u9802\
     \u70B9\u6570\n     */\n    size_t get_vertex_size() const {\n        return vertex_;\n\
@@ -238,36 +245,55 @@ data:
     \ low_[e.to]);\n            }\n            else{\n                child_[v].pop_back();\n\
     \                low_[v] = min(low_[v], ord_[e.to]);\n            }\n        }\n\
     \        return true;\n    }\n\n    Graph<CostType> &graph_;\n    vector<int>\
-    \ ord_, low_, state_;\n    vector<vector<Vertex>> child_;\n};\n#line 5 \"verify/AOJ-GRL-3-B.test.cpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    Graph<int> G(V);\n    G.InputGraph(E,\
-    \ false, false);\n    \n    LowLink lol(G);\n    auto ans = lol.EnumrateBridge();\n\
-    \    sort(ans.begin(), ans.end(), [](Edge<int> le, Edge<int> re){\n        if(le.from\
-    \ == re.from) return le.to < re.to;\n        return le.from < re.from;\n    });\n\
-    \    for(auto e : ans){\n        cout << e.from << \" \" << e.to << endl;\n  \
-    \  }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/LowLink.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    Graph<int> G(V);\n    G.InputGraph(E,\
-    \ false, false);\n    \n    LowLink lol(G);\n    auto ans = lol.EnumrateBridge();\n\
-    \    sort(ans.begin(), ans.end(), [](Edge<int> le, Edge<int> re){\n        if(le.from\
-    \ == re.from) return le.to < re.to;\n        return le.from < re.from;\n    });\n\
-    \    for(auto e : ans){\n        cout << e.from << \" \" << e.to << endl;\n  \
-    \  }\n}"
+    \ ord_, low_, state_;\n    vector<vector<Vertex>> child_;\n};\n#line 9 \"Library/Graph/TwoEdgeConnectedComponents.hpp\"\
+    \n\ntemplate<typename CostType>\nclass TwoEdgeConnectedComponents{\n    private:\n\
+    \    Graph<CostType> &G;\n\n    vector<vector<Vertex>> components_;\n\n    public:\n\
+    \    /**\n     * @brief \u30B0\u30E9\u30D5\u304B\u3089\u4E8C\u8FBA\u9023\u7D50\
+    \u6210\u5206\u5206\u89E3\u3092\u884C\u3046\u3002\n     */\n    TwoEdgeConnectedComponents(Graph<CostType>\
+    \ &graph) : G(graph){\n        LowLink<CostType> lowlink(G);\n        vector<bool>\
+    \ is_bridge(G.get_edge_size(), false);\n        for(Edge<CostType> &es : lowlink.EnumrateBridge()){\n\
+    \            is_bridge[es.id] = true;\n        }\n        vector<bool> visited(G.get_vertex_size(),\
+    \ false);\n        queue<Vertex> que;\n        for(int s = 0; s < G.get_vertex_size();\
+    \ ++s){\n            if(visited[s]) continue;\n            que.push(s);\n    \
+    \        visited[s] = true;\n            components_.push_back({});\n        \
+    \    while(que.size()){\n                Vertex v = que.front();\n           \
+    \     components_.back().push_back(v);\n                que.pop();\n         \
+    \       for(Edge<CostType> &es : G[v]){\n                    if(is_bridge[es.id])\
+    \ continue;\n                    if(visited[es.to]) continue;\n              \
+    \      que.push(es.to);\n                    visited[es.to] = true;\n        \
+    \        }\n            }\n        }\n    }\n\n    /**\n     * @brief \u3059\u3079\
+    \u3066\u306E\u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u3068\u305D\u308C\u306B\u542B\
+    \u307E\u308C\u308B\u3059\u3079\u3066\u306E\u9802\u70B9\u3092\u5217\u6319\u3059\
+    \u308B\u3002\n     */\n    vector<vector<Vertex>> &get_components(){\n       \
+    \ return components_;\n    }\n};\n#line 5 \"verify/LC-TwoEdgeConnectedComponents.test.cpp\"\
+    \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<int> G(N);\n    G.InputGraph(M,\
+    \ false, false);\n\n    TwoEdgeConnectedComponents<int> tecc(G);\n    auto ans\
+    \ = tecc.get_components();\n    cout << ans.size() << endl;\n    for(auto &vs\
+    \ : ans){\n        cout << vs.size();\n        for(auto &v : vs){\n          \
+    \  cout << \" \" << v;\n        }\n        cout << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/TwoEdgeConnectedComponents.hpp\"\
+    \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<int> G(N);\n    G.InputGraph(M,\
+    \ false, false);\n\n    TwoEdgeConnectedComponents<int> tecc(G);\n    auto ans\
+    \ = tecc.get_components();\n    cout << ans.size() << endl;\n    for(auto &vs\
+    \ : ans){\n        cout << vs.size();\n        for(auto &v : vs){\n          \
+    \  cout << \" \" << v;\n        }\n        cout << endl;\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
+  - Library/Graph/TwoEdgeConnectedComponents.hpp
   - Library/Graph/LowLink.hpp
   - Library/Graph/Graph.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-3-B.test.cpp
+  path: verify/LC-TwoEdgeConnectedComponents.test.cpp
   requiredBy: []
-  timestamp: '2024-10-21 10:22:26+09:00'
+  timestamp: '2024-10-21 10:24:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-3-B.test.cpp
+documentation_of: verify/LC-TwoEdgeConnectedComponents.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-3-B.test.cpp
-- /verify/verify/AOJ-GRL-3-B.test.cpp.html
-title: verify/AOJ-GRL-3-B.test.cpp
+- /verify/verify/LC-TwoEdgeConnectedComponents.test.cpp
+- /verify/verify/LC-TwoEdgeConnectedComponents.test.cpp.html
+title: verify/LC-TwoEdgeConnectedComponents.test.cpp
 ---
