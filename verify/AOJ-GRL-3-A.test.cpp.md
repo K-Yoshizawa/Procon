@@ -203,32 +203,24 @@ data:
     \ &graph) :\n            graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),\n\
     \            child_(graph.get_vertex_size()), state_(graph.get_vertex_size(),\
     \ 0){\n        for(int i = 0; i < graph.get_vertex_size(); ++i){\n           \
-    \ if(!state_[i]) dfs(i, -1, 0);\n        }\n    }\n\n    /**\n     * @brief \u9802\
-    \u70B9 `v` \u306E `ord[v]` \u3092\u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @return int \n     */\n    int get_ord(Vertex v)\
-    \ const {\n        graph_.Validate(v);\n        return ord_[v];\n    }\n\n   \
-    \ /**\n     * @brief \u9802\u70B9 `v` \u306E `low[v]` \u3092\u8FD4\u3059\u3002\
-    \n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return int \n  \
-    \   */\n    int get_low(Vertex v) const {\n        graph_.Validate(v);\n     \
-    \   return low_[v];\n    }\n\n    /**\n     * @brief \u95A2\u7BC0\u70B9\u3092\u5217\
-    \u6319\u3059\u308B\u3002\n     * @note \u95A2\u7BC0\u70B9 : \u305D\u306E\u9802\
-    \u70B9\u3092\u9664\u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\u308B\
-    \u3088\u3046\u306A\u9802\u70B9\n     * @return vector<Vertex> \u95A2\u7BC0\u70B9\
-    \u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     */\n    vector<Vertex> EnumrateArticulationVertex()\
-    \ const {\n        vector<Vertex> ret;\n        for(int u = 0; u < graph_.get_vertex_size();\
-    \ ++u){\n            if(state_[u] == 2){\n                if(child_[u].size()\
-    \ > 1) ret.push_back(u);\n                continue;\n            }\n         \
-    \   bool exist = false;\n            for(Vertex v : child_[u]){\n            \
-    \    exist |= (get_ord(u) <= get_low(v));\n            }\n            if(exist)\
-    \ ret.push_back(u);\n        }\n        return ret;\n    }\n\n    /**\n     *\
-    \ @brief \u6A4B\u3092\u5217\u6319\u3059\u308B\u3002\n     * @note \u6A4B : \u305D\
-    \u306E\u8FBA\u3092\u9664\u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\
-    \u308B\u3088\u3046\u306A\u9802\u70B9\n     * @return vector<Edge<CostType>> \u6A4B\
-    \u3067\u3042\u308B\u8FBA\n     */\n    vector<Edge<CostType>> EnumrateBridge()\
-    \ const {\n        vector<Edge<CostType>> ret;\n        auto es = GraphConvertEdgeSet(graph_,\
-    \ false);\n        for(Edge<CostType> e : es){\n            Vertex u = e.from,\
-    \ v = e.to;\n            if(get_ord(u) >= get_ord(v)) swap(u, v);\n          \
-    \  if(get_ord(u) < get_low(v)) ret.push_back(e);\n        }\n        return ret;\n\
+    \ if(!state_[i]) dfs(i, -1, 0);\n        }\n        BuildArticulationVertex();\n\
+    \        BuildBridge();\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\
+    \ `ord[v]` \u3092\u8FD4\u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\
+    \ (0-index)\n     * @return int \n     */\n    int get_ord(Vertex v) const {\n\
+    \        graph_.Validate(v);\n        return ord_[v];\n    }\n\n    /**\n    \
+    \ * @brief \u9802\u70B9 `v` \u306E `low[v]` \u3092\u8FD4\u3059\u3002\n     * @param\
+    \ v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return int \n     */\n    int\
+    \ get_low(Vertex v) const {\n        graph_.Validate(v);\n        return low_[v];\n\
+    \    }\n\n    /**\n     * @brief \u95A2\u7BC0\u70B9\u3092\u5217\u6319\u3059\u308B\
+    \u3002\n     * @note \u95A2\u7BC0\u70B9 : \u305D\u306E\u9802\u70B9\u3092\u9664\
+    \u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\u308B\u3088\u3046\u306A\
+    \u9802\u70B9\n     * @return vector<Vertex> \u95A2\u7BC0\u70B9\u306E\u9802\u70B9\
+    \u756A\u53F7 (0-index)\n     */\n    vector<Vertex> &get_articulation_vertex(){\n\
+    \        return articulation_vertex_;\n    }\n\n    /**\n     * @brief \u6A4B\u3092\
+    \u5217\u6319\u3059\u308B\u3002\n     * @note \u6A4B : \u305D\u306E\u8FBA\u3092\
+    \u9664\u304F\u3068\u9023\u7D50\u6210\u5206\u304C\u5897\u3048\u308B\u3088\u3046\
+    \u306A\u9802\u70B9\n     * @return vector<Edge<CostType>> \u6A4B\u3067\u3042\u308B\
+    \u8FBA\n     */\n    vector<Edge<CostType>> &get_bridge(){\n        return bridge_;\n\
     \    }\n\n    private:\n    bool dfs(Vertex v, int p, int order){\n        if(state_[v]\
     \ != 0) return false;\n        // cerr << \"# (v, p, order) = (\" << v << \",\
     \ \" << p << \", \" << order << \")\" << endl;\n        state_[v] = 1 + (p ==\
@@ -237,15 +229,26 @@ data:
     \            if(dfs(e.to, e.id, order + 1)){\n                low_[v] = min(low_[v],\
     \ low_[e.to]);\n            }\n            else{\n                child_[v].pop_back();\n\
     \                low_[v] = min(low_[v], ord_[e.to]);\n            }\n        }\n\
-    \        return true;\n    }\n\n    Graph<CostType> &graph_;\n    vector<int>\
-    \ ord_, low_, state_;\n    vector<vector<Vertex>> child_;\n};\n#line 5 \"verify/AOJ-GRL-3-A.test.cpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    Graph<ll> G(V);\n    G.InputGraph(E,\
-    \ false, false);\n    \n    LowLink lol(G);\n    auto ans = lol.EnumrateArticulationVertex();\n\
-    \    for(auto v : ans){\n        cout << v << endl;\n    }\n}\n"
+    \        return true;\n    }\n\n    void BuildArticulationVertex(){\n        for(int\
+    \ u = 0; u < graph_.get_vertex_size(); ++u){\n            if(state_[u] == 2){\n\
+    \                if(child_[u].size() > 1) articulation_vertex_.push_back(u);\n\
+    \                continue;\n            }\n            bool exist = false;\n \
+    \           for(Vertex v : child_[u]){\n                exist |= (get_ord(u) <=\
+    \ get_low(v));\n            }\n            if(exist) articulation_vertex_.push_back(u);\n\
+    \        }\n    }\n\n    void BuildBridge(){\n        auto es = GraphConvertEdgeSet(graph_,\
+    \ false);\n        for(Edge<CostType> e : es){\n            Vertex u = e.from,\
+    \ v = e.to;\n            if(get_ord(u) >= get_ord(v)) swap(u, v);\n          \
+    \  if(get_ord(u) < get_low(v)) bridge_.push_back(e);\n        }\n    }\n\n   \
+    \ Graph<CostType> &graph_;\n    vector<int> ord_, low_, state_;\n    vector<vector<Vertex>>\
+    \ child_;\n\n    vector<Vertex> articulation_vertex_;\n    vector<Edge<CostType>>\
+    \ bridge_;\n};\n#line 5 \"verify/AOJ-GRL-3-A.test.cpp\"\n\nint main(){\n    int\
+    \ V, E; cin >> V >> E;\n    Graph<ll> G(V);\n    G.InputGraph(E, false, false);\n\
+    \    \n    LowLink lol(G);\n    auto ans = lol.get_articulation_vertex();\n  \
+    \  for(auto v : ans){\n        cout << v << endl;\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_3_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/LowLink.hpp\"\
     \n\nint main(){\n    int V, E; cin >> V >> E;\n    Graph<ll> G(V);\n    G.InputGraph(E,\
-    \ false, false);\n    \n    LowLink lol(G);\n    auto ans = lol.EnumrateArticulationVertex();\n\
+    \ false, false);\n    \n    LowLink lol(G);\n    auto ans = lol.get_articulation_vertex();\n\
     \    for(auto v : ans){\n        cout << v << endl;\n    }\n}"
   dependsOn:
   - Library/Template.hpp
@@ -255,7 +258,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-A.test.cpp
   requiredBy: []
-  timestamp: '2024-10-21 10:22:26+09:00'
+  timestamp: '2024-10-21 10:57:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-A.test.cpp

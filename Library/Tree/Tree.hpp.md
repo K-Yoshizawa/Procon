@@ -6,6 +6,10 @@ data:
     title: Library/Common.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Library/Graph/TwoEdgeConnectedComponents.hpp
+    title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
+      \u89E3"
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -45,6 +49,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-TwoEdgeConnectedComponents.test.cpp
+    title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
@@ -350,6 +357,7 @@ data:
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Tree/TreeDiameter.hpp
   - Library/Tree/HeavyLightDecomposition.hpp
+  - Library/Graph/TwoEdgeConnectedComponents.hpp
   timestamp: '2024-09-06 22:33:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -360,6 +368,7 @@ data:
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
