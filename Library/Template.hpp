@@ -4,8 +4,8 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.8
- * @date 2024-06-16
+ * @version 1.9
+ * @date 2024-10-27
  */
 
 #include "Common.hpp"
@@ -172,6 +172,15 @@ tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
     vector<tuple<T1, T2, T3>> v(size);
     for(auto &[p, q, r] : v) cin >> p >> q >> r;
     return DisassembleVectorTuple(v);
+}
+
+ll modpow(ll a, ll x, ll m){
+    ll ret = 1, cur = a % m, rem = x;
+    while(rem){
+        if(rem & 1) ret = (ret * cur) % m;
+        rem >>= 1, cur = (cur * cur) % m;
+    }
+    return ret;
 }
 
 #ifdef LOGK
