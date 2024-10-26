@@ -11,7 +11,7 @@ fi
 S="$1"
 
 # Original file directory and name
-origin_dir="library"
+origin_dir="Library"
 origin_file="origin.cpp"
 
 # New directory
