@@ -29,7 +29,7 @@ data:
   bundledCode: "#line 1 \"verify/LC-MinimumSpanningTree.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\n\n#line 2 \"Library/Template.hpp\"\
     \n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template -\
-    \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n\
+    \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.9\n * @date 2024-10-27\n\
     \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
@@ -108,9 +108,11 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
-    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
-    #endif\n\n// ==============================================================\n\
+    \ DisassembleVectorTuple(v);\n}\n\nll modpow(ll a, ll x, ll m){\n    ll ret =\
+    \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
+    \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
+    }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
     #line 1 \"Library/Graph/Kruskal.hpp\"\n/**\n * @file Kruskal.hpp\n * @brief Kruskal\
     \ - \u6700\u5C0F\u5168\u57DF\u6728\n * @version 4.0\n * @date 2024-10-21\n */\n\
@@ -275,7 +277,7 @@ data:
   isVerificationFile: true
   path: verify/LC-MinimumSpanningTree.test.cpp
   requiredBy: []
-  timestamp: '2024-10-21 00:05:42+09:00'
+  timestamp: '2024-10-27 03:42:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-MinimumSpanningTree.test.cpp

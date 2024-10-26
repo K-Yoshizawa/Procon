@@ -25,6 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
+  - icon: ':warning:'
+    path: Library/Graph/FunctionalGraph.hpp
+    title: Functional Graph
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -205,6 +208,7 @@ data:
   - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/TwoEdgeConnectedComponents.hpp
   - Library/Graph/BellmanFord.hpp
+  - Library/Graph/FunctionalGraph.hpp
   - Library/Graph/Dijkstra.hpp
   - Library/modint.hpp
   timestamp: '2024-09-05 07:46:35+09:00'

@@ -104,7 +104,7 @@ data:
     links: []
   bundledCode: "#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n *\
     \ @author log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @version 1.8\n * @date 2024-06-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\
+    \n * @version 1.9\n * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\
     \n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
     \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
@@ -182,12 +182,14 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
-    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
-    #endif\n\n// ==============================================================\n\
+    \ DisassembleVectorTuple(v);\n}\n\nll modpow(ll a, ll x, ll m){\n    ll ret =\
+    \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
+    \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
+    }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n"
   code: "#pragma once\n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
-    \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.8\n * @date 2024-06-16\n\
+    \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.9\n * @date 2024-10-27\n\
     \ */\n\n#include \"Common.hpp\"\n#define ALL(x) (x).begin(), (x).end()\n#define\
     \ RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n#define RSORT(x)\
     \ sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit) fixed\
@@ -260,9 +262,11 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n\n#ifdef LOGK\n#define VARIABLE(var) cerr <<\
-    \ \"# \" << #var << \" = \" << var << endl;\n#else\n#define VARIABLE(...) 42\n\
-    #endif\n\n// ==============================================================\n\
+    \ DisassembleVectorTuple(v);\n}\n\nll modpow(ll a, ll x, ll m){\n    ll ret =\
+    \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
+    \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
+    }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// =============================================================="
   dependsOn:
   - Library/Common.hpp
@@ -270,7 +274,7 @@ data:
   path: Library/Template.hpp
   requiredBy:
   - Library/TemplateExtend.hpp
-  timestamp: '2024-10-20 22:40:47+09:00'
+  timestamp: '2024-10-27 03:42:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-B.test.cpp
