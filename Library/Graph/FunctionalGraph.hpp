@@ -81,6 +81,12 @@ class FunctionalGraph{
         return ret;
     }
 
+    /**
+     * @brief 頂点 `v` が属するサイクルのサイズを取得する。
+     * @note verify : https://atcoder.jp/contests/abc377/submissions/59194861
+     * @param v 頂点番号
+     * @return int 頂点が属するサイクルのサイズ、ただしサイクルに属していない場合は 0 を返す
+     */
     int CycleSize(int v){
         int i = v - one_index_;
         if(belong_cycle_[i] == -1) return 0;
