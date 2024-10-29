@@ -17,6 +17,7 @@
 "verify/AOJ-GRL-5-B.test.cpp": "2024-10-27 03:42:01 +0900",
 "verify/AOJ-GRL-5-C.test.cpp": "2024-10-27 03:42:01 +0900",
 "verify/LC-JumponTree.test.cpp": "2024-10-27 03:42:01 +0900",
+"verify/LC-LongestIncreasingSubsequence.test.cpp": "2024-10-30 02:03:27 +0900",
 "verify/LC-LowestCommonAncestor-HLD.test.cpp": "2024-10-27 03:42:01 +0900",
 "verify/LC-LowestCommonAncestor.test.cpp": "2024-10-27 03:42:01 +0900",
 "verify/LC-MinimumSpanningTree.test.cpp": "2024-10-27 03:42:01 +0900",
