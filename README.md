@@ -7,6 +7,35 @@
 
 ## 更新履歴
 
+### Ver 4.1.1 (2024/10/29)
+- `tasks.json` : デバッグ出力をさせるとき、標準出力はコンソール出力させるように修正
+- ドキュメントの更新
+
+### Ver 4.1.0 (2024/10/27)
+- Functional Graph を追加 (`FunctionalGraph.hpp`)
+
+### Ver 4.0.0 (2024/10/21)
+- 暫定的なコーディングルールを策定し、それに従って大規模なライブラリ改修を実施
+- 以下のライブラリが対応済
+    - 二次元累積和(`CumulativeSum2D.hpp`)
+    - 遅延セグメント木(`LazySegmentTree.hpp`)
+    - セグメント木(`SegmentTree.hpp`)
+    - Union-Find(`UnionFind.hpp`)
+    - 重み付き Union-Find(`WeightedUnionFind.hpp`)
+    - ベルマンフォード法(`BellmanFord.hpp`)
+    - ダイクストラ法(`Dijkstra.hpp`)
+    - グラフテンプレート(`Graph.hpp`)
+    - クラスカル法(`Kruskal.hpp`)
+    - LowLink(`LowLink.hpp`)
+    - 強連結成分分解(`StronglyConnectedComponents.hpp`)
+    - 二辺連結成分分解(`TwoEdgeConnectedComponents.hpp`)
+    - ワーシャルフロイド法(`WarshallFloyd.hpp`)
+    - HL分解(`HeavyLightDecomposition.hpp`)
+    - LCA(`LowestCommonAncestor.hpp`)
+    - 全方位木 DP(`RerootingDP.hpp`)
+    - 木テンプレート(`Tree.hpp`)
+    - 木の直径(`TreeDiameter.hpp`)
+
 ### Ver 3.2.3 (2024/03/10)
 - 【改修】Rolling Hash : 高速化
 
