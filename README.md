@@ -7,12 +7,15 @@
 
 ## 更新履歴
 
+### Ver 4.2.0 (2024/??/??)
+- 【追加】最長増加部分列 (`LongestIncreasingSubsequence.hpp`)
+
 ### Ver 4.1.1 (2024/10/29)
 - `tasks.json` : デバッグ出力をさせるとき、標準出力はコンソール出力させるように修正
 - ドキュメントの更新
 
 ### Ver 4.1.0 (2024/10/27)
-- Functional Graph を追加 (`FunctionalGraph.hpp`)
+- 【追加】Functional Graph (`FunctionalGraph.hpp`)
 
 ### Ver 4.0.0 (2024/10/21)
 - 暫定的なコーディングルールを策定し、それに従って大規模なライブラリ改修を実施
