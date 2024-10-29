@@ -14,7 +14,7 @@
         {
             "label": "debug",
             "type": "shell",
-            "command": "./a.out < in.txt > out.txt 2> debug.txt"
+            "command": "./a.out < in.txt 2> debug.txt"
         }
     ]
 }
