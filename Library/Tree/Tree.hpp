@@ -265,6 +265,11 @@ vector<CostType> CalculateTreeCumlativeSum(RootedTree<CostType> &tree){
     return ret;
 }
 
+/**
+ * @brief 各頂点を根とする部分木のサイズを求める。
+ * @param tree 木
+ * @return vector<int> 各頂点を根とする部分木のサイズ
+ */
 template<typename CostType>
 vector<int> CalculateSubtreeSize(RootedTree<CostType> &tree){
     Vertex root = tree.get_root();
