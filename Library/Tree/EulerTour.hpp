@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @file EulerTour.hpp
  * @brief Euler Tour - オイラーツアー
@@ -13,16 +15,18 @@ class EulerTour{
     public:
     using F = function<CostType(CostType)>;
 
+    EulerTour(){}
+
     /**
      * @brief 木 `T` におけるオイラーツアーを構築する。
      * @param one_index `1-index` として扱いたいか `(default = false)`
      */
     EulerTour(RootedTree<CostType> &T, bool one_index = false) :
-        T(T),
-        vertex_size_(T.get_vertex_size()),
-        in_time_(T.get_vertex_size()),
-        out_time_(T.get_vertex_size()),
-        one_index_(one_index){
+            T(T),
+            vertex_size_(T.get_vertex_size()),
+            in_time_(T.get_vertex_size()),
+            out_time_(T.get_vertex_size()),
+            one_index_(one_index){
         dfs(T.get_root());
     }
 

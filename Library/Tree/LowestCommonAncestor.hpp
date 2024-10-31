@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @file LowestCommonAncestor.hpp
  * @brief Lowest Common Ancestor - 最小共通祖先
@@ -10,6 +12,8 @@
 template<typename CostType>
 struct LowestCommonAncestor{
     public:
+    LowestCommonAncestor(){}
+
     LowestCommonAncestor(RootedTree<CostType> &tree) :
             tree_(tree), depth_(CalculateTreeDepth(tree)){
         int V = tree.get_vertex_size();
