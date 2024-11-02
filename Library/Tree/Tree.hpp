@@ -28,7 +28,7 @@ class RootedTree{
      * @param vertex_size 頂点数
      * @param root_vertex 根とする頂点 (default = 0)
      */
-    RootedTree(int vertex_size, Vertex root_vertex = 0) :
+    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :
             vertex_size_(vertex_size), root_vertex_(root_vertex),
             node_(vertex_size){}
 
@@ -265,6 +265,11 @@ vector<CostType> CalculateTreeCumlativeSum(RootedTree<CostType> &tree){
     return ret;
 }
 
+/**
+ * @brief 各頂点を根とする部分木のサイズを求める。
+ * @param tree 木
+ * @return vector<int> 各頂点を根とする部分木のサイズ
+ */
 template<typename CostType>
 vector<int> CalculateSubtreeSize(RootedTree<CostType> &tree){
     Vertex root = tree.get_root();
@@ -275,6 +280,26 @@ vector<int> CalculateSubtreeSize(RootedTree<CostType> &tree){
             ret[v] += self(self, u);
         }
         return ret[v];
+    };
+    rec(rec, root);
+    return ret;
+}
+
+/**
+ * @brief 各頂点を行きかけ順に並べたときに何番目に相当するかの配列を求める。
+ * @param tree 木
+ * @return vector<int> 各頂点が行きかけ順で何番目になるか (0-index)
+ */
+template<typename CostType>
+vector<int> CalculatePreOrder(RootedTree<CostType> &tree){
+    Vertex root = tree.get_root();
+    int V = tree.get_vertex_size(), time_stamp = 0;
+    vector<int> ret(V, -1);
+    auto rec = [&](auto self, Vertex v) -> void {
+        ret[v] = time_stamp++;
+        for(Vertex u : tree.get_child()){
+            self(self, u);
+        }
     };
     rec(rec, root);
     return ret;
