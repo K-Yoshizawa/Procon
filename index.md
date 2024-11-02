@@ -65,8 +65,23 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Graph/WarshallFloyd.hpp
       title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
+  - name: Library/Other
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Library/Other/LongestIncreasingSubsequence.hpp
+      title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\
+        \u5217"
   - name: Library/Tree
     pages:
+    - icon: ':warning:'
+      path: Library/Tree/AuxiliaryTree.hpp
+      title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
+        \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
+        \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
+        \u6728"
+    - icon: ':heavy_check_mark:'
+      path: Library/Tree/EulerTour.hpp
+      title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
       path: Library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
@@ -84,9 +99,6 @@ data:
       title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   - name: Library/unauthenticated
     pages:
-    - icon: ':warning:'
-      path: Library/unauthenticated/AuxiliaryTree.hpp
-      title: "Auxiliary Tree - \u88DC\u52A9\u6728"
     - icon: ':warning:'
       path: Library/unauthenticated/BinaryIndexedTree.hpp
       title: Binary Indexed Tree
@@ -117,10 +129,6 @@ data:
     - icon: ':warning:'
       path: Library/unauthenticated/LongestDistance.hpp
       title: "Longest Distance - DAG\u306B\u304A\u3051\u308B\u6700\u9577\u8DDD\u96E2"
-    - icon: ':warning:'
-      path: Library/unauthenticated/LongestIncreasingSubsequence.hpp
-      title: "Longest Increasing Subsequence - \u6700\u9577\u90E8\u5206\u5897\u52A0\
-        \u5217"
     - icon: ':warning:'
       path: Library/unauthenticated/Manacher.hpp
       title: Library/unauthenticated/Manacher.hpp
@@ -200,6 +208,9 @@ data:
       path: verify/LC-JumponTree.test.cpp
       title: verify/LC-JumponTree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-LongestIncreasingSubsequence.test.cpp
+      title: verify/LC-LongestIncreasingSubsequence.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-LowestCommonAncestor-HLD.test.cpp
       title: verify/LC-LowestCommonAncestor-HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -235,6 +246,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+      title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp

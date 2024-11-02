@@ -61,6 +61,9 @@ data:
     path: verify/LC-JumponTree.test.cpp
     title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-LongestIncreasingSubsequence.test.cpp
+    title: verify/LC-LongestIncreasingSubsequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,6 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
@@ -280,12 +286,14 @@ data:
   - verify/AOJ-DSL-2-B.test.cpp
   - verify/AOJ-GRL-4-B.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-LongestIncreasingSubsequence.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-TreeDiameter.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp

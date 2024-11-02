@@ -22,6 +22,9 @@ data:
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -172,6 +175,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp

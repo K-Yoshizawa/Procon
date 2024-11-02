@@ -5,108 +5,33 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/Template.hpp
-    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: Library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
+      \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
+      \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
+      \u6728"
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A
-  bundledCode: "#line 1 \"verify/AOJ-ALDS1-7-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.9\n * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n#line 12 \"Library/Template.hpp\"\n#define ALL(x) (x).begin(),\
-    \ (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n\
-    #define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
-    \ fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define\
-    \ SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno)\
-    \ - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
-    \ val) distance((arr).begin(), lower_bound((arr).begin(), (arr).end(), val))\n\
-    #define UPPERBOUND_IDX(arr, val) distance((arr).begin(), upper_bound((arr).begin(),\
-    \ (arr).end(), val))\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" :\
-    \ \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\n\
-    inline string YN(bool flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool\
-    \ flag){cout << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool chmin(T\
-    \ &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
-    \ T>\nbool chmax(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
-    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
-    \ min <= x && x <= max;}\ntemplate<typename T>\ninline bool ingrid(T y, T x, T\
-    \ ymax, T xmax){return between(0, y, ymax - 1) && between(0, x, xmax - 1);}\n\
-    template<typename T>\ninline T median(T a, T b, T c){return between(b, a, c) ||\
-    \ between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\ntemplate<typename\
-    \ T>\ninline T except(T src, T cond, T excp){return (src == cond ? excp : src);}\n\
-    template<typename T>\ninline T min(vector<T> &v){return *min_element((v).begin(),\
-    \ (v).end());}\ntemplate<typename T>\ninline T max(vector<T> &v){return *max_element((v).begin(),\
-    \ (v).end());}\nvector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n\
-    \    IOTA(ret);\n    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T>\
-    \ &v){\n    sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n\
-    \    v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    using ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
-    const ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nusing vi = vector<int>;\n\
-    using vvi = vector<vi>;\nusing vl = vector<ll>;\nusing vvl = vector<vl>;\nusing\
-    \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing vs = vector<string>;\n\
-    template <typename T>\nusing pq = priority_queue<T>;\ntemplate <typename T>\n\
-    using rpq = priority_queue<T, vector<T>, greater<T>>;\n\nconst int dx4[4] = {1,\
-    \ 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0,\
-    \ -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int,\
-    \ int>> adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8\
-    \ = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 +\
-    \ dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n\
-    \        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(0 <=\
-    \ next_y and next_y < max_y and 0 <= next_x and next_x < max_x){\n           \
-    \ ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n}\n\n\
-    template <typename T1, typename T2>\nostream &operator<<(ostream &os, const pair<T1,\
-    \ T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n}\n\ntemplate\
-    \ <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n\
-    \    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename T>\n\
-    ostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i < v.size();\
-    \ ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n  \
-    \  return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, vector<vector<T>>\
-    \ &v){\n    for (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1\
-    \ != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename\
-    \ T>\nistream &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i <\
-    \ v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream\
-    \ &operator<<(ostream &os, set<T> &v){\n    for (auto &u : v){\n        os <<\
-    \ u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename T1, typename T2>\n\
-    vector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n   \
-    \ assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i\
-    \ = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\n\
-    template<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
-    \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
-    \ v2};\n}\n\ntemplate<typename T1, typename T2, typename T3>\ntuple<vector<T1>,\
-    \ vector<T2>, vector<T3>> DisassembleVectorTuple(vector<tuple<T1, T2, T3>> &v){\n\
-    \    vector<T1> v1;\n    vector<T2> v2;\n    vector<T3> v3;\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v1), [](auto p){return get<0>(p);});\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v2), [](auto p){return get<1>(p);});\n    transform(v.begin(),\
-    \ v.end(), back_inserter(v3), [](auto p){return get<2>(p);});\n    return {v1,\
-    \ v2, v3};\n}\n\ntemplate<typename T1 = int, typename T2 = T1>\npair<vector<T1>,\
-    \ vector<T2>> InputVectorPair(int size){\n    vector<pair<T1, T2>> v(size);\n\
-    \    for(auto &[p, q] : v) cin >> p >> q;\n    return DisassembleVectorPair(v);\n\
-    }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
-    \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
-    \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n\nll modpow(ll a, ll x, ll m){\n    ll ret =\
-    \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
-    \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
-    }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
+    document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+    links: []
+  bundledCode: "#line 2 \"Library/Tree/EulerTour.hpp\"\n\n/**\n * @file EulerTour.hpp\n\
+    \ * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version\
+    \ 4.0\n * @date 2024-10-31\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file\
+    \ Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
+    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
+    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
     #line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n * @brief Tree -\
     \ \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-02\n\
     \ */\n\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
@@ -258,45 +183,113 @@ data:
     \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
     \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
     \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
-    \ root);\n    return ret;\n}\n#line 5 \"verify/AOJ-ALDS1-7-A.test.cpp\"\n\nint\
-    \ main(){\n    int n; cin >> n;\n    RootedTree T(n, -1);\n    for(int i = 0;\
-    \ i < n; ++i){\n        int id, k; cin >> id >> k;\n        for(int j = 0; j <\
-    \ k; ++j){\n            int c; cin >> c;\n            T.AddEdge(id, c);\n    \
-    \    }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n    for(int i = 0; i\
-    \ < n; ++i){\n        cout << \"node \" << i << \": \";\n        cout << \"parent\
-    \ = \" << T.get_parent(i) << \", \";\n        cout << \"depth = \" << depth[i]\
-    \ << \", \";\n        cout << (T.RootVertex(i) ? \"root\" : (T.LeafVertex(i) ?\
-    \ \"leaf\" : \"internal node\")) << \", \";\n        cout << \"[\";\n        auto\
-    \ c = T.get_child(i);\n        for(int j = 0; j < c.size(); ++j){\n          \
-    \  cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n        }\n        cout\
-    \ << \"]\\n\";\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/Tree.hpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n, -1);\n    for(int i\
-    \ = 0; i < n; ++i){\n        int id, k; cin >> id >> k;\n        for(int j = 0;\
-    \ j < k; ++j){\n            int c; cin >> c;\n            T.AddEdge(id, c);\n\
-    \        }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n    for(int i =\
-    \ 0; i < n; ++i){\n        cout << \"node \" << i << \": \";\n        cout <<\
-    \ \"parent = \" << T.get_parent(i) << \", \";\n        cout << \"depth = \" <<\
-    \ depth[i] << \", \";\n        cout << (T.RootVertex(i) ? \"root\" : (T.LeafVertex(i)\
-    \ ? \"leaf\" : \"internal node\")) << \", \";\n        cout << \"[\";\n      \
-    \  auto c = T.get_child(i);\n        for(int j = 0; j < c.size(); ++j){\n    \
-    \        cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n        }\n   \
-    \     cout << \"]\\n\";\n    }\n}"
+    \ root);\n    return ret;\n}\n#line 12 \"Library/Tree/EulerTour.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass EulerTour{\n    public:\n    using F = function<CostType(CostType)>;\n\
+    \n    EulerTour(){}\n\n    /**\n     * @brief \u6728 `T` \u306B\u304A\u3051\u308B\
+    \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u3092\u69CB\u7BC9\u3059\u308B\u3002\
+    \n     * @param one_index `1-index` \u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B `(default = false)`\n     */\n    EulerTour(RootedTree<CostType> &T, bool\
+    \ one_index = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
+    \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
+    \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
+    \ /**\n     * @brief \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3092\
+    \u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F `0-index` \u3067\u8FD4\u308B\
+    \u3002\n     * @return int \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\
+    \n     */\n    int get_in(const Vertex v) const {\n        return in_time_.at(v\
+    \ - one_index_);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u304B\u3089\
+    \u51FA\u305F\u6642\u523B\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return int \u9802\u70B9 `v` \u304B\
+    \u3089\u51FA\u305F\u6642\u523B\n     */\n    int get_out(const Vertex v) const\
+    \ {\n        return out_time_.at(v - one_index_);\n    }\n\n    /**\n     * @brief\
+    \ \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\
+    \u523B\u306E\u4E21\u65B9\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return pair<int, int> \u9802\u70B9\
+    \ `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\u523B\n   \
+    \  */\n    pair<int, int> get_pair(const Vertex v) const {\n        return make_pair(in_time_.at(v\
+    \ - one_index_), out_time_.at(v - one_index_));\n    }\n\n    /**\n     * @brief\
+    \ \u914D\u5217 `value` \u3092\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u306B\u57FA\
+    \u3065\u3044\u3066\u5909\u63DB\u3057\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\
+    \n     * @note \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306A\u3069\u306E\u521D\u671F\
+    \u914D\u5217\u3068\u3057\u3066\u6E21\u3059\u5834\u5408\u306B\u306A\u3069\u306B\
+    \u7528\u3044\u308B\u3002\n     * @tparam Type \u6E21\u3059\u30C7\u30FC\u30BF\u306E\
+    \u578B\n     * @param value \u5909\u63DB\u3059\u308B\u914D\u5217\n     * @param\
+    \ in_converter \u9802\u70B9 `v` \u306B\u5165\u308B\u6642\u523B\u306B\u5BFE\u3059\
+    \u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n     * @param\
+    \ out_converter \u9802\u70B9 `v` \u304B\u3089\u51FA\u308B\u6642\u523B\u306B\u5BFE\
+    \u3059\u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n   \
+    \  * @return vector<Type> \u5909\u63DB\u3057\u305F\u9577\u3055 `2 * |V|` \u306E\
+    \u914D\u5217\n     */\n    template<typename Type>\n    vector<Type> ConvertVector(const\
+    \ vector<Type> &value, const F in_converter, const F out_converter){\n       \
+    \ vector<Type> ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_;\
+    \ ++i){\n            int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n\
+    \            ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx]\
+    \ = out_converter(value.at(i));\n        }\n        return ret;\n    }\n\n   \
+    \ private:\n    int time_{0}, one_index_, vertex_size_;\n\n    RootedTree<CostType>\
+    \ &T;\n    vector<int> in_time_, out_time_;\n\n    void dfs(Vertex v){\n     \
+    \   in_time_[v] = time_++;\n        for(Vertex c : T.get_child(v)){\n        \
+    \    dfs(c);\n        }\n        out_time_[v] = time_++;\n    }\n};\n"
+  code: "#pragma once\n\n/**\n * @file EulerTour.hpp\n * @brief Euler Tour - \u30AA\
+    \u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version 4.0\n * @date 2024-10-31\n */\n\
+    \n#include \"../Common.hpp\"\n#include \"Tree.hpp\"\n\ntemplate<typename CostType>\n\
+    class EulerTour{\n    public:\n    using F = function<CostType(CostType)>;\n\n\
+    \    EulerTour(){}\n\n    /**\n     * @brief \u6728 `T` \u306B\u304A\u3051\u308B\
+    \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u3092\u69CB\u7BC9\u3059\u308B\u3002\
+    \n     * @param one_index `1-index` \u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B `(default = false)`\n     */\n    EulerTour(RootedTree<CostType> &T, bool\
+    \ one_index = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
+    \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
+    \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
+    \ /**\n     * @brief \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3092\
+    \u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F `0-index` \u3067\u8FD4\u308B\
+    \u3002\n     * @return int \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\
+    \n     */\n    int get_in(const Vertex v) const {\n        return in_time_.at(v\
+    \ - one_index_);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u304B\u3089\
+    \u51FA\u305F\u6642\u523B\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return int \u9802\u70B9 `v` \u304B\
+    \u3089\u51FA\u305F\u6642\u523B\n     */\n    int get_out(const Vertex v) const\
+    \ {\n        return out_time_.at(v - one_index_);\n    }\n\n    /**\n     * @brief\
+    \ \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\
+    \u523B\u306E\u4E21\u65B9\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return pair<int, int> \u9802\u70B9\
+    \ `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\u523B\n   \
+    \  */\n    pair<int, int> get_pair(const Vertex v) const {\n        return make_pair(in_time_.at(v\
+    \ - one_index_), out_time_.at(v - one_index_));\n    }\n\n    /**\n     * @brief\
+    \ \u914D\u5217 `value` \u3092\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u306B\u57FA\
+    \u3065\u3044\u3066\u5909\u63DB\u3057\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\
+    \n     * @note \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306A\u3069\u306E\u521D\u671F\
+    \u914D\u5217\u3068\u3057\u3066\u6E21\u3059\u5834\u5408\u306B\u306A\u3069\u306B\
+    \u7528\u3044\u308B\u3002\n     * @tparam Type \u6E21\u3059\u30C7\u30FC\u30BF\u306E\
+    \u578B\n     * @param value \u5909\u63DB\u3059\u308B\u914D\u5217\n     * @param\
+    \ in_converter \u9802\u70B9 `v` \u306B\u5165\u308B\u6642\u523B\u306B\u5BFE\u3059\
+    \u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n     * @param\
+    \ out_converter \u9802\u70B9 `v` \u304B\u3089\u51FA\u308B\u6642\u523B\u306B\u5BFE\
+    \u3059\u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n   \
+    \  * @return vector<Type> \u5909\u63DB\u3057\u305F\u9577\u3055 `2 * |V|` \u306E\
+    \u914D\u5217\n     */\n    template<typename Type>\n    vector<Type> ConvertVector(const\
+    \ vector<Type> &value, const F in_converter, const F out_converter){\n       \
+    \ vector<Type> ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_;\
+    \ ++i){\n            int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n\
+    \            ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx]\
+    \ = out_converter(value.at(i));\n        }\n        return ret;\n    }\n\n   \
+    \ private:\n    int time_{0}, one_index_, vertex_size_;\n\n    RootedTree<CostType>\
+    \ &T;\n    vector<int> in_time_, out_time_;\n\n    void dfs(Vertex v){\n     \
+    \   in_time_[v] = time_++;\n        for(Vertex c : T.get_child(v)){\n        \
+    \    dfs(c);\n        }\n        out_time_[v] = time_++;\n    }\n};"
   dependsOn:
-  - Library/Template.hpp
   - Library/Common.hpp
   - Library/Tree/Tree.hpp
-  isVerificationFile: true
-  path: verify/AOJ-ALDS1-7-A.test.cpp
-  requiredBy: []
-  timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: verify/AOJ-ALDS1-7-A.test.cpp
+  isVerificationFile: false
+  path: Library/Tree/EulerTour.hpp
+  requiredBy:
+  - Library/Tree/AuxiliaryTree.hpp
+  timestamp: '2024-11-01 01:27:36+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+documentation_of: Library/Tree/EulerTour.hpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-ALDS1-7-A.test.cpp
-- /verify/verify/AOJ-ALDS1-7-A.test.cpp.html
-title: verify/AOJ-ALDS1-7-A.test.cpp
+- /library/Library/Tree/EulerTour.hpp
+- /library/Library/Tree/EulerTour.hpp.html
+title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
 ---

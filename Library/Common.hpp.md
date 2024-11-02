@@ -48,11 +48,23 @@ data:
     path: Library/Graph/WarshallFloyd.hpp
     title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
   - icon: ':heavy_check_mark:'
+    path: Library/Other/LongestIncreasingSubsequence.hpp
+    title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':warning:'
     path: Library/TemplateExtend.hpp
     title: Library/TemplateExtend.hpp
+  - icon: ':warning:'
+    path: Library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
+      \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
+      \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
+      \u6728"
+  - icon: ':heavy_check_mark:'
+    path: Library/Tree/EulerTour.hpp
+    title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
@@ -127,6 +139,9 @@ data:
     path: verify/LC-JumponTree.test.cpp
     title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-LongestIncreasingSubsequence.test.cpp
+    title: verify/LC-LongestIncreasingSubsequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -163,6 +178,9 @@ data:
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -196,10 +214,13 @@ data:
   - Library/DataStructure/LazySegmentTree.hpp
   - Library/DataStructure/WeightedUnionFind.hpp
   - Library/DataStructure/CumulativeSum2D.hpp
+  - Library/Other/LongestIncreasingSubsequence.hpp
   - Library/Tree/Tree.hpp
+  - Library/Tree/AuxiliaryTree.hpp
   - Library/Tree/RerootingDP.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Tree/TreeDiameter.hpp
+  - Library/Tree/EulerTour.hpp
   - Library/Tree/HeavyLightDecomposition.hpp
   - Library/Graph/WarshallFloyd.hpp
   - Library/Graph/Graph.hpp
@@ -217,6 +238,7 @@ data:
   - verify/AOJ-DSL-2-B.test.cpp
   - verify/AOJ-GRL-4-B.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-LongestIncreasingSubsequence.test.cpp
   - verify/LC-UnionfindWithPotential.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
@@ -224,6 +246,7 @@ data:
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-TreeDiameter.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-Unionfind.test.cpp

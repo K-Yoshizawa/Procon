@@ -9,6 +9,15 @@ data:
     path: Library/Graph/TwoEdgeConnectedComponents.hpp
     title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
       \u89E3"
+  - icon: ':warning:'
+    path: Library/Tree/AuxiliaryTree.hpp
+    title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
+      \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
+      \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
+      \u6728"
+  - icon: ':heavy_check_mark:'
+    path: Library/Tree/EulerTour.hpp
+    title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
@@ -56,6 +65,9 @@ data:
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -86,9 +98,9 @@ data:
     \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
     \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
     \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
-    \ = 0)\n     */\n    RootedTree(int vertex_size, Vertex root_vertex = 0) :\n \
-    \           vertex_size_(vertex_size), root_vertex_(root_vertex),\n          \
-    \  node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
+    \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
+    \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
+    \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
     \u3092\u8FD4\u3059\u3002\n     * @return int \u6728\u306E\u9802\u70B9\u6570\n\
     \     */\n    int get_vertex_size() const {\n        return vertex_size_;\n  \
     \  }\n\n    /**\n     * @brief \u6728\u306E\u6839\u306E\u9802\u70B9\u3092\u8FD4\
@@ -205,12 +217,26 @@ data:
     \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
     \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
     \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
-    \ CalculateSubtreeSize(RootedTree<CostType> &tree){\n    Vertex root = tree.get_root();\n\
-    \    int V = tree.get_vertex_size();\n    vector<int> ret(V, 1);\n    auto rec\
-    \ = [&](auto self, Vertex v) -> int {\n        for(Vertex u : tree.get_child(v)){\n\
-    \            ret[v] += self(self, u);\n        }\n        return ret[v];\n   \
-    \ };\n    rec(rec, root);\n    return ret;\n}\n"
+    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\
+    \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\
+    \u6C42\u3081\u308B\u3002\n * @param tree \u6728\n * @return vector<int> \u5404\
+    \u9802\u70B9\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\
+    \u30BA\n */\ntemplate<typename CostType>\nvector<int> CalculateSubtreeSize(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
+    \    vector<int> ret(V, 1);\n    auto rec = [&](auto self, Vertex v) -> int {\n\
+    \        for(Vertex u : tree.get_child(v)){\n            ret[v] += self(self,\
+    \ u);\n        }\n        return ret[v];\n    };\n    rec(rec, root);\n    return\
+    \ ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\
+    \u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\
+    \u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002\n * @param\
+    \ tree \u6728\n * @return vector<int> \u5404\u9802\u70B9\u304C\u884C\u304D\u304B\
+    \u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\u304B (0-index)\n */\n\
+    template<typename CostType>\nvector<int> CalculatePreOrder(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size(),\
+    \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
+    \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
+    \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
+    \ root);\n    return ret;\n}\n"
   code: "#pragma once\n\n/**\n * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\
     \u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-02\n */\n\n#include\
     \ \"../Common.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\n\
@@ -223,8 +249,8 @@ data:
     \u304C\u5F8C\u3067\u5206\u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\
     \u306E\u6642\u306F `root_vertex = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n \
     \    * @param vertex_size \u9802\u70B9\u6570\n     * @param root_vertex \u6839\
-    \u3068\u3059\u308B\u9802\u70B9 (default = 0)\n     */\n    RootedTree(int vertex_size,\
-    \ Vertex root_vertex = 0) :\n            vertex_size_(vertex_size), root_vertex_(root_vertex),\n\
+    \u3068\u3059\u308B\u9802\u70B9 (default = 0)\n     */\n    RootedTree(int vertex_size\
+    \ = 0, Vertex root_vertex = 0) :\n            vertex_size_(vertex_size), root_vertex_(root_vertex),\n\
     \            node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\
     \u70B9\u6570\u3092\u8FD4\u3059\u3002\n     * @return int \u6728\u306E\u9802\u70B9\
     \u6570\n     */\n    int get_vertex_size() const {\n        return vertex_size_;\n\
@@ -342,28 +368,45 @@ data:
     \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
     \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
     \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
-    \ CalculateSubtreeSize(RootedTree<CostType> &tree){\n    Vertex root = tree.get_root();\n\
-    \    int V = tree.get_vertex_size();\n    vector<int> ret(V, 1);\n    auto rec\
-    \ = [&](auto self, Vertex v) -> int {\n        for(Vertex u : tree.get_child(v)){\n\
-    \            ret[v] += self(self, u);\n        }\n        return ret[v];\n   \
-    \ };\n    rec(rec, root);\n    return ret;\n}"
+    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\
+    \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\
+    \u6C42\u3081\u308B\u3002\n * @param tree \u6728\n * @return vector<int> \u5404\
+    \u9802\u70B9\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\
+    \u30BA\n */\ntemplate<typename CostType>\nvector<int> CalculateSubtreeSize(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
+    \    vector<int> ret(V, 1);\n    auto rec = [&](auto self, Vertex v) -> int {\n\
+    \        for(Vertex u : tree.get_child(v)){\n            ret[v] += self(self,\
+    \ u);\n        }\n        return ret[v];\n    };\n    rec(rec, root);\n    return\
+    \ ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\
+    \u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\
+    \u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002\n * @param\
+    \ tree \u6728\n * @return vector<int> \u5404\u9802\u70B9\u304C\u884C\u304D\u304B\
+    \u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\u304B (0-index)\n */\n\
+    template<typename CostType>\nvector<int> CalculatePreOrder(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size(),\
+    \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
+    \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
+    \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
+    \ root);\n    return ret;\n}"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/Tree/Tree.hpp
   requiredBy:
+  - Library/Tree/AuxiliaryTree.hpp
   - Library/Tree/RerootingDP.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Tree/TreeDiameter.hpp
+  - Library/Tree/EulerTour.hpp
   - Library/Tree/HeavyLightDecomposition.hpp
   - Library/Graph/TwoEdgeConnectedComponents.hpp
-  timestamp: '2024-09-06 22:33:01+09:00'
+  timestamp: '2024-11-01 01:18:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-TreeDiameter.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp

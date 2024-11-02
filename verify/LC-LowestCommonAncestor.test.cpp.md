@@ -111,7 +111,7 @@ data:
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
     \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Tree/LowestCommonAncestor.hpp\"\n/**\n * @file LowestCommonAncestor.hpp\n\
+    #line 2 \"Library/Tree/LowestCommonAncestor.hpp\"\n\n/**\n * @file LowestCommonAncestor.hpp\n\
     \ * @brief Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148\n * @version\
     \ 4.0\n * @date 2024-09-03\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n\
     \ * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
@@ -126,9 +126,9 @@ data:
     \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
     \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
     \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
-    \ = 0)\n     */\n    RootedTree(int vertex_size, Vertex root_vertex = 0) :\n \
-    \           vertex_size_(vertex_size), root_vertex_(root_vertex),\n          \
-    \  node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
+    \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
+    \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
+    \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
     \u3092\u8FD4\u3059\u3002\n     * @return int \u6728\u306E\u9802\u70B9\u6570\n\
     \     */\n    int get_vertex_size() const {\n        return vertex_size_;\n  \
     \  }\n\n    /**\n     * @brief \u6728\u306E\u6839\u306E\u9802\u70B9\u3092\u8FD4\
@@ -245,34 +245,48 @@ data:
     \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
     \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
     \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
-    \ CalculateSubtreeSize(RootedTree<CostType> &tree){\n    Vertex root = tree.get_root();\n\
-    \    int V = tree.get_vertex_size();\n    vector<int> ret(V, 1);\n    auto rec\
-    \ = [&](auto self, Vertex v) -> int {\n        for(Vertex u : tree.get_child(v)){\n\
-    \            ret[v] += self(self, u);\n        }\n        return ret[v];\n   \
-    \ };\n    rec(rec, root);\n    return ret;\n}\n#line 9 \"Library/Tree/LowestCommonAncestor.hpp\"\
+    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\
+    \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\
+    \u6C42\u3081\u308B\u3002\n * @param tree \u6728\n * @return vector<int> \u5404\
+    \u9802\u70B9\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\
+    \u30BA\n */\ntemplate<typename CostType>\nvector<int> CalculateSubtreeSize(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
+    \    vector<int> ret(V, 1);\n    auto rec = [&](auto self, Vertex v) -> int {\n\
+    \        for(Vertex u : tree.get_child(v)){\n            ret[v] += self(self,\
+    \ u);\n        }\n        return ret[v];\n    };\n    rec(rec, root);\n    return\
+    \ ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\
+    \u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\
+    \u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002\n * @param\
+    \ tree \u6728\n * @return vector<int> \u5404\u9802\u70B9\u304C\u884C\u304D\u304B\
+    \u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\u304B (0-index)\n */\n\
+    template<typename CostType>\nvector<int> CalculatePreOrder(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size(),\
+    \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
+    \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
+    \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
+    \ root);\n    return ret;\n}\n#line 11 \"Library/Tree/LowestCommonAncestor.hpp\"\
     \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    public:\n \
-    \   LowestCommonAncestor(RootedTree<CostType> &tree) :\n            tree_(tree),\
-    \ depth_(CalculateTreeDepth(tree)){\n        int V = tree.get_vertex_size();\n\
-    \        height_ = 1;\n        while((1 << height_) < V) ++height_;\n        parent_.resize(height_,\
-    \ vector<Vertex>(V, -1));\n        for(Vertex v = 0; v < V; ++v){\n          \
-    \  parent_[0][v] = tree.get_parent(v);\n        }\n        for(int k = 0; k +\
-    \ 1 < height_; ++k){\n            for(Vertex v = 0; v < V; ++v){\n           \
-    \     if(parent_[k][v] < 0) parent_[k + 1][v] = -1;\n                else parent_[k\
-    \ + 1][v] = parent_[k][parent_[k][v]];\n            }\n        }\n    }\n\n  \
-    \  /**\n     * @brief \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\
-    \u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\n     * @param u \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n \
-    \    * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\
-    \u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex u, Vertex v){\n   \
-    \     if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
-    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
-    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
-    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
-    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
-    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
-    \    RootedTree<CostType> &tree_;\n    int height_;\n    vector<int> depth_;\n\
-    \    vector<vector<Vertex>> parent_;\n};\n#line 5 \"verify/LC-LowestCommonAncestor.test.cpp\"\
+    \   LowestCommonAncestor(){}\n\n    LowestCommonAncestor(RootedTree<CostType>\
+    \ &tree) :\n            tree_(tree), depth_(CalculateTreeDepth(tree)){\n     \
+    \   int V = tree.get_vertex_size();\n        height_ = 1;\n        while((1 <<\
+    \ height_) < V) ++height_;\n        parent_.resize(height_, vector<Vertex>(V,\
+    \ -1));\n        for(Vertex v = 0; v < V; ++v){\n            parent_[0][v] = tree.get_parent(v);\n\
+    \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
+    \ v = 0; v < V; ++v){\n                if(parent_[k][v] < 0) parent_[k + 1][v]\
+    \ = -1;\n                else parent_[k + 1][v] = parent_[k][parent_[k][v]];\n\
+    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
+    \u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\
+    \n     * @param u \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\
+    \u756A\u53F7 (0-index)\n     * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9\
+    \ `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex\
+    \ u, Vertex v){\n        if(depth_[u] < depth_[v]) swap(u, v);\n        for(int\
+    \ k = 0; k < height_; ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n\
+    \                u = parent_[k][u];\n            }\n        }\n        if(u ==\
+    \ v) return u;\n        for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u]\
+    \ != parent_[k][v]){\n                u = parent_[k][u];\n                v =\
+    \ parent_[k][v];\n            }\n        }\n        return parent_[0][u];\n  \
+    \  }\n\n    private:\n    RootedTree<CostType> &tree_;\n    int height_;\n   \
+    \ vector<int> depth_;\n    vector<vector<Vertex>> parent_;\n};\n#line 5 \"verify/LC-LowestCommonAncestor.test.cpp\"\
     \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
     \ false);\n\n    LowestCommonAncestor lca(T);\n    while(Q--){\n        int u,\
     \ v; cin >> u >> v;\n        cout << lca.Query(u, v) << endl;\n    }\n}\n"
@@ -289,7 +303,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LowestCommonAncestor.test.cpp
   requiredBy: []
-  timestamp: '2024-10-27 03:42:01+09:00'
+  timestamp: '2024-11-01 01:27:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LowestCommonAncestor.test.cpp

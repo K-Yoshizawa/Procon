@@ -5,11 +5,14 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
+    path: Library/DataStructure/SegmentTree.hpp
+    title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
-    path: Library/Tree/RerootingDP.hpp
-    title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
+    path: Library/Tree/EulerTour.hpp
+    title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -20,45 +23,46 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_B
+    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_B
-  bundledCode: "#line 1 \"verify/AOJ-GRL-5-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_B\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.9\n * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n#line 12 \"Library/Template.hpp\"\n#define ALL(x) (x).begin(),\
-    \ (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n#define SORT(x) sort(ALL(x))\n\
-    #define RSORT(x) sort(RALL(x))\n#define REVERSE(x) reverse(ALL(x))\n#define SETPRE(digit)\
-    \ fixed << setprecision(digit)\n#define POPCOUNT(x) __builtin_popcount(x)\n#define\
-    \ SUM(x) reduce((x).begin(), (x).end())\n#define CEIL(nume, deno) ((nume) + (deno)\
-    \ - 1) / (deno)\n#define IOTA(x) iota((x).begin(), (x).end(), 0)\n#define LOWERBOUND_IDX(arr,\
-    \ val) distance((arr).begin(), lower_bound((arr).begin(), (arr).end(), val))\n\
-    #define UPPERBOUND_IDX(arr, val) distance((arr).begin(), upper_bound((arr).begin(),\
-    \ (arr).end(), val))\n\ninline string Yn(bool flag){return (flag) ? \"Yes\" :\
-    \ \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}\n\
-    inline string YN(bool flag){return (flag) ? \"YES\" : \"NO\";}\ninline bool YNPrint(bool\
-    \ flag){cout << YN(flag) << endl;return flag;}\ntemplate<class T>\nbool chmin(T\
-    \ &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}\ntemplate<class\
-    \ T>\nbool chmax(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return\
-    \ false;}\ntemplate<typename T>\ninline bool between(T min, T x, T max){return\
-    \ min <= x && x <= max;}\ntemplate<typename T>\ninline bool ingrid(T y, T x, T\
-    \ ymax, T xmax){return between(0, y, ymax - 1) && between(0, x, xmax - 1);}\n\
-    template<typename T>\ninline T median(T a, T b, T c){return between(b, a, c) ||\
-    \ between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}\ntemplate<typename\
-    \ T>\ninline T except(T src, T cond, T excp){return (src == cond ? excp : src);}\n\
-    template<typename T>\ninline T min(vector<T> &v){return *min_element((v).begin(),\
-    \ (v).end());}\ntemplate<typename T>\ninline T max(vector<T> &v){return *max_element((v).begin(),\
-    \ (v).end());}\nvector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n\
-    \    IOTA(ret);\n    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T>\
-    \ &v){\n    sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n\
-    \    v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    using ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
+    - https://judge.yosupo.jp/problem/vertex_add_subtree_sum
+  bundledCode: "#line 1 \"verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\n#line\
+    \ 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n\
+    \ * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.9\n\
+    \ * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n\
+    \ */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
+    #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n#line 12 \"Library/Template.hpp\"\
+    \n#define ALL(x) (x).begin(), (x).end()\n#define RALL(x) (x).rbegin(), (x).rend()\n\
+    #define SORT(x) sort(ALL(x))\n#define RSORT(x) sort(RALL(x))\n#define REVERSE(x)\
+    \ reverse(ALL(x))\n#define SETPRE(digit) fixed << setprecision(digit)\n#define\
+    \ POPCOUNT(x) __builtin_popcount(x)\n#define SUM(x) reduce((x).begin(), (x).end())\n\
+    #define CEIL(nume, deno) ((nume) + (deno) - 1) / (deno)\n#define IOTA(x) iota((x).begin(),\
+    \ (x).end(), 0)\n#define LOWERBOUND_IDX(arr, val) distance((arr).begin(), lower_bound((arr).begin(),\
+    \ (arr).end(), val))\n#define UPPERBOUND_IDX(arr, val) distance((arr).begin(),\
+    \ upper_bound((arr).begin(), (arr).end(), val))\n\ninline string Yn(bool flag){return\
+    \ (flag) ? \"Yes\" : \"No\";}\ninline bool YnPrint(bool flag){cout << Yn(flag)\
+    \ << endl;return flag;}\ninline string YN(bool flag){return (flag) ? \"YES\" :\
+    \ \"NO\";}\ninline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}\n\
+    template<class T>\nbool chmin(T &src, const T &cmp){if(src > cmp){src = cmp; return\
+    \ true;}return false;}\ntemplate<class T>\nbool chmax(T &src, const T &cmp){if(src\
+    \ < cmp){src = cmp; return true;}return false;}\ntemplate<typename T>\ninline\
+    \ bool between(T min, T x, T max){return min <= x && x <= max;}\ntemplate<typename\
+    \ T>\ninline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax -\
+    \ 1) && between(0, x, xmax - 1);}\ntemplate<typename T>\ninline T median(T a,\
+    \ T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c)\
+    \ || between(c, b, a) ? b : c);}\ntemplate<typename T>\ninline T except(T src,\
+    \ T cond, T excp){return (src == cond ? excp : src);}\ntemplate<typename T>\n\
+    inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename\
+    \ T>\ninline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}\n\
+    vector<int> make_sequence(int Size){\n    vector<int> ret(Size);\n    IOTA(ret);\n\
+    \    return ret;\n}\ntemplate<typename T>\nvoid make_unique(vector<T> &v){\n \
+    \   sort(v.begin(), v.end());\n    auto itr = unique(v.begin(), v.end());\n  \
+    \  v.erase(itr, v.end());\n}\n\nusing ll = int64_t;\nusing ull = uint64_t;\nusing\
+    \ ld = long double;\n\nconst int INF_INT = numeric_limits<int>::max() >> 2;\n\
     const ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nusing vi = vector<int>;\n\
     using vvi = vector<vi>;\nusing vl = vector<ll>;\nusing vvl = vector<vl>;\nusing\
     \ pi = pair<int, int>;\nusing pl = pair<ll, ll>;\nusing vs = vector<string>;\n\
@@ -110,21 +114,21 @@ data:
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
     \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
     // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Tree/RerootingDP.hpp\"\n/**\n * @file RerootingDP.hpp\n * @brief\
-    \ Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP\n * @version 1.0\n * @date 2024-09-03\n\
-    \ */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n * @brief\
-    \ Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date\
-    \ 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing Vertex = int;\n\
-    \ntemplate<typename CostType = int32_t>\nclass RootedTree{\n    public:\n    struct\
-    \ Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\n        Vertex\
-    \ parent{-1};\n        CostType cost{};\n        vector<Vertex> children{};\n\
-    \    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\u6839\u3068\
-    \u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\u6728\u3092\
-    \u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\u3067\u4E0E\
-    \u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\u304B\u308B\
-    \u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex = -1`\
-    \ \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\u70B9\
-    \u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
+    #line 2 \"Library/Tree/EulerTour.hpp\"\n\n/**\n * @file EulerTour.hpp\n * @brief\
+    \ Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version 4.0\n *\
+    \ @date 2024-10-31\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file\
+    \ Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
+    \ 1.0\n * @date 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing\
+    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
+    \    public:\n    struct Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\
+    \n        Vertex parent{-1};\n        CostType cost{};\n        vector<Vertex>\
+    \ children{};\n    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\
+    \u6839\u3068\u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\
+    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\
+    \u3067\u4E0E\u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\
+    \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
+    \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
+    \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
     \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
     \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
     \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
@@ -263,112 +267,148 @@ data:
     \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
     \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
     \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
-    \ root);\n    return ret;\n}\n#line 9 \"Library/Tree/RerootingDP.hpp\"\n\ntemplate<typename\
-    \ CostType, typename Monoid>\nclass RerootingDP{\n    public:\n    using F = function<Monoid(Monoid,\
-    \ Monoid, Vertex)>;\n    using G = function<Monoid(Monoid, CostType, Vertex)>;\n\
-    \    using H = function<Monoid(Monoid, Vertex)>;\n    using Fsub = function<Monoid(Monoid,\
-    \ Monoid)>;\n    using Gsub = function<Monoid(Monoid, CostType)>;\n\n    /**\n\
-    \     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\u4F4D\u6728\
-    DP\u3092\u884C\u3046\u3002(\u8FBA\u5C5E\u6027\u306E\u307F)\n     * @param tree\
-    \ \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid, Monoid) -> Monoid` :\
-    \ `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n\
-    \     * @param add `(Monoid, CostType) -> Monoid` : `Monoid` \u3068 `CostType`\
-    \ \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n     * @param monoid_identity\
-    \ `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n    RerootingDP(RootedTree<CostType>\
-    \ &tree, Fsub merge, Gsub add, const Monoid monoid_identity) :\n            tree_(tree),\
-    \ V(tree.get_vertex_size()), merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n\
-    \        merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};\n\
-    \        add_ = [&](Monoid x, CostType y, Vertex i){return add_sub_(x, y);};\n\
-    \        finalize_ = [](Monoid x, Vertex i){return x;};\n        solve();\n  \
-    \  }\n\n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\
-    \u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u9802\u70B9\u5C5E\u6027\u3092\u542B\u3080\
-    )\n     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid,\
-    \ Monoid, Vertex) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\
-    \u9805\u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType, Vertex) -> Monoid`\
-    \ : `Monoid` \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\
-    \u3002\n     * @param finalize `(Monoid, Vertex) -> Monoid` : `Monoid` \u306B\u9802\
-    \u70B9 `Vertex` \u304C\u6839\u306E\u3068\u304D\u306E\u51E6\u7406\u3002\n     *\
-    \ @param monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n  \
-    \  RerootingDP(RootedTree<CostType> &tree, F merge, G add, H finalize, const Monoid\
-    \ monoid_identity) :\n            tree_(tree), V(tree.get_vertex_size()), merge_(merge),\
-    \ add_(add), finalize_(finalize), id_(monoid_identity){\n        solve();\n  \
-    \  }\n\n    /**\n     * @brief \u5168\u9802\u70B9\u306B\u95A2\u3059\u308BDP\u306E\
-    \u914D\u5217\u3092\u53D6\u5F97\u3059\u308B\u3002\n     */\n    vector<Monoid>\
-    \ &get_all_answer(){\n        return dp_;\n    }\n\n    Monoid operator[](Vertex\
-    \ v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex v)\
-    \ const {\n        return dp_[v];\n    }\n\n    void Print() const {\n       \
-    \ cerr << \"# dp table :\";\n        for(int i = 0; i < V; ++i){\n           \
-    \ cerr << \" \" << dp_[i];\n        }\n        cerr << endl;\n        cerr <<\
-    \ \"# subtree_dp table\" << endl;\n        for(int i = 0; i < V; ++i){\n     \
-    \       cerr << \"# vertex \" << i << endl;\n            cerr << \"#    subtree_dp\
-    \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
-    \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << endl;\n            cerr << \"#    left_cum   :\";\n            for(int j\
-    \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << endl;\n            cerr << \"#    right_cum\
-    \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
-    \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ endl;\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\n\
-    \    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n   \
-    \     for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n  \
-    \          subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
-    \ v);\n        }\n        if(root) ret = finalize_(ret, v);\n        else ret\
-    \ = add_(ret, tree_.get_cost(v), v);\n        return ret;\n    }\n\n    void solve(){\n\
-    \        dp_.resize(V, id_);\n        subtree_dp_.resize(V, vector<Monoid>{id_});\n\
-    \        left_cum_.resize(V);\n        right_cum_.resize(V);\n        Vertex root\
-    \ = tree_.get_root();\n\n        dp_[root] = dfs(root, true);\n        int root_size\
-    \ = subtree_dp_[root].size();\n        left_cum_[root].resize(root_size + 1);\n\
-    \        left_cum_[root].front() = id_;\n        for(int i = 1; i < root_size;\
-    \ ++i){\n            left_cum_[root][i] = merge_(left_cum_[root][i - 1], subtree_dp_[root][i],\
-    \ root);\n        }\n        right_cum_[root].resize(root_size + 1);\n       \
-    \ right_cum_[root].back() = id_;\n        for(int i = root_size - 1; i - 1 >=\
-    \ 0; --i){\n            right_cum_[root][i] = merge_(right_cum_[root][i + 1],\
-    \ subtree_dp_[root][i], root);\n        }\n\n        queue<tuple<int, int, int>>\
-    \ que;\n        for(int i = 0; i < tree_.get_child(root).size(); ++i){\n     \
-    \       que.push({tree_.get_child(root)[i], root, i + 1});\n        }\n      \
-    \  while(que.size()){\n            auto [v, p, idx] = que.front(); que.pop();\n\
-    \            Monoid ret = id_;\n            ret = merge_(ret, left_cum_[p][idx\
-    \ - 1], v);\n            ret = merge_(ret, right_cum_[p][idx + 1], v);\n     \
-    \       ret = add_(ret, tree_.get_cost(v), p);\n            subtree_dp_[v].push_back(ret);\n\
-    \            for(int i = 1; i + 1 < subtree_dp_[v].size(); ++i){\n           \
-    \     ret = merge_(ret, subtree_dp_[v][i], v);\n            }\n            dp_[v]\
-    \ = finalize_(ret, v);\n            int c = subtree_dp_[v].size();\n         \
-    \   left_cum_[v].resize(c + 1);\n            left_cum_[v][0] = id_;\n        \
-    \    for(int i = 1; i < c; ++i){\n                left_cum_[v][i] = merge_(left_cum_[v][i\
-    \ - 1], subtree_dp_[v][i], v);\n            }\n            right_cum_[v].resize(c\
-    \ + 1);\n            right_cum_[v].back() = id_;\n            for(int i = c -\
-    \ 1; i - 1 >= 0; --i){\n                right_cum_[v][i] = merge_(right_cum_[v][i\
-    \ + 1], subtree_dp_[v][i], v);\n            }\n            for(int i = 0; i <\
-    \ tree_.get_child(v).size(); ++i){\n                que.push({tree_.get_child(v)[i],\
-    \ v, i + 1});\n            }\n        }\n    }\n    \n    int V;\n    vector<Monoid>\
-    \ dp_;\n    vector<vector<Monoid>> subtree_dp_, left_cum_, right_cum_;\n\n   \
-    \ const Monoid id_;\n\n    F merge_;\n    G add_;\n    H finalize_;\n    const\
-    \ Fsub merge_sub_;\n    const Gsub add_sub_;\n};\n#line 5 \"verify/AOJ-GRL-5-B.test.cpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n);\n    T.InputGraphFormat(true,\
-    \ false);\n\n    RerootingDP<int, int> dp(\n        T,\n        [](int l, int\
-    \ r){return max(l, r);},\n        [](int l, int r){return l + r;},\n        0);\n\
-    \    for(int i = 0; i < n; ++i){\n        cout << dp[i] << endl;\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/RerootingDP.hpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n);\n    T.InputGraphFormat(true,\
-    \ false);\n\n    RerootingDP<int, int> dp(\n        T,\n        [](int l, int\
-    \ r){return max(l, r);},\n        [](int l, int r){return l + r;},\n        0);\n\
-    \    for(int i = 0; i < n; ++i){\n        cout << dp[i] << endl;\n    }\n}"
+    \ root);\n    return ret;\n}\n#line 12 \"Library/Tree/EulerTour.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass EulerTour{\n    public:\n    using F = function<CostType(CostType)>;\n\
+    \n    EulerTour(){}\n\n    /**\n     * @brief \u6728 `T` \u306B\u304A\u3051\u308B\
+    \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u3092\u69CB\u7BC9\u3059\u308B\u3002\
+    \n     * @param one_index `1-index` \u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B `(default = false)`\n     */\n    EulerTour(RootedTree<CostType> &T, bool\
+    \ one_index = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
+    \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
+    \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
+    \ /**\n     * @brief \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3092\
+    \u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F `0-index` \u3067\u8FD4\u308B\
+    \u3002\n     * @return int \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\
+    \n     */\n    int get_in(const Vertex v) const {\n        return in_time_.at(v\
+    \ - one_index_);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u304B\u3089\
+    \u51FA\u305F\u6642\u523B\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return int \u9802\u70B9 `v` \u304B\
+    \u3089\u51FA\u305F\u6642\u523B\n     */\n    int get_out(const Vertex v) const\
+    \ {\n        return out_time_.at(v - one_index_);\n    }\n\n    /**\n     * @brief\
+    \ \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\
+    \u523B\u306E\u4E21\u65B9\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
+    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return pair<int, int> \u9802\u70B9\
+    \ `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\u523B\n   \
+    \  */\n    pair<int, int> get_pair(const Vertex v) const {\n        return make_pair(in_time_.at(v\
+    \ - one_index_), out_time_.at(v - one_index_));\n    }\n\n    /**\n     * @brief\
+    \ \u914D\u5217 `value` \u3092\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u306B\u57FA\
+    \u3065\u3044\u3066\u5909\u63DB\u3057\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\
+    \n     * @note \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306A\u3069\u306E\u521D\u671F\
+    \u914D\u5217\u3068\u3057\u3066\u6E21\u3059\u5834\u5408\u306B\u306A\u3069\u306B\
+    \u7528\u3044\u308B\u3002\n     * @tparam Type \u6E21\u3059\u30C7\u30FC\u30BF\u306E\
+    \u578B\n     * @param value \u5909\u63DB\u3059\u308B\u914D\u5217\n     * @param\
+    \ in_converter \u9802\u70B9 `v` \u306B\u5165\u308B\u6642\u523B\u306B\u5BFE\u3059\
+    \u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n     * @param\
+    \ out_converter \u9802\u70B9 `v` \u304B\u3089\u51FA\u308B\u6642\u523B\u306B\u5BFE\
+    \u3059\u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n   \
+    \  * @return vector<Type> \u5909\u63DB\u3057\u305F\u9577\u3055 `2 * |V|` \u306E\
+    \u914D\u5217\n     */\n    template<typename Type>\n    vector<Type> ConvertVector(const\
+    \ vector<Type> &value, const F in_converter, const F out_converter){\n       \
+    \ vector<Type> ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_;\
+    \ ++i){\n            int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n\
+    \            ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx]\
+    \ = out_converter(value.at(i));\n        }\n        return ret;\n    }\n\n   \
+    \ private:\n    int time_{0}, one_index_, vertex_size_;\n\n    RootedTree<CostType>\
+    \ &T;\n    vector<int> in_time_, out_time_;\n\n    void dfs(Vertex v){\n     \
+    \   in_time_[v] = time_++;\n        for(Vertex c : T.get_child(v)){\n        \
+    \    dfs(c);\n        }\n        out_time_[v] = time_++;\n    }\n};\n#line 1 \"\
+    Library/DataStructure/SegmentTree.hpp\"\n/**\n * @file SegmentTree.hpp\n * @author\
+    \ log K (lX57)\n * @brief Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
+    \ * @version 3.0\n * @date 2024-09-04\n */\n\n#line 10 \"Library/DataStructure/SegmentTree.hpp\"\
+    \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using F =\
+    \ function<Monoid(Monoid, Monoid)>;\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\
+    \u30F3\u30C8\u6728\u3092\u8981\u7D20\u6570 `size` \u3067\u521D\u671F\u5316\u3059\
+    \u308B\u3002\n     * @param size \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\u8981\
+    \u7D20\u6570\n     * @param merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\
+    \u7B97\n     * @param monoid_identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\
+    \u5143\n     * @param zero_index 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\
+    \u304B (default = `false`)\n     */\n    SegmentTree(int size, F merge, const\
+    \ Monoid &monoid_identity, bool zero_index = false) :\n            f(merge), id_(monoid_identity),\
+    \ zero_index_(zero_index){\n        size_ = 1;\n        while(size_ < size) size_\
+    \ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2 * size_, id_);\n\
+    \    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u69CB\
+    \u7BC9\u3059\u308B\u3002\n     * @attention \u5FC5\u305A `Set()` \u3067\u521D\u671F\
+    \u5024\u3092\u4EE3\u5165\u3057\u3066\u304B\u3089\u547C\u3073\u51FA\u3059\u3053\
+    \u3068\uFF01\n     */\n    void Build(){\n        for(int i = offset_; i >= 1;\
+    \ --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n     \
+    \   }\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306E\
+    \u521D\u671F\u5024\u3092\u4EE3\u5165\u3059\u308B\u3002\n     * @param index \u4EE3\
+    \u5165\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     * @param\
+    \ value \u4EE3\u5165\u3059\u308B\u5024\n     */\n    void Set(int index, Monoid\
+    \ value){\n        Validate(index + zero_index_);\n        data_[offset_ + index\
+    \ + zero_index_] = value;\n    }\n\n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\
+    \u30C8\u6728\u3092\u914D\u5217 `init_data` \u3067\u521D\u671F\u5316\u3059\u308B\
+    \u3002\n     * @param init_data \u521D\u671F\u30C7\u30FC\u30BF\u306E\u914D\u5217\
+    \n     * @param merge \u533A\u9593\u53D6\u5F97\u3092\u884C\u3046\u6F14\u7B97\n\
+    \     * @param monoid_identity \u30E2\u30CE\u30A4\u30C9\u306E\u5358\u4F4D\u5143\
+    \n     * @param zero_index 0-index\u3068\u3057\u3066\u6271\u3044\u305F\u3044\u304B\
+    \ (default = `false`)\n     */\n    SegmentTree(vector<Monoid> &init_data, F merge,\
+    \ const Monoid &monoid_identity, bool zero_index = false) :\n            f(merge),\
+    \ id_(monoid_identity), zero_index_(zero_index){\n        size_ = 1;\n       \
+    \ while(size_ < (int)init_data.size()) size_ <<= 1;\n        offset_ = size_ -\
+    \ 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)init_data.size();\
+    \ ++i){\n            data_[size_ + i] = init_data[i];\n        }\n        Build();\n\
+    \    }\n\n    /**\n     * @brief \u4E00\u70B9\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\
+    \u51E6\u7406\u3059\u308B\u3002\n     * @param index \u66F4\u65B0\u5148\u306E\u8981\
+    \u7D20\u756A\u53F7 (default = 1-index)\n     * @param value \u66F4\u65B0\u3059\
+    \u308B\u5024\n     */\n    void Update(int index, Monoid value){\n        Validate(index\
+    \ + zero_index_);\n        int k = offset_ + index + zero_index_;\n        data_[k]\
+    \ = value;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
+    \ * k + 1]);\n        }\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593\
+    \ `[left, Right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\
+    \u30EA\u3092\u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\
+    \u5DE6\u7AEF\n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n\
+    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ Query(int left, int right){\n        if(left == right) return id_;\n       \
+    \ Validate(left + zero_index_);\n        Validate(right + zero_index_ - 1);\n\
+    \        int l = left + zero_index_ + offset_, r = right + zero_index_ + offset_;\n\
+    \        Monoid al = id_, ar = id_;\n        while(l < r){\n            if(l &\
+    \ 1) al = f(al, data_[l++]);\n            if(r & 1) ar = f(data_[--r], ar);\n\
+    \            l >>= 1, r >>= 1;\n        }\n        return f(al, ar);\n    }\n\n\
+    \    /**\n     * @brief \u8981\u7D20\u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\
+    \u5F97\u3059\u308B\u3002\n     * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\
+    \u756A\u53F7 (default = 1-index)\n     * @return Monoid \u53D6\u5F97\u3057\u305F\
+    \u7D50\u679C\n     */\n    Monoid get_value(int k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    Monoid operator[](const\
+    \ int &k){\n        return get_value(k);\n    }\n\n    private:\n    int size_,\
+    \ offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const\
+    \ Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1 <=\
+    \ x && x <= size_);\n    }\n};\n#line 6 \"verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp\"\
+    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vl a(N); cin >> a;\n    RootedTree\
+    \ T(N);\n    T.InputRootedTreeFormat(false, false);\n\n    EulerTour et(T);\n\
+    \    auto A = et.ConvertVector(a, [](ll x){return x;}, [](ll x){return 0;});\n\
+    \    SegmentTree<ll> seg(A, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n\
+    \        int t; cin >> t;\n        if(t == 0){\n            int u, x; cin >> u\
+    \ >> x;\n            seg.Update(et.get_in(u), seg[et.get_in(u)] + x);\n      \
+    \  }\n        else{\n            int u; cin >> u;\n            auto [l, r] = et.get_pair(u);\n\
+    \            cout << seg.Query(l, r) << endl;\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/EulerTour.hpp\"\
+    \n#include \"../Library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n    int\
+    \ N, Q; cin >> N >> Q;\n    vl a(N); cin >> a;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
+    \ false);\n\n    EulerTour et(T);\n    auto A = et.ConvertVector(a, [](ll x){return\
+    \ x;}, [](ll x){return 0;});\n    SegmentTree<ll> seg(A, [](ll l, ll r){return\
+    \ l + r;}, 0LL, true);\n    while(Q--){\n        int t; cin >> t;\n        if(t\
+    \ == 0){\n            int u, x; cin >> u >> x;\n            seg.Update(et.get_in(u),\
+    \ seg[et.get_in(u)] + x);\n        }\n        else{\n            int u; cin >>\
+    \ u;\n            auto [l, r] = et.get_pair(u);\n            cout << seg.Query(l,\
+    \ r) << endl;\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/Tree/RerootingDP.hpp
+  - Library/Tree/EulerTour.hpp
   - Library/Tree/Tree.hpp
+  - Library/DataStructure/SegmentTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-5-B.test.cpp
+  path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   requiredBy: []
-  timestamp: '2024-11-01 01:18:45+09:00'
+  timestamp: '2024-11-01 01:27:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-5-B.test.cpp
+documentation_of: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-5-B.test.cpp
-- /verify/verify/AOJ-GRL-5-B.test.cpp.html
-title: verify/AOJ-GRL-5-B.test.cpp
+- /verify/verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+- /verify/verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp.html
+title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
 ---

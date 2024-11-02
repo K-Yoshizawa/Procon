@@ -159,9 +159,9 @@ data:
     \u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex = -1`\
     \ \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\u70B9\
     \u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
-    \ = 0)\n     */\n    RootedTree(int vertex_size, Vertex root_vertex = 0) :\n \
-    \           vertex_size_(vertex_size), root_vertex_(root_vertex),\n          \
-    \  node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
+    \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
+    \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
+    \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
     \u3092\u8FD4\u3059\u3002\n     * @return int \u6728\u306E\u9802\u70B9\u6570\n\
     \     */\n    int get_vertex_size() const {\n        return vertex_size_;\n  \
     \  }\n\n    /**\n     * @brief \u6728\u306E\u6839\u306E\u9802\u70B9\u3092\u8FD4\
@@ -278,42 +278,56 @@ data:
     \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
     \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
     \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
-    \ CalculateSubtreeSize(RootedTree<CostType> &tree){\n    Vertex root = tree.get_root();\n\
-    \    int V = tree.get_vertex_size();\n    vector<int> ret(V, 1);\n    auto rec\
-    \ = [&](auto self, Vertex v) -> int {\n        for(Vertex u : tree.get_child(v)){\n\
-    \            ret[v] += self(self, u);\n        }\n        return ret[v];\n   \
-    \ };\n    rec(rec, root);\n    return ret;\n}\n#line 9 \"Library/Tree/RerootingDP.hpp\"\
-    \n\ntemplate<typename CostType, typename Monoid>\nclass RerootingDP{\n    public:\n\
-    \    using F = function<Monoid(Monoid, Monoid, Vertex)>;\n    using G = function<Monoid(Monoid,\
-    \ CostType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n    using\
-    \ Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
-    \ CostType)>;\n\n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\
-    \u5168\u65B9\u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u8FBA\u5C5E\u6027\u306E\u307F\
+    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\
+    \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\
+    \u6C42\u3081\u308B\u3002\n * @param tree \u6728\n * @return vector<int> \u5404\
+    \u9802\u70B9\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\
+    \u30BA\n */\ntemplate<typename CostType>\nvector<int> CalculateSubtreeSize(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
+    \    vector<int> ret(V, 1);\n    auto rec = [&](auto self, Vertex v) -> int {\n\
+    \        for(Vertex u : tree.get_child(v)){\n            ret[v] += self(self,\
+    \ u);\n        }\n        return ret[v];\n    };\n    rec(rec, root);\n    return\
+    \ ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\
+    \u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\
+    \u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002\n * @param\
+    \ tree \u6728\n * @return vector<int> \u5404\u9802\u70B9\u304C\u884C\u304D\u304B\
+    \u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\u304B (0-index)\n */\n\
+    template<typename CostType>\nvector<int> CalculatePreOrder(RootedTree<CostType>\
+    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size(),\
+    \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
+    \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
+    \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
+    \ root);\n    return ret;\n}\n#line 9 \"Library/Tree/RerootingDP.hpp\"\n\ntemplate<typename\
+    \ CostType, typename Monoid>\nclass RerootingDP{\n    public:\n    using F = function<Monoid(Monoid,\
+    \ Monoid, Vertex)>;\n    using G = function<Monoid(Monoid, CostType, Vertex)>;\n\
+    \    using H = function<Monoid(Monoid, Vertex)>;\n    using Fsub = function<Monoid(Monoid,\
+    \ Monoid)>;\n    using Gsub = function<Monoid(Monoid, CostType)>;\n\n    /**\n\
+    \     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\u4F4D\u6728\
+    DP\u3092\u884C\u3046\u3002(\u8FBA\u5C5E\u6027\u306E\u307F)\n     * @param tree\
+    \ \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid, Monoid) -> Monoid` :\
+    \ `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n\
+    \     * @param add `(Monoid, CostType) -> Monoid` : `Monoid` \u3068 `CostType`\
+    \ \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n     * @param monoid_identity\
+    \ `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n    RerootingDP(RootedTree<CostType>\
+    \ &tree, Fsub merge, Gsub add, const Monoid monoid_identity) :\n            tree_(tree),\
+    \ V(tree.get_vertex_size()), merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n\
+    \        merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};\n\
+    \        add_ = [&](Monoid x, CostType y, Vertex i){return add_sub_(x, y);};\n\
+    \        finalize_ = [](Monoid x, Vertex i){return x;};\n        solve();\n  \
+    \  }\n\n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\
+    \u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u9802\u70B9\u5C5E\u6027\u3092\u542B\u3080\
     )\n     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid,\
-    \ Monoid) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\
-    \u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType) -> Monoid` : `Monoid`\
-    \ \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n \
-    \    * @param monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n\
-    \    RerootingDP(RootedTree<CostType> &tree, Fsub merge, Gsub add, const Monoid\
-    \ monoid_identity) :\n            tree_(tree), V(tree.get_vertex_size()), merge_sub_(merge),\
-    \ add_sub_(add), id_(monoid_identity){\n        merge_ = [&](Monoid x, Monoid\
-    \ y, Vertex i){return merge_sub_(x, y);};\n        add_ = [&](Monoid x, CostType\
-    \ y, Vertex i){return add_sub_(x, y);};\n        finalize_ = [](Monoid x, Vertex\
-    \ i){return x;};\n        solve();\n    }\n\n    /**\n     * @brief \u6728 `tree`\
-    \ \u306B\u5BFE\u3057\u3066\u5168\u65B9\u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u9802\
-    \u70B9\u5C5E\u6027\u3092\u542B\u3080)\n     * @param tree \u6839\u4ED8\u304D\u6728\
-    \n     * @param merge `(Monoid, Monoid, Vertex) -> Monoid` : `Monoid` \u540C\u58EB\
-    \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n     * @param add `(Monoid,\
-    \ CostType, Vertex) -> Monoid` : `Monoid` \u3068 `CostType` \u306B\u95A2\u3059\
-    \u308B\u4E8C\u9805\u6F14\u7B97\u3002\n     * @param finalize `(Monoid, Vertex)\
-    \ -> Monoid` : `Monoid` \u306B\u9802\u70B9 `Vertex` \u304C\u6839\u306E\u3068\u304D\
-    \u306E\u51E6\u7406\u3002\n     * @param monoid_identity `Monoid` \u306E\u5358\u4F4D\
-    \u5143\u3002\n     */\n    RerootingDP(RootedTree<CostType> &tree, F merge, G\
-    \ add, H finalize, const Monoid monoid_identity) :\n            tree_(tree), V(tree.get_vertex_size()),\
-    \ merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){\n     \
-    \   solve();\n    }\n\n    /**\n     * @brief \u5168\u9802\u70B9\u306B\u95A2\u3059\
-    \u308BDP\u306E\u914D\u5217\u3092\u53D6\u5F97\u3059\u308B\u3002\n     */\n    vector<Monoid>\
+    \ Monoid, Vertex) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\
+    \u9805\u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType, Vertex) -> Monoid`\
+    \ : `Monoid` \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\
+    \u3002\n     * @param finalize `(Monoid, Vertex) -> Monoid` : `Monoid` \u306B\u9802\
+    \u70B9 `Vertex` \u304C\u6839\u306E\u3068\u304D\u306E\u51E6\u7406\u3002\n     *\
+    \ @param monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n  \
+    \  RerootingDP(RootedTree<CostType> &tree, F merge, G add, H finalize, const Monoid\
+    \ monoid_identity) :\n            tree_(tree), V(tree.get_vertex_size()), merge_(merge),\
+    \ add_(add), finalize_(finalize), id_(monoid_identity){\n        solve();\n  \
+    \  }\n\n    /**\n     * @brief \u5168\u9802\u70B9\u306B\u95A2\u3059\u308BDP\u306E\
+    \u914D\u5217\u3092\u53D6\u5F97\u3059\u308B\u3002\n     */\n    vector<Monoid>\
     \ &get_all_answer(){\n        return dp_;\n    }\n\n    Monoid operator[](Vertex\
     \ v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex v)\
     \ const {\n        return dp_[v];\n    }\n\n    void Print() const {\n       \
@@ -419,7 +433,7 @@ data:
   isVerificationFile: true
   path: verify/LC-TreePathCompositeSum.test.cpp
   requiredBy: []
-  timestamp: '2024-10-27 03:42:01+09:00'
+  timestamp: '2024-11-01 01:18:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreePathCompositeSum.test.cpp
