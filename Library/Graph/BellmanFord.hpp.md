@@ -57,22 +57,23 @@ data:
     \u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\u304C\u5F35\u3089\u308C\u308B\u3002\
     \n     * @param s \u59CB\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param\
     \ t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param c \u91CD\
-    \u307F `(default = 1)`\n     */\n    void AddEdge(Vertex s, Vertex t, CostType\
-    \ c = 1){\n        Validate(s);\n        Validate(t);\n        int edge_id = edge_++;\n\
-    \        adjacent_list_[s].push_back(Edge(s, t, c, edge_id));\n        if(!directed_flag_){\n\
-    \            adjacent_list_[t].push_back(Edge(t, s, c, edge_id));\n        }\n\
-    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306B\u6307\u5B9A\u3057\u305F\
-    \u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\u3059\u308B\u3002\n     * @note\
-    \ \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\u305F\u306F `u v` \u306E\u5F62\
-    \u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\u5F62\u5F0F\u306B\u5BFE\u5FDC\
-    \u3057\u3066\u3044\u308B\u3002\n     * @param edge_count \u8FBA\u6570 E\n    \
-    \ * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\u3042\u308B\u304B\
-    \ `(default = true)`\n     * @param one_index \u9802\u70B9\u304C1-index\u3067\u3042\
-    \u308B\u304B `(default = true)`\n     */\n    void InputGraph(int edge_count,\
-    \ bool weighted_graph = true, bool one_index = true){\n        for(int i = 0;\
-    \ i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n            if(one_index)\
-    \ --s, --t;\n            CostType w = 1;\n            if(weighted_graph) cin >>\
-    \ w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \u307F `(default = 1)`\n     * @param id \u8FBA\u306E\u756A\u53F7\u3092\u660E\u793A\
+    \u7684\u306B\u6307\u5B9A\u3059\u308B `(default = -1)`\n     */\n    void AddEdge(Vertex\
+    \ s, Vertex t, CostType c = 1, int id = -1){\n        Validate(s);\n        Validate(t);\n\
+    \        int edge_id = edge_++;\n        if(id != -1) edge_id = id;\n        adjacent_list_[s].push_back(Edge(s,\
+    \ t, c, edge_id));\n        if(!directed_flag_){\n            adjacent_list_[t].push_back(Edge(t,\
+    \ s, c, edge_id));\n        }\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
+    \u306B\u6307\u5B9A\u3057\u305F\u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\
+    \u3059\u308B\u3002\n     * @note \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\
+    \u305F\u306F `u v` \u306E\u5F62\u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\
+    \u5F62\u5F0F\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u308B\u3002\n     * @param edge_count\
+    \ \u8FBA\u6570 E\n     * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\
+    \u3042\u308B\u304B `(default = true)`\n     * @param one_index \u9802\u70B9\u304C\
+    1-index\u3067\u3042\u308B\u304B `(default = true)`\n     */\n    void InputGraph(int\
+    \ edge_count, bool weighted_graph = true, bool one_index = true){\n        for(int\
+    \ i = 0; i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n       \
+    \     if(one_index) --s, --t;\n            CostType w = 1;\n            if(weighted_graph)\
+    \ cin >> w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
     \ &operator[](Vertex v){\n        return adjacent_list_[v];\n    }\n\n    const\
     \ vector<Edge<CostType>> &operator[](Vertex v) const {\n        return adjacent_list_[v];\n\
     \    }\n\n    inline void Validate(int vertex) const {\n        assert(0 <= vertex\
@@ -109,53 +110,53 @@ data:
     \u30C8\u3067\u30BD\u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B\
     \ `(default = false)`\n * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\
     \n */\ntemplate<typename CostType>\nvector<Edge<CostType>> GraphConvertEdgeSet(const\
-    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret(graph.get_edge_size());\n\
-    \    vector<bool> picked(graph.get_edge_size(), false);\n    for(int v = 0; v\
-    \ < graph.get_vertex_size(); ++v){\n        for(Edge<CostType> e : graph[v]){\n\
-    \            if(!picked[e.id]){\n\t\t\t\tret[e.id] = e;\n            \tpicked[e.id]\
-    \ = true;\n\t\t\t}\n        }\n    }\n    if(sorted){\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 9 \"Library/Graph/BellmanFord.hpp\"\
-    \n\ntemplate<typename CostType>\nclass BellmanFord{\n    public:\n    /**\n  \
-    \   * @brief \u30B0\u30E9\u30D5 graph \u306B\u304A\u3051\u308B\u8CA0\u8FBA\u6709\
-    \u308A\u5358\u4E00\u59CB\u70B9\u6700\u77ED\u8DEF\u554F\u984C\u3092\u89E3\u304F\
-    \u3002\n     * @note \u8A08\u7B97\u91CF : O(EV)\n     * @param graph \u9802\u70B9\
-    \u6570 V, \u8FBA\u6570 E \u306E\u30B0\u30E9\u30D5\n     * @param source \u59CB\
-    \u70B9\u306E\u9802\u70B9 (0-index)\n     */\n    BellmanFord(const Graph<CostType>\
-    \ &graph, Vertex source) :\n            vertex_size_(graph.get_vertex_size()),\
-    \ edge_set_(GraphConvertEdgeSet(graph, false)),\n            source_vertex_(source),\
-    \ inf_(graph.get_inf()), dist_(vertex_size_, inf_){\n        Validate(source_vertex_);\n\
-    \        dist_[source_vertex_] = 0;\n        int update_count = 0;\n        while(1){\n\
-    \            if(update_count == vertex_size_){\n                negative_cycle_\
-    \ = true;\n                break;\n            }\n            bool update_flag\
-    \ = false;\n            for(Edge<CostType> &e : edge_set_){\n                if(dist_[e.from]\
-    \ == inf_) continue;\n                if(dist_[e.to] > dist_[e.from] + e.cost){\n\
-    \                    dist_[e.to] = dist_[e.from] + e.cost;\n                 \
-    \   update_flag = true;\n                }\n            }\n            if(!update_flag)\
-    \ break;\n            ++update_count;\n        }\n    }\n    \n    /**\n     *\
-    \ @brief \u9802\u70B9 `source` \u304B\u3089\u9802\u70B9 `target` \u306B\u5230\u9054\
-    \u53EF\u80FD\u304B\u3092\u8FD4\u3059\u3002\n     * @param target \u7D42\u70B9\u306E\
-    \u9802\u70B9\n     * @return true \u5230\u9054\u53EF\u80FD\n     * @return false\
-    \ \u5230\u9054\u4E0D\u80FD\n     */\n    bool Reachable(Vertex target) const {\n\
-    \        Validate(target);\n        return dist_[target] != inf_;\n    }\n\n \
-    \   /**\n     * @brief \u30B0\u30E9\u30D5\u304C\u8CA0\u9589\u8DEF\u3092\u6301\u3064\
-    \u304B\u3092\u8FD4\u3059\u3002\n     */\n    inline bool Negative() const {\n\
-    \        return negative_cycle_;\n    }\n\n    /**\n     * @brief \u9802\u70B9\
+    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret;\n\
+    \    set<int> picked;\n    for(int v = 0; v < graph.get_vertex_size(); ++v){\n\
+    \        for(Edge<CostType> e : graph[v]){\n            if(!picked.contains(e.id)){\n\
+    \t\t\t\tret.emplace_back(e);\n                picked.insert(e.id);\n\t\t\t}\n\
+    \        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(), [&](Edge<CostType>\
+    \ &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n        });\n\
+    \    }\n    return ret;\n}\n#line 9 \"Library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass BellmanFord{\n    public:\n    /**\n     * @brief \u30B0\u30E9\
+    \u30D5 graph \u306B\u304A\u3051\u308B\u8CA0\u8FBA\u6709\u308A\u5358\u4E00\u59CB\
+    \u70B9\u6700\u77ED\u8DEF\u554F\u984C\u3092\u89E3\u304F\u3002\n     * @note \u8A08\
+    \u7B97\u91CF : O(EV)\n     * @param graph \u9802\u70B9\u6570 V, \u8FBA\u6570 E\
+    \ \u306E\u30B0\u30E9\u30D5\n     * @param source \u59CB\u70B9\u306E\u9802\u70B9\
+    \ (0-index)\n     */\n    BellmanFord(const Graph<CostType> &graph, Vertex source)\
+    \ :\n            vertex_size_(graph.get_vertex_size()), edge_set_(GraphConvertEdgeSet(graph,\
+    \ false)),\n            source_vertex_(source), inf_(graph.get_inf()), dist_(vertex_size_,\
+    \ inf_){\n        Validate(source_vertex_);\n        dist_[source_vertex_] = 0;\n\
+    \        int update_count = 0;\n        while(1){\n            if(update_count\
+    \ == vertex_size_){\n                negative_cycle_ = true;\n               \
+    \ break;\n            }\n            bool update_flag = false;\n            for(Edge<CostType>\
+    \ &e : edge_set_){\n                if(dist_[e.from] == inf_) continue;\n    \
+    \            if(dist_[e.to] > dist_[e.from] + e.cost){\n                    dist_[e.to]\
+    \ = dist_[e.from] + e.cost;\n                    update_flag = true;\n       \
+    \         }\n            }\n            if(!update_flag) break;\n            ++update_count;\n\
+    \        }\n    }\n    \n    /**\n     * @brief \u9802\u70B9 `source` \u304B\u3089\
+    \u9802\u70B9 `target` \u306B\u5230\u9054\u53EF\u80FD\u304B\u3092\u8FD4\u3059\u3002\
+    \n     * @param target \u7D42\u70B9\u306E\u9802\u70B9\n     * @return true \u5230\
+    \u9054\u53EF\u80FD\n     * @return false \u5230\u9054\u4E0D\u80FD\n     */\n \
+    \   bool Reachable(Vertex target) const {\n        Validate(target);\n       \
+    \ return dist_[target] != inf_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
+    \u304C\u8CA0\u9589\u8DEF\u3092\u6301\u3064\u304B\u3092\u8FD4\u3059\u3002\n   \
+    \  */\n    inline bool Negative() const {\n        return negative_cycle_;\n \
+    \   }\n\n    /**\n     * @brief \u9802\u70B9 `source` \u304B\u3089\u9802\u70B9\
+    \ `target` \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u9577\u3092\u8FD4\u3059\u3002\
+    \n     * @param target \u7D42\u70B9\u306E\u9802\u70B9 (0-index)\n     * @attention\
+    \ \u8CA0\u9589\u8DEF\u3092\u6301\u3064\u3068\u304D\u306B\u8FD4\u3059\u5024\u306F\
+    \u672A\u5B9A\u7FA9\u3067\u3042\u308B\u3002\n     * @return CostType \u9802\u70B9\
     \ `source` \u304B\u3089\u9802\u70B9 `target` \u307E\u3067\u306E\u6700\u77ED\u7D4C\
-    \u8DEF\u9577\u3092\u8FD4\u3059\u3002\n     * @param target \u7D42\u70B9\u306E\u9802\
-    \u70B9 (0-index)\n     * @attention \u8CA0\u9589\u8DEF\u3092\u6301\u3064\u3068\
-    \u304D\u306B\u8FD4\u3059\u5024\u306F\u672A\u5B9A\u7FA9\u3067\u3042\u308B\u3002\
-    \n     * @return CostType \u9802\u70B9 `source` \u304B\u3089\u9802\u70B9 `target`\
-    \ \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u9577\n     */\n    CostType Distance(Vertex\
-    \ target) const {\n        Validate(target);\n        return dist_[target];\n\
-    \    }\n\n    CostType operator[](Vertex target){\n        return Distance(target);\n\
-    \    }\n\n    const CostType operator[](Vertex target) const {\n        return\
-    \ Distance(target);\n    }\n\n    private:\n    int vertex_size_;\n    vector<Edge<CostType>>\
-    \ edge_set_;\n    Vertex source_vertex_{-1};\n    CostType inf_;\n    vector<CostType>\
-    \ dist_;\n    bool negative_cycle_{false};\n\n    inline void Validate(int vertex)\
-    \ const {\n        if(!(0 <= vertex && vertex < vertex_size_)){\n            cerr\
-    \ << \"# [Bellman-Ford] Failed Validate : Vertex \" << vertex << endl;\n     \
-    \       assert(false);\n        }\n    }\n};\n"
+    \u8DEF\u9577\n     */\n    CostType Distance(Vertex target) const {\n        Validate(target);\n\
+    \        return dist_[target];\n    }\n\n    CostType operator[](Vertex target){\n\
+    \        return Distance(target);\n    }\n\n    const CostType operator[](Vertex\
+    \ target) const {\n        return Distance(target);\n    }\n\n    private:\n \
+    \   int vertex_size_;\n    vector<Edge<CostType>> edge_set_;\n    Vertex source_vertex_{-1};\n\
+    \    CostType inf_;\n    vector<CostType> dist_;\n    bool negative_cycle_{false};\n\
+    \n    inline void Validate(int vertex) const {\n        if(!(0 <= vertex && vertex\
+    \ < vertex_size_)){\n            cerr << \"# [Bellman-Ford] Failed Validate :\
+    \ Vertex \" << vertex << endl;\n            assert(false);\n        }\n    }\n\
+    };\n"
   code: "/**\n * @file BellmanFord.hpp\n * @brief BellmanFord - \u30D9\u30EB\u30DE\
     \u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5\n * @version 4.0\n * @date 2024-09-01\n */\n\
     \n#include \"Graph.hpp\"\n\ntemplate<typename CostType>\nclass BellmanFord{\n\
@@ -204,7 +205,7 @@ data:
   isVerificationFile: false
   path: Library/Graph/BellmanFord.hpp
   requiredBy: []
-  timestamp: '2024-10-20 23:59:02+09:00'
+  timestamp: '2024-11-18 02:33:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-B.test.cpp

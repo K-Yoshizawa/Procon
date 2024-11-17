@@ -112,14 +112,12 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 2 \"Library/Tree/EulerTour.hpp\"\n\n/**\n * @file EulerTour.hpp\n * @brief\
-    \ Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @version 4.0\n *\
-    \ @date 2024-10-31\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file\
-    \ Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version\
-    \ 1.0\n * @date 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 2 \"Library/Tree/EulerTour.hpp\"\
+    \n\n/**\n * @file EulerTour.hpp\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\
+    \u30C4\u30A2\u30FC\n * @version 4.0\n * @date 2024-10-31\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\
+    \n\n/**\n * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\
+    \u30C8\n * @version 1.0\n * @date 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
     \    public:\n    struct Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\
     \n        Vertex parent{-1};\n        CostType cost{};\n        vector<Vertex>\
     \ children{};\n    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\
@@ -402,7 +400,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   requiredBy: []
-  timestamp: '2024-11-01 01:27:36+09:00'
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp

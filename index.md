@@ -15,6 +15,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/modint.hpp
       title: modint
+    - icon: ':warning:'
+      path: Library/origin.cpp
+      title: Library/origin.cpp
   - name: Library/DataStructure
     pages:
     - icon: ':heavy_check_mark:'

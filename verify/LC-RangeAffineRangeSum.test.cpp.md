@@ -110,37 +110,35 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 2 \"Library/modint.hpp\"\n\n/**\n * @file modint.hpp\n * @author log K (lX57)\n\
-    \ * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\n#line 12 \"Library/modint.hpp\"\
-    \nusing namespace std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\
-    \ntemplate< int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\
-    \n    ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n\
-    \    ModInt &operator+=(const ModInt &p) {\n        if((x += p.x) >= mod) x -=\
-    \ mod;\n        return *this;\n    }\n\n    ModInt &operator-=(const ModInt &p)\
-    \ {\n        if((x += mod - p.x) >= mod) x -= mod;\n        return *this;\n  \
-    \  }\n\n    ModInt &operator*=(const ModInt &p) {\n        x = (int) (1LL * x\
-    \ * p.x % mod);\n        return *this;\n    }\n\n    ModInt &operator/=(const\
-    \ ModInt &p) {\n        *this *= p.inverse();\n        return *this;\n    }\n\n\
-    \    ModInt operator-() const { return ModInt(-x); }\n\n    ModInt operator+(const\
-    \ ModInt &p) const { return ModInt(*this) += p; }\n\n    ModInt operator-(const\
-    \ ModInt &p) const { return ModInt(*this) -= p; }\n\n    ModInt operator*(const\
-    \ ModInt &p) const { return ModInt(*this) *= p; }\n\n    ModInt operator/(const\
-    \ ModInt &p) const { return ModInt(*this) /= p; }\n\n    bool operator==(const\
-    \ ModInt &p) const { return x == p.x; }\n\n    bool operator!=(const ModInt &p)\
-    \ const { return x != p.x; }\n\n    ModInt inverse() const {\n        int a =\
-    \ x, b = mod, u = 1, v = 0, t;\n        while(b > 0) {\n            t = a / b;\n\
-    \            swap(a -= t * b, b);\n            swap(u -= t * v, v);\n        }\n\
-    \        return ModInt(u);\n    }\n\n    ModInt pow(int64_t n) const {\n     \
-    \   if(n == 0) return ModInt(1);\n        ModInt ret(1), mul(x);\n        while(n\
-    \ > 0) {\n            if(n & 1) ret *= mul;\n            mul *= mul;\n       \
-    \     n >>= 1;\n        }\n        return ret;\n    }\n\n    friend ostream &operator<<(ostream\
-    \ &os, const ModInt &p) {\n        return os << p.x;\n    }\n\n    friend istream\
-    \ &operator>>(istream &is, ModInt &a) {\n        int64_t t;\n        is >> t;\n\
-    \        a = ModInt< mod >(t);\n        return (is);\n    }\n\n    static int\
-    \ get_mod() { return mod; }\n};\n\nusing mint = ModInt<mod998>;\nusing mint107\
-    \ = ModInt<mod107>;\n\nusing vm = vector<mint>;\nusing vvm = vector<vector<mint>>;\n\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 2 \"Library/modint.hpp\"\
+    \n\n/**\n * @file modint.hpp\n * @author log K (lX57)\n * @brief modint\n * @version\
+    \ 1.0\n * @date 2023-08-24\n */\n\n#line 12 \"Library/modint.hpp\"\nusing namespace\
+    \ std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate<\
+    \ int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
+    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
+    \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
+    \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
+    \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
+    \ ModInt &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n\
+    \    }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
+    \        return *this;\n    }\n\n    ModInt operator-() const { return ModInt(-x);\
+    \ }\n\n    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p;\
+    \ }\n\n    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p;\
+    \ }\n\n    ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p;\
+    \ }\n\n    ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p;\
+    \ }\n\n    bool operator==(const ModInt &p) const { return x == p.x; }\n\n   \
+    \ bool operator!=(const ModInt &p) const { return x != p.x; }\n\n    ModInt inverse()\
+    \ const {\n        int a = x, b = mod, u = 1, v = 0, t;\n        while(b > 0)\
+    \ {\n            t = a / b;\n            swap(a -= t * b, b);\n            swap(u\
+    \ -= t * v, v);\n        }\n        return ModInt(u);\n    }\n\n    ModInt pow(int64_t\
+    \ n) const {\n        if(n == 0) return ModInt(1);\n        ModInt ret(1), mul(x);\n\
+    \        while(n > 0) {\n            if(n & 1) ret *= mul;\n            mul *=\
+    \ mul;\n            n >>= 1;\n        }\n        return ret;\n    }\n\n    friend\
+    \ ostream &operator<<(ostream &os, const ModInt &p) {\n        return os << p.x;\n\
+    \    }\n\n    friend istream &operator>>(istream &is, ModInt &a) {\n        int64_t\
+    \ t;\n        is >> t;\n        a = ModInt< mod >(t);\n        return (is);\n\
+    \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing mint = ModInt<mod998>;\n\
+    using mint107 = ModInt<mod107>;\n\nusing vm = vector<mint>;\nusing vvm = vector<vector<mint>>;\n\
     using vm107 = vector<mint107>;\nusing vvm107 = vector<vector<mint107>>;\n#line\
     \ 1 \"Library/DataStructure/LazySegmentTree.hpp\"\n/**\n * @file LazySegmentTree.hpp\n\
     \ * @author log K (lX57)\n * @brief Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\
@@ -284,7 +282,7 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2024-10-27 03:42:01+09:00'
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp

@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: Library/TemplateExtend.hpp
     title: Library/TemplateExtend.hpp
+  - icon: ':warning:'
+    path: Library/origin.cpp
+    title: Library/origin.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-0560.test.cpp
@@ -192,8 +195,7 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n"
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n"
   code: "#pragma once\n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief\
     \ Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.9\n * @date 2024-10-27\n\
     \ */\n\n#include \"Common.hpp\"\n#define ALL(x) (x).begin(), (x).end()\n#define\
@@ -272,15 +274,15 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// =============================================================="
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/Template.hpp
   requiredBy:
   - Library/TemplateExtend.hpp
-  timestamp: '2024-10-27 03:42:01+09:00'
+  - Library/origin.cpp
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-B.test.cpp

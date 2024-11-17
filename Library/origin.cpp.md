@@ -5,27 +5,19 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/DataStructure/WeightedUnionFind.hpp
-    title: "Weighted UnionFind - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\u30FC\
-      \u30BF\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B
-  bundledCode: "#line 1 \"verify/AOJ-DSL-1-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.9\n * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
+    links: []
+  bundledCode: "#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n *\
+    \ @author log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @version 1.9\n * @date 2024-10-27\n */\n\n#line 2 \"Library/Common.hpp\"\n\
+    \n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
     \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
     \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
@@ -106,50 +98,30 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 1 \"Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n/**\n * @file WeightedUnionFind.hpp\n * @author log K (lX57)\n * @brief Weighted\
-    \ UnionFind - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\
-    \u9020\n * @version 2.0\n * @date 2024-09-05\n */\n\n#line 10 \"Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n\ntemplate<typename Abel = int32_t>\nclass WeightedUnionFind{\n    public:\n\
-    \    WeightedUnionFind(int size) : data_(size, -1), weight_(size, Abel{}){}\n\n\
-    \    int Find(int k){\n        if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n\
-    \        weight_[k] += weight_[data_[k]];\n        return data_[k] = r;\n    }\n\
-    \n    Abel Weight(int k){\n        Find(k);\n        return weight_[k];\n    }\n\
-    \n    Abel Diff(int x, int y){\n        return Weight(y) - Weight(x);\n    }\n\
-    \n    bool Same(int x, int y){\n        return Find(x) == Find(y);\n    }\n\n\
-    \    bool Relate(int x, int y, Abel w){\n        w += Weight(x) - Weight(y);\n\
-    \        x = Find(x), y = Find(y);\n        if(x == y) return false;\n       \
-    \ if(data_[x] > data_[y]) swap(x, y), w = -w;\n        data_[x] += data_[y];\n\
-    \        data_[y] = x;\n        weight_[y] = w;\n        return true;\n    }\n\
-    \n    private:\n    vector<int> data_;\n    vector<Abel> weight_;\n};\n#line 5\
-    \ \"verify/AOJ-DSL-1-B.test.cpp\"\n\nint main(){\n    int n, q; cin >> n >> q;\n\
-    \n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n        int query; cin >>\
-    \ query;\n        if(query == 0){\n            int x, y, z; cin >> x >> y >> z;\n\
-    \            uf.Relate(x, y, z);\n        }\n        else{\n            int x,\
-    \ y; cin >> x >> y;\n            if(!uf.Same(x, y)) cout << \"?\" << endl;\n \
-    \           else cout << uf.Diff(x, y) << endl;\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n\nint main(){\n    int n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n\
-    \    while(q--){\n        int query; cin >> query;\n        if(query == 0){\n\
-    \            int x, y, z; cin >> x >> y >> z;\n            uf.Relate(x, y, z);\n\
-    \        }\n        else{\n            int x, y; cin >> x >> y;\n            if(!uf.Same(x,\
-    \ y)) cout << \"?\" << endl;\n            else cout << uf.Diff(x, y) << endl;\n\
-    \        }\n    }\n}"
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 2 \"Library/origin.cpp\"\
+    \n\n// ===================================================================\n//\
+    \ \n// Main Program\n// \n// Contest : {contest}\n// Problem : {problem}\n// Date\
+    \    : {date}\n// \n// ===================================================================\n\
+    \nvoid solve(){\n\n}\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    // int T; cin >> T;\n    // while(T--)\n    solve();\n}\n"
+  code: "#include \"../Library/Template.hpp\"\n\n// ===================================================================\n\
+    // \n// Main Program\n// \n// Contest : {contest}\n// Problem : {problem}\n//\
+    \ Date    : {date}\n// \n// ===================================================================\n\
+    \nvoid solve(){\n\n}\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    // int T; cin >> T;\n    // while(T--)\n    solve();\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/DataStructure/WeightedUnionFind.hpp
-  isVerificationFile: true
-  path: verify/AOJ-DSL-1-B.test.cpp
+  isVerificationFile: false
+  path: Library/origin.cpp
   requiredBy: []
   timestamp: '2024-11-11 17:34:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-1-B.test.cpp
+documentation_of: Library/origin.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-1-B.test.cpp
-- /verify/verify/AOJ-DSL-1-B.test.cpp.html
-title: verify/AOJ-DSL-1-B.test.cpp
+- /library/Library/origin.cpp
+- /library/Library/origin.cpp.html
+title: Library/origin.cpp
 ---

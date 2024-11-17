@@ -98,25 +98,24 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 2 \"Library/TemplateExtend.hpp\"\n\ntemplate <typename T>\ninline long long\
-    \ EuclideanDist2(const pair<T, T> &p1, const pair<T, T> &p2){\n    long long dx\
-    \ = (long long)p1.first - (long long)p2.first;\n    long long dy = (long long)p1.second\
-    \ - (long long)p2.second;\n    return dx * dx + dy * dy;\n}\n\ntemplate <typename\
-    \ T>\ninline long long EuclideanDist2(const pair<T, T> &p){\n    return EuclideanDist2(p,\
-    \ make_pair(0, 0));\n}\n\ntemplate <typename T>\ninline long double EuclideanDist(const\
-    \ pair<T, T> &p1, const pair<T, T> &p2){\n    return sqrtl((long double)EuclideanDist2(p1,\
-    \ p2));\n}\n\ntemplate <typename T>\ninline long double EuclideanDist(const pair<T,\
-    \ T> &p){\n    return sqrtl((long double)EuclideanDist2(p));\n}\n\ntemplate<typename\
-    \ T>\ninline long long ManhattanDist(const pair<T, T> &p1, const pair<T, T> &p2){\n\
-    \    return abs(p1.first - p2.first) + abs(p1.second - p2.second);\n}\n\nll modpow(ll\
-    \ a, ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i < 63; ++i)\n  \
-    \  {\n        if ((b & (1LL << i)) != 0)\n        {\n            p *= q;\n   \
-    \         p %= m;\n        }\n        q *= q;\n        q %= m;\n    }\n    return\
-    \ p;\n}\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a = -a;\n  \
-    \  if(b < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b, a % b);\n\
-    }\n\null lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\nstring bitseq(long\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 2 \"Library/TemplateExtend.hpp\"\
+    \n\ntemplate <typename T>\ninline long long EuclideanDist2(const pair<T, T> &p1,\
+    \ const pair<T, T> &p2){\n    long long dx = (long long)p1.first - (long long)p2.first;\n\
+    \    long long dy = (long long)p1.second - (long long)p2.second;\n    return dx\
+    \ * dx + dy * dy;\n}\n\ntemplate <typename T>\ninline long long EuclideanDist2(const\
+    \ pair<T, T> &p){\n    return EuclideanDist2(p, make_pair(0, 0));\n}\n\ntemplate\
+    \ <typename T>\ninline long double EuclideanDist(const pair<T, T> &p1, const pair<T,\
+    \ T> &p2){\n    return sqrtl((long double)EuclideanDist2(p1, p2));\n}\n\ntemplate\
+    \ <typename T>\ninline long double EuclideanDist(const pair<T, T> &p){\n    return\
+    \ sqrtl((long double)EuclideanDist2(p));\n}\n\ntemplate<typename T>\ninline long\
+    \ long ManhattanDist(const pair<T, T> &p1, const pair<T, T> &p2){\n    return\
+    \ abs(p1.first - p2.first) + abs(p1.second - p2.second);\n}\n\nll modpow(ll a,\
+    \ ll b, ll m){\n    ll p = 1, q = a;\n    for (int i = 0; i < 63; ++i)\n    {\n\
+    \        if ((b & (1LL << i)) != 0)\n        {\n            p *= q;\n        \
+    \    p %= m;\n        }\n        q *= q;\n        q %= m;\n    }\n    return p;\n\
+    }\n\ntemplate<typename T>\nT gcd(T a, T b) {\n    if(a < 0) a = -a;\n    if(b\
+    \ < 0) b = -b;\n    if(b == 0) return a;\n    else return gcd(b, a % b);\n}\n\n\
+    ull lcm(ull a, ull b) {\n    return a * b / gcd(a, b);\n}\n\nstring bitseq(long\
     \ long x, int mini_len = 1, bool rev = false){\n    string ret = \"\";\n    while(x){\n\
     \        ret.push_back('0' + (x & 1));\n        x >>= 1;\n    }\n    while(ret.size()<mini_len)\
     \ ret.push_back('0');\n    if(!rev) reverse(ret.begin(), ret.end());\n    return\
@@ -148,7 +147,7 @@ data:
   isVerificationFile: false
   path: Library/TemplateExtend.hpp
   requiredBy: []
-  timestamp: '2024-10-27 03:42:01+09:00'
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/TemplateExtend.hpp

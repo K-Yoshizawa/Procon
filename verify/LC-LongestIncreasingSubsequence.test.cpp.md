@@ -106,33 +106,31 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Other/LongestIncreasingSubsequence.hpp\"\n/**\n * @file LongestIncreasingSubsequence.hpp\n\
-    \ * @brief Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\
-    \u5217\n * @author ei1333 (Original)\n * @version 2.0\n * @date 2024-10-29\n */\n\
-    \n#line 10 \"Library/Other/LongestIncreasingSubsequence.hpp\"\n\n/**\n * @brief\
-    \ \u914D\u5217 `data` \u306E\u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\u3092\u6C42\
-    \u3081\u308B\u3002\n * @tparam Strict \u72ED\u7FA9\u5358\u8ABF\u5897\u52A0\u3067\
-    \u3042\u308B\u304B\n * @param data \u6C42\u3081\u308B\u914D\u5217\n * @return\
-    \ vector<T> \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\u306E 1 \u3064\u3067\u3001\
-    \u5404\u8981\u7D20\u3092 `data` \u306B\u304A\u3051\u308B\u6DFB\u3048\u5B57\u3067\
-    \u8868\u3057\u305F\u914D\u5217\n * @note \u8FD4\u308A\u5024\u306E\u914D\u5217\u306E\
-    \u9577\u3055\u304C\u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\u306E\u9577\u3055\
-    \u3067\u3042\u308B\u3002\n */\ntemplate<bool Strict, typename T>\nvector<T> LongestIncreasingSubsequence(const\
-    \ vector<T> &data){\n    int N = (int)data.size();\n    T inf = numeric_limits<T>::min();\n\
-    \    vector<T> L, pre, S;\n    for(auto &x : data){\n        typename vector<T>::iterator\
-    \ itr;\n        if(Strict) itr = lower_bound(L.begin(), L.end(), x);\n       \
-    \ else itr = upper_bound(L.begin(), L.end(), x);\n        if(itr == L.begin())\
-    \ pre.emplace_back(inf);\n        else pre.emplace_back(*prev(itr));\n       \
-    \ if(itr == L.end()) L.emplace_back(x);\n        else *itr = x;\n    }\n    T\
-    \ x = L.back();\n    for(int i = N - 1; x != inf;){\n        while(data[i] !=\
-    \ x) --i;\n        S.emplace_back(i);\n        x = pre[i];\n    }\n    reverse(S.begin(),\
-    \ S.end());\n    return S;\n}\n#line 5 \"verify/LC-LongestIncreasingSubsequence.test.cpp\"\
-    \n\nint main(){\n    int N; cin >> N;\n    vector<int> A(N); cin >> A;\n\n   \
-    \ auto ans = LongestIncreasingSubsequence<true>(A);\n    cout << ans.size() <<\
-    \ endl;\n    for(auto i : ans){\n        cout << i << \" \";\n    }\n    cout\
-    \ << endl;\n}\n"
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 1 \"Library/Other/LongestIncreasingSubsequence.hpp\"\
+    \n/**\n * @file LongestIncreasingSubsequence.hpp\n * @brief Longest Increasing\
+    \ Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\n * @author ei1333\
+    \ (Original)\n * @version 2.0\n * @date 2024-10-29\n */\n\n#line 10 \"Library/Other/LongestIncreasingSubsequence.hpp\"\
+    \n\n/**\n * @brief \u914D\u5217 `data` \u306E\u6700\u9577\u5897\u52A0\u90E8\u5206\
+    \u5217\u3092\u6C42\u3081\u308B\u3002\n * @tparam Strict \u72ED\u7FA9\u5358\u8ABF\
+    \u5897\u52A0\u3067\u3042\u308B\u304B\n * @param data \u6C42\u3081\u308B\u914D\u5217\
+    \n * @return vector<T> \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\u306E 1 \u3064\
+    \u3067\u3001\u5404\u8981\u7D20\u3092 `data` \u306B\u304A\u3051\u308B\u6DFB\u3048\
+    \u5B57\u3067\u8868\u3057\u305F\u914D\u5217\n * @note \u8FD4\u308A\u5024\u306E\u914D\
+    \u5217\u306E\u9577\u3055\u304C\u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\u306E\
+    \u9577\u3055\u3067\u3042\u308B\u3002\n */\ntemplate<bool Strict, typename T>\n\
+    vector<T> LongestIncreasingSubsequence(const vector<T> &data){\n    int N = (int)data.size();\n\
+    \    T inf = numeric_limits<T>::min();\n    vector<T> L, pre, S;\n    for(auto\
+    \ &x : data){\n        typename vector<T>::iterator itr;\n        if(Strict) itr\
+    \ = lower_bound(L.begin(), L.end(), x);\n        else itr = upper_bound(L.begin(),\
+    \ L.end(), x);\n        if(itr == L.begin()) pre.emplace_back(inf);\n        else\
+    \ pre.emplace_back(*prev(itr));\n        if(itr == L.end()) L.emplace_back(x);\n\
+    \        else *itr = x;\n    }\n    T x = L.back();\n    for(int i = N - 1; x\
+    \ != inf;){\n        while(data[i] != x) --i;\n        S.emplace_back(i);\n  \
+    \      x = pre[i];\n    }\n    reverse(S.begin(), S.end());\n    return S;\n}\n\
+    #line 5 \"verify/LC-LongestIncreasingSubsequence.test.cpp\"\n\nint main(){\n \
+    \   int N; cin >> N;\n    vector<int> A(N); cin >> A;\n\n    auto ans = LongestIncreasingSubsequence<true>(A);\n\
+    \    cout << ans.size() << endl;\n    for(auto i : ans){\n        cout << i <<\
+    \ \" \";\n    }\n    cout << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_increasing_subsequence\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Other/LongestIncreasingSubsequence.hpp\"\
     \n\nint main(){\n    int N; cin >> N;\n    vector<int> A(N); cin >> A;\n\n   \
@@ -146,7 +144,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LongestIncreasingSubsequence.test.cpp
   requiredBy: []
-  timestamp: '2024-10-30 02:03:27+09:00'
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LongestIncreasingSubsequence.test.cpp

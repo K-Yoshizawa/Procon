@@ -83,6 +83,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
+  - icon: ':warning:'
+    path: Library/origin.cpp
+    title: Library/origin.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-0560.test.cpp
@@ -231,6 +234,7 @@ data:
   - Library/Graph/BellmanFord.hpp
   - Library/Graph/FunctionalGraph.hpp
   - Library/Graph/Dijkstra.hpp
+  - Library/origin.cpp
   - Library/modint.hpp
   timestamp: '2024-09-05 07:46:35+09:00'
   verificationStatus: LIBRARY_ALL_AC

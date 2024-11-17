@@ -61,9 +61,11 @@ data:
     \u30B0\u30E9\u30D5\u306E\u5834\u5408\u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\
     \u304C\u5F35\u3089\u308C\u308B\u3002\n     * @param s \u59CB\u70B9\u306E\u9802\
     \u70B9(\u6709\u5411\u8FBA)\n     * @param t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\
-    \u5411\u8FBA)\n     * @param c \u91CD\u307F `(default = 1)`\n     */\n    void\
-    \ AddEdge(Vertex s, Vertex t, CostType c = 1){\n        Validate(s);\n       \
-    \ Validate(t);\n        int edge_id = edge_++;\n        adjacent_list_[s].push_back(Edge(s,\
+    \u5411\u8FBA)\n     * @param c \u91CD\u307F `(default = 1)`\n     * @param id\
+    \ \u8FBA\u306E\u756A\u53F7\u3092\u660E\u793A\u7684\u306B\u6307\u5B9A\u3059\u308B\
+    \ `(default = -1)`\n     */\n    void AddEdge(Vertex s, Vertex t, CostType c =\
+    \ 1, int id = -1){\n        Validate(s);\n        Validate(t);\n        int edge_id\
+    \ = edge_++;\n        if(id != -1) edge_id = id;\n        adjacent_list_[s].push_back(Edge(s,\
     \ t, c, edge_id));\n        if(!directed_flag_){\n            adjacent_list_[t].push_back(Edge(t,\
     \ s, c, edge_id));\n        }\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
     \u306B\u6307\u5B9A\u3057\u305F\u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\
@@ -113,13 +115,13 @@ data:
     \u30C8\u3067\u30BD\u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B\
     \ `(default = false)`\n * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\
     \n */\ntemplate<typename CostType>\nvector<Edge<CostType>> GraphConvertEdgeSet(const\
-    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret(graph.get_edge_size());\n\
-    \    vector<bool> picked(graph.get_edge_size(), false);\n    for(int v = 0; v\
-    \ < graph.get_vertex_size(); ++v){\n        for(Edge<CostType> e : graph[v]){\n\
-    \            if(!picked[e.id]){\n\t\t\t\tret[e.id] = e;\n            \tpicked[e.id]\
-    \ = true;\n\t\t\t}\n        }\n    }\n    if(sorted){\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 9 \"Library/Graph/StronglyConnectedComponents.hpp\"\
+    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret;\n\
+    \    set<int> picked;\n    for(int v = 0; v < graph.get_vertex_size(); ++v){\n\
+    \        for(Edge<CostType> e : graph[v]){\n            if(!picked.contains(e.id)){\n\
+    \t\t\t\tret.emplace_back(e);\n                picked.insert(e.id);\n\t\t\t}\n\
+    \        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(), [&](Edge<CostType>\
+    \ &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n        });\n\
+    \    }\n    return ret;\n}\n#line 9 \"Library/Graph/StronglyConnectedComponents.hpp\"\
     \n\ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    public:\n\
     \    /**\n     * @brief \u6709\u5411\u30B0\u30E9\u30D5 G \u3092\u5F37\u9023\u7D50\
     \u6210\u5206\u5206\u89E3\u3059\u308B\u3002\n     */\n    StronglyConnectedComponents(Graph<CostType>\
@@ -215,7 +217,7 @@ data:
   isVerificationFile: false
   path: Library/Graph/StronglyConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2024-10-20 23:59:02+09:00'
+  timestamp: '2024-11-18 02:33:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-4-B.test.cpp

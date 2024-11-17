@@ -116,15 +116,14 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Graph/TwoEdgeConnectedComponents.hpp\"\n/**\n * @file TwoEdgeConnectedComponents.hpp\n\
-    \ * @brief Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
-    \u5206\u89E3\n * @version 1.0\n * @date 2024-10-21\n */\n\n#line 2 \"Library/Graph/LowLink.hpp\"\
-    \n\n/**\n * @file LowLink.hpp\n * @brief LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9\
-    \n * @version 1.0\n * @date 2024-09-02\n */\n\n#line 2 \"Library/Graph/Graph.hpp\"\
-    \n\n/**\n * @file Graph.hpp\n * @brief Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 1 \"Library/Graph/TwoEdgeConnectedComponents.hpp\"\
+    \n/**\n * @file TwoEdgeConnectedComponents.hpp\n * @brief Two-Edge-Connected Components\
+    \ - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3\n * @version 1.0\n * @date\
+    \ 2024-10-21\n */\n\n#line 2 \"Library/Graph/LowLink.hpp\"\n\n/**\n * @file LowLink.hpp\n\
+    \ * @brief LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9\n * @version 1.0\n * @date\
+    \ 2024-09-02\n */\n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n\
+    \ * @brief Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
+    \ @version 1.0\n * @date 2024-09-01\n */\n\n#line 11 \"Library/Graph/Graph.hpp\"\
     \n\nusing Vertex = int;\n\ntemplate<typename CostType>\nstruct Edge{\n    Edge()\
     \ = default;\n    Edge(int from, int to, CostType cost, int id = -1) : from(from),\
     \ to(to), cost(cost), id(id){}\n\t\n    int from{-1}, to{-1}, id{-1};\n    CostType\
@@ -152,22 +151,23 @@ data:
     \u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\u304C\u5F35\u3089\u308C\u308B\u3002\
     \n     * @param s \u59CB\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param\
     \ t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\u5411\u8FBA)\n     * @param c \u91CD\
-    \u307F `(default = 1)`\n     */\n    void AddEdge(Vertex s, Vertex t, CostType\
-    \ c = 1){\n        Validate(s);\n        Validate(t);\n        int edge_id = edge_++;\n\
-    \        adjacent_list_[s].push_back(Edge(s, t, c, edge_id));\n        if(!directed_flag_){\n\
-    \            adjacent_list_[t].push_back(Edge(t, s, c, edge_id));\n        }\n\
-    \    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306B\u6307\u5B9A\u3057\u305F\
-    \u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\u3059\u308B\u3002\n     * @note\
-    \ \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\u305F\u306F `u v` \u306E\u5F62\
-    \u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\u5F62\u5F0F\u306B\u5BFE\u5FDC\
-    \u3057\u3066\u3044\u308B\u3002\n     * @param edge_count \u8FBA\u6570 E\n    \
-    \ * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\u3042\u308B\u304B\
-    \ `(default = true)`\n     * @param one_index \u9802\u70B9\u304C1-index\u3067\u3042\
-    \u308B\u304B `(default = true)`\n     */\n    void InputGraph(int edge_count,\
-    \ bool weighted_graph = true, bool one_index = true){\n        for(int i = 0;\
-    \ i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n            if(one_index)\
-    \ --s, --t;\n            CostType w = 1;\n            if(weighted_graph) cin >>\
-    \ w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
+    \u307F `(default = 1)`\n     * @param id \u8FBA\u306E\u756A\u53F7\u3092\u660E\u793A\
+    \u7684\u306B\u6307\u5B9A\u3059\u308B `(default = -1)`\n     */\n    void AddEdge(Vertex\
+    \ s, Vertex t, CostType c = 1, int id = -1){\n        Validate(s);\n        Validate(t);\n\
+    \        int edge_id = edge_++;\n        if(id != -1) edge_id = id;\n        adjacent_list_[s].push_back(Edge(s,\
+    \ t, c, edge_id));\n        if(!directed_flag_){\n            adjacent_list_[t].push_back(Edge(t,\
+    \ s, c, edge_id));\n        }\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
+    \u306B\u6307\u5B9A\u3057\u305F\u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\
+    \u3059\u308B\u3002\n     * @note \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\
+    \u305F\u306F `u v` \u306E\u5F62\u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\
+    \u5F62\u5F0F\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u308B\u3002\n     * @param edge_count\
+    \ \u8FBA\u6570 E\n     * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\
+    \u3042\u308B\u304B `(default = true)`\n     * @param one_index \u9802\u70B9\u304C\
+    1-index\u3067\u3042\u308B\u304B `(default = true)`\n     */\n    void InputGraph(int\
+    \ edge_count, bool weighted_graph = true, bool one_index = true){\n        for(int\
+    \ i = 0; i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n       \
+    \     if(one_index) --s, --t;\n            CostType w = 1;\n            if(weighted_graph)\
+    \ cin >> w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
     \ &operator[](Vertex v){\n        return adjacent_list_[v];\n    }\n\n    const\
     \ vector<Edge<CostType>> &operator[](Vertex v) const {\n        return adjacent_list_[v];\n\
     \    }\n\n    inline void Validate(int vertex) const {\n        assert(0 <= vertex\
@@ -204,15 +204,15 @@ data:
     \u30C8\u3067\u30BD\u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B\
     \ `(default = false)`\n * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\
     \n */\ntemplate<typename CostType>\nvector<Edge<CostType>> GraphConvertEdgeSet(const\
-    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret(graph.get_edge_size());\n\
-    \    vector<bool> picked(graph.get_edge_size(), false);\n    for(int v = 0; v\
-    \ < graph.get_vertex_size(); ++v){\n        for(Edge<CostType> e : graph[v]){\n\
-    \            if(!picked[e.id]){\n\t\t\t\tret[e.id] = e;\n            \tpicked[e.id]\
-    \ = true;\n\t\t\t}\n        }\n    }\n    if(sorted){\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n    }\n    return ret;\n}\n#line 11 \"Library/Graph/LowLink.hpp\"\
-    \n\ntemplate<typename CostType>\nclass LowLink{\n    public:\n    LowLink(Graph<CostType>\
-    \ &graph) :\n            graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),\n\
+    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret;\n\
+    \    set<int> picked;\n    for(int v = 0; v < graph.get_vertex_size(); ++v){\n\
+    \        for(Edge<CostType> e : graph[v]){\n            if(!picked.contains(e.id)){\n\
+    \t\t\t\tret.emplace_back(e);\n                picked.insert(e.id);\n\t\t\t}\n\
+    \        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(), [&](Edge<CostType>\
+    \ &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n        });\n\
+    \    }\n    return ret;\n}\n#line 11 \"Library/Graph/LowLink.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass LowLink{\n    public:\n    LowLink(Graph<CostType> &graph)\
+    \ :\n            graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),\n\
     \            child_(graph.get_vertex_size()), state_(graph.get_vertex_size(),\
     \ 0){\n        for(int i = 0; i < graph.get_vertex_size(); ++i){\n           \
     \ if(!state_[i]) dfs(i, -1, 0);\n        }\n        BuildArticulationVertex();\n\
@@ -469,7 +469,7 @@ data:
   isVerificationFile: true
   path: verify/LC-TwoEdgeConnectedComponents.test.cpp
   requiredBy: []
-  timestamp: '2024-11-01 01:18:45+09:00'
+  timestamp: '2024-11-18 02:33:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TwoEdgeConnectedComponents.test.cpp

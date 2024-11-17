@@ -112,23 +112,22 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n\n// ==============================================================\n\
-    // \n// Main Program Start\n// \n// ==============================================================\n\
-    #line 1 \"Library/Tree/HeavyLightDecomposition.hpp\"\n/**\n * @file HeavyLightDecomposition.hpp\n\
-    \ * @author log K (lX57)\n * @brief Heavy Light Decomposition - HL\u5206\u89E3\
-    \n * @version 4.0\n * @date 2024-09-04\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\
-    \n\n/**\n * @file Tree.hpp\n * @brief Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\
-    \u30C8\n * @version 1.0\n * @date 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\
-    \n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
-    \    public:\n    struct Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\
-    \n        Vertex parent{-1};\n        CostType cost{};\n        vector<Vertex>\
-    \ children{};\n    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\
-    \u6839\u3068\u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\
-    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\
-    \u3067\u4E0E\u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\
-    \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
-    \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
-    \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 1 \"Library/Tree/HeavyLightDecomposition.hpp\"\
+    \n/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
+    \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 4.0\n * @date 2024-09-04\n\
+    \ */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n * @brief\
+    \ Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date\
+    \ 2024-09-02\n */\n\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing Vertex = int;\n\
+    \ntemplate<typename CostType = int32_t>\nclass RootedTree{\n    public:\n    struct\
+    \ Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\n        Vertex\
+    \ parent{-1};\n        CostType cost{};\n        vector<Vertex> children{};\n\
+    \    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\u6839\u3068\
+    \u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\u6728\u3092\
+    \u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\u3067\u4E0E\
+    \u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\u304B\u308B\
+    \u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex = -1`\
+    \ \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\u70B9\
+    \u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
     \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
     \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
     \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
@@ -494,7 +493,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddSubtreeSum.test.cpp
   requiredBy: []
-  timestamp: '2024-11-01 01:18:45+09:00'
+  timestamp: '2024-11-11 17:34:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddSubtreeSum.test.cpp
