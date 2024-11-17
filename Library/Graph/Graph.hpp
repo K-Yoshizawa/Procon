@@ -64,11 +64,13 @@ class Graph{
      * @param s 始点の頂点(有向辺)
      * @param t 終点の頂点(有向辺)
      * @param c 重み `(default = 1)`
+     * @param id 辺の番号を明示的に指定する `(default = -1)`
      */
-    void AddEdge(Vertex s, Vertex t, CostType c = 1){
+    void AddEdge(Vertex s, Vertex t, CostType c = 1, int id = -1){
         Validate(s);
         Validate(t);
         int edge_id = edge_++;
+        if(id != -1) edge_id = id;
         adjacent_list_[s].push_back(Edge(s, t, c, edge_id));
         if(!directed_flag_){
             adjacent_list_[t].push_back(Edge(t, s, c, edge_id));
@@ -162,13 +164,13 @@ Graph<CostType> GraphReverse(const Graph<CostType> &graph){
  */
 template<typename CostType>
 vector<Edge<CostType>> GraphConvertEdgeSet(const Graph<CostType> &graph, bool sorted = false){
-    vector<Edge<CostType>> ret(graph.get_edge_size());
-    vector<bool> picked(graph.get_edge_size(), false);
+    vector<Edge<CostType>> ret;
+    set<int> picked;
     for(int v = 0; v < graph.get_vertex_size(); ++v){
         for(Edge<CostType> e : graph[v]){
-            if(!picked[e.id]){
-				ret[e.id] = e;
-            	picked[e.id] = true;
+            if(!picked.contains(e.id)){
+				ret.emplace_back(e);
+                picked.insert(e.id);
 			}
         }
     }
