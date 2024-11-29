@@ -82,6 +82,9 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-RangeAffinePointGet.test.cpp
+    title: verify/LC-RangeAffinePointGet.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -301,6 +304,7 @@ data:
   - verify/AOJ-ALDS1-7-A.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-0560.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp

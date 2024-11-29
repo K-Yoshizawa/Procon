@@ -10,6 +10,9 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-RangeAffinePointGet.test.cpp
+    title: verify/LC-RangeAffinePointGet.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -103,6 +106,7 @@ data:
   verifiedWith:
   - verify/LC-UnionfindWithPotential.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp

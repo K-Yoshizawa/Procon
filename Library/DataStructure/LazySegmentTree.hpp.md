@@ -76,13 +76,13 @@ data:
     \u9593\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n   \
     \  * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n     * @param right\
     \ \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @param OP \u66F4\u65B0\u64CD\
-    \u4F5C\n     */\n    void Update(int left, int right, OperatorMonoid OP){\n  \
-    \      Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
-    \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, OP, 1, size_ +\
-    \ 1, 1);\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[left, right)`\
-    \ \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u884C\
-    \u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n\
-    \     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
+    \u4F5C\n     */\n    void Update(int left, int right, OperatorMonoid operation){\n\
+    \        Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
+    \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1,\
+    \ size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[left,\
+    \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
+    \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
+    \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
     \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Query(int left,\
     \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
     \ zeroindex_ - 1);\n        return RecursiveQuery(left + zeroindex_, right + zeroindex_,\
@@ -170,13 +170,13 @@ data:
     \u9593\u66F4\u65B0\u30AF\u30A8\u30EA\u3092\u51E6\u7406\u3059\u308B\u3002\n   \
     \  * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n     * @param right\
     \ \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @param OP \u66F4\u65B0\u64CD\
-    \u4F5C\n     */\n    void Update(int left, int right, OperatorMonoid OP){\n  \
-    \      Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
-    \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, OP, 1, size_ +\
-    \ 1, 1);\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[left, right)`\
-    \ \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\u884C\
-    \u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\n\
-    \     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
+    \u4F5C\n     */\n    void Update(int left, int right, OperatorMonoid operation){\n\
+    \        Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
+    \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1,\
+    \ size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u534A\u958B\u533A\u9593 `[left,\
+    \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
+    \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
+    \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
     \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Query(int left,\
     \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
     \ zeroindex_ - 1);\n        return RecursiveQuery(left + zeroindex_, right + zeroindex_,\
@@ -215,7 +215,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/LazySegmentTree.hpp
   requiredBy: []
-  timestamp: '2024-10-20 22:41:06+09:00'
+  timestamp: '2024-11-29 17:05:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffineRangeSum.test.cpp

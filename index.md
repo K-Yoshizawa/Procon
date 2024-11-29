@@ -24,6 +24,9 @@ data:
       path: Library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
+      path: Library/DataStructure/DualSegmentTree.hpp
+      title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728"
@@ -228,6 +231,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-RangeAffinePointGet.test.cpp
+      title: verify/LC-RangeAffinePointGet.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
