@@ -21,5 +21,11 @@
             "type": "shell",
             "command": "./a.out < in.txt 2> debug.txt"
         }
-    ]
+    ],
+    "options": {
+        "shell": {
+            "executable": "/bin/bash",
+            "args": ["-l", "-c"]
+        }
+    }
 }
