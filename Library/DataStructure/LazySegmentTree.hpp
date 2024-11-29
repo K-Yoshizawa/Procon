@@ -87,10 +87,10 @@ class LazySegmentTree{
      * @param right 半開区間の右端
      * @param OP 更新操作
      */
-    void Update(int left, int right, OperatorMonoid OP){
+    void Update(int left, int right, OperatorMonoid operation){
         Validate(left + zeroindex_);
         Validate(right + zeroindex_ - 1);
-        RecursiveUpdate(left + zeroindex_, right + zeroindex_, OP, 1, size_ + 1, 1);
+        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1, size_ + 1, 1);
     }
 
     /**
