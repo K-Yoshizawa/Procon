@@ -9,3 +9,4 @@ ac-library/
 !/verify_latest/**
 !/verify_old/**
 tools/
+.vscode/

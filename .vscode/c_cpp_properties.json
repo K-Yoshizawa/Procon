@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${default}"
+                "${default}",
+                "/home/lx57/Procon/ac-library"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++-13",
