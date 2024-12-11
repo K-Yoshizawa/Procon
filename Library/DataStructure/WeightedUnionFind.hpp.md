@@ -64,8 +64,8 @@ data:
   timestamp: '2024-09-05 07:46:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-UnionfindWithPotential.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
+  - verify/LC-UnionfindWithPotential.test.cpp
 documentation_of: Library/DataStructure/WeightedUnionFind.hpp
 layout: document
 redirect_from:
