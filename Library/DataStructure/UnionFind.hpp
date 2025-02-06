@@ -4,8 +4,6 @@
  * @file UnionFind.hpp
  * @author log K (lX57)
  * @brief Union-Find - 素集合データ構造
- * @version 5.0
- * @date 2025-02-07
  */
 
 #include "../Common.hpp"
@@ -24,7 +22,7 @@ class UnionFind{
      * @param k 探索する要素
      * @return 要素 `k` が属する集合の代表元
      */
-    int Find(int k){
+    int Find(const int k){
         if(data_[k] < 0) return k;
         int r = Find(data_[k]);
         return data_[k] = r;
@@ -36,7 +34,7 @@ class UnionFind{
      * @param y 要素番号
      * @return 同じ集合に属しているか
      */
-    bool Same(int x, int y){
+    bool Same(const int x, const int y){
         return Find(x) == Find(y);
     }
 

@@ -2,8 +2,6 @@
  * @file WeightedUnionFind.hpp
  * @author log K (lX57)
  * @brief Weighted Union-Find - 重み付き素集合データ構造
- * @version 2.0
- * @date 2024-09-05
  */
 
 #include "../Common.hpp"
@@ -23,7 +21,7 @@ class WeightedUnionFind{
      * @param k 探索する要素
      * @return 要素 `k` が属する集合の代表元
      */
-    int Find(int k){
+    int Find(const int k){
         if(data_[k] < 0) return k;
         int r = Find(data_[k]);
         weight_[k] += weight_[data_[k]];
@@ -35,7 +33,7 @@ class WeightedUnionFind{
      * @param k 探索する要素
      * @return 代表元との重みの差
      */
-    Abel Weight(int k){
+    Abel Weight(const int k) const {
         Find(k);
         return weight_[k];
     }
@@ -47,7 +45,7 @@ class WeightedUnionFind{
      * @param y 要素番号
      * @return 要素 `x` と要素 `y` の重みの差
      */
-    Abel Diff(int x, int y){
+    Abel Diff(const int x, const int y) const {
         return Weight(y) - Weight(x);
     }
 
@@ -57,7 +55,7 @@ class WeightedUnionFind{
      * @param y 要素番号
      * @return 同じ集合に属しているか
      */
-    bool Same(int x, int y){
+    bool Same(const int x, const int y) const {
         return Find(x) == Find(y);
     }
 
