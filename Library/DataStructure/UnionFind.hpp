@@ -22,7 +22,7 @@ class UnionFind{
     /**
      * @brief 要素 `k` が属する集合の代表元を返します。
      * @param k 探索する要素
-     * @return int 要素 `k` が属する集合の代表元
+     * @return 要素 `k` が属する集合の代表元
      */
     int Find(int k){
         if(data_[k] < 0) return k;
@@ -34,6 +34,7 @@ class UnionFind{
      * @brief 要素 `x` と要素 `y` が同じ集合に属しているかを判定します。
      * @param x 要素番号
      * @param y 要素番号
+     * @return 同じ集合に属しているか
      */
     bool Same(int x, int y){
         return Find(x) == Find(y);
@@ -43,8 +44,7 @@ class UnionFind{
      * @brief 要素 `x` と要素 `y` を併合します。併合した場合は `true` を返します。
      * @param x 要素番号
      * @param y 要素番号
-     * @return true 要素 `x` と要素 `y` を併合した (元々未併合だった)
-     * @return false 要素 `x` と要素 `y` が既に併合済だった
+     * @return 併合を行ったか
      */
     bool Unite(int x, int y){
         x = Find(x), y = Find(y);
