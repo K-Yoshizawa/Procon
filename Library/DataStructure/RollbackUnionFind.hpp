@@ -55,6 +55,13 @@ class RollbackUnionFind{
     }
 
     /**
+     * @brief 現在の状態を保存します。別の状態を保存している場合、上書きします。
+     */
+    void Record(){
+        record_ = history_.size();
+    }
+
+    /**
      * @brief 直前の `Unite` 操作を取り消します。
      */
     void Undo(){
@@ -64,6 +71,14 @@ class RollbackUnionFind{
         auto [x, dx] = history_.top();
         history_.pop();
         data_[x] = dx;
+    }
+
+    /**
+     * @brief `Record` で記録した状態までロールバックします。
+     */
+    void Rollback(){
+        int state = record_;
+        while(state < (int)history_.size()) Undo();
     }
 
     /**
@@ -93,4 +108,5 @@ class RollbackUnionFind{
     private:
     vector<int> data_;
     stack<pair<int, int>> history_;
+    int record_;
 };
