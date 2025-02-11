@@ -12,15 +12,15 @@ int main(){
         if(t == 0){
             int x; cin >> x;
             if(uf.Same(u, v)){
-                cout << (uf.Diff(v, u) == x) << endl;
+                cout << (uf.Diff(u, v) == x) << endl;
             }
             else{
-                cout << uf.Relate(v, u, x) << endl;
+                cout << uf.Unite(u, v, x) << endl;
             }
         }
         else{
             if(uf.Same(u, v)){
-                cout << uf.Diff(v, u) << endl;
+                cout << uf.Diff(u, v) << endl;
             }
             else{
                 cout << -1 << endl;

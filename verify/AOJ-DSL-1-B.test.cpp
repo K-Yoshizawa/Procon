@@ -11,7 +11,7 @@ int main(){
         int query; cin >> query;
         if(query == 0){
             int x, y, z; cin >> x >> y >> z;
-            uf.Relate(x, y, z);
+            uf.Unite(x, y, z);
         }
         else{
             int x, y; cin >> x >> y;

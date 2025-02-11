@@ -1,9 +1,7 @@
 /**
  * @file WeightedUnionFind.hpp
  * @author log K (lX57)
- * @brief Weighted UnionFind - 重み付き素集合データ構造
- * @version 2.0
- * @date 2024-09-05
+ * @brief Weighted Union-Find - 重み付き素集合データ構造
  */
 
 #include "../Common.hpp"
@@ -11,29 +9,29 @@
 template<typename Abel = int32_t>
 class WeightedUnionFind{
     public:
-    WeightedUnionFind(int size) : data_(size, -1), weight_(size, Abel{}){}
+    WeightedUnionFind(int n) : data_(n, -1), weight_(n, Abel{}){}
 
-    int Find(int k){
+    int Find(const int k){
         if(data_[k] < 0) return k;
         int r = Find(data_[k]);
         weight_[k] += weight_[data_[k]];
         return data_[k] = r;
     }
 
-    Abel Weight(int k){
+    Abel Weight(const int k){
         Find(k);
         return weight_[k];
     }
 
-    Abel Diff(int x, int y){
+    Abel Diff(const int x, const int y){
         return Weight(y) - Weight(x);
     }
 
-    bool Same(int x, int y){
+    bool Same(const int x, const int y){
         return Find(x) == Find(y);
     }
 
-    bool Relate(int x, int y, Abel w){
+    bool Unite(int x, int y, Abel w){
         w += Weight(x) - Weight(y);
         x = Find(x), y = Find(y);
         if(x == y) return false;
