@@ -9,7 +9,7 @@
 template<typename Abel = int32_t>
 class WeightedUnionFind{
     public:
-    WeightedUnionFind(int n) : data_(size, -1), weight_(size, Abel{}){}
+    WeightedUnionFind(int n) : data_(n, -1), weight_(n, Abel{}){}
 
     int Find(const int k){
         if(data_[k] < 0) return k;
