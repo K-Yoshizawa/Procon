@@ -156,8 +156,8 @@ data:
   timestamp: '2024-10-21 02:45:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-0560.test.cpp
   - verify/AOJ-DSL-5-B.test.cpp
+  - verify/AOJ-0560.test.cpp
 documentation_of: Library/DataStructure/CumulativeSum2D.hpp
 layout: document
 redirect_from:

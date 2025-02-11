@@ -174,14 +174,14 @@ data:
   timestamp: '2024-10-20 22:40:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/LC-PointAddRangeSum.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

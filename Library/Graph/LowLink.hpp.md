@@ -224,9 +224,9 @@ data:
   timestamp: '2024-11-18 02:33:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-3-A.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/AOJ-GRL-3-A.test.cpp
 documentation_of: Library/Graph/LowLink.hpp
 layout: document
 redirect_from:

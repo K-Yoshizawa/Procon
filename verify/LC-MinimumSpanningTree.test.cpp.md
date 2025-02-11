@@ -6,7 +6,7 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/UnionFind.hpp
-    title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+    title: "Graph - \u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -204,64 +204,44 @@ data:
     \        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(), [&](Edge<CostType>\
     \ &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n        });\n\
     \    }\n    return ret;\n}\n#line 2 \"Library/DataStructure/UnionFind.hpp\"\n\n\
-    /**\n * @file UnionFind.hpp\n * @author log K (lX57)\n * @brief UnionFind - \u7D20\
-    \u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n * @version 4.0\n * @date 2024-09-05\n\
-    \ */\n\n#line 12 \"Library/DataStructure/UnionFind.hpp\"\n\nclass UnionFind{\n\
-    \    public:\n    /**\n     * @brief \u8981\u7D20\u6570 `size` \u3067UnionFind\u3092\
-    \u521D\u671F\u5316\u3059\u308B\u3002\n     * @param size \u8981\u7D20\u6570\n\
-    \     */\n    UnionFind(int size) : data_(size, -1){}\n\n    /**\n     * @brief\
-    \ \u8981\u7D20 `k` \u306E\u89AA\u3092\u8FD4\u3059\u3002\n     * @param k \u63A2\
-    \u7D22\u3059\u308B\u8981\u7D20\n     * @return int \u89AA\u8981\u7D20\u306E\u756A\
-    \u53F7\n     */\n    int Find(int k){\n        if(data_[k] < 0) return k;\n  \
-    \      int r = Find(data_[k]);\n        return data_[k] = r;\n    }\n\n    /**\n\
-    \     * @brief \u8981\u7D20 `x` \u3068\u8981\u7D20 `y` \u304C\u540C\u3058\u96C6\
-    \u5408\u306B\u5C5E\u3057\u3066\u3044\u308B\u304B\u3092\u5224\u5B9A\u3059\u308B\
-    \u3002\n     * @param x \u8981\u7D20\u756A\u53F7 (0-index)\n     * @param y \u8981\
-    \u7D20\u756A\u53F7 (0-index)\n     */\n    bool Same(int x, int y){\n        return\
-    \ Find(x) == Find(y);\n    }\n\n    /**\n     * @brief \u8981\u7D20 `x` \u3068\
-    \u8981\u7D20 `y` \u3092\u4F75\u5408\u3059\u308B\u3002\n     * @param x \u8981\u7D20\
-    \u756A\u53F7 (0-index)\n     * @param y \u8981\u7D20\u756A\u53F7 (0-index)\n \
-    \    * @return true \u8981\u7D20 `x` \u3068\u8981\u7D20 `y` \u3092\u4F75\u5408\
-    \u3057\u305F (\u5143\u3005\u672A\u4F75\u5408\u3060\u3063\u305F)\n     * @return\
-    \ false \u8981\u7D20 `x` \u3068\u8981\u7D20 `y` \u304C\u65E2\u306B\u4F75\u5408\
-    \u6E08\u3060\u3063\u305F\n     */\n    bool Unite(int x, int y){\n        x =\
-    \ Find(x), y = Find(y);\n        if(x == y) return false;\n        if(data_[x]\
-    \ > data_[y]) swap(x, y);\n        data_[x] += data_[y];\n        data_[y] = x;\n\
-    \        return true;\n    }\n\n    /**\n     * @brief \u5404\u96C6\u5408\u306B\
-    \u6240\u5C5E\u3059\u308B\u8981\u7D20\u3092\u5217\u6319\u3059\u308B\u3002\n   \
-    \  * @return vector<vector<int>> \u5404\u96C6\u5408\u306B\u6240\u5C5E\u3059\u308B\
-    \u8981\u7D20\u306E\u4E00\u89A7\n     */\n    vector<vector<int>> Group(){\n  \
-    \      vector<vector<int>> ret(data_.size());\n        for(int i = 0; i < data_.size();\
-    \ ++i){\n            ret[Find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
-    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
-    \        return ret;\n    }\n\n    /**\n     * @brief \u8981\u7D20 `k` \u304C\u5C5E\
-    \u3059\u308B\u96C6\u5408\u306E\u8981\u7D20\u6570\u3092\u6C42\u3081\u308B\u3002\
-    \n     * @param k \u8981\u7D20\u756A\u53F7 (0-index)\n     * @return int \u96C6\
-    \u5408\u306E\u8981\u7D20\u6570\n     */\n    int Size(int k){\n        int v =\
-    \ Find(k);\n        return -data_[v];\n    }\n\n    private:\n    vector<int>\
-    \ data_;\n};\n#line 10 \"Library/Graph/Kruskal.hpp\"\n\ntemplate<typename CostType,\
-    \ bool MaximumSpanningTree = false>\nstruct Kruskal{\n    private:\n    Graph<CostType>\
-    \ &G;\n    vector<int> remain_edge_id_;\n    CostType cost_;\n\n    public:\n\
-    \    /**\n     * @brief \u30B0\u30E9\u30D5\u3092\u57FA\u306B\u5168\u57DF\u6728\
-    \u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param graph \u9802\u70B9\u6570 V\
-    \ \u306E\u30B0\u30E9\u30D5\n     */\n    Kruskal(Graph<CostType> &graph) : G(graph){\n\
-    \        cost_ = 0;\n        UnionFind uf(G.get_vertex_size());\n        auto\
-    \ es = GraphConvertEdgeSet(G, true);\n        if(MaximumSpanningTree) reverse(es.begin(),\
-    \ es.end());\n        for(Edge<CostType> &e : es){\n            int i = e.id;\n\
-    \            if(uf.Same(e.from, e.to)) continue;\n            uf.Unite(e.from,\
-    \ e.to);\n            remain_edge_id_.push_back(i);\n            cost_ += e.cost;\n\
-    \        }\n    }\n\n    /**\n     * @brief \u5168\u57DF\u6728\u306B\u542B\u307E\
-    \u308C\u308B\u8FBA\u756A\u53F7\u3092\u8FD4\u3059\u3002\n     * @note verify :\
-    \ https://judge.yosupo.jp/problem/minimum_spanning_tree\n     * @return vector<int>&\
-    \ \u8FBA\u756A\u53F7\u306E\u30D9\u30AF\u30C8\u30EB\n     */\n    vector<int> &get_edge_id(){\n\
-    \        return remain_edge_id_;\n    }\n\n    /**\n     * @brief \u5168\u57DF\
-    \u6728\u306E\u30B3\u30B9\u30C8\u3092\u8FD4\u3059\u3002\n     * @note verify :\
-    \ https://judge.yosupo.jp/problem/minimum_spanning_tree\n     * @return CostType\
-    \ \u5168\u57DF\u6728\u306E\u30B3\u30B9\u30C8\n     */\n    CostType get_cost()\
-    \ const {\n        return cost_;\n    }\n};\n#line 5 \"verify/LC-MinimumSpanningTree.test.cpp\"\
-    \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<ll> G(N);\n    G.InputGraph(M,\
-    \ true, false);\n\n    Kruskal kr(G);\n    cout << kr.get_cost() << endl;\n  \
-    \  cout << kr.get_edge_id() << endl;\n}\n"
+    /**\n * @file UnionFind.hpp\n * @author log K (lX57)\n * @brief Union-Find - \u7D20\
+    \u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n#line 10 \"Library/DataStructure/UnionFind.hpp\"\
+    \n\nclass UnionFind{\n    public:\n    UnionFind(size_t n) : data_(n, -1){}\n\n\
+    \    int Find(const int k){\n        if(data_[k] < 0) return k;\n        int r\
+    \ = Find(data_[k]);\n        return data_[k] = r;\n    }\n\n    bool Same(const\
+    \ int x, const int y){\n        return Find(x) == Find(y);\n    }\n\n    bool\
+    \ Unite(int x, int y){\n        x = Find(x), y = Find(y);\n        if(x == y)\
+    \ return false;\n        if(data_[x] > data_[y]) swap(x, y);\n        data_[x]\
+    \ += data_[y];\n        data_[y] = x;\n        return true;\n    }\n    \n   \
+    \ size_t Size(int k){\n        int v = Find(k);\n        return -data_[v];\n \
+    \   }\n\n    vector<vector<int>> Group(){\n        vector<vector<int>> ret(data_.size());\n\
+    \        for(int i = 0; i < data_.size(); ++i){\n            ret[Find(i)].emplace_back(i);\n\
+    \        }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int>\
+    \ &v){\n            return v.empty();\n        }), end(ret));\n        return\
+    \ ret;\n    }\n\n    private:\n    vector<int> data_;\n};\n#line 10 \"Library/Graph/Kruskal.hpp\"\
+    \n\ntemplate<typename CostType, bool MaximumSpanningTree = false>\nstruct Kruskal{\n\
+    \    private:\n    Graph<CostType> &G;\n    vector<int> remain_edge_id_;\n   \
+    \ CostType cost_;\n\n    public:\n    /**\n     * @brief \u30B0\u30E9\u30D5\u3092\
+    \u57FA\u306B\u5168\u57DF\u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param\
+    \ graph \u9802\u70B9\u6570 V \u306E\u30B0\u30E9\u30D5\n     */\n    Kruskal(Graph<CostType>\
+    \ &graph) : G(graph){\n        cost_ = 0;\n        UnionFind uf(G.get_vertex_size());\n\
+    \        auto es = GraphConvertEdgeSet(G, true);\n        if(MaximumSpanningTree)\
+    \ reverse(es.begin(), es.end());\n        for(Edge<CostType> &e : es){\n     \
+    \       int i = e.id;\n            if(uf.Same(e.from, e.to)) continue;\n     \
+    \       uf.Unite(e.from, e.to);\n            remain_edge_id_.push_back(i);\n \
+    \           cost_ += e.cost;\n        }\n    }\n\n    /**\n     * @brief \u5168\
+    \u57DF\u6728\u306B\u542B\u307E\u308C\u308B\u8FBA\u756A\u53F7\u3092\u8FD4\u3059\
+    \u3002\n     * @note verify : https://judge.yosupo.jp/problem/minimum_spanning_tree\n\
+    \     * @return vector<int>& \u8FBA\u756A\u53F7\u306E\u30D9\u30AF\u30C8\u30EB\n\
+    \     */\n    vector<int> &get_edge_id(){\n        return remain_edge_id_;\n \
+    \   }\n\n    /**\n     * @brief \u5168\u57DF\u6728\u306E\u30B3\u30B9\u30C8\u3092\
+    \u8FD4\u3059\u3002\n     * @note verify : https://judge.yosupo.jp/problem/minimum_spanning_tree\n\
+    \     * @return CostType \u5168\u57DF\u6728\u306E\u30B3\u30B9\u30C8\n     */\n\
+    \    CostType get_cost() const {\n        return cost_;\n    }\n};\n#line 5 \"\
+    verify/LC-MinimumSpanningTree.test.cpp\"\n\nint main(){\n    int N, M; cin >>\
+    \ N >> M;\n    Graph<ll> G(N);\n    G.InputGraph(M, true, false);\n\n    Kruskal\
+    \ kr(G);\n    cout << kr.get_cost() << endl;\n    cout << kr.get_edge_id() <<\
+    \ endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/Kruskal.hpp\"\
     \n\nint main(){\n    int N, M; cin >> N >> M;\n    Graph<ll> G(N);\n    G.InputGraph(M,\
@@ -276,7 +256,7 @@ data:
   isVerificationFile: true
   path: verify/LC-MinimumSpanningTree.test.cpp
   requiredBy: []
-  timestamp: '2024-11-18 02:33:08+09:00'
+  timestamp: '2025-02-12 01:52:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-MinimumSpanningTree.test.cpp

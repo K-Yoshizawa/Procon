@@ -475,11 +475,11 @@ data:
   timestamp: '2024-11-01 01:18:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-JumponTree.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
 documentation_of: Library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

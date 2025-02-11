@@ -244,8 +244,8 @@ data:
   timestamp: '2024-11-01 01:27:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
+  - verify/LC-LowestCommonAncestor.test.cpp
 documentation_of: Library/Tree/LowestCommonAncestor.hpp
 layout: document
 redirect_from:

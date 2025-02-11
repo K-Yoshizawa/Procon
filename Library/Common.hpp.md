@@ -13,15 +13,17 @@ data:
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
   - icon: ':heavy_check_mark:'
+    path: Library/DataStructure/RollbackUnionFind.hpp
+    title: "Graph - \u30B0\u30E9\u30D5"
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/UnionFind.hpp
-    title: "UnionFind - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
+    title: "Graph - \u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
-    title: "Weighted UnionFind - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\u30FC\
-      \u30BF\u69CB\u9020"
+    title: "Graph - \u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/BellmanFord.hpp
     title: "BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
@@ -94,6 +96,9 @@ data:
     path: verify/AOJ-0560.test.cpp
     title: verify/AOJ-0560.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/AOJ-0723.test.cpp
+    title: verify/AOJ-0723.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/AOJ-ALDS1-7-A.test.cpp
     title: verify/AOJ-ALDS1-7-A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -157,6 +162,9 @@ data:
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-PersistentUnionfind.test.cpp
+    title: verify/LC-PersistentUnionfind.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -216,71 +224,74 @@ data:
   isVerificationFile: false
   path: Library/Common.hpp
   requiredBy:
-  - Library/TemplateExtend.hpp
-  - Library/Graph/Kruskal.hpp
-  - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/Graph.hpp
-  - Library/Graph/FunctionalGraph.hpp
-  - Library/Graph/WarshallFloyd.hpp
-  - Library/Graph/Dijkstra.hpp
-  - Library/Graph/BellmanFord.hpp
-  - Library/Graph/LowLink.hpp
+  - Library/Graph/Kruskal.hpp
   - Library/Graph/TwoEdgeConnectedComponents.hpp
-  - Library/modint.hpp
-  - Library/Tree/Tree.hpp
-  - Library/Tree/RerootingDP.hpp
-  - Library/Tree/HeavyLightDecomposition.hpp
-  - Library/Tree/LowestCommonAncestor.hpp
-  - Library/Tree/TreeDiameter.hpp
-  - Library/Tree/EulerTour.hpp
-  - Library/Tree/AuxiliaryTree.hpp
-  - Library/Template.hpp
-  - Library/origin.cpp
+  - Library/Graph/BellmanFord.hpp
+  - Library/Graph/FunctionalGraph.hpp
+  - Library/Graph/StronglyConnectedComponents.hpp
+  - Library/Graph/Dijkstra.hpp
+  - Library/Graph/LowLink.hpp
+  - Library/Graph/WarshallFloyd.hpp
   - Library/Other/LongestIncreasingSubsequence.hpp
-  - Library/DataStructure/LazySegmentTree.hpp
-  - Library/DataStructure/SegmentTree.hpp
-  - Library/DataStructure/WeightedUnionFind.hpp
+  - Library/TemplateExtend.hpp
   - Library/DataStructure/DualSegmentTree.hpp
   - Library/DataStructure/UnionFind.hpp
+  - Library/DataStructure/WeightedUnionFind.hpp
+  - Library/DataStructure/RollbackUnionFind.hpp
+  - Library/DataStructure/SegmentTree.hpp
   - Library/DataStructure/CumulativeSum2D.hpp
+  - Library/DataStructure/LazySegmentTree.hpp
+  - Library/origin.cpp
+  - Library/modint.hpp
+  - Library/Template.hpp
+  - Library/Tree/Tree.hpp
+  - Library/Tree/LowestCommonAncestor.hpp
+  - Library/Tree/TreeDiameter.hpp
+  - Library/Tree/AuxiliaryTree.hpp
+  - Library/Tree/RerootingDP.hpp
+  - Library/Tree/EulerTour.hpp
+  - Library/Tree/HeavyLightDecomposition.hpp
   timestamp: '2024-09-05 07:46:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-0560.test.cpp
-  - verify/LC-JumponTree.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - verify/AOJ-DSL-1-B.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
-  - verify/AOJ-GRL-4-B.test.cpp
-  - verify/LC-Unionfind.test.cpp
-  - verify/LC-RangeAffineRangeSum.test.cpp
-  - verify/AOJ-DSL-1-A.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-5-B.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
-  - verify/LC-LowestCommonAncestor.test.cpp
-  - verify/LC-UnionfindWithPotential.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/AOJ-GRL-3-A.test.cpp
-  - verify/LC-PointAddRangeSum.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
-  - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/LC-LowestCommonAncestor-HLD.test.cpp
-  - verify/AOJ-GRL-5-B.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/AOJ-GRL-3-B.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/LC-LongestIncreasingSubsequence.test.cpp
-  - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/AOJ-GRL-5-A.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/LC-Unionfind.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/AOJ-GRL-3-B.test.cpp
+  - verify/LC-UnionfindWithPotential.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-TreeDiameter.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
+  - verify/LC-LongestIncreasingSubsequence.test.cpp
+  - verify/AOJ-DSL-1-A.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp
+  - verify/AOJ-0560.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/AOJ-GRL-4-B.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/LC-JumponTree.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-GRL-5-B.test.cpp
+  - verify/AOJ-0723.test.cpp
+  - verify/LC-LowestCommonAncestor.test.cpp
+  - verify/LC-PersistentUnionfind.test.cpp
+  - verify/AOJ-DSL-1-B.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
+  - verify/AOJ-GRL-3-A.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
 documentation_of: Library/Common.hpp
 layout: document
 redirect_from:
