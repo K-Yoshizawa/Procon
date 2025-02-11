@@ -1,11 +1,5 @@
 #pragma once
 
-/**
- * @file UnionFind.hpp
- * @author log K (lX57)
- * @brief Union-Find - 素集合データ構造
- */
-
 #include "../Common.hpp"
 
 class UnionFind{

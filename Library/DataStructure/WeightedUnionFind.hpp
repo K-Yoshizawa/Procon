@@ -1,9 +1,3 @@
-/**
- * @file WeightedUnionFind.hpp
- * @author log K (lX57)
- * @brief Weighted Union-Find - 重み付き素集合データ構造
- */
-
 #include "../Common.hpp"
 
 template<typename Abel = int32_t>

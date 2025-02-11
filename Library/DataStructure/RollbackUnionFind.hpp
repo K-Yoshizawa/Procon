@@ -1,9 +1,3 @@
-/**
- * @file RollbackUnionFind.hpp
- * @author lX57
- * @brief Rollback Union-Find - Rollback 可能 Union-Find
- */
-
 #include "../Common.hpp"
 
 class RollbackUnionFind{
