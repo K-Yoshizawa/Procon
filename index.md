@@ -32,16 +32,17 @@ data:
         \u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/RollbackUnionFind.hpp
-      title: "Graph - \u30B0\u30E9\u30D5"
+      title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/UnionFind.hpp
-      title: "Graph - \u30B0\u30E9\u30D5"
+      title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/WeightedUnionFind.hpp
-      title: "Graph - \u30B0\u30E9\u30D5"
+      title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
+        \u30FC\u30BF\u69CB\u9020"
   - name: Library/Graph
     pages:
     - icon: ':heavy_check_mark:'

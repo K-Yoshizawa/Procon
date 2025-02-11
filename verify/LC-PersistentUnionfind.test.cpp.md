@@ -6,7 +6,7 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/RollbackUnionFind.hpp
-    title: "Graph - \u30B0\u30E9\u30D5"
+    title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -18,16 +18,14 @@ data:
     links:
     - https://judge.yosupo.jp/problem/persistent_unionfind
   bundledCode: "#line 1 \"verify/LC-PersistentUnionfind.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\n#line 1 \"Library/DataStructure/RollbackUnionFind.hpp\"\
-    \n/**\n * @file RollbackUnionFind.hpp\n * @author lX57\n * @brief Rollback Union-Find\
-    \ - Rollback \u53EF\u80FD Union-Find\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n#line 8 \"Library/DataStructure/RollbackUnionFind.hpp\"\n\n\
-    class RollbackUnionFind{\n    public:\n    RollbackUnionFind(size_t n) : data_(n,\
+    \ \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\n#line 2 \"Library/Common.hpp\"\
+    \n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n\
+    #include <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n\
+    #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
+    #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
+    \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
+    using namespace std;\n#line 2 \"Library/DataStructure/RollbackUnionFind.hpp\"\n\
+    \nclass RollbackUnionFind{\n    public:\n    RollbackUnionFind(size_t n) : data_(n,\
     \ -1), record_(0){}\n\n    int Find(const int k) const {\n        if(data_[k]\
     \ < 0) return k;\n        return Find(data_[k]);\n    }\n\n    bool Same(const\
     \ int x, const int y) const {\n        return Find(x) == Find(y);\n    }\n\n \
@@ -75,7 +73,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PersistentUnionfind.test.cpp
   requiredBy: []
-  timestamp: '2025-02-12 02:05:17+09:00'
+  timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PersistentUnionfind.test.cpp

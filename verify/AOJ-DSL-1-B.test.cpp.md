@@ -6,7 +6,8 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
-    title: "Graph - \u30B0\u30E9\u30D5"
+    title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
+      \u30FC\u30BF\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -105,28 +106,26 @@ data:
     \ 1, cur = a % m, rem = x;\n    while(rem){\n        if(rem & 1) ret = (ret *\
     \ cur) % m;\n        rem >>= 1, cur = (cur * cur) % m;\n    }\n    return ret;\n\
     }\n\n#ifdef LOGK\n#define VARIABLE(var) cerr << \"# \" << #var << \" = \" << var\
-    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 1 \"Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n/**\n * @file WeightedUnionFind.hpp\n * @author log K (lX57)\n * @brief Weighted\
-    \ Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\
-    \u9020\n */\n\n#line 8 \"Library/DataStructure/WeightedUnionFind.hpp\"\n\ntemplate<typename\
-    \ Abel = int32_t>\nclass WeightedUnionFind{\n    public:\n    WeightedUnionFind(int\
-    \ n) : data_(n, -1), weight_(n, Abel{}){}\n\n    int Find(const int k){\n    \
-    \    if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n        weight_[k]\
-    \ += weight_[data_[k]];\n        return data_[k] = r;\n    }\n\n    Abel Weight(const\
-    \ int k){\n        Find(k);\n        return weight_[k];\n    }\n\n    Abel Diff(const\
-    \ int x, const int y){\n        return Weight(y) - Weight(x);\n    }\n\n    bool\
-    \ Same(const int x, const int y){\n        return Find(x) == Find(y);\n    }\n\
-    \n    bool Unite(int x, int y, Abel w){\n        w += Weight(x) - Weight(y);\n\
-    \        x = Find(x), y = Find(y);\n        if(x == y) return false;\n       \
-    \ if(data_[x] > data_[y]) swap(x, y), w = -w;\n        data_[x] += data_[y];\n\
-    \        data_[y] = x;\n        weight_[y] = w;\n        return true;\n    }\n\
-    \n    private:\n    vector<int> data_;\n    vector<Abel> weight_;\n};\n#line 5\
-    \ \"verify/AOJ-DSL-1-B.test.cpp\"\n\nint main(){\n    int n, q; cin >> n >> q;\n\
-    \n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n        int query; cin >>\
-    \ query;\n        if(query == 0){\n            int x, y, z; cin >> x >> y >> z;\n\
-    \            uf.Unite(x, y, z);\n        }\n        else{\n            int x,\
-    \ y; cin >> x >> y;\n            if(!uf.Same(x, y)) cout << \"?\" << endl;\n \
-    \           else cout << uf.Diff(x, y) << endl;\n        }\n    }\n}\n"
+    \ << endl;\n#else\n#define VARIABLE(...) 42\n#endif\n#line 2 \"Library/DataStructure/WeightedUnionFind.hpp\"\
+    \n\ntemplate<typename Abel = int32_t>\nclass WeightedUnionFind{\n    public:\n\
+    \    WeightedUnionFind(int n) : data_(n, -1), weight_(n, Abel{}){}\n\n    int\
+    \ Find(const int k){\n        if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n\
+    \        weight_[k] += weight_[data_[k]];\n        return data_[k] = r;\n    }\n\
+    \n    Abel Weight(const int k){\n        Find(k);\n        return weight_[k];\n\
+    \    }\n\n    Abel Diff(const int x, const int y){\n        return Weight(y) -\
+    \ Weight(x);\n    }\n\n    bool Same(const int x, const int y){\n        return\
+    \ Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y, Abel w){\n      \
+    \  w += Weight(x) - Weight(y);\n        x = Find(x), y = Find(y);\n        if(x\
+    \ == y) return false;\n        if(data_[x] > data_[y]) swap(x, y), w = -w;\n \
+    \       data_[x] += data_[y];\n        data_[y] = x;\n        weight_[y] = w;\n\
+    \        return true;\n    }\n\n    private:\n    vector<int> data_;\n    vector<Abel>\
+    \ weight_;\n};\n#line 5 \"verify/AOJ-DSL-1-B.test.cpp\"\n\nint main(){\n    int\
+    \ n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n\
+    \        int query; cin >> query;\n        if(query == 0){\n            int x,\
+    \ y, z; cin >> x >> y >> z;\n            uf.Unite(x, y, z);\n        }\n     \
+    \   else{\n            int x, y; cin >> x >> y;\n            if(!uf.Same(x, y))\
+    \ cout << \"?\" << endl;\n            else cout << uf.Diff(x, y) << endl;\n  \
+    \      }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/WeightedUnionFind.hpp\"\
     \n\nint main(){\n    int n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n\
@@ -142,7 +141,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2025-02-12 02:07:25+09:00'
+  timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-1-B.test.cpp

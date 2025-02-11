@@ -22,40 +22,36 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
     links: []
-  bundledCode: "#line 2 \"Library/DataStructure/UnionFind.hpp\"\n\n/**\n * @file UnionFind.hpp\n\
-    \ * @author log K (lX57)\n * @brief Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\
-    \u30BF\u69CB\u9020\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n\
-    \ */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
-    #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
-    #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
-    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n#line 10 \"Library/DataStructure/UnionFind.hpp\"\
-    \n\nclass UnionFind{\n    public:\n    UnionFind(size_t n) : data_(n, -1){}\n\n\
-    \    int Find(const int k){\n        if(data_[k] < 0) return k;\n        int r\
-    \ = Find(data_[k]);\n        return data_[k] = r;\n    }\n\n    bool Same(const\
-    \ int x, const int y){\n        return Find(x) == Find(y);\n    }\n\n    bool\
-    \ Unite(int x, int y){\n        x = Find(x), y = Find(y);\n        if(x == y)\
-    \ return false;\n        if(data_[x] > data_[y]) swap(x, y);\n        data_[x]\
-    \ += data_[y];\n        data_[y] = x;\n        return true;\n    }\n    \n   \
-    \ size_t Size(int k){\n        int v = Find(k);\n        return -data_[v];\n \
-    \   }\n\n    vector<vector<int>> Group(){\n        vector<vector<int>> ret(data_.size());\n\
-    \        for(int i = 0; i < data_.size(); ++i){\n            ret[Find(i)].emplace_back(i);\n\
-    \        }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int>\
-    \ &v){\n            return v.empty();\n        }), end(ret));\n        return\
-    \ ret;\n    }\n\n    private:\n    vector<int> data_;\n};\n"
-  code: "#pragma once\n\n/**\n * @file UnionFind.hpp\n * @author log K (lX57)\n *\
-    \ @brief Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n\
-    #include \"../Common.hpp\"\n\nclass UnionFind{\n    public:\n    UnionFind(size_t\
-    \ n) : data_(n, -1){}\n\n    int Find(const int k){\n        if(data_[k] < 0)\
-    \ return k;\n        int r = Find(data_[k]);\n        return data_[k] = r;\n \
-    \   }\n\n    bool Same(const int x, const int y){\n        return Find(x) == Find(y);\n\
-    \    }\n\n    bool Unite(int x, int y){\n        x = Find(x), y = Find(y);\n \
-    \       if(x == y) return false;\n        if(data_[x] > data_[y]) swap(x, y);\n\
-    \        data_[x] += data_[y];\n        data_[y] = x;\n        return true;\n\
-    \    }\n    \n    size_t Size(int k){\n        int v = Find(k);\n        return\
-    \ -data_[v];\n    }\n\n    vector<vector<int>> Group(){\n        vector<vector<int>>\
+  bundledCode: "#line 2 \"Library/DataStructure/UnionFind.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
+    \n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n\
+    #include <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n\
+    #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
+    #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
+    \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
+    using namespace std;\n#line 4 \"Library/DataStructure/UnionFind.hpp\"\n\nclass\
+    \ UnionFind{\n    public:\n    UnionFind(size_t n) : data_(n, -1){}\n\n    int\
+    \ Find(const int k){\n        if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n\
+    \        return data_[k] = r;\n    }\n\n    bool Same(const int x, const int y){\n\
+    \        return Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y){\n\
+    \        x = Find(x), y = Find(y);\n        if(x == y) return false;\n       \
+    \ if(data_[x] > data_[y]) swap(x, y);\n        data_[x] += data_[y];\n       \
+    \ data_[y] = x;\n        return true;\n    }\n    \n    size_t Size(int k){\n\
+    \        int v = Find(k);\n        return -data_[v];\n    }\n\n    vector<vector<int>>\
+    \ Group(){\n        vector<vector<int>> ret(data_.size());\n        for(int i\
+    \ = 0; i < data_.size(); ++i){\n            ret[Find(i)].emplace_back(i);\n  \
+    \      }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int> &v){\n\
+    \            return v.empty();\n        }), end(ret));\n        return ret;\n\
+    \    }\n\n    private:\n    vector<int> data_;\n};\n"
+  code: "#pragma once\n\n#include \"../Common.hpp\"\n\nclass UnionFind{\n    public:\n\
+    \    UnionFind(size_t n) : data_(n, -1){}\n\n    int Find(const int k){\n    \
+    \    if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n        return\
+    \ data_[k] = r;\n    }\n\n    bool Same(const int x, const int y){\n        return\
+    \ Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y){\n        x = Find(x),\
+    \ y = Find(y);\n        if(x == y) return false;\n        if(data_[x] > data_[y])\
+    \ swap(x, y);\n        data_[x] += data_[y];\n        data_[y] = x;\n        return\
+    \ true;\n    }\n    \n    size_t Size(int k){\n        int v = Find(k);\n    \
+    \    return -data_[v];\n    }\n\n    vector<vector<int>> Group(){\n        vector<vector<int>>\
     \ ret(data_.size());\n        for(int i = 0; i < data_.size(); ++i){\n       \
     \     ret[Find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
     \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
@@ -66,7 +62,7 @@ data:
   path: Library/DataStructure/UnionFind.hpp
   requiredBy:
   - Library/Graph/Kruskal.hpp
-  timestamp: '2025-02-12 01:52:47+09:00'
+  timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-MinimumSpanningTree.test.cpp
@@ -74,19 +70,8 @@ data:
   - verify/AOJ-DSL-1-A.test.cpp
 documentation_of: Library/DataStructure/UnionFind.hpp
 layout: document
-title: "Graph - \u30B0\u30E9\u30D5"
+title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
 ---
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
 
 # Union-Find - 素集合データ構造
 

@@ -16,39 +16,13 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
     links: []
-  bundledCode: "#line 1 \"Library/DataStructure/RollbackUnionFind.hpp\"\n/**\n * @file\
-    \ RollbackUnionFind.hpp\n * @author lX57\n * @brief Rollback Union-Find - Rollback\
-    \ \u53EF\u80FD Union-Find\n */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file\
-    \ Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
-    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
-    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
-    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
-    #line 8 \"Library/DataStructure/RollbackUnionFind.hpp\"\n\nclass RollbackUnionFind{\n\
-    \    public:\n    RollbackUnionFind(size_t n) : data_(n, -1), record_(0){}\n\n\
-    \    int Find(const int k) const {\n        if(data_[k] < 0) return k;\n     \
-    \   return Find(data_[k]);\n    }\n\n    bool Same(const int x, const int y) const\
-    \ {\n        return Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y){\n\
-    \        x = Find(x), y = Find(y);\n        history_.push({x, data_[x]});\n  \
-    \      history_.push({y, data_[y]});\n        if(x == y) return false;\n     \
-    \   if(data_[x] > data_[y]) swap(x, y);\n        data_[x] += data_[y];\n     \
-    \   data_[y] = x;\n        return true;\n    }\n    \n    int Size(const int k)\
-    \ const {\n        return -data_[Find(k)];\n    }\n    \n    vector<vector<int>>\
-    \ Group() const {\n        vector<vector<int>> ret(data_.size());\n        for(int\
-    \ i = 0; i < data_.size(); ++i){\n            ret[Find(i)].emplace_back(i);\n\
-    \        }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int>\
-    \ &v){\n            return v.empty();\n        }), end(ret));\n        return\
-    \ ret;\n    }\n\n    void Record(){\n        record_ = history_.size();\n    }\n\
-    \n    void Undo(){\n        auto [y, dy] = history_.top();\n        history_.pop();\n\
-    \        data_[y] = dy;\n        auto [x, dx] = history_.top();\n        history_.pop();\n\
-    \        data_[x] = dx;\n    }\n\n    void Rollback(){\n        int state = record_;\n\
-    \        while(state < (int)history_.size()) Undo();\n    }\n    \n    private:\n\
-    \    vector<int> data_;\n    stack<pair<int, int>> history_;\n    int record_;\n\
-    };\n"
-  code: "/**\n * @file RollbackUnionFind.hpp\n * @author lX57\n * @brief Rollback\
-    \ Union-Find - Rollback \u53EF\u80FD Union-Find\n */\n\n#include \"../Common.hpp\"\
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
+    #include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
+    #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n#line 2 \"Library/DataStructure/RollbackUnionFind.hpp\"\
     \n\nclass RollbackUnionFind{\n    public:\n    RollbackUnionFind(size_t n) : data_(n,\
     \ -1), record_(0){}\n\n    int Find(const int k) const {\n        if(data_[k]\
     \ < 0) return k;\n        return Find(data_[k]);\n    }\n\n    bool Same(const\
@@ -68,32 +42,41 @@ data:
     \        data_[x] = dx;\n    }\n\n    void Rollback(){\n        int state = record_;\n\
     \        while(state < (int)history_.size()) Undo();\n    }\n    \n    private:\n\
     \    vector<int> data_;\n    stack<pair<int, int>> history_;\n    int record_;\n\
+    };\n"
+  code: "#include \"../Common.hpp\"\n\nclass RollbackUnionFind{\n    public:\n   \
+    \ RollbackUnionFind(size_t n) : data_(n, -1), record_(0){}\n\n    int Find(const\
+    \ int k) const {\n        if(data_[k] < 0) return k;\n        return Find(data_[k]);\n\
+    \    }\n\n    bool Same(const int x, const int y) const {\n        return Find(x)\
+    \ == Find(y);\n    }\n\n    bool Unite(int x, int y){\n        x = Find(x), y\
+    \ = Find(y);\n        history_.push({x, data_[x]});\n        history_.push({y,\
+    \ data_[y]});\n        if(x == y) return false;\n        if(data_[x] > data_[y])\
+    \ swap(x, y);\n        data_[x] += data_[y];\n        data_[y] = x;\n        return\
+    \ true;\n    }\n    \n    int Size(const int k) const {\n        return -data_[Find(k)];\n\
+    \    }\n    \n    vector<vector<int>> Group() const {\n        vector<vector<int>>\
+    \ ret(data_.size());\n        for(int i = 0; i < data_.size(); ++i){\n       \
+    \     ret[Find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
+    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
+    \        return ret;\n    }\n\n    void Record(){\n        record_ = history_.size();\n\
+    \    }\n\n    void Undo(){\n        auto [y, dy] = history_.top();\n        history_.pop();\n\
+    \        data_[y] = dy;\n        auto [x, dx] = history_.top();\n        history_.pop();\n\
+    \        data_[x] = dx;\n    }\n\n    void Rollback(){\n        int state = record_;\n\
+    \        while(state < (int)history_.size()) Undo();\n    }\n    \n    private:\n\
+    \    vector<int> data_;\n    stack<pair<int, int>> history_;\n    int record_;\n\
     };"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/DataStructure/RollbackUnionFind.hpp
   requiredBy: []
-  timestamp: '2025-02-12 02:05:17+09:00'
+  timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-0723.test.cpp
   - verify/LC-PersistentUnionfind.test.cpp
 documentation_of: Library/DataStructure/RollbackUnionFind.hpp
 layout: document
-title: "Graph - \u30B0\u30E9\u30D5"
+title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
 ---
-
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
- MathJax.Hub.Config({
- tex2jax: {
- inlineMath: [['$', '$'] ],
- displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
- }
- });
-</script>
 
 # Rollback Union-Find - Rollback 可能 Union-Find
 

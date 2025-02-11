@@ -6,7 +6,8 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
-    title: "Graph - \u30B0\u30E9\u30D5"
+    title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
+      \u30FC\u30BF\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
@@ -57,25 +58,23 @@ data:
     \    }\n\n    static int get_mod() { return mod; }\n};\n\nusing mint = ModInt<mod998>;\n\
     using mint107 = ModInt<mod107>;\n\nusing vm = vector<mint>;\nusing vvm = vector<vector<mint>>;\n\
     using vm107 = vector<mint107>;\nusing vvm107 = vector<vector<mint107>>;\n#line\
-    \ 1 \"Library/DataStructure/WeightedUnionFind.hpp\"\n/**\n * @file WeightedUnionFind.hpp\n\
-    \ * @author log K (lX57)\n * @brief Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\
-    \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n#line 8 \"Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n\ntemplate<typename Abel = int32_t>\nclass WeightedUnionFind{\n    public:\n\
-    \    WeightedUnionFind(int n) : data_(n, -1), weight_(n, Abel{}){}\n\n    int\
-    \ Find(const int k){\n        if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n\
-    \        weight_[k] += weight_[data_[k]];\n        return data_[k] = r;\n    }\n\
-    \n    Abel Weight(const int k){\n        Find(k);\n        return weight_[k];\n\
-    \    }\n\n    Abel Diff(const int x, const int y){\n        return Weight(y) -\
-    \ Weight(x);\n    }\n\n    bool Same(const int x, const int y){\n        return\
-    \ Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y, Abel w){\n      \
-    \  w += Weight(x) - Weight(y);\n        x = Find(x), y = Find(y);\n        if(x\
-    \ == y) return false;\n        if(data_[x] > data_[y]) swap(x, y), w = -w;\n \
-    \       data_[x] += data_[y];\n        data_[y] = x;\n        weight_[y] = w;\n\
-    \        return true;\n    }\n\n    private:\n    vector<int> data_;\n    vector<Abel>\
-    \ weight_;\n};\n#line 5 \"verify/LC-UnionfindWithPotential.test.cpp\"\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n    while(Q--){\n\
-    \        int t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n            int\
-    \ x; cin >> x;\n            if(uf.Same(u, v)){\n                cout << (uf.Diff(u,\
+    \ 2 \"Library/DataStructure/WeightedUnionFind.hpp\"\n\ntemplate<typename Abel\
+    \ = int32_t>\nclass WeightedUnionFind{\n    public:\n    WeightedUnionFind(int\
+    \ n) : data_(n, -1), weight_(n, Abel{}){}\n\n    int Find(const int k){\n    \
+    \    if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n        weight_[k]\
+    \ += weight_[data_[k]];\n        return data_[k] = r;\n    }\n\n    Abel Weight(const\
+    \ int k){\n        Find(k);\n        return weight_[k];\n    }\n\n    Abel Diff(const\
+    \ int x, const int y){\n        return Weight(y) - Weight(x);\n    }\n\n    bool\
+    \ Same(const int x, const int y){\n        return Find(x) == Find(y);\n    }\n\
+    \n    bool Unite(int x, int y, Abel w){\n        w += Weight(x) - Weight(y);\n\
+    \        x = Find(x), y = Find(y);\n        if(x == y) return false;\n       \
+    \ if(data_[x] > data_[y]) swap(x, y), w = -w;\n        data_[x] += data_[y];\n\
+    \        data_[y] = x;\n        weight_[y] = w;\n        return true;\n    }\n\
+    \n    private:\n    vector<int> data_;\n    vector<Abel> weight_;\n};\n#line 5\
+    \ \"verify/LC-UnionfindWithPotential.test.cpp\"\n\nint main(){\n    int N, Q;\
+    \ cin >> N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n    while(Q--){\n    \
+    \    int t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n            int x;\
+    \ cin >> x;\n            if(uf.Same(u, v)){\n                cout << (uf.Diff(u,\
     \ v) == x) << endl;\n            }\n            else{\n                cout <<\
     \ uf.Unite(u, v, x) << endl;\n            }\n        }\n        else{\n      \
     \      if(uf.Same(u, v)){\n                cout << uf.Diff(u, v) << endl;\n  \
@@ -98,7 +97,7 @@ data:
   isVerificationFile: true
   path: verify/LC-UnionfindWithPotential.test.cpp
   requiredBy: []
-  timestamp: '2025-02-12 02:07:25+09:00'
+  timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-UnionfindWithPotential.test.cpp
