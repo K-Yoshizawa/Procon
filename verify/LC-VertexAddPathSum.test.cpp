@@ -12,18 +12,18 @@ int main(){
 
     HeavyLightDecomposition hld(T);
     hld.SortVertex(a);
-    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;}, 0LL, true);
+    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;}, 0LL);
     while(Q--){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Update(hld[p], seg[hld[p]] + x);
+            seg.Set(hld[p], seg[hld[p]] + x);
         }
         else{
             int u, v; cin >> u >> v;
             ll ans = 0;
             for(auto &path : hld.PathQuery(u, v)){
-                ans += seg.Query(path.head_index, path.tail_index);
+                ans += seg.Product(path.head_index, path.tail_index);
             }
             cout << ans << endl;
         }

@@ -12,17 +12,17 @@ int main(){
 
     EulerTour et(T);
     auto A = et.ConvertVector(a, [](ll x){return x;}, [](ll x){return 0;});
-    SegmentTree<ll> seg(A, [](ll l, ll r){return l + r;}, 0LL, true);
+    SegmentTree<ll> seg(A, [](ll l, ll r){return l + r;}, 0LL);
     while(Q--){
         int t; cin >> t;
         if(t == 0){
             int u, x; cin >> u >> x;
-            seg.Update(et.get_in(u), seg[et.get_in(u)] + x);
+            seg.Set(et.get_in(u), seg[et.get_in(u)] + x);
         }
         else{
             int u; cin >> u;
             auto [l, r] = et.get_pair(u);
-            cout << seg.Query(l, r) << endl;
+            cout << seg.Product(l, r) << endl;
         }
     }
 }
