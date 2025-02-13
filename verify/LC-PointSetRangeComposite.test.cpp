@@ -23,16 +23,16 @@ int main(){
         init_data.push_back(Affine(a, b));
     }
 
-    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(), true);
+    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine());
     while(Q--){
         int t; cin >> t;
         if(t == 0){
             int p, c, d; cin >> p >> c >> d;
-            seg.Update(p, Affine(c, d));
+            seg.Set(p, Affine(c, d));
         }
         else{
             int l, r, x; cin >> l >> r >> x;
-            cout << seg.Query(l, r).Value(x) << endl;
+            cout << seg.Product(l, r).Value(x) << endl;
         }
     }
 }

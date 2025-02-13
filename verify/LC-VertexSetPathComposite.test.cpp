@@ -32,21 +32,21 @@ int main(){
 
     HeavyLightDecomposition hld(T);
     hld.SortVertex(init_data);
-    SegmentTree<Affine> seg1(init_data, [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine(), true);
-    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l, r);}, Affine(), true);
+    SegmentTree<Affine> seg1(init_data, [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine());
+    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l, r);}, Affine());
     while(Q--){
         int t; cin >> t;
         if(t == 0){
             int p, c, d; cin >> p >> c >> d;
-            seg1.Update(hld[p], Affine(c, d));
-            seg2.Update(hld[p], Affine(c, d));
+            seg1.Set(hld[p], Affine(c, d));
+            seg2.Set(hld[p], Affine(c, d));
         }
         else{
             int u, v, x; cin >> u >> v >> x;
             Affine ans;
             for(auto &path : hld.PathQuery(u, v)){
-                if(path.reverse) ans = Affine::left_merge(ans, seg2.Query(path.head_index, path.tail_index));
-                else ans = Affine::left_merge(ans, seg1.Query(path.head_index, path.tail_index));
+                if(path.reverse) ans = Affine::left_merge(ans, seg2.Product(path.head_index, path.tail_index));
+                else ans = Affine::left_merge(ans, seg1.Product(path.head_index, path.tail_index));
             }
             cout << ans.a * x + ans.b << endl;
         }
