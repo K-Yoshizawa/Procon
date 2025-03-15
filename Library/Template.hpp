@@ -4,74 +4,51 @@
  * @file Template.hpp
  * @author log K (lX57)
  * @brief Template - テンプレート
- * @version 1.9
- * @date 2024-10-27
+ * @version 1.10
+ * @date 2025-03-16
  */
 
 #include "Common.hpp"
-#define ALL(x) (x).begin(), (x).end()
-#define RALL(x) (x).rbegin(), (x).rend()
-#define SORT(x) sort(ALL(x))
-#define RSORT(x) sort(RALL(x))
-#define REVERSE(x) reverse(ALL(x))
-#define SETPRE(digit) fixed << setprecision(digit)
-#define POPCOUNT(x) __builtin_popcount(x)
-#define SUM(x) reduce((x).begin(), (x).end())
-#define CEIL(nume, deno) ((nume) + (deno) - 1) / (deno)
-#define IOTA(x) iota((x).begin(), (x).end(), 0)
-#define LOWERBOUND_IDX(arr, val) distance((arr).begin(), lower_bound((arr).begin(), (arr).end(), val))
-#define UPPERBOUND_IDX(arr, val) distance((arr).begin(), upper_bound((arr).begin(), (arr).end(), val))
 
-inline string Yn(bool flag){return (flag) ? "Yes" : "No";}
-inline bool YnPrint(bool flag){cout << Yn(flag) << endl;return flag;}
-inline string YN(bool flag){return (flag) ? "YES" : "NO";}
-inline bool YNPrint(bool flag){cout << YN(flag) << endl;return flag;}
-template<class T>
-bool chmin(T &src, const T &cmp){if(src > cmp){src = cmp; return true;}return false;}
-template<class T>
-bool chmax(T &src, const T &cmp){if(src < cmp){src = cmp; return true;}return false;}
-template<typename T>
-inline bool between(T min, T x, T max){return min <= x && x <= max;}
-template<typename T>
-inline bool ingrid(T y, T x, T ymax, T xmax){return between(0, y, ymax - 1) && between(0, x, xmax - 1);}
-template<typename T>
-inline T median(T a, T b, T c){return between(b, a, c) || between(c, a, b) ? a : (between(a, b, c) || between(c, b, a) ? b : c);}
-template<typename T>
-inline T except(T src, T cond, T excp){return (src == cond ? excp : src);}
-template<typename T>
-inline T min(vector<T> &v){return *min_element((v).begin(), (v).end());}
-template<typename T>
-inline T max(vector<T> &v){return *max_element((v).begin(), (v).end());}
-vector<int> make_sequence(int Size){
-    vector<int> ret(Size);
-    IOTA(ret);
-    return ret;
-}
-template<typename T>
-void make_unique(vector<T> &v){
-    sort(v.begin(), v.end());
-    auto itr = unique(v.begin(), v.end());
-    v.erase(itr, v.end());
-}
+inline bool YnPrint(bool flag){cout << (flag ? "Yes" : "No") << '\n'; return flag;}
+inline bool YNPrint(bool flag){cout << (flag ? "YES" : "NO") << '\n'; return flag;}
+template<typename Container>
+inline void Sort(Container &container){sort(container.begin(), container.end());}
+template<typename Container>
+inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}
+template<typename Container>
+inline void Reverse(Container &container){reverse(container.begin(), container.end());}
+template<typename Value>
+inline int PopCount(const Value &value){return __builtin_popcount(value);}
+template<typename Value>
+inline Value Ceil(const Value &numerator, const Value &denominator){return (numerator + denominator - 1) / denominator;}
+template<typename Value>
+inline int LowerBoundIndex(const vector<Value> &container, const Value &value){return distance(container.begin(), lower_bound(container.begin(), container.end(), value));}
+template<typename Value>
+inline int UpperBoundIndex(const vector<Value> &container, const Value &value){return distance(container.begin(), upper_bound(container.begin(), container.end(), value));}
+template<class Value>
+bool ChangeMin(Value &src, const Value &cmp){if(src > cmp){src = cmp; return true;} return false;}
+template<class Value>
+bool ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}
+template<typename Value>
+inline bool Between(const Value &lower, const Value &x, const Value &higher){return lower <= x && x <= higher;}
+template<typename Value>
+inline bool InGrid(const Value &y, const Value &x, const Value &ymax, const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}
+template<typename Value>
+inline Value Median(const Value &a, const Value &b, const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a, b, c) || Between(c, b, a) ? b : c);}
+template<typename Value>
+inline Value Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}
+
+template<typename Value>
+inline Value min(vector<Value> &v){return *min_element((v).begin(), (v).end());}
+template<typename Value>
+inline Value max(vector<Value> &v){return *max_element((v).begin(), (v).end());}
 
 using ll = int64_t;
 using ull = uint64_t;
-using ld = long double;
 
 const int INF_INT = numeric_limits<int>::max() >> 2;
 const ll INF_LL = numeric_limits<ll>::max() >> 2;
-
-using vi = vector<int>;
-using vvi = vector<vi>;
-using vl = vector<ll>;
-using vvl = vector<vl>;
-using pi = pair<int, int>;
-using pl = pair<ll, ll>;
-using vs = vector<string>;
-template <typename T>
-using pq = priority_queue<T>;
-template <typename T>
-using rpq = priority_queue<T, vector<T>, greater<T>>;
 
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, -1, 0, 1};
@@ -83,7 +60,7 @@ vector<pair<int, int>> adjacent(int current_y, int current_x, int max_y, int max
     for(int d = 0; d < 4 * (1 + dir_8); ++d){
         int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);
         int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);
-        if(0 <= next_y and next_y < max_y and 0 <= next_x and next_x < max_x){
+        if(InGrid(next_y, next_x, max_y, max_x)){
             ret.emplace_back(next_y, next_x);
         }
     }
@@ -173,18 +150,3 @@ tuple<vector<T1>, vector<T2>, vector<T3>> InputVectorTuple(int size){
     for(auto &[p, q, r] : v) cin >> p >> q >> r;
     return DisassembleVectorTuple(v);
 }
-
-ll modpow(ll a, ll x, ll m){
-    ll ret = 1, cur = a % m, rem = x;
-    while(rem){
-        if(rem & 1) ret = (ret * cur) % m;
-        rem >>= 1, cur = (cur * cur) % m;
-    }
-    return ret;
-}
-
-#ifdef LOGK
-#define VARIABLE(var) cerr << "# " << #var << " = " << var << endl;
-#else
-#define VARIABLE(...) 42
-#endif
