@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/DualSegmentTree.hpp
     title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'

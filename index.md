@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: Library
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Common.hpp
       title: Library/Common.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Template.hpp
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
@@ -33,7 +33,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/RollbackUnionFind.hpp
       title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -88,10 +88,10 @@ data:
         \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
         \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
         \u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -100,7 +100,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Tree/RerootingDP.hpp
       title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/Tree.hpp
       title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -231,7 +231,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-PersistentUnionfind.test.cpp
       title: verify/LC-PersistentUnionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -258,13 +258,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-UnionfindWithPotential.test.cpp
       title: verify/LC-UnionfindWithPotential.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
       title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
     - icon: ':heavy_check_mark:'

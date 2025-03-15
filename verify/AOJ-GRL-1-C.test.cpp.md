@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
     title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -93,21 +93,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -271,7 +271,7 @@ data:
   - Library/origin.cpp
   - Library/TemplateExtend.hpp
   timestamp: '2025-03-16 02:46:39+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-C.test.cpp
   - verify/LC-LongestIncreasingSubsequence.test.cpp

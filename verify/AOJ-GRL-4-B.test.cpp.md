@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

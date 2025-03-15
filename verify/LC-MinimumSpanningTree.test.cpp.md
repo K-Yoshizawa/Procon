@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -12,27 +12,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-B.test.cpp
     title: verify/AOJ-DSL-2-B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     links: []
@@ -172,7 +172,7 @@ data:
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2024-10-20 22:40:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-A.test.cpp
   - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
