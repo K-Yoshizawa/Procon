@@ -5,7 +5,7 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/TwoEdgeConnectedComponents.hpp
     title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
       \u89E3"
@@ -24,10 +24,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
@@ -43,22 +43,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C.test.cpp
     title: verify/AOJ-GRL-5-C.test.cpp
-  - icon: ':x:'
-    path: verify/LC-JumponTree.test.cpp
-    title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor.test.cpp
     title: verify/LC-LowestCommonAncestor.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   - icon: ':x:'
@@ -70,7 +67,7 @@ data:
   - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
   _isVerificationFailed: true
@@ -409,7 +406,6 @@ data:
   - verify/LC-TreePathCompositeSum.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
-  - verify/LC-JumponTree.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/LC-TreeDiameter.test.cpp

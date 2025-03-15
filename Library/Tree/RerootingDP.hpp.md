@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-B.test.cpp
     title: verify/AOJ-GRL-5-B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
     links: []
@@ -349,7 +349,7 @@ data:
   path: Library/Tree/RerootingDP.hpp
   requiredBy: []
   timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreePathCompositeSum.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp

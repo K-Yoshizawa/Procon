@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
     links: []
@@ -231,7 +231,7 @@ data:
   path: Library/Tree/TreeDiameter.hpp
   requiredBy: []
   timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreeDiameter.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp

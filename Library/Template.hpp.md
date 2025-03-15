@@ -60,9 +60,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C.test.cpp
     title: verify/AOJ-GRL-5-C.test.cpp
-  - icon: ':x:'
-    path: verify/LC-JumponTree.test.cpp
-    title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LongestIncreasingSubsequence.test.cpp
     title: verify/LC-LongestIncreasingSubsequence.test.cpp
@@ -78,22 +75,22 @@ data:
   - icon: ':x:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffinePointGet.test.cpp
     title: verify/LC-RangeAffinePointGet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   - icon: ':x:'
@@ -105,7 +102,7 @@ data:
   - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
   _isVerificationFailed: true
@@ -294,7 +291,6 @@ data:
   - verify/AOJ-GRL-5-B.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
   - verify/AOJ-GRL-4-B.test.cpp
-  - verify/LC-JumponTree.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-0560.test.cpp

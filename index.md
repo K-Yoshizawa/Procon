@@ -12,7 +12,7 @@ data:
     - icon: ':warning:'
       path: Library/TemplateExtend.hpp
       title: Library/TemplateExtend.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/modint.hpp
       title: modint
     - icon: ':warning:'
@@ -23,10 +23,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728"
@@ -54,20 +54,20 @@ data:
     - icon: ':warning:'
       path: Library/Graph/FunctionalGraph.hpp
       title: Functional Graph
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Graph/Graph.hpp
       title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Kruskal.hpp
       title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Graph/LowLink.hpp
       title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/StronglyConnectedComponents.hpp
       title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
         \u89E3"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Library/Graph/TwoEdgeConnectedComponents.hpp
       title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
         \u5206\u89E3"
@@ -97,13 +97,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/RerootingDP.hpp
       title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
     - icon: ':question:'
       path: Library/Tree/Tree.hpp
       title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/TreeDiameter.hpp
       title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   - name: Library/unauthenticated
@@ -216,9 +216,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-C.test.cpp
       title: verify/AOJ-GRL-5-C.test.cpp
-    - icon: ':x:'
-      path: verify/LC-JumponTree.test.cpp
-      title: verify/LC-JumponTree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-LongestIncreasingSubsequence.test.cpp
       title: verify/LC-LongestIncreasingSubsequence.test.cpp
@@ -237,22 +234,22 @@ data:
     - icon: ':x:'
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffinePointGet.test.cpp
       title: verify/LC-RangeAffinePointGet.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-TreeDiameter.test.cpp
       title: verify/LC-TreeDiameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-TreePathCompositeSum.test.cpp
       title: verify/LC-TreePathCompositeSum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-TwoEdgeConnectedComponents.test.cpp
       title: verify/LC-TwoEdgeConnectedComponents.test.cpp
     - icon: ':heavy_check_mark:'
@@ -270,7 +267,7 @@ data:
     - icon: ':x:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-VertexSetPathComposite.test.cpp
       title: verify/LC-VertexSetPathComposite.test.cpp
 layout: toppage
