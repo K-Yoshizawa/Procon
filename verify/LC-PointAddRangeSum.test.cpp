@@ -5,7 +5,7 @@
 
 int main(){
     int N, Q; cin >> N >> Q;
-    vl a(N); cin >> a;
+    vector<ll> a(N); cin >> a;
 
     SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;}, 0LL, true);
     while(Q--){

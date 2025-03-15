@@ -6,7 +6,7 @@
 
 int main(){
     int N, Q; cin >> N >> Q;
-    vl a(N); cin >> a;
+    vector<ll> a(N); cin >> a;
     RootedTree T(N);
     T.InputRootedTreeFormat(false, false);
 
