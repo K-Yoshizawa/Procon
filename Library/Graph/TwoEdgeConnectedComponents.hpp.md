@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/LowLink.hpp
     title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\
       \u5206\u5206\u89E3"
@@ -417,7 +417,7 @@ data:
   path: Library/Graph/TwoEdgeConnectedComponents.hpp
   requiredBy: []
   timestamp: '2024-11-18 02:33:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/LC-TwoEdgeConnectedComponents.test.cpp
 documentation_of: Library/Graph/TwoEdgeConnectedComponents.hpp

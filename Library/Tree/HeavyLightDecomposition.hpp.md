@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-JumponTree.test.cpp
     title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Heavy Light Decomposition - HL\u5206\u89E3"
     links: []
@@ -473,13 +473,13 @@ data:
   path: Library/Tree/HeavyLightDecomposition.hpp
   requiredBy: []
   timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-JumponTree.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
 documentation_of: Library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

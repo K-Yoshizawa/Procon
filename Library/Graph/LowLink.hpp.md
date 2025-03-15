@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/Graph/TwoEdgeConnectedComponents.hpp
     title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
       \u89E3"
@@ -19,12 +19,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-3-B.test.cpp
     title: verify/AOJ-GRL-3-B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
     links: []
@@ -222,11 +222,11 @@ data:
   requiredBy:
   - Library/Graph/TwoEdgeConnectedComponents.hpp
   timestamp: '2024-11-18 02:33:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/AOJ-GRL-3-A.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/LC-TwoEdgeConnectedComponents.test.cpp
-  - verify/AOJ-GRL-3-A.test.cpp
 documentation_of: Library/Graph/LowLink.hpp
 layout: document
 redirect_from:

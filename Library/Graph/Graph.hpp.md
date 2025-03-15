@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -14,13 +14,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
     title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/LowLink.hpp
     title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/Graph/TwoEdgeConnectedComponents.hpp
     title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
       \u89E3"
@@ -52,12 +52,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links:
@@ -253,25 +253,25 @@ data:
   isVerificationFile: false
   path: Library/Graph/Graph.hpp
   requiredBy:
-  - Library/Graph/Kruskal.hpp
-  - Library/Graph/TwoEdgeConnectedComponents.hpp
-  - Library/Graph/BellmanFord.hpp
-  - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/Dijkstra.hpp
-  - Library/Graph/LowLink.hpp
+  - Library/Graph/TwoEdgeConnectedComponents.hpp
   - Library/Graph/WarshallFloyd.hpp
+  - Library/Graph/LowLink.hpp
+  - Library/Graph/StronglyConnectedComponents.hpp
+  - Library/Graph/BellmanFord.hpp
+  - Library/Graph/Kruskal.hpp
   timestamp: '2024-11-18 02:33:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-3-B.test.cpp
-  - verify/LC-TwoEdgeConnectedComponents.test.cpp
-  - verify/AOJ-GRL-4-B.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
+  - verify/AOJ-GRL-4-B.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-GRL-3-B.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
 documentation_of: Library/Graph/Graph.hpp
 layout: document
 redirect_from:

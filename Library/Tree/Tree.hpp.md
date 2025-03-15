@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/Graph/TwoEdgeConnectedComponents.hpp
     title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
       \u89E3"
@@ -15,19 +15,19 @@ data:
       \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
       \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
       \u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   _extendedVerifiedWith:
@@ -43,7 +43,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C.test.cpp
     title: verify/AOJ-GRL-5-C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-JumponTree.test.cpp
     title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -52,30 +52,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor.test.cpp
     title: verify/LC-LowestCommonAncestor.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TwoEdgeConnectedComponents.test.cpp
     title: verify/LC-TwoEdgeConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links:
@@ -396,27 +396,27 @@ data:
   - Library/Graph/TwoEdgeConnectedComponents.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Tree/TreeDiameter.hpp
-  - Library/Tree/AuxiliaryTree.hpp
   - Library/Tree/RerootingDP.hpp
-  - Library/Tree/EulerTour.hpp
   - Library/Tree/HeavyLightDecomposition.hpp
+  - Library/Tree/AuxiliaryTree.hpp
+  - Library/Tree/EulerTour.hpp
   timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-GRL-5-A.test.cpp
-  - verify/LC-TreePathCompositeSum.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
-  - verify/LC-TwoEdgeConnectedComponents.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
-  - verify/AOJ-ALDS1-7-A.test.cpp
   - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/AOJ-ALDS1-7-A.test.cpp
+  - verify/AOJ-GRL-5-B.test.cpp
   - verify/LC-JumponTree.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-5-B.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - verify/LC-TreeDiameter.test.cpp
+  - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
 documentation_of: Library/Tree/Tree.hpp
 layout: document
 redirect_from:

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
     links: []
@@ -231,10 +231,10 @@ data:
   path: Library/Tree/TreeDiameter.hpp
   requiredBy: []
   timestamp: '2024-11-01 01:18:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-TreeDiameter.test.cpp
+  - verify/AOJ-GRL-5-A.test.cpp
 documentation_of: Library/Tree/TreeDiameter.hpp
 layout: document
 redirect_from:

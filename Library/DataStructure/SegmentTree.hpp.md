@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -12,27 +12,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-B.test.cpp
     title: verify/AOJ-DSL-2-B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     links: []
@@ -172,15 +172,15 @@ data:
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2024-10-20 22:40:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
   - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document

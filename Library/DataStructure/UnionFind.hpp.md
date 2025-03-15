@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -65,9 +65,9 @@ data:
   timestamp: '2025-02-12 02:16:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-MinimumSpanningTree.test.cpp
   - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
 documentation_of: Library/DataStructure/UnionFind.hpp
 layout: document
 title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
