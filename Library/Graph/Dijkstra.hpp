@@ -7,7 +7,7 @@ class Dijkstra{
     public:
     Dijkstra(Graph<CostType> &graph, Vertex s = -1) :
         G(graph), n(graph.VertexSize()), dist_(n), prev_edge_(n){
-        if(s != -1) Solve_(s);
+        if(s != -1) Solve(s);
     }
 
     inline bool Reachable(const Vertex &t) const {
