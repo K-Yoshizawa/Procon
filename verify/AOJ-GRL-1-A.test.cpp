@@ -5,11 +5,9 @@
 
 int main(){
     int V, E, r; cin >> V >> E >> r;
-    Graph<ll> G(V, true);
-    G.InputGraph(E, true, false);
+    auto G = InputGraph<ll>(V, E, 0, true, true);
     
-    Dijkstra dk(G);
-    dk.Solve(r);
+    Dijkstra dk(G, r);
     for(int i = 0; i < V; ++i){
         if(dk.Reachable(i)){
             cout << dk.Distance(i) << endl;
