@@ -12,6 +12,8 @@ struct Edge{
     Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :
         from(from_), to(to_), cost(cost_), idx(idx_){}
     
+    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}
+
     operator int() const {return to;}
 
     Vertex from, to;
@@ -38,7 +40,11 @@ class Graph{
     }
 
     inline size_t VertexSize() const {
-        return adjacent_list_.size();
+        return vertex_size_;
+    }
+
+    inline size_t EdgeSize() const {
+        return edge_size_;
     }
 
     inline vector<Edge<CostType>> &operator[](const int v){
