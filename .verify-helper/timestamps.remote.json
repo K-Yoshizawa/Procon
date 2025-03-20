@@ -16,6 +16,7 @@
 "verify/LC-LongestIncreasingSubsequence.test.cpp": "2025-03-20 00:50:35 +0900",
 "verify/LC-LowestCommonAncestor-HLD.test.cpp": "2025-03-20 00:50:35 +0900",
 "verify/LC-LowestCommonAncestor.test.cpp": "2025-03-20 00:50:35 +0900",
+"verify/LC-MinimumSpanningTree.test.cpp": "2025-03-20 23:38:21 +0900",
 "verify/LC-PersistentUnionfind.test.cpp": "2025-03-20 00:50:35 +0900",
 "verify/LC-PointAddRangeSum.test.cpp": "2025-03-20 00:50:35 +0900",
 "verify/LC-PointSetRangeComposite.test.cpp": "2025-03-20 00:50:35 +0900",
