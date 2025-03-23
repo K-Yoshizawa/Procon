@@ -16,3 +16,16 @@ vector<Edge<CostType>> ConvertEdgeSet(const Graph<CostType> &G){
     }
     return ret;
 }
+
+template<typename CostType>
+vector<vector<CostType>> ConvertDistanceMatrix(const Graph<CostType> &G){
+    int n = G.VertexSize();
+    vector<vector<CostType>> ret(n, vector<CostType>(n, CostType(INF)));
+    for(int u = 0; u < n; ++u){
+        ret[u][u] = CostType(0);
+        for(const Edge<CostType> &e : G[u]){
+            ret[u][e.to] = e.cost;
+        }
+    }
+    return ret;
+}
