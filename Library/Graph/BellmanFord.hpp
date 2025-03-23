@@ -1,35 +1,40 @@
-/**
- * @file BellmanFord.hpp
- * @brief BellmanFord - ベルマンフォード法
- * @version 4.0
- * @date 2024-09-01
- */
-
 #include "Graph.hpp"
+#include "GraphMisc.hpp"
 
 template<typename CostType>
 class BellmanFord{
     public:
-    /**
-     * @brief グラフ graph における負辺有り単一始点最短路問題を解く。
-     * @note 計算量 : O(EV)
-     * @param graph 頂点数 V, 辺数 E のグラフ
-     * @param source 始点の頂点 (0-index)
-     */
-    BellmanFord(const Graph<CostType> &graph, Vertex source) :
-            vertex_size_(graph.get_vertex_size()), edge_set_(GraphConvertEdgeSet(graph, false)),
-            source_vertex_(source), inf_(graph.get_inf()), dist_(vertex_size_, inf_){
-        Validate(source_vertex_);
-        dist_[source_vertex_] = 0;
+    BellmanFord(Graph<CostType> &graph, Vertex s = -1) :
+        G(graph), n(graph.VertexSize()), dist_(n){
+        if(s != -1) Solve(s);
+    }
+
+    inline bool Reachable(const Vertex &t) const {
+        return dist_[t] != inf;
+    }
+
+    inline CostType Distance(const Vertex &t) const {
+        return dist_[t];
+    }
+
+    inline bool Negative() const {
+        return negative_cycle_;
+    }
+
+    void Solve(Vertex s){
+        fill(dist_.begin(), dist_.end(), inf);
+        dist_[s] = CostType(0);
+        negative_cycle_ = false;
         int update_count = 0;
+        auto E = ConvertEdgeSet(G);
         while(1){
-            if(update_count == vertex_size_){
+            if(update_count == n){
                 negative_cycle_ = true;
                 break;
             }
             bool update_flag = false;
-            for(Edge<CostType> &e : edge_set_){
-                if(dist_[e.from] == inf_) continue;
+            for(const Edge<CostType> &e : E){
+                if(dist_[e.from] == inf) continue;
                 if(dist_[e.to] > dist_[e.from] + e.cost){
                     dist_[e.to] = dist_[e.from] + e.cost;
                     update_flag = true;
@@ -39,56 +44,20 @@ class BellmanFord{
             ++update_count;
         }
     }
-    
-    /**
-     * @brief 頂点 `source` から頂点 `target` に到達可能かを返す。
-     * @param target 終点の頂点
-     * @return true 到達可能
-     * @return false 到達不能
-     */
-    bool Reachable(Vertex target) const {
-        Validate(target);
-        return dist_[target] != inf_;
+
+    inline CostType operator[](const Vertex &t){
+        return dist_[t];
     }
 
-    /**
-     * @brief グラフが負閉路を持つかを返す。
-     */
-    inline bool Negative() const {
-        return negative_cycle_;
-    }
-
-    /**
-     * @brief 頂点 `source` から頂点 `target` までの最短経路長を返す。
-     * @param target 終点の頂点 (0-index)
-     * @attention 負閉路を持つときに返す値は未定義である。
-     * @return CostType 頂点 `source` から頂点 `target` までの最短経路長
-     */
-    CostType Distance(Vertex target) const {
-        Validate(target);
-        return dist_[target];
-    }
-
-    CostType operator[](Vertex target){
-        return Distance(target);
-    }
-
-    const CostType operator[](Vertex target) const {
-        return Distance(target);
+    inline const CostType operator[](const Vertex &t) const {
+        return dist_[t];
     }
 
     private:
-    int vertex_size_;
-    vector<Edge<CostType>> edge_set_;
-    Vertex source_vertex_{-1};
-    CostType inf_;
+    Graph<CostType> &G;
+    vector<Edge<CostType>> edges_;
+    int n;
+    CostType inf{CostType(INF)};
+    bool negative_cycle_;
     vector<CostType> dist_;
-    bool negative_cycle_{false};
-
-    inline void Validate(int vertex) const {
-        if(!(0 <= vertex && vertex < vertex_size_)){
-            cerr << "# [Bellman-Ford] Failed Validate : Vertex " << vertex << endl;
-            assert(false);
-        }
-    }
 };
