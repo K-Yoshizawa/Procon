@@ -29,3 +29,15 @@ vector<vector<CostType>> ConvertDistanceMatrix(const Graph<CostType> &G){
     }
     return ret;
 }
+
+template<typename CostType>
+Graph<CostType> ReverseGraph(const Graph<CostType> &G){
+    int n = G.VertexSize();
+    Graph<CostType> ret(n);
+    for(int u = 0; u < n; ++u){
+        for(const Edge<CostType> &e : G[u]){
+            ret.AddDirectedEdge(e.to, e.from, e.cost);
+        }
+    }
+    return ret;
+}
