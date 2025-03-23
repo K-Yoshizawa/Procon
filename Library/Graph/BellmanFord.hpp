@@ -55,7 +55,6 @@ class BellmanFord{
 
     private:
     Graph<CostType> &G;
-    vector<Edge<CostType>> edges_;
     int n;
     CostType inf{CostType(INF)};
     bool negative_cycle_;
