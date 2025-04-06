@@ -24,11 +24,12 @@ data:
     #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
     #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
-    using namespace std;\n#line 9 \"Library/DataStructure/DualSegmentTree.hpp\"\n\n\
-    template<typename OperatorMonoid>\nclass DualSegmentTree{\n    public:\n    using\
-    \ H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n    \n    DualSegmentTree(int\
-    \ size, H composite, const OperatorMonoid &operator_identity, bool zero_index\
-    \ = false)\n    : h(composite), om1_(operator_identity), zeroindex_(zero_index){\n\
+    using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
+    \ const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 9 \"Library/DataStructure/DualSegmentTree.hpp\"\
+    \n\ntemplate<typename OperatorMonoid>\nclass DualSegmentTree{\n    public:\n \
+    \   using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n    \n\
+    \    DualSegmentTree(int size, H composite, const OperatorMonoid &operator_identity,\
+    \ bool zero_index = false)\n    : h(composite), om1_(operator_identity), zeroindex_(zero_index){\n\
     \        size_ = 1;\n        while(size_ < size) size_ <<= 1;\n        offset_\
     \ = size_ - 1;\n        lazy_.resize(2 * size_, om1_);\n        is_identity_.resize(2\
     \ * size_, true);\n    }\n\n    void Set(int index, OperatorMonoid value){\n \
@@ -96,7 +97,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/DualSegmentTree.hpp
   requiredBy: []
-  timestamp: '2024-11-29 17:05:44+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffinePointGet.test.cpp

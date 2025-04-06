@@ -36,17 +36,18 @@ data:
     #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
     #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
-    using namespace std;\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing Vertex = int;\n\
-    \ntemplate<typename CostType = int32_t>\nclass RootedTree{\n    public:\n    struct\
-    \ Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\n        Vertex\
-    \ parent{-1};\n        CostType cost{};\n        vector<Vertex> children{};\n\
-    \    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\u6839\u3068\
-    \u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\u6728\u3092\
-    \u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\u3067\u4E0E\
-    \u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\u304B\u308B\
-    \u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex = -1`\
-    \ \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\u70B9\
-    \u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
+    using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
+    \ const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 11 \"Library/Tree/Tree.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nclass RootedTree{\n\
+    \    public:\n    struct Node{\n        Node(Vertex parent = -1) : parent(parent){}\n\
+    \n        Vertex parent{-1};\n        CostType cost{};\n        vector<Vertex>\
+    \ children{};\n    };\n\n    /**\n     * @brief \u9802\u70B9 `root_vertex` \u3092\
+    \u6839\u3068\u3059\u308B\u9802\u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\
+    \u6728\u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\
+    \u3067\u4E0E\u3048\u3089\u308C\u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\
+    \u304B\u308B\u3001\u307F\u305F\u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex\
+    \ = -1` \u3068\u3059\u308B\u3068\u3088\u3044\n     * @param vertex_size \u9802\
+    \u70B9\u6570\n     * @param root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default\
     \ = 0)\n     */\n    RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n\
     \            vertex_size_(vertex_size), root_vertex_(root_vertex),\n         \
     \   node_(vertex_size){}\n\n    /**\n     * @brief \u6728\u306E\u9802\u70B9\u6570\
@@ -364,7 +365,7 @@ data:
   isVerificationFile: false
   path: Library/Tree/AuxiliaryTree.hpp
   requiredBy: []
-  timestamp: '2024-11-01 01:27:36+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/Tree/AuxiliaryTree.hpp

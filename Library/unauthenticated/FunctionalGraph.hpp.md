@@ -16,42 +16,43 @@ data:
     - https://atcoder.jp/contests/abc179/submissions/59194689
     - https://atcoder.jp/contests/abc311/submissions/59194783
     - https://atcoder.jp/contests/abc377/submissions/59194861
-  bundledCode: "#line 1 \"Library/Graph/FunctionalGraph.hpp\"\n/**\n * @file FunctionalGraph.hpp\n\
-    \ * @brief Functional Graph\n * @version 2.0\n * @date 2024-10-27\n */\n\n#line\
-    \ 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cstdint>\n\
-    #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
-    #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
-    \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n#line 9 \"Library/Graph/FunctionalGraph.hpp\"\
-    \n\ntemplate<typename CostType = int32_t>\nclass FunctionalGraph{\n    public:\n\
-    \    /**\n     * @brief \u91CD\u307F\u306A\u3057 Functional Graph \u306E\u69CB\
-    \u7BC9\u3092\u884C\u3046\u3002\n     * @param to \u5404\u9802\u70B9 i \u304C\u63A5\
-    \u7D9A\u3057\u3066\u3044\u308B\u9802\u70B9\n     * @param one_index \u9802\u70B9\
-    \u756A\u53F7\u3092 1-index \u3068\u3057\u3066\u6271\u3046\u304B `(default = true)`\n\
-    \     * @param doubling_size \u30C0\u30D6\u30EA\u30F3\u30B0\u306E\u30C6\u30FC\u30D6\
-    \u30EB\u30B5\u30A4\u30BA `(default = 60)`\n     */\n    FunctionalGraph(vector<int>\
-    \ &to, bool one_index = true, int doubling_size = 60) :\n        vertex_size_((int)to.size()),\
-    \ doubling_size_(doubling_size), one_index_(one_index){\n        vector<CostType>\
-    \ cost(vertex_size_, 1);\n        Build(to, cost);\n    }\n    \n    /**\n   \
-    \  * @brief \u91CD\u307F\u3042\u308A Functional Graph \u306E\u69CB\u7BC9\u3092\
-    \u884C\u3046\u3002\n     * @param to \u5404\u9802\u70B9 i \u304C\u63A5\u7D9A\u3057\
-    \u3066\u3044\u308B\u9802\u70B9\n     * @param cost \u5404\u9802\u70B9 i \u304C\
-    \u63A5\u7D9A\u3057\u3066\u3044\u308B\u9802\u70B9\u3078\u306E\u8FBA\u306E\u91CD\
-    \u307F\n     * @param one_index \u9802\u70B9\u756A\u53F7\u3092 1-index \u3068\u3057\
-    \u3066\u6271\u3046\u304B `(default = true)`\n     * @param doubling_size \u30C0\
-    \u30D6\u30EA\u30F3\u30B0\u306E\u30C6\u30FC\u30D6\u30EB\u30B5\u30A4\u30BA `(default\
-    \ = 60)`\n     */\n    FunctionalGraph(vector<int> &to, vector<CostType> &cost,\
-    \ bool one_index = true, int doubling_size = 60) :\n        vertex_size_((int)to.size()),\
-    \ doubling_size_(doubling_size), one_index_(one_index){\n        Build(to, cost);\n\
-    \    }\n\n    /**\n     * @brief \u5404\u30B5\u30A4\u30AF\u30EB\u3092\u69CB\u6210\
-    \u3059\u308B\u9802\u70B9\u306E\u4E00\u89A7\u3092\u8FD4\u3059\u3002\n     * @note\
-    \ verify : https://atcoder.jp/contests/abc311/submissions/59194783\n     * @return\
-    \ vector<vector<int>> \u5404\u30B5\u30A4\u30AF\u30EB\u3092\u69CB\u6210\u3059\u308B\
-    \u9802\u70B9\u306E\u4E00\u89A7\n     */\n    vector<vector<int>> &get_cycle(){\n\
-    \        return cycle_;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `start`\
-    \ \u304B\u3089 `step` \u56DE\u79FB\u52D5\u3059\u308B\u5148\u306E\u9802\u70B9\u3092\
-    \u6C42\u3081\u308B\u3002\n     * @note verify : https://atcoder.jp/contests/abc167/submissions/59194517\n\
+  bundledCode: "#line 1 \"Library/unauthenticated/FunctionalGraph.hpp\"\n/**\n * @file\
+    \ FunctionalGraph.hpp\n * @brief Functional Graph\n * @version 2.0\n * @date 2024-10-27\n\
+    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
+    \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    \ 1;\n#line 9 \"Library/unauthenticated/FunctionalGraph.hpp\"\n\ntemplate<typename\
+    \ CostType = int32_t>\nclass FunctionalGraph{\n    public:\n    /**\n     * @brief\
+    \ \u91CD\u307F\u306A\u3057 Functional Graph \u306E\u69CB\u7BC9\u3092\u884C\u3046\
+    \u3002\n     * @param to \u5404\u9802\u70B9 i \u304C\u63A5\u7D9A\u3057\u3066\u3044\
+    \u308B\u9802\u70B9\n     * @param one_index \u9802\u70B9\u756A\u53F7\u3092 1-index\
+    \ \u3068\u3057\u3066\u6271\u3046\u304B `(default = true)`\n     * @param doubling_size\
+    \ \u30C0\u30D6\u30EA\u30F3\u30B0\u306E\u30C6\u30FC\u30D6\u30EB\u30B5\u30A4\u30BA\
+    \ `(default = 60)`\n     */\n    FunctionalGraph(vector<int> &to, bool one_index\
+    \ = true, int doubling_size = 60) :\n        vertex_size_((int)to.size()), doubling_size_(doubling_size),\
+    \ one_index_(one_index){\n        vector<CostType> cost(vertex_size_, 1);\n  \
+    \      Build(to, cost);\n    }\n    \n    /**\n     * @brief \u91CD\u307F\u3042\
+    \u308A Functional Graph \u306E\u69CB\u7BC9\u3092\u884C\u3046\u3002\n     * @param\
+    \ to \u5404\u9802\u70B9 i \u304C\u63A5\u7D9A\u3057\u3066\u3044\u308B\u9802\u70B9\
+    \n     * @param cost \u5404\u9802\u70B9 i \u304C\u63A5\u7D9A\u3057\u3066\u3044\
+    \u308B\u9802\u70B9\u3078\u306E\u8FBA\u306E\u91CD\u307F\n     * @param one_index\
+    \ \u9802\u70B9\u756A\u53F7\u3092 1-index \u3068\u3057\u3066\u6271\u3046\u304B\
+    \ `(default = true)`\n     * @param doubling_size \u30C0\u30D6\u30EA\u30F3\u30B0\
+    \u306E\u30C6\u30FC\u30D6\u30EB\u30B5\u30A4\u30BA `(default = 60)`\n     */\n \
+    \   FunctionalGraph(vector<int> &to, vector<CostType> &cost, bool one_index =\
+    \ true, int doubling_size = 60) :\n        vertex_size_((int)to.size()), doubling_size_(doubling_size),\
+    \ one_index_(one_index){\n        Build(to, cost);\n    }\n\n    /**\n     * @brief\
+    \ \u5404\u30B5\u30A4\u30AF\u30EB\u3092\u69CB\u6210\u3059\u308B\u9802\u70B9\u306E\
+    \u4E00\u89A7\u3092\u8FD4\u3059\u3002\n     * @note verify : https://atcoder.jp/contests/abc311/submissions/59194783\n\
+    \     * @return vector<vector<int>> \u5404\u30B5\u30A4\u30AF\u30EB\u3092\u69CB\
+    \u6210\u3059\u308B\u9802\u70B9\u306E\u4E00\u89A7\n     */\n    vector<vector<int>>\
+    \ &get_cycle(){\n        return cycle_;\n    }\n\n    /**\n     * @brief \u9802\
+    \u70B9 `start` \u304B\u3089 `step` \u56DE\u79FB\u52D5\u3059\u308B\u5148\u306E\u9802\
+    \u70B9\u3092\u6C42\u3081\u308B\u3002\n     * @note verify : https://atcoder.jp/contests/abc167/submissions/59194517\n\
     \     * @param start \u958B\u59CB\u9802\u70B9\n     * @param step \u79FB\u52D5\
     \u56DE\u6570\n     * @return int \u79FB\u52D5\u5148\u306E\u9802\u70B9\n     */\n\
     \    int Jump(int start, int64_t step){\n        int ret = start - one_index_;\n\
@@ -176,15 +177,15 @@ data:
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
-  path: Library/Graph/FunctionalGraph.hpp
+  path: Library/unauthenticated/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2024-10-27 03:44:09+09:00'
+  timestamp: '2025-04-07 00:35:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: Library/Graph/FunctionalGraph.hpp
+documentation_of: Library/unauthenticated/FunctionalGraph.hpp
 layout: document
 redirect_from:
-- /library/Library/Graph/FunctionalGraph.hpp
-- /library/Library/Graph/FunctionalGraph.hpp.html
+- /library/Library/unauthenticated/FunctionalGraph.hpp
+- /library/Library/unauthenticated/FunctionalGraph.hpp.html
 title: Functional Graph
 ---

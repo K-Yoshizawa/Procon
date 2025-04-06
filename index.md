@@ -47,33 +47,32 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: Library/Graph/BellmanFord.hpp
-      title: "BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
+      title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
+    - icon: ':heavy_check_mark:'
+      path: Library/Graph/CycleDetection.hpp
+      title: Library/Graph/CycleDetection.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-    - icon: ':warning:'
-      path: Library/Graph/FunctionalGraph.hpp
-      title: Functional Graph
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Graph.hpp
       title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
+      path: Library/Graph/GraphMisc.hpp
+      title: Library/Graph/GraphMisc.hpp
+    - icon: ':heavy_check_mark:'
       path: Library/Graph/Kruskal.hpp
-      title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+      title: Library/Graph/Kruskal.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Graph/LowLink.hpp
-      title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
+      title: Library/Graph/LowLink.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Graph/StronglyConnectedComponents.hpp
-      title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
-        \u89E3"
-    - icon: ':heavy_check_mark:'
-      path: Library/Graph/TwoEdgeConnectedComponents.hpp
-      title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\
-        \u5206\u89E3"
+      title: Library/Graph/StronglyConnectedComponents.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Graph/WarshallFloyd.hpp
-      title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
+      title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
+        \u6CD5"
   - name: Library/Other
     pages:
     - icon: ':heavy_check_mark:'
@@ -124,8 +123,8 @@ data:
       path: Library/unauthenticated/ErasablePriorityQueue.hpp
       title: "Erasable Priority Queue - \u6D88\u305B\u308B Priority Queue"
     - icon: ':warning:'
-      path: Library/unauthenticated/EulerTour.hpp
-      title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
+      path: Library/unauthenticated/FunctionalGraph.hpp
+      title: Functional Graph
     - icon: ':warning:'
       path: Library/unauthenticated/GraphTemplate.hpp
       title: "Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -205,8 +204,8 @@ data:
       path: verify/AOJ-GRL-3-C.test.cpp
       title: verify/AOJ-GRL-3-C.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/AOJ-GRL-4-B.test.cpp
-      title: verify/AOJ-GRL-4-B.test.cpp
+      path: verify/AOJ-GRL-4-A.test.cpp
+      title: verify/AOJ-GRL-4-A.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-A.test.cpp
       title: verify/AOJ-GRL-5-A.test.cpp
@@ -216,6 +215,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/AOJ-GRL-5-C.test.cpp
       title: verify/AOJ-GRL-5-C.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-CycleDetection.test.cpp
+      title: verify/LC-CycleDetection.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-CycleDetectionUndirected.test.cpp
+      title: verify/LC-CycleDetectionUndirected.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-LongestIncreasingSubsequence.test.cpp
       title: verify/LC-LongestIncreasingSubsequence.test.cpp
@@ -244,14 +249,17 @@ data:
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-ShortestPath.test.cpp
+      title: verify/LC-ShortestPath.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/LC-StronglyConnectedComponents.test.cpp
+      title: verify/LC-StronglyConnectedComponents.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-TreeDiameter.test.cpp
       title: verify/LC-TreeDiameter.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-TreePathCompositeSum.test.cpp
       title: verify/LC-TreePathCompositeSum.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/LC-TwoEdgeConnectedComponents.test.cpp
-      title: verify/LC-TwoEdgeConnectedComponents.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp

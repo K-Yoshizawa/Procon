@@ -37,8 +37,9 @@ data:
     #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
     #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
     \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n#line 12 \"Library/modint.hpp\"\nusing\
-    \ namespace std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\
+    #include <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
+    \nconstexpr const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\
+    \nusing namespace std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\
     \ntemplate< int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\
     \n    ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n\
     \    ModInt &operator+=(const ModInt &p) {\n        if((x += p.x) >= mod) x -=\
@@ -101,7 +102,7 @@ data:
   isVerificationFile: false
   path: Library/modint.hpp
   requiredBy: []
-  timestamp: '2024-09-05 07:46:35+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-UnionfindWithPotential.test.cpp

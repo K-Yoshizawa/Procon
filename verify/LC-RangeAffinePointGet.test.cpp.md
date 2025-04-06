@@ -32,39 +32,39 @@ data:
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
     \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n#line 12 \"Library/Template.hpp\"\
-    \n\ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n';\
-    \ return flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\"\
-    ) << '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
-    \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
-    inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}\n\
-    template<typename Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
-    \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
-    \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
-    \ Value Ceil(const Value &numerator, const Value &denominator){return (numerator\
-    \ + denominator - 1) / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
-    \ vector<Value> &container, const Value &value){return distance(container.begin(),\
-    \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
-    \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
-    \ &value){return distance(container.begin(), upper_bound(container.begin(), container.end(),\
-    \ value));}\ntemplate<class Value>\nbool ChangeMin(Value &src, const Value &cmp){if(src\
-    \ > cmp){src = cmp; return true;} return false;}\ntemplate<class Value>\nbool\
-    \ ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;}\
-    \ return false;}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
-    \ const Value &x, const Value &higher){return lower <= x && x <= higher;}\ntemplate<typename\
-    \ Value>\ninline bool InGrid(const Value &y, const Value &x, const Value &ymax,\
-    \ const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\n\
-    template<typename Value>\ninline Value Median(const Value &a, const Value &b,\
-    \ const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a,\
-    \ b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename Value>\ninline Value\
-    \ Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}\n\
-    \ntemplate<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
-    \ (v).end());}\ntemplate<typename Value>\ninline Value max(vector<Value> &v){return\
-    \ *max_element((v).begin(), (v).end());}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconst int INF_INT = numeric_limits<int>::max() >> 2;\nconst ll INF_LL = numeric_limits<ll>::max()\
-    \ >> 2;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\n\
-    const int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1,\
-    \ -1, 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y, int current_x,\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    \ 1;\n#line 12 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
+    \ << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool YNPrint(bool\
+    \ flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\ntemplate<typename\
+    \ Container>\ninline void Sort(Container &container){sort(container.begin(), container.end());}\n\
+    template<typename Container>\ninline void ReverseSort(Container &container){sort(container.rbegin(),\
+    \ container.rend());}\ntemplate<typename Container>\ninline void Reverse(Container\
+    \ &container){reverse(container.begin(), container.end());}\ntemplate<typename\
+    \ Value>\ninline int PopCount(const Value &value){return __builtin_popcount(value);}\n\
+    template<typename Value>\ninline Value Ceil(const Value &numerator, const Value\
+    \ &denominator){return (numerator + denominator - 1) / denominator;}\ntemplate<typename\
+    \ Value>\ninline int LowerBoundIndex(const vector<Value> &container, const Value\
+    \ &value){return distance(container.begin(), lower_bound(container.begin(), container.end(),\
+    \ value));}\ntemplate<typename Value>\ninline int UpperBoundIndex(const vector<Value>\
+    \ &container, const Value &value){return distance(container.begin(), upper_bound(container.begin(),\
+    \ container.end(), value));}\ntemplate<typename Value>\ninline bool Between(const\
+    \ Value &lower, const Value &x, const Value &higher){return lower <= x && x <=\
+    \ higher;}\ntemplate<typename Value>\ninline bool InGrid(const Value &y, const\
+    \ Value &x, const Value &ymax, const Value &xmax){return Between(0, y, ymax -\
+    \ 1) && Between(0, x, xmax - 1);}\ntemplate<typename Value>\ninline Value Median(const\
+    \ Value &a, const Value &b, const Value &c){return Between(b, a, c) || Between(c,\
+    \ a, b) ? a : (Between(a, b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename\
+    \ Value>\ninline Value Except(Value &src, Value &cond, Value &excp){return (src\
+    \ == cond ? excp : src);}\n\ntemplate<class Value>\nbool chmin(Value &src, const\
+    \ Value &cmp){if(src > cmp){src = cmp; return true;} return false;}\ntemplate<class\
+    \ Value>\nbool chmax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return\
+    \ true;} return false;}\ntemplate<typename Value>\ninline Value min(vector<Value>\
+    \ &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename Value>\n\
+    inline Value max(vector<Value> &v){return *max_element((v).begin(), (v).end());}\n\
+    \nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst\
+    \ int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1,\
+    \ 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y, int current_x,\
     \ int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int, int>> ret;\n\
     \    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y = current_y\
     \ + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8 ? dx8[d]\
@@ -201,7 +201,7 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffinePointGet.test.cpp
   requiredBy: []
-  timestamp: '2025-03-16 02:46:39+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffinePointGet.test.cpp

@@ -5,11 +5,11 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
+    path: Library/Graph/CycleDetection.hpp
+    title: Library/Graph/CycleDetection.hpp
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: Library/Graph/LowLink.hpp
-    title: Library/Graph/LowLink.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -20,10 +20,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B
-  bundledCode: "#line 1 \"verify/AOJ-GRL-3-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A
+  bundledCode: "#line 1 \"verify/AOJ-GRL-4-A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A\"\
     \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
     \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
     \ @version 1.10\n * @date 2025-03-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
@@ -101,11 +101,11 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/LowLink.hpp\"\n\n#line\
-    \ 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n    public:\n\
-    \    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType cost_ =\
-    \ 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/CycleDetection.hpp\"\n\
+    \n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\
+    \nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n\
+    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType\
+    \ cost_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
     \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
     \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
     \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
@@ -127,53 +127,43 @@ data:
     \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
     \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
     \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Graph/LowLink.hpp\"\n\ntemplate<typename CostType>\nclass LowLink{\n\
-    \    public:\n    LowLink(Graph<CostType> &graph) : G(graph), n(graph.VertexSize()),\
-    \ ord_(n, -1), low_(n, -1), in_(n), out_(n){\n        for(int i = 0, k = 0, t\
-    \ = 0; i < n; ++i){\n            if(ord_[i] == -1){\n                k = dfs(i,\
-    \ -1, k, t);\n            }\n        }\n    }\n\n    vector<Vertex> &ArticulationVertex(){\n\
-    \        return articulation_vertex_;\n    }\n\n    vector<pair<Vertex, Vertex>>\
-    \ &Bridge(){\n        return bridge_;\n    }\n\n    pair<int, int> EulerTour(const\
-    \ Vertex v) const {\n        return {in_[v], out_[v]};\n    }\n\n    private:\n\
-    \    Graph<CostType> &G;\n    int n;\n    vector<int> ord_, low_, in_, out_;\n\
-    \    vector<Vertex> articulation_vertex_;\n    vector<pair<Vertex, Vertex>> bridge_;\n\
-    \n    int dfs(Vertex v, int p, int k, int &t){\n        in_[v] = t++;\n      \
-    \  low_[v] = (ord_[v] = k++);\n        int cnt = 0;\n        bool is_articulation\
-    \ = false, second = false;\n        for(int u : G[v]){\n            if(ord_[u]\
-    \ == -1){\n                ++cnt;\n                k = dfs(u, v, k, t);\n    \
-    \            low_[v] = min(low_[v], low_[u]);\n                is_articulation\
-    \ |= (p != -1) && (low_[u] >= ord_[v]);\n                if(ord_[v] < low_[u]){\n\
-    \                    bridge_.emplace_back(minmax(u, v));\n                }\n\
-    \            }\n            else if(u != p || second){\n                low_[v]\
-    \ = min(low_[v], ord_[u]);\n            }\n            else{\n               \
-    \ second = true;\n            }\n        }\n        is_articulation |= (p == -1)\
-    \ && (cnt > 1);\n        if(is_articulation) articulation_vertex_.emplace_back(v);\n\
-    \        out_[v] = t;\n        return k;\n    }\n};\n#line 5 \"verify/AOJ-GRL-3-B.test.cpp\"\
+    \ 4 \"Library/Graph/CycleDetection.hpp\"\n\ntemplate<typename CostType>\nvector<Edge<CostType>>\
+    \ CycleDetection(Graph<CostType> &G){\n    int N = G.VertexSize();\n    vector<Edge<CostType>>\
+    \ history;\n    vector<int> state(N, 0);\n    vector<Edge<CostType>> ret;\n  \
+    \  bool detected = false;\n    auto dfs = [&](auto &self, int v, int pre) -> void\
+    \ {\n        state[v] = 1;\n        for(const Edge<CostType> &e : G[v]){\n   \
+    \         if(e.idx == pre) continue;\n            if(state[e.to] == 2) continue;\n\
+    \            else if(state[e.to] == 1){\n                ret.push_back(e);\n \
+    \               for(int i = history.size() - 1; i >= 0 && history[i].to != e.to;\
+    \ --i){\n                    ret.push_back(history[i]);\n                }\n \
+    \               detected = true;\n            }\n            else{\n         \
+    \       history.push_back(e);\n                self(self, e.to, e.idx);\n    \
+    \            history.pop_back();\n            }\n            if(detected) return;\n\
+    \        }\n        state[v] = 2;\n    };\n    for(int v = 0; v < N && !detected;\
+    \ ++v){\n        if(state[v] == 0) dfs(dfs, v, -1);\n    }\n    reverse(ret.begin(),\
+    \ ret.end());\n    return ret;\n}\n#line 5 \"verify/AOJ-GRL-4-A.test.cpp\"\n\n\
+    int main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0,\
+    \ false, true);\n    \n    cout << !(CycleDetection(G).empty()) << endl;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/CycleDetection.hpp\"\
     \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, false);\n    \n    LowLink llk(G);\n    auto ans = llk.Bridge();\n\
-    \    Sort(ans);\n    for(const auto [s, t] : ans) cout << s << ' ' << t << '\\\
-    n';\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/LowLink.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, false);\n    \n    LowLink llk(G);\n    auto ans = llk.Bridge();\n\
-    \    Sort(ans);\n    for(const auto [s, t] : ans) cout << s << ' ' << t << '\\\
-    n';\n}"
+    \ E, 0, false, true);\n    \n    cout << !(CycleDetection(G).empty()) << endl;\n\
+    }"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/Graph/LowLink.hpp
+  - Library/Graph/CycleDetection.hpp
   - Library/Graph/Graph.hpp
   isVerificationFile: true
-  path: verify/AOJ-GRL-3-B.test.cpp
+  path: verify/AOJ-GRL-4-A.test.cpp
   requiredBy: []
-  timestamp: '2025-04-06 18:24:49+09:00'
+  timestamp: '2025-04-06 18:24:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-3-B.test.cpp
+documentation_of: verify/AOJ-GRL-4-A.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-3-B.test.cpp
-- /verify/verify/AOJ-GRL-3-B.test.cpp.html
-title: verify/AOJ-GRL-3-B.test.cpp
+- /verify/verify/AOJ-GRL-4-A.test.cpp
+- /verify/verify/AOJ-GRL-4-A.test.cpp.html
+title: verify/AOJ-GRL-4-A.test.cpp
 ---

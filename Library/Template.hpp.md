@@ -49,8 +49,8 @@ data:
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-4-B.test.cpp
-    title: verify/AOJ-GRL-4-B.test.cpp
+    path: verify/AOJ-GRL-4-A.test.cpp
+    title: verify/AOJ-GRL-4-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
@@ -60,6 +60,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C.test.cpp
     title: verify/AOJ-GRL-5-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-CycleDetection.test.cpp
+    title: verify/LC-CycleDetection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-CycleDetectionUndirected.test.cpp
+    title: verify/LC-CycleDetectionUndirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LongestIncreasingSubsequence.test.cpp
     title: verify/LC-LongestIncreasingSubsequence.test.cpp
@@ -85,14 +91,17 @@ data:
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-ShortestPath.test.cpp
+    title: verify/LC-ShortestPath.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-StronglyConnectedComponents.test.cpp
+    title: verify/LC-StronglyConnectedComponents.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TwoEdgeConnectedComponents.test.cpp
-    title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
@@ -119,13 +128,14 @@ data:
     #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
     #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
-    using namespace std;\n#line 12 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
-    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
-    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
-    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
-    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
-    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
-    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
+    using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
+    \ const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\
+    \n\ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n';\
+    \ return flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\"\
+    ) << '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
+    \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
+    inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}\n\
+    template<typename Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
     \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
     \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
     \ Value Ceil(const Value &numerator, const Value &denominator){return (numerator\
@@ -134,10 +144,7 @@ data:
     \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
     \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
     \ &value){return distance(container.begin(), upper_bound(container.begin(), container.end(),\
-    \ value));}\ntemplate<class Value>\nbool ChangeMin(Value &src, const Value &cmp){if(src\
-    \ > cmp){src = cmp; return true;} return false;}\ntemplate<class Value>\nbool\
-    \ ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;}\
-    \ return false;}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
+    \ value));}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
     \ const Value &x, const Value &higher){return lower <= x && x <= higher;}\ntemplate<typename\
     \ Value>\ninline bool InGrid(const Value &y, const Value &x, const Value &ymax,\
     \ const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\n\
@@ -145,35 +152,36 @@ data:
     \ const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a,\
     \ b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename Value>\ninline Value\
     \ Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}\n\
-    \ntemplate<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
+    \ntemplate<class Value>\nbool chmin(Value &src, const Value &cmp){if(src > cmp){src\
+    \ = cmp; return true;} return false;}\ntemplate<class Value>\nbool chmax(Value\
+    \ &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}\n\
+    template<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
     \ (v).end());}\ntemplate<typename Value>\ninline Value max(vector<Value> &v){return\
-    \ *max_element((v).begin(), (v).end());}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconst int INF_INT = numeric_limits<int>::max() >> 2;\nconst ll INF_LL = numeric_limits<ll>::max()\
-    \ >> 2;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\n\
-    const int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1,\
-    \ -1, 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y, int current_x,\
-    \ int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int, int>> ret;\n\
-    \    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y = current_y\
-    \ + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8 ? dx8[d]\
-    \ : dx4[d]);\n        if(InGrid(next_y, next_x, max_y, max_x)){\n            ret.emplace_back(next_y,\
-    \ next_x);\n        }\n    }\n    return ret;\n}\n\ntemplate <typename T1, typename\
-    \ T2>\nostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << p.first\
-    \ << \" \" << p.second;\n    return os;\n}\n\ntemplate <typename T1, typename\
-    \ T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n    is >> p.first >>\
-    \ p.second;\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os <<\
-    \ v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
-    \ <typename T>\nostream &operator<<(ostream &os, vector<vector<T>> &v){\n    for\
-    \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ?\
-    \ \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nistream\
-    \ &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i)\
-    \ is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, set<T> &v){\n    for (auto &u : v){\n        os << u << \" \";\n    }\n\
-    \    return os;\n}\n\ntemplate<typename T1, typename T2>\nvector<pair<T1, T2>>\
-    \ AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n    assert(v1.size() ==\
-    \ v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i = 0; i < v1.size();\
-    \ ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\ntemplate<typename T1,\
-    \ typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ *max_element((v).begin(), (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\n\
+    const int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0,\
+    \ 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>>\
+    \ adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){\n\
+    \    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n\
+    \        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x\
+    \ = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x,\
+    \ max_y, max_x)){\n            ret.emplace_back(next_y, next_x);\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream\
+    \ &os, const pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return\
+    \ os;\n}\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is,\
+    \ pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int\
+    \ i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \"\
+    \ : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
+    \   os << v[i] << (i + 1 != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n\
+    }\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v){\n\
+    \    for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, set<T> &v){\n    for (auto &u\
+    \ : v){\n        os << u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename\
+    \ T1, typename T2>\nvector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2>\
+    \ &v2){\n    assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n  \
+    \  for(int i = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return\
+    \ v;\n}\n\ntemplate<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
     \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
@@ -206,10 +214,7 @@ data:
     \ &value){return distance(container.begin(), lower_bound(container.begin(), container.end(),\
     \ value));}\ntemplate<typename Value>\ninline int UpperBoundIndex(const vector<Value>\
     \ &container, const Value &value){return distance(container.begin(), upper_bound(container.begin(),\
-    \ container.end(), value));}\ntemplate<class Value>\nbool ChangeMin(Value &src,\
-    \ const Value &cmp){if(src > cmp){src = cmp; return true;} return false;}\ntemplate<class\
-    \ Value>\nbool ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp;\
-    \ return true;} return false;}\ntemplate<typename Value>\ninline bool Between(const\
+    \ container.end(), value));}\ntemplate<typename Value>\ninline bool Between(const\
     \ Value &lower, const Value &x, const Value &higher){return lower <= x && x <=\
     \ higher;}\ntemplate<typename Value>\ninline bool InGrid(const Value &y, const\
     \ Value &x, const Value &ymax, const Value &xmax){return Between(0, y, ymax -\
@@ -217,18 +222,19 @@ data:
     \ Value &a, const Value &b, const Value &c){return Between(b, a, c) || Between(c,\
     \ a, b) ? a : (Between(a, b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename\
     \ Value>\ninline Value Except(Value &src, Value &cond, Value &excp){return (src\
-    \ == cond ? excp : src);}\n\ntemplate<typename Value>\ninline Value min(vector<Value>\
+    \ == cond ? excp : src);}\n\ntemplate<class Value>\nbool chmin(Value &src, const\
+    \ Value &cmp){if(src > cmp){src = cmp; return true;} return false;}\ntemplate<class\
+    \ Value>\nbool chmax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return\
+    \ true;} return false;}\ntemplate<typename Value>\ninline Value min(vector<Value>\
     \ &v){return *min_element((v).begin(), (v).end());}\ntemplate<typename Value>\n\
     inline Value max(vector<Value> &v){return *max_element((v).begin(), (v).end());}\n\
-    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconst int INF_INT = numeric_limits<int>::max()\
-    \ >> 2;\nconst ll INF_LL = numeric_limits<ll>::max() >> 2;\n\nconst int dx4[4]\
-    \ = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1,\
-    \ 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\n\
-    vector<pair<int, int>> adjacent(int current_y, int current_x, int max_y, int max_x,\
-    \ bool dir_8 = false){\n    vector<pair<int, int>> ret;\n    for(int d = 0; d\
-    \ < 4 * (1 + dir_8); ++d){\n        int next_y = current_y + (dir_8 ? dy8[d] :\
-    \ dy4[d]);\n        int next_x = current_x + (dir_8 ? dx8[d] : dx4[d]);\n    \
-    \    if(InGrid(next_y, next_x, max_y, max_x)){\n            ret.emplace_back(next_y,\
+    \nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\nconst\
+    \ int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1, -1,\
+    \ 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y, int current_x,\
+    \ int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int, int>> ret;\n\
+    \    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y = current_y\
+    \ + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8 ? dx8[d]\
+    \ : dx4[d]);\n        if(InGrid(next_y, next_x, max_y, max_x)){\n            ret.emplace_back(next_y,\
     \ next_x);\n        }\n    }\n    return ret;\n}\n\ntemplate <typename T1, typename\
     \ T2>\nostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << p.first\
     \ << \" \" << p.second;\n    return os;\n}\n\ntemplate <typename T1, typename\
@@ -270,7 +276,7 @@ data:
   requiredBy:
   - Library/origin.cpp
   - Library/TemplateExtend.hpp
-  timestamp: '2025-03-16 02:46:39+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-C.test.cpp
@@ -283,6 +289,7 @@ data:
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/LC-CycleDetectionUndirected.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-RangeAffinePointGet.test.cpp
@@ -290,17 +297,19 @@ data:
   - verify/AOJ-GRL-1-C.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
-  - verify/AOJ-GRL-4-B.test.cpp
+  - verify/LC-ShortestPath.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-0560.test.cpp
+  - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-CycleDetection.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/LC-TreeDiameter.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
-  - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp

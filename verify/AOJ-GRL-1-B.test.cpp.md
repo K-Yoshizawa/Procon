@@ -6,10 +6,13 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/BellmanFord.hpp
-    title: "BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
+    title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':heavy_check_mark:'
+    path: Library/Graph/GraphMisc.hpp
+    title: Library/Graph/GraphMisc.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -32,13 +35,14 @@ data:
     \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
     \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
     #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n#line 12 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
-    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
-    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
-    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
-    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
-    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
-    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
+    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
+    \ ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\n\
+    \ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return\
+    \ flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") <<\
+    \ '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
+    \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
+    inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}\n\
+    template<typename Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
     \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
     \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
     \ Value Ceil(const Value &numerator, const Value &denominator){return (numerator\
@@ -47,10 +51,7 @@ data:
     \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
     \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
     \ &value){return distance(container.begin(), upper_bound(container.begin(), container.end(),\
-    \ value));}\ntemplate<class Value>\nbool ChangeMin(Value &src, const Value &cmp){if(src\
-    \ > cmp){src = cmp; return true;} return false;}\ntemplate<class Value>\nbool\
-    \ ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;}\
-    \ return false;}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
+    \ value));}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
     \ const Value &x, const Value &higher){return lower <= x && x <= higher;}\ntemplate<typename\
     \ Value>\ninline bool InGrid(const Value &y, const Value &x, const Value &ymax,\
     \ const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\n\
@@ -58,35 +59,36 @@ data:
     \ const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a,\
     \ b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename Value>\ninline Value\
     \ Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}\n\
-    \ntemplate<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
+    \ntemplate<class Value>\nbool chmin(Value &src, const Value &cmp){if(src > cmp){src\
+    \ = cmp; return true;} return false;}\ntemplate<class Value>\nbool chmax(Value\
+    \ &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}\n\
+    template<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
     \ (v).end());}\ntemplate<typename Value>\ninline Value max(vector<Value> &v){return\
-    \ *max_element((v).begin(), (v).end());}\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconst int INF_INT = numeric_limits<int>::max() >> 2;\nconst ll INF_LL = numeric_limits<ll>::max()\
-    \ >> 2;\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1, 0, 1};\n\
-    const int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] = {0, -1, -1,\
-    \ -1, 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y, int current_x,\
-    \ int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int, int>> ret;\n\
-    \    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y = current_y\
-    \ + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8 ? dx8[d]\
-    \ : dx4[d]);\n        if(InGrid(next_y, next_x, max_y, max_x)){\n            ret.emplace_back(next_y,\
-    \ next_x);\n        }\n    }\n    return ret;\n}\n\ntemplate <typename T1, typename\
-    \ T2>\nostream &operator<<(ostream &os, const pair<T1, T2> &p){\n    os << p.first\
-    \ << \" \" << p.second;\n    return os;\n}\n\ntemplate <typename T1, typename\
-    \ T2>\nistream &operator>>(istream &is, pair<T1, T2> &p){\n    is >> p.first >>\
-    \ p.second;\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i){\n        os <<\
-    \ v[i] << (i + 1 != v.size() ? \" \" : \"\");\n    }\n    return os;\n}\n\ntemplate\
-    \ <typename T>\nostream &operator<<(ostream &os, vector<vector<T>> &v){\n    for\
-    \ (int i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ?\
-    \ \"\\n\" : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nistream\
-    \ &operator>>(istream &is, vector<T> &v){\n    for (int i = 0; i < v.size(); ++i)\
-    \ is >> v[i];\n    return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, set<T> &v){\n    for (auto &u : v){\n        os << u << \" \";\n    }\n\
-    \    return os;\n}\n\ntemplate<typename T1, typename T2>\nvector<pair<T1, T2>>\
-    \ AssembleVectorPair(vector<T1> &v1, vector<T2> &v2){\n    assert(v1.size() ==\
-    \ v2.size());\n    vector<pair<T1, T2>> v;\n    for(int i = 0; i < v1.size();\
-    \ ++i) v.push_back({v1[i], v2[i]});\n    return v;\n}\n\ntemplate<typename T1,\
-    \ typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
+    \ *max_element((v).begin(), (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\n\
+    const int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0,\
+    \ 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>>\
+    \ adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){\n\
+    \    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n\
+    \        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x\
+    \ = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x,\
+    \ max_y, max_x)){\n            ret.emplace_back(next_y, next_x);\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream\
+    \ &os, const pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return\
+    \ os;\n}\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is,\
+    \ pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int\
+    \ i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \"\
+    \ : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
+    \   os << v[i] << (i + 1 != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n\
+    }\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v){\n\
+    \    for (int i = 0; i < v.size(); ++i) is >> v[i];\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, set<T> &v){\n    for (auto &u\
+    \ : v){\n        os << u << \" \";\n    }\n    return os;\n}\n\ntemplate<typename\
+    \ T1, typename T2>\nvector<pair<T1, T2>> AssembleVectorPair(vector<T1> &v1, vector<T2>\
+    \ &v2){\n    assert(v1.size() == v2.size());\n    vector<pair<T1, T2>> v;\n  \
+    \  for(int i = 0; i < v1.size(); ++i) v.push_back({v1[i], v2[i]});\n    return\
+    \ v;\n}\n\ntemplate<typename T1, typename T2>\npair<vector<T1>, vector<T2>> DisassembleVectorPair(vector<pair<T1,\
     \ T2>> &v){\n    vector<T1> v1;\n    vector<T2> v2;\n    transform(v.begin(),\
     \ v.end(), back_inserter(v1), [](auto p){return p.first;});\n    transform(v.begin(),\
     \ v.end(), back_inserter(v2), [](auto p){return p.second;});\n    return {v1,\
@@ -102,162 +104,92 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 1 \"Library/Graph/BellmanFord.hpp\"\n/**\n\
-    \ * @file BellmanFord.hpp\n * @brief BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\
-    \u30A9\u30FC\u30C9\u6CD5\n * @version 4.0\n * @date 2024-09-01\n */\n\n#line 2\
-    \ \"Library/Graph/Graph.hpp\"\n\n/**\n * @file Graph.hpp\n * @brief Graph - \u30B0\
-    \u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-01\n\
-    \ */\n\n#line 11 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    Edge() = default;\n    Edge(int from, int to, CostType\
-    \ cost, int id = -1) : from(from), to(to), cost(cost), id(id){}\n\t\n    int from{-1},\
-    \ to{-1}, id{-1};\n    CostType cost{1};\n};\n\ntemplate<typename CostType = int32_t>\n\
-    class Graph{\n    public:\n    Graph() = default;\n\n    /**\n     * @brief \u9802\
-    \u70B9\u6570 `vertex_size` \u306E\u30B0\u30E9\u30D5\u3092\u69CB\u7BC9\u3059\u308B\
-    \u3002\n     * @param vertex_size \u9802\u70B9\u6570\n     * @param directed `true`\
-    \ \u306E\u5834\u5408\u3001\u6709\u5411\u30B0\u30E9\u30D5\u3068\u3057\u3066\u69CB\
-    \u7BC9\u3059\u308B `(default = false)`\n     */\n    Graph(int vertex_size, bool\
-    \ directed = false) : \n        vertex_(vertex_size), adjacent_list_(vertex_size),\n\
-    \        directed_flag_(directed){}\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
-    \ G \u306E\u9802\u70B9\u6570\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @return\
-    \ size_t \u30B0\u30E9\u30D5 G \u306E\u9802\u70B9\u6570\n     */\n    size_t get_vertex_size()\
-    \ const {\n        return vertex_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\
-    \u30D5 G \u306E\u8FBA\u6570\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @return\
-    \ size_t \u30B0\u30E9\u30D5 G \u306E\u8FBA\u6570\n     */\n    size_t get_edge_size()\
-    \ const {\n        return edge_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\
-    \u30D5 G \u306B\u5BFE\u3059\u308B\u5341\u5206\u5927\u304D\u306A\u5024(`INF`)\u3092\
-    \u53D6\u5F97\u3059\u308B\u3002\n     * @note `numeric_limits<CostType>::max()\
-    \ / 4` \u3092\u63A1\u7528\u3057\u3066\u3044\u308B\u3002\n     * @return CostType\
-    \ `INF`\n     */\n    CostType get_inf() const {\n        return inf_;\n    }\n\
-    \n    /**\n     * @brief 2\u9802\u70B9 `s` `t` \u9593\u306B\u91CD\u307F `c` \u306E\
-    \u8FBA\u3092\u5F35\u308B\u3002\u6709\u5411\u30B0\u30E9\u30D5\u306E\u5834\u5408\
-    \u306F `s` \u304B\u3089 `t` \u3078\u306E\u6709\u5411\u8FBA\u304C\u3001\u7121\u5411\
-    \u30B0\u30E9\u30D5\u306E\u5834\u5408\u306F `s` `t` \u9593\u306E\u7121\u5411\u8FBA\
-    \u304C\u5F35\u3089\u308C\u308B\u3002\n     * @param s \u59CB\u70B9\u306E\u9802\
-    \u70B9(\u6709\u5411\u8FBA)\n     * @param t \u7D42\u70B9\u306E\u9802\u70B9(\u6709\
-    \u5411\u8FBA)\n     * @param c \u91CD\u307F `(default = 1)`\n     * @param id\
-    \ \u8FBA\u306E\u756A\u53F7\u3092\u660E\u793A\u7684\u306B\u6307\u5B9A\u3059\u308B\
-    \ `(default = -1)`\n     */\n    void AddEdge(Vertex s, Vertex t, CostType c =\
-    \ 1, int id = -1){\n        Validate(s);\n        Validate(t);\n        int edge_id\
-    \ = edge_++;\n        if(id != -1) edge_id = id;\n        adjacent_list_[s].push_back(Edge(s,\
-    \ t, c, edge_id));\n        if(!directed_flag_){\n            adjacent_list_[t].push_back(Edge(t,\
-    \ s, c, edge_id));\n        }\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
-    \u306B\u6307\u5B9A\u3057\u305F\u8FBA\u6570\u306E\u60C5\u5831\u3092\u5165\u529B\
-    \u3059\u308B\u3002\n     * @note \u5165\u529B\u5F62\u5F0F\u304C `u v w` \u307E\
-    \u305F\u306F `u v` \u306E\u5F62\u5F0F\u3067\u8868\u3055\u308C\u308B\u5165\u529B\
-    \u5F62\u5F0F\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u308B\u3002\n     * @param edge_count\
-    \ \u8FBA\u6570 E\n     * @param weighted_graph \u91CD\u307F\u4ED8\u304D\u8FBA\u3067\
-    \u3042\u308B\u304B `(default = true)`\n     * @param one_index \u9802\u70B9\u304C\
-    1-index\u3067\u3042\u308B\u304B `(default = true)`\n     */\n    void InputGraph(int\
-    \ edge_count, bool weighted_graph = true, bool one_index = true){\n        for(int\
-    \ i = 0; i < edge_count; ++i){\n            int s, t; cin >> s >> t;\n       \
-    \     if(one_index) --s, --t;\n            CostType w = 1;\n            if(weighted_graph)\
-    \ cin >> w;\n            AddEdge(s, t, w);\n        }\n    }\n\n    vector<Edge<CostType>>\
-    \ &operator[](Vertex v){\n        return adjacent_list_[v];\n    }\n\n    const\
-    \ vector<Edge<CostType>> &operator[](Vertex v) const {\n        return adjacent_list_[v];\n\
-    \    }\n\n    inline void Validate(int vertex) const {\n        assert(0 <= vertex\
-    \ && vertex < vertex_);\n    }\n\n    private:\n    size_t vertex_{0}, edge_{0};\n\
-    \    vector<vector<Edge<CostType>>> adjacent_list_;\n\n    bool directed_flag_;\n\
-    \    CostType inf_{numeric_limits<CostType>::max() / 4};\n};\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u306E\u96A3\u63A5\u884C\u5217\u3092\u8FD4\u3059\u3002\n *\
-    \ @note verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/11/ALDS1_11_A\n\
-    \ * @note \u8A08\u7B97\u91CF : O(V + E)\n * @note \u591A\u91CD\u8FBA\u306B\u3064\
-    \u3044\u3066\u306F\u3001\u6700\u3082\u91CD\u307F\u304C\u5C0F\u3055\u3044\u8FBA\
-    \u3092\u63A1\u7528\n * @param graph \u9802\u70B9\u6570 V \u306E\u30B0\u30E9\u30D5\
-    \n * @param not_adjacent_value 2\u9802\u70B9 u, v \u9593\u306B\u8FBA\u304C\u5B58\
-    \u5728\u3057\u306A\u3044\u5834\u5408\u306E\u5024 `(default = 0)`\n * @attention\
-    \ \u81EA\u5DF1\u30EB\u30FC\u30D7\u304C\u542B\u307E\u308C\u308B\u30B0\u30E9\u30D5\
-    \u306B\u3064\u3044\u3066\u306F\u672A\u5B9A\u7FA9\n * @return vector<vector<CostType>>\
-    \ V \xD7 V \u306E\u96A3\u63A5\u884C\u5217\n */\ntemplate<typename CostType>\n\
-    vector<vector<CostType>> GraphConvertMatrix(const Graph<CostType> &graph, CostType\
-    \ not_adjacent_value = 0){\n    size_t V = graph.get_vertex_size();\n    vector<vector<CostType>>\
-    \ ret(V, vector<CostType>(V, not_adjacent_value));\n    for(int i = 0; i < V;\
-    \ ++i){\n        for(const Edge<CostType> &e : graph[i]){\n            if(ret[i][e.to]\
-    \ == not_adjacent_value || ret[i][e.to] > e.cost){\n                ret[i][e.to]\
-    \ = e.cost;\n            }\n        }\n    }\n    return ret;\n}\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u306E\u8FBA\u3092\u9006\u9806\u306B\u3057\u305F\u30B0\u30E9\
-    \u30D5\u3092\u8FD4\u3059\u3002\n * @param graph \u9802\u70B9\u6570 V \u306E\u30B0\
-    \u30E9\u30D5\n * @attention \u7121\u5411\u30B0\u30E9\u30D5\u306B\u5BFE\u3059\u308B\
-    \u52D5\u4F5C\u306F\u672A\u5B9A\u7FA9\n * @return Graph<CostType> G \u306E\u8FBA\
-    \u3092\u9006\u306B\u3057\u305F\u30B0\u30E9\u30D5\n */\ntemplate<typename CostType>\n\
-    Graph<CostType> GraphReverse(const Graph<CostType> &graph){\n    size_t V = graph.get_vertex_size();\n\
-    \    Graph<CostType> ret(V, true);\n    for(int i = 0; i < V; ++i){\n        for(const\
-    \ Edge<CostType> &e : graph[i]){\n            ret.AddEdge(e.to, e.from, e.cost);\n\
-    \        }\n    }\n    return ret;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u306E\
-    \u8FBA\u96C6\u5408\u3092\u8FD4\u3059\u3002\n * @param graph \u9802\u70B9\u6570\
-    \ V \u306E\u30B0\u30E9\u30D5\n * @param sorted \u8FBA\u96C6\u5408\u3092\u30B3\u30B9\
-    \u30C8\u3067\u30BD\u30FC\u30C8\u3057\u305F\u72B6\u614B\u3067\u8FD4\u3059\u304B\
-    \ `(default = false)`\n * @return vector<Edge<CostType>> G \u306E\u8FBA\u96C6\u5408\
-    \n */\ntemplate<typename CostType>\nvector<Edge<CostType>> GraphConvertEdgeSet(const\
-    \ Graph<CostType> &graph, bool sorted = false){\n    vector<Edge<CostType>> ret;\n\
-    \    set<int> picked;\n    for(int v = 0; v < graph.get_vertex_size(); ++v){\n\
-    \        for(Edge<CostType> e : graph[v]){\n            if(!picked.contains(e.id)){\n\
-    \t\t\t\tret.emplace_back(e);\n                picked.insert(e.id);\n\t\t\t}\n\
-    \        }\n    }\n    if(sorted){\n        sort(ret.begin(), ret.end(), [&](Edge<CostType>\
-    \ &l, Edge<CostType> &r){\n            return l.cost < r.cost;\n        });\n\
-    \    }\n    return ret;\n}\n#line 9 \"Library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
-    \ CostType>\nclass BellmanFord{\n    public:\n    /**\n     * @brief \u30B0\u30E9\
-    \u30D5 graph \u306B\u304A\u3051\u308B\u8CA0\u8FBA\u6709\u308A\u5358\u4E00\u59CB\
-    \u70B9\u6700\u77ED\u8DEF\u554F\u984C\u3092\u89E3\u304F\u3002\n     * @note \u8A08\
-    \u7B97\u91CF : O(EV)\n     * @param graph \u9802\u70B9\u6570 V, \u8FBA\u6570 E\
-    \ \u306E\u30B0\u30E9\u30D5\n     * @param source \u59CB\u70B9\u306E\u9802\u70B9\
-    \ (0-index)\n     */\n    BellmanFord(const Graph<CostType> &graph, Vertex source)\
-    \ :\n            vertex_size_(graph.get_vertex_size()), edge_set_(GraphConvertEdgeSet(graph,\
-    \ false)),\n            source_vertex_(source), inf_(graph.get_inf()), dist_(vertex_size_,\
-    \ inf_){\n        Validate(source_vertex_);\n        dist_[source_vertex_] = 0;\n\
-    \        int update_count = 0;\n        while(1){\n            if(update_count\
-    \ == vertex_size_){\n                negative_cycle_ = true;\n               \
-    \ break;\n            }\n            bool update_flag = false;\n            for(Edge<CostType>\
-    \ &e : edge_set_){\n                if(dist_[e.from] == inf_) continue;\n    \
-    \            if(dist_[e.to] > dist_[e.from] + e.cost){\n                    dist_[e.to]\
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line\
+    \ 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename CostType\
+    \ = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n    Edge(Vertex\
+    \ from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n        from(from_),\
+    \ to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const Edge<CostType>\
+    \ &e) const {return cost < e.cost;}\n\n    operator int() const {return to;}\n\
+    \n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\ntemplate<typename\
+    \ CostType = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n \
+    \   Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n    \n\
+    \    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n    \
+    \    int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
+    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
+    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
+    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
+    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
+    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
+    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
+    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
+    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
+    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
+    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
+    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
+    \ 2 \"Library/Graph/GraphMisc.hpp\"\n\n#line 4 \"Library/Graph/GraphMisc.hpp\"\
+    \n\ntemplate<typename CostType>\nvector<Edge<CostType>> ConvertEdgeSet(const Graph<CostType>\
+    \ &G){\n    vector<Edge<CostType>> ret;\n    vector<bool> check(G.EdgeSize(),\
+    \ false);\n    int n = G.VertexSize();\n    for(int u = 0; u < n; ++u){\n    \
+    \    for(const Edge<CostType> &e : G[u]){\n            if(check[e.idx]) continue;\n\
+    \            check[e.idx] = true;\n            ret.push_back(e);\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<vector<CostType>>\
+    \ ConvertDistanceMatrix(const Graph<CostType> &G){\n    int n = G.VertexSize();\n\
+    \    vector<vector<CostType>> ret(n, vector<CostType>(n, CostType(INF)));\n  \
+    \  for(int u = 0; u < n; ++u){\n        ret[u][u] = CostType(0);\n        for(const\
+    \ Edge<CostType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate<typename CostType>\nGraph<CostType> ReverseGraph(const\
+    \ Graph<CostType> &G){\n    int n = G.VertexSize();\n    Graph<CostType> ret(n);\n\
+    \    for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e : G[u]){\n\
+    \            ret.AddDirectedEdge(e.to, e.from, e.cost);\n        }\n    }\n  \
+    \  return ret;\n}\n#line 3 \"Library/Graph/BellmanFord.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass BellmanFord{\n    public:\n    BellmanFord(Graph<CostType>\
+    \ &graph, Vertex s = -1) :\n        G(graph), n(graph.VertexSize()), dist_(n){\n\
+    \        if(s != -1) Solve(s);\n    }\n\n    inline bool Reachable(const Vertex\
+    \ &t) const {\n        return dist_[t] != inf;\n    }\n\n    inline CostType Distance(const\
+    \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    inline bool Negative()\
+    \ const {\n        return negative_cycle_;\n    }\n\n    void Solve(Vertex s){\n\
+    \        fill(dist_.begin(), dist_.end(), inf);\n        dist_[s] = CostType(0);\n\
+    \        negative_cycle_ = false;\n        int update_count = 0;\n        auto\
+    \ E = ConvertEdgeSet(G);\n        while(1){\n            if(update_count == n){\n\
+    \                negative_cycle_ = true;\n                break;\n           \
+    \ }\n            bool update_flag = false;\n            for(const Edge<CostType>\
+    \ &e : E){\n                if(dist_[e.from] == inf) continue;\n             \
+    \   if(dist_[e.to] > dist_[e.from] + e.cost){\n                    dist_[e.to]\
     \ = dist_[e.from] + e.cost;\n                    update_flag = true;\n       \
     \         }\n            }\n            if(!update_flag) break;\n            ++update_count;\n\
-    \        }\n    }\n    \n    /**\n     * @brief \u9802\u70B9 `source` \u304B\u3089\
-    \u9802\u70B9 `target` \u306B\u5230\u9054\u53EF\u80FD\u304B\u3092\u8FD4\u3059\u3002\
-    \n     * @param target \u7D42\u70B9\u306E\u9802\u70B9\n     * @return true \u5230\
-    \u9054\u53EF\u80FD\n     * @return false \u5230\u9054\u4E0D\u80FD\n     */\n \
-    \   bool Reachable(Vertex target) const {\n        Validate(target);\n       \
-    \ return dist_[target] != inf_;\n    }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\
-    \u304C\u8CA0\u9589\u8DEF\u3092\u6301\u3064\u304B\u3092\u8FD4\u3059\u3002\n   \
-    \  */\n    inline bool Negative() const {\n        return negative_cycle_;\n \
-    \   }\n\n    /**\n     * @brief \u9802\u70B9 `source` \u304B\u3089\u9802\u70B9\
-    \ `target` \u307E\u3067\u306E\u6700\u77ED\u7D4C\u8DEF\u9577\u3092\u8FD4\u3059\u3002\
-    \n     * @param target \u7D42\u70B9\u306E\u9802\u70B9 (0-index)\n     * @attention\
-    \ \u8CA0\u9589\u8DEF\u3092\u6301\u3064\u3068\u304D\u306B\u8FD4\u3059\u5024\u306F\
-    \u672A\u5B9A\u7FA9\u3067\u3042\u308B\u3002\n     * @return CostType \u9802\u70B9\
-    \ `source` \u304B\u3089\u9802\u70B9 `target` \u307E\u3067\u306E\u6700\u77ED\u7D4C\
-    \u8DEF\u9577\n     */\n    CostType Distance(Vertex target) const {\n        Validate(target);\n\
-    \        return dist_[target];\n    }\n\n    CostType operator[](Vertex target){\n\
-    \        return Distance(target);\n    }\n\n    const CostType operator[](Vertex\
-    \ target) const {\n        return Distance(target);\n    }\n\n    private:\n \
-    \   int vertex_size_;\n    vector<Edge<CostType>> edge_set_;\n    Vertex source_vertex_{-1};\n\
-    \    CostType inf_;\n    vector<CostType> dist_;\n    bool negative_cycle_{false};\n\
-    \n    inline void Validate(int vertex) const {\n        if(!(0 <= vertex && vertex\
-    \ < vertex_size_)){\n            cerr << \"# [Bellman-Ford] Failed Validate :\
-    \ Vertex \" << vertex << endl;\n            assert(false);\n        }\n    }\n\
-    };\n#line 5 \"verify/AOJ-GRL-1-B.test.cpp\"\n\nint main(){\n    int V, E, r; cin\
-    \ >> V >> E >> r;\n    Graph<ll> G(V, true);\n    G.InputGraph(E, true, false);\n\
-    \    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n        cout << \"NEGATIVE\
-    \ CYCLE\" << endl;\n    }\n    else{\n        for(int i = 0; i < V; ++i){\n  \
-    \          if(bf.Reachable(i)){\n                cout << bf.Distance(i) << endl;\n\
-    \            }\n            else{\n                cout << \"INF\" << endl;\n\
-    \            }\n        }\n    }\n}\n"
+    \        }\n    }\n\n    inline CostType operator[](const Vertex &t){\n      \
+    \  return dist_[t];\n    }\n\n    inline const CostType operator[](const Vertex\
+    \ &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
+    \ &G;\n    int n;\n    CostType inf{CostType(INF)};\n    bool negative_cycle_;\n\
+    \    vector<CostType> dist_;\n};\n#line 5 \"verify/AOJ-GRL-1-B.test.cpp\"\n\n\
+    int main(){\n    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V,\
+    \ E, 0, true, true);\n    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n\
+    \        cout << \"NEGATIVE CYCLE\" << endl;\n        return 0;\n    }\n    for(int\
+    \ i = 0; i < V; ++i){\n        if(bf.Reachable(i)){\n            cout << bf.Distance(i)\
+    \ << endl;\n        }\n        else{\n            cout << \"INF\" << endl;\n \
+    \       }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/BellmanFord.hpp\"\
-    \n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    Graph<ll> G(V, true);\n\
-    \    G.InputGraph(E, true, false);\n    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n\
-    \        cout << \"NEGATIVE CYCLE\" << endl;\n    }\n    else{\n        for(int\
-    \ i = 0; i < V; ++i){\n            if(bf.Reachable(i)){\n                cout\
-    \ << bf.Distance(i) << endl;\n            }\n            else{\n             \
-    \   cout << \"INF\" << endl;\n            }\n        }\n    }\n}"
+    \n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V,\
+    \ E, 0, true, true);\n    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n\
+    \        cout << \"NEGATIVE CYCLE\" << endl;\n        return 0;\n    }\n    for(int\
+    \ i = 0; i < V; ++i){\n        if(bf.Reachable(i)){\n            cout << bf.Distance(i)\
+    \ << endl;\n        }\n        else{\n            cout << \"INF\" << endl;\n \
+    \       }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
   - Library/Graph/BellmanFord.hpp
   - Library/Graph/Graph.hpp
+  - Library/Graph/GraphMisc.hpp
   isVerificationFile: true
   path: verify/AOJ-GRL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2025-03-16 02:46:39+09:00'
+  timestamp: '2025-03-23 23:54:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-B.test.cpp

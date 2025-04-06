@@ -30,15 +30,16 @@ data:
     #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
     \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
     #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
-    #line 12 \"Library/modint.hpp\"\nusing namespace std;\n\nconst int mod998 = 998244353;\n\
-    const int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct ModInt {\n    int\
-    \ x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y >= 0 ? y % mod :\
-    \ (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const ModInt &p) {\n\
-    \        if((x += p.x) >= mod) x -= mod;\n        return *this;\n    }\n\n   \
-    \ ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x) >= mod) x\
-    \ -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const ModInt\
-    \ &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n   \
-    \ }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
+    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
+    \ << 62) - (1LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\nusing namespace\
+    \ std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate<\
+    \ int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
+    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
+    \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
+    \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
+    \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
+    \ ModInt &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n\
+    \    }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
     \        return *this;\n    }\n\n    ModInt operator-() const { return ModInt(-x);\
     \ }\n\n    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p;\
     \ }\n\n    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p;\
@@ -97,7 +98,7 @@ data:
   isVerificationFile: true
   path: verify/LC-UnionfindWithPotential.test.cpp
   requiredBy: []
-  timestamp: '2025-02-12 02:16:01+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-UnionfindWithPotential.test.cpp

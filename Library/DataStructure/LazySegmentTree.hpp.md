@@ -24,9 +24,11 @@ data:
     #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
     #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n#line 10 \"Library/DataStructure/LazySegmentTree.hpp\"\
-    \n\ntemplate<typename Monoid, typename OperatorMonoid = Monoid>\nclass LazySegmentTree{\n\
-    \    public:\n    using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    \ 1;\n#line 10 \"Library/DataStructure/LazySegmentTree.hpp\"\n\ntemplate<typename\
+    \ Monoid, typename OperatorMonoid = Monoid>\nclass LazySegmentTree{\n    public:\n\
+    \    using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
     \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
     \n    /**\n     * @brief \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u3092\u8981\u7D20\
     \u6570 `size` \u3067\u521D\u671F\u5316\u3059\u308B\u3002\n     * @param size \u30BB\
@@ -215,7 +217,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/LazySegmentTree.hpp
   requiredBy: []
-  timestamp: '2024-11-29 17:05:56+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffineRangeSum.test.cpp

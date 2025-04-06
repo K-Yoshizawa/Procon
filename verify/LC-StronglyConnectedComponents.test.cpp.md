@@ -5,17 +5,14 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/DataStructure/UnionFind.hpp
-    title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
     title: Library/Graph/GraphMisc.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/Graph/Kruskal.hpp
-    title: Library/Graph/Kruskal.hpp
+    path: Library/Graph/StronglyConnectedComponents.hpp
+    title: Library/Graph/StronglyConnectedComponents.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -26,11 +23,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/minimum_spanning_tree
+    PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
-    - https://judge.yosupo.jp/problem/minimum_spanning_tree
-  bundledCode: "#line 1 \"verify/LC-MinimumSpanningTree.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\n\n#line 2 \"Library/Template.hpp\"\
+    - https://judge.yosupo.jp/problem/scc
+  bundledCode: "#line 1 \"verify/LC-StronglyConnectedComponents.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#line 2 \"Library/Template.hpp\"\
     \n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template -\
     \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.10\n * @date 2025-03-16\n\
     \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
@@ -149,56 +146,72 @@ data:
     \ Graph<CostType> &G){\n    int n = G.VertexSize();\n    Graph<CostType> ret(n);\n\
     \    for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e : G[u]){\n\
     \            ret.AddDirectedEdge(e.to, e.from, e.cost);\n        }\n    }\n  \
-    \  return ret;\n}\n#line 2 \"Library/DataStructure/UnionFind.hpp\"\n\n#line 4\
-    \ \"Library/DataStructure/UnionFind.hpp\"\n\nclass UnionFind{\n    public:\n \
-    \   UnionFind(size_t n) : data_(n, -1){}\n\n    int Find(const int k){\n     \
-    \   if(data_[k] < 0) return k;\n        int r = Find(data_[k]);\n        return\
-    \ data_[k] = r;\n    }\n\n    bool Same(const int x, const int y){\n        return\
-    \ Find(x) == Find(y);\n    }\n\n    bool Unite(int x, int y){\n        x = Find(x),\
-    \ y = Find(y);\n        if(x == y) return false;\n        if(data_[x] > data_[y])\
-    \ swap(x, y);\n        data_[x] += data_[y];\n        data_[y] = x;\n        return\
-    \ true;\n    }\n    \n    size_t Size(int k){\n        int v = Find(k);\n    \
-    \    return -data_[v];\n    }\n\n    vector<vector<int>> Group(){\n        vector<vector<int>>\
-    \ ret(data_.size());\n        for(int i = 0; i < data_.size(); ++i){\n       \
-    \     ret[Find(i)].emplace_back(i);\n        }\n        ret.erase(remove_if(begin(ret),\
-    \ end(ret), [&](vector<int> &v){\n            return v.empty();\n        }), end(ret));\n\
-    \        return ret;\n    }\n\n    private:\n    vector<int> data_;\n};\n#line\
-    \ 4 \"Library/Graph/Kruskal.hpp\"\n\ntemplate<typename CostType>\nclass Kruskal{\n\
-    \    public:\n    Kruskal(Graph<CostType> &graph) : G(graph), cost_(0){\n    \
-    \    int N = G.VertexSize();\n        auto E = ConvertEdgeSet(G);\n        sort(E.begin(),\
-    \ E.end());\n        UnionFind uf(N);\n        for(const Edge<CostType> &e : E){\n\
-    \            if(uf.Unite(e.from, e.to)){\n                cost_ += e.cost;\n \
-    \               edges_.push_back(e);\n            }\n        }\n    }\n\n    inline\
-    \ vector<Edge<CostType>> &GetEdgeSet(){\n        return edges_;\n    }\n\n   \
-    \ inline CostType GetCost() const {\n        return cost_;\n    }\n\n    private:\n\
-    \    Graph<CostType> &G;\n    vector<Edge<CostType>> edges_;\n    CostType cost_;\n\
-    };\n#line 5 \"verify/LC-MinimumSpanningTree.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
-    \    int N, M; cin >> N >> M;\n    auto G = InputGraph<ll>(N, M, 0, true, false);\n\
-    \n    Kruskal kr(G);\n    cout << kr.GetCost() << '\\n';\n    for(auto e : kr.GetEdgeSet()){\n\
-    \        cout << e.idx << ' ';\n    }\n    cout << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/Kruskal.hpp\"\
-    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >>\
-    \ N >> M;\n    auto G = InputGraph<ll>(N, M, 0, true, false);\n\n    Kruskal kr(G);\n\
-    \    cout << kr.GetCost() << '\\n';\n    for(auto e : kr.GetEdgeSet()){\n    \
-    \    cout << e.idx << ' ';\n    }\n    cout << '\\n';\n}"
+    \  return ret;\n}\n#line 3 \"Library/Graph/StronglyConnectedComponents.hpp\"\n\
+    \ntemplate<typename CostType>\nstruct StronglyConnectedComponents{\n    public:\n\
+    \    StronglyConnectedComponents(Graph<CostType> &graph) :\n        G(graph),\
+    \ RG(ReverseGraph(graph)), n(G.VertexSize()), belong_(n, -1){\n        vector<int>\
+    \ label(n, -1);\n        vector<bool> state(n, false);\n        int nex = 0;\n\
+    \        vector<Vertex> vs(n);\n        iota(vs.begin(), vs.end(), 0);\n     \
+    \   for(auto v : vs){\n            if(!state[v]) dfs1(v, label, nex, state);\n\
+    \        }\n        sort(vs.begin(), vs.end(), [&](Vertex u, Vertex v){\n    \
+    \        return label[u] > label[v];\n        });\n        for(auto v : vs){\n\
+    \            if(state[v]){\n                int c = components_.size();\n    \
+    \            components_.push_back(vector<Vertex>{});\n                dfs2(v,\
+    \ label, c, state);\n            }\n        }\n    }\n\n    inline vector<vector<Vertex>>\
+    \ &Components(){\n        return components_;\n    }\n\n    inline int ComponentCount()\
+    \ const {\n        return (int)components_.size();\n    }\n\n    inline int BelongComponent(const\
+    \ Vertex &v) const {\n        return belong_[v];\n    }\n\n    vector<Vertex>\
+    \ TopologicalSort() const {\n        vector<Vertex> ret;\n        for(const auto\
+    \ &vs : components_){\n            for(const auto &v : vs){\n                ret.emplace_back(v);\n\
+    \            }\n        }\n        return ret;\n    }\n    \n    Graph<CostType>\
+    \ ContractedGraph() const {\n        int nn = ComponentCount();\n        Graph<CostType>\
+    \ ret(nn);\n        for(int u = 0; u < n; ++u){\n            int nu = BelongComponent(u);\n\
+    \            for(const Edge<CostType> &e : G[u]){\n                int nv = BelongComponent(e.to);\n\
+    \                if(nu == nv) continue;\n                ret.AddDirectedEdge(nu,\
+    \ nv, e.cost);\n            }\n        }\n        return ret;\n    }\n\n    inline\
+    \ int operator[](const Vertex &v){\n        return BelongComponent(v);\n    }\n\
+    \n    inline const int operator[](const Vertex &v) const {\n        return BelongComponent(v);\n\
+    \    }\n\n    private:\n    Graph<CostType> &G;\n    Graph<CostType> RG;\n   \
+    \ int n;\n    vector<vector<Vertex>> components_;\n    vector<int> belong_;\n\n\
+    \    void dfs1(Vertex v, vector<int> &label, int &nex, vector<bool> &state){\n\
+    \        state[v] = true;\n        for(const Edge<CostType> &e : G[v]){\n    \
+    \        if(state[e.to]) continue;\n            dfs1(e.to, label, nex, state);\n\
+    \        }\n        label[v] = nex++;\n        return;\n    }\n\n    void dfs2(Vertex\
+    \ v, vector<int> &label, int component, vector<bool> &state){\n        components_[component].push_back(v);\n\
+    \        belong_[v] = component;\n        state[v] = false;\n        for(const\
+    \ Edge<CostType> &e : RG[v]){\n            if(!state[e.to]) continue;\n      \
+    \      dfs2(e.to, label, component, state);\n        }\n        return;\n    }\n\
+    };\n#line 5 \"verify/LC-StronglyConnectedComponents.test.cpp\"\n\nint main(){\n\
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >> N >> M;\n    auto\
+    \ G = InputGraph(N, M, 0, false, true);\n    \n    StronglyConnectedComponents\
+    \ scc(G);\n    cout << scc.ComponentCount() << '\\n';\n    for(const auto &vs\
+    \ : scc.Components()){\n        cout << vs.size();\n        for(const auto &v\
+    \ : vs){\n            cout << ' ' << v;\n        }\n        cout << '\\n';\n \
+    \   }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#include \"../Library/Template.hpp\"\
+    \n#include \"../Library/Graph/StronglyConnectedComponents.hpp\"\n\nint main(){\n\
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >> N >> M;\n    auto\
+    \ G = InputGraph(N, M, 0, false, true);\n    \n    StronglyConnectedComponents\
+    \ scc(G);\n    cout << scc.ComponentCount() << '\\n';\n    for(const auto &vs\
+    \ : scc.Components()){\n        cout << vs.size();\n        for(const auto &v\
+    \ : vs){\n            cout << ' ' << v;\n        }\n        cout << '\\n';\n \
+    \   }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/Graph/Kruskal.hpp
+  - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/Graph.hpp
   - Library/Graph/GraphMisc.hpp
-  - Library/DataStructure/UnionFind.hpp
   isVerificationFile: true
-  path: verify/LC-MinimumSpanningTree.test.cpp
+  path: verify/LC-StronglyConnectedComponents.test.cpp
   requiredBy: []
   timestamp: '2025-03-23 23:54:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/LC-MinimumSpanningTree.test.cpp
+documentation_of: verify/LC-StronglyConnectedComponents.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-MinimumSpanningTree.test.cpp
-- /verify/verify/LC-MinimumSpanningTree.test.cpp.html
-title: verify/LC-MinimumSpanningTree.test.cpp
+- /verify/verify/LC-StronglyConnectedComponents.test.cpp
+- /verify/verify/LC-StronglyConnectedComponents.test.cpp.html
+title: verify/LC-StronglyConnectedComponents.test.cpp
 ---

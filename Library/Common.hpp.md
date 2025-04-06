@@ -27,32 +27,32 @@ data:
       \u30FC\u30BF\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/BellmanFord.hpp
-    title: "BellmanFord - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
+    title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
+  - icon: ':heavy_check_mark:'
+    path: Library/Graph/CycleDetection.hpp
+    title: Library/Graph/CycleDetection.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':warning:'
-    path: Library/Graph/FunctionalGraph.hpp
-    title: Functional Graph
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
+    path: Library/Graph/GraphMisc.hpp
+    title: Library/Graph/GraphMisc.hpp
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: "Kruskal - \u6700\u5C0F\u5168\u57DF\u6728"
+    title: Library/Graph/Kruskal.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
-    title: "LowLink - \u6A4B\u3068\u95A2\u7BC0\u70B9"
+    title: Library/Graph/LowLink.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
-    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
-    path: Library/Graph/TwoEdgeConnectedComponents.hpp
-    title: "Two-Edge-Connected Components - \u4E8C\u8FBA\u9023\u7D50\u6210\u5206\u5206\
-      \u89E3"
+    title: Library/Graph/StronglyConnectedComponents.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
-    title: "WarshallFloyd - \u5168\u70B9\u5BFE\u9593\u6700\u77ED\u7D4C\u8DEF"
+    title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
+      \u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
@@ -92,6 +92,9 @@ data:
   - icon: ':warning:'
     path: Library/origin.cpp
     title: Library/origin.cpp
+  - icon: ':warning:'
+    path: Library/unauthenticated/FunctionalGraph.hpp
+    title: Functional Graph
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-0560.test.cpp
@@ -136,8 +139,8 @@ data:
     path: verify/AOJ-GRL-3-C.test.cpp
     title: verify/AOJ-GRL-3-C.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-4-B.test.cpp
-    title: verify/AOJ-GRL-4-B.test.cpp
+    path: verify/AOJ-GRL-4-A.test.cpp
+    title: verify/AOJ-GRL-4-A.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-A.test.cpp
     title: verify/AOJ-GRL-5-A.test.cpp
@@ -147,6 +150,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-5-C.test.cpp
     title: verify/AOJ-GRL-5-C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-CycleDetection.test.cpp
+    title: verify/LC-CycleDetection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-CycleDetectionUndirected.test.cpp
+    title: verify/LC-CycleDetectionUndirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LongestIncreasingSubsequence.test.cpp
     title: verify/LC-LongestIncreasingSubsequence.test.cpp
@@ -175,14 +184,17 @@ data:
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-ShortestPath.test.cpp
+    title: verify/LC-ShortestPath.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-StronglyConnectedComponents.test.cpp
+    title: verify/LC-StronglyConnectedComponents.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TwoEdgeConnectedComponents.test.cpp
-    title: verify/LC-TwoEdgeConnectedComponents.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
@@ -211,28 +223,32 @@ data:
     #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
     #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n"
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    \ 1;\n"
   code: "#pragma once\n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include\
     \ <array>\n#include <bitset>\n#include <cassert>\n#include <cstdint>\n#include\
     \ <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n#include\
     \ <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n\
     #include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include\
-    \ <vector>\nusing namespace std;"
+    \ <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
+    \nconstexpr const ll INF = (1LL << 62) - (1LL << 30) - 1;"
   dependsOn: []
   isVerificationFile: false
   path: Library/Common.hpp
   requiredBy:
   - Library/Graph/Graph.hpp
   - Library/Graph/Dijkstra.hpp
-  - Library/Graph/TwoEdgeConnectedComponents.hpp
+  - Library/Graph/GraphMisc.hpp
+  - Library/Graph/CycleDetection.hpp
   - Library/Graph/WarshallFloyd.hpp
   - Library/Graph/LowLink.hpp
   - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/BellmanFord.hpp
   - Library/Graph/Kruskal.hpp
-  - Library/Graph/FunctionalGraph.hpp
   - Library/origin.cpp
   - Library/modint.hpp
+  - Library/unauthenticated/FunctionalGraph.hpp
   - Library/Template.hpp
   - Library/TemplateExtend.hpp
   - Library/Tree/Tree.hpp
@@ -250,7 +266,7 @@ data:
   - Library/DataStructure/UnionFind.hpp
   - Library/DataStructure/LazySegmentTree.hpp
   - Library/DataStructure/DualSegmentTree.hpp
-  timestamp: '2024-09-05 07:46:35+09:00'
+  timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-C.test.cpp
@@ -265,6 +281,7 @@ data:
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/LC-CycleDetectionUndirected.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
@@ -274,18 +291,20 @@ data:
   - verify/AOJ-GRL-5-B.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
   - verify/LC-PersistentUnionfind.test.cpp
-  - verify/AOJ-GRL-4-B.test.cpp
+  - verify/LC-ShortestPath.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-0560.test.cpp
   - verify/AOJ-0723.test.cpp
+  - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-CycleDetection.test.cpp
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/LC-TreeDiameter.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
-  - verify/LC-TwoEdgeConnectedComponents.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
