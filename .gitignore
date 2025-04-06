@@ -3,6 +3,7 @@
 *.c
 *.txt
 ac-library/
+!/docs/Template.txt
 !/Library/origin.cpp
 !/verify/**
 !/verify_icpc/**
