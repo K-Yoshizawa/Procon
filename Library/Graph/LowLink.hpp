@@ -1,112 +1,62 @@
 #pragma once
 
-/**
- * @file LowLink.hpp
- * @brief LowLink - 橋と関節点
- * @version 1.0
- * @date 2024-09-02
- */
-
 #include "Graph.hpp"
 
 template<typename CostType>
 class LowLink{
     public:
-    LowLink(Graph<CostType> &graph) :
-            graph_(graph), ord_(graph.get_vertex_size()), low_(graph.get_vertex_size()),
-            child_(graph.get_vertex_size()), state_(graph.get_vertex_size(), 0){
-        for(int i = 0; i < graph.get_vertex_size(); ++i){
-            if(!state_[i]) dfs(i, -1, 0);
+    LowLink(Graph<CostType> &graph) : G(graph), n(graph.VertexSize()), ord_(n, -1), low_(n, -1), in_(n), out_(n){
+        for(int i = 0, k = 0, t = 0; i < n; ++i){
+            if(ord_[i] == -1){
+                k = dfs(i, -1, k, t);
+            }
         }
-        BuildArticulationVertex();
-        BuildBridge();
     }
 
-    /**
-     * @brief 頂点 `v` の `ord[v]` を返す。
-     * @param v 頂点番号 (0-index)
-     * @return int 
-     */
-    int get_ord(Vertex v) const {
-        graph_.Validate(v);
-        return ord_[v];
-    }
-
-    /**
-     * @brief 頂点 `v` の `low[v]` を返す。
-     * @param v 頂点番号 (0-index)
-     * @return int 
-     */
-    int get_low(Vertex v) const {
-        graph_.Validate(v);
-        return low_[v];
-    }
-
-    /**
-     * @brief 関節点を列挙する。
-     * @note 関節点 : その頂点を除くと連結成分が増えるような頂点
-     * @return vector<Vertex> 関節点の頂点番号 (0-index)
-     */
-    vector<Vertex> &get_articulation_vertex(){
+    vector<Vertex> &ArticulationVertex(){
         return articulation_vertex_;
     }
 
-    /**
-     * @brief 橋を列挙する。
-     * @note 橋 : その辺を除くと連結成分が増えるような頂点
-     * @return vector<Edge<CostType>> 橋である辺
-     */
-    vector<Edge<CostType>> &get_bridge(){
+    vector<pair<Vertex, Vertex>> &Bridge(){
         return bridge_;
     }
 
+    pair<int, int> EulerTour(const Vertex v) const {
+        return {in_[v], out_[v]};
+    }
+
     private:
-    bool dfs(Vertex v, int p, int order){
-        if(state_[v] != 0) return false;
-        // cerr << "# (v, p, order) = (" << v << ", " << p << ", " << order << ")" << endl;
-        state_[v] = 1 + (p == -1);
-        ord_[v] = low_[v] = order;
-        for(Edge<CostType> &e : graph_[v]){
-            if(e.id == p) continue;
-            child_[v].push_back(e.to);
-            if(dfs(e.to, e.id, order + 1)){
-                low_[v] = min(low_[v], low_[e.to]);
+    Graph<CostType> &G;
+    int n;
+    vector<int> ord_, low_, in_, out_;
+    vector<Vertex> articulation_vertex_;
+    vector<pair<Vertex, Vertex>> bridge_;
+
+    int dfs(Vertex v, int p, int k, int &t){
+        in_[v] = t++;
+        low_[v] = (ord_[v] = k++);
+        int cnt = 0;
+        bool is_articulation = false, second = false;
+        for(int u : G[v]){
+            if(ord_[u] == -1){
+                ++cnt;
+                k = dfs(u, v, k, t);
+                low_[v] = min(low_[v], low_[u]);
+                is_articulation |= (p != -1) && (low_[u] >= ord_[v]);
+                if(ord_[v] < low_[u]){
+                    bridge_.emplace_back(minmax(u, v));
+                }
+            }
+            else if(u != p || second){
+                low_[v] = min(low_[v], ord_[u]);
             }
             else{
-                child_[v].pop_back();
-                low_[v] = min(low_[v], ord_[e.to]);
+                second = true;
             }
         }
-        return true;
+        is_articulation |= (p == -1) && (cnt > 1);
+        if(is_articulation) articulation_vertex_.emplace_back(v);
+        out_[v] = t;
+        return k;
     }
-
-    void BuildArticulationVertex(){
-        for(int u = 0; u < graph_.get_vertex_size(); ++u){
-            if(state_[u] == 2){
-                if(child_[u].size() > 1) articulation_vertex_.push_back(u);
-                continue;
-            }
-            bool exist = false;
-            for(Vertex v : child_[u]){
-                exist |= (get_ord(u) <= get_low(v));
-            }
-            if(exist) articulation_vertex_.push_back(u);
-        }
-    }
-
-    void BuildBridge(){
-        auto es = GraphConvertEdgeSet(graph_, false);
-        for(Edge<CostType> e : es){
-            Vertex u = e.from, v = e.to;
-            if(get_ord(u) >= get_ord(v)) swap(u, v);
-            if(get_ord(u) < get_low(v)) bridge_.push_back(e);
-        }
-    }
-
-    Graph<CostType> &graph_;
-    vector<int> ord_, low_, state_;
-    vector<vector<Vertex>> child_;
-
-    vector<Vertex> articulation_vertex_;
-    vector<Edge<CostType>> bridge_;
 };
