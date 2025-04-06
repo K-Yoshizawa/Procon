@@ -5,9 +5,22 @@
 
 int main(){
     int V, E; cin >> V >> E;
-    Graph<ll> G(V, true);
-    G.InputGraph(E, true, false);
+    auto G = InputGraph<ll>(V, E, 0, true, true);
     
     WarshallFloyd wf(G);
-    wf.Print();
+    if(wf.Negative()){
+        cout << "NEGATIVE CYCLE" << endl;
+        return 0;
+    }
+    for(int i = 0; i < V; ++i){
+        for(int j = 0; j < V; ++j){
+            if(wf.Reachable(i, j)){
+                cout << wf[i][j];
+            }
+            else{
+                cout << "INF";
+            }
+            cout << " \n"[j + 1 == V];
+        }
+    }
 }

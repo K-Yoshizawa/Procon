@@ -26,10 +26,6 @@ template<typename Value>
 inline int LowerBoundIndex(const vector<Value> &container, const Value &value){return distance(container.begin(), lower_bound(container.begin(), container.end(), value));}
 template<typename Value>
 inline int UpperBoundIndex(const vector<Value> &container, const Value &value){return distance(container.begin(), upper_bound(container.begin(), container.end(), value));}
-template<class Value>
-bool ChangeMin(Value &src, const Value &cmp){if(src > cmp){src = cmp; return true;} return false;}
-template<class Value>
-bool ChangeMax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}
 template<typename Value>
 inline bool Between(const Value &lower, const Value &x, const Value &higher){return lower <= x && x <= higher;}
 template<typename Value>
@@ -39,16 +35,14 @@ inline Value Median(const Value &a, const Value &b, const Value &c){return Betwe
 template<typename Value>
 inline Value Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}
 
+template<class Value>
+bool chmin(Value &src, const Value &cmp){if(src > cmp){src = cmp; return true;} return false;}
+template<class Value>
+bool chmax(Value &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}
 template<typename Value>
 inline Value min(vector<Value> &v){return *min_element((v).begin(), (v).end());}
 template<typename Value>
 inline Value max(vector<Value> &v){return *max_element((v).begin(), (v).end());}
-
-using ll = int64_t;
-using ull = uint64_t;
-
-const int INF_INT = numeric_limits<int>::max() >> 2;
-const ll INF_LL = numeric_limits<ll>::max() >> 2;
 
 const int dx4[4] = {1, 0, -1, 0};
 const int dy4[4] = {0, -1, 0, 1};

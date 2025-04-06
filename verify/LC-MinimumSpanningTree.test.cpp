@@ -4,11 +4,14 @@
 #include "../Library/Graph/Kruskal.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, M; cin >> N >> M;
-    Graph<ll> G(N);
-    G.InputGraph(M, true, false);
+    auto G = InputGraph<ll>(N, M, 0, true, false);
 
     Kruskal kr(G);
-    cout << kr.get_cost() << endl;
-    cout << kr.get_edge_id() << endl;
+    cout << kr.GetCost() << '\n';
+    for(auto e : kr.GetEdgeSet()){
+        cout << e.idx << ' ';
+    }
+    cout << '\n';
 }

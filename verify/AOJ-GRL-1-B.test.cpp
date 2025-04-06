@@ -5,21 +5,19 @@
 
 int main(){
     int V, E, r; cin >> V >> E >> r;
-    Graph<ll> G(V, true);
-    G.InputGraph(E, true, false);
+    auto G = InputGraph<ll>(V, E, 0, true, true);
     
     BellmanFord bf(G, r);
     if(bf.Negative()){
         cout << "NEGATIVE CYCLE" << endl;
+        return 0;
     }
-    else{
-        for(int i = 0; i < V; ++i){
-            if(bf.Reachable(i)){
-                cout << bf.Distance(i) << endl;
-            }
-            else{
-                cout << "INF" << endl;
-            }
+    for(int i = 0; i < V; ++i){
+        if(bf.Reachable(i)){
+            cout << bf.Distance(i) << endl;
+        }
+        else{
+            cout << "INF" << endl;
         }
     }
 }
