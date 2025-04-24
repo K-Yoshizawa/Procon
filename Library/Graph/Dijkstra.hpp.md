@@ -112,8 +112,8 @@ data:
   timestamp: '2025-03-20 23:31:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-ShortestPath.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/LC-ShortestPath.test.cpp
 documentation_of: Library/Graph/Dijkstra.hpp
 layout: document
 title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"

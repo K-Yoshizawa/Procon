@@ -235,8 +235,8 @@ data:
   timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-TreeDiameter.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp
+  - verify/LC-TreeDiameter.test.cpp
 documentation_of: Library/Tree/TreeDiameter.hpp
 layout: document
 redirect_from:

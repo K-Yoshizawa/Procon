@@ -475,9 +475,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/LC-LowestCommonAncestor-HLD.test.cpp
 documentation_of: Library/Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:
