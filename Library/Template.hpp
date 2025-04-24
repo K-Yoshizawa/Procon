@@ -21,7 +21,9 @@ inline void Reverse(Container &container){reverse(container.begin(), container.e
 template<typename Value>
 inline int PopCount(const Value &value){return __builtin_popcount(value);}
 template<typename Value>
-inline Value Ceil(const Value &numerator, const Value &denominator){return (numerator + denominator - 1) / denominator;}
+inline Value Floor(const Value &numerator, const Value &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator + 1) / denominator - 1 : numerator / denominator;}
+template<typename Value>
+inline Value Ceil(const Value &numerator, const Value &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return numerator > 0 ? (numerator - 1) / denominator + 1 : numerator / denominator;}
 template<typename Value>
 inline int LowerBoundIndex(const vector<Value> &container, const Value &value){return distance(container.begin(), lower_bound(container.begin(), container.end(), value));}
 template<typename Value>
