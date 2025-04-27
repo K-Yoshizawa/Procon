@@ -113,11 +113,11 @@ void Solve(Vertex s)
 ```
 
 - `Distance(t)` を返します。
-- `Solve(s)` が $1$ 回以上呼び出されている
 
 **制約**
 
 - $0 \le v \lt N$
+- `Solve(s)` が $1$ 回以上呼び出されている
 
 **計算量**
 
