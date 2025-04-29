@@ -38,6 +38,52 @@ u v w
 
 ---
 
+### InputRootedTreeChild
+
+```
+Graph<CostType> InputRootedTreeChild(int N, int padding = -1)
+```
+
+- 木 $T$ を標準入力から読み込みます。
+- 入力形式は以下の形式であることを想定しています。
+
+```
+k c_0 c_1 ... c_k
+```
+
+**制約**
+
+- $0 \le n \le 10^{6}$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
+### InputRootedTreeParent
+
+```
+Graph<CostType> InputRootedTreeParent(int N, int padding = -1)
+```
+
+- 木 $T$ を標準入力から読み込みます。
+- 入力形式は以下の形式であることを想定しています。
+
+```
+p_1 p_2 ... p_{N - 1}
+```
+
+**制約**
+
+- $0 \le n \le 10^{6}$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
 ### CalculateTreeParent
 
 ```

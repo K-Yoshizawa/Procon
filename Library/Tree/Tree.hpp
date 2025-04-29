@@ -14,6 +14,29 @@ Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false){
     return G;
 }
 
+template<typename CostType = int32_t>
+Graph<CostType> InputRootedTreeChild(int N, int padding = -1){
+    Graph<CostType> G(N);
+    for(Vertex u = 0; u < N; ++u){
+        int k; cin >> k;
+        for(int i = 0; i < k; ++i){
+            Vertex v; cin >> v, v += padding;
+            G.AddUndirectedEdge(u, v);
+        }
+    }
+    return G;
+}
+
+template<typename CostType = int32_t>
+Graph<CostType> InputRootedTreeParent(int N, int padding = -1){
+    Graph<CostType> G(N);
+    for(Vertex u = 1; u < N; ++u){
+        Vertex v; cin >> v, v += padding;
+        G.AddUndirectedEdge(u, v);
+    }
+    return G;
+}
+
 template<typename CostType>
 vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
     int n = T.VertexSize();
