@@ -56,3 +56,22 @@ vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0)
 - $\textrm{O}(n)$
 
 ---
+
+### CalculateTreeDistance
+
+```
+vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0)
+```
+
+- 木 $T$ について、頂点 $r$ を始点としたときの各頂点までの距離を求めます。
+- 頂点 $r$ の距離は $0$ とします。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---

@@ -29,25 +29,22 @@ vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-// /**
-//  * @brief 木の根から各頂点への辺の重みの累積和を計算する。
-//  * @param tree 木
-//  * @return vector<CostType> 根から各頂点への重みの累積和
-//  */
-// template<typename CostType>
-// vector<CostType> CalculateTreeCumlativeSum(RootedTree<CostType> &tree){
-//     Vertex root = tree.get_root();
-//     int V = tree.get_vertex_size();
-//     vector<CostType> ret(V, 0);
-//     auto rec = [&](auto self, Vertex v, CostType s) -> void {
-//         ret[v] = s + tree.get_cost(v);
-//         for(Vertex u : tree.get_child(v)){
-//             self(self, u, ret[v]);
-//         }
-//     };
-//     rec(rec, root, 0);
-//     return ret;
-// }
+template<typename CostType>
+vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){
+    int n = T.VertexSize();
+    vector<CostType> ret(n, CostType(INF));
+    auto rec = [&](auto &self, Vertex u) -> void {
+        for(const Edge<CostType> &e : T[u]){
+            if(ret[e.to] > ret[u] + e.cost){
+                ret[e.to] = ret[u] + e.cost;
+                self(self, e.to);
+            }
+        }
+    };
+    ret[r] = 0;
+    rec(rec, r);
+    return ret;
+}
 
 // /**
 //  * @brief 各頂点を根とする部分木のサイズを求める。
