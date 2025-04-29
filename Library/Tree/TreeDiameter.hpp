@@ -40,6 +40,10 @@ class TreeDiameter{
         return diameter_;
     }
 
+    CostType Height(Vertex v) const {
+        return max(dist_s_[v], dist_t_[v]);
+    }
+
     private:
     Graph<CostType> &T;
     vector<CostType> dist_s_, dist_t_;

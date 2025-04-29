@@ -41,21 +41,22 @@ CostType Diameter() const
 
 ---
 
-### 
+### Height
 
 ```
-
+CostType Height(Vertex v) const
 ```
 
-- <説明>
+- 木 $T$ について、頂点 $v$ を根としたときの木の高さを返します。
+  - 木の高さとは、根から最も遠い葉までの距離を指します。
 
 **制約**
 
-- <制約>
+- $0 \le v \lt n$
 
 **計算量**
 
-- <計算量>
+- $\textrm{O}(1)$
 
 ---
 
