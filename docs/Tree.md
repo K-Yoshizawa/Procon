@@ -11,6 +11,33 @@ documentation_of: ../Library/Tree/Tree.hpp
 
 ---
 
+### InputTree
+
+```
+Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false)
+```
+
+- 木 $T$ を標準入力から読み込みます。
+- 入力形式は以下の 2 つの形式のどちらかであることを想定しています。
+
+```
+u v
+```
+
+```
+u v w
+```
+
+**制約**
+
+- $0 \le n \le 10^{6}$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
 ### CalculateTreeDepth
 
 ```

@@ -2,14 +2,18 @@
 
 #include "../Graph/Graph.hpp"
 
-/**
- * @brief 木 `tree` の各頂点の深さを求める。
- * @note 根の頂点は深さ 0 である。
- * @note Verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A
- * @param tree 木
- * @param root 根の頂点番号 (default = 0)
- * @return vector<int> 各頂点の深さ
- */
+template<typename CostType = int32_t>
+Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false){
+    Graph<CostType> G(N);
+    for(int i = 0; i < N - 1; ++i){
+        Vertex u, v; CostType w = 1;
+        cin >> u >> v, u += padding, v += padding;
+        if(weighted) cin >> w;
+        G.AddUndirectedEdge(u, v, w);
+    }
+    return G;
+}
+
 template<typename CostType>
 vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
     int n = T.VertexSize();
