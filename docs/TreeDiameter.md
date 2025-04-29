@@ -60,38 +60,30 @@ CostType Height(Vertex v) const
 
 ---
 
-### 
+### EndPoints
 
 ```
-
+pair<Vertex, Vertex> EndPoints() const 
 ```
 
-- <説明>
-
-**制約**
-
-- <制約>
+- 木 $T$ の直径の端点の頂点を返します。
 
 **計算量**
 
-- <計算量>
+- $\textrm{O}(1)$
 
 ---
 
-### 
+### Path
 
 ```
-
+vector<Vertex> &Path()
 ```
 
-- <説明>
-
-**制約**
-
-- <制約>
+- 木 $T$ の直径を成すパスの頂点列を返します。
 
 **計算量**
 
-- <計算量>
+- $\textrm{O}(1)$
 
 ---

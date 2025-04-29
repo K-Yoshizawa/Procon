@@ -1,16 +1,14 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
-#include "../Library/Template.hpp"
 #include "../Library/Tree/TreeDiameter.hpp"
 
 int main(){
     int n; cin >> n;
-    RootedTree<ll> T(n);
-    T.InputGraphFormat(true, false);
+    Graph T = InputTree<ll>(n, 0, true);
 
     TreeDiameter td(T);
-    auto us = td.get_diameter_path();
-    ll X = td.get_diameter(), Y = us.size();
+    auto us = td.Path();
+    ll X = td.Diameter(), Y = us.size();
     cout << X << " " << Y << endl;
     for(auto u : us){
         cout << u << " ";

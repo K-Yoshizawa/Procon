@@ -19,29 +19,21 @@ class TreeDiameter{
         }
         path_.emplace_back(s);
     }
-
-    // /**
-    //  * @brief 直径を構成するパスの端点を返す。
-    //  * @return pair<Vertex, Vertex> 直径を構成するパスの端点 (0-index)
-    //  */
-    // pair<Vertex, Vertex> get_endpoints() const {
-    //     return pair<Vertex, Vertex>(diameter_path_.front(), diameter_path_.end());
-    // }
-
-    // /**
-    //  * @brief 直径を構成するパスを返す。
-    //  * @return vector<Vertex>& 直径を構成するパスに含まれる頂点 (0-index)
-    //  */
-    // vector<Vertex> &get_diameter_path(){
-    //     return diameter_path_;
-    // }
-
+    
     CostType Diameter() const {
         return diameter_;
     }
-
+    
     CostType Height(Vertex v) const {
         return max(dist_s_[v], dist_t_[v]);
+    }
+
+    pair<Vertex, Vertex> EndPoints() const {
+        return pair<Vertex, Vertex>(path_.front(), path_.back());
+    }
+
+    vector<Vertex> &Path(){
+        return path_;
     }
 
     private:
