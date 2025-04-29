@@ -5,25 +5,35 @@
 
 int main(){
     int n; cin >> n;
-    RootedTree T(n, -1);
+    Graph T(n);
+    vector<int> parent(n, -1);
     for(int i = 0; i < n; ++i){
         int id, k; cin >> id >> k;
         for(int j = 0; j < k; ++j){
             int c; cin >> c;
-            T.AddEdge(id, c);
+            T.AddUndirectedEdge(id, c);
+            parent[c] = id;
         }
     }
+    int root = [&]{
+        for(int i = 0; i < n; ++i){
+            if(parent[i] == -1) return i;
+        }
+        return -1;
+    }();
 
-    auto depth = CalculateTreeDepth(T);
+    auto depth = CalculateTreeDepth(T, root);
     for(int i = 0; i < n; ++i){
         cout << "node " << i << ": ";
-        cout << "parent = " << T.get_parent(i) << ", ";
+        cout << "parent = " << parent[i] << ", ";
         cout << "depth = " << depth[i] << ", ";
-        cout << (T.RootVertex(i) ? "root" : (T.LeafVertex(i) ? "leaf" : "internal node")) << ", ";
+        cout << (i == root ? "root" : (T[i].size() == 1 ? "leaf" : "internal node")) << ", ";
         cout << "[";
-        auto c = T.get_child(i);
-        for(int j = 0; j < c.size(); ++j){
-            cout << c[j] << (j + 1 == c.size() ? "" : ", ");
+        int child = T[i].size() - 1 + (i == root), cnt = 0;
+        for(int j : T[i]){
+            if(j == parent[i]) continue;
+            ++cnt;
+            cout << j << (cnt == child ? "" : ", ");
         }
         cout << "]\n";
     }
