@@ -38,6 +38,25 @@ u v w
 
 ---
 
+### CalculateTreeParent
+
+```
+vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
+```
+
+- 木 $T$ について、頂点 $r$ を根としたときの各頂点の親を求めます。
+- 頂点 $r$ の親は $-1$ とします。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
 ### CalculateTreeDepth
 
 ```

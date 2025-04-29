@@ -15,6 +15,21 @@ Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false){
 }
 
 template<typename CostType>
+vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
+    int n = T.VertexSize();
+    vector<int> ret(n, -1);
+    auto rec = [&](auto &self, Vertex u) -> void {
+        for(Vertex v : T[u]){
+            if(v == ret[u]) continue;
+            ret[v] = u;
+            self(self, v);
+        }
+    };
+    rec(rec, r);
+    return ret;
+}
+
+template<typename CostType>
 vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
     int n = T.VertexSize();
     vector<int> ret(n, 0);
