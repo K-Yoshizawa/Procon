@@ -1,11 +1,3 @@
-/**
- * @file HeavyLightDecomposition.hpp
- * @author log K (lX57)
- * @brief Heavy Light Decomposition - HL分解
- * @version 4.0
- * @date 2024-09-04
- */
-
 #include "Tree.hpp"
 
 struct PathSegment{
@@ -24,44 +16,52 @@ struct PathSegment{
 template<typename CostType>
 class HeavyLightDecomposition{
     public:
-    HeavyLightDecomposition(RootedTree<CostType> &tree) : tree_(tree){
-        vertex_size_ = tree_.get_vertex_size();
-        vector<int> subtree_size = CalculateSubtreeSize(tree_);
-        vertex_depth_ = CalculateTreeDepth(tree_);
-        for(int i = 0; i < vertex_size_; ++i){
-            auto &children = tree_.get_child(i);
-            nth_element(children.begin(), children.begin(), children.end(), [&](Vertex i, Vertex j){
-                return subtree_size[i] > subtree_size[j];
+    HeavyLightDecomposition(Graph<CostType> &tree, Vertex r = 0) :
+        T(tree), parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){
+        vector<int> ss = CalculateSubtreeSize(T, r);
+        for(int i = 0; i < n; ++i){
+            if(child[i].empty()) continue;
+            // cerr << "# i = " << i << endl;
+            // cerr << "#   (old) -> " << child[i] << endl;
+            nth_element(child[i].begin(), child[i].begin() + 1, child[i].end(), [&](Vertex i, Vertex j){
+                return ss[i] > ss[j];
             });
+            // cerr << "#   (new) -> " << child[i] << endl;
         }
-        Vertex root = tree_.get_root();
-        heavy_path_head_.push_back(root);
-        heavy_path_depth_.push_back(0);
-        belong_heavy_path_index_.resize(vertex_size_, -1);
-        belong_heavy_path_index_[root] = 0;
-        preorder_index_.resize(vertex_size_, -1);
-        postorder_index_.resize(vertex_size_, -1);
-        vertex_order_.resize(vertex_size_);
-        int timer = 0;
-        dfs(root, 0, 0, timer);
+        hp_head_.push_back(r);
+        hp_depth_.push_back(0);
+        belong_hp_id_[r] = 0;
+        timer_ = 0;
+        dfs(r, 0, 0);
+
+        // debug ---
+        // vector<vector<Vertex>> hp(hp_head_.size());
+        // for(int i = 0; i < n; ++i){
+        //     hp[belong_hp_id_[i]].push_back(i);
+        // }
+        // for(int i = 0; i < hp_head_.size(); ++i){
+        //     sort(hp[i].begin(), hp[i].end(), [&](int x, int y){
+        //         return euler_tour_[x].first < euler_tour_[y].first;
+        //     });
+        //     cerr << "# Heavy Path " << i << " = [";
+        //     for(int j = 0; j < hp[i].size(); ++j){
+        //         cerr << hp[i][j] << ",]"[j + 1 == hp[i].size()] << ' ';
+        //     }
+        //     cerr << endl;
+        // }
+        // ---------
     }
 
-    /**
-     * @brief 頂点 `u` と頂点 `v` の最小共通祖先を返す。
-     * @param u 頂点番号 (0-index)
-     * @param v 頂点番号 (0-index)
-     * @return Vertex 最小共通祖先の頂点番号 (0-index)
-     */
-    Vertex LowestCommonAncestor(Vertex u, Vertex v){
-        if(path_depth(u) < path_depth(v)) swap(u, v);
-        while(path_depth(u) != path_depth(v)){
-            u = tree_.get_parent(head(u));
+    Vertex LowestCommonAncestor(Vertex u, Vertex v) const {
+        if(PathDepth(u) < PathDepth(v)) swap(u, v);
+        while(PathDepth(u) != PathDepth(v)){
+            u = parent[Head(u)];
         }
         while(belong(u) != belong(v)){
-            u = tree_.get_parent(head(u));
-            v = tree_.get_parent(head(v));
+            u = parent[Head(u)];
+            v = parent[Head(v)];
         }
-        return vertex_depth(u) < vertex_depth(v) ? u : v;
+        return depth_[u] < depth_[v] ? u : v;
     }
 
     /**
@@ -73,13 +73,13 @@ class HeavyLightDecomposition{
      */
     Vertex LevelAncestor(Vertex v, int level){
         if(level < 0 || vertex_depth(v) < level) return -1;
-        Vertex u = head(v);
+        Vertex u = Head(v);
         while(1){
             if(vertex_depth(u) <= level){
                 int delta = level - vertex_depth(u);
                 return order(preorder(u) + delta);
             }
-            u = tree_.get_parent(u);
+            u = T.get_parent(u);
         }
     }
 
@@ -116,12 +116,12 @@ class HeavyLightDecomposition{
         Vertex lca = LowestCommonAncestor(from, to);
         while(belong(from) != belong(lca)){
             PathSegment path;
-            Vertex h = head(from);
+            Vertex h = Head(from);
             path.head_vertex = h, path.tail_vertex = from;
             path.head_index = preorder(h), path.tail_index = preorder(from) + 1;
             path.highest = false, path.reverse = true;
             ret.push_back(path);
-            from = tree_.get_parent(h);
+            from = T.get_parent(h);
         }
         if(from != lca){
             PathSegment path;
@@ -133,12 +133,12 @@ class HeavyLightDecomposition{
         int size = ret.size();
         while(belong(to) != belong(lca)){
             PathSegment path;
-            Vertex h = head(to);
+            Vertex h = Head(to);
             path.head_vertex = h, path.tail_vertex = to;
             path.head_index = preorder(h), path.tail_index = preorder(to) + 1;
             path.highest = false, path.reverse = false;
             ret.push_back(path);
-            to = tree_.get_parent(h);
+            to = T.get_parent(h);
         }
         if(to != lca){
             PathSegment path;
@@ -174,9 +174,9 @@ class HeavyLightDecomposition{
      */
     template<typename T>
     void SortVertex(vector<T> &data){
-        assert(data.size() == vertex_size_);
+        assert(data.size() == n);
         vector<T> sub(data.size());
-        for(int i = 0; i < vertex_size_; ++i){
+        for(int i = 0; i < n; ++i){
             sub[preorder(i)] = data[i];
         }
         swap(data, sub);
@@ -191,61 +191,62 @@ class HeavyLightDecomposition{
     }
 
     private:
-    int dfs(Vertex v, int h, int d, int &t){
-        preorder_index_[v] = t;
-        vertex_order_[t] = v;
-        int ret = t;
-        ++t;
-        auto cs = tree_.get_child(v);
-        if(!cs.empty()){
-            int c = cs.size();
-            belong_heavy_path_index_[cs.front()] = h;
-            ret = max(ret, dfs(cs.front(), h, d, t));
+    int dfs(Vertex v, int h, int d){
+        // cerr << "# v = " << v << endl;
+        euler_tour_[v].first = timer_;
+        ++timer_;
+        int ret = timer_;
+        if(!child[v].empty()){
+            int c = child[v].size();
+            belong_hp_id_[child[v].front()] = h;
+            ret = max(ret, dfs(child[v].front(), h, d));
             for(int i = 1; i < c; ++i){
-                int nh = (int)heavy_path_head_.size();
-                heavy_path_head_.push_back(cs[i]);
-                heavy_path_depth_.push_back(d + 1);
-                belong_heavy_path_index_[cs[i]] = nh;
-                ret = max(ret, dfs(cs[i], nh, d + 1, t));
+                int nh = (int)hp_head_.size();
+                hp_head_.push_back(child[v][i]);
+                hp_depth_.push_back(d + 1);
+                belong_hp_id_[child[v][i]] = nh;
+                ret = max(ret, dfs(child[v][i], nh, d + 1));
             }
         }
-        postorder_index_[v] = ret;
+        euler_tour_[v].second = ret;
+        // cerr << "# Euler Tour of " << v << " -> [" << euler_tour_[v].first << ", " << euler_tour_[v].second << ")" << endl;
         return ret;
     }
 
-    Vertex head(Vertex v) const {
-        return heavy_path_head_[belong_heavy_path_index_[v]];
+    Vertex Head(Vertex v) const {
+        return hp_head_[belong_hp_id_[v]];
     }
 
-    int path_depth(Vertex v) const {
-        return heavy_path_depth_[belong_heavy_path_index_[v]];
-    }
-
-    int vertex_depth(Vertex v) const {
-        return vertex_depth_[v];
+    int PathDepth(Vertex v) const {
+        return hp_depth_[belong_hp_id_[v]];
     }
 
     int belong(Vertex v) const {
-        return belong_heavy_path_index_[v];
+        return belong_hp_id_[v];
     }
 
     Vertex order(int idx) const {
-        return vertex_order_[idx];
+        return euler_tour_[idx].first;
     }
 
     int preorder(Vertex v) const {
-        return preorder_index_[v];
+        return euler_tour_[v].first;
     }
 
     int postorder(Vertex v) const {
-        return postorder_index_[v];
+        return euler_tour_[v].second;
     }
 
-    RootedTree<CostType> &tree_;
+    Graph<CostType> &T;
+    vector<Vertex> parent;
+    vector<vector<Vertex>> child;
+    int n, timer_;
 
-    int vertex_size_;
-    vector<Vertex> heavy_path_head_, vertex_order_;
-    vector<int> belong_heavy_path_index_, belong_heavy_path_order_, heavy_path_depth_;
-    vector<int> preorder_index_, postorder_index_;
-    vector<int> vertex_depth_;
+    vector<pair<int, int>> euler_tour_;
+    vector<int> depth_;
+
+    vector<Vertex> hp_head_; // 各 heavy path の最も根に近い頂点
+    vector<int> hp_depth_; // 各 heavy path の深さ
+    vector<int> belong_hp_id_; // 各頂点が属する heavy path の番号
+    vector<int> belong_heavy_path_order_;
 };

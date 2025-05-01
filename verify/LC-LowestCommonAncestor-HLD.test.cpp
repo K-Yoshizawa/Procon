@@ -4,13 +4,13 @@
 #include "../Library/Tree/HeavyLightDecomposition.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
-    RootedTree T(N);
-    T.InputRootedTreeFormat(false, false);
+    Graph T = InputRootedTreeParent(N, 0);
 
     HeavyLightDecomposition hld(T);
     while(Q--){
         int u, v; cin >> u >> v;
-        cout << hld.LowestCommonAncestor(u, v) << endl;
+        cout << hld.LowestCommonAncestor(u, v) << '\n';
     }
 }
