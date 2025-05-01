@@ -57,7 +57,7 @@ class HeavyLightDecomposition{
         while(PathDepth(u) != PathDepth(v)){
             u = parent[Head(u)];
         }
-        while(belong(u) != belong(v)){
+        while(Belong(u) != Belong(v)){
             u = parent[Head(u)];
             v = parent[Head(v)];
         }
@@ -111,43 +111,43 @@ class HeavyLightDecomposition{
      * @param to 終点の頂点番号 (0-index)
      * @return vector<PathSegment> 分解した結果
      */
-    vector<PathSegment> PathQuery(Vertex from, Vertex to){
+    vector<PathSegment> PathQuery(Vertex u, Vertex v){
         vector<PathSegment> ret;
-        Vertex lca = LowestCommonAncestor(from, to);
-        while(belong(from) != belong(lca)){
+        Vertex lca = LowestCommonAncestor(u, v);
+        while(Belong(u) != Belong(lca)){
             PathSegment path;
-            Vertex h = Head(from);
-            path.head_vertex = h, path.tail_vertex = from;
-            path.head_index = PreOrder(h), path.tail_index = PreOrder(from) + 1;
+            Vertex h = Head(u);
+            path.head_vertex = h, path.tail_vertex = u;
+            path.head_index = PreOrder(h), path.tail_index = PreOrder(u) + 1;
             path.highest = false, path.reverse = true;
             ret.push_back(path);
-            from = parent[h];
+            u = parent[h];
         }
-        if(from != lca){
+        if(u != lca){
             PathSegment path;
-            path.head_vertex = lca, path.tail_vertex = from;
-            path.head_index = PreOrder(lca), path.tail_index = PreOrder(from) + 1;
+            path.head_vertex = lca, path.tail_vertex = u;
+            path.head_index = PreOrder(lca), path.tail_index = PreOrder(u) + 1;
             path.highest = true, path.reverse = true;
             ret.push_back(path);
         }
         int size = ret.size();
-        while(belong(to) != belong(lca)){
+        while(Belong(v) != Belong(lca)){
             PathSegment path;
-            Vertex h = Head(to);
-            path.head_vertex = h, path.tail_vertex = to;
-            path.head_index = PreOrder(h), path.tail_index = PreOrder(to) + 1;
+            Vertex h = Head(v);
+            path.head_vertex = h, path.tail_vertex = v;
+            path.head_index = PreOrder(h), path.tail_index = PreOrder(v) + 1;
             path.highest = false, path.reverse = false;
             ret.push_back(path);
-            to = parent[h];
+            v = parent[h];
         }
-        if(to != lca){
+        if(v != lca){
             PathSegment path;
-            path.head_vertex = lca, path.tail_vertex = to;
-            path.head_index = PreOrder(lca), path.tail_index = PreOrder(to) + 1;
+            path.head_vertex = lca, path.tail_vertex = v;
+            path.head_index = PreOrder(lca), path.tail_index = PreOrder(v) + 1;
             path.highest = true, path.reverse = false;
             ret.push_back(path);
         }
-        if(from == lca && to == lca){
+        if(u == lca && v == lca){
             PathSegment path;
             path.head_vertex = path.tail_vertex = lca;
             path.head_index = PreOrder(lca), path.tail_index = PreOrder(lca) + 1;
@@ -164,7 +164,7 @@ class HeavyLightDecomposition{
      * @return pair<int, int> インデックス (0-index, 半開区間)
      */
     pair<int, int> SubtreeQuery(Vertex v) const {
-        return make_pair(PreOrder(v), PostOrder(v) + 1);
+        return euler_tour_[v];
     }
 
     /**
@@ -222,7 +222,7 @@ class HeavyLightDecomposition{
         return hp_depth_[belong_hp_id_[v]];
     }
 
-    int belong(Vertex v) const {
+    int Belong(Vertex v) const {
         return belong_hp_id_[v];
     }
 
