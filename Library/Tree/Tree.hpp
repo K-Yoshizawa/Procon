@@ -68,6 +68,22 @@ vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
 }
 
 template<typename CostType>
+vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0){
+    int n = T.VertexSize();
+    vector<CostType> ret(n);
+    auto rec = [&](auto &self, Vertex u, Vertex p) -> void {
+        for(const Edge<CostType> &e : T[u]){
+            Vertex v = e.to;
+            if(v == p) continue;
+            ret[v] = e.cost;
+            self(self, v, u);
+        }
+    };
+    rec(rec, r, -1);
+    return ret;
+}
+
+template<typename CostType>
 vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
     int n = T.VertexSize();
     vector<int> ret(n, 0);

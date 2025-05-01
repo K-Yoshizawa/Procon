@@ -103,6 +103,25 @@ vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
 
 ---
 
+### CalculateTreeCost
+
+```
+vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0)
+```
+
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の親と結ぶ辺の重みを求めます。
+- 頂点 $r$ の重みについては未定義です。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
 ### CalculateTreeDepth
 
 ```
