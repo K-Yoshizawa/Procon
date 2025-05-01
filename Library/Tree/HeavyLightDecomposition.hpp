@@ -2,12 +2,12 @@
 
 struct PathSegment{
     PathSegment() = default;
-    Vertex head_vertex; // `head_vertex` : パスの最も根に近い頂点の頂点番号
-    Vertex tail_vertex; // `tail_vertex` : パスの最も葉に近い頂点の頂点番号
-    int head_index; // `head_index` : `head_vertex` の行きかけ順のインデックス番号 (0-index, 半開区間)
-    int tail_index; // `tail_index` : `tail_vertex` の行きかけ順のインデックス番号 (0-index, 半開区間)
-    bool highest; // この `PathSegment` が最も根に近い(つまり LCA を含んでいる)パスであることを表す。辺属性のクエリで LCA を除くために使用。
-    bool reverse; // クエリで投げた `from -> to` に対して、`from` 側が `tail_vertex` であることを表す。可逆性のないクエリで使用。
+    Vertex head_vertex;
+    Vertex tail_vertex;
+    int head_index;
+    int tail_index;
+    bool highest;
+    bool reverse;
     friend ostream &operator<<(ostream &os, const PathSegment &p){
         return os << "# Path (" << p.head_vertex << " -> " << p.tail_vertex << ", " << p.head_index << " -> " << p.tail_index << ", " << boolalpha << p.highest << ", " << p.reverse << ")";
     }
@@ -64,53 +64,6 @@ class HeavyLightDecomposition{
         return depth_[u] < depth_[v] ? u : v;
     }
 
-    /**
-     * @brief 頂点 `v` の祖先であって、深さが `level` である頂点を返す。
-     * @note そのような頂点が存在しないとき、`-1` を返す。
-     * @param v 頂点番号 (0-index)
-     * @param level 深さ (0-index)
-     * @return Vertex 答えとなる頂点 (または `-1`)
-     */
-    Vertex LevelAncestor(Vertex v, int level){
-        if(level < 0 || depth_[v] < level) return -1;
-        Vertex u = Head(v);
-        while(1){
-            if(depth_[u] <= level){
-                int delta = level - depth_[u];
-                return RevOrder(PreOrder(u) + delta);
-            }
-            u = parent[u];
-        }
-    }
-
-    /**
-     * @brief 頂点 `from` から頂点 `to` への最短路において、`from` から `dist` 個移動した頂点番号を求める。
-     * @note 最短路の長さを `k` として、`dist < 0` または `k < dist` のとき `-1` を返す。
-     * @param from 始点の頂点番号 (0-index)
-     * @param to 終点の頂点番号 (0-index)
-     * @param dist 移動する頂点数
-     * @return Vertex 答えの頂点番号 (0-index) または `-1`
-     */
-    Vertex Jump(Vertex from, Vertex to, int dist){
-        Vertex lca = LowestCommonAncestor(from, to);
-        int dist_from_lca = depth_[from] - depth_[lca];
-        int dist_lca_to = depth_[to] - depth_[lca];
-        if(dist < 0 or dist > dist_from_lca + dist_lca_to) return -1;
-        if(dist <= dist_from_lca){
-            return LevelAncestor(from, depth_[from] - dist);
-        }
-        else{
-            return LevelAncestor(to, depth_[lca] + dist - dist_from_lca);
-        }
-    }
-
-    /**
-     * @brief 頂点 `from` から頂点 `to` へのパスを分解した結果を返す。
-     * @note 可逆性のないクエリに対しても対応。詳しくは `PathSegment` の `reverse` を参照。
-     * @param from 始点の頂点番号 (0-index)
-     * @param to 終点の頂点番号 (0-index)
-     * @return vector<PathSegment> 分解した結果
-     */
     vector<PathSegment> PathQuery(Vertex u, Vertex v){
         vector<PathSegment> ret;
         Vertex lca = LowestCommonAncestor(u, v);
@@ -158,20 +111,10 @@ class HeavyLightDecomposition{
         return ret;
     }
 
-    /**
-     * @brief 頂点 `v` を根とする部分木に対応したインデックスを半開区間で返す。
-     * @param v 頂点番号 (0-index)
-     * @return pair<int, int> インデックス (0-index, 半開区間)
-     */
     pair<int, int> SubtreeQuery(Vertex v) const {
         return euler_tour_[v];
     }
 
-    /**
-     * @brief 頂点 `i` に載せるデータを格納した配列 `data[i]` を、頂点の行きかけ順になるように並べ替える。
-     * @note セグメント木などに載せる前に使用する。
-     * @param data 各頂点に載せるデータ
-     */
     template<typename T>
     void SortVertex(vector<T> &A){
         assert(A.size() == n);
@@ -250,5 +193,4 @@ class HeavyLightDecomposition{
     vector<Vertex> hp_head_; // 各 heavy path の最も根に近い頂点
     vector<int> hp_depth_; // 各 heavy path の深さ
     vector<int> belong_hp_id_; // 各頂点が属する heavy path の番号
-    vector<int> belong_heavy_path_order_;
 };
