@@ -23,25 +23,14 @@ struct Monoid{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N; cin >> N;
-    RootedTree<Affine> T(N);
-    vm a(N); cin >> a;
-    {
-        vector<vector<pair<Vertex, Affine>>> graph(N);
-        for(int i = 0; i < N - 1; ++i){
-            int u, v; cin >> u >> v;
-            mint b, c; cin >> b >> c;
-            graph[u].emplace_back(v, Affine(b, c));
-            graph[v].emplace_back(u, Affine(b, c));
-        }
-        auto rec = [&](auto self, Vertex v, Vertex p) -> void {
-            for(auto [u, w] : graph[v]){
-                if(u == p) continue;
-                T.AddEdge(v, u, w);
-                self(self, u, v);
-            }
-        };
-        rec(rec, 0, -1);
+    vector<mint> a(N); cin >> a;
+    Graph<Affine> T(N);
+    for(int i = 0; i < N - 1; ++i){
+        int u, v; cin >> u >> v;
+        mint b, c; cin >> b >> c;
+        T.AddUndirectedEdge(u, v, Affine(b, c));
     }
 
     RerootingDP<Affine, Monoid> dp(
