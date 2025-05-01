@@ -17,7 +17,7 @@ template<typename CostType>
 class HeavyLightDecomposition{
     public:
     HeavyLightDecomposition(Graph<CostType> &tree, Vertex r = 0) :
-        T(tree), parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){
+        T(tree), parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n), rev_order_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){
         vector<int> ss = CalculateSubtreeSize(T, r);
         for(int i = 0; i < n; ++i){
             if(child[i].empty()) continue;
@@ -72,14 +72,14 @@ class HeavyLightDecomposition{
      * @return Vertex 答えとなる頂点 (または `-1`)
      */
     Vertex LevelAncestor(Vertex v, int level){
-        if(level < 0 || vertex_depth(v) < level) return -1;
+        if(level < 0 || depth_[v] < level) return -1;
         Vertex u = Head(v);
         while(1){
-            if(vertex_depth(u) <= level){
-                int delta = level - vertex_depth(u);
-                return order(preorder(u) + delta);
+            if(depth_[u] <= level){
+                int delta = level - depth_[u];
+                return RevOrder(PreOrder(u) + delta);
             }
-            u = T.get_parent(u);
+            u = parent[u];
         }
     }
 
@@ -93,14 +93,14 @@ class HeavyLightDecomposition{
      */
     Vertex Jump(Vertex from, Vertex to, int dist){
         Vertex lca = LowestCommonAncestor(from, to);
-        int dist_from_lca = vertex_depth(from) - vertex_depth(lca);
-        int dist_lca_to = vertex_depth(to) - vertex_depth(lca);
+        int dist_from_lca = depth_[from] - depth_[lca];
+        int dist_lca_to = depth_[to] - depth_[lca];
         if(dist < 0 or dist > dist_from_lca + dist_lca_to) return -1;
         if(dist <= dist_from_lca){
-            return LevelAncestor(from, vertex_depth(from) - dist);
+            return LevelAncestor(from, depth_[from] - dist);
         }
         else{
-            return LevelAncestor(to, vertex_depth(lca) + dist - dist_from_lca);
+            return LevelAncestor(to, depth_[lca] + dist - dist_from_lca);
         }
     }
 
@@ -118,15 +118,15 @@ class HeavyLightDecomposition{
             PathSegment path;
             Vertex h = Head(from);
             path.head_vertex = h, path.tail_vertex = from;
-            path.head_index = preorder(h), path.tail_index = preorder(from) + 1;
+            path.head_index = PreOrder(h), path.tail_index = PreOrder(from) + 1;
             path.highest = false, path.reverse = true;
             ret.push_back(path);
-            from = T.get_parent(h);
+            from = parent[h];
         }
         if(from != lca){
             PathSegment path;
             path.head_vertex = lca, path.tail_vertex = from;
-            path.head_index = preorder(lca), path.tail_index = preorder(from) + 1;
+            path.head_index = PreOrder(lca), path.tail_index = PreOrder(from) + 1;
             path.highest = true, path.reverse = true;
             ret.push_back(path);
         }
@@ -135,22 +135,22 @@ class HeavyLightDecomposition{
             PathSegment path;
             Vertex h = Head(to);
             path.head_vertex = h, path.tail_vertex = to;
-            path.head_index = preorder(h), path.tail_index = preorder(to) + 1;
+            path.head_index = PreOrder(h), path.tail_index = PreOrder(to) + 1;
             path.highest = false, path.reverse = false;
             ret.push_back(path);
-            to = T.get_parent(h);
+            to = parent[h];
         }
         if(to != lca){
             PathSegment path;
             path.head_vertex = lca, path.tail_vertex = to;
-            path.head_index = preorder(lca), path.tail_index = preorder(to) + 1;
+            path.head_index = PreOrder(lca), path.tail_index = PreOrder(to) + 1;
             path.highest = true, path.reverse = false;
             ret.push_back(path);
         }
         if(from == lca && to == lca){
             PathSegment path;
             path.head_vertex = path.tail_vertex = lca;
-            path.head_index = preorder(lca), path.tail_index = preorder(lca) + 1;
+            path.head_index = PreOrder(lca), path.tail_index = PreOrder(lca) + 1;
             path.highest = true, path.reverse = false;
             ret.push_back(path);
         }
@@ -164,7 +164,7 @@ class HeavyLightDecomposition{
      * @return pair<int, int> インデックス (0-index, 半開区間)
      */
     pair<int, int> SubtreeQuery(Vertex v) const {
-        return make_pair(preorder(v), postorder(v) + 1);
+        return make_pair(PreOrder(v), PostOrder(v) + 1);
     }
 
     /**
@@ -177,23 +177,24 @@ class HeavyLightDecomposition{
         assert(data.size() == n);
         vector<T> sub(data.size());
         for(int i = 0; i < n; ++i){
-            sub[preorder(i)] = data[i];
+            sub[PreOrder(i)] = data[i];
         }
         swap(data, sub);
     }
 
     int operator[](Vertex v){
-        return preorder(v);
+        return PreOrder(v);
     }
 
     const int operator[](Vertex v) const {
-        return preorder(v);
+        return PreOrder(v);
     }
 
     private:
     int dfs(Vertex v, int h, int d){
         // cerr << "# v = " << v << endl;
         euler_tour_[v].first = timer_;
+        rev_order_[timer_] = v;
         ++timer_;
         int ret = timer_;
         if(!child[v].empty()){
@@ -225,15 +226,15 @@ class HeavyLightDecomposition{
         return belong_hp_id_[v];
     }
 
-    Vertex order(int idx) const {
-        return euler_tour_[idx].first;
+    Vertex RevOrder(int idx) const {
+        return rev_order_[idx];
     }
 
-    int preorder(Vertex v) const {
+    int PreOrder(Vertex v) const {
         return euler_tour_[v].first;
     }
 
-    int postorder(Vertex v) const {
+    int PostOrder(Vertex v) const {
         return euler_tour_[v].second;
     }
 
@@ -243,6 +244,7 @@ class HeavyLightDecomposition{
     int n, timer_;
 
     vector<pair<int, int>> euler_tour_;
+    vector<Vertex> rev_order_;
     vector<int> depth_;
 
     vector<Vertex> hp_head_; // 各 heavy path の最も根に近い頂点

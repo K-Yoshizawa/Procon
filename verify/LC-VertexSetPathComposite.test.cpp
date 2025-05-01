@@ -21,14 +21,14 @@ struct Affine{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<Affine> init_data;
     for(int i = 0; i < N; ++i){
         mint a, b; cin >> a >> b;
         init_data.push_back(Affine(a, b));
     }
-    RootedTree T(N);
-    T.InputGraphFormat(false, false);
+    auto T = InputTree(N, 0);
 
     HeavyLightDecomposition hld(T);
     hld.SortVertex(init_data);
