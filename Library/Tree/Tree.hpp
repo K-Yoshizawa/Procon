@@ -84,25 +84,20 @@ vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-// /**
-//  * @brief 各頂点を根とする部分木のサイズを求める。
-//  * @param tree 木
-//  * @return vector<int> 各頂点を根とする部分木のサイズ
-//  */
-// template<typename CostType>
-// vector<int> CalculateSubtreeSize(RootedTree<CostType> &tree){
-//     Vertex root = tree.get_root();
-//     int V = tree.get_vertex_size();
-//     vector<int> ret(V, 1);
-//     auto rec = [&](auto self, Vertex v) -> int {
-//         for(Vertex u : tree.get_child(v)){
-//             ret[v] += self(self, u);
-//         }
-//         return ret[v];
-//     };
-//     rec(rec, root);
-//     return ret;
-// }
+template<typename CostType>
+vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0){
+    int n = tree.VertexSize();
+    vector<int> ret(n, 1);
+    auto rec = [&](auto self, Vertex u, Vertex p) -> int {
+        for(const int v : tree[u]){
+            if(v == p) continue;
+            ret[u] += self(self, v, u);
+        }
+        return ret[u];
+    };
+    rec(rec, r, -1);
+    return ret;
+}
 
 // /**
 //  * @brief 各頂点を行きかけ順に並べたときに何番目に相当するかの配列を求める。

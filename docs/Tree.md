@@ -90,7 +90,7 @@ p_1 p_2 ... p_{N - 1}
 vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
 ```
 
-- 木 $T$ について、頂点 $r$ を根としたときの各頂点の親を求めます。
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の親を求めます。
 - 頂点 $r$ の親は $-1$ とします。
 
 **制約**
@@ -109,7 +109,7 @@ vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
 vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0)
 ```
 
-- 木 $T$ について、頂点 $r$ を根としたときの各頂点の深さを求めます。
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の深さを求めます。
 - 頂点 $r$ の深さは $0$ とします。
 
 **制約**
@@ -130,6 +130,25 @@ vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0)
 
 - 木 $T$ について、頂点 $r$ を始点としたときの各頂点までの距離を求めます。
 - 頂点 $r$ の距離は $0$ とします。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
+### CalculateSubtreeSize
+
+```
+vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0)
+```
+
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点を根とする部分木の大きさを求めます。
+- 葉を根とする部分木の大きさは $1$ とします。
 
 **制約**
 
