@@ -74,3 +74,22 @@ vector<PathSegment> PathQuery(Vertex u, Vertex v)
 - $\textrm{O}(\log n)$
 
 ---
+
+### SubtreeQuery
+
+```
+pair<int, int> SubtreeQuery(Vertex v) const
+```
+
+- 頂点 $v$ を根とする部分木に対応する区間を半開区間で返します。
+
+**制約**
+
+- $0 \le v \lt n$
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+

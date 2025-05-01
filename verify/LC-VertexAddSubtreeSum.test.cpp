@@ -5,10 +5,10 @@
 #include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<ll> a(N); cin >> a;
-    RootedTree T(N);
-    T.InputRootedTreeFormat(false, false);
+    auto T = InputRootedTreeParent(N, 0);
 
     HeavyLightDecomposition hld(T);
     hld.SortVertex(a);
