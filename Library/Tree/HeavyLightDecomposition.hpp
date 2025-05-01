@@ -173,13 +173,13 @@ class HeavyLightDecomposition{
      * @param data 各頂点に載せるデータ
      */
     template<typename T>
-    void SortVertex(vector<T> &data){
-        assert(data.size() == n);
+    void SortVertex(vector<T> &A){
+        assert(A.size() == n);
         vector<T> sub(n);
         for(int i = 0; i < n; ++i){
-            sub[PreOrder(i)] = data[i];
+            sub[PreOrder(i)] = A[i];
         }
-        swap(data, sub);
+        swap(A, sub);
     }
 
     int operator[](Vertex v){

@@ -93,3 +93,21 @@ pair<int, int> SubtreeQuery(Vertex v) const
 
 ---
 
+### SortVertex
+
+```
+void SortVertex(vector<T> &A)
+```
+
+- 長さ $n$ の数列 $A = (A_1, \dots, A_n)$ を、頂点の行きかけ順序になるように並べ替えます。
+
+**制約**
+
+- $|A| = n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
