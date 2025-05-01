@@ -175,7 +175,7 @@ class HeavyLightDecomposition{
     template<typename T>
     void SortVertex(vector<T> &data){
         assert(data.size() == n);
-        vector<T> sub(data.size());
+        vector<T> sub(n);
         for(int i = 0; i < n; ++i){
             sub[PreOrder(i)] = data[i];
         }
