@@ -159,3 +159,21 @@ vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0)
 - $\textrm{O}(n)$
 
 ---
+
+### RootedTreeAdjacentList
+
+```
+vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType> &T, const Vertex r = 0)
+```
+
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の子の頂点の隣接リストを作成します。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---

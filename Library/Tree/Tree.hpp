@@ -37,6 +37,21 @@ Graph<CostType> InputRootedTreeParent(int N, int padding = -1){
     return G;
 }
 
+template<typename CostType = int32_t>
+vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType> &T, const Vertex r = 0){
+    int n = T.VertexSize();
+    vector<vector<Vertex>> ret(n);
+    auto rec = [&](auto &self, Vertex u, Vertex p) -> void {
+        for(Vertex v : T[u]){
+            if(v == p) continue;
+            ret[u].push_back(v);
+            self(self, v, u);
+        }
+    };
+    rec(rec, r, -1);
+    return ret;
+}
+
 template<typename CostType>
 vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
     int n = T.VertexSize();
