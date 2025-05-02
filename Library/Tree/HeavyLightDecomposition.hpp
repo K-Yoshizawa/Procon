@@ -21,35 +21,15 @@ class HeavyLightDecomposition{
         vector<int> ss = CalculateSubtreeSize(T, r);
         for(int i = 0; i < n; ++i){
             if(child[i].empty()) continue;
-            // cerr << "# i = " << i << endl;
-            // cerr << "#   (old) -> " << child[i] << endl;
             nth_element(child[i].begin(), child[i].begin() + 1, child[i].end(), [&](Vertex i, Vertex j){
                 return ss[i] > ss[j];
             });
-            // cerr << "#   (new) -> " << child[i] << endl;
         }
         hp_head_.push_back(r);
         hp_depth_.push_back(0);
         belong_hp_id_[r] = 0;
         timer_ = 0;
         dfs(r, 0, 0);
-
-        // debug ---
-        // vector<vector<Vertex>> hp(hp_head_.size());
-        // for(int i = 0; i < n; ++i){
-        //     hp[belong_hp_id_[i]].push_back(i);
-        // }
-        // for(int i = 0; i < hp_head_.size(); ++i){
-        //     sort(hp[i].begin(), hp[i].end(), [&](int x, int y){
-        //         return euler_tour_[x].first < euler_tour_[y].first;
-        //     });
-        //     cerr << "# Heavy Path " << i << " = [";
-        //     for(int j = 0; j < hp[i].size(); ++j){
-        //         cerr << hp[i][j] << ",]"[j + 1 == hp[i].size()] << ' ';
-        //     }
-        //     cerr << endl;
-        // }
-        // ---------
     }
 
     Vertex LowestCommonAncestor(Vertex u, Vertex v) const {
@@ -62,6 +42,30 @@ class HeavyLightDecomposition{
             v = parent[Head(v)];
         }
         return depth_[u] < depth_[v] ? u : v;
+    }
+
+    Vertex LevelAncestor(Vertex v, int k){
+        assert(0 <= k <= depth_[v]);
+        Vertex ret = v;
+        while(1){
+            int h = Head(ret);
+            int x = depth_[ret] - depth_[h];
+            if(k <= x){
+                ret = RevOrder(PreOrder(ret) - k);
+                break;
+            }
+            ret = parent[h];
+            k -= x + 1;
+        }
+        return ret;
+    }
+
+    int Jump(Vertex u, Vertex v, int k){
+        Vertex w = LowestCommonAncestor(u, v);
+        int p = depth_[u] - depth_[w], q = depth_[v] - depth_[w];
+        if(p + q < k || k < 0) return -1;
+        if(k <= p) return LevelAncestor(u, k);
+        else return LevelAncestor(v, p + q - k);
     }
 
     vector<PathSegment> PathQuery(Vertex u, Vertex v){
@@ -135,7 +139,6 @@ class HeavyLightDecomposition{
 
     private:
     int dfs(Vertex v, int h, int d){
-        // cerr << "# v = " << v << endl;
         euler_tour_[v].first = timer_;
         rev_order_[timer_] = v;
         ++timer_;
@@ -153,7 +156,6 @@ class HeavyLightDecomposition{
             }
         }
         euler_tour_[v].second = ret;
-        // cerr << "# Euler Tour of " << v << " -> [" << euler_tour_[v].first << ", " << euler_tour_[v].second << ")" << endl;
         return ret;
     }
 

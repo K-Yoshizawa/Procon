@@ -45,6 +45,44 @@ Vertex LowestCommonAncestor(Vertex u, Vertex v) const
 
 ---
 
+### LevelAncestor
+
+```
+Vertex LevelAncestor(Vertex v, int k)
+```
+
+- 頂点 $v$ から $k$ 回親の頂点を辿った先の頂点を求めます。
+
+**制約**
+
+- $0 \le v \lt n$
+- 頂点 $v$ の深さを $d$ としたとき、$0 \le k \le d$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
+### Jump
+
+```
+int Jump(Vertex u, Vertex v, int k)
+```
+
+- 頂点 $u$ から頂点 $v$ への $T$ 上の最短パスを通る順に並べた頂点列 $p = (p_0, \dots, p_d)$ において、頂点 $p_k$ を返します。ここで、$d$ は頂点 $u$ から頂点 $v$ への $T$ 上の最短パス長です。
+- $k \lt 0$ または $d \lt k$ のとき、`-1` を返します。
+
+**制約**
+
+- $0 \le u, v \lt n$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
 ### PathQuery
 
 ```
