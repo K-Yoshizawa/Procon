@@ -19,7 +19,7 @@ inline void ReverseSort(Container &container){sort(container.rbegin(), container
 template<typename Container>
 inline void Reverse(Container &container){reverse(container.begin(), container.end());}
 template<typename Value>
-inline int PopCount(const Value &value){return __builtin_popcount(value);}
+inline int PopCount(const Value &value){return __builtin_popcountll(value);}
 template<typename Value>
 inline Value Floor(const Value &numerator, const Value &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator + 1) / denominator - 1 : numerator / denominator;}
 template<typename Value>
