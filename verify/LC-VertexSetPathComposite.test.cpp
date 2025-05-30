@@ -38,17 +38,17 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, c, d; cin >> p >> c >> d;
-            seg1.Update(hld[p], Affine(c, d));
-            seg2.Update(hld[p], Affine(c, d));
+            seg1.Set(hld[p], Affine(c, d));
+            seg2.Set(hld[p], Affine(c, d));
         }
         else{
             int u, v, x; cin >> u >> v >> x;
             Affine ans;
             for(auto &path : hld.PathQuery(u, v)){
-                if(path.reverse) ans = Affine::left_merge(ans, seg2.Query(path.head_index, path.tail_index));
-                else ans = Affine::left_merge(ans, seg1.Query(path.head_index, path.tail_index));
+                if(path.reverse) ans = Affine::left_merge(ans, seg2.Product(path.head_index, path.tail_index));
+                else ans = Affine::left_merge(ans, seg1.Product(path.head_index, path.tail_index));
             }
-            cout << ans.a * x + ans.b << endl;
+            cout << ans.a * x + ans.b << '\n';
         }
     }
 }

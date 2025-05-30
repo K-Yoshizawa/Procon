@@ -4,6 +4,7 @@
 #include "../Library/Graph/LowLink.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int V, E; cin >> V >> E;
     auto G = InputGraph<ll>(V, E, 0, false, false);
     

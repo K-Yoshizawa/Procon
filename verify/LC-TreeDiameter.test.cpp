@@ -3,6 +3,7 @@
 #include "../Library/Tree/TreeDiameter.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n; cin >> n;
     Graph T = InputTree<ll>(n, 0, true);
 
@@ -13,5 +14,5 @@ int main(){
     for(auto u : us){
         cout << u << " ";
     }
-    cout << endl;
+    cout << '\n';
 }

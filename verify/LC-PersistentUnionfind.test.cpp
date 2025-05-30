@@ -3,6 +3,7 @@
 #include "../Library/DataStructure/RollbackUnionFind.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     using qs = tuple<int, int, int, int>;
     vector<vector<qs>> G(Q + 1);
@@ -26,6 +27,6 @@ int main(){
     };
     dfs(dfs, {-1, 0, 0, 0});
     for(auto a : ans){
-        if(a != -1) cout << a << endl;
+        if(a != -1) cout << a << '\n';
     }
 }

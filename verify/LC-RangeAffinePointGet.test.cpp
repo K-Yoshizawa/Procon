@@ -13,6 +13,7 @@ struct OperatorMonoid{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<mint> a(N); cin >> a;
 
@@ -30,8 +31,8 @@ int main(){
         }
         else{
             int i; cin >> i;
-            OperatorMonoid op = seg.Query(i);
-            cout << op.b * a[i] + op.c << endl;
+            OperatorMonoid op = seg.Product(i);
+            cout << op.b * a[i] + op.c << '\n';
         }
     }
 }

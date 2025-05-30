@@ -4,13 +4,14 @@
 #include "../Library/Other/LongestIncreasingSubsequence.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N; cin >> N;
     vector<int> A(N); cin >> A;
 
     auto ans = LongestIncreasingSubsequence<true>(A);
-    cout << ans.size() << endl;
+    cout << ans.size() << '\n';
     for(auto i : ans){
         cout << i << " ";
     }
-    cout << endl;
+    cout << '\n';
 }

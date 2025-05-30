@@ -4,6 +4,7 @@
 #include "../Library/DataStructure/CumulativeSum2D.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, M; cin >> N >> M;
     int K; cin >> K;
     CumulativeSum2D<int> Jcum(N, M), Ocum(N, M), Icum(N, M);
@@ -22,6 +23,6 @@ int main(){
     Icum.Build();
     for(int i = 0; i < K; ++i){
         int a, b, c, d; cin >> a >> b >> c >> d, --a, --b, --c, --d;
-        cout << Jcum.Sum(a, b, c, d) << ' ' << Ocum.Sum(a, b, c, d) << ' ' << Icum.Sum(a, b, c, d) << endl;
+        cout << Jcum.Sum(a, b, c, d) << ' ' << Ocum.Sum(a, b, c, d) << ' ' << Icum.Sum(a, b, c, d) << '\n';
     }
 }

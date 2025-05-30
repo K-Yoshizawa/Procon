@@ -3,6 +3,7 @@
 #include "../Library/Tree/TreeDiameter.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n; cin >> n;
     Graph<int> T = InputTree(n, 0, true);
 

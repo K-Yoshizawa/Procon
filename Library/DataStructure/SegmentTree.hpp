@@ -33,18 +33,13 @@ class SegmentTree{
         Build();
     }
 
-    void Set(int i, Monoid v){
-        Validate(i + zero_index_);
-        data_[offset_ + i + zero_index_] = v;
-    }
-
     void Build(){
         for(int i = offset_; i >= 1; --i){
             data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
         }
     }
 
-    void Update(int i, Monoid v){
+    void Set(int i, Monoid v){
         Validate(i + zero_index_);
         int k = offset_ + i + zero_index_;
         data_[k] = v;
@@ -53,7 +48,7 @@ class SegmentTree{
         }
     }
 
-    Monoid Query(int l, int r){
+    Monoid Product(int l, int r){
         if(l == r) return id_;
         Validate(l + zero_index_);
         Validate(r + zero_index_ - 1);

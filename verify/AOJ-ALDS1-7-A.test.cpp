@@ -4,6 +4,7 @@
 #include "../Library/Tree/Tree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n; cin >> n;
     Graph T(n);
     vector<int> parent(n, -1);

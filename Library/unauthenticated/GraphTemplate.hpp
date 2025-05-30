@@ -243,14 +243,14 @@ struct Graph{
         for(int i = 0; i < G.size(); ++i){
             os << "Vertex " << i << " : ";
             if(G[i].empty()){
-                os << "<none>" << endl;
+                os << "<none>" << '\n';
                 continue;
             }
             for(auto &e : G[i]){
                 if(G.is_weighted()) os << "{" << e.to << ", " << e.cost << "} ";
                 else os << e.to << " ";
             }
-            if(i + 1 < G.size()) os << endl;
+            if(i + 1 < G.size()) os << '\n';
         }
         return os;
     }
