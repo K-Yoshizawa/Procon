@@ -99,10 +99,10 @@ class LazySegmentTree{
      * @param right 半開区間の右端
      * @return Monoid 取得した結果
      */
-    Monoid Query(int left, int right){
+    Monoid Prod(int left, int right){
         Validate(left + zeroindex_);
         Validate(right + zeroindex_ - 1);
-        return RecursiveQuery(left + zeroindex_, right + zeroindex_, 1, size_ + 1, 1);
+        return RecursiveProd(left + zeroindex_, right + zeroindex_, 1, size_ + 1, 1);
     }
 
     /**
@@ -112,7 +112,7 @@ class LazySegmentTree{
      */
     Monoid get_value(int k){
         Validate(k + zeroindex_);
-        return Query(k, k + 1);
+        return Prod(k, k + 1);
     }
 
     Monoid operator[](const int &k){
@@ -162,7 +162,7 @@ class LazySegmentTree{
         }
     }
 
-    Monoid RecursiveQuery(int ql, int qr, int left, int right, int cell){
+    Monoid RecursiveProd(int ql, int qr, int left, int right, int cell){
         Evaluate(cell);
         if(qr <= left || right <= ql){
             return m1_;
@@ -171,8 +171,8 @@ class LazySegmentTree{
             return data_[cell];
         }
         int mid = (left + right) / 2;
-        Monoid ans_left = RecursiveQuery(ql, qr, left, mid, cell * 2 + 0);
-        Monoid ans_right = RecursiveQuery(ql, qr, mid, right, cell * 2 + 1);
+        Monoid ans_left = RecursiveProd(ql, qr, left, mid, cell * 2 + 0);
+        Monoid ans_right = RecursiveProd(ql, qr, mid, right, cell * 2 + 1);
         return f(ans_left, ans_right);
     }
 };
