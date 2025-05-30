@@ -1,13 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "../Library/Template.hpp"
 #include "../Library/Tree/LowestCommonAncestor.hpp"
 
 int main(){
     cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
-    RootedTree T(N);
-    T.InputRootedTreeFormat(false, false);
+    auto T = InputRootedTreeParent(N, 0);
 
     LowestCommonAncestor lca(T);
     while(Q--){

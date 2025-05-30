@@ -28,4 +28,4 @@ using namespace std;
 using ll = int64_t;
 using ull = uint64_t;
 
-constexpr const ll INF = (1LL << 62) - (1LL << 30) - 1;
+constexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;

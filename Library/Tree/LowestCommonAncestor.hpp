@@ -1,32 +1,23 @@
 #pragma once
 
-/**
- * @file LowestCommonAncestor.hpp
- * @brief Lowest Common Ancestor - 最小共通祖先
- * @version 4.0
- * @date 2024-09-03
- */
-
 #include "Tree.hpp"
 
 template<typename CostType>
 struct LowestCommonAncestor{
     public:
-    LowestCommonAncestor(){}
-
-    LowestCommonAncestor(RootedTree<CostType> &tree) :
-            tree_(tree), depth_(CalculateTreeDepth(tree)){
-        int V = tree.get_vertex_size();
+    LowestCommonAncestor(Graph<CostType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){
+        int n = T.VertexSize();
         height_ = 1;
-        while((1 << height_) < V) ++height_;
-        parent_.resize(height_, vector<Vertex>(V, -1));
-        for(Vertex v = 0; v < V; ++v){
-            parent_[0][v] = tree.get_parent(v);
+        while((1 << height_) < n) ++height_;
+        auto par = CalculateTreeParent(T);
+        parent_.resize(height_, vector<Vertex>(n, -1));
+        for(Vertex i = 0; i < n; ++i){
+            parent_[0][i] = par[i];
         }
         for(int k = 0; k + 1 < height_; ++k){
-            for(Vertex v = 0; v < V; ++v){
-                if(parent_[k][v] < 0) parent_[k + 1][v] = -1;
-                else parent_[k + 1][v] = parent_[k][parent_[k][v]];
+            for(Vertex i = 0; i < n; ++i){
+                if(parent_[k][i] < 0) parent_[k + 1][i] = -1;
+                else parent_[k + 1][i] = parent_[k][parent_[k][i]];
             }
         }
     }
@@ -55,7 +46,7 @@ struct LowestCommonAncestor{
     }
 
     private:
-    RootedTree<CostType> &tree_;
+    Graph<CostType> &T;
     int height_;
     vector<int> depth_;
     vector<vector<Vertex>> parent_;

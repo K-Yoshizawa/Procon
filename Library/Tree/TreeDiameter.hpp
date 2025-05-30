@@ -1,58 +1,44 @@
-/**
- * @file TreeDiameter.hpp
- * @brief Tree Diameter - 木の直径
- * @version 3.0
- * @date 2024-09-03
- */
-
 #include "Tree.hpp"
 
 template<typename CostType>
 class TreeDiameter{
     public:
-    TreeDiameter(RootedTree<CostType> &tree) : tree_(tree){
-        dist_ = CalculateTreeCumlativeSum(tree);
-        Vertex u = distance(dist_.begin(), max_element(dist_.begin(), dist_.end()));
-        tree_.Rerooting(u);
-        dist_ = CalculateTreeCumlativeSum(tree);
-        auto itr = max_element(dist_.begin(), dist_.end());
-        diameter_ = *itr;
-        Vertex v = distance(dist_.begin(), itr);
-        while(v != u){
-            diameter_path_.push_back(v);
-            v = tree.get_parent(v);
+    TreeDiameter(Graph<CostType> &tree) : T(tree){
+        int n = T.VertexSize(), s = 0;
+        dist_s_ = CalculateTreeDistance(T, s);
+        s = distance(dist_s_.begin(), max_element(dist_s_.begin(), dist_s_.end()));
+        dist_s_ = CalculateTreeDistance(T, s);
+        vector<int> par = CalculateTreeParent(T, s);
+        int t = distance(dist_s_.begin(), max_element(dist_s_.begin(), dist_s_.end()));
+        diameter_ = dist_s_[t];
+        dist_t_ = CalculateTreeDistance(T, t);
+        int u = t;
+        while(u != s){
+            path_.emplace_back(u);
+            u = par[u];
         }
-        diameter_path_.push_back(u);
+        path_.emplace_back(s);
     }
-
-    /**
-     * @brief 直径を構成するパスの端点を返す。
-     * @return pair<Vertex, Vertex> 直径を構成するパスの端点 (0-index)
-     */
-    pair<Vertex, Vertex> get_endpoints() const {
-        return pair<Vertex, Vertex>(diameter_path_.front(), diameter_path_.end());
-    }
-
-    /**
-     * @brief 直径を構成するパスを返す。
-     * @return vector<Vertex>& 直径を構成するパスに含まれる頂点 (0-index)
-     */
-    vector<Vertex> &get_diameter_path(){
-        return diameter_path_;
-    }
-
-    /**
-     * @brief 直径を返す。
-     * @return CostType 直径
-     */
-    CostType get_diameter() const {
+    
+    CostType Diameter() const {
         return diameter_;
+    }
+    
+    CostType Height(Vertex v) const {
+        return max(dist_s_[v], dist_t_[v]);
+    }
+
+    pair<Vertex, Vertex> EndPoints() const {
+        return pair<Vertex, Vertex>(path_.front(), path_.back());
+    }
+
+    vector<Vertex> &Path(){
+        return path_;
     }
 
     private:
-    RootedTree<CostType> &tree_;
-
+    Graph<CostType> &T;
+    vector<CostType> dist_s_, dist_t_;
+    vector<Vertex> path_;
     CostType diameter_;
-    vector<Vertex> diameter_path_;
-    vector<CostType> dist_;
 };
