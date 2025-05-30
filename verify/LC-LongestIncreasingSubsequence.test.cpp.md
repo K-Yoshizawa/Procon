@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

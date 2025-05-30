@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   _extendedRequiredBy:
@@ -17,13 +17,10 @@ data:
       \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
       \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
       \u6728"
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     links: []
@@ -218,9 +215,8 @@ data:
   requiredBy:
   - Library/Tree/AuxiliaryTree.hpp
   timestamp: '2025-05-02 02:04:34+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: Library/Tree/EulerTour.hpp
 layout: document
 redirect_from:

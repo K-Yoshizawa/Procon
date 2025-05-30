@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -39,7 +39,7 @@ data:
       \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
       \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
       \u6728"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
@@ -49,10 +49,10 @@ data:
     path: Library/Tree/LowestCommonAncestor.hpp
     title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
       \u7956\u5148\u3092\u8FD4\u3059\u3002"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   - icon: ':heavy_check_mark:'
@@ -119,24 +119,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':x:'
-    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
@@ -218,7 +215,7 @@ data:
   - Library/Tree/EulerTour.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   timestamp: '2025-04-30 01:32:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
@@ -241,7 +238,6 @@ data:
   - verify/AOJ-GRL-3-B.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
   - verify/LC-TreePathCompositeSum.test.cpp
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-CycleDetection.test.cpp
   - verify/LC-TreeDiameter.test.cpp

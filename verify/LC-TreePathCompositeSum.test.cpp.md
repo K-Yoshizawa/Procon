@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
@@ -263,7 +263,7 @@ data:
     \ v) const {\n        return dp_[v];\n    }\n\n    void Print() const {\n    \
     \    cerr << \"# dp table :\";\n        for(int i = 0; i < n; ++i){\n        \
     \    cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr\
-    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n \
+    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < n; ++i){\n \
     \           cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
@@ -353,8 +353,8 @@ data:
   isVerificationFile: true
   path: verify/LC-TreePathCompositeSum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-05-30 21:11:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreePathCompositeSum.test.cpp
 layout: document

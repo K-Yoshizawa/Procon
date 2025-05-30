@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
     links: []
@@ -150,7 +150,7 @@ data:
     \ v) const {\n        return dp_[v];\n    }\n\n    void Print() const {\n    \
     \    cerr << \"# dp table :\";\n        for(int i = 0; i < n; ++i){\n        \
     \    cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr\
-    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n \
+    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < n; ++i){\n \
     \           cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
@@ -233,7 +233,7 @@ data:
     \ v) const {\n        return dp_[v];\n    }\n\n    void Print() const {\n    \
     \    cerr << \"# dp table :\";\n        for(int i = 0; i < n; ++i){\n        \
     \    cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr\
-    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n \
+    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < n; ++i){\n \
     \           cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
@@ -283,8 +283,8 @@ data:
   isVerificationFile: false
   path: Library/Tree/RerootingDP.hpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-05-30 21:11:18+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreePathCompositeSum.test.cpp
 documentation_of: Library/Tree/RerootingDP.hpp

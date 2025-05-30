@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -21,18 +21,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':x:'
-    path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-    title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -102,7 +99,7 @@ data:
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2025-05-30 20:02:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
@@ -111,7 +108,6 @@ data:
   - verify/LC-PointAddRangeSum.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document
 title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
