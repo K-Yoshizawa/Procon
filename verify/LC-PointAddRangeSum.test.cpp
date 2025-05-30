@@ -12,11 +12,11 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Update(p, seg[p] + x);
+            seg.Set(p, seg[p] + x);
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Query(l, r) << endl;
+            cout << seg.Prod(l, r) << endl;
         }
     }
 }

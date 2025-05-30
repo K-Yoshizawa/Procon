@@ -17,12 +17,12 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int u, x; cin >> u >> x;
-            seg.Update(et.get_in(u), seg[et.get_in(u)] + x);
+            seg.Set(et.get_in(u), seg[et.get_in(u)] + x);
         }
         else{
             int u; cin >> u;
             auto [l, r] = et.get_pair(u);
-            cout << seg.Query(l, r) << endl;
+            cout << seg.Prod(l, r) << endl;
         }
     }
 }

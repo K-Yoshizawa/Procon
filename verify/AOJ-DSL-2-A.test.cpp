@@ -12,10 +12,10 @@ int main(){
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){
-            seg.Update(x, y);
+            seg.Set(x, y);
         }
         else{
-            cout << seg.Query(x, y + 1) << endl;
+            cout << seg.Prod(x, y + 1) << endl;
         }
     }
 }
