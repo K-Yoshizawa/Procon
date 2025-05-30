@@ -68,7 +68,7 @@ class RerootingDP{
         }
         cerr << '\n';
         cerr << "# subtree_dp table" << '\n';
-        for(int i = 0; i < V; ++i){
+        for(int i = 0; i < n; ++i){
             cerr << "# vertex " << i << '\n';
             cerr << "#    subtree_dp :";
             for(int j = 0; j < subtree_dp_[i].size(); ++j){
