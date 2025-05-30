@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -280,14 +280,14 @@ data:
     \ get_diameter() const {\n        return diameter_;\n    }\n\n    private:\n \
     \   RootedTree<CostType> &tree_;\n\n    CostType diameter_;\n    vector<Vertex>\
     \ diameter_path_;\n    vector<CostType> dist_;\n};\n#line 5 \"verify/AOJ-GRL-5-A.test.cpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n);\n    T.InputGraphFormat(true,\
-    \ false);\n\n    TreeDiameter td(T);\n    cout << td.get_diameter() << endl;\n\
-    }\n"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n; cin >> n;\n\
+    \    RootedTree T(n);\n    T.InputGraphFormat(true, false);\n\n    TreeDiameter\
+    \ td(T);\n    cout << td.get_diameter() << '\\n';\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/TreeDiameter.hpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n);\n    T.InputGraphFormat(true,\
-    \ false);\n\n    TreeDiameter td(T);\n    cout << td.get_diameter() << endl;\n\
-    }"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n; cin >> n;\n\
+    \    RootedTree T(n);\n    T.InputGraphFormat(true, false);\n\n    TreeDiameter\
+    \ td(T);\n    cout << td.get_diameter() << '\\n';\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -296,7 +296,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-5-A.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-5-A.test.cpp

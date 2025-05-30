@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -397,16 +397,16 @@ data:
     \ heavy_path_head_, vertex_order_;\n    vector<int> belong_heavy_path_index_,\
     \ belong_heavy_path_order_, heavy_path_depth_;\n    vector<int> preorder_index_,\
     \ postorder_index_;\n    vector<int> vertex_depth_;\n};\n#line 5 \"verify/LC-LowestCommonAncestor-HLD.test.cpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
-    \ false);\n\n    HeavyLightDecomposition hld(T);\n    while(Q--){\n        int\
-    \ u, v; cin >> u >> v;\n        cout << hld.LowestCommonAncestor(u, v) << endl;\n\
-    \    }\n}\n"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
+    \ N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false, false);\n\n\
+    \    HeavyLightDecomposition hld(T);\n    while(Q--){\n        int u, v; cin >>\
+    \ u >> v;\n        cout << hld.LowestCommonAncestor(u, v) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../Library/Template.hpp\"\
     \n#include \"../Library/Tree/HeavyLightDecomposition.hpp\"\n\nint main(){\n  \
-    \  int N, Q; cin >> N >> Q;\n    RootedTree T(N);\n    T.InputRootedTreeFormat(false,\
-    \ false);\n\n    HeavyLightDecomposition hld(T);\n    while(Q--){\n        int\
-    \ u, v; cin >> u >> v;\n        cout << hld.LowestCommonAncestor(u, v) << endl;\n\
-    \    }\n}"
+    \  cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    RootedTree\
+    \ T(N);\n    T.InputRootedTreeFormat(false, false);\n\n    HeavyLightDecomposition\
+    \ hld(T);\n    while(Q--){\n        int u, v; cin >> u >> v;\n        cout <<\
+    \ hld.LowestCommonAncestor(u, v) << '\\n';\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -415,7 +415,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LowestCommonAncestor-HLD.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LowestCommonAncestor-HLD.test.cpp

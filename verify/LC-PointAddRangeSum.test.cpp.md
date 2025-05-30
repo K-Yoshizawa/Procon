@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -119,7 +119,7 @@ data:
     \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
     \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
     \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
     \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
     \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
     \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
@@ -130,20 +130,20 @@ data:
     \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
     \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
     \    }\n};\n#line 5 \"verify/LC-PointAddRangeSum.test.cpp\"\n\nint main(){\n \
-    \   int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    SegmentTree<ll>\
-    \ seg(a, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n       \
-    \ int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n\
-    \            seg.Set(p, seg[p] + x);\n        }\n        else{\n            int\
-    \ l, r; cin >> l >> r;\n            cout << seg.Prod(l, r) << endl;\n        }\n\
-    \    }\n}\n"
+    \   cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    vector<ll>\
+    \ a(N); cin >> a;\n\n    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;},\
+    \ 0LL, true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n\
+    \            int p, x; cin >> p >> x;\n            seg.Set(p, seg[p] + x);\n \
+    \       }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
+    \ << seg.Product(l, r) << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\
-    \n    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n\
-    \        int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p\
-    \ >> x;\n            seg.Set(p, seg[p] + x);\n        }\n        else{\n     \
-    \       int l, r; cin >> l >> r;\n            cout << seg.Prod(l, r) << endl;\n\
-    \        }\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
+    \ N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    SegmentTree<ll> seg(a, [](ll\
+    \ l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n        int t; cin >>\
+    \ t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n            seg.Set(p,\
+    \ seg[p] + x);\n        }\n        else{\n            int l, r; cin >> l >> r;\n\
+    \            cout << seg.Product(l, r) << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -151,7 +151,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointAddRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointAddRangeSum.test.cpp

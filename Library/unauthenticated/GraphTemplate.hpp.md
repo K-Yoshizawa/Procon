@@ -116,10 +116,10 @@ data:
     \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n\
     \        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" <<\
     \ i << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
+    \ << '\\n';\n                continue;\n            }\n            for(auto &e\
     \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
     \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
+    \  }\n            if(i + 1 < G.size()) os << '\\n';\n        }\n        return\
     \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
     \ get_adj(v);\n    }\n};\n"
   code: "#pragma once\n\n/**\n * @file GraphTemplate.hpp\n * @brief Graph Template\
@@ -224,10 +224,10 @@ data:
     \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n\
     \        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" <<\
     \ i << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << endl;\n                continue;\n            }\n            for(auto &e\
+    \ << '\\n';\n                continue;\n            }\n            for(auto &e\
     \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
     \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << endl;\n        }\n        return\
+    \  }\n            if(i + 1 < G.size()) os << '\\n';\n        }\n        return\
     \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
     \ get_adj(v);\n    }\n};"
   dependsOn: []
@@ -235,7 +235,7 @@ data:
   path: Library/unauthenticated/GraphTemplate.hpp
   requiredBy:
   - Library/unauthenticated/LongestDistance.hpp
-  timestamp: '2024-09-04 01:04:48+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/GraphTemplate.hpp

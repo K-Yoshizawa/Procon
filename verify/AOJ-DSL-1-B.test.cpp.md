@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
     title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
       \u30FC\u30BF\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -116,21 +116,22 @@ data:
     \ == y) return false;\n        if(data_[x] > data_[y]) swap(x, y), w = -w;\n \
     \       data_[x] += data_[y];\n        data_[y] = x;\n        weight_[y] = w;\n\
     \        return true;\n    }\n\n    private:\n    vector<int> data_;\n    vector<Abel>\
-    \ weight_;\n};\n#line 5 \"verify/AOJ-DSL-1-B.test.cpp\"\n\nint main(){\n    int\
-    \ n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n\
+    \ weight_;\n};\n#line 5 \"verify/AOJ-DSL-1-B.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n\
     \        int query; cin >> query;\n        if(query == 0){\n            int x,\
     \ y, z; cin >> x >> y >> z;\n            uf.Unite(x, y, z);\n        }\n     \
     \   else{\n            int x, y; cin >> x >> y;\n            if(!uf.Same(x, y))\
-    \ cout << \"?\" << endl;\n            else cout << uf.Diff(x, y) << endl;\n  \
-    \      }\n    }\n}\n"
+    \ cout << \"?\" << '\\n';\n            else cout << uf.Diff(x, y) << '\\n';\n\
+    \        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n\nint main(){\n    int n, q; cin >> n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n\
-    \    while(q--){\n        int query; cin >> query;\n        if(query == 0){\n\
-    \            int x, y, z; cin >> x >> y >> z;\n            uf.Unite(x, y, z);\n\
-    \        }\n        else{\n            int x, y; cin >> x >> y;\n            if(!uf.Same(x,\
-    \ y)) cout << \"?\" << endl;\n            else cout << uf.Diff(x, y) << endl;\n\
-    \        }\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n, q; cin >>\
+    \ n >> q;\n\n    WeightedUnionFind<ll> uf(n);\n    while(q--){\n        int query;\
+    \ cin >> query;\n        if(query == 0){\n            int x, y, z; cin >> x >>\
+    \ y >> z;\n            uf.Unite(x, y, z);\n        }\n        else{\n        \
+    \    int x, y; cin >> x >> y;\n            if(!uf.Same(x, y)) cout << \"?\" <<\
+    \ '\\n';\n            else cout << uf.Diff(x, y) << '\\n';\n        }\n    }\n\
+    }"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -138,7 +139,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-1-B.test.cpp

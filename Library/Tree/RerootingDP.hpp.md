@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -216,20 +216,20 @@ data:
     \ v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex v)\
     \ const {\n        return dp_[v];\n    }\n\n    void Print() const {\n       \
     \ cerr << \"# dp table :\";\n        for(int i = 0; i < V; ++i){\n           \
-    \ cerr << \" \" << dp_[i];\n        }\n        cerr << endl;\n        cerr <<\
-    \ \"# subtree_dp table\" << endl;\n        for(int i = 0; i < V; ++i){\n     \
-    \       cerr << \"# vertex \" << i << endl;\n            cerr << \"#    subtree_dp\
+    \ cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr <<\
+    \ \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n    \
+    \        cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << endl;\n            cerr << \"#    left_cum   :\";\n            for(int j\
+    \ << '\\n';\n            cerr << \"#    left_cum   :\";\n            for(int j\
     \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << endl;\n            cerr << \"#    right_cum\
+    \            }\n            cerr << '\\n';\n            cerr << \"#    right_cum\
     \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
     \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ endl;\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\n\
-    \    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n   \
-    \     for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n  \
-    \          subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
+    \ '\\n';\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\
+    \n    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n  \
+    \      for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n \
+    \           subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
     \ v);\n        }\n        if(root) ret = finalize_(ret, v);\n        else ret\
     \ = add_(ret, tree_.get_cost(v), v);\n        return ret;\n    }\n\n    void solve(){\n\
     \        dp_.resize(V, id_);\n        subtree_dp_.resize(V, vector<Monoid>{id_});\n\
@@ -298,20 +298,20 @@ data:
     \ v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex v)\
     \ const {\n        return dp_[v];\n    }\n\n    void Print() const {\n       \
     \ cerr << \"# dp table :\";\n        for(int i = 0; i < V; ++i){\n           \
-    \ cerr << \" \" << dp_[i];\n        }\n        cerr << endl;\n        cerr <<\
-    \ \"# subtree_dp table\" << endl;\n        for(int i = 0; i < V; ++i){\n     \
-    \       cerr << \"# vertex \" << i << endl;\n            cerr << \"#    subtree_dp\
+    \ cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr <<\
+    \ \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n    \
+    \        cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << endl;\n            cerr << \"#    left_cum   :\";\n            for(int j\
+    \ << '\\n';\n            cerr << \"#    left_cum   :\";\n            for(int j\
     \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << endl;\n            cerr << \"#    right_cum\
+    \            }\n            cerr << '\\n';\n            cerr << \"#    right_cum\
     \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
     \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ endl;\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\n\
-    \    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n   \
-    \     for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n  \
-    \          subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
+    \ '\\n';\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\
+    \n    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n  \
+    \      for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n \
+    \           subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
     \ v);\n        }\n        if(root) ret = finalize_(ret, v);\n        else ret\
     \ = add_(ret, tree_.get_cost(v), v);\n        return ret;\n    }\n\n    void solve(){\n\
     \        dp_.resize(V, id_);\n        subtree_dp_.resize(V, vector<Monoid>{id_});\n\
@@ -350,7 +350,7 @@ data:
   isVerificationFile: false
   path: Library/Tree/RerootingDP.hpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-B.test.cpp

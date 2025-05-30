@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -254,30 +254,30 @@ data:
     \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
     \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
     \ root);\n    return ret;\n}\n#line 5 \"verify/AOJ-ALDS1-7-A.test.cpp\"\n\nint\
-    \ main(){\n    int n; cin >> n;\n    RootedTree T(n, -1);\n    for(int i = 0;\
-    \ i < n; ++i){\n        int id, k; cin >> id >> k;\n        for(int j = 0; j <\
-    \ k; ++j){\n            int c; cin >> c;\n            T.AddEdge(id, c);\n    \
-    \    }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n    for(int i = 0; i\
-    \ < n; ++i){\n        cout << \"node \" << i << \": \";\n        cout << \"parent\
-    \ = \" << T.get_parent(i) << \", \";\n        cout << \"depth = \" << depth[i]\
-    \ << \", \";\n        cout << (T.RootVertex(i) ? \"root\" : (T.LeafVertex(i) ?\
-    \ \"leaf\" : \"internal node\")) << \", \";\n        cout << \"[\";\n        auto\
-    \ c = T.get_child(i);\n        for(int j = 0; j < c.size(); ++j){\n          \
-    \  cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n        }\n        cout\
-    \ << \"]\\n\";\n    }\n}\n"
+    \ main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n; cin >> n;\n   \
+    \ RootedTree T(n, -1);\n    for(int i = 0; i < n; ++i){\n        int id, k; cin\
+    \ >> id >> k;\n        for(int j = 0; j < k; ++j){\n            int c; cin >>\
+    \ c;\n            T.AddEdge(id, c);\n        }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n\
+    \    for(int i = 0; i < n; ++i){\n        cout << \"node \" << i << \": \";\n\
+    \        cout << \"parent = \" << T.get_parent(i) << \", \";\n        cout <<\
+    \ \"depth = \" << depth[i] << \", \";\n        cout << (T.RootVertex(i) ? \"root\"\
+    \ : (T.LeafVertex(i) ? \"leaf\" : \"internal node\")) << \", \";\n        cout\
+    \ << \"[\";\n        auto c = T.get_child(i);\n        for(int j = 0; j < c.size();\
+    \ ++j){\n            cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n  \
+    \      }\n        cout << \"]\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/Tree.hpp\"\
-    \n\nint main(){\n    int n; cin >> n;\n    RootedTree T(n, -1);\n    for(int i\
-    \ = 0; i < n; ++i){\n        int id, k; cin >> id >> k;\n        for(int j = 0;\
-    \ j < k; ++j){\n            int c; cin >> c;\n            T.AddEdge(id, c);\n\
-    \        }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n    for(int i =\
-    \ 0; i < n; ++i){\n        cout << \"node \" << i << \": \";\n        cout <<\
-    \ \"parent = \" << T.get_parent(i) << \", \";\n        cout << \"depth = \" <<\
-    \ depth[i] << \", \";\n        cout << (T.RootVertex(i) ? \"root\" : (T.LeafVertex(i)\
-    \ ? \"leaf\" : \"internal node\")) << \", \";\n        cout << \"[\";\n      \
-    \  auto c = T.get_child(i);\n        for(int j = 0; j < c.size(); ++j){\n    \
-    \        cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n        }\n   \
-    \     cout << \"]\\n\";\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n; cin >> n;\n\
+    \    RootedTree T(n, -1);\n    for(int i = 0; i < n; ++i){\n        int id, k;\
+    \ cin >> id >> k;\n        for(int j = 0; j < k; ++j){\n            int c; cin\
+    \ >> c;\n            T.AddEdge(id, c);\n        }\n    }\n\n    auto depth = CalculateTreeDepth(T);\n\
+    \    for(int i = 0; i < n; ++i){\n        cout << \"node \" << i << \": \";\n\
+    \        cout << \"parent = \" << T.get_parent(i) << \", \";\n        cout <<\
+    \ \"depth = \" << depth[i] << \", \";\n        cout << (T.RootVertex(i) ? \"root\"\
+    \ : (T.LeafVertex(i) ? \"leaf\" : \"internal node\")) << \", \";\n        cout\
+    \ << \"[\";\n        auto c = T.get_child(i);\n        for(int j = 0; j < c.size();\
+    \ ++j){\n            cout << c[j] << (j + 1 == c.size() ? \"\" : \", \");\n  \
+    \      }\n        cout << \"]\\n\";\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -285,7 +285,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-ALDS1-7-A.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-ALDS1-7-A.test.cpp

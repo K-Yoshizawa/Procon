@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -45,19 +45,7 @@ data:
     \        data_[x] = dx;\n    }\n\n    void Rollback(){\n        int state = record_;\n\
     \        while(state < (int)history_.size()) Undo();\n    }\n    \n    private:\n\
     \    vector<int> data_;\n    stack<pair<int, int>> history_;\n    int record_;\n\
-    };\n#line 4 \"verify/LC-PersistentUnionfind.test.cpp\"\n\nint main(){\n    int\
-    \ N, Q; cin >> N >> Q;\n    using qs = tuple<int, int, int, int>;\n    vector<vector<qs>>\
-    \ G(Q + 1);\n    for(int i = 1; i <= Q; ++i){\n        int t, k, u, v; cin >>\
-    \ t >> k >> u >> v, ++k;\n        G[k].push_back({t, i, u, v});\n    }\n\n   \
-    \ RollbackUnionFind uf(N);\n    vector<int> ans(Q + 1, -1);\n    auto dfs = [&](auto\
-    \ self, const qs &query) -> void {\n        auto [t, i, u, v] = query;\n     \
-    \   if(t == 1){\n            ans[i] = uf.Same(u, v);\n        }\n        else{\n\
-    \            if(t == 0) uf.Unite(u, v);\n            for(auto nquery : G[i]) self(self,\
-    \ nquery);\n            if(t == 0) uf.Undo();\n        }\n    };\n    dfs(dfs,\
-    \ {-1, 0, 0, 0});\n    for(auto a : ans){\n        if(a != -1) cout << a << endl;\n\
-    \    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\
-    \n#include \"../Library/DataStructure/RollbackUnionFind.hpp\"\n\nint main(){\n\
+    };\n#line 4 \"verify/LC-PersistentUnionfind.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
     \    int N, Q; cin >> N >> Q;\n    using qs = tuple<int, int, int, int>;\n   \
     \ vector<vector<qs>> G(Q + 1);\n    for(int i = 1; i <= Q; ++i){\n        int\
     \ t, k, u, v; cin >> t >> k >> u >> v, ++k;\n        G[k].push_back({t, i, u,\
@@ -67,14 +55,27 @@ data:
     \       }\n        else{\n            if(t == 0) uf.Unite(u, v);\n           \
     \ for(auto nquery : G[i]) self(self, nquery);\n            if(t == 0) uf.Undo();\n\
     \        }\n    };\n    dfs(dfs, {-1, 0, 0, 0});\n    for(auto a : ans){\n   \
-    \     if(a != -1) cout << a << endl;\n    }\n}"
+    \     if(a != -1) cout << a << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\
+    \n#include \"../Library/DataStructure/RollbackUnionFind.hpp\"\n\nint main(){\n\
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    using\
+    \ qs = tuple<int, int, int, int>;\n    vector<vector<qs>> G(Q + 1);\n    for(int\
+    \ i = 1; i <= Q; ++i){\n        int t, k, u, v; cin >> t >> k >> u >> v, ++k;\n\
+    \        G[k].push_back({t, i, u, v});\n    }\n\n    RollbackUnionFind uf(N);\n\
+    \    vector<int> ans(Q + 1, -1);\n    auto dfs = [&](auto self, const qs &query)\
+    \ -> void {\n        auto [t, i, u, v] = query;\n        if(t == 1){\n       \
+    \     ans[i] = uf.Same(u, v);\n        }\n        else{\n            if(t == 0)\
+    \ uf.Unite(u, v);\n            for(auto nquery : G[i]) self(self, nquery);\n \
+    \           if(t == 0) uf.Undo();\n        }\n    };\n    dfs(dfs, {-1, 0, 0,\
+    \ 0});\n    for(auto a : ans){\n        if(a != -1) cout << a << '\\n';\n    }\n\
+    }"
   dependsOn:
   - Library/DataStructure/RollbackUnionFind.hpp
   - Library/Common.hpp
   isVerificationFile: true
   path: verify/LC-PersistentUnionfind.test.cpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PersistentUnionfind.test.cpp

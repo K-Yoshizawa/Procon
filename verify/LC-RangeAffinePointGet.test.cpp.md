@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/DualSegmentTree.hpp
     title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_point_get
@@ -149,9 +149,9 @@ data:
     \ = value;\n    }\n\n    void Update(int left, int right, OperatorMonoid operation){\n\
     \        Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
     \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1,\
-    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Prod(int index){\n        Validate(index\
-    \ + zeroindex_);\n        return RecursiveProd(index + zeroindex_, 1, size_ +\
-    \ 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
+    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Product(int index){\n        Validate(index\
+    \ + zeroindex_);\n        return RecursiveProduct(index + zeroindex_, 1, size_\
+    \ + 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
     \ lazy_;\n    vector<bool> is_identity_;\n    const H h;\n    const OperatorMonoid\
     \ om1_;\n\n    inline void Validate(int x){\n        assert(1 <= x && x <= size_);\n\
     \    }\n\n    void Evaluate(int k){\n        if(is_identity_[k]) return;\n   \
@@ -165,37 +165,39 @@ data:
     \ = false;\n            Evaluate(cell);\n        }\n        else if(ul < right\
     \ && left < ur){\n            int mid = (left + right) / 2;\n            RecursiveUpdate(ul,\
     \ ur, x, left, mid, cell * 2 + 0);\n            RecursiveUpdate(ul, ur, x, mid,\
-    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProd(int\
+    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProduct(int\
     \ q, int left, int right, int cell){\n        Evaluate(cell);\n        if(q ==\
     \ left && right - left == 1) return lazy_[cell];\n        int mid = (left + right)\
-    \ / 2;\n        if(q < mid) return RecursiveProd(q, left, mid, cell * 2 + 0);\n\
-    \        else return RecursiveProd(q, mid, right, cell * 2 + 1);\n    }\n};\n\
+    \ / 2;\n        if(q < mid) return RecursiveProduct(q, left, mid, cell * 2 + 0);\n\
+    \        else return RecursiveProduct(q, mid, right, cell * 2 + 1);\n    }\n};\n\
     #line 6 \"verify/LC-RangeAffinePointGet.test.cpp\"\n\nstruct OperatorMonoid{\n\
     \    mint b, c;\n    OperatorMonoid(mint b_ = 1, mint c_ = 0) : b(b_), c(c_){}\n\
     \    static OperatorMonoid Composite(OperatorMonoid &l, OperatorMonoid &r){\n\
     \        return OperatorMonoid(r.b * l.b, r.b * l.c + r.c);\n    }\n};\n\nint\
-    \ main(){\n    int N, Q; cin >> N >> Q;\n    vector<mint> a(N); cin >> a;\n\n\
-    \    DualSegmentTree<OperatorMonoid> seg(\n        N,\n        [](OperatorMonoid\
-    \ l, OperatorMonoid r){return OperatorMonoid::Composite(l, r);},\n        OperatorMonoid(),\n\
-    \        true\n    );\n    while(Q--){\n        int t; cin >> t;\n        if(t\
-    \ == 0){\n            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Update(l,\
-    \ r, OperatorMonoid(b, c));\n        }\n        else{\n            int i; cin\
-    \ >> i;\n            OperatorMonoid op = seg.Query(i);\n            cout << op.b\
-    \ * a[i] + op.c << endl;\n        }\n    }\n}\n"
+    \ main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >>\
+    \ Q;\n    vector<mint> a(N); cin >> a;\n\n    DualSegmentTree<OperatorMonoid>\
+    \ seg(\n        N,\n        [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l,\
+    \ r);},\n        OperatorMonoid(),\n        true\n    );\n    while(Q--){\n  \
+    \      int t; cin >> t;\n        if(t == 0){\n            int l, r, b, c; cin\
+    \ >> l >> r >> b >> c;\n            seg.Update(l, r, OperatorMonoid(b, c));\n\
+    \        }\n        else{\n            int i; cin >> i;\n            OperatorMonoid\
+    \ op = seg.Product(i);\n            cout << op.b * a[i] + op.c << '\\n';\n   \
+    \     }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_point_get\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/modint.hpp\"\n\
     #include \"../Library/DataStructure/DualSegmentTree.hpp\"\n\nstruct OperatorMonoid{\n\
     \    mint b, c;\n    OperatorMonoid(mint b_ = 1, mint c_ = 0) : b(b_), c(c_){}\n\
     \    static OperatorMonoid Composite(OperatorMonoid &l, OperatorMonoid &r){\n\
     \        return OperatorMonoid(r.b * l.b, r.b * l.c + r.c);\n    }\n};\n\nint\
-    \ main(){\n    int N, Q; cin >> N >> Q;\n    vector<mint> a(N); cin >> a;\n\n\
-    \    DualSegmentTree<OperatorMonoid> seg(\n        N,\n        [](OperatorMonoid\
-    \ l, OperatorMonoid r){return OperatorMonoid::Composite(l, r);},\n        OperatorMonoid(),\n\
-    \        true\n    );\n    while(Q--){\n        int t; cin >> t;\n        if(t\
-    \ == 0){\n            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Update(l,\
-    \ r, OperatorMonoid(b, c));\n        }\n        else{\n            int i; cin\
-    \ >> i;\n            OperatorMonoid op = seg.Query(i);\n            cout << op.b\
-    \ * a[i] + op.c << endl;\n        }\n    }\n}"
+    \ main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >>\
+    \ Q;\n    vector<mint> a(N); cin >> a;\n\n    DualSegmentTree<OperatorMonoid>\
+    \ seg(\n        N,\n        [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l,\
+    \ r);},\n        OperatorMonoid(),\n        true\n    );\n    while(Q--){\n  \
+    \      int t; cin >> t;\n        if(t == 0){\n            int l, r, b, c; cin\
+    \ >> l >> r >> b >> c;\n            seg.Update(l, r, OperatorMonoid(b, c));\n\
+    \        }\n        else{\n            int i; cin >> i;\n            OperatorMonoid\
+    \ op = seg.Product(i);\n            cout << op.b * a[i] + op.c << '\\n';\n   \
+    \     }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -204,8 +206,8 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffinePointGet.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffinePointGet.test.cpp
 layout: document

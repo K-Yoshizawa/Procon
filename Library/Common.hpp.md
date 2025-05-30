@@ -8,17 +8,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/CumulativeSum2D.hpp
     title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/DualSegmentTree.hpp
     title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/LazySegmentTree.hpp
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/RollbackUnionFind.hpp
     title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
@@ -59,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':warning:'
@@ -74,7 +74,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -83,13 +83,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   - icon: ':warning:'
@@ -183,10 +183,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffinePointGet.test.cpp
     title: verify/LC-RangeAffinePointGet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -207,21 +207,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-UnionfindWithPotential.test.cpp
     title: verify/LC-UnionfindWithPotential.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -274,7 +274,7 @@ data:
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Template.hpp
   timestamp: '2025-03-20 00:50:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp

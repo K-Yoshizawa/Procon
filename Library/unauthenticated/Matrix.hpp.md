@@ -51,23 +51,23 @@ data:
     \ = width();\n        cerr << \"Matrix ===============================\\n\";\n\
     \        for(int i = 0; i < N; ++i){\n            cerr << \"[\";\n           \
     \ for(int j = 0; j < M; ++j){\n                cerr << A[i][j] << \" ]\"[j + 1\
-    \ == M];\n            }\n            cerr << endl;\n        }\n    }\n\n    T\
+    \ == M];\n            }\n            cerr << '\\n';\n        }\n    }\n\n    T\
     \ det() const {\n        Matrix<T> tmp(*this);\n        T ret = 1;\n        int\
     \ N = size();\n        int i = 0;\n        for(int j = 0; i < N && j < N; ++j){\n\
-    \            // cerr << \"i = \" << i << \", j = \" << j << endl;\n          \
-    \  // tmp.print();\n            bool found = false;\n            for(int ti =\
+    \            // cerr << \"i = \" << i << \", j = \" << j << '\\n';\n         \
+    \   // tmp.print();\n            bool found = false;\n            for(int ti =\
     \ i; ti < N && !found; ++ti){\n                // cerr << \" - ti = \" << ti <<\
-    \ \", val = \" << tmp[ti][j] << endl;\n                if(tmp[ti][j] != 0){\n\
+    \ \", val = \" << tmp[ti][j] << '\\n';\n                if(tmp[ti][j] != 0){\n\
     \                    if(ti != i){\n                        swap(tmp[ti], tmp[i]);\n\
     \                        ret *= -1;\n                    }\n                 \
     \   // cerr << \" -  - OK\\n\";\n                    found = true;\n         \
     \       }\n            }\n            if(!found) return 0;\n            // tmp.print();\n\
     \            for(int ti = i + 1; ti < N; ++ti){\n                if(tmp[ti][j]\
     \ == 0) continue;\n                T mul = tmp[ti][j] / tmp[i][j];\n         \
-    \       // cerr << \" - ti = \" << ti << \", mul = \" << mul << endl;\n      \
-    \          for(int tj = j; tj < N; ++tj){\n                    // cerr << \" -\
-    \  - tj = \" << tj << \", sub = \" << tmp[i][tj] << \" * \" << mul << \" = \"\
-    \ << tmp[i][tj] * mul << endl;\n                    tmp[ti][tj] -= tmp[i][tj]\
+    \       // cerr << \" - ti = \" << ti << \", mul = \" << mul << '\\n';\n     \
+    \           for(int tj = j; tj < N; ++tj){\n                    // cerr << \"\
+    \ -  - tj = \" << tj << \", sub = \" << tmp[i][tj] << \" * \" << mul << \" = \"\
+    \ << tmp[i][tj] * mul << '\\n';\n                    tmp[ti][tj] -= tmp[i][tj]\
     \ * mul;\n                }\n            }\n            ++i;\n        }\n    \
     \    for(int i = 0; i < N; ++i) ret *= tmp[i][i];\n        return ret;\n    }\n\
     \n    bool isRegular() const {\n        return (det() != 0);\n    }\n\n    static\
@@ -128,13 +128,13 @@ data:
     \ int N = height(), M = width();\n        cerr << \"Matrix ===============================\\\
     n\";\n        for(int i = 0; i < N; ++i){\n            cerr << \"[\";\n      \
     \      for(int j = 0; j < M; ++j){\n                cerr << A[i][j] << \" ]\"\
-    [j + 1 == M];\n            }\n            cerr << endl;\n        }\n    }\n\n\
+    [j + 1 == M];\n            }\n            cerr << '\\n';\n        }\n    }\n\n\
     \    T det() const {\n        Matrix<T> tmp(*this);\n        T ret = 1;\n    \
     \    int N = size();\n        int i = 0;\n        for(int j = 0; i < N && j <\
-    \ N; ++j){\n            // cerr << \"i = \" << i << \", j = \" << j << endl;\n\
+    \ N; ++j){\n            // cerr << \"i = \" << i << \", j = \" << j << '\\n';\n\
     \            // tmp.print();\n            bool found = false;\n            for(int\
     \ ti = i; ti < N && !found; ++ti){\n                // cerr << \" - ti = \" <<\
-    \ ti << \", val = \" << tmp[ti][j] << endl;\n                if(tmp[ti][j] !=\
+    \ ti << \", val = \" << tmp[ti][j] << '\\n';\n                if(tmp[ti][j] !=\
     \ 0){\n                    if(ti != i){\n                        swap(tmp[ti],\
     \ tmp[i]);\n                        ret *= -1;\n                    }\n      \
     \              // cerr << \" -  - OK\\n\";\n                    found = true;\n\
@@ -142,9 +142,9 @@ data:
     \    // tmp.print();\n            for(int ti = i + 1; ti < N; ++ti){\n       \
     \         if(tmp[ti][j] == 0) continue;\n                T mul = tmp[ti][j] /\
     \ tmp[i][j];\n                // cerr << \" - ti = \" << ti << \", mul = \" <<\
-    \ mul << endl;\n                for(int tj = j; tj < N; ++tj){\n             \
-    \       // cerr << \" -  - tj = \" << tj << \", sub = \" << tmp[i][tj] << \" *\
-    \ \" << mul << \" = \" << tmp[i][tj] * mul << endl;\n                    tmp[ti][tj]\
+    \ mul << '\\n';\n                for(int tj = j; tj < N; ++tj){\n            \
+    \        // cerr << \" -  - tj = \" << tj << \", sub = \" << tmp[i][tj] << \"\
+    \ * \" << mul << \" = \" << tmp[i][tj] * mul << '\\n';\n                    tmp[ti][tj]\
     \ -= tmp[i][tj] * mul;\n                }\n            }\n            ++i;\n \
     \       }\n        for(int i = 0; i < N; ++i) ret *= tmp[i][i];\n        return\
     \ ret;\n    }\n\n    bool isRegular() const {\n        return (det() != 0);\n\
@@ -168,7 +168,7 @@ data:
   isVerificationFile: false
   path: Library/unauthenticated/Matrix.hpp
   requiredBy: []
-  timestamp: '2024-09-04 01:04:48+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/Matrix.hpp

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
     title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
       \u30FC\u30BF\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -72,25 +72,26 @@ data:
     \ if(data_[x] > data_[y]) swap(x, y), w = -w;\n        data_[x] += data_[y];\n\
     \        data_[y] = x;\n        weight_[y] = w;\n        return true;\n    }\n\
     \n    private:\n    vector<int> data_;\n    vector<Abel> weight_;\n};\n#line 5\
-    \ \"verify/LC-UnionfindWithPotential.test.cpp\"\n\nint main(){\n    int N, Q;\
-    \ cin >> N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n    while(Q--){\n    \
-    \    int t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n            int x;\
-    \ cin >> x;\n            if(uf.Same(u, v)){\n                cout << (uf.Diff(u,\
-    \ v) == x) << endl;\n            }\n            else{\n                cout <<\
-    \ uf.Unite(u, v, x) << endl;\n            }\n        }\n        else{\n      \
-    \      if(uf.Same(u, v)){\n                cout << uf.Diff(u, v) << endl;\n  \
-    \          }\n            else{\n                cout << -1 << endl;\n       \
-    \     }\n        }\n    }\n}\n"
+    \ \"verify/LC-UnionfindWithPotential.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int N, Q; cin >> N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n    while(Q--){\n\
+    \        int t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n            int\
+    \ x; cin >> x;\n            if(uf.Same(u, v)){\n                cout << (uf.Diff(u,\
+    \ v) == x) << '\\n';\n            }\n            else{\n                cout <<\
+    \ uf.Unite(u, v, x) << '\\n';\n            }\n        }\n        else{\n     \
+    \       if(uf.Same(u, v)){\n                cout << uf.Diff(u, v) << '\\n';\n\
+    \            }\n            else{\n                cout << -1 << '\\n';\n    \
+    \        }\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind_with_potential\"\
     \n\n#include \"../Library/modint.hpp\"\n#include \"../Library/DataStructure/WeightedUnionFind.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n\
-    \    while(Q--){\n        int t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n\
-    \            int x; cin >> x;\n            if(uf.Same(u, v)){\n              \
-    \  cout << (uf.Diff(u, v) == x) << endl;\n            }\n            else{\n \
-    \               cout << uf.Unite(u, v, x) << endl;\n            }\n        }\n\
-    \        else{\n            if(uf.Same(u, v)){\n                cout << uf.Diff(u,\
-    \ v) << endl;\n            }\n            else{\n                cout << -1 <<\
-    \ endl;\n            }\n        }\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
+    \ N >> Q;\n\n    WeightedUnionFind<mint> uf(N);\n    while(Q--){\n        int\
+    \ t, u, v; cin >> t >> u >> v;\n        if(t == 0){\n            int x; cin >>\
+    \ x;\n            if(uf.Same(u, v)){\n                cout << (uf.Diff(u, v) ==\
+    \ x) << '\\n';\n            }\n            else{\n                cout << uf.Unite(u,\
+    \ v, x) << '\\n';\n            }\n        }\n        else{\n            if(uf.Same(u,\
+    \ v)){\n                cout << uf.Diff(u, v) << '\\n';\n            }\n     \
+    \       else{\n                cout << -1 << '\\n';\n            }\n        }\n\
+    \    }\n}"
   dependsOn:
   - Library/modint.hpp
   - Library/Common.hpp
@@ -98,7 +99,7 @@ data:
   isVerificationFile: true
   path: verify/LC-UnionfindWithPotential.test.cpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-UnionfindWithPotential.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -122,7 +122,7 @@ data:
     \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
     \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
     \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
     \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
     \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
     \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
@@ -166,28 +166,28 @@ data:
     \ a = 1, mint b = 0) : a(a), b(b){}\n    mint Value(mint x) const {\n        return\
     \ a * x + b;\n    }\n    static Affine Merge(Affine l, Affine r){\n        return\
     \ Affine(l.a * r.a, l.b * r.a + r.b);\n    }\n    mint a, b;\n};\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n    for(int i =\
-    \ 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
-    \ b));\n    }\n\n    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return\
-    \ Affine::Merge(l, r);}, Affine(), true);\n    while(Q--){\n        int t; cin\
-    \ >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >> d;\n \
-    \           seg.Set(p, Affine(c, d));\n        }\n        else{\n            int\
-    \ l, r, x; cin >> l >> r >> x;\n            cout << seg.Prod(l, r).Value(x) <<\
-    \ endl;\n        }\n    }\n}\n"
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    vector<Affine>\
+    \ init_data;\n    for(int i = 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n\
+    \        init_data.push_back(Affine(a, b));\n    }\n\n    SegmentTree<Affine>\
+    \ seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(),\
+    \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
+    \         int p, c, d; cin >> p >> c >> d;\n            seg.Set(p, Affine(c, d));\n\
+    \        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n    \
+    \        cout << seg.Product(l, r).Value(x) << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
     \n#include \"../Library/modint.hpp\"\n\nstruct Affine{\n    Affine(mint a = 1,\
     \ mint b = 0) : a(a), b(b){}\n    mint Value(mint x) const {\n        return a\
     \ * x + b;\n    }\n    static Affine Merge(Affine l, Affine r){\n        return\
     \ Affine(l.a * r.a, l.b * r.a + r.b);\n    }\n    mint a, b;\n};\n\nint main(){\n\
-    \    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n    for(int i =\
-    \ 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
-    \ b));\n    }\n\n    SegmentTree<Affine> seg(init_data, [](Affine l, Affine r){return\
-    \ Affine::Merge(l, r);}, Affine(), true);\n    while(Q--){\n        int t; cin\
-    \ >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >> d;\n \
-    \           seg.Set(p, Affine(c, d));\n        }\n        else{\n            int\
-    \ l, r, x; cin >> l >> r >> x;\n            cout << seg.Prod(l, r).Value(x) <<\
-    \ endl;\n        }\n    }\n}"
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    vector<Affine>\
+    \ init_data;\n    for(int i = 0; i < N; ++i){\n        int a, b; cin >> a >> b;\n\
+    \        init_data.push_back(Affine(a, b));\n    }\n\n    SegmentTree<Affine>\
+    \ seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(),\
+    \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
+    \         int p, c, d; cin >> p >> c >> d;\n            seg.Set(p, Affine(c, d));\n\
+    \        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n    \
+    \        cout << seg.Product(l, r).Value(x) << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -196,7 +196,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointSetRangeComposite.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointSetRangeComposite.test.cpp

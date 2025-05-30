@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -39,21 +39,22 @@ data:
     \        }\n        ret.erase(remove_if(begin(ret), end(ret), [&](vector<int>\
     \ &v){\n            return v.empty();\n        }), end(ret));\n        return\
     \ ret;\n    }\n\n    private:\n    vector<int> data_;\n};\n#line 4 \"verify/AOJ-DSL-1-A.test.cpp\"\
-    \n\nint main(){\n    int n, q; cin >> n >> q;\n\n    UnionFind uf(n);\n    while(q--){\n\
-    \        int com, x, y; cin >> com >> x >> y;\n        if(com == 0) uf.Unite(x,\
-    \ y);\n        else cout << (uf.Same(x, y) ? 1 : 0) << endl;\n    }\n}\n"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int n, q; cin >>\
+    \ n >> q;\n\n    UnionFind uf(n);\n    while(q--){\n        int com, x, y; cin\
+    \ >> com >> x >> y;\n        if(com == 0) uf.Unite(x, y);\n        else cout <<\
+    \ (uf.Same(x, y) ? 1 : 0) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A\"\
-    \n\n#include \"../Library/DataStructure/UnionFind.hpp\"\n\nint main(){\n    int\
-    \ n, q; cin >> n >> q;\n\n    UnionFind uf(n);\n    while(q--){\n        int com,\
-    \ x, y; cin >> com >> x >> y;\n        if(com == 0) uf.Unite(x, y);\n        else\
-    \ cout << (uf.Same(x, y) ? 1 : 0) << endl;\n    }\n}"
+    \n\n#include \"../Library/DataStructure/UnionFind.hpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int n, q; cin >> n >> q;\n\n    UnionFind uf(n);\n    while(q--){\n     \
+    \   int com, x, y; cin >> com >> x >> y;\n        if(com == 0) uf.Unite(x, y);\n\
+    \        else cout << (uf.Same(x, y) ? 1 : 0) << '\\n';\n    }\n}"
   dependsOn:
   - Library/DataStructure/UnionFind.hpp
   - Library/Common.hpp
   isVerificationFile: true
   path: verify/AOJ-DSL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-1-A.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -105,18 +105,17 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 4 \"verify/LC-CycleDetectionUndirected.test.cpp\"\
-    \n\n#line 2 \"Library/Graph/CycleDetection.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
-    \n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n  \
-    \  Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n     \
-    \   from(from_), to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const\
-    \ Edge<CostType> &e) const {return cost < e.cost;}\n\n    operator int() const\
-    \ {return to;}\n\n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\
-    \ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
-    \ = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n\
-    \    \n    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n\
-    \        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/CycleDetection.hpp\"\n\
+    \n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\
+    \nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n\
+    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType\
+    \ cost_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
+    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
+    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
+    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
+    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
+    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
+    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
     \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
     \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
     \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
@@ -146,7 +145,7 @@ data:
     \            history.pop_back();\n            }\n            if(detected) return;\n\
     \        }\n        state[v] = 2;\n    };\n    for(int v = 0; v < N && !detected;\
     \ ++v){\n        if(state[v] == 0) dfs(dfs, v, -1);\n    }\n    reverse(ret.begin(),\
-    \ ret.end());\n    return ret;\n}\n#line 6 \"verify/LC-CycleDetectionUndirected.test.cpp\"\
+    \ ret.end());\n    return ret;\n}\n#line 5 \"verify/LC-CycleDetectionUndirected.test.cpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >>\
     \ N >> M;\n    auto G = InputGraph(N, M, 0, false, false);\n\n    auto ret = CycleDetection(G);\n\
     \    if(ret.empty()) cout << -1 << '\\n';\n    else{\n        cout << ret.size()\
@@ -155,7 +154,7 @@ data:
     \            cout << e.idx << ' ';\n        }\n        cout << '\\n';\n    }\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection_undirected\"\
-    \n\n#include \"Library/Template.hpp\"\n\n#include \"Library/Graph/CycleDetection.hpp\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/CycleDetection.hpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >>\
     \ N >> M;\n    auto G = InputGraph(N, M, 0, false, false);\n\n    auto ret = CycleDetection(G);\n\
     \    if(ret.empty()) cout << -1 << '\\n';\n    else{\n        cout << ret.size()\
@@ -171,7 +170,7 @@ data:
   isVerificationFile: true
   path: verify/LC-CycleDetectionUndirected.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-CycleDetectionUndirected.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: Library/Graph/StronglyConnectedComponents.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -184,17 +184,18 @@ data:
     \        belong_[v] = component;\n        state[v] = false;\n        for(const\
     \ Edge<CostType> &e : RG[v]){\n            if(!state[e.to]) continue;\n      \
     \      dfs2(e.to, label, component, state);\n        }\n        return;\n    }\n\
-    };\n#line 5 \"verify/AOJ-GRL-3-C.test.cpp\"\n\nint main(){\n    int V, E; cin\
-    \ >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, true);\n    \n    StronglyConnectedComponents\
-    \ scc(G);\n    int Q; cin >> Q;\n    while(Q--){\n        int u, v; cin >> u >>\
-    \ v;\n        cout << (scc.BelongComponent(u) == scc.BelongComponent(v)) << '\\\
-    n';\n    }\n}\n"
+    };\n#line 5 \"verify/AOJ-GRL-3-C.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, true);\n\
+    \    \n    StronglyConnectedComponents scc(G);\n    int Q; cin >> Q;\n    while(Q--){\n\
+    \        int u, v; cin >> u >> v;\n        cout << (scc.BelongComponent(u) ==\
+    \ scc.BelongComponent(v)) << '\\n';\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_C\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/StronglyConnectedComponents.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, true);\n    \n    StronglyConnectedComponents scc(G);\n    int\
-    \ Q; cin >> Q;\n    while(Q--){\n        int u, v; cin >> u >> v;\n        cout\
-    \ << (scc.BelongComponent(u) == scc.BelongComponent(v)) << '\\n';\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
+    \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, true);\n    \n    StronglyConnectedComponents\
+    \ scc(G);\n    int Q; cin >> Q;\n    while(Q--){\n        int u, v; cin >> u >>\
+    \ v;\n        cout << (scc.BelongComponent(u) == scc.BelongComponent(v)) << '\\\
+    n';\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -204,7 +205,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-C.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-C.test.cpp

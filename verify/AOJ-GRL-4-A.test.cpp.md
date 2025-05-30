@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -146,13 +146,14 @@ data:
     \        }\n        state[v] = 2;\n    };\n    for(int v = 0; v < N && !detected;\
     \ ++v){\n        if(state[v] == 0) dfs(dfs, v, -1);\n    }\n    reverse(ret.begin(),\
     \ ret.end());\n    return ret;\n}\n#line 5 \"verify/AOJ-GRL-4-A.test.cpp\"\n\n\
-    int main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0,\
-    \ false, true);\n    \n    cout << !(CycleDetection(G).empty()) << endl;\n}\n"
+    int main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >> V >>\
+    \ E;\n    auto G = InputGraph<ll>(V, E, 0, false, true);\n    \n    cout << !(CycleDetection(G).empty())\
+    \ << '\\n';\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/CycleDetection.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, true);\n    \n    cout << !(CycleDetection(G).empty()) << endl;\n\
-    }"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
+    \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, true);\n    \n    cout\
+    \ << !(CycleDetection(G).empty()) << '\\n';\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -161,7 +162,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-4-A.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-4-A.test.cpp

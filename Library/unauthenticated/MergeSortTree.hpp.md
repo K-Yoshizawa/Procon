@@ -61,12 +61,12 @@ data:
     \ d = 1; i < size_ * 2; d <<= 1){\n            for(int j = 0; j < d; ++i, ++j){\n\
     \                cerr << j << \" {\";\n                for(int k = 0; k < data_[i].size();\
     \ ++k){\n                    cerr << data_[i][k] << (k + 1 == data_[i].size()\
-    \ ? \"} \" : \", \");\n                }\n                cerr << endl;\n    \
-    \            cerr << \"  {\";\n                for(int k = 0; k <= data_[i].size();\
+    \ ? \"} \" : \", \");\n                }\n                cerr << '\\n';\n   \
+    \             cerr << \"  {\";\n                for(int k = 0; k <= data_[i].size();\
     \ ++k){\n                    cerr << cum_[i][k] << (k == data_[i].size() ? \"\
-    } \" : \", \");\n                }\n                cerr << endl;\n          \
-    \  }\n            cerr << \"========================================\\n\";\n \
-    \       }\n    }\n};\n"
+    } \" : \", \");\n                }\n                cerr << '\\n';\n         \
+    \   }\n            cerr << \"========================================\\n\";\n\
+    \        }\n    }\n};\n"
   code: "/**\n * @file MergeSortTree.hpp\n * @brief Merge-Sort Tree - \u9818\u57DF\
     \u6728\n * @version 1.0\n * @date 2024-02-04\n */\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nstruct MergeSortTree{\n    private:\n\
@@ -118,17 +118,17 @@ data:
     \ d = 1; i < size_ * 2; d <<= 1){\n            for(int j = 0; j < d; ++i, ++j){\n\
     \                cerr << j << \" {\";\n                for(int k = 0; k < data_[i].size();\
     \ ++k){\n                    cerr << data_[i][k] << (k + 1 == data_[i].size()\
-    \ ? \"} \" : \", \");\n                }\n                cerr << endl;\n    \
-    \            cerr << \"  {\";\n                for(int k = 0; k <= data_[i].size();\
+    \ ? \"} \" : \", \");\n                }\n                cerr << '\\n';\n   \
+    \             cerr << \"  {\";\n                for(int k = 0; k <= data_[i].size();\
     \ ++k){\n                    cerr << cum_[i][k] << (k == data_[i].size() ? \"\
-    } \" : \", \");\n                }\n                cerr << endl;\n          \
-    \  }\n            cerr << \"========================================\\n\";\n \
-    \       }\n    }\n};"
+    } \" : \", \");\n                }\n                cerr << '\\n';\n         \
+    \   }\n            cerr << \"========================================\\n\";\n\
+    \        }\n    }\n};"
   dependsOn: []
   isVerificationFile: false
   path: Library/unauthenticated/MergeSortTree.hpp
   requiredBy: []
-  timestamp: '2024-09-04 01:04:48+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/MergeSortTree.hpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -156,18 +156,19 @@ data:
     \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
     \ &G;\n    int n;\n    Vertex source_;\n    CostType inf{CostType(INF)};\n   \
     \ vector<CostType> dist_;\n    vector<Edge<CostType>> prev_edge_;\n};\n#line 5\
-    \ \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    int V, E, r; cin >> V >>\
-    \ E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    Dijkstra\
-    \ dk(G, r);\n    for(int i = 0; i < V; ++i){\n        if(dk.Reachable(i)){\n \
-    \           cout << dk.Distance(i) << endl;\n        }\n        else{\n      \
-    \      cout << \"INF\" << endl;\n        }\n    }\n}\n"
+    \ \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true,\
+    \ true);\n    \n    Dijkstra dk(G, r);\n    for(int i = 0; i < V; ++i){\n    \
+    \    if(dk.Reachable(i)){\n            cout << dk.Distance(i) << '\\n';\n    \
+    \    }\n        else{\n            cout << \"INF\" << '\\n';\n        }\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/Dijkstra.hpp\"\
-    \n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, true, true);\n    \n    Dijkstra dk(G, r);\n    for(int i = 0; i < V;\
-    \ ++i){\n        if(dk.Reachable(i)){\n            cout << dk.Distance(i) << endl;\n\
-    \        }\n        else{\n            cout << \"INF\" << endl;\n        }\n \
-    \   }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E, r; cin\
+    \ >> V >> E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n \
+    \   Dijkstra dk(G, r);\n    for(int i = 0; i < V; ++i){\n        if(dk.Reachable(i)){\n\
+    \            cout << dk.Distance(i) << '\\n';\n        }\n        else{\n    \
+    \        cout << \"INF\" << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -176,7 +177,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp

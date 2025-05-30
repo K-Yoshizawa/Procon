@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\
       \u30F3\u30C8\u6728"
@@ -85,16 +85,16 @@ data:
     \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
     \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
     \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
-    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Prod(int left,\
-    \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
-    \ zeroindex_ - 1);\n        return RecursiveProd(left + zeroindex_, right + zeroindex_,\
-    \ 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7\
-    \ `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k\
-    \ \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
-    \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get_value(int\
-    \ k){\n        Validate(k + zeroindex_);\n        return Prod(k, k + 1);\n   \
-    \ }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n  \
-    \  }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
+    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Product(int\
+    \ left, int right){\n        Validate(left + zeroindex_);\n        Validate(right\
+    \ + zeroindex_ - 1);\n        return RecursiveProduct(left + zeroindex_, right\
+    \ + zeroindex_, 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\
+    \u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n    \
+    \ * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n\
+    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ get_value(int k){\n        Validate(k + zeroindex_);\n        return Product(k,\
+    \ k + 1);\n    }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n\
+    \    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
     \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
     \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
     \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
@@ -111,13 +111,13 @@ data:
     \ + right) / 2;\n            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 +\
     \ 0);\n            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);\n   \
     \         data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n       \
-    \ }\n    }\n\n    Monoid RecursiveProd(int ql, int qr, int left, int right, int\
-    \ cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n  \
-    \          return m1_;\n        }\n        if(ql <= left && right <= qr){\n  \
-    \          return data_[cell];\n        }\n        int mid = (left + right) /\
-    \ 2;\n        Monoid ans_left = RecursiveProd(ql, qr, left, mid, cell * 2 + 0);\n\
-    \        Monoid ans_right = RecursiveProd(ql, qr, mid, right, cell * 2 + 1);\n\
-    \        return f(ans_left, ans_right);\n    }\n};\n"
+    \ }\n    }\n\n    Monoid RecursiveProduct(int ql, int qr, int left, int right,\
+    \ int cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n\
+    \            return m1_;\n        }\n        if(ql <= left && right <= qr){\n\
+    \            return data_[cell];\n        }\n        int mid = (left + right)\
+    \ / 2;\n        Monoid ans_left = RecursiveProduct(ql, qr, left, mid, cell * 2\
+    \ + 0);\n        Monoid ans_right = RecursiveProduct(ql, qr, mid, right, cell\
+    \ * 2 + 1);\n        return f(ans_left, ans_right);\n    }\n};\n"
   code: "/**\n * @file LazySegmentTree.hpp\n * @author log K (lX57)\n * @brief Lazy\
     \ Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n\
     \ * @version 2.0\n * @date 2023-10-02\n */\n\n#include \"../Common.hpp\"\n\ntemplate<typename\
@@ -179,16 +179,16 @@ data:
     \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
     \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
     \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
-    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Prod(int left,\
-    \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
-    \ zeroindex_ - 1);\n        return RecursiveProd(left + zeroindex_, right + zeroindex_,\
-    \ 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7\
-    \ `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k\
-    \ \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
-    \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get_value(int\
-    \ k){\n        Validate(k + zeroindex_);\n        return Prod(k, k + 1);\n   \
-    \ }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n  \
-    \  }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
+    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Product(int\
+    \ left, int right){\n        Validate(left + zeroindex_);\n        Validate(right\
+    \ + zeroindex_ - 1);\n        return RecursiveProduct(left + zeroindex_, right\
+    \ + zeroindex_, 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\
+    \u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n    \
+    \ * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n\
+    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ get_value(int k){\n        Validate(k + zeroindex_);\n        return Product(k,\
+    \ k + 1);\n    }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n\
+    \    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
     \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
     \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
     \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
@@ -205,20 +205,20 @@ data:
     \ + right) / 2;\n            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 +\
     \ 0);\n            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);\n   \
     \         data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n       \
-    \ }\n    }\n\n    Monoid RecursiveProd(int ql, int qr, int left, int right, int\
-    \ cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n  \
-    \          return m1_;\n        }\n        if(ql <= left && right <= qr){\n  \
-    \          return data_[cell];\n        }\n        int mid = (left + right) /\
-    \ 2;\n        Monoid ans_left = RecursiveProd(ql, qr, left, mid, cell * 2 + 0);\n\
-    \        Monoid ans_right = RecursiveProd(ql, qr, mid, right, cell * 2 + 1);\n\
-    \        return f(ans_left, ans_right);\n    }\n};"
+    \ }\n    }\n\n    Monoid RecursiveProduct(int ql, int qr, int left, int right,\
+    \ int cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n\
+    \            return m1_;\n        }\n        if(ql <= left && right <= qr){\n\
+    \            return data_[cell];\n        }\n        int mid = (left + right)\
+    \ / 2;\n        Monoid ans_left = RecursiveProduct(ql, qr, left, mid, cell * 2\
+    \ + 0);\n        Monoid ans_right = RecursiveProduct(ql, qr, mid, right, cell\
+    \ * 2 + 1);\n        return f(ans_left, ans_right);\n    }\n};"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/DataStructure/LazySegmentTree.hpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffineRangeSum.test.cpp
 documentation_of: Library/DataStructure/LazySegmentTree.hpp

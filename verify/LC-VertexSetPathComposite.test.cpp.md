@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -419,7 +419,7 @@ data:
     \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
     \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
     \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
     \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
     \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
     \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
@@ -465,22 +465,22 @@ data:
     \ * l.a, r.a * l.b + r.b);\n    }\n    static Affine right_merge(Affine l, Affine\
     \ r){\n        return Affine(l.a * r.a, l.a * r.b + l.b);\n    }\n    friend ostream\
     \ &operator<<(ostream &os, const Affine &p) {\n        return os << \"{\" << p.a\
-    \ << \", \" << p.b << \"}\";\n    }\n};\n\nint main(){\n    int N, Q; cin >> N\
-    \ >> Q;\n    vector<Affine> init_data;\n    for(int i = 0; i < N; ++i){\n    \
-    \    mint a, b; cin >> a >> b;\n        init_data.push_back(Affine(a, b));\n \
-    \   }\n    RootedTree T(N);\n    T.InputGraphFormat(false, false);\n\n    HeavyLightDecomposition\
-    \ hld(T);\n    hld.SortVertex(init_data);\n    SegmentTree<Affine> seg1(init_data,\
-    \ [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine(), true);\n\
-    \    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l,\
-    \ r);}, Affine(), true);\n    while(Q--){\n        int t; cin >> t;\n        if(t\
-    \ == 0){\n            int p, c, d; cin >> p >> c >> d;\n            seg1.Update(hld[p],\
-    \ Affine(c, d));\n            seg2.Update(hld[p], Affine(c, d));\n        }\n\
-    \        else{\n            int u, v, x; cin >> u >> v >> x;\n            Affine\
-    \ ans;\n            for(auto &path : hld.PathQuery(u, v)){\n                if(path.reverse)\
-    \ ans = Affine::left_merge(ans, seg2.Query(path.head_index, path.tail_index));\n\
-    \                else ans = Affine::left_merge(ans, seg1.Query(path.head_index,\
+    \ << \", \" << p.b << \"}\";\n    }\n};\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n    for(int i =\
+    \ 0; i < N; ++i){\n        mint a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
+    \ b));\n    }\n    RootedTree T(N);\n    T.InputGraphFormat(false, false);\n\n\
+    \    HeavyLightDecomposition hld(T);\n    hld.SortVertex(init_data);\n    SegmentTree<Affine>\
+    \ seg1(init_data, [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine(),\
+    \ true);\n    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return\
+    \ Affine::right_merge(l, r);}, Affine(), true);\n    while(Q--){\n        int\
+    \ t; cin >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >>\
+    \ d;\n            seg1.Set(hld[p], Affine(c, d));\n            seg2.Set(hld[p],\
+    \ Affine(c, d));\n        }\n        else{\n            int u, v, x; cin >> u\
+    \ >> v >> x;\n            Affine ans;\n            for(auto &path : hld.PathQuery(u,\
+    \ v)){\n                if(path.reverse) ans = Affine::left_merge(ans, seg2.Product(path.head_index,\
+    \ path.tail_index));\n                else ans = Affine::left_merge(ans, seg1.Product(path.head_index,\
     \ path.tail_index));\n            }\n            cout << ans.a * x + ans.b <<\
-    \ endl;\n        }\n    }\n}\n"
+    \ '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/HeavyLightDecomposition.hpp\"\
     \n#include \"../Library/DataStructure/SegmentTree.hpp\"\n#include \"../Library/modint.hpp\"\
@@ -490,21 +490,22 @@ data:
     \ right_merge(Affine l, Affine r){\n        return Affine(l.a * r.a, l.a * r.b\
     \ + l.b);\n    }\n    friend ostream &operator<<(ostream &os, const Affine &p)\
     \ {\n        return os << \"{\" << p.a << \", \" << p.b << \"}\";\n    }\n};\n\
-    \nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<Affine> init_data;\n \
-    \   for(int i = 0; i < N; ++i){\n        mint a, b; cin >> a >> b;\n        init_data.push_back(Affine(a,\
-    \ b));\n    }\n    RootedTree T(N);\n    T.InputGraphFormat(false, false);\n\n\
-    \    HeavyLightDecomposition hld(T);\n    hld.SortVertex(init_data);\n    SegmentTree<Affine>\
-    \ seg1(init_data, [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine(),\
-    \ true);\n    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return\
-    \ Affine::right_merge(l, r);}, Affine(), true);\n    while(Q--){\n        int\
-    \ t; cin >> t;\n        if(t == 0){\n            int p, c, d; cin >> p >> c >>\
-    \ d;\n            seg1.Update(hld[p], Affine(c, d));\n            seg2.Update(hld[p],\
-    \ Affine(c, d));\n        }\n        else{\n            int u, v, x; cin >> u\
-    \ >> v >> x;\n            Affine ans;\n            for(auto &path : hld.PathQuery(u,\
-    \ v)){\n                if(path.reverse) ans = Affine::left_merge(ans, seg2.Query(path.head_index,\
-    \ path.tail_index));\n                else ans = Affine::left_merge(ans, seg1.Query(path.head_index,\
+    \nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N\
+    \ >> Q;\n    vector<Affine> init_data;\n    for(int i = 0; i < N; ++i){\n    \
+    \    mint a, b; cin >> a >> b;\n        init_data.push_back(Affine(a, b));\n \
+    \   }\n    RootedTree T(N);\n    T.InputGraphFormat(false, false);\n\n    HeavyLightDecomposition\
+    \ hld(T);\n    hld.SortVertex(init_data);\n    SegmentTree<Affine> seg1(init_data,\
+    \ [](Affine l, Affine r){return Affine::left_merge(l, r);}, Affine(), true);\n\
+    \    SegmentTree<Affine> seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l,\
+    \ r);}, Affine(), true);\n    while(Q--){\n        int t; cin >> t;\n        if(t\
+    \ == 0){\n            int p, c, d; cin >> p >> c >> d;\n            seg1.Set(hld[p],\
+    \ Affine(c, d));\n            seg2.Set(hld[p], Affine(c, d));\n        }\n   \
+    \     else{\n            int u, v, x; cin >> u >> v >> x;\n            Affine\
+    \ ans;\n            for(auto &path : hld.PathQuery(u, v)){\n                if(path.reverse)\
+    \ ans = Affine::left_merge(ans, seg2.Product(path.head_index, path.tail_index));\n\
+    \                else ans = Affine::left_merge(ans, seg1.Product(path.head_index,\
     \ path.tail_index));\n            }\n            cout << ans.a * x + ans.b <<\
-    \ endl;\n        }\n    }\n}"
+    \ '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -515,8 +516,8 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexSetPathComposite.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexSetPathComposite.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -18,21 +18,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -58,7 +58,7 @@ data:
     \        }\n    }\n\n    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n\
     \        int k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k\
     \ >>= 1){\n            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n       \
-    \ }\n    }\n\n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n\
+    \ }\n    }\n\n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n\
     \        Validate(l + zero_index_);\n        Validate(r + zero_index_ - 1);\n\
     \        int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n\
     \        Monoid al = id_, ar = id_;\n        while(lh < rh){\n            if(lh\
@@ -85,7 +85,7 @@ data:
     \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
     \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
     \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
     \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
     \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
     \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
@@ -101,8 +101,8 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
@@ -210,10 +210,10 @@ void Update(int i, Monoid v)
 
 ---
 
-### Prod
+### Product
 
 ```
-Monoid Prod(int l, int r)
+Monoid Product(int l, int r)
 ```
 
 - 半開区間 $[l, r)$ に対して区間取得クエリを実行します。

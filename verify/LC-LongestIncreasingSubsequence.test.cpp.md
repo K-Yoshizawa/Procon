@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -125,15 +125,16 @@ data:
     \ != inf;){\n        while(data[i] != x) --i;\n        S.emplace_back(i);\n  \
     \      x = pre[i];\n    }\n    reverse(S.begin(), S.end());\n    return S;\n}\n\
     #line 5 \"verify/LC-LongestIncreasingSubsequence.test.cpp\"\n\nint main(){\n \
-    \   int N; cin >> N;\n    vector<int> A(N); cin >> A;\n\n    auto ans = LongestIncreasingSubsequence<true>(A);\n\
-    \    cout << ans.size() << endl;\n    for(auto i : ans){\n        cout << i <<\
-    \ \" \";\n    }\n    cout << endl;\n}\n"
+    \   cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n    vector<int>\
+    \ A(N); cin >> A;\n\n    auto ans = LongestIncreasingSubsequence<true>(A);\n \
+    \   cout << ans.size() << '\\n';\n    for(auto i : ans){\n        cout << i <<\
+    \ \" \";\n    }\n    cout << '\\n';\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_increasing_subsequence\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Other/LongestIncreasingSubsequence.hpp\"\
-    \n\nint main(){\n    int N; cin >> N;\n    vector<int> A(N); cin >> A;\n\n   \
-    \ auto ans = LongestIncreasingSubsequence<true>(A);\n    cout << ans.size() <<\
-    \ endl;\n    for(auto i : ans){\n        cout << i << \" \";\n    }\n    cout\
-    \ << endl;\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\
+    \    vector<int> A(N); cin >> A;\n\n    auto ans = LongestIncreasingSubsequence<true>(A);\n\
+    \    cout << ans.size() << '\\n';\n    for(auto i : ans){\n        cout << i <<\
+    \ \" \";\n    }\n    cout << '\\n';\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -141,7 +142,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LongestIncreasingSubsequence.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LongestIncreasingSubsequence.test.cpp

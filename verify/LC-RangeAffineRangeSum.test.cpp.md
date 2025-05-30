@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/LazySegmentTree.hpp
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -198,16 +198,16 @@ data:
     \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
     \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
     \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
-    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Prod(int left,\
-    \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
-    \ zeroindex_ - 1);\n        return RecursiveProd(left + zeroindex_, right + zeroindex_,\
-    \ 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7\
-    \ `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k\
-    \ \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
-    \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get_value(int\
-    \ k){\n        Validate(k + zeroindex_);\n        return Prod(k, k + 1);\n   \
-    \ }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n  \
-    \  }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
+    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Product(int\
+    \ left, int right){\n        Validate(left + zeroindex_);\n        Validate(right\
+    \ + zeroindex_ - 1);\n        return RecursiveProduct(left + zeroindex_, right\
+    \ + zeroindex_, 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\
+    \u756A\u53F7 `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n    \
+    \ * @param k \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n\
+    \     * @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid\
+    \ get_value(int k){\n        Validate(k + zeroindex_);\n        return Product(k,\
+    \ k + 1);\n    }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n\
+    \    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
     \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
     \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
     \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
@@ -224,13 +224,13 @@ data:
     \ + right) / 2;\n            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 +\
     \ 0);\n            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);\n   \
     \         data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n       \
-    \ }\n    }\n\n    Monoid RecursiveProd(int ql, int qr, int left, int right, int\
-    \ cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n  \
-    \          return m1_;\n        }\n        if(ql <= left && right <= qr){\n  \
-    \          return data_[cell];\n        }\n        int mid = (left + right) /\
-    \ 2;\n        Monoid ans_left = RecursiveProd(ql, qr, left, mid, cell * 2 + 0);\n\
-    \        Monoid ans_right = RecursiveProd(ql, qr, mid, right, cell * 2 + 1);\n\
-    \        return f(ans_left, ans_right);\n    }\n};\n#line 6 \"verify/LC-RangeAffineRangeSum.test.cpp\"\
+    \ }\n    }\n\n    Monoid RecursiveProduct(int ql, int qr, int left, int right,\
+    \ int cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n\
+    \            return m1_;\n        }\n        if(ql <= left && right <= qr){\n\
+    \            return data_[cell];\n        }\n        int mid = (left + right)\
+    \ / 2;\n        Monoid ans_left = RecursiveProduct(ql, qr, left, mid, cell * 2\
+    \ + 0);\n        Monoid ans_right = RecursiveProduct(ql, qr, mid, right, cell\
+    \ * 2 + 1);\n        return f(ans_left, ans_right);\n    }\n};\n#line 6 \"verify/LC-RangeAffineRangeSum.test.cpp\"\
     \n\nstruct Monoid{\n    mint a;\n    int len;\n    Monoid(mint a_ = 0, int len_\
     \ = 1) : a(a_), len(len_){}\n    static Monoid Merge(Monoid &l, Monoid &r){\n\
     \        return Monoid(l.a + r.a, l.len + r.len);\n    }\n};\n\nstruct OperatorMonoid{\n\
@@ -238,17 +238,18 @@ data:
     \    static Monoid Mapping(Monoid &m, OperatorMonoid &op){\n        return Monoid(op.b\
     \ * m.a + op.c * m.len, m.len);\n    }\n    static OperatorMonoid Composite(OperatorMonoid\
     \ &l, OperatorMonoid &r){\n        return OperatorMonoid(r.b * l.b, r.b * l.c\
-    \ + r.c);\n    }\n};\n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<Monoid>\
-    \ A(N);\n    for(int i = 0; i < N; ++i){\n        mint a; cin >> a;\n        A[i]\
-    \ = Monoid(a);\n    }\n\n    LazySegmentTree<Monoid, OperatorMonoid> seg(A,\n\
-    \        [](Monoid l, Monoid r){return Monoid::Merge(l, r);},\n        [](Monoid\
-    \ m, OperatorMonoid op){return OperatorMonoid::Mapping(m, op);},\n        [](OperatorMonoid\
-    \ l, OperatorMonoid r){return OperatorMonoid::Composite(l, r);},\n        Monoid(),\n\
-    \        OperatorMonoid(),\n        true);\n    while(Q--){\n        int t; cin\
-    \ >> t;\n        if(t == 0){\n            int l, r, b, c; cin >> l >> r >> b >>\
-    \ c;\n            seg.Update(l, r, OperatorMonoid(b, c));\n        }\n       \
-    \ else{\n            int l, r; cin >> l >> r;\n            cout << seg.Query(l,\
-    \ r).a << endl;\n        }\n    }\n}\n"
+    \ + r.c);\n    }\n};\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int N, Q; cin >> N >> Q;\n    vector<Monoid> A(N);\n    for(int i = 0; i\
+    \ < N; ++i){\n        mint a; cin >> a;\n        A[i] = Monoid(a);\n    }\n\n\
+    \    LazySegmentTree<Monoid, OperatorMonoid> seg(A,\n        [](Monoid l, Monoid\
+    \ r){return Monoid::Merge(l, r);},\n        [](Monoid m, OperatorMonoid op){return\
+    \ OperatorMonoid::Mapping(m, op);},\n        [](OperatorMonoid l, OperatorMonoid\
+    \ r){return OperatorMonoid::Composite(l, r);},\n        Monoid(),\n        OperatorMonoid(),\n\
+    \        true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n\
+    \            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Update(l,\
+    \ r, OperatorMonoid(b, c));\n        }\n        else{\n            int l, r; cin\
+    \ >> l >> r;\n            cout << seg.Product(l, r).a << '\\n';\n        }\n \
+    \   }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/modint.hpp\"\n\
     #include \"../Library/DataStructure/LazySegmentTree.hpp\"\n\nstruct Monoid{\n\
@@ -259,17 +260,17 @@ data:
     \ OperatorMonoid &op){\n        return Monoid(op.b * m.a + op.c * m.len, m.len);\n\
     \    }\n    static OperatorMonoid Composite(OperatorMonoid &l, OperatorMonoid\
     \ &r){\n        return OperatorMonoid(r.b * l.b, r.b * l.c + r.c);\n    }\n};\n\
-    \nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<Monoid> A(N);\n    for(int\
-    \ i = 0; i < N; ++i){\n        mint a; cin >> a;\n        A[i] = Monoid(a);\n\
-    \    }\n\n    LazySegmentTree<Monoid, OperatorMonoid> seg(A,\n        [](Monoid\
-    \ l, Monoid r){return Monoid::Merge(l, r);},\n        [](Monoid m, OperatorMonoid\
-    \ op){return OperatorMonoid::Mapping(m, op);},\n        [](OperatorMonoid l, OperatorMonoid\
-    \ r){return OperatorMonoid::Composite(l, r);},\n        Monoid(),\n        OperatorMonoid(),\n\
-    \        true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n\
-    \            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Update(l,\
-    \ r, OperatorMonoid(b, c));\n        }\n        else{\n            int l, r; cin\
-    \ >> l >> r;\n            cout << seg.Query(l, r).a << endl;\n        }\n    }\n\
-    }"
+    \nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N\
+    \ >> Q;\n    vector<Monoid> A(N);\n    for(int i = 0; i < N; ++i){\n        mint\
+    \ a; cin >> a;\n        A[i] = Monoid(a);\n    }\n\n    LazySegmentTree<Monoid,\
+    \ OperatorMonoid> seg(A,\n        [](Monoid l, Monoid r){return Monoid::Merge(l,\
+    \ r);},\n        [](Monoid m, OperatorMonoid op){return OperatorMonoid::Mapping(m,\
+    \ op);},\n        [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l,\
+    \ r);},\n        Monoid(),\n        OperatorMonoid(),\n        true);\n    while(Q--){\n\
+    \        int t; cin >> t;\n        if(t == 0){\n            int l, r, b, c; cin\
+    \ >> l >> r >> b >> c;\n            seg.Update(l, r, OperatorMonoid(b, c));\n\
+    \        }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
+    \ << seg.Product(l, r).a << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -278,8 +279,8 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp
 layout: document

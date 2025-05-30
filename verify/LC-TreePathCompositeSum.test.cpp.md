@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -326,20 +326,20 @@ data:
     \ v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex v)\
     \ const {\n        return dp_[v];\n    }\n\n    void Print() const {\n       \
     \ cerr << \"# dp table :\";\n        for(int i = 0; i < V; ++i){\n           \
-    \ cerr << \" \" << dp_[i];\n        }\n        cerr << endl;\n        cerr <<\
-    \ \"# subtree_dp table\" << endl;\n        for(int i = 0; i < V; ++i){\n     \
-    \       cerr << \"# vertex \" << i << endl;\n            cerr << \"#    subtree_dp\
+    \ cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr <<\
+    \ \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < V; ++i){\n    \
+    \        cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
     \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
     \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << endl;\n            cerr << \"#    left_cum   :\";\n            for(int j\
+    \ << '\\n';\n            cerr << \"#    left_cum   :\";\n            for(int j\
     \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << endl;\n            cerr << \"#    right_cum\
+    \            }\n            cerr << '\\n';\n            cerr << \"#    right_cum\
     \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
     \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ endl;\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\n\
-    \    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n   \
-    \     for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n  \
-    \          subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
+    \ '\\n';\n        }\n    }\n\n    private:\n    RootedTree<CostType> &tree_;\n\
+    \n    Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n  \
+    \      for(auto u : tree_.get_child(v)){\n            Monoid res = dfs(u);\n \
+    \           subtree_dp_[v].push_back(res);\n            ret = merge_(ret, res,\
     \ v);\n        }\n        if(root) ret = finalize_(ret, v);\n        else ret\
     \ = add_(ret, tree_.get_cost(v), v);\n        return ret;\n    }\n\n    void solve(){\n\
     \        dp_.resize(V, id_);\n        subtree_dp_.resize(V, vector<Monoid>{id_});\n\
@@ -378,10 +378,35 @@ data:
     \    }\n};\n\nstruct Monoid{\n    Monoid() = default;\n    Monoid(mint v, mint\
     \ c) : val(v), cnt(c){}\n    mint val{0}, cnt{0};\n    friend ostream &operator<<(ostream\
     \ &os, const Monoid &p) {\n        return os << \"{\" << p.val << \", \" << p.cnt\
-    \ << \"}\";\n    }\n};\n\nint main(){\n    int N; cin >> N;\n    RootedTree<Affine>\
-    \ T(N);\n    vm a(N); cin >> a;\n    {\n        vector<vector<pair<Vertex, Affine>>>\
-    \ graph(N);\n        for(int i = 0; i < N - 1; ++i){\n            int u, v; cin\
-    \ >> u >> v;\n            mint b, c; cin >> b >> c;\n            graph[u].emplace_back(v,\
+    \ << \"}\";\n    }\n};\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int N; cin >> N;\n    RootedTree<Affine> T(N);\n    vm a(N); cin >> a;\n\
+    \    {\n        vector<vector<pair<Vertex, Affine>>> graph(N);\n        for(int\
+    \ i = 0; i < N - 1; ++i){\n            int u, v; cin >> u >> v;\n            mint\
+    \ b, c; cin >> b >> c;\n            graph[u].emplace_back(v, Affine(b, c));\n\
+    \            graph[v].emplace_back(u, Affine(b, c));\n        }\n        auto\
+    \ rec = [&](auto self, Vertex v, Vertex p) -> void {\n            for(auto [u,\
+    \ w] : graph[v]){\n                if(u == p) continue;\n                T.AddEdge(v,\
+    \ u, w);\n                self(self, u, v);\n            }\n        };\n     \
+    \   rec(rec, 0, -1);\n    }\n\n    RerootingDP<Affine, Monoid> dp(\n        T,\n\
+    \        [](Monoid l, Monoid r, Vertex i){\n            return Monoid(l.val +\
+    \ r.val, l.cnt + r.cnt);\n        },\n        [&](Monoid x, Affine m, Vertex i){\n\
+    \            return Monoid(m.b * (a[i] + x.val) + (x.cnt + 1) * m.c, x.cnt + 1);\n\
+    \        },\n        [&](Monoid x, Vertex i){\n            return Monoid(x.val\
+    \ + a[i], x.cnt + 1);\n        },\n        Monoid()\n    );\n    for(int i = 0;\
+    \ i < N; ++i){\n        cout << dp[i].val << \" \";\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_path_composite_sum\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/modint.hpp\"\n\
+    #include \"../Library/Tree/RerootingDP.hpp\"\n\nstruct Affine{\n    Affine() =\
+    \ default;\n    Affine(mint b, mint c) : b(b), c(c){}\n    mint b{1}, c{0};\n\
+    \    friend ostream &operator<<(ostream &os, const Affine &p) {\n        return\
+    \ os << \"{\" << p.b << \", \" << p.c << \"}\";\n    }\n};\n\nstruct Monoid{\n\
+    \    Monoid() = default;\n    Monoid(mint v, mint c) : val(v), cnt(c){}\n    mint\
+    \ val{0}, cnt{0};\n    friend ostream &operator<<(ostream &os, const Monoid &p)\
+    \ {\n        return os << \"{\" << p.val << \", \" << p.cnt << \"}\";\n    }\n\
+    };\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >>\
+    \ N;\n    RootedTree<Affine> T(N);\n    vm a(N); cin >> a;\n    {\n        vector<vector<pair<Vertex,\
+    \ Affine>>> graph(N);\n        for(int i = 0; i < N - 1; ++i){\n            int\
+    \ u, v; cin >> u >> v;\n            mint b, c; cin >> b >> c;\n            graph[u].emplace_back(v,\
     \ Affine(b, c));\n            graph[v].emplace_back(u, Affine(b, c));\n      \
     \  }\n        auto rec = [&](auto self, Vertex v, Vertex p) -> void {\n      \
     \      for(auto [u, w] : graph[v]){\n                if(u == p) continue;\n  \
@@ -393,31 +418,7 @@ data:
     \ + 1) * m.c, x.cnt + 1);\n        },\n        [&](Monoid x, Vertex i){\n    \
     \        return Monoid(x.val + a[i], x.cnt + 1);\n        },\n        Monoid()\n\
     \    );\n    for(int i = 0; i < N; ++i){\n        cout << dp[i].val << \" \";\n\
-    \    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_path_composite_sum\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/modint.hpp\"\n\
-    #include \"../Library/Tree/RerootingDP.hpp\"\n\nstruct Affine{\n    Affine() =\
-    \ default;\n    Affine(mint b, mint c) : b(b), c(c){}\n    mint b{1}, c{0};\n\
-    \    friend ostream &operator<<(ostream &os, const Affine &p) {\n        return\
-    \ os << \"{\" << p.b << \", \" << p.c << \"}\";\n    }\n};\n\nstruct Monoid{\n\
-    \    Monoid() = default;\n    Monoid(mint v, mint c) : val(v), cnt(c){}\n    mint\
-    \ val{0}, cnt{0};\n    friend ostream &operator<<(ostream &os, const Monoid &p)\
-    \ {\n        return os << \"{\" << p.val << \", \" << p.cnt << \"}\";\n    }\n\
-    };\n\nint main(){\n    int N; cin >> N;\n    RootedTree<Affine> T(N);\n    vm\
-    \ a(N); cin >> a;\n    {\n        vector<vector<pair<Vertex, Affine>>> graph(N);\n\
-    \        for(int i = 0; i < N - 1; ++i){\n            int u, v; cin >> u >> v;\n\
-    \            mint b, c; cin >> b >> c;\n            graph[u].emplace_back(v, Affine(b,\
-    \ c));\n            graph[v].emplace_back(u, Affine(b, c));\n        }\n     \
-    \   auto rec = [&](auto self, Vertex v, Vertex p) -> void {\n            for(auto\
-    \ [u, w] : graph[v]){\n                if(u == p) continue;\n                T.AddEdge(v,\
-    \ u, w);\n                self(self, u, v);\n            }\n        };\n     \
-    \   rec(rec, 0, -1);\n    }\n\n    RerootingDP<Affine, Monoid> dp(\n        T,\n\
-    \        [](Monoid l, Monoid r, Vertex i){\n            return Monoid(l.val +\
-    \ r.val, l.cnt + r.cnt);\n        },\n        [&](Monoid x, Affine m, Vertex i){\n\
-    \            return Monoid(m.b * (a[i] + x.val) + (x.cnt + 1) * m.c, x.cnt + 1);\n\
-    \        },\n        [&](Monoid x, Vertex i){\n            return Monoid(x.val\
-    \ + a[i], x.cnt + 1);\n        },\n        Monoid()\n    );\n    for(int i = 0;\
-    \ i < N; ++i){\n        cout << dp[i].val << \" \";\n    }\n}"
+    \    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -427,7 +428,7 @@ data:
   isVerificationFile: true
   path: verify/LC-TreePathCompositeSum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreePathCompositeSum.test.cpp

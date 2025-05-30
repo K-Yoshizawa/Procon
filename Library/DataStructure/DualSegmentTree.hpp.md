@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffinePointGet.test.cpp
     title: verify/LC-RangeAffinePointGet.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
@@ -37,9 +37,9 @@ data:
     \ = value;\n    }\n\n    void Update(int left, int right, OperatorMonoid operation){\n\
     \        Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
     \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1,\
-    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Prod(int index){\n        Validate(index\
-    \ + zeroindex_);\n        return RecursiveProd(index + zeroindex_, 1, size_ +\
-    \ 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
+    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Product(int index){\n        Validate(index\
+    \ + zeroindex_);\n        return RecursiveProduct(index + zeroindex_, 1, size_\
+    \ + 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
     \ lazy_;\n    vector<bool> is_identity_;\n    const H h;\n    const OperatorMonoid\
     \ om1_;\n\n    inline void Validate(int x){\n        assert(1 <= x && x <= size_);\n\
     \    }\n\n    void Evaluate(int k){\n        if(is_identity_[k]) return;\n   \
@@ -53,11 +53,11 @@ data:
     \ = false;\n            Evaluate(cell);\n        }\n        else if(ul < right\
     \ && left < ur){\n            int mid = (left + right) / 2;\n            RecursiveUpdate(ul,\
     \ ur, x, left, mid, cell * 2 + 0);\n            RecursiveUpdate(ul, ur, x, mid,\
-    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProd(int\
+    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProduct(int\
     \ q, int left, int right, int cell){\n        Evaluate(cell);\n        if(q ==\
     \ left && right - left == 1) return lazy_[cell];\n        int mid = (left + right)\
-    \ / 2;\n        if(q < mid) return RecursiveProd(q, left, mid, cell * 2 + 0);\n\
-    \        else return RecursiveProd(q, mid, right, cell * 2 + 1);\n    }\n};\n"
+    \ / 2;\n        if(q < mid) return RecursiveProduct(q, left, mid, cell * 2 + 0);\n\
+    \        else return RecursiveProduct(q, mid, right, cell * 2 + 1);\n    }\n};\n"
   code: "/**\n * @file DualSegmentTree.hpp\n * @brief Dual Segment Tree - \u53CC\u5BFE\
     \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @version 2.0\n * @date 2024-11-29\n */\n\
     \n#include \"../Common.hpp\"\n\ntemplate<typename OperatorMonoid>\nclass DualSegmentTree{\n\
@@ -71,9 +71,9 @@ data:
     \ = value;\n    }\n\n    void Update(int left, int right, OperatorMonoid operation){\n\
     \        Validate(left + zeroindex_);\n        Validate(right + zeroindex_ - 1);\n\
     \        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1,\
-    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Prod(int index){\n        Validate(index\
-    \ + zeroindex_);\n        return RecursiveProd(index + zeroindex_, 1, size_ +\
-    \ 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
+    \ size_ + 1, 1);\n    }\n\n    OperatorMonoid Product(int index){\n        Validate(index\
+    \ + zeroindex_);\n        return RecursiveProduct(index + zeroindex_, 1, size_\
+    \ + 1, 1);\n    }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<OperatorMonoid>\
     \ lazy_;\n    vector<bool> is_identity_;\n    const H h;\n    const OperatorMonoid\
     \ om1_;\n\n    inline void Validate(int x){\n        assert(1 <= x && x <= size_);\n\
     \    }\n\n    void Evaluate(int k){\n        if(is_identity_[k]) return;\n   \
@@ -87,18 +87,18 @@ data:
     \ = false;\n            Evaluate(cell);\n        }\n        else if(ul < right\
     \ && left < ur){\n            int mid = (left + right) / 2;\n            RecursiveUpdate(ul,\
     \ ur, x, left, mid, cell * 2 + 0);\n            RecursiveUpdate(ul, ur, x, mid,\
-    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProd(int\
+    \ right, cell * 2 + 1);\n        }\n    }\n    \n    OperatorMonoid RecursiveProduct(int\
     \ q, int left, int right, int cell){\n        Evaluate(cell);\n        if(q ==\
     \ left && right - left == 1) return lazy_[cell];\n        int mid = (left + right)\
-    \ / 2;\n        if(q < mid) return RecursiveProd(q, left, mid, cell * 2 + 0);\n\
-    \        else return RecursiveProd(q, mid, right, cell * 2 + 1);\n    }\n};"
+    \ / 2;\n        if(q < mid) return RecursiveProduct(q, left, mid, cell * 2 + 0);\n\
+    \        else return RecursiveProduct(q, mid, right, cell * 2 + 1);\n    }\n};"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/DataStructure/DualSegmentTree.hpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2025-05-30 19:43:59+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffinePointGet.test.cpp
 documentation_of: Library/DataStructure/DualSegmentTree.hpp

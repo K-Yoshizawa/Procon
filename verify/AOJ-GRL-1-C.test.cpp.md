@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -14,7 +14,7 @@ data:
     path: Library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
       \u6CD5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -169,23 +169,24 @@ data:
     \ dist_[k][j] == inf) continue;\n                    dist_[i][j] = min(dist_[i][j],\
     \ dist_[i][k] + dist_[k][j]);\n                }\n            }\n        }\n \
     \       for(int i = 0; i < n; ++i) negative_cycle_ |= dist_[i][i] < 0;\n    }\n\
-    };\n#line 5 \"verify/AOJ-GRL-1-C.test.cpp\"\n\nint main(){\n    int V, E; cin\
-    \ >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    WarshallFloyd\
-    \ wf(G);\n    if(wf.Negative()){\n        cout << \"NEGATIVE CYCLE\" << endl;\n\
+    };\n#line 5 \"verify/AOJ-GRL-1-C.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n\
+    \    \n    WarshallFloyd wf(G);\n    if(wf.Negative()){\n        cout << \"NEGATIVE\
+    \ CYCLE\" << '\\n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n\
+    \        for(int j = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n  \
+    \              cout << wf[i][j];\n            }\n            else{\n         \
+    \       cout << \"INF\";\n            }\n            cout << \" \\n\"[j + 1 ==\
+    \ V];\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/WarshallFloyd.hpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
+    \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    WarshallFloyd\
+    \ wf(G);\n    if(wf.Negative()){\n        cout << \"NEGATIVE CYCLE\" << '\\n';\n\
     \        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n        for(int j\
     \ = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n                cout\
     \ << wf[i][j];\n            }\n            else{\n                cout << \"INF\"\
     ;\n            }\n            cout << \" \\n\"[j + 1 == V];\n        }\n    }\n\
-    }\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/WarshallFloyd.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, true, true);\n    \n    WarshallFloyd wf(G);\n    if(wf.Negative()){\n\
-    \        cout << \"NEGATIVE CYCLE\" << endl;\n        return 0;\n    }\n    for(int\
-    \ i = 0; i < V; ++i){\n        for(int j = 0; j < V; ++j){\n            if(wf.Reachable(i,\
-    \ j)){\n                cout << wf[i][j];\n            }\n            else{\n\
-    \                cout << \"INF\";\n            }\n            cout << \" \\n\"\
-    [j + 1 == V];\n        }\n    }\n}"
+    }"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -195,7 +196,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-C.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-C.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/CumulativeSum2D.hpp
     title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -165,18 +165,18 @@ data:
     \       for(int j = 0; j < width_; ++j){\n                ret = min(ret, data_[i][j]);\n\
     \            }\n        }\n        return ret;\n    }\n\n    vector<T> &operator[](const\
     \ int k){\n        return data_.at(k);\n    }\n};\n#line 5 \"verify/AOJ-DSL-5-B.test.cpp\"\
-    \n\nint main(){\n    int N; cin >> N;\n\n    CumulativeSum2D<int> cum(2000, 2000);\n\
-    \    for(int i = 0; i < N; ++i){\n        int x1, y1, x2, y2; cin >> x1 >> y1\
-    \ >> x2 >> y2;\n        cum.Add(y1, x1, y2 - 1, x2 - 1, 1);\n        // cerr <<\
-    \ \"# i = \" << i + 1 << endl;\n        // cum.Print();\n    }\n    cum.Build();\n\
-    \    // cum.Print();\n    cout << cum.Max() << endl;\n}\n"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\
+    \n    CumulativeSum2D<int> cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n\
+    \        int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1,\
+    \ x1, y2 - 1, x2 - 1, 1);\n    }\n    cum.Build();\n    cout << cum.Max() << '\\\
+    n';\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/CumulativeSum2D.hpp\"\
-    \n\nint main(){\n    int N; cin >> N;\n\n    CumulativeSum2D<int> cum(2000, 2000);\n\
-    \    for(int i = 0; i < N; ++i){\n        int x1, y1, x2, y2; cin >> x1 >> y1\
-    \ >> x2 >> y2;\n        cum.Add(y1, x1, y2 - 1, x2 - 1, 1);\n        // cerr <<\
-    \ \"# i = \" << i + 1 << endl;\n        // cum.Print();\n    }\n    cum.Build();\n\
-    \    // cum.Print();\n    cout << cum.Max() << endl;\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\
+    \n    CumulativeSum2D<int> cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n\
+    \        int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1,\
+    \ x1, y2 - 1, x2 - 1, 1);\n    }\n    cum.Build();\n    cout << cum.Max() << '\\\
+    n';\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -184,7 +184,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-5-B.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-5-B.test.cpp

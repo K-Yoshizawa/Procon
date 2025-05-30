@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
     title: Library/Graph/GraphMisc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -170,20 +170,21 @@ data:
     \ &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
     \ &G;\n    int n;\n    CostType inf{CostType(INF)};\n    bool negative_cycle_;\n\
     \    vector<CostType> dist_;\n};\n#line 5 \"verify/AOJ-GRL-1-B.test.cpp\"\n\n\
-    int main(){\n    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, true, true);\n    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n\
-    \        cout << \"NEGATIVE CYCLE\" << endl;\n        return 0;\n    }\n    for(int\
-    \ i = 0; i < V; ++i){\n        if(bf.Reachable(i)){\n            cout << bf.Distance(i)\
-    \ << endl;\n        }\n        else{\n            cout << \"INF\" << endl;\n \
-    \       }\n    }\n}\n"
+    int main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E, r; cin >>\
+    \ V >> E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    BellmanFord\
+    \ bf(G, r);\n    if(bf.Negative()){\n        cout << \"NEGATIVE CYCLE\" << '\\\
+    n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n        if(bf.Reachable(i)){\n\
+    \            cout << bf.Distance(i) << '\\n';\n        }\n        else{\n    \
+    \        cout << \"INF\" << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/BellmanFord.hpp\"\
-    \n\nint main(){\n    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, true, true);\n    \n    BellmanFord bf(G, r);\n    if(bf.Negative()){\n\
-    \        cout << \"NEGATIVE CYCLE\" << endl;\n        return 0;\n    }\n    for(int\
-    \ i = 0; i < V; ++i){\n        if(bf.Reachable(i)){\n            cout << bf.Distance(i)\
-    \ << endl;\n        }\n        else{\n            cout << \"INF\" << endl;\n \
-    \       }\n    }\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E, r; cin\
+    \ >> V >> E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n \
+    \   BellmanFord bf(G, r);\n    if(bf.Negative()){\n        cout << \"NEGATIVE\
+    \ CYCLE\" << '\\n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n\
+    \        if(bf.Reachable(i)){\n            cout << bf.Distance(i) << '\\n';\n\
+    \        }\n        else{\n            cout << \"INF\" << '\\n';\n        }\n\
+    \    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -193,7 +194,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-B.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
     title: Library/Graph/LowLink.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -153,16 +153,16 @@ data:
     \ second = true;\n            }\n        }\n        is_articulation |= (p == -1)\
     \ && (cnt > 1);\n        if(is_articulation) articulation_vertex_.emplace_back(v);\n\
     \        out_[v] = t;\n        return k;\n    }\n};\n#line 5 \"verify/AOJ-GRL-3-B.test.cpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, false);\n    \n    LowLink llk(G);\n    auto ans = llk.Bridge();\n\
-    \    Sort(ans);\n    for(const auto [s, t] : ans) cout << s << ' ' << t << '\\\
-    n';\n}\n"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
+    \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, false);\n    \n    LowLink\
+    \ llk(G);\n    auto ans = llk.Bridge();\n    Sort(ans);\n    for(const auto [s,\
+    \ t] : ans) cout << s << ' ' << t << '\\n';\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_B\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/LowLink.hpp\"\
-    \n\nint main(){\n    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V,\
-    \ E, 0, false, false);\n    \n    LowLink llk(G);\n    auto ans = llk.Bridge();\n\
-    \    Sort(ans);\n    for(const auto [s, t] : ans) cout << s << ' ' << t << '\\\
-    n';\n}"
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
+    \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, false);\n    \n    LowLink\
+    \ llk(G);\n    auto ans = llk.Bridge();\n    Sort(ans);\n    for(const auto [s,\
+    \ t] : ans) cout << s << ' ' << t << '\\n';\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -171,7 +171,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-B.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 15:32:29+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-B.test.cpp

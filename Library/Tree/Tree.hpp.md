@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - HL\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -51,21 +51,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links:
@@ -392,7 +392,7 @@ data:
   - Library/Tree/EulerTour.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   timestamp: '2025-03-20 00:50:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
