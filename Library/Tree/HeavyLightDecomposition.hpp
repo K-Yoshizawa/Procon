@@ -45,7 +45,7 @@ class HeavyLightDecomposition{
     }
 
     Vertex LevelAncestor(Vertex v, int k){
-        assert(0 <= k <= depth_[v]);
+        assert(k <= depth_[v]);
         Vertex ret = v;
         while(1){
             int h = Head(ret);
