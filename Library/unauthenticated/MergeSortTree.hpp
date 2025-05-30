@@ -112,12 +112,12 @@ struct MergeSortTree{
                 for(int k = 0; k < data_[i].size(); ++k){
                     cerr << data_[i][k] << (k + 1 == data_[i].size() ? "} " : ", ");
                 }
-                cerr << endl;
+                cerr << '\n';
                 cerr << "  {";
                 for(int k = 0; k <= data_[i].size(); ++k){
                     cerr << cum_[i][k] << (k == data_[i].size() ? "} " : ", ");
                 }
-                cerr << endl;
+                cerr << '\n';
             }
             cerr << "========================================\n";
         }

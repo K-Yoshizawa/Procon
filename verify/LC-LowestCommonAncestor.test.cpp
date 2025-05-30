@@ -4,6 +4,7 @@
 #include "../Library/Tree/LowestCommonAncestor.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     RootedTree T(N);
     T.InputRootedTreeFormat(false, false);
@@ -11,6 +12,6 @@ int main(){
     LowestCommonAncestor lca(T);
     while(Q--){
         int u, v; cin >> u >> v;
-        cout << lca.Query(u, v) << endl;
+        cout << lca.Query(u, v) << '\n';
     }
 }

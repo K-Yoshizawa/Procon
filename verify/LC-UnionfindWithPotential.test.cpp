@@ -4,6 +4,7 @@
 #include "../Library/DataStructure/WeightedUnionFind.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
 
     WeightedUnionFind<mint> uf(N);
@@ -12,18 +13,18 @@ int main(){
         if(t == 0){
             int x; cin >> x;
             if(uf.Same(u, v)){
-                cout << (uf.Diff(u, v) == x) << endl;
+                cout << (uf.Diff(u, v) == x) << '\n';
             }
             else{
-                cout << uf.Unite(u, v, x) << endl;
+                cout << uf.Unite(u, v, x) << '\n';
             }
         }
         else{
             if(uf.Same(u, v)){
-                cout << uf.Diff(u, v) << endl;
+                cout << uf.Diff(u, v) << '\n';
             }
             else{
-                cout << -1 << endl;
+                cout << -1 << '\n';
             }
         }
     }

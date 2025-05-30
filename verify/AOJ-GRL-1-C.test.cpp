@@ -4,12 +4,13 @@
 #include "../Library/Graph/WarshallFloyd.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int V, E; cin >> V >> E;
     auto G = InputGraph<ll>(V, E, 0, true, true);
     
     WarshallFloyd wf(G);
     if(wf.Negative()){
-        cout << "NEGATIVE CYCLE" << endl;
+        cout << "NEGATIVE CYCLE" << '\n';
         return 0;
     }
     for(int i = 0; i < V; ++i){

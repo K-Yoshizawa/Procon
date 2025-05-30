@@ -4,6 +4,7 @@
 #include "../Library/Tree/RerootingDP.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n; cin >> n;
     RootedTree T(n);
     T.InputGraphFormat(true, false);
@@ -14,6 +15,6 @@ int main(){
         [](int l, int r){return l + r;},
         0);
     for(int i = 0; i < n; ++i){
-        cout << dp[i] << endl;
+        cout << dp[i] << '\n';
     }
 }

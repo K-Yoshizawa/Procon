@@ -5,6 +5,7 @@
 #include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<ll> a(N); cin >> a;
     RootedTree T(N);
@@ -22,7 +23,7 @@ int main(){
         else{
             int u; cin >> u;
             auto [l, r] = et.get_pair(u);
-            cout << seg.Prod(l, r) << endl;
+            cout << seg.Product(l, r) << '\n';
         }
     }
 }

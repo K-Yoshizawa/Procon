@@ -119,7 +119,7 @@ struct Matrix{
             for(int j = 0; j < M; ++j){
                 cerr << A[i][j] << " ]"[j + 1 == M];
             }
-            cerr << endl;
+            cerr << '\n';
         }
     }
 
@@ -129,11 +129,11 @@ struct Matrix{
         int N = size();
         int i = 0;
         for(int j = 0; i < N && j < N; ++j){
-            // cerr << "i = " << i << ", j = " << j << endl;
+            // cerr << "i = " << i << ", j = " << j << '\n';
             // tmp.print();
             bool found = false;
             for(int ti = i; ti < N && !found; ++ti){
-                // cerr << " - ti = " << ti << ", val = " << tmp[ti][j] << endl;
+                // cerr << " - ti = " << ti << ", val = " << tmp[ti][j] << '\n';
                 if(tmp[ti][j] != 0){
                     if(ti != i){
                         swap(tmp[ti], tmp[i]);
@@ -148,9 +148,9 @@ struct Matrix{
             for(int ti = i + 1; ti < N; ++ti){
                 if(tmp[ti][j] == 0) continue;
                 T mul = tmp[ti][j] / tmp[i][j];
-                // cerr << " - ti = " << ti << ", mul = " << mul << endl;
+                // cerr << " - ti = " << ti << ", mul = " << mul << '\n';
                 for(int tj = j; tj < N; ++tj){
-                    // cerr << " -  - tj = " << tj << ", sub = " << tmp[i][tj] << " * " << mul << " = " << tmp[i][tj] * mul << endl;
+                    // cerr << " -  - tj = " << tj << ", sub = " << tmp[i][tj] << " * " << mul << " = " << tmp[i][tj] * mul << '\n';
                     tmp[ti][tj] -= tmp[i][tj] * mul;
                 }
             }

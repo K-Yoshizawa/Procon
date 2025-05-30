@@ -4,6 +4,7 @@
 #include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n, q; cin >> n >> q;
 
     int inf = (1LL << 31) - 1;
@@ -15,7 +16,7 @@ int main(){
             seg.Set(x, y);
         }
         else{
-            cout << seg.Prod(x, y + 1) << endl;
+            cout << seg.Product(x, y + 1) << '\n';
         }
     }
 }

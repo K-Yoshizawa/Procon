@@ -32,9 +32,9 @@ class DualSegmentTree{
         RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1, size_ + 1, 1);
     }
 
-    OperatorMonoid Prod(int index){
+    OperatorMonoid Product(int index){
         Validate(index + zeroindex_);
-        return RecursiveProd(index + zeroindex_, 1, size_ + 1, 1);
+        return RecursiveProduct(index + zeroindex_, 1, size_ + 1, 1);
     }
 
     private:
@@ -74,11 +74,11 @@ class DualSegmentTree{
         }
     }
     
-    OperatorMonoid RecursiveProd(int q, int left, int right, int cell){
+    OperatorMonoid RecursiveProduct(int q, int left, int right, int cell){
         Evaluate(cell);
         if(q == left && right - left == 1) return lazy_[cell];
         int mid = (left + right) / 2;
-        if(q < mid) return RecursiveProd(q, left, mid, cell * 2 + 0);
-        else return RecursiveProd(q, mid, right, cell * 2 + 1);
+        if(q < mid) return RecursiveProduct(q, left, mid, cell * 2 + 0);
+        else return RecursiveProduct(q, mid, right, cell * 2 + 1);
     }
 };

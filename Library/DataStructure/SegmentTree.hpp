@@ -48,7 +48,7 @@ class SegmentTree{
         }
     }
 
-    Monoid Prod(int l, int r){
+    Monoid Product(int l, int r){
         if(l == r) return id_;
         Validate(l + zero_index_);
         Validate(r + zero_index_ - 1);

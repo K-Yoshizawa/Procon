@@ -1,8 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection_undirected"
 
-#include "Library/Template.hpp"
-
-#include "Library/Graph/CycleDetection.hpp"
+#include "../Library/Template.hpp"
+#include "../Library/Graph/CycleDetection.hpp"
 
 int main(){
     cin.tie(0)->sync_with_stdio(false);

@@ -3,6 +3,7 @@
 #include "../Library/DataStructure/RollbackUnionFind.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, M, K; cin >> N >> M >> K;
     vector<int> U(M), V(M);
     for(int i = 0; i < M; ++i) cin >> U[i] >> V[i], --U[i], --V[i];
@@ -46,6 +47,6 @@ int main(){
     }
     for(auto a : ans){
         assert(a != -1);
-        cout << a << endl;
+        cout << a << '\n';
     }
 }

@@ -23,6 +23,7 @@ struct Monoid{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N; cin >> N;
     RootedTree<Affine> T(N);
     vm a(N); cin >> a;

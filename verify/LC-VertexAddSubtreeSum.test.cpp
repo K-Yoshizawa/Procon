@@ -5,6 +5,7 @@
 #include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<ll> a(N); cin >> a;
     RootedTree T(N);
@@ -17,12 +18,12 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Update(hld[p], seg[hld[p]] + x);
+            seg.Set(hld[p], seg[hld[p]] + x);
         }
         else{
             int u; cin >> u;
             auto [l, r] = hld.SubtreeQuery(u);
-            cout << seg.Query(l, r) << endl;
+            cout << seg.Product(l, r) << '\n';
         }
     }
 }

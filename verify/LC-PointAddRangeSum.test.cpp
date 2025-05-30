@@ -4,6 +4,7 @@
 #include "../Library/DataStructure/SegmentTree.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<ll> a(N); cin >> a;
 
@@ -16,7 +17,7 @@ int main(){
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Prod(l, r) << endl;
+            cout << seg.Product(l, r) << '\n';
         }
     }
 }

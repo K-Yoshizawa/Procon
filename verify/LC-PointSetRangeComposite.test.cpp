@@ -16,6 +16,7 @@ struct Affine{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<Affine> init_data;
     for(int i = 0; i < N; ++i){
@@ -32,7 +33,7 @@ int main(){
         }
         else{
             int l, r, x; cin >> l >> r >> x;
-            cout << seg.Prod(l, r).Value(x) << endl;
+            cout << seg.Product(l, r).Value(x) << '\n';
         }
     }
 }

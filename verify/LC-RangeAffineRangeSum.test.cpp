@@ -25,6 +25,7 @@ struct OperatorMonoid{
 };
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int N, Q; cin >> N >> Q;
     vector<Monoid> A(N);
     for(int i = 0; i < N; ++i){
@@ -47,7 +48,7 @@ int main(){
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Query(l, r).a << endl;
+            cout << seg.Product(l, r).a << '\n';
         }
     }
 }

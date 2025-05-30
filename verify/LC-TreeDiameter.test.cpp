@@ -4,6 +4,7 @@
 #include "../Library/Tree/TreeDiameter.hpp"
 
 int main(){
+    cin.tie(0)->sync_with_stdio(false);
     int n; cin >> n;
     RootedTree<ll> T(n);
     T.InputGraphFormat(true, false);
@@ -11,9 +12,9 @@ int main(){
     TreeDiameter td(T);
     auto us = td.get_diameter_path();
     ll X = td.get_diameter(), Y = us.size();
-    cout << X << " " << Y << endl;
+    cout << X << " " << Y << '\n';
     for(auto u : us){
         cout << u << " ";
     }
-    cout << endl;
+    cout << '\n';
 }
