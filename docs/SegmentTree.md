@@ -96,10 +96,10 @@ void Update(int i, Monoid v)
 
 ---
 
-### Query
+### Prod
 
 ```
-Monoid Query(int l, int r)
+Monoid Prod(int l, int r)
 ```
 
 - 半開区間 $[l, r)$ に対して区間取得クエリを実行します。
