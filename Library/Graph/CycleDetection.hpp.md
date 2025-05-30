@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -96,8 +96,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-CycleDetectionUndirected.test.cpp
-  - verify/LC-CycleDetection.test.cpp
   - verify/AOJ-GRL-4-A.test.cpp
+  - verify/LC-CycleDetection.test.cpp
 documentation_of: Library/Graph/CycleDetection.hpp
 layout: document
 redirect_from:

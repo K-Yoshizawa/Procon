@@ -4,9 +4,9 @@ data:
   - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
-    path: Library/DataStructure/SegmentTree.hpp
-    title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+  - icon: ':heavy_check_mark:'
+    path: Library/DataStructure/BinaryIndexedTree.hpp
+    title: Library/DataStructure/BinaryIndexedTree.hpp
   - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -20,8 +20,8 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
     links:
     - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"verify/LC-PointAddRangeSum.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n#line 2 \"Library/Template.hpp\"\
+  bundledCode: "#line 1 \"verify/LC-PointAddRangeSum_BIT.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n#line 2 \"Library/Template.hpp\"\
     \n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template -\
     \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.10\n * @date 2025-03-16\n\
     \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
@@ -102,62 +102,44 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\
-    \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using F =\
-    \ function<Monoid(Monoid, Monoid)>;\n\n    SegmentTree(\n        int n,\n    \
-    \    F merge,\n        const Monoid &e,\n        bool zero_index = false\n   \
-    \ ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n       \
-    \ while(size_ < n) size_ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2\
-    \ * size_, id_);\n    }\n    \n    SegmentTree(\n        vector<Monoid> &A, \n\
-    \        F merge, \n        const Monoid &e, \n        bool zero_index = false\n\
-    \    ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n    \
-    \    while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_ - 1;\n\
-    \        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
-    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        Build();\n \
-    \   }\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n     \
-    \       data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
-    \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
-    \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
-    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
-    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
-    \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
-    \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
-    \ data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n           \
-    \ lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\n    Monoid\
-    \ operator[](const int &i){\n        Validate(i + zero_index_);\n        return\
-    \ data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int size_, offset_,\
-    \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
-    \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
-    \    }\n};\n#line 5 \"verify/LC-PointAddRangeSum.test.cpp\"\n\nint main(){\n \
-    \   int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    SegmentTree<ll>\
-    \ seg(a, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n       \
-    \ int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n\
-    \            seg.Set(p, seg[p] + x);\n        }\n        else{\n            int\
-    \ l, r; cin >> l >> r;\n            cout << seg.Prod(l, r) << endl;\n        }\n\
-    \    }\n}\n"
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/BinaryIndexedTree.hpp\"\
+    \n\ntemplate<typename T>\nstruct BinaryIndexedTree{\n    public:\n    BinaryIndexedTree(int\
+    \ n) : size_(n){\n        data_.resize(size_ + 1, 0);\n    }\n\n    T Sum(int\
+    \ i){\n        T ret = 0;\n        for(; i > 0; i -= i & -i) ret += data_[i];\n\
+    \        return ret;\n    }\n    \n    T Sum(int l, int r){\n        return Sum(r)\
+    \ - Sum(l - 1);\n    }\n\n    void Add(int i, T v){\n        for(; i <= size_;\
+    \ i += i & -i) data_[i] += v;\n    }\n\n    private:\n    int size_;\n    vector<T>\
+    \ data_;\n};\n#line 5 \"verify/LC-PointAddRangeSum_BIT.test.cpp\"\n\nint main(){\n\
+    \    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin >> N >> Q;\n   \
+    \ BinaryIndexedTree<ll> BIT(N);\n    for(int i = 1; i <= N; ++i){\n        ll\
+    \ a; cin >> a;\n        BIT.Add(i, a);\n    }\n\n    while(Q--){\n        int\
+    \ t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p >> x, ++p;\n\
+    \            BIT.Add(p, x);\n        }\n        else{\n            int l, r; cin\
+    \ >> l >> r, ++l;\n            cout << BIT.Sum(l, r) << '\\n';\n        }\n  \
+    \  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\
-    \n    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n\
-    \        int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p\
-    \ >> x;\n            seg.Set(p, seg[p] + x);\n        }\n        else{\n     \
-    \       int l, r; cin >> l >> r;\n            cout << seg.Prod(l, r) << endl;\n\
+    \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/BinaryIndexedTree.hpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin\
+    \ >> N >> Q;\n    BinaryIndexedTree<ll> BIT(N);\n    for(int i = 1; i <= N; ++i){\n\
+    \        ll a; cin >> a;\n        BIT.Add(i, a);\n    }\n\n    while(Q--){\n \
+    \       int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p\
+    \ >> x, ++p;\n            BIT.Add(p, x);\n        }\n        else{\n         \
+    \   int l, r; cin >> l >> r, ++l;\n            cout << BIT.Sum(l, r) << '\\n';\n\
     \        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/DataStructure/SegmentTree.hpp
+  - Library/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: true
-  path: verify/LC-PointAddRangeSum.test.cpp
+  path: verify/LC-PointAddRangeSum_BIT.test.cpp
   requiredBy: []
   timestamp: '2025-05-30 15:32:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/LC-PointAddRangeSum.test.cpp
+documentation_of: verify/LC-PointAddRangeSum_BIT.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-PointAddRangeSum.test.cpp
-- /verify/verify/LC-PointAddRangeSum.test.cpp.html
-title: verify/LC-PointAddRangeSum.test.cpp
+- /verify/verify/LC-PointAddRangeSum_BIT.test.cpp
+- /verify/verify/LC-PointAddRangeSum_BIT.test.cpp.html
+title: verify/LC-PointAddRangeSum_BIT.test.cpp
 ---

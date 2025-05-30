@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
@@ -151,8 +151,8 @@ data:
   timestamp: '2025-03-23 23:54:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
 documentation_of: Library/Graph/StronglyConnectedComponents.hpp
 layout: document
 redirect_from:

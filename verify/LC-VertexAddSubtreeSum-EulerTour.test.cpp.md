@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -45,45 +45,44 @@ data:
     \ container.rend());}\ntemplate<typename Container>\ninline void Reverse(Container\
     \ &container){reverse(container.begin(), container.end());}\ntemplate<typename\
     \ Value>\ninline int PopCount(const Value &value){return __builtin_popcount(value);}\n\
-    template<typename Value>\ninline Value Floor(const Value &numerator, const Value\
-    \ &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return\
-    \ numerator < 0 ? (numerator + 1) / denominator - 1 : numerator / denominator;}\n\
-    template<typename Value>\ninline Value Ceil(const Value &numerator, const Value\
-    \ &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return\
-    \ numerator > 0 ? (numerator - 1) / denominator + 1 : numerator / denominator;}\n\
-    template<typename Value>\ninline int LowerBoundIndex(const vector<Value> &container,\
-    \ const Value &value){return distance(container.begin(), lower_bound(container.begin(),\
-    \ container.end(), value));}\ntemplate<typename Value>\ninline int UpperBoundIndex(const\
+    template<typename Value>\ninline Value Floor(Value numerator, Value denominator){if(denominator\
+    \ < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator +\
+    \ 1) / denominator - 1 : numerator / denominator;}\ntemplate<typename Value>\n\
+    inline Value Ceil(Value numerator, Value denominator){if(denominator < 0) numerator\
+    \ *= -1, denominator *= -1; return numerator > 0 ? (numerator - 1) / denominator\
+    \ + 1 : numerator / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
     \ vector<Value> &container, const Value &value){return distance(container.begin(),\
-    \ upper_bound(container.begin(), container.end(), value));}\ntemplate<typename\
-    \ Value>\ninline bool Between(const Value &lower, const Value &x, const Value\
-    \ &higher){return lower <= x && x <= higher;}\ntemplate<typename Value>\ninline\
-    \ bool InGrid(const Value &y, const Value &x, const Value &ymax, const Value &xmax){return\
-    \ Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\ntemplate<typename Value>\n\
-    inline Value Median(const Value &a, const Value &b, const Value &c){return Between(b,\
-    \ a, c) || Between(c, a, b) ? a : (Between(a, b, c) || Between(c, b, a) ? b :\
-    \ c);}\ntemplate<typename Value>\ninline Value Except(Value &src, Value &cond,\
-    \ Value &excp){return (src == cond ? excp : src);}\n\ntemplate<class Value>\n\
-    bool chmin(Value &src, const Value &cmp){if(src > cmp){src = cmp; return true;}\
-    \ return false;}\ntemplate<class Value>\nbool chmax(Value &src, const Value &cmp){if(src\
-    \ < cmp){src = cmp; return true;} return false;}\ntemplate<typename Value>\ninline\
-    \ Value min(vector<Value> &v){return *min_element((v).begin(), (v).end());}\n\
-    template<typename Value>\ninline Value max(vector<Value> &v){return *max_element((v).begin(),\
-    \ (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1,\
-    \ 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] =\
-    \ {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y,\
-    \ int current_x, int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int,\
-    \ int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y\
-    \ = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8\
-    \ ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x, max_y, max_x)){\n   \
-    \         ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n\
-    }\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream &os, const\
-    \ pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n\
-    }\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1,\
-    \ T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i <\
-    \ v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n\
-    \    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
+    \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
+    \ &value){return distance(container.begin(), upper_bound(container.begin(), container.end(),\
+    \ value));}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
+    \ const Value &x, const Value &higher){return lower <= x && x <= higher;}\ntemplate<typename\
+    \ Value>\ninline bool InGrid(const Value &y, const Value &x, const Value &ymax,\
+    \ const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\n\
+    template<typename Value>\ninline Value Median(const Value &a, const Value &b,\
+    \ const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a,\
+    \ b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename Value>\ninline Value\
+    \ Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}\n\
+    \ntemplate<class Value>\nbool chmin(Value &src, const Value &cmp){if(src > cmp){src\
+    \ = cmp; return true;} return false;}\ntemplate<class Value>\nbool chmax(Value\
+    \ &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}\n\
+    template<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
+    \ (v).end());}\ntemplate<typename Value>\ninline Value max(vector<Value> &v){return\
+    \ *max_element((v).begin(), (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\n\
+    const int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0,\
+    \ 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>>\
+    \ adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){\n\
+    \    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n\
+    \        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x\
+    \ = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x,\
+    \ max_y, max_x)){\n            ret.emplace_back(next_y, next_x);\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream\
+    \ &os, const pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return\
+    \ os;\n}\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is,\
+    \ pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int\
+    \ i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \"\
+    \ : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
     \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
     \   os << v[i] << (i + 1 != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n\
     }\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v){\n\
@@ -318,32 +317,30 @@ data:
     \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
     \ - 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
     \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        Build();\n \
-    \   }\n\n    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n\
-    \        data_[offset_ + i + zero_index_] = v;\n    }\n\n    void Build(){\n \
-    \       for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i *\
-    \ 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Update(int i, Monoid\
-    \ v){\n        Validate(i + zero_index_);\n        int k = offset_ + i + zero_index_;\n\
-    \        data_[k] = v;\n        while(k >>= 1){\n            data_[k] = f(data_[2\
-    \ * k], data_[2 * k + 1]);\n        }\n    }\n\n    Monoid Query(int l, int r){\n\
-    \        if(l == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r\
-    \ + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
-    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
-    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
-    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
-    \    }\n\n    Monoid operator[](const int &i){\n        Validate(i + zero_index_);\n\
-    \        return data_[offset_ + i + zero_index_];\n    }\n\n    private:\n   \
-    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n\
-    \    const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
-    \ <= x && x <= size_);\n    }\n};\n#line 6 \"verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp\"\
-    \n\nint main(){\n    int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\
-    \    RootedTree T(N);\n    T.InputRootedTreeFormat(false, false);\n\n    EulerTour\
-    \ et(T);\n    auto A = et.ConvertVector(a, [](ll x){return x;}, [](ll x){return\
-    \ 0;});\n    SegmentTree<ll> seg(A, [](ll l, ll r){return l + r;}, 0LL, true);\n\
-    \    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n            int\
-    \ u, x; cin >> u >> x;\n            seg.Update(et.get_in(u), seg[et.get_in(u)]\
-    \ + x);\n        }\n        else{\n            int u; cin >> u;\n            auto\
-    \ [l, r] = et.get_pair(u);\n            cout << seg.Query(l, r) << endl;\n   \
-    \     }\n    }\n}\n"
+    \   }\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n     \
+    \       data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
+    \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
+    \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
+    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
+    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
+    \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
+    \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
+    \ data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n           \
+    \ lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\n    Monoid\
+    \ operator[](const int &i){\n        Validate(i + zero_index_);\n        return\
+    \ data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int size_, offset_,\
+    \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
+    \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
+    \    }\n};\n#line 6 \"verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp\"\n\nint\
+    \ main(){\n    int N, Q; cin >> N >> Q;\n    vector<ll> a(N); cin >> a;\n    RootedTree\
+    \ T(N);\n    T.InputRootedTreeFormat(false, false);\n\n    EulerTour et(T);\n\
+    \    auto A = et.ConvertVector(a, [](ll x){return x;}, [](ll x){return 0;});\n\
+    \    SegmentTree<ll> seg(A, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n\
+    \        int t; cin >> t;\n        if(t == 0){\n            int u, x; cin >> u\
+    \ >> x;\n            seg.Set(et.get_in(u), seg[et.get_in(u)] + x);\n        }\n\
+    \        else{\n            int u; cin >> u;\n            auto [l, r] = et.get_pair(u);\n\
+    \            cout << seg.Prod(l, r) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Tree/EulerTour.hpp\"\
     \n#include \"../Library/DataStructure/SegmentTree.hpp\"\n\nint main(){\n    int\
@@ -352,9 +349,9 @@ data:
     \ A = et.ConvertVector(a, [](ll x){return x;}, [](ll x){return 0;});\n    SegmentTree<ll>\
     \ seg(A, [](ll l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n       \
     \ int t; cin >> t;\n        if(t == 0){\n            int u, x; cin >> u >> x;\n\
-    \            seg.Update(et.get_in(u), seg[et.get_in(u)] + x);\n        }\n   \
-    \     else{\n            int u; cin >> u;\n            auto [l, r] = et.get_pair(u);\n\
-    \            cout << seg.Query(l, r) << endl;\n        }\n    }\n}"
+    \            seg.Set(et.get_in(u), seg[et.get_in(u)] + x);\n        }\n      \
+    \  else{\n            int u; cin >> u;\n            auto [l, r] = et.get_pair(u);\n\
+    \            cout << seg.Prod(l, r) << endl;\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -364,7 +361,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   requiredBy: []
-  timestamp: '2025-04-28 12:42:19+09:00'
+  timestamp: '2025-05-30 15:32:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp

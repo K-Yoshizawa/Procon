@@ -3,16 +3,16 @@ data:
   libraryCategories:
   - name: Library
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Common.hpp
       title: Library/Common.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Template.hpp
       title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':warning:'
       path: Library/TemplateExtend.hpp
       title: Library/TemplateExtend.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/modint.hpp
       title: modint
     - icon: ':warning:'
@@ -21,19 +21,22 @@ data:
   - name: Library/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
+      path: Library/DataStructure/BinaryIndexedTree.hpp
+      title: Library/DataStructure/BinaryIndexedTree.hpp
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/RollbackUnionFind.hpp
       title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -90,7 +93,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Tree/EulerTour.hpp
       title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Tree/HeavyLightDecomposition.hpp
       title: "Heavy Light Decomposition - HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -99,7 +102,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Tree/RerootingDP.hpp
       title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Tree/Tree.hpp
       title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
@@ -107,9 +110,6 @@ data:
       title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
   - name: Library/unauthenticated
     pages:
-    - icon: ':warning:'
-      path: Library/unauthenticated/BinaryIndexedTree.hpp
-      title: Binary Indexed Tree
     - icon: ':warning:'
       path: Library/unauthenticated/Combination.hpp
       title: "Combination - \u7D44\u5408\u305B"
@@ -240,12 +240,15 @@ data:
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/LC-PointAddRangeSum_BIT.test.cpp
+      title: verify/LC-PointAddRangeSum_BIT.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RangeAffinePointGet.test.cpp
       title: verify/LC-RangeAffinePointGet.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -266,16 +269,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-UnionfindWithPotential.test.cpp
       title: verify/LC-UnionfindWithPotential.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
       title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexSetPathComposite.test.cpp
       title: verify/LC-VertexSetPathComposite.test.cpp
 layout: toppage

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -18,21 +18,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -53,24 +53,22 @@ data:
     \        size_ = 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n     \
     \   offset_ = size_ - 1;\n        data_.resize(2 * size_, id_);\n        for(int\
     \ i = 0; i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n    \
-    \    }\n        Build();\n    }\n\n    void Set(int i, Monoid v){\n        Validate(i\
-    \ + zero_index_);\n        data_[offset_ + i + zero_index_] = v;\n    }\n\n  \
-    \  void Build(){\n        for(int i = offset_; i >= 1; --i){\n            data_[i]\
-    \ = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Update(int\
-    \ i, Monoid v){\n        Validate(i + zero_index_);\n        int k = offset_ +\
-    \ i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n         \
-    \   data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\n    Monoid\
-    \ Query(int l, int r){\n        if(l == r) return id_;\n        Validate(l + zero_index_);\n\
-    \        Validate(r + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_,\
-    \ rh = r + zero_index_ + offset_;\n        Monoid al = id_, ar = id_;\n      \
-    \  while(lh < rh){\n            if(lh & 1) al = f(al, data_[lh++]);\n        \
-    \    if(rh & 1) ar = f(data_[--rh], ar);\n            lh >>= 1, rh >>= 1;\n  \
-    \      }\n        return f(al, ar);\n    }\n\n    Monoid operator[](const int\
-    \ &i){\n        Validate(i + zero_index_);\n        return data_[offset_ + i +\
-    \ zero_index_];\n    }\n\n    private:\n    int size_, offset_, zero_index_;\n\
-    \    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\n    inline\
-    \ void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n    }\n\
-    };\n"
+    \    }\n        Build();\n    }\n\n    void Build(){\n        for(int i = offset_;\
+    \ i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n\
+    \        }\n    }\n\n    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n\
+    \        int k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k\
+    \ >>= 1){\n            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n       \
+    \ }\n    }\n\n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n\
+    \        Validate(l + zero_index_);\n        Validate(r + zero_index_ - 1);\n\
+    \        int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n\
+    \        Monoid al = id_, ar = id_;\n        while(lh < rh){\n            if(lh\
+    \ & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n\
+    \            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\
+    \n    Monoid operator[](const int &i){\n        Validate(i + zero_index_);\n \
+    \       return data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int\
+    \ size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n  \
+    \  const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
+    \ <= x && x <= size_);\n    }\n};\n"
   code: "#include \"../Common.hpp\"\n\ntemplate<typename Monoid>\nclass SegmentTree{\n\
     \    public:\n    using F = function<Monoid(Monoid, Monoid)>;\n\n    SegmentTree(\n\
     \        int n,\n        F merge,\n        const Monoid &e,\n        bool zero_index\
@@ -82,39 +80,38 @@ data:
     \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
     \ - 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
     \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        Build();\n \
-    \   }\n\n    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n\
-    \        data_[offset_ + i + zero_index_] = v;\n    }\n\n    void Build(){\n \
-    \       for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i *\
-    \ 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Update(int i, Monoid\
-    \ v){\n        Validate(i + zero_index_);\n        int k = offset_ + i + zero_index_;\n\
-    \        data_[k] = v;\n        while(k >>= 1){\n            data_[k] = f(data_[2\
-    \ * k], data_[2 * k + 1]);\n        }\n    }\n\n    Monoid Query(int l, int r){\n\
-    \        if(l == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r\
-    \ + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
-    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
-    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
-    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
-    \    }\n\n    Monoid operator[](const int &i){\n        Validate(i + zero_index_);\n\
-    \        return data_[offset_ + i + zero_index_];\n    }\n\n    private:\n   \
-    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n\
-    \    const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
-    \ <= x && x <= size_);\n    }\n};"
+    \   }\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n     \
+    \       data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
+    \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
+    \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
+    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
+    \n    Monoid Prod(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
+    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
+    \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
+    \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
+    \ data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n           \
+    \ lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\n    Monoid\
+    \ operator[](const int &i){\n        Validate(i + zero_index_);\n        return\
+    \ data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int size_, offset_,\
+    \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
+    \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
+    \    }\n};"
   dependsOn:
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2025-04-28 12:42:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-05-30 15:32:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document
 title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -213,10 +210,10 @@ void Update(int i, Monoid v)
 
 ---
 
-### Query
+### Prod
 
 ```
-Monoid Query(int l, int r)
+Monoid Prod(int l, int r)
 ```
 
 - 半開区間 $[l, r)$ に対して区間取得クエリを実行します。

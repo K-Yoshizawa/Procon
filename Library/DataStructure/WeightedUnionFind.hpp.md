@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -58,8 +58,8 @@ data:
   timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-UnionfindWithPotential.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
+  - verify/LC-UnionfindWithPotential.test.cpp
 documentation_of: Library/DataStructure/WeightedUnionFind.hpp
 layout: document
 title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\u30FC\

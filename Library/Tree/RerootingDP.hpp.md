@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -353,8 +353,8 @@ data:
   timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-TreePathCompositeSum.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
 documentation_of: Library/Tree/RerootingDP.hpp
 layout: document
 redirect_from:

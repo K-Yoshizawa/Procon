@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -73,8 +73,8 @@ data:
   timestamp: '2025-03-20 00:50:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-PersistentUnionfind.test.cpp
   - verify/AOJ-0723.test.cpp
+  - verify/LC-PersistentUnionfind.test.cpp
 documentation_of: Library/DataStructure/RollbackUnionFind.hpp
 layout: document
 title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"

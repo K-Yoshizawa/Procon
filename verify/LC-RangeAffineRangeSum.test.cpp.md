@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/DataStructure/LazySegmentTree.hpp
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -43,45 +43,44 @@ data:
     \ container.rend());}\ntemplate<typename Container>\ninline void Reverse(Container\
     \ &container){reverse(container.begin(), container.end());}\ntemplate<typename\
     \ Value>\ninline int PopCount(const Value &value){return __builtin_popcount(value);}\n\
-    template<typename Value>\ninline Value Floor(const Value &numerator, const Value\
-    \ &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return\
-    \ numerator < 0 ? (numerator + 1) / denominator - 1 : numerator / denominator;}\n\
-    template<typename Value>\ninline Value Ceil(const Value &numerator, const Value\
-    \ &denominator){if(denominator < 0) numerator *= -1, denominator *= -1; return\
-    \ numerator > 0 ? (numerator - 1) / denominator + 1 : numerator / denominator;}\n\
-    template<typename Value>\ninline int LowerBoundIndex(const vector<Value> &container,\
-    \ const Value &value){return distance(container.begin(), lower_bound(container.begin(),\
-    \ container.end(), value));}\ntemplate<typename Value>\ninline int UpperBoundIndex(const\
+    template<typename Value>\ninline Value Floor(Value numerator, Value denominator){if(denominator\
+    \ < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator +\
+    \ 1) / denominator - 1 : numerator / denominator;}\ntemplate<typename Value>\n\
+    inline Value Ceil(Value numerator, Value denominator){if(denominator < 0) numerator\
+    \ *= -1, denominator *= -1; return numerator > 0 ? (numerator - 1) / denominator\
+    \ + 1 : numerator / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
     \ vector<Value> &container, const Value &value){return distance(container.begin(),\
-    \ upper_bound(container.begin(), container.end(), value));}\ntemplate<typename\
-    \ Value>\ninline bool Between(const Value &lower, const Value &x, const Value\
-    \ &higher){return lower <= x && x <= higher;}\ntemplate<typename Value>\ninline\
-    \ bool InGrid(const Value &y, const Value &x, const Value &ymax, const Value &xmax){return\
-    \ Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\ntemplate<typename Value>\n\
-    inline Value Median(const Value &a, const Value &b, const Value &c){return Between(b,\
-    \ a, c) || Between(c, a, b) ? a : (Between(a, b, c) || Between(c, b, a) ? b :\
-    \ c);}\ntemplate<typename Value>\ninline Value Except(Value &src, Value &cond,\
-    \ Value &excp){return (src == cond ? excp : src);}\n\ntemplate<class Value>\n\
-    bool chmin(Value &src, const Value &cmp){if(src > cmp){src = cmp; return true;}\
-    \ return false;}\ntemplate<class Value>\nbool chmax(Value &src, const Value &cmp){if(src\
-    \ < cmp){src = cmp; return true;} return false;}\ntemplate<typename Value>\ninline\
-    \ Value min(vector<Value> &v){return *min_element((v).begin(), (v).end());}\n\
-    template<typename Value>\ninline Value max(vector<Value> &v){return *max_element((v).begin(),\
-    \ (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\nconst int dy4[4] = {0, -1,\
-    \ 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0, 1};\nconst int dy8[8] =\
-    \ {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>> adjacent(int current_y,\
-    \ int current_x, int max_y, int max_x, bool dir_8 = false){\n    vector<pair<int,\
-    \ int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n        int next_y\
-    \ = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x = current_x + (dir_8\
-    \ ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x, max_y, max_x)){\n   \
-    \         ret.emplace_back(next_y, next_x);\n        }\n    }\n    return ret;\n\
-    }\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream &os, const\
-    \ pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return os;\n\
-    }\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is, pair<T1,\
-    \ T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int i = 0; i <\
-    \ v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \" : \"\");\n\
-    \    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
+    \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
+    \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
+    \ &value){return distance(container.begin(), upper_bound(container.begin(), container.end(),\
+    \ value));}\ntemplate<typename Value>\ninline bool Between(const Value &lower,\
+    \ const Value &x, const Value &higher){return lower <= x && x <= higher;}\ntemplate<typename\
+    \ Value>\ninline bool InGrid(const Value &y, const Value &x, const Value &ymax,\
+    \ const Value &xmax){return Between(0, y, ymax - 1) && Between(0, x, xmax - 1);}\n\
+    template<typename Value>\ninline Value Median(const Value &a, const Value &b,\
+    \ const Value &c){return Between(b, a, c) || Between(c, a, b) ? a : (Between(a,\
+    \ b, c) || Between(c, b, a) ? b : c);}\ntemplate<typename Value>\ninline Value\
+    \ Except(Value &src, Value &cond, Value &excp){return (src == cond ? excp : src);}\n\
+    \ntemplate<class Value>\nbool chmin(Value &src, const Value &cmp){if(src > cmp){src\
+    \ = cmp; return true;} return false;}\ntemplate<class Value>\nbool chmax(Value\
+    \ &src, const Value &cmp){if(src < cmp){src = cmp; return true;} return false;}\n\
+    template<typename Value>\ninline Value min(vector<Value> &v){return *min_element((v).begin(),\
+    \ (v).end());}\ntemplate<typename Value>\ninline Value max(vector<Value> &v){return\
+    \ *max_element((v).begin(), (v).end());}\n\nconst int dx4[4] = {1, 0, -1, 0};\n\
+    const int dy4[4] = {0, -1, 0, 1};\nconst int dx8[8] = {1, 1, 0, -1, -1, -1, 0,\
+    \ 1};\nconst int dy8[8] = {0, -1, -1, -1, 0, 1, 1, 1};\n\nvector<pair<int, int>>\
+    \ adjacent(int current_y, int current_x, int max_y, int max_x, bool dir_8 = false){\n\
+    \    vector<pair<int, int>> ret;\n    for(int d = 0; d < 4 * (1 + dir_8); ++d){\n\
+    \        int next_y = current_y + (dir_8 ? dy8[d] : dy4[d]);\n        int next_x\
+    \ = current_x + (dir_8 ? dx8[d] : dx4[d]);\n        if(InGrid(next_y, next_x,\
+    \ max_y, max_x)){\n            ret.emplace_back(next_y, next_x);\n        }\n\
+    \    }\n    return ret;\n}\n\ntemplate <typename T1, typename T2>\nostream &operator<<(ostream\
+    \ &os, const pair<T1, T2> &p){\n    os << p.first << \" \" << p.second;\n    return\
+    \ os;\n}\n\ntemplate <typename T1, typename T2>\nistream &operator>>(istream &is,\
+    \ pair<T1, T2> &p){\n    is >> p.first >> p.second;\n    return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, vector<T> &v){\n    for (int\
+    \ i = 0; i < v.size(); ++i){\n        os << v[i] << (i + 1 != v.size() ? \" \"\
+    \ : \"\");\n    }\n    return os;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream\
     \ &os, vector<vector<T>> &v){\n    for (int i = 0; i < v.size(); ++i){\n     \
     \   os << v[i] << (i + 1 != v.size() ? \"\\n\" : \"\");\n    }\n    return os;\n\
     }\n\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v){\n\
@@ -199,16 +198,16 @@ data:
     \ right)` \u306B\u5BFE\u3057\u3066\u533A\u9593\u53D6\u5F97\u30AF\u30A8\u30EA\u3092\
     \u884C\u3046\u3002\n     * @param left \u534A\u958B\u533A\u9593\u306E\u5DE6\u7AEF\
     \n     * @param right \u534A\u958B\u533A\u9593\u306E\u53F3\u7AEF\n     * @return\
-    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Query(int left,\
+    \ Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid Prod(int left,\
     \ int right){\n        Validate(left + zeroindex_);\n        Validate(right +\
-    \ zeroindex_ - 1);\n        return RecursiveQuery(left + zeroindex_, right + zeroindex_,\
+    \ zeroindex_ - 1);\n        return RecursiveProd(left + zeroindex_, right + zeroindex_,\
     \ 1, size_ + 1, 1);\n    }\n\n    /**\n     * @brief \u8981\u7D20\u756A\u53F7\
     \ `k` \u306E\u8981\u7D20\u3092\u53D6\u5F97\u3059\u308B\u3002\n     * @param k\
     \ \u53D6\u5F97\u5148\u306E\u8981\u7D20\u756A\u53F7 (default = 1-index)\n     *\
     \ @return Monoid \u53D6\u5F97\u3057\u305F\u7D50\u679C\n     */\n    Monoid get_value(int\
-    \ k){\n        Validate(k + zeroindex_);\n        return Query(k, k + 1);\n  \
-    \  }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n \
-    \   }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
+    \ k){\n        Validate(k + zeroindex_);\n        return Prod(k, k + 1);\n   \
+    \ }\n\n    Monoid operator[](const int &k){\n        return get_value(k);\n  \
+    \  }\n\n    private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid>\
     \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
     \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
     \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
@@ -225,12 +224,12 @@ data:
     \ + right) / 2;\n            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 +\
     \ 0);\n            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);\n   \
     \         data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n       \
-    \ }\n    }\n\n    Monoid RecursiveQuery(int ql, int qr, int left, int right, int\
+    \ }\n    }\n\n    Monoid RecursiveProd(int ql, int qr, int left, int right, int\
     \ cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n  \
     \          return m1_;\n        }\n        if(ql <= left && right <= qr){\n  \
     \          return data_[cell];\n        }\n        int mid = (left + right) /\
-    \ 2;\n        Monoid ans_left = RecursiveQuery(ql, qr, left, mid, cell * 2 + 0);\n\
-    \        Monoid ans_right = RecursiveQuery(ql, qr, mid, right, cell * 2 + 1);\n\
+    \ 2;\n        Monoid ans_left = RecursiveProd(ql, qr, left, mid, cell * 2 + 0);\n\
+    \        Monoid ans_right = RecursiveProd(ql, qr, mid, right, cell * 2 + 1);\n\
     \        return f(ans_left, ans_right);\n    }\n};\n#line 6 \"verify/LC-RangeAffineRangeSum.test.cpp\"\
     \n\nstruct Monoid{\n    mint a;\n    int len;\n    Monoid(mint a_ = 0, int len_\
     \ = 1) : a(a_), len(len_){}\n    static Monoid Merge(Monoid &l, Monoid &r){\n\
@@ -279,8 +278,8 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2025-04-25 02:08:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2025-05-30 15:32:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp
 layout: document
