@@ -11,30 +11,21 @@ data:
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-A.test.cpp
-    title: verify/AOJ-GRL-5-A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-B.test.cpp
-    title: verify/AOJ-GRL-5-B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TreeDiameter.test.cpp
-    title: verify/LC-TreeDiameter.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
-    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
-    \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
-    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
-    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
+    #include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n\
+    #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
     using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
-    \ 1;\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
+    \ 1;\n#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
+    \n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
     \ CostType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n  \
     \  Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n     \
     \   from(from_), to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const\
@@ -114,136 +105,52 @@ data:
     \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
     \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
     \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 2 \"Library/Tree/TreeDiameter.hpp\"\
-    \n\ntemplate<typename CostType>\nclass TreeDiameter{\n    public:\n    TreeDiameter(Graph<CostType>\
-    \ &tree) : T(tree){\n        int n = T.VertexSize(), s = 0;\n        dist_s_ =\
-    \ CalculateTreeDistance(T, s);\n        s = distance(dist_s_.begin(), max_element(dist_s_.begin(),\
-    \ dist_s_.end()));\n        dist_s_ = CalculateTreeDistance(T, s);\n        vector<int>\
-    \ par = CalculateTreeParent(T, s);\n        int t = distance(dist_s_.begin(),\
-    \ max_element(dist_s_.begin(), dist_s_.end()));\n        diameter_ = dist_s_[t];\n\
-    \        dist_t_ = CalculateTreeDistance(T, t);\n        int u = t;\n        while(u\
-    \ != s){\n            path_.emplace_back(u);\n            u = par[u];\n      \
-    \  }\n        path_.emplace_back(s);\n    }\n    \n    CostType Diameter() const\
-    \ {\n        return diameter_;\n    }\n    \n    CostType Height(Vertex v) const\
-    \ {\n        return max(dist_s_[v], dist_t_[v]);\n    }\n\n    pair<Vertex, Vertex>\
-    \ EndPoints() const {\n        return pair<Vertex, Vertex>(path_.front(), path_.back());\n\
-    \    }\n\n    vector<Vertex> &Path(){\n        return path_;\n    }\n\n    private:\n\
-    \    Graph<CostType> &T;\n    vector<CostType> dist_s_, dist_t_;\n    vector<Vertex>\
-    \ path_;\n    CostType diameter_;\n};\n"
-  code: "#include \"Tree.hpp\"\n\ntemplate<typename CostType>\nclass TreeDiameter{\n\
-    \    public:\n    TreeDiameter(Graph<CostType> &tree) : T(tree){\n        int\
-    \ n = T.VertexSize(), s = 0;\n        dist_s_ = CalculateTreeDistance(T, s);\n\
-    \        s = distance(dist_s_.begin(), max_element(dist_s_.begin(), dist_s_.end()));\n\
-    \        dist_s_ = CalculateTreeDistance(T, s);\n        vector<int> par = CalculateTreeParent(T,\
-    \ s);\n        int t = distance(dist_s_.begin(), max_element(dist_s_.begin(),\
-    \ dist_s_.end()));\n        diameter_ = dist_s_[t];\n        dist_t_ = CalculateTreeDistance(T,\
-    \ t);\n        int u = t;\n        while(u != s){\n            path_.emplace_back(u);\n\
-    \            u = par[u];\n        }\n        path_.emplace_back(s);\n    }\n \
-    \   \n    CostType Diameter() const {\n        return diameter_;\n    }\n    \n\
-    \    CostType Height(Vertex v) const {\n        return max(dist_s_[v], dist_t_[v]);\n\
-    \    }\n\n    pair<Vertex, Vertex> EndPoints() const {\n        return pair<Vertex,\
-    \ Vertex>(path_.front(), path_.back());\n    }\n\n    vector<Vertex> &Path(){\n\
-    \        return path_;\n    }\n\n    private:\n    Graph<CostType> &T;\n    vector<CostType>\
-    \ dist_s_, dist_t_;\n    vector<Vertex> path_;\n    CostType diameter_;\n};"
+    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 3 \"Library/String/Trie.hpp\"\
+    \n\ntemplate<int MAXSIZE = 500010>\nclass Trie{\n    public:\n    Trie(vector<string>\
+    \ &S_) : S(S_), n((int)S_.size()), v(1), vertex_(n), child_(MAXSIZE){\n      \
+    \  for(int i = 0; i < MAXSIZE; ++i){\n            child_[i].fill(-1);\n      \
+    \  }\n        for(int i = 0; i < n; ++i){\n            int p = 0, m = S[i].size();\n\
+    \            vertex_[i].resize(m + 1, 0);\n            for(int j = 0; j < m; ++j){\n\
+    \                int c = S[i][j] - 'a';\n                if(child_[p][c] == -1){\n\
+    \                    child_[p][c] = v++;\n                }\n                p\
+    \ = child_[p][c];\n                vertex_[i][j + 1] = p;\n            }\n   \
+    \     }\n    }\n\n    Graph<int32_t> Build() const {\n        Graph<int32_t> ret(v);\n\
+    \        for(int i = 0; i < v; ++i){\n            for(int j = 0; j < 26; ++j){\n\
+    \                if(child_[i][j] == -1) continue;\n                ret.AddUndirectedEdge(i,\
+    \ child_[i][j]);\n            }\n        }\n        return ret;\n    }\n\n   \
+    \ vector<int> &operator[](const int i){\n        return vertex_[i];\n    }\n\n\
+    \    private:\n    vector<string> &S;\n    int n, v;\n    vector<vector<int>>\
+    \ vertex_;\n    vector<array<int, 26>> child_;\n};\n"
+  code: "#include \"../Common.hpp\"\n#include \"../Tree/Tree.hpp\"\n\ntemplate<int\
+    \ MAXSIZE = 500010>\nclass Trie{\n    public:\n    Trie(vector<string> &S_) :\
+    \ S(S_), n((int)S_.size()), v(1), vertex_(n), child_(MAXSIZE){\n        for(int\
+    \ i = 0; i < MAXSIZE; ++i){\n            child_[i].fill(-1);\n        }\n    \
+    \    for(int i = 0; i < n; ++i){\n            int p = 0, m = S[i].size();\n  \
+    \          vertex_[i].resize(m + 1, 0);\n            for(int j = 0; j < m; ++j){\n\
+    \                int c = S[i][j] - 'a';\n                if(child_[p][c] == -1){\n\
+    \                    child_[p][c] = v++;\n                }\n                p\
+    \ = child_[p][c];\n                vertex_[i][j + 1] = p;\n            }\n   \
+    \     }\n    }\n\n    Graph<int32_t> Build() const {\n        Graph<int32_t> ret(v);\n\
+    \        for(int i = 0; i < v; ++i){\n            for(int j = 0; j < 26; ++j){\n\
+    \                if(child_[i][j] == -1) continue;\n                ret.AddUndirectedEdge(i,\
+    \ child_[i][j]);\n            }\n        }\n        return ret;\n    }\n\n   \
+    \ vector<int> &operator[](const int i){\n        return vertex_[i];\n    }\n\n\
+    \    private:\n    vector<string> &S;\n    int n, v;\n    vector<vector<int>>\
+    \ vertex_;\n    vector<array<int, 26>> child_;\n};"
   dependsOn:
+  - Library/Common.hpp
   - Library/Tree/Tree.hpp
   - Library/Graph/Graph.hpp
-  - Library/Common.hpp
   isVerificationFile: false
-  path: Library/Tree/TreeDiameter.hpp
+  path: Library/String/Trie.hpp
   requiredBy: []
   timestamp: '2025-05-02 02:04:34+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/AOJ-GRL-5-B.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
-documentation_of: Library/Tree/TreeDiameter.hpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: Library/String/Trie.hpp
 layout: document
-title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
----
-
-# Tree Diameter - 木の直径
-
-$n$ 頂点の木 $T$ の直径に関するライブラリです。
-
-## Function
-
-### Constructor
-
-```
-TreeDiameter(Graph<CostType> &tree)
-```
-
-- 木 $T =$ `tree` の直径を求めます。
-
-**制約**
-
-- `tree` は木
-
-**計算量**
-
-- $\textrm{O}(n)$
-
----
-
-### Diameter
-
-```
-CostType Diameter() const
-```
-
-- 木 $T$ の直径を返します。
-
-**計算量**
-
-- $\textrm{O}(1)$
-
----
-
-### Height
-
-```
-CostType Height(Vertex v) const
-```
-
-- 木 $T$ について、頂点 $v$ を根としたときの木の高さを返します。
-  - 木の高さとは、根から最も遠い葉までの距離を指します。
-
-**制約**
-
-- $0 \le v \lt n$
-
-**計算量**
-
-- $\textrm{O}(1)$
-
----
-
-### EndPoints
-
-```
-pair<Vertex, Vertex> EndPoints() const 
-```
-
-- 木 $T$ の直径の端点の頂点を返します。
-
-**計算量**
-
-- $\textrm{O}(1)$
-
----
-
-### Path
-
-```
-vector<Vertex> &Path()
-```
-
-- 木 $T$ の直径を成すパスの頂点列を返します。
-
-**計算量**
-
-- $\textrm{O}(1)$
-
+redirect_from:
+- /library/Library/String/Trie.hpp
+- /library/Library/String/Trie.hpp.html
+title: Library/String/Trie.hpp
 ---

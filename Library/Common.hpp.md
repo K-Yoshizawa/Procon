@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/RollbackUnionFind.hpp
     title: "Rollback Union-Find - Rollback \u53EF\u80FD Union-Find"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
@@ -37,7 +37,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -59,7 +59,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: Library/String/Trie.hpp
+    title: Library/String/Trie.hpp
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':warning:'
@@ -71,25 +74,26 @@ data:
       \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
       \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
       \u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Library/Tree/EulerTour.hpp
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
-    title: "Heavy Light Decomposition - HL\u5206\u89E3"
+    title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
-    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-  - icon: ':heavy_check_mark:'
+    title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
+      \u7956\u5148\u3092\u8FD4\u3059\u3002"
+  - icon: ':x:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
-    title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Tree - \u6728"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   - icon: ':warning:'
@@ -160,6 +164,9 @@ data:
     path: verify/LC-CycleDetectionUndirected.test.cpp
     title: verify/LC-CycleDetectionUndirected.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-JumponTree.test.cpp
+    title: verify/LC-JumponTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-LongestIncreasingSubsequence.test.cpp
     title: verify/LC-LongestIncreasingSubsequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -198,7 +205,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -210,7 +217,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - icon: ':heavy_check_mark:'
@@ -219,9 +226,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -230,7 +237,7 @@ data:
     #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
     \ 1;\n"
   code: "#pragma once\n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include\
     \ <array>\n#include <bitset>\n#include <cassert>\n#include <cstdint>\n#include\
@@ -238,11 +245,12 @@ data:
     \ <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n\
     #include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include\
     \ <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconstexpr const ll INF = (1LL << 62) - (1LL << 30) - 1;"
+    \nconstexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;"
   dependsOn: []
   isVerificationFile: false
   path: Library/Common.hpp
   requiredBy:
+  - Library/String/Trie.hpp
   - Library/modint.hpp
   - Library/TemplateExtend.hpp
   - Library/DataStructure/LazySegmentTree.hpp
@@ -273,8 +281,8 @@ data:
   - Library/Tree/EulerTour.hpp
   - Library/Tree/LowestCommonAncestor.hpp
   - Library/Template.hpp
-  timestamp: '2025-03-20 00:50:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-04-30 01:32:17+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
@@ -296,6 +304,7 @@ data:
   - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/LC-JumponTree.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-5-A.test.cpp

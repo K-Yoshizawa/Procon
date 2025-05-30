@@ -1,14 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: Library/Graph/Graph.hpp
+    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
-    title: "Tree - \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Tree - \u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-JumponTree.test.cpp
+    title: verify/LC-JumponTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
@@ -25,463 +31,420 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Heavy Light Decomposition - HL\u5206\u89E3"
     links: []
-  bundledCode: "#line 1 \"Library/Tree/HeavyLightDecomposition.hpp\"\n/**\n * @file\
-    \ HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief Heavy Light\
-    \ Decomposition - HL\u5206\u89E3\n * @version 4.0\n * @date 2024-09-04\n */\n\n\
-    #line 2 \"Library/Tree/Tree.hpp\"\n\n/**\n * @file Tree.hpp\n * @brief Tree -\
-    \ \u6728\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.0\n * @date 2024-09-02\n\
-    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
+  bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
+    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
     \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
-    \ 1;\n#line 11 \"Library/Tree/Tree.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType = int32_t>\nclass RootedTree{\n    public:\n    struct Node{\n    \
-    \    Node(Vertex parent = -1) : parent(parent){}\n\n        Vertex parent{-1};\n\
-    \        CostType cost{};\n        vector<Vertex> children{};\n    };\n\n    /**\n\
-    \     * @brief \u9802\u70B9 `root_vertex` \u3092\u6839\u3068\u3059\u308B\u9802\
-    \u70B9\u6570 `vertex_size` \u306E\u6839\u4ED8\u304D\u6728\u3092\u69CB\u7BC9\u3059\
-    \u308B\u3002\n     * @note \u6839\u304C\u5165\u529B\u3067\u4E0E\u3048\u3089\u308C\
-    \u306A\u308C\u306A\u3044\u304C\u5F8C\u3067\u5206\u304B\u308B\u3001\u307F\u305F\
-    \u3044\u306A\u72B6\u6CC1\u306E\u6642\u306F `root_vertex = -1` \u3068\u3059\u308B\
-    \u3068\u3088\u3044\n     * @param vertex_size \u9802\u70B9\u6570\n     * @param\
-    \ root_vertex \u6839\u3068\u3059\u308B\u9802\u70B9 (default = 0)\n     */\n  \
-    \  RootedTree(int vertex_size = 0, Vertex root_vertex = 0) :\n            vertex_size_(vertex_size),\
-    \ root_vertex_(root_vertex),\n            node_(vertex_size){}\n\n    /**\n  \
-    \   * @brief \u6728\u306E\u9802\u70B9\u6570\u3092\u8FD4\u3059\u3002\n     * @return\
-    \ int \u6728\u306E\u9802\u70B9\u6570\n     */\n    int get_vertex_size() const\
-    \ {\n        return vertex_size_;\n    }\n\n    /**\n     * @brief \u6728\u306E\
-    \u6839\u306E\u9802\u70B9\u3092\u8FD4\u3059\u3002\n     * @return Vertex \u6728\
-    \u306E\u6839\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     */\n    Vertex get_root()\
-    \ const {\n        return root_vertex_;\n    }\n\n    /**\n     * @brief \u9802\
-    \u70B9 `v` \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7\u3092\u8FD4\u3059\u3002\n\
-    \     * @note `v` \u304C\u6839\u306E\u5834\u5408\u3001`-1` \u304C\u8FD4\u3055\u308C\
-    \u308B\u3002\n     * @param v \u5B50\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     * @return Vertex \u89AA\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     */\n\
-    \    Vertex get_parent(Vertex v) const {\n        Validate(v);\n        return\
-    \ node_[v].parent;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u5B50\
-    \u306E\u9802\u70B9\u756A\u53F7\u5217\u3092\u8FD4\u3059\u3002\n     * @note \u9802\
-    \u70B9\u756A\u53F7\u5217\u306F\u5165\u529B\u9806\u306B\u8FD4\u3055\u308C\u308B\
-    \u3002\n     * @param v \u89AA\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n     *\
-    \ @return vector<Vertex> \u5B50\u306E\u9802\u70B9\u756A\u53F7\u5217 (0-index)\n\
-    \     */\n    vector<Vertex> &get_child(Vertex v){\n        Validate(v);\n   \
-    \     return node_[v].children;\n    }\n\n    /**\n     * @brief \u9802\u70B9\
-    \ `v` \u3068\u305D\u306E\u89AA\u3092\u7D50\u3076\u8FBA\u306E\u91CD\u307F\u3092\
-    \u8FD4\u3059\u3002\n     * @attention `v` \u304C\u6839\u306E\u5834\u5408\u306E\
-    \u8FD4\u308A\u5024\u306F\u672A\u5B9A\u7FA9\u3067\u3042\u308B\u3002\n     * @param\
-    \ v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return CostType \u8FBA\u306E\u91CD\
-    \u307F\n     */\n    CostType get_cost(Vertex v){\n        Validate(v);\n    \
-    \    return node_[v].cost;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `parent`\
-    \ \u304B\u3089\u9802\u70B9 `child` \u3078\u306E\u91CD\u3055 `cost` \u306E\u8FBA\
-    \u3092\u5F35\u308B\u3002\n     * @note `cost` \u3092\u7701\u7565\u3059\u308B\u3053\
-    \u3068\u3067\u91CD\u307F\u306A\u3057\u8FBA\u3092\u5F35\u308B\u3053\u3068\u304C\
-    \u3067\u304D\u308B\u3002\n     * @param parent \u89AA\u306E\u9802\u70B9\u756A\u53F7\
-    \ (0-index)\n     * @param child \u5B50\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     * @param cost \u8FBA\u306E\u91CD\u307F (default = 1)\n     */\n    void\
-    \ AddEdge(Vertex parent, Vertex child, CostType cost = 1){\n        Validate(parent);\n\
-    \        Validate(child);\n        node_[parent].children.push_back(child);\n\
-    \        node_[child].parent = parent;\n        node_[child].cost = cost;\n  \
-    \  }\n\n    /**\n     * @brief `u v w` \u306E\u3088\u3046\u306A\u5165\u529B\u5F62\
-    \u5F0F\u3092\u53D7\u3051\u53D6\u308B\u3002\n     * @param weighted \u91CD\u307F\
-    \u4ED8\u304D\u306E\u6728\u3067\u3042\u308B\u304B (default = true)\n     * @param\
-    \ one_index \u5165\u529B\u3055\u308C\u308B\u9802\u70B9\u756A\u53F7\u304C 1-index\
-    \ \u304B\u3069\u3046\u304B (default = true)\n     */\n    void InputGraphFormat(bool\
-    \ weighted = true, bool one_index = true){\n        vector<vector<pair<Vertex,\
-    \ CostType>>> graph(vertex_size_);\n        for(int i = 0; i < vertex_size_ -\
-    \ 1; ++i){\n            int u, v; cin >> u >> v;\n            if(one_index) --u,\
-    \ --v;\n            CostType w = 1;\n            if(weighted) cin >> w;\n    \
-    \        graph[u].emplace_back(v, w);\n            graph[v].emplace_back(u, w);\n\
-    \        }\n        auto rec = [&](auto self, Vertex v, Vertex p) -> void {\n\
-    \            for(auto [u, w] : graph[v]){\n                if(u == p) continue;\n\
-    \                AddEdge(v, u, w);\n                self(self, u, v);\n      \
-    \      }\n        };\n        rec(rec, root_vertex_, -1);\n    }\n\n    /**\n\
-    \     * @brief `p_1 p_2 ... p_N` \u306E\u3088\u3046\u306A\u5165\u529B\u5F62\u5F0F\
-    \u3092\u53D7\u3051\u53D6\u308B\u3002\n     * @attention weighted \u306E\u51E6\u7406\
-    \u3092\u66F8\u3044\u3066\u3044\u306A\u3044\u306E\u3067\u3001`weighted` \u306E\u30D1\
-    \u30E9\u30E1\u30FC\u30BF\u306B\u610F\u5473\u306F\u306A\u3044\n     * @param weighted\
-    \ \u91CD\u307F\u4ED8\u304D\u306E\u6728\u3067\u3042\u308B\u304B (default = true)\n\
-    \     * @param one_index \u5165\u529B\u3055\u308C\u308B\u9802\u70B9\u756A\u53F7\
-    \u304C 1-index \u304B\u3069\u3046\u304B (default = true)\n     */\n    void InputRootedTreeFormat(bool\
-    \ weighted = true, bool one_index = true){\n        assert(root_vertex_ == 0);\n\
-    \        for(int i = 1; i < vertex_size_; ++i){\n            int p; cin >> p;\n\
-    \            if(one_index) --p;\n            AddEdge(p, i);\n        }\n    }\n\
-    \n    /**\n     * @brief \u9802\u70B9 `v` \u304C\u6839\u306E\u9802\u70B9\u304B\
-    \u5224\u5B9A\u3059\u308B\u3002\n     * @param v \u5224\u5B9A\u3059\u308B\u9802\
-    \u70B9\u756A\u53F7 (0-index)\n     */\n    bool RootVertex(Vertex v){\n      \
-    \  Validate(v);\n        return node_[v].parent == -1;\n    }\n    \n    /**\n\
-    \     * @brief \u9802\u70B9 `v` \u304C\u8449\u306E\u9802\u70B9\u304B\u5224\u5B9A\
-    \u3059\u308B\u3002\n     * @param v \u5224\u5B9A\u3059\u308B\u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     */\n    bool LeafVertex(Vertex v){\n        Validate(v);\n\
-    \        return node_[v].children.empty();\n    }\n\n    /**\n     * @brief \u6728\
-    \u306E\u6839\u306E\u9802\u70B9\u3092\u6C42\u3081\u308B\u3002\n     * @attention\
-    \ \u57FA\u672C\u7684\u306B\u306F\u4E0D\u8981\u3067\u3001\u6839\u306E\u9802\u70B9\
-    \u756A\u53F7\u304C\u4E0E\u3048\u3089\u308C\u3066\u3044\u306A\u3044\u5834\u5408\
-    \u306B\u7528\u3044\u308B\u3002\n     * @note Verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\n\
-    \     * @return Vertex \u6839\u306E\u9802\u70B9\u756A\u53F7\n     */\n    Vertex\
-    \ FindRoot(){\n        for(int i = 0; i < vertex_size_; ++i){\n            if(RootVertex(i)){\n\
-    \                root_vertex_ = i;\n                return i;\n            }\n\
-    \        }\n        assert(false);\n    }\n\n    /**\n     * @brief \u6728\u306E\
-    \u6839\u3092\u5909\u66F4\u3057\u3066\u518D\u69CB\u7BC9\u3059\u308B\u3002\n   \
-    \  * @param root \u65B0\u3057\u3044\u6839\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     */\n    void Rerooting(Vertex root){\n        if(root == root_vertex_) return;\n\
-    \        vector<Node> new_node_(vertex_size_);\n        auto rec = [&](auto self,\
-    \ Vertex v, Vertex p, CostType c) -> void {\n            new_node_[v].parent =\
-    \ p;\n            new_node_[v].cost = c;\n            if(node_[v].parent != p\
-    \ && node_[v].parent != -1){\n                new_node_[v].children.push_back(node_[v].parent);\n\
-    \                self(self, node_[v].parent, v, node_[v].cost);\n            }\n\
-    \            for(Vertex u : node_[v].children){\n                if(u != p){\n\
-    \                    new_node_[v].children.push_back(u);\n                   \
-    \ self(self, u, v, node_[u].cost);\n                }\n            }\n       \
-    \ };\n        rec(rec, root, -1, 0);\n        swap(new_node_, node_);\n      \
-    \  root_vertex_ = root;\n    }\n\n    void Print(bool one_index = true) const\
-    \ {\n        for(int i = 0; i < vertex_size_; ++i){\n            // fprintf(stderr,\
-    \ \"# Vertex %d : parent = %d (cost = %d), children = [\", i + int(one_index),\
-    \ get_parent(i) + int(one_index), node_[i].cost);\n            fprintf(stderr,\
-    \ \"# Vertex %d : parent = %d (cost = \", i + int(one_index), get_parent(i) +\
-    \ int(one_index));\n            cerr << node_[i].cost;\n            fprintf(stderr,\
-    \ \"), children = [\");\n            for(int j = 0; j < node_[i].children.size();\
-    \ ++j){\n                fprintf(stderr, \"%d\", node_[i].children[j] + int(one_index));\n\
-    \                if(j + 1 < node_[i].children.size()){\n                    fprintf(stderr,\
-    \ \", \");\n                }\n            }\n            fprintf(stderr, \"]\\\
-    n\");\n        }\n    }\n\n    private:\n    inline void Validate(Vertex v) const\
-    \ {\n        assert(0 <= v && v < vertex_size_);\n    }\n\n    int vertex_size_,\
-    \ root_vertex_{-1};\n    vector<Node> node_;\n};\n\n/**\n * @brief \u6728 `tree`\
-    \ \u306E\u5404\u9802\u70B9\u306E\u6DF1\u3055\u3092\u6C42\u3081\u308B\u3002\n *\
-    \ @note \u6839\u306E\u9802\u70B9\u306F\u6DF1\u3055 0 \u3067\u3042\u308B\u3002\n\
-    \ * @note Verify : https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/7/ALDS1_7_A\n\
-    \ * @param tree \u6728\n * @param root \u6839\u306E\u9802\u70B9\u756A\u53F7 (default\
-    \ = 0)\n * @return vector<int> \u5404\u9802\u70B9\u306E\u6DF1\u3055\n */\ntemplate<typename\
-    \ CostType>\nvector<int> CalculateTreeDepth(RootedTree<CostType> &tree){\n   \
-    \ int V = tree.get_vertex_size();\n    vector<int> ret(V, 0);\n    auto rec =\
-    \ [&](auto self, Vertex v, int d) -> void {\n        ret[v] = d;\n        for(Vertex\
-    \ u : tree.get_child(v)){\n            self(self, u, d + 1);\n        }\n    };\n\
-    \    Vertex root = tree.get_root();\n    if(root < 0) root = tree.FindRoot();\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u6728\u306E\u6839\
-    \u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u8FBA\u306E\u91CD\u307F\u306E\u7D2F\
-    \u7A4D\u548C\u3092\u8A08\u7B97\u3059\u308B\u3002\n * @param tree \u6728\n * @return\
-    \ vector<CostType> \u6839\u304B\u3089\u5404\u9802\u70B9\u3078\u306E\u91CD\u307F\
-    \u306E\u7D2F\u7A4D\u548C\n */\ntemplate<typename CostType>\nvector<CostType> CalculateTreeCumlativeSum(RootedTree<CostType>\
-    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
-    \    vector<CostType> ret(V, 0);\n    auto rec = [&](auto self, Vertex v, CostType\
-    \ s) -> void {\n        ret[v] = s + tree.get_cost(v);\n        for(Vertex u :\
-    \ tree.get_child(v)){\n            self(self, u, ret[v]);\n        }\n    };\n\
-    \    rec(rec, root, 0);\n    return ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\
-    \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\
-    \u6C42\u3081\u308B\u3002\n * @param tree \u6728\n * @return vector<int> \u5404\
-    \u9802\u70B9\u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\
-    \u30BA\n */\ntemplate<typename CostType>\nvector<int> CalculateSubtreeSize(RootedTree<CostType>\
-    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size();\n\
-    \    vector<int> ret(V, 1);\n    auto rec = [&](auto self, Vertex v) -> int {\n\
-    \        for(Vertex u : tree.get_child(v)){\n            ret[v] += self(self,\
-    \ u);\n        }\n        return ret[v];\n    };\n    rec(rec, root);\n    return\
-    \ ret;\n}\n\n/**\n * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\
-    \u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\
-    \u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002\n * @param\
-    \ tree \u6728\n * @return vector<int> \u5404\u9802\u70B9\u304C\u884C\u304D\u304B\
-    \u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\u304B (0-index)\n */\n\
-    template<typename CostType>\nvector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n    Vertex root = tree.get_root();\n    int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n    vector<int> ret(V, -1);\n    auto rec = [&](auto self,\
-    \ Vertex v) -> void {\n        ret[v] = time_stamp++;\n        for(Vertex u :\
-    \ tree.get_child()){\n            self(self, u);\n        }\n    };\n    rec(rec,\
-    \ root);\n    return ret;\n}\n#line 10 \"Library/Tree/HeavyLightDecomposition.hpp\"\
-    \n\nstruct PathSegment{\n    PathSegment() = default;\n    Vertex head_vertex;\
-    \ // `head_vertex` : \u30D1\u30B9\u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\
-    \u70B9\u306E\u9802\u70B9\u756A\u53F7\n    Vertex tail_vertex; // `tail_vertex`\
-    \ : \u30D1\u30B9\u306E\u6700\u3082\u8449\u306B\u8FD1\u3044\u9802\u70B9\u306E\u9802\
-    \u70B9\u756A\u53F7\n    int head_index; // `head_index` : `head_vertex` \u306E\
-    \u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u756A\
-    \u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    int tail_index; // `tail_index`\
-    \ : `tail_vertex` \u306E\u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\
-    \u30C3\u30AF\u30B9\u756A\u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    bool highest;\
-    \ // \u3053\u306E `PathSegment` \u304C\u6700\u3082\u6839\u306B\u8FD1\u3044(\u3064\
-    \u307E\u308A LCA \u3092\u542B\u3093\u3067\u3044\u308B)\u30D1\u30B9\u3067\u3042\
-    \u308B\u3053\u3068\u3092\u8868\u3059\u3002\u8FBA\u5C5E\u6027\u306E\u30AF\u30A8\
-    \u30EA\u3067 LCA \u3092\u9664\u304F\u305F\u3081\u306B\u4F7F\u7528\u3002\n    bool\
-    \ reverse; // \u30AF\u30A8\u30EA\u3067\u6295\u3052\u305F `from -> to` \u306B\u5BFE\
-    \u3057\u3066\u3001`from` \u5074\u304C `tail_vertex` \u3067\u3042\u308B\u3053\u3068\
-    \u3092\u8868\u3059\u3002\u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\
-    \u3067\u4F7F\u7528\u3002\n    friend ostream &operator<<(ostream &os, const PathSegment\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
+    \ CostType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n  \
+    \  Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n     \
+    \   from(from_), to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const\
+    \ Edge<CostType> &e) const {return cost < e.cost;}\n\n    operator int() const\
+    \ {return to;}\n\n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\
+    \ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
+    \ = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n\
+    \    \n    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n\
+    \        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
+    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
+    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
+    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
+    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
+    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
+    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
+    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
+    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
+    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
+    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
+    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
+    \ 4 \"Library/Tree/Tree.hpp\"\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ InputTree(int N, int padding = -1, bool weighted = false){\n    Graph<CostType>\
+    \ G(N);\n    for(int i = 0; i < N - 1; ++i){\n        Vertex u, v; CostType w\
+    \ = 1;\n        cin >> u >> v, u += padding, v += padding;\n        if(weighted)\
+    \ cin >> w;\n        G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\n\
+    template<typename CostType = int32_t>\nGraph<CostType> InputRootedTreeChild(int\
+    \ N, int padding = -1){\n    Graph<CostType> G(N);\n    for(Vertex u = 0; u <\
+    \ N; ++u){\n        int k; cin >> k;\n        for(int i = 0; i < k; ++i){\n  \
+    \          Vertex v; cin >> v, v += padding;\n            G.AddUndirectedEdge(u,\
+    \ v);\n        }\n    }\n    return G;\n}\n\ntemplate<typename CostType = int32_t>\n\
+    Graph<CostType> InputRootedTreeParent(int N, int padding = -1){\n    Graph<CostType>\
+    \ G(N);\n    for(Vertex u = 1; u < N; ++u){\n        Vertex v; cin >> v, v +=\
+    \ padding;\n        G.AddUndirectedEdge(u, v);\n    }\n    return G;\n}\n\ntemplate<typename\
+    \ CostType = int32_t>\nvector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType>\
+    \ &T, const Vertex r = 0){\n    int n = T.VertexSize();\n    vector<vector<Vertex>>\
+    \ ret(n);\n    auto rec = [&](auto &self, Vertex u, Vertex p) -> void {\n    \
+    \    for(Vertex v : T[u]){\n            if(v == p) continue;\n            ret[u].push_back(v);\n\
+    \            self(self, v, u);\n        }\n    };\n    rec(rec, r, -1);\n    return\
+    \ ret;\n}\n\ntemplate<typename CostType>\nvector<int> CalculateTreeParent(Graph<CostType>\
+    \ &T, Vertex r = 0){\n    int n = T.VertexSize();\n    vector<int> ret(n, -1);\n\
+    \    auto rec = [&](auto &self, Vertex u) -> void {\n        for(Vertex v : T[u]){\n\
+    \            if(v == ret[u]) continue;\n            ret[v] = u;\n            self(self,\
+    \ v);\n        }\n    };\n    rec(rec, r);\n    return ret;\n}\n\ntemplate<typename\
+    \ CostType>\nvector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r =\
+    \ 0){\n    int n = T.VertexSize();\n    vector<CostType> ret(n);\n    auto rec\
+    \ = [&](auto &self, Vertex u, Vertex p) -> void {\n        for(const Edge<CostType>\
+    \ &e : T[u]){\n            Vertex v = e.to;\n            if(v == p) continue;\n\
+    \            ret[v] = e.cost;\n            self(self, v, u);\n        }\n    };\n\
+    \    rec(rec, r, -1);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
+    \ CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){\n    int n = T.VertexSize();\n\
+    \    vector<int> ret(n, 0);\n    auto rec = [&](auto &self, Vertex u, Vertex p,\
+    \ int d) -> void {\n        ret[u] = d;\n        for(Vertex v : T[u]){\n     \
+    \       if(v == p) continue;\n            self(self, v, u, d + 1);\n        }\n\
+    \    };\n    rec(rec, r, -1, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\n\
+    vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){\n  \
+    \  int n = T.VertexSize();\n    vector<CostType> ret(n, CostType(INF));\n    auto\
+    \ rec = [&](auto &self, Vertex u) -> void {\n        for(const Edge<CostType>\
+    \ &e : T[u]){\n            if(ret[e.to] > ret[u] + e.cost){\n                ret[e.to]\
+    \ = ret[u] + e.cost;\n                self(self, e.to);\n            }\n     \
+    \   }\n    };\n    ret[r] = 0;\n    rec(rec, r);\n    return ret;\n}\n\ntemplate<typename\
+    \ CostType>\nvector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r\
+    \ = 0){\n    int n = tree.VertexSize();\n    vector<int> ret(n, 1);\n    auto\
+    \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
+    \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
+    \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
+    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
+    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
+    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
+    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
+    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
+    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
+    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
+    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
+    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
+    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
+    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 2 \"Library/Tree/HeavyLightDecomposition.hpp\"\
+    \n\nstruct PathSegment{\n    PathSegment() = default;\n    Vertex head_vertex;\n\
+    \    Vertex tail_vertex;\n    int head_index;\n    int tail_index;\n    bool highest;\n\
+    \    bool reverse;\n    friend ostream &operator<<(ostream &os, const PathSegment\
     \ &p){\n        return os << \"# Path (\" << p.head_vertex << \" -> \" << p.tail_vertex\
     \ << \", \" << p.head_index << \" -> \" << p.tail_index << \", \" << boolalpha\
     \ << p.highest << \", \" << p.reverse << \")\";\n    }\n};\n\ntemplate<typename\
-    \ CostType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(RootedTree<CostType>\
-    \ &tree) : tree_(tree){\n        vertex_size_ = tree_.get_vertex_size();\n   \
-    \     vector<int> subtree_size = CalculateSubtreeSize(tree_);\n        vertex_depth_\
-    \ = CalculateTreeDepth(tree_);\n        for(int i = 0; i < vertex_size_; ++i){\n\
-    \            auto &children = tree_.get_child(i);\n            nth_element(children.begin(),\
-    \ children.begin(), children.end(), [&](Vertex i, Vertex j){\n               \
-    \ return subtree_size[i] > subtree_size[j];\n            });\n        }\n    \
-    \    Vertex root = tree_.get_root();\n        heavy_path_head_.push_back(root);\n\
-    \        heavy_path_depth_.push_back(0);\n        belong_heavy_path_index_.resize(vertex_size_,\
-    \ -1);\n        belong_heavy_path_index_[root] = 0;\n        preorder_index_.resize(vertex_size_,\
-    \ -1);\n        postorder_index_.resize(vertex_size_, -1);\n        vertex_order_.resize(vertex_size_);\n\
-    \        int timer = 0;\n        dfs(root, 0, 0, timer);\n    }\n\n    /**\n \
-    \    * @brief \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\
-    \u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\n     * @param u \u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return\
-    \ Vertex \u6700\u5C0F\u5171\u901A\u7956\u5148\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     */\n    Vertex LowestCommonAncestor(Vertex u, Vertex v){\n        if(path_depth(u)\
-    \ < path_depth(v)) swap(u, v);\n        while(path_depth(u) != path_depth(v)){\n\
-    \            u = tree_.get_parent(head(u));\n        }\n        while(belong(u)\
-    \ != belong(v)){\n            u = tree_.get_parent(head(u));\n            v =\
-    \ tree_.get_parent(head(v));\n        }\n        return vertex_depth(u) < vertex_depth(v)\
-    \ ? u : v;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u7956\u5148\
-    \u3067\u3042\u3063\u3066\u3001\u6DF1\u3055\u304C `level` \u3067\u3042\u308B\u9802\
-    \u70B9\u3092\u8FD4\u3059\u3002\n     * @note \u305D\u306E\u3088\u3046\u306A\u9802\
-    \u70B9\u304C\u5B58\u5728\u3057\u306A\u3044\u3068\u304D\u3001`-1` \u3092\u8FD4\u3059\
-    \u3002\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param level\
-    \ \u6DF1\u3055 (0-index)\n     * @return Vertex \u7B54\u3048\u3068\u306A\u308B\
-    \u9802\u70B9 (\u307E\u305F\u306F `-1`)\n     */\n    Vertex LevelAncestor(Vertex\
-    \ v, int level){\n        if(level < 0 || vertex_depth(v) < level) return -1;\n\
-    \        Vertex u = head(v);\n        while(1){\n            if(vertex_depth(u)\
-    \ <= level){\n                int delta = level - vertex_depth(u);\n         \
-    \       return order(preorder(u) + delta);\n            }\n            u = tree_.get_parent(u);\n\
-    \        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\
-    \u70B9 `to` \u3078\u306E\u6700\u77ED\u8DEF\u306B\u304A\u3044\u3066\u3001`from`\
-    \ \u304B\u3089 `dist` \u500B\u79FB\u52D5\u3057\u305F\u9802\u70B9\u756A\u53F7\u3092\
-    \u6C42\u3081\u308B\u3002\n     * @note \u6700\u77ED\u8DEF\u306E\u9577\u3055\u3092\
-    \ `k` \u3068\u3057\u3066\u3001`dist < 0` \u307E\u305F\u306F `k < dist` \u306E\u3068\
-    \u304D `-1` \u3092\u8FD4\u3059\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\
-    \u70B9\u756A\u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param dist \u79FB\u52D5\u3059\u308B\u9802\u70B9\u6570\
-    \n     * @return Vertex \u7B54\u3048\u306E\u9802\u70B9\u756A\u53F7 (0-index) \u307E\
-    \u305F\u306F `-1`\n     */\n    Vertex Jump(Vertex from, Vertex to, int dist){\n\
-    \        Vertex lca = LowestCommonAncestor(from, to);\n        int dist_from_lca\
-    \ = vertex_depth(from) - vertex_depth(lca);\n        int dist_lca_to = vertex_depth(to)\
-    \ - vertex_depth(lca);\n        if(dist < 0 or dist > dist_from_lca + dist_lca_to)\
-    \ return -1;\n        if(dist <= dist_from_lca){\n            return LevelAncestor(from,\
-    \ vertex_depth(from) - dist);\n        }\n        else{\n            return LevelAncestor(to,\
-    \ vertex_depth(lca) + dist - dist_from_lca);\n        }\n    }\n\n    /**\n  \
-    \   * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\u70B9 `to` \u3078\u306E\u30D1\
-    \u30B9\u3092\u5206\u89E3\u3057\u305F\u7D50\u679C\u3092\u8FD4\u3059\u3002\n   \
-    \  * @note \u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\u306B\u5BFE\u3057\
-    \u3066\u3082\u5BFE\u5FDC\u3002\u8A73\u3057\u304F\u306F `PathSegment` \u306E `reverse`\
-    \ \u3092\u53C2\u7167\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\u53F7\
-    \ (0-index)\n     * @return vector<PathSegment> \u5206\u89E3\u3057\u305F\u7D50\
-    \u679C\n     */\n    vector<PathSegment> PathQuery(Vertex from, Vertex to){\n\
-    \        vector<PathSegment> ret;\n        Vertex lca = LowestCommonAncestor(from,\
-    \ to);\n        while(belong(from) != belong(lca)){\n            PathSegment path;\n\
-    \            Vertex h = head(from);\n            path.head_vertex = h, path.tail_vertex\
-    \ = from;\n            path.head_index = preorder(h), path.tail_index = preorder(from)\
+    \ CostType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(Graph<CostType>\
+    \ &tree, Vertex r = 0) :\n        T(tree), parent(CalculateTreeParent(tree, r)),\
+    \ child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n),\
+    \ rev_order_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){\n    \
+    \    vector<int> ss = CalculateSubtreeSize(T, r);\n        for(int i = 0; i <\
+    \ n; ++i){\n            if(child[i].empty()) continue;\n            nth_element(child[i].begin(),\
+    \ child[i].begin() + 1, child[i].end(), [&](Vertex i, Vertex j){\n           \
+    \     return ss[i] > ss[j];\n            });\n        }\n        hp_head_.push_back(r);\n\
+    \        hp_depth_.push_back(0);\n        belong_hp_id_[r] = 0;\n        timer_\
+    \ = 0;\n        dfs(r, 0, 0);\n    }\n\n    Vertex LowestCommonAncestor(Vertex\
+    \ u, Vertex v) const {\n        if(PathDepth(u) < PathDepth(v)) swap(u, v);\n\
+    \        while(PathDepth(u) != PathDepth(v)){\n            u = parent[Head(u)];\n\
+    \        }\n        while(Belong(u) != Belong(v)){\n            u = parent[Head(u)];\n\
+    \            v = parent[Head(v)];\n        }\n        return depth_[u] < depth_[v]\
+    \ ? u : v;\n    }\n\n    Vertex LevelAncestor(Vertex v, int k){\n        assert(k\
+    \ <= depth_[v]);\n        Vertex ret = v;\n        while(1){\n            int\
+    \ h = Head(ret);\n            int x = depth_[ret] - depth_[h];\n            if(k\
+    \ <= x){\n                ret = RevOrder(PreOrder(ret) - k);\n               \
+    \ break;\n            }\n            ret = parent[h];\n            k -= x + 1;\n\
+    \        }\n        return ret;\n    }\n\n    int Jump(Vertex u, Vertex v, int\
+    \ k){\n        Vertex w = LowestCommonAncestor(u, v);\n        int p = depth_[u]\
+    \ - depth_[w], q = depth_[v] - depth_[w];\n        if(p + q < k || k < 0) return\
+    \ -1;\n        if(k <= p) return LevelAncestor(u, k);\n        else return LevelAncestor(v,\
+    \ p + q - k);\n    }\n\n    vector<PathSegment> PathQuery(Vertex u, Vertex v){\n\
+    \        vector<PathSegment> ret;\n        Vertex lca = LowestCommonAncestor(u,\
+    \ v);\n        while(Belong(u) != Belong(lca)){\n            PathSegment path;\n\
+    \            Vertex h = Head(u);\n            path.head_vertex = h, path.tail_vertex\
+    \ = u;\n            path.head_index = PreOrder(h), path.tail_index = PreOrder(u)\
     \ + 1;\n            path.highest = false, path.reverse = true;\n            ret.push_back(path);\n\
-    \            from = tree_.get_parent(h);\n        }\n        if(from != lca){\n\
-    \            PathSegment path;\n            path.head_vertex = lca, path.tail_vertex\
-    \ = from;\n            path.head_index = preorder(lca), path.tail_index = preorder(from)\
-    \ + 1;\n            path.highest = true, path.reverse = true;\n            ret.push_back(path);\n\
-    \        }\n        int size = ret.size();\n        while(belong(to) != belong(lca)){\n\
-    \            PathSegment path;\n            Vertex h = head(to);\n           \
-    \ path.head_vertex = h, path.tail_vertex = to;\n            path.head_index =\
-    \ preorder(h), path.tail_index = preorder(to) + 1;\n            path.highest =\
-    \ false, path.reverse = false;\n            ret.push_back(path);\n           \
-    \ to = tree_.get_parent(h);\n        }\n        if(to != lca){\n            PathSegment\
-    \ path;\n            path.head_vertex = lca, path.tail_vertex = to;\n        \
-    \    path.head_index = preorder(lca), path.tail_index = preorder(to) + 1;\n  \
-    \          path.highest = true, path.reverse = false;\n            ret.push_back(path);\n\
-    \        }\n        if(from == lca && to == lca){\n            PathSegment path;\n\
+    \            u = parent[h];\n        }\n        if(u != lca){\n            PathSegment\
+    \ path;\n            path.head_vertex = lca, path.tail_vertex = u;\n         \
+    \   path.head_index = PreOrder(lca), path.tail_index = PreOrder(u) + 1;\n    \
+    \        path.highest = true, path.reverse = true;\n            ret.push_back(path);\n\
+    \        }\n        int size = ret.size();\n        while(Belong(v) != Belong(lca)){\n\
+    \            PathSegment path;\n            Vertex h = Head(v);\n            path.head_vertex\
+    \ = h, path.tail_vertex = v;\n            path.head_index = PreOrder(h), path.tail_index\
+    \ = PreOrder(v) + 1;\n            path.highest = false, path.reverse = false;\n\
+    \            ret.push_back(path);\n            v = parent[h];\n        }\n   \
+    \     if(v != lca){\n            PathSegment path;\n            path.head_vertex\
+    \ = lca, path.tail_vertex = v;\n            path.head_index = PreOrder(lca), path.tail_index\
+    \ = PreOrder(v) + 1;\n            path.highest = true, path.reverse = false;\n\
+    \            ret.push_back(path);\n        }\n        if(u == lca && v == lca){\n\
+    \            PathSegment path;\n            path.head_vertex = path.tail_vertex\
+    \ = lca;\n            path.head_index = PreOrder(lca), path.tail_index = PreOrder(lca)\
+    \ + 1;\n            path.highest = true, path.reverse = false;\n            ret.push_back(path);\n\
+    \        }\n        reverse(ret.begin() + size, ret.end());\n        return ret;\n\
+    \    }\n\n    pair<int, int> SubtreeQuery(Vertex v) const {\n        return euler_tour_[v];\n\
+    \    }\n\n    template<typename T>\n    void SortVertex(vector<T> &A){\n     \
+    \   assert(A.size() == n);\n        vector<T> sub(n);\n        for(int i = 0;\
+    \ i < n; ++i){\n            sub[PreOrder(i)] = A[i];\n        }\n        swap(A,\
+    \ sub);\n    }\n\n    int operator[](Vertex v){\n        return PreOrder(v);\n\
+    \    }\n\n    const int operator[](Vertex v) const {\n        return PreOrder(v);\n\
+    \    }\n\n    private:\n    int dfs(Vertex v, int h, int d){\n        euler_tour_[v].first\
+    \ = timer_;\n        rev_order_[timer_] = v;\n        ++timer_;\n        int ret\
+    \ = timer_;\n        if(!child[v].empty()){\n            int c = child[v].size();\n\
+    \            belong_hp_id_[child[v].front()] = h;\n            ret = max(ret,\
+    \ dfs(child[v].front(), h, d));\n            for(int i = 1; i < c; ++i){\n   \
+    \             int nh = (int)hp_head_.size();\n                hp_head_.push_back(child[v][i]);\n\
+    \                hp_depth_.push_back(d + 1);\n                belong_hp_id_[child[v][i]]\
+    \ = nh;\n                ret = max(ret, dfs(child[v][i], nh, d + 1));\n      \
+    \      }\n        }\n        euler_tour_[v].second = ret;\n        return ret;\n\
+    \    }\n\n    Vertex Head(Vertex v) const {\n        return hp_head_[belong_hp_id_[v]];\n\
+    \    }\n\n    int PathDepth(Vertex v) const {\n        return hp_depth_[belong_hp_id_[v]];\n\
+    \    }\n\n    int Belong(Vertex v) const {\n        return belong_hp_id_[v];\n\
+    \    }\n\n    Vertex RevOrder(int idx) const {\n        return rev_order_[idx];\n\
+    \    }\n\n    int PreOrder(Vertex v) const {\n        return euler_tour_[v].first;\n\
+    \    }\n\n    int PostOrder(Vertex v) const {\n        return euler_tour_[v].second;\n\
+    \    }\n\n    Graph<CostType> &T;\n    vector<Vertex> parent;\n    vector<vector<Vertex>>\
+    \ child;\n    int n, timer_;\n\n    vector<pair<int, int>> euler_tour_;\n    vector<Vertex>\
+    \ rev_order_;\n    vector<int> depth_;\n\n    vector<Vertex> hp_head_; // \u5404\
+    \ heavy path \u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\u70B9\n    vector<int>\
+    \ hp_depth_; // \u5404 heavy path \u306E\u6DF1\u3055\n    vector<int> belong_hp_id_;\
+    \ // \u5404\u9802\u70B9\u304C\u5C5E\u3059\u308B heavy path \u306E\u756A\u53F7\n\
+    };\n"
+  code: "#include \"Tree.hpp\"\n\nstruct PathSegment{\n    PathSegment() = default;\n\
+    \    Vertex head_vertex;\n    Vertex tail_vertex;\n    int head_index;\n    int\
+    \ tail_index;\n    bool highest;\n    bool reverse;\n    friend ostream &operator<<(ostream\
+    \ &os, const PathSegment &p){\n        return os << \"# Path (\" << p.head_vertex\
+    \ << \" -> \" << p.tail_vertex << \", \" << p.head_index << \" -> \" << p.tail_index\
+    \ << \", \" << boolalpha << p.highest << \", \" << p.reverse << \")\";\n    }\n\
+    };\n\ntemplate<typename CostType>\nclass HeavyLightDecomposition{\n    public:\n\
+    \    HeavyLightDecomposition(Graph<CostType> &tree, Vertex r = 0) :\n        T(tree),\
+    \ parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)),\
+    \ n((int)tree.VertexSize()), euler_tour_(n), rev_order_(n), depth_(CalculateTreeDepth(tree,\
+    \ r)), belong_hp_id_(n){\n        vector<int> ss = CalculateSubtreeSize(T, r);\n\
+    \        for(int i = 0; i < n; ++i){\n            if(child[i].empty()) continue;\n\
+    \            nth_element(child[i].begin(), child[i].begin() + 1, child[i].end(),\
+    \ [&](Vertex i, Vertex j){\n                return ss[i] > ss[j];\n          \
+    \  });\n        }\n        hp_head_.push_back(r);\n        hp_depth_.push_back(0);\n\
+    \        belong_hp_id_[r] = 0;\n        timer_ = 0;\n        dfs(r, 0, 0);\n \
+    \   }\n\n    Vertex LowestCommonAncestor(Vertex u, Vertex v) const {\n       \
+    \ if(PathDepth(u) < PathDepth(v)) swap(u, v);\n        while(PathDepth(u) != PathDepth(v)){\n\
+    \            u = parent[Head(u)];\n        }\n        while(Belong(u) != Belong(v)){\n\
+    \            u = parent[Head(u)];\n            v = parent[Head(v)];\n        }\n\
+    \        return depth_[u] < depth_[v] ? u : v;\n    }\n\n    Vertex LevelAncestor(Vertex\
+    \ v, int k){\n        assert(k <= depth_[v]);\n        Vertex ret = v;\n     \
+    \   while(1){\n            int h = Head(ret);\n            int x = depth_[ret]\
+    \ - depth_[h];\n            if(k <= x){\n                ret = RevOrder(PreOrder(ret)\
+    \ - k);\n                break;\n            }\n            ret = parent[h];\n\
+    \            k -= x + 1;\n        }\n        return ret;\n    }\n\n    int Jump(Vertex\
+    \ u, Vertex v, int k){\n        Vertex w = LowestCommonAncestor(u, v);\n     \
+    \   int p = depth_[u] - depth_[w], q = depth_[v] - depth_[w];\n        if(p +\
+    \ q < k || k < 0) return -1;\n        if(k <= p) return LevelAncestor(u, k);\n\
+    \        else return LevelAncestor(v, p + q - k);\n    }\n\n    vector<PathSegment>\
+    \ PathQuery(Vertex u, Vertex v){\n        vector<PathSegment> ret;\n        Vertex\
+    \ lca = LowestCommonAncestor(u, v);\n        while(Belong(u) != Belong(lca)){\n\
+    \            PathSegment path;\n            Vertex h = Head(u);\n            path.head_vertex\
+    \ = h, path.tail_vertex = u;\n            path.head_index = PreOrder(h), path.tail_index\
+    \ = PreOrder(u) + 1;\n            path.highest = false, path.reverse = true;\n\
+    \            ret.push_back(path);\n            u = parent[h];\n        }\n   \
+    \     if(u != lca){\n            PathSegment path;\n            path.head_vertex\
+    \ = lca, path.tail_vertex = u;\n            path.head_index = PreOrder(lca), path.tail_index\
+    \ = PreOrder(u) + 1;\n            path.highest = true, path.reverse = true;\n\
+    \            ret.push_back(path);\n        }\n        int size = ret.size();\n\
+    \        while(Belong(v) != Belong(lca)){\n            PathSegment path;\n   \
+    \         Vertex h = Head(v);\n            path.head_vertex = h, path.tail_vertex\
+    \ = v;\n            path.head_index = PreOrder(h), path.tail_index = PreOrder(v)\
+    \ + 1;\n            path.highest = false, path.reverse = false;\n            ret.push_back(path);\n\
+    \            v = parent[h];\n        }\n        if(v != lca){\n            PathSegment\
+    \ path;\n            path.head_vertex = lca, path.tail_vertex = v;\n         \
+    \   path.head_index = PreOrder(lca), path.tail_index = PreOrder(v) + 1;\n    \
+    \        path.highest = true, path.reverse = false;\n            ret.push_back(path);\n\
+    \        }\n        if(u == lca && v == lca){\n            PathSegment path;\n\
     \            path.head_vertex = path.tail_vertex = lca;\n            path.head_index\
-    \ = preorder(lca), path.tail_index = preorder(lca) + 1;\n            path.highest\
+    \ = PreOrder(lca), path.tail_index = PreOrder(lca) + 1;\n            path.highest\
     \ = true, path.reverse = false;\n            ret.push_back(path);\n        }\n\
     \        reverse(ret.begin() + size, ret.end());\n        return ret;\n    }\n\
-    \n    /**\n     * @brief \u9802\u70B9 `v` \u3092\u6839\u3068\u3059\u308B\u90E8\
-    \u5206\u6728\u306B\u5BFE\u5FDC\u3057\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
-    \u3092\u534A\u958B\u533A\u9593\u3067\u8FD4\u3059\u3002\n     * @param v \u9802\
-    \u70B9\u756A\u53F7 (0-index)\n     * @return pair<int, int> \u30A4\u30F3\u30C7\
-    \u30C3\u30AF\u30B9 (0-index, \u534A\u958B\u533A\u9593)\n     */\n    pair<int,\
-    \ int> SubtreeQuery(Vertex v) const {\n        return make_pair(preorder(v), postorder(v)\
-    \ + 1);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `i` \u306B\u8F09\u305B\u308B\
-    \u30C7\u30FC\u30BF\u3092\u683C\u7D0D\u3057\u305F\u914D\u5217 `data[i]` \u3092\u3001\
-    \u9802\u70B9\u306E\u884C\u304D\u304B\u3051\u9806\u306B\u306A\u308B\u3088\u3046\
-    \u306B\u4E26\u3079\u66FF\u3048\u308B\u3002\n     * @note \u30BB\u30B0\u30E1\u30F3\
-    \u30C8\u6728\u306A\u3069\u306B\u8F09\u305B\u308B\u524D\u306B\u4F7F\u7528\u3059\
-    \u308B\u3002\n     * @param data \u5404\u9802\u70B9\u306B\u8F09\u305B\u308B\u30C7\
-    \u30FC\u30BF\n     */\n    template<typename T>\n    void SortVertex(vector<T>\
-    \ &data){\n        assert(data.size() == vertex_size_);\n        vector<T> sub(data.size());\n\
-    \        for(int i = 0; i < vertex_size_; ++i){\n            sub[preorder(i)]\
-    \ = data[i];\n        }\n        swap(data, sub);\n    }\n\n    int operator[](Vertex\
-    \ v){\n        return preorder(v);\n    }\n\n    const int operator[](Vertex v)\
-    \ const {\n        return preorder(v);\n    }\n\n    private:\n    int dfs(Vertex\
-    \ v, int h, int d, int &t){\n        preorder_index_[v] = t;\n        vertex_order_[t]\
-    \ = v;\n        int ret = t;\n        ++t;\n        auto cs = tree_.get_child(v);\n\
-    \        if(!cs.empty()){\n            int c = cs.size();\n            belong_heavy_path_index_[cs.front()]\
-    \ = h;\n            ret = max(ret, dfs(cs.front(), h, d, t));\n            for(int\
-    \ i = 1; i < c; ++i){\n                int nh = (int)heavy_path_head_.size();\n\
-    \                heavy_path_head_.push_back(cs[i]);\n                heavy_path_depth_.push_back(d\
-    \ + 1);\n                belong_heavy_path_index_[cs[i]] = nh;\n             \
-    \   ret = max(ret, dfs(cs[i], nh, d + 1, t));\n            }\n        }\n    \
-    \    postorder_index_[v] = ret;\n        return ret;\n    }\n\n    Vertex head(Vertex\
-    \ v) const {\n        return heavy_path_head_[belong_heavy_path_index_[v]];\n\
-    \    }\n\n    int path_depth(Vertex v) const {\n        return heavy_path_depth_[belong_heavy_path_index_[v]];\n\
-    \    }\n\n    int vertex_depth(Vertex v) const {\n        return vertex_depth_[v];\n\
-    \    }\n\n    int belong(Vertex v) const {\n        return belong_heavy_path_index_[v];\n\
-    \    }\n\n    Vertex order(int idx) const {\n        return vertex_order_[idx];\n\
-    \    }\n\n    int preorder(Vertex v) const {\n        return preorder_index_[v];\n\
-    \    }\n\n    int postorder(Vertex v) const {\n        return postorder_index_[v];\n\
-    \    }\n\n    RootedTree<CostType> &tree_;\n\n    int vertex_size_;\n    vector<Vertex>\
-    \ heavy_path_head_, vertex_order_;\n    vector<int> belong_heavy_path_index_,\
-    \ belong_heavy_path_order_, heavy_path_depth_;\n    vector<int> preorder_index_,\
-    \ postorder_index_;\n    vector<int> vertex_depth_;\n};\n"
-  code: "/**\n * @file HeavyLightDecomposition.hpp\n * @author log K (lX57)\n * @brief\
-    \ Heavy Light Decomposition - HL\u5206\u89E3\n * @version 4.0\n * @date 2024-09-04\n\
-    \ */\n\n#include \"Tree.hpp\"\n\nstruct PathSegment{\n    PathSegment() = default;\n\
-    \    Vertex head_vertex; // `head_vertex` : \u30D1\u30B9\u306E\u6700\u3082\u6839\
-    \u306B\u8FD1\u3044\u9802\u70B9\u306E\u9802\u70B9\u756A\u53F7\n    Vertex tail_vertex;\
-    \ // `tail_vertex` : \u30D1\u30B9\u306E\u6700\u3082\u8449\u306B\u8FD1\u3044\u9802\
-    \u70B9\u306E\u9802\u70B9\u756A\u53F7\n    int head_index; // `head_index` : `head_vertex`\
-    \ \u306E\u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
-    \u756A\u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    int tail_index; // `tail_index`\
-    \ : `tail_vertex` \u306E\u884C\u304D\u304B\u3051\u9806\u306E\u30A4\u30F3\u30C7\
-    \u30C3\u30AF\u30B9\u756A\u53F7 (0-index, \u534A\u958B\u533A\u9593)\n    bool highest;\
-    \ // \u3053\u306E `PathSegment` \u304C\u6700\u3082\u6839\u306B\u8FD1\u3044(\u3064\
-    \u307E\u308A LCA \u3092\u542B\u3093\u3067\u3044\u308B)\u30D1\u30B9\u3067\u3042\
-    \u308B\u3053\u3068\u3092\u8868\u3059\u3002\u8FBA\u5C5E\u6027\u306E\u30AF\u30A8\
-    \u30EA\u3067 LCA \u3092\u9664\u304F\u305F\u3081\u306B\u4F7F\u7528\u3002\n    bool\
-    \ reverse; // \u30AF\u30A8\u30EA\u3067\u6295\u3052\u305F `from -> to` \u306B\u5BFE\
-    \u3057\u3066\u3001`from` \u5074\u304C `tail_vertex` \u3067\u3042\u308B\u3053\u3068\
-    \u3092\u8868\u3059\u3002\u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\
-    \u3067\u4F7F\u7528\u3002\n    friend ostream &operator<<(ostream &os, const PathSegment\
-    \ &p){\n        return os << \"# Path (\" << p.head_vertex << \" -> \" << p.tail_vertex\
-    \ << \", \" << p.head_index << \" -> \" << p.tail_index << \", \" << boolalpha\
-    \ << p.highest << \", \" << p.reverse << \")\";\n    }\n};\n\ntemplate<typename\
-    \ CostType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(RootedTree<CostType>\
-    \ &tree) : tree_(tree){\n        vertex_size_ = tree_.get_vertex_size();\n   \
-    \     vector<int> subtree_size = CalculateSubtreeSize(tree_);\n        vertex_depth_\
-    \ = CalculateTreeDepth(tree_);\n        for(int i = 0; i < vertex_size_; ++i){\n\
-    \            auto &children = tree_.get_child(i);\n            nth_element(children.begin(),\
-    \ children.begin(), children.end(), [&](Vertex i, Vertex j){\n               \
-    \ return subtree_size[i] > subtree_size[j];\n            });\n        }\n    \
-    \    Vertex root = tree_.get_root();\n        heavy_path_head_.push_back(root);\n\
-    \        heavy_path_depth_.push_back(0);\n        belong_heavy_path_index_.resize(vertex_size_,\
-    \ -1);\n        belong_heavy_path_index_[root] = 0;\n        preorder_index_.resize(vertex_size_,\
-    \ -1);\n        postorder_index_.resize(vertex_size_, -1);\n        vertex_order_.resize(vertex_size_);\n\
-    \        int timer = 0;\n        dfs(root, 0, 0, timer);\n    }\n\n    /**\n \
-    \    * @brief \u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\
-    \u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\n     * @param u \u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @return\
-    \ Vertex \u6700\u5C0F\u5171\u901A\u7956\u5148\u306E\u9802\u70B9\u756A\u53F7 (0-index)\n\
-    \     */\n    Vertex LowestCommonAncestor(Vertex u, Vertex v){\n        if(path_depth(u)\
-    \ < path_depth(v)) swap(u, v);\n        while(path_depth(u) != path_depth(v)){\n\
-    \            u = tree_.get_parent(head(u));\n        }\n        while(belong(u)\
-    \ != belong(v)){\n            u = tree_.get_parent(head(u));\n            v =\
-    \ tree_.get_parent(head(v));\n        }\n        return vertex_depth(u) < vertex_depth(v)\
-    \ ? u : v;\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u306E\u7956\u5148\
-    \u3067\u3042\u3063\u3066\u3001\u6DF1\u3055\u304C `level` \u3067\u3042\u308B\u9802\
-    \u70B9\u3092\u8FD4\u3059\u3002\n     * @note \u305D\u306E\u3088\u3046\u306A\u9802\
-    \u70B9\u304C\u5B58\u5728\u3057\u306A\u3044\u3068\u304D\u3001`-1` \u3092\u8FD4\u3059\
-    \u3002\n     * @param v \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param level\
-    \ \u6DF1\u3055 (0-index)\n     * @return Vertex \u7B54\u3048\u3068\u306A\u308B\
-    \u9802\u70B9 (\u307E\u305F\u306F `-1`)\n     */\n    Vertex LevelAncestor(Vertex\
-    \ v, int level){\n        if(level < 0 || vertex_depth(v) < level) return -1;\n\
-    \        Vertex u = head(v);\n        while(1){\n            if(vertex_depth(u)\
-    \ <= level){\n                int delta = level - vertex_depth(u);\n         \
-    \       return order(preorder(u) + delta);\n            }\n            u = tree_.get_parent(u);\n\
-    \        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\
-    \u70B9 `to` \u3078\u306E\u6700\u77ED\u8DEF\u306B\u304A\u3044\u3066\u3001`from`\
-    \ \u304B\u3089 `dist` \u500B\u79FB\u52D5\u3057\u305F\u9802\u70B9\u756A\u53F7\u3092\
-    \u6C42\u3081\u308B\u3002\n     * @note \u6700\u77ED\u8DEF\u306E\u9577\u3055\u3092\
-    \ `k` \u3068\u3057\u3066\u3001`dist < 0` \u307E\u305F\u306F `k < dist` \u306E\u3068\
-    \u304D `-1` \u3092\u8FD4\u3059\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\
-    \u70B9\u756A\u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param dist \u79FB\u52D5\u3059\u308B\u9802\u70B9\u6570\
-    \n     * @return Vertex \u7B54\u3048\u306E\u9802\u70B9\u756A\u53F7 (0-index) \u307E\
-    \u305F\u306F `-1`\n     */\n    Vertex Jump(Vertex from, Vertex to, int dist){\n\
-    \        Vertex lca = LowestCommonAncestor(from, to);\n        int dist_from_lca\
-    \ = vertex_depth(from) - vertex_depth(lca);\n        int dist_lca_to = vertex_depth(to)\
-    \ - vertex_depth(lca);\n        if(dist < 0 or dist > dist_from_lca + dist_lca_to)\
-    \ return -1;\n        if(dist <= dist_from_lca){\n            return LevelAncestor(from,\
-    \ vertex_depth(from) - dist);\n        }\n        else{\n            return LevelAncestor(to,\
-    \ vertex_depth(lca) + dist - dist_from_lca);\n        }\n    }\n\n    /**\n  \
-    \   * @brief \u9802\u70B9 `from` \u304B\u3089\u9802\u70B9 `to` \u3078\u306E\u30D1\
-    \u30B9\u3092\u5206\u89E3\u3057\u305F\u7D50\u679C\u3092\u8FD4\u3059\u3002\n   \
-    \  * @note \u53EF\u9006\u6027\u306E\u306A\u3044\u30AF\u30A8\u30EA\u306B\u5BFE\u3057\
-    \u3066\u3082\u5BFE\u5FDC\u3002\u8A73\u3057\u304F\u306F `PathSegment` \u306E `reverse`\
-    \ \u3092\u53C2\u7167\u3002\n     * @param from \u59CB\u70B9\u306E\u9802\u70B9\u756A\
-    \u53F7 (0-index)\n     * @param to \u7D42\u70B9\u306E\u9802\u70B9\u756A\u53F7\
-    \ (0-index)\n     * @return vector<PathSegment> \u5206\u89E3\u3057\u305F\u7D50\
-    \u679C\n     */\n    vector<PathSegment> PathQuery(Vertex from, Vertex to){\n\
-    \        vector<PathSegment> ret;\n        Vertex lca = LowestCommonAncestor(from,\
-    \ to);\n        while(belong(from) != belong(lca)){\n            PathSegment path;\n\
-    \            Vertex h = head(from);\n            path.head_vertex = h, path.tail_vertex\
-    \ = from;\n            path.head_index = preorder(h), path.tail_index = preorder(from)\
-    \ + 1;\n            path.highest = false, path.reverse = true;\n            ret.push_back(path);\n\
-    \            from = tree_.get_parent(h);\n        }\n        if(from != lca){\n\
-    \            PathSegment path;\n            path.head_vertex = lca, path.tail_vertex\
-    \ = from;\n            path.head_index = preorder(lca), path.tail_index = preorder(from)\
-    \ + 1;\n            path.highest = true, path.reverse = true;\n            ret.push_back(path);\n\
-    \        }\n        int size = ret.size();\n        while(belong(to) != belong(lca)){\n\
-    \            PathSegment path;\n            Vertex h = head(to);\n           \
-    \ path.head_vertex = h, path.tail_vertex = to;\n            path.head_index =\
-    \ preorder(h), path.tail_index = preorder(to) + 1;\n            path.highest =\
-    \ false, path.reverse = false;\n            ret.push_back(path);\n           \
-    \ to = tree_.get_parent(h);\n        }\n        if(to != lca){\n            PathSegment\
-    \ path;\n            path.head_vertex = lca, path.tail_vertex = to;\n        \
-    \    path.head_index = preorder(lca), path.tail_index = preorder(to) + 1;\n  \
-    \          path.highest = true, path.reverse = false;\n            ret.push_back(path);\n\
-    \        }\n        if(from == lca && to == lca){\n            PathSegment path;\n\
-    \            path.head_vertex = path.tail_vertex = lca;\n            path.head_index\
-    \ = preorder(lca), path.tail_index = preorder(lca) + 1;\n            path.highest\
-    \ = true, path.reverse = false;\n            ret.push_back(path);\n        }\n\
-    \        reverse(ret.begin() + size, ret.end());\n        return ret;\n    }\n\
-    \n    /**\n     * @brief \u9802\u70B9 `v` \u3092\u6839\u3068\u3059\u308B\u90E8\
-    \u5206\u6728\u306B\u5BFE\u5FDC\u3057\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
-    \u3092\u534A\u958B\u533A\u9593\u3067\u8FD4\u3059\u3002\n     * @param v \u9802\
-    \u70B9\u756A\u53F7 (0-index)\n     * @return pair<int, int> \u30A4\u30F3\u30C7\
-    \u30C3\u30AF\u30B9 (0-index, \u534A\u958B\u533A\u9593)\n     */\n    pair<int,\
-    \ int> SubtreeQuery(Vertex v) const {\n        return make_pair(preorder(v), postorder(v)\
-    \ + 1);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `i` \u306B\u8F09\u305B\u308B\
-    \u30C7\u30FC\u30BF\u3092\u683C\u7D0D\u3057\u305F\u914D\u5217 `data[i]` \u3092\u3001\
-    \u9802\u70B9\u306E\u884C\u304D\u304B\u3051\u9806\u306B\u306A\u308B\u3088\u3046\
-    \u306B\u4E26\u3079\u66FF\u3048\u308B\u3002\n     * @note \u30BB\u30B0\u30E1\u30F3\
-    \u30C8\u6728\u306A\u3069\u306B\u8F09\u305B\u308B\u524D\u306B\u4F7F\u7528\u3059\
-    \u308B\u3002\n     * @param data \u5404\u9802\u70B9\u306B\u8F09\u305B\u308B\u30C7\
-    \u30FC\u30BF\n     */\n    template<typename T>\n    void SortVertex(vector<T>\
-    \ &data){\n        assert(data.size() == vertex_size_);\n        vector<T> sub(data.size());\n\
-    \        for(int i = 0; i < vertex_size_; ++i){\n            sub[preorder(i)]\
-    \ = data[i];\n        }\n        swap(data, sub);\n    }\n\n    int operator[](Vertex\
-    \ v){\n        return preorder(v);\n    }\n\n    const int operator[](Vertex v)\
-    \ const {\n        return preorder(v);\n    }\n\n    private:\n    int dfs(Vertex\
-    \ v, int h, int d, int &t){\n        preorder_index_[v] = t;\n        vertex_order_[t]\
-    \ = v;\n        int ret = t;\n        ++t;\n        auto cs = tree_.get_child(v);\n\
-    \        if(!cs.empty()){\n            int c = cs.size();\n            belong_heavy_path_index_[cs.front()]\
-    \ = h;\n            ret = max(ret, dfs(cs.front(), h, d, t));\n            for(int\
-    \ i = 1; i < c; ++i){\n                int nh = (int)heavy_path_head_.size();\n\
-    \                heavy_path_head_.push_back(cs[i]);\n                heavy_path_depth_.push_back(d\
-    \ + 1);\n                belong_heavy_path_index_[cs[i]] = nh;\n             \
-    \   ret = max(ret, dfs(cs[i], nh, d + 1, t));\n            }\n        }\n    \
-    \    postorder_index_[v] = ret;\n        return ret;\n    }\n\n    Vertex head(Vertex\
-    \ v) const {\n        return heavy_path_head_[belong_heavy_path_index_[v]];\n\
-    \    }\n\n    int path_depth(Vertex v) const {\n        return heavy_path_depth_[belong_heavy_path_index_[v]];\n\
-    \    }\n\n    int vertex_depth(Vertex v) const {\n        return vertex_depth_[v];\n\
-    \    }\n\n    int belong(Vertex v) const {\n        return belong_heavy_path_index_[v];\n\
-    \    }\n\n    Vertex order(int idx) const {\n        return vertex_order_[idx];\n\
-    \    }\n\n    int preorder(Vertex v) const {\n        return preorder_index_[v];\n\
-    \    }\n\n    int postorder(Vertex v) const {\n        return postorder_index_[v];\n\
-    \    }\n\n    RootedTree<CostType> &tree_;\n\n    int vertex_size_;\n    vector<Vertex>\
-    \ heavy_path_head_, vertex_order_;\n    vector<int> belong_heavy_path_index_,\
-    \ belong_heavy_path_order_, heavy_path_depth_;\n    vector<int> preorder_index_,\
-    \ postorder_index_;\n    vector<int> vertex_depth_;\n};"
+    \n    pair<int, int> SubtreeQuery(Vertex v) const {\n        return euler_tour_[v];\n\
+    \    }\n\n    template<typename T>\n    void SortVertex(vector<T> &A){\n     \
+    \   assert(A.size() == n);\n        vector<T> sub(n);\n        for(int i = 0;\
+    \ i < n; ++i){\n            sub[PreOrder(i)] = A[i];\n        }\n        swap(A,\
+    \ sub);\n    }\n\n    int operator[](Vertex v){\n        return PreOrder(v);\n\
+    \    }\n\n    const int operator[](Vertex v) const {\n        return PreOrder(v);\n\
+    \    }\n\n    private:\n    int dfs(Vertex v, int h, int d){\n        euler_tour_[v].first\
+    \ = timer_;\n        rev_order_[timer_] = v;\n        ++timer_;\n        int ret\
+    \ = timer_;\n        if(!child[v].empty()){\n            int c = child[v].size();\n\
+    \            belong_hp_id_[child[v].front()] = h;\n            ret = max(ret,\
+    \ dfs(child[v].front(), h, d));\n            for(int i = 1; i < c; ++i){\n   \
+    \             int nh = (int)hp_head_.size();\n                hp_head_.push_back(child[v][i]);\n\
+    \                hp_depth_.push_back(d + 1);\n                belong_hp_id_[child[v][i]]\
+    \ = nh;\n                ret = max(ret, dfs(child[v][i], nh, d + 1));\n      \
+    \      }\n        }\n        euler_tour_[v].second = ret;\n        return ret;\n\
+    \    }\n\n    Vertex Head(Vertex v) const {\n        return hp_head_[belong_hp_id_[v]];\n\
+    \    }\n\n    int PathDepth(Vertex v) const {\n        return hp_depth_[belong_hp_id_[v]];\n\
+    \    }\n\n    int Belong(Vertex v) const {\n        return belong_hp_id_[v];\n\
+    \    }\n\n    Vertex RevOrder(int idx) const {\n        return rev_order_[idx];\n\
+    \    }\n\n    int PreOrder(Vertex v) const {\n        return euler_tour_[v].first;\n\
+    \    }\n\n    int PostOrder(Vertex v) const {\n        return euler_tour_[v].second;\n\
+    \    }\n\n    Graph<CostType> &T;\n    vector<Vertex> parent;\n    vector<vector<Vertex>>\
+    \ child;\n    int n, timer_;\n\n    vector<pair<int, int>> euler_tour_;\n    vector<Vertex>\
+    \ rev_order_;\n    vector<int> depth_;\n\n    vector<Vertex> hp_head_; // \u5404\
+    \ heavy path \u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\u70B9\n    vector<int>\
+    \ hp_depth_; // \u5404 heavy path \u306E\u6DF1\u3055\n    vector<int> belong_hp_id_;\
+    \ // \u5404\u9802\u70B9\u304C\u5C5E\u3059\u308B heavy path \u306E\u756A\u53F7\n\
+    };"
   dependsOn:
   - Library/Tree/Tree.hpp
+  - Library/Graph/Graph.hpp
   - Library/Common.hpp
   isVerificationFile: false
   path: Library/Tree/HeavyLightDecomposition.hpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-05-30 20:57:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-JumponTree.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
 documentation_of: Library/Tree/HeavyLightDecomposition.hpp
 layout: document
-redirect_from:
-- /library/Library/Tree/HeavyLightDecomposition.hpp
-- /library/Library/Tree/HeavyLightDecomposition.hpp.html
-title: "Heavy Light Decomposition - HL\u5206\u89E3"
+title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
 ---
+
+# Heavy Light Decomposition - 重軽分解
+
+$n$ 頂点の根付き木 $T$ を $\textrm{O}(\log n)$ 個のパスの集合に分解します。
+
+## Function
+
+### Constructor
+
+```
+HeavyLightDecomposition(Graph<CostType> &tree, Vertex r = 0)
+```
+
+- 頂点 $r$ を根とする根付き木 $T$ に対して重軽分解を行います。
+
+**制約**
+
+- $0 \le r \lt n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+
+### LowestCommonAncestor
+
+```
+Vertex LowestCommonAncestor(Vertex u, Vertex v) const
+```
+
+- 頂点 $u$ と頂点 $v$ の最小共通祖先の頂点を求めます。
+
+**制約**
+
+- $0 \le u, v \lt n$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
+### LevelAncestor
+
+```
+Vertex LevelAncestor(Vertex v, int k)
+```
+
+- 頂点 $v$ から $k$ 回親の頂点を辿った先の頂点を求めます。
+
+**制約**
+
+- $0 \le v \lt n$
+- 頂点 $v$ の深さを $d$ としたとき、$0 \le k \le d$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
+### Jump
+
+```
+int Jump(Vertex u, Vertex v, int k)
+```
+
+- 頂点 $u$ から頂点 $v$ への $T$ 上の最短パスを通る順に並べた頂点列 $p = (p_0, \dots, p_d)$ において、頂点 $p_k$ を返します。ここで、$d$ は頂点 $u$ から頂点 $v$ への $T$ 上の最短パス長です。
+- $k \lt 0$ または $d \lt k$ のとき、`-1` を返します。
+
+**制約**
+
+- $0 \le u, v \lt n$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
+### PathQuery
+
+```
+vector<PathSegment> PathQuery(Vertex u, Vertex v)
+```
+
+- 頂点 $u$ から頂点 $v$ へのパスを Heavy Path に分解した `PathSegment` の集合を返します。
+- `PathSegment` $P$ は次の要素からなる構造体です。
+    - `head_vertex` : $P$ のうち最も根に近い頂点番号
+    - `tail_vertex` : $P$ のうち最も葉に近い頂点番号
+    - `head_index` : `head_vertex` の行きかけ順序 (0-index)
+    - `tail_index` : `tail_vertex` の行きかけ順序 (0-index)
+    - `highest` : $P$ が最も根に近いパスであること (すなわち、$\textrm{LCA}(u, v)$ を含むこと) を表す真偽値
+    - `reverse` : 頂点 $u$ が `tail_vertex` であることを表す真偽値
+- Segment Tree などと併せて使用することを想定しています。基本的には `SortVertex()` によって並べ替えたデータを乗せた Segment Tree に対して半開区間 `[head_index, tail_index)` のクエリを実行すればよいです。
+- クエリが辺属性である場合、すなわち頂点 $x$ に対するデータの代わりに、頂点 $x$ とその親の頂点を繋ぐ辺に対するデータを表す場合、$\textrm{LCA}(u, v)$ に対するデータを集計しないようにする必要があります。
+    - `highest` フラグを確認することで解決できます。より具体的には、`highest` フラグが真であるとき、`[head_index + 1, tail_index)` を代わりに実行すればよいです。(要 verify)
+- Segment Tree などに乗せたデータが可換性を持たないとき、パスの向きに注意する必要があります。
+    - 二方向の演算で集計できるように、$2$ 本の Segment Tree を持ちつつ、`reverse` フラグを確認することで解決できます。より具体的には、`reverse` フラグの真偽によってクエリを実行するデータ構造を変更すればよいです。実装例は [Vertex Set Path Composite](https://k-yoshizawa.github.io/Procon/verify/LC-VertexSetPathComposite.test.cpp) を参照してください。
+
+**制約**
+
+- $0 \le u, v \lt n$
+
+**計算量**
+
+- $\textrm{O}(\log n)$
+
+---
+
+### SubtreeQuery
+
+```
+pair<int, int> SubtreeQuery(Vertex v) const
+```
+
+- 頂点 $v$ を根とする部分木に対応する区間を半開区間で返します。
+
+**制約**
+
+- $0 \le v \lt n$
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+
+### SortVertex
+
+```
+void SortVertex(vector<T> &A)
+```
+
+- 長さ $n$ の数列 $A = (A_1, \dots, A_n)$ を、頂点の行きかけ順序になるように並べ替えます。
+
+**制約**
+
+- $|A| = n$
+
+**計算量**
+
+- $\textrm{O}(n)$
+
+---
+

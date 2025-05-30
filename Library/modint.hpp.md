@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: modint
     links: []
@@ -38,7 +38,7 @@ data:
     #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
     \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
     #include <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconstexpr const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\
+    \nconstexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\
     \nusing namespace std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\
     \ntemplate< int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\
     \n    ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n\
@@ -102,8 +102,8 @@ data:
   isVerificationFile: false
   path: Library/modint.hpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-04-30 01:32:17+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp

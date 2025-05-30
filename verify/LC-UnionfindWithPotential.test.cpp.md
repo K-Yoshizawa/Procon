@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
     title: "Weighted Union-Find - \u91CD\u307F\u4ED8\u304D\u7D20\u96C6\u5408\u30C7\
       \u30FC\u30BF\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -31,7 +31,7 @@ data:
     \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
     #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
     \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
-    \ << 62) - (1LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\nusing namespace\
+    \ << 62) - (3LL << 30) - 1;\n#line 12 \"Library/modint.hpp\"\nusing namespace\
     \ std;\n\nconst int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate<\
     \ int mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
     \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: true
   path: verify/LC-UnionfindWithPotential.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 19:43:59+09:00'
+  timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-UnionfindWithPotential.test.cpp

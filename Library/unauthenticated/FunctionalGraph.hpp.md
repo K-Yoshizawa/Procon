@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -24,7 +24,7 @@ data:
     \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
     \ 1;\n#line 9 \"Library/unauthenticated/FunctionalGraph.hpp\"\n\ntemplate<typename\
     \ CostType = int32_t>\nclass FunctionalGraph{\n    public:\n    /**\n     * @brief\
     \ \u91CD\u307F\u306A\u3057 Functional Graph \u306E\u69CB\u7BC9\u3092\u884C\u3046\
@@ -179,7 +179,7 @@ data:
   isVerificationFile: false
   path: Library/unauthenticated/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2025-04-07 00:35:58+09:00'
+  timestamp: '2025-04-30 01:32:17+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/FunctionalGraph.hpp

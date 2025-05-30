@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -25,7 +25,7 @@ data:
     #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
     using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
-    \ const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 9 \"Library/DataStructure/DualSegmentTree.hpp\"\
+    \ const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 9 \"Library/DataStructure/DualSegmentTree.hpp\"\
     \n\ntemplate<typename OperatorMonoid>\nclass DualSegmentTree{\n    public:\n \
     \   using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n    \n\
     \    DualSegmentTree(int size, H composite, const OperatorMonoid &operator_identity,\
@@ -97,7 +97,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/DualSegmentTree.hpp
   requiredBy: []
-  timestamp: '2025-05-30 19:43:59+09:00'
+  timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffinePointGet.test.cpp

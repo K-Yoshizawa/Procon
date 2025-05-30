@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -20,7 +20,7 @@ data:
     #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
     \ 1;\n#line 2 \"Library/DataStructure/BinaryIndexedTree.hpp\"\n\ntemplate<typename\
     \ T>\nstruct BinaryIndexedTree{\n    public:\n    BinaryIndexedTree(int n) : size_(n){\n\
     \        data_.resize(size_ + 1, 0);\n    }\n\n    T Sum(int i){\n        T ret\
@@ -40,7 +40,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
-  timestamp: '2025-05-30 15:31:21+09:00'
+  timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-PointAddRangeSum_BIT.test.cpp

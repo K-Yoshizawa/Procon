@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -23,7 +23,7 @@ data:
     #include <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (1LL << 30) -\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
     \ 1;\n#line 2 \"Library/DataStructure/RollbackUnionFind.hpp\"\n\nclass RollbackUnionFind{\n\
     \    public:\n    RollbackUnionFind(size_t n) : data_(n, -1), record_(0){}\n\n\
     \    int Find(const int k) const {\n        if(data_[k] < 0) return k;\n     \
@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/RollbackUnionFind.hpp
   requiredBy: []
-  timestamp: '2025-03-20 00:50:35+09:00'
+  timestamp: '2025-04-30 01:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-0723.test.cpp

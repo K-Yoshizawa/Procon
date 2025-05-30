@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -52,15 +52,6 @@ data:
     path: verify/AOJ-GRL-4-A.test.cpp
     title: verify/AOJ-GRL-4-A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-A.test.cpp
-    title: verify/AOJ-GRL-5-A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-B.test.cpp
-    title: verify/AOJ-GRL-5-B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/AOJ-GRL-5-C.test.cpp
-    title: verify/AOJ-GRL-5-C.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/LC-CycleDetection.test.cpp
     title: verify/LC-CycleDetection.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,9 +63,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-LowestCommonAncestor-HLD.test.cpp
     title: verify/LC-LowestCommonAncestor-HLD.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-LowestCommonAncestor.test.cpp
-    title: verify/LC-LowestCommonAncestor.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
@@ -99,16 +87,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TreeDiameter.test.cpp
-    title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
     title: verify/LC-VertexAddSubtreeSum-EulerTour.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,9 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     links: []
@@ -132,7 +117,7 @@ data:
     #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
     \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
     using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
-    \ const ll INF = (1LL << 62) - (1LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\
+    \ const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\
     \n\ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n';\
     \ return flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\"\
     ) << '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
@@ -286,15 +271,12 @@ data:
   requiredBy:
   - Library/TemplateExtend.hpp
   - Library/origin.cpp
-  timestamp: '2025-05-30 15:32:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2025-05-30 20:02:37+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
-  - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/AOJ-GRL-5-B.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
   - verify/AOJ-DSL-2-B.test.cpp
@@ -309,7 +291,6 @@ data:
   - verify/LC-RangeAffineRangeSum.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
   - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
@@ -323,7 +304,6 @@ data:
   - verify/AOJ-0560.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-CycleDetection.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
 documentation_of: Library/Template.hpp
 layout: document
 redirect_from:

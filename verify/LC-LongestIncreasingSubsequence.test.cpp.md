@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -31,7 +31,7 @@ data:
     \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
     #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
     \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
-    \ << 62) - (1LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\n\ninline bool\
+    \ << 62) - (3LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\n\ninline bool\
     \ YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\n\
     inline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return\
     \ flag;}\ntemplate<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
@@ -142,7 +142,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LongestIncreasingSubsequence.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 19:43:59+09:00'
+  timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LongestIncreasingSubsequence.test.cpp
