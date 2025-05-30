@@ -33,6 +33,7 @@
 "verify/LC-ShortestPath.test.cpp": "2025-05-30 20:02:37 +0900",
 "verify/LC-StronglyConnectedComponents.test.cpp": "2025-05-30 20:02:37 +0900",
 "verify/LC-TreeDiameter.test.cpp": "2025-05-30 20:02:37 +0900",
+"verify/LC-TreePathCompositeSum.test.cpp": "2025-05-30 21:11:18 +0900",
 "verify/LC-Unionfind.test.cpp": "2025-05-30 20:02:37 +0900",
 "verify/LC-UnionfindWithPotential.test.cpp": "2025-05-30 20:02:37 +0900",
 "verify/LC-VertexAddPathSum.test.cpp": "2025-05-30 20:57:50 +0900",
