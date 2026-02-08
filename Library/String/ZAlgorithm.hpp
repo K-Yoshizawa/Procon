@@ -1,7 +1,6 @@
+#pragma once
 
-
-#include <bits/stdc++.h>
-using namespace std;
+#include "../Common.hpp"
 
 vector<int> Z_Algorithm(string S){
     vector<int> Z(S.size(), 0);
