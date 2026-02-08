@@ -19,11 +19,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
     links: []
-  bundledCode: "#line 1 \"Library/Tree/RerootingDP.hpp\"\n/**\n * @file RerootingDP.hpp\n\
-    \ * @brief Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP\n * @version 1.0\n * @date\
-    \ 2024-09-03\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
+  bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
     \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
@@ -101,74 +98,47 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 9 \"Library/Tree/RerootingDP.hpp\"\
-    \n\ntemplate<typename CostType, typename Monoid>\nclass RerootingDP{\n    public:\n\
-    \    using F = function<Monoid(Monoid, Monoid, Vertex)>;\n    using G = function<Monoid(Monoid,\
-    \ CostType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n    using\
-    \ Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
-    \ CostType)>;\n\n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\
-    \u5168\u65B9\u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u8FBA\u5C5E\u6027\u306E\u307F\
-    )\n     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid,\
-    \ Monoid) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\
-    \u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType) -> Monoid` : `Monoid`\
-    \ \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n \
-    \    * @param monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n\
-    \    RerootingDP(Graph<CostType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity,\
-    \ Vertex r = 0) :\n            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree,\
-    \ r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
+    \  return ret;\n}\n#line 2 \"Library/Tree/RerootingDP.hpp\"\n\ntemplate<typename\
+    \ CostType, typename Monoid>\nclass RerootingDP{\n    public:\n    using F = function<Monoid(Monoid,\
+    \ Monoid, Vertex)>;\n    using G = function<Monoid(Monoid, CostType, Vertex)>;\n\
+    \    using H = function<Monoid(Monoid, Vertex)>;\n    using Fsub = function<Monoid(Monoid,\
+    \ Monoid)>;\n    using Gsub = function<Monoid(Monoid, CostType)>;\n\n    RerootingDP(Graph<CostType>\
+    \ &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :\n\
+    \            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)),\
+    \ cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
     \            merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n       \
     \ merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};\n    \
     \    add_ = [&](Monoid x, CostType y, Vertex i){return add_sub_(x, y);};\n   \
     \     finalize_ = [](Monoid x, Vertex i){return x;};\n        solve(r);\n    }\n\
-    \n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\u4F4D\
-    \u6728DP\u3092\u884C\u3046\u3002(\u9802\u70B9\u5C5E\u6027\u3092\u542B\u3080)\n\
-    \     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid, Monoid,\
-    \ Vertex) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\
-    \u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType, Vertex) -> Monoid` :\
-    \ `Monoid` \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\
-    \n     * @param finalize `(Monoid, Vertex) -> Monoid` : `Monoid` \u306B\u9802\u70B9\
-    \ `Vertex` \u304C\u6839\u306E\u3068\u304D\u306E\u51E6\u7406\u3002\n     * @param\
-    \ monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n    RerootingDP(Graph<CostType>\
-    \ &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r =\
-    \ 0) :\n            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree,\
-    \ r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
-    \            merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){\n\
-    \        solve(r);\n    }\n\n    /**\n     * @brief \u5168\u9802\u70B9\u306B\u95A2\
-    \u3059\u308BDP\u306E\u914D\u5217\u3092\u53D6\u5F97\u3059\u308B\u3002\n     */\n\
-    \    vector<Monoid> &get_all_answer(){\n        return dp_;\n    }\n\n    Monoid\
-    \ operator[](Vertex v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex\
-    \ v) const {\n        return dp_[v];\n    }\n\n    void Print() const {\n    \
-    \    cerr << \"# dp table :\";\n        for(int i = 0; i < n; ++i){\n        \
-    \    cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr\
-    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < n; ++i){\n \
-    \           cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
-    \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
-    \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << '\\n';\n            cerr << \"#    left_cum   :\";\n            for(int j\
-    \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << '\\n';\n            cerr << \"#    right_cum\
-    \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
-    \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ '\\n';\n        }\n    }\n\n    private:\n    Graph<CostType> &T;\n    int n;\n\
-    \    vector<Vertex> parent;\n    vector<CostType> cost;\n    vector<vector<Vertex>>\
-    \ child;\n    \n    vector<Monoid> dp_;\n    vector<vector<Monoid>> subtree_dp_,\
-    \ left_cum_, right_cum_;\n\n    const Monoid id_;\n\n    F merge_;\n    G add_;\n\
-    \    H finalize_;\n    const Fsub merge_sub_;\n    const Gsub add_sub_;\n\n  \
-    \  Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n     \
-    \   for(auto u : child[v]){\n            Monoid res = dfs(u);\n            subtree_dp_[v].push_back(res);\n\
-    \            ret = merge_(ret, res, v);\n        }\n        if(root) ret = finalize_(ret,\
-    \ v);\n        else ret = add_(ret, cost[v], v);\n        return ret;\n    }\n\
-    \n    void solve(Vertex r){\n        dp_.resize(n, id_);\n        subtree_dp_.resize(n,\
+    \n    RerootingDP(Graph<CostType> &tree, F merge, G add, H finalize, const Monoid\
+    \ monoid_identity, Vertex r = 0) :\n            T(tree), n(tree.VertexSize()),\
+    \ parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree,\
+    \ r)),\n            merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){\n\
+    \        solve(r);\n    }\n\n    vector<Monoid> &GetAllAnswer(){\n        return\
+    \ dp_;\n    }\n\n    Monoid operator[](Vertex v){\n        return dp_[v];\n  \
+    \  }\n\n    const Monoid operator[](Vertex v) const {\n        return dp_[v];\n\
+    \    }\n\n    void Print() const {\n        cerr << \"# dp table :\";\n      \
+    \  for(int i = 0; i < n; ++i){\n            cerr << \" \" << dp_[i];\n       \
+    \ }\n        cerr << '\\n';\n        cerr << \"# subtree_dp table\" << '\\n';\n\
+    \        for(int i = 0; i < n; ++i){\n            cerr << \"# vertex \" << i <<\
+    \ '\\n';\n            cerr << \"#    subtree_dp :\";\n            for(int j =\
+    \ 0; j < subtree_dp_[i].size(); ++j){\n                cerr << \" \" << subtree_dp_[i][j];\n\
+    \            }\n            cerr << '\\n';\n            cerr << \"#    left_cum\
+    \   :\";\n            for(int j = 0; j < left_cum_[i].size(); ++j){\n        \
+    \        cerr << \" \" << left_cum_[i][j];\n            }\n            cerr <<\
+    \ '\\n';\n            cerr << \"#    right_cum  :\";\n            for(int j =\
+    \ 0; j < right_cum_[i].size(); ++j){\n                cerr << \" \" << right_cum_[i][j];\n\
+    \            }\n            cerr << '\\n';\n        }\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int n;\n    vector<Vertex> parent;\n    vector<CostType>\
+    \ cost;\n    vector<vector<Vertex>> child;\n    \n    vector<Monoid> dp_;\n  \
+    \  vector<vector<Monoid>> subtree_dp_, left_cum_, right_cum_;\n\n    const Monoid\
+    \ id_;\n\n    F merge_;\n    G add_;\n    H finalize_;\n    const Fsub merge_sub_;\n\
+    \    const Gsub add_sub_;\n\n    Monoid dfs(Vertex v, bool root = false){\n  \
+    \      Monoid ret = id_;\n        for(auto u : child[v]){\n            Monoid\
+    \ res = dfs(u);\n            subtree_dp_[v].push_back(res);\n            ret =\
+    \ merge_(ret, res, v);\n        }\n        if(root) ret = finalize_(ret, v);\n\
+    \        else ret = add_(ret, cost[v], v);\n        return ret;\n    }\n\n   \
+    \ void solve(Vertex r){\n        dp_.resize(n, id_);\n        subtree_dp_.resize(n,\
     \ vector<Monoid>{id_});\n        left_cum_.resize(n);\n        right_cum_.resize(n);\n\
     \n        dp_[r] = dfs(r, true);\n        int root_size = subtree_dp_[r].size();\n\
     \        left_cum_[r].resize(root_size + 1);\n        left_cum_[r].front() = id_;\n\
@@ -193,65 +163,47 @@ data:
     \ + 1], subtree_dp_[v][i], v);\n            }\n            for(int i = 0; i <\
     \ child[v].size(); ++i){\n                que.push({child[v][i], v, i + 1});\n\
     \            }\n        }\n    }\n};\n"
-  code: "/**\n * @file RerootingDP.hpp\n * @brief Rerooting DP - \u5168\u65B9\u4F4D\
-    \u6728 DP\n * @version 1.0\n * @date 2024-09-03\n */\n\n#include \"Tree.hpp\"\n\
-    \ntemplate<typename CostType, typename Monoid>\nclass RerootingDP{\n    public:\n\
-    \    using F = function<Monoid(Monoid, Monoid, Vertex)>;\n    using G = function<Monoid(Monoid,\
-    \ CostType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n    using\
-    \ Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
-    \ CostType)>;\n\n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\
-    \u5168\u65B9\u4F4D\u6728DP\u3092\u884C\u3046\u3002(\u8FBA\u5C5E\u6027\u306E\u307F\
-    )\n     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid,\
-    \ Monoid) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\
-    \u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType) -> Monoid` : `Monoid`\
-    \ \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\n \
-    \    * @param monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n\
-    \    RerootingDP(Graph<CostType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity,\
-    \ Vertex r = 0) :\n            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree,\
-    \ r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
-    \            merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n       \
-    \ merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};\n    \
-    \    add_ = [&](Monoid x, CostType y, Vertex i){return add_sub_(x, y);};\n   \
-    \     finalize_ = [](Monoid x, Vertex i){return x;};\n        solve(r);\n    }\n\
-    \n    /**\n     * @brief \u6728 `tree` \u306B\u5BFE\u3057\u3066\u5168\u65B9\u4F4D\
-    \u6728DP\u3092\u884C\u3046\u3002(\u9802\u70B9\u5C5E\u6027\u3092\u542B\u3080)\n\
-    \     * @param tree \u6839\u4ED8\u304D\u6728\n     * @param merge `(Monoid, Monoid,\
-    \ Vertex) -> Monoid` : `Monoid` \u540C\u58EB\u306B\u95A2\u3059\u308B\u4E8C\u9805\
-    \u6F14\u7B97\u3002\n     * @param add `(Monoid, CostType, Vertex) -> Monoid` :\
-    \ `Monoid` \u3068 `CostType` \u306B\u95A2\u3059\u308B\u4E8C\u9805\u6F14\u7B97\u3002\
-    \n     * @param finalize `(Monoid, Vertex) -> Monoid` : `Monoid` \u306B\u9802\u70B9\
-    \ `Vertex` \u304C\u6839\u306E\u3068\u304D\u306E\u51E6\u7406\u3002\n     * @param\
-    \ monoid_identity `Monoid` \u306E\u5358\u4F4D\u5143\u3002\n     */\n    RerootingDP(Graph<CostType>\
+  code: "#include \"Tree.hpp\"\n\ntemplate<typename CostType, typename Monoid>\nclass\
+    \ RerootingDP{\n    public:\n    using F = function<Monoid(Monoid, Monoid, Vertex)>;\n\
+    \    using G = function<Monoid(Monoid, CostType, Vertex)>;\n    using H = function<Monoid(Monoid,\
+    \ Vertex)>;\n    using Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub\
+    \ = function<Monoid(Monoid, CostType)>;\n\n    RerootingDP(Graph<CostType> &tree,\
+    \ Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :\n      \
+    \      T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree,\
+    \ r)), child(RootedTreeAdjacentList(tree, r)),\n            merge_sub_(merge),\
+    \ add_sub_(add), id_(monoid_identity){\n        merge_ = [&](Monoid x, Monoid\
+    \ y, Vertex i){return merge_sub_(x, y);};\n        add_ = [&](Monoid x, CostType\
+    \ y, Vertex i){return add_sub_(x, y);};\n        finalize_ = [](Monoid x, Vertex\
+    \ i){return x;};\n        solve(r);\n    }\n\n    RerootingDP(Graph<CostType>\
     \ &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r =\
     \ 0) :\n            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree,\
     \ r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
     \            merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){\n\
-    \        solve(r);\n    }\n\n    /**\n     * @brief \u5168\u9802\u70B9\u306B\u95A2\
-    \u3059\u308BDP\u306E\u914D\u5217\u3092\u53D6\u5F97\u3059\u308B\u3002\n     */\n\
-    \    vector<Monoid> &get_all_answer(){\n        return dp_;\n    }\n\n    Monoid\
-    \ operator[](Vertex v){\n        return dp_[v];\n    }\n\n    const Monoid operator[](Vertex\
-    \ v) const {\n        return dp_[v];\n    }\n\n    void Print() const {\n    \
-    \    cerr << \"# dp table :\";\n        for(int i = 0; i < n; ++i){\n        \
-    \    cerr << \" \" << dp_[i];\n        }\n        cerr << '\\n';\n        cerr\
-    \ << \"# subtree_dp table\" << '\\n';\n        for(int i = 0; i < n; ++i){\n \
-    \           cerr << \"# vertex \" << i << '\\n';\n            cerr << \"#    subtree_dp\
-    \ :\";\n            for(int j = 0; j < subtree_dp_[i].size(); ++j){\n        \
-    \        cerr << \" \" << subtree_dp_[i][j];\n            }\n            cerr\
-    \ << '\\n';\n            cerr << \"#    left_cum   :\";\n            for(int j\
-    \ = 0; j < left_cum_[i].size(); ++j){\n                cerr << \" \" << left_cum_[i][j];\n\
-    \            }\n            cerr << '\\n';\n            cerr << \"#    right_cum\
-    \  :\";\n            for(int j = 0; j < right_cum_[i].size(); ++j){\n        \
-    \        cerr << \" \" << right_cum_[i][j];\n            }\n            cerr <<\
-    \ '\\n';\n        }\n    }\n\n    private:\n    Graph<CostType> &T;\n    int n;\n\
-    \    vector<Vertex> parent;\n    vector<CostType> cost;\n    vector<vector<Vertex>>\
-    \ child;\n    \n    vector<Monoid> dp_;\n    vector<vector<Monoid>> subtree_dp_,\
-    \ left_cum_, right_cum_;\n\n    const Monoid id_;\n\n    F merge_;\n    G add_;\n\
-    \    H finalize_;\n    const Fsub merge_sub_;\n    const Gsub add_sub_;\n\n  \
-    \  Monoid dfs(Vertex v, bool root = false){\n        Monoid ret = id_;\n     \
-    \   for(auto u : child[v]){\n            Monoid res = dfs(u);\n            subtree_dp_[v].push_back(res);\n\
-    \            ret = merge_(ret, res, v);\n        }\n        if(root) ret = finalize_(ret,\
-    \ v);\n        else ret = add_(ret, cost[v], v);\n        return ret;\n    }\n\
-    \n    void solve(Vertex r){\n        dp_.resize(n, id_);\n        subtree_dp_.resize(n,\
+    \        solve(r);\n    }\n\n    vector<Monoid> &GetAllAnswer(){\n        return\
+    \ dp_;\n    }\n\n    Monoid operator[](Vertex v){\n        return dp_[v];\n  \
+    \  }\n\n    const Monoid operator[](Vertex v) const {\n        return dp_[v];\n\
+    \    }\n\n    void Print() const {\n        cerr << \"# dp table :\";\n      \
+    \  for(int i = 0; i < n; ++i){\n            cerr << \" \" << dp_[i];\n       \
+    \ }\n        cerr << '\\n';\n        cerr << \"# subtree_dp table\" << '\\n';\n\
+    \        for(int i = 0; i < n; ++i){\n            cerr << \"# vertex \" << i <<\
+    \ '\\n';\n            cerr << \"#    subtree_dp :\";\n            for(int j =\
+    \ 0; j < subtree_dp_[i].size(); ++j){\n                cerr << \" \" << subtree_dp_[i][j];\n\
+    \            }\n            cerr << '\\n';\n            cerr << \"#    left_cum\
+    \   :\";\n            for(int j = 0; j < left_cum_[i].size(); ++j){\n        \
+    \        cerr << \" \" << left_cum_[i][j];\n            }\n            cerr <<\
+    \ '\\n';\n            cerr << \"#    right_cum  :\";\n            for(int j =\
+    \ 0; j < right_cum_[i].size(); ++j){\n                cerr << \" \" << right_cum_[i][j];\n\
+    \            }\n            cerr << '\\n';\n        }\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int n;\n    vector<Vertex> parent;\n    vector<CostType>\
+    \ cost;\n    vector<vector<Vertex>> child;\n    \n    vector<Monoid> dp_;\n  \
+    \  vector<vector<Monoid>> subtree_dp_, left_cum_, right_cum_;\n\n    const Monoid\
+    \ id_;\n\n    F merge_;\n    G add_;\n    H finalize_;\n    const Fsub merge_sub_;\n\
+    \    const Gsub add_sub_;\n\n    Monoid dfs(Vertex v, bool root = false){\n  \
+    \      Monoid ret = id_;\n        for(auto u : child[v]){\n            Monoid\
+    \ res = dfs(u);\n            subtree_dp_[v].push_back(res);\n            ret =\
+    \ merge_(ret, res, v);\n        }\n        if(root) ret = finalize_(ret, v);\n\
+    \        else ret = add_(ret, cost[v], v);\n        return ret;\n    }\n\n   \
+    \ void solve(Vertex r){\n        dp_.resize(n, id_);\n        subtree_dp_.resize(n,\
     \ vector<Monoid>{id_});\n        left_cum_.resize(n);\n        right_cum_.resize(n);\n\
     \n        dp_[r] = dfs(r, true);\n        int root_size = subtree_dp_[r].size();\n\
     \        left_cum_[r].resize(root_size + 1);\n        left_cum_[r].front() = id_;\n\
@@ -283,14 +235,119 @@ data:
   isVerificationFile: false
   path: Library/Tree/RerootingDP.hpp
   requiredBy: []
-  timestamp: '2025-05-30 21:11:18+09:00'
+  timestamp: '2026-02-08 19:36:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreePathCompositeSum.test.cpp
 documentation_of: Library/Tree/RerootingDP.hpp
 layout: document
-redirect_from:
-- /library/Library/Tree/RerootingDP.hpp
-- /library/Library/Tree/RerootingDP.hpp.html
-title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
+title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
+---
+
+# Rerooting DP - 全方位木DP
+
+木のすべての頂点を根としたときの DP の値を効率的に計算するデータ構造です。
+
+各頂点を根とした場合の DP を愚直に計算すると $\textrm{O}(N^2)$ かかりますが、全方位木 DP を用いることで $\textrm{O}(N)$ で計算できます。
+
+## Function
+
+### Constructor (辺属性のみ)
+
+```
+RerootingDP(Graph<CostType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0)
+```
+
+- 木 `tree` に対して全方位木 DP を行います（辺属性のみを考慮）。
+- `merge`: `(Monoid, Monoid) -> Monoid` - モノイド同士の二項演算
+- `add`: `(Monoid, CostType) -> Monoid` - モノイドと辺コストの二項演算
+- `monoid_identity`: モノイドの単位元
+- `r`: 初期の根（デフォルトは頂点 0）
+
+**型定義**
+- `Fsub = function<Monoid(Monoid, Monoid)>`
+- `Gsub = function<Monoid(Monoid, CostType)>`
+
+**制約**
+
+- $1 \le N \le 10^5$
+- `merge` と `add` はモノイドの演算を満たす
+
+**計算量**
+
+- $\textrm{O}(N)$
+
+---
+
+### Constructor (頂点属性を含む)
+
+```
+RerootingDP(Graph<CostType> &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0)
+```
+
+- 木 `tree` に対して全方位木 DP を行います（頂点属性を含む）。
+- `merge`: `(Monoid, Monoid, Vertex) -> Monoid` - モノイド同士の二項演算（頂点情報を利用）
+- `add`: `(Monoid, CostType, Vertex) -> Monoid` - モノイドと辺コストの二項演算（頂点情報を利用）
+- `finalize`: `(Monoid, Vertex) -> Monoid` - 頂点が根のときの最終処理
+- `monoid_identity`: モノイドの単位元
+- `r`: 初期の根（デフォルトは頂点 0）
+
+**型定義**
+- `F = function<Monoid(Monoid, Monoid, Vertex)>`
+- `G = function<Monoid(Monoid, CostType, Vertex)>`
+- `H = function<Monoid(Monoid, Vertex)>`
+
+**制約**
+
+- $1 \le N \le 10^5$
+- `merge`, `add`, `finalize` はモノイドの演算を満たす
+
+**計算量**
+
+- $\textrm{O}(N)$
+
+---
+
+### GetAllAnswer
+
+```
+vector<Monoid> &GetAllAnswer()
+```
+
+- 全頂点に関する DP の結果の配列を取得します。
+- 配列の $i$ 番目の要素は、頂点 $i$ を根としたときの DP の値です。
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+
+### operator[]
+
+```
+Monoid operator[](Vertex v)
+const Monoid operator[](Vertex v) const
+```
+
+- 頂点 $v$ を根としたときの DP の値を返します。
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+
+### Print
+
+```
+void Print() const
+```
+
+- デバッグ用に DP テーブルの内容を標準エラー出力に出力します。
+
+**計算量**
+
+- $\textrm{O}(N)$
+
 ---

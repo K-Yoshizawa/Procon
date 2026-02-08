@@ -102,18 +102,8 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 2 \"Library/Tree/TreeDiameter.hpp\"\
-    \n\ntemplate<typename CostType>\nclass TreeDiameter{\n    public:\n    TreeDiameter(Graph<CostType>\
+    \  return ret;\n}\n#line 2 \"Library/Tree/TreeDiameter.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass TreeDiameter{\n    public:\n    TreeDiameter(Graph<CostType>\
     \ &tree) : T(tree){\n        int n = T.VertexSize(), s = 0;\n        dist_s_ =\
     \ CalculateTreeDistance(T, s);\n        s = distance(dist_s_.begin(), max_element(dist_s_.begin(),\
     \ dist_s_.end()));\n        dist_s_ = CalculateTreeDistance(T, s);\n        vector<int>\
@@ -147,7 +137,7 @@ data:
   isVerificationFile: true
   path: verify/LC-TreeDiameter.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
+  timestamp: '2026-02-08 19:12:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreeDiameter.test.cpp

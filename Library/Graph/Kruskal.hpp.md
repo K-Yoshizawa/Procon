@@ -12,7 +12,8 @@ data:
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
-    title: Library/Graph/GraphMisc.hpp
+    title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\
+      \u30A3"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -118,8 +119,62 @@ data:
   - verify/LC-MinimumSpanningTree.test.cpp
 documentation_of: Library/Graph/Kruskal.hpp
 layout: document
-redirect_from:
-- /library/Library/Graph/Kruskal.hpp
-- /library/Library/Graph/Kruskal.hpp.html
-title: Library/Graph/Kruskal.hpp
+title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
+---
+
+# Kruskal's Algorithm - クラスカル法
+
+グラフの最小全域木（Minimum Spanning Tree, MST）をクラスカル法により求めます。
+
+辺を重みの小さい順にソートし、Union-Find を用いて閉路を作らないように辺を追加していきます。
+
+## Function
+
+### Constructor
+
+```
+Kruskal(Graph<CostType> &graph)
+```
+
+- 無向グラフ `graph` の最小全域木を構築します。
+- グラフが連結でない場合は、最小全域森（Minimum Spanning Forest）を構築します。
+
+**制約**
+
+- $G$ は無向グラフ
+- $1 \le \lvert V \rvert \le 10^5$
+- $0 \le \lvert E \rvert \le 10^5$
+
+**計算量**
+
+- $\textrm{O}(\lvert E \rvert \log \lvert E \rvert)$
+
+---
+
+### GetEdgeSet
+
+```
+vector<Edge<CostType>> &GetEdgeSet()
+```
+
+- 最小全域木（または最小全域森）を構成する辺のリストを返します。
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+
+### GetCost
+
+```
+CostType GetCost() const
+```
+
+- 最小全域木（または最小全域森）の総コスト（辺の重みの合計）を返します。
+
+**計算量**
+
+- $\textrm{O}(1)$
+
 ---

@@ -28,8 +28,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\
-      \u901A\u7956\u5148\u3092\u8FD4\u3059\u3002"
     links: []
   bundledCode: "#line 2 \"Library/Tree/LowestCommonAncestor.hpp\"\n\n#line 2 \"Library/Tree/Tree.hpp\"\
     \n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n\
@@ -109,38 +107,24 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    public:\n \
-    \   LowestCommonAncestor(Graph<CostType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n\
-    \        int n = T.VertexSize();\n        height_ = 1;\n        while((1 << height_)\
-    \ < n) ++height_;\n        auto par = CalculateTreeParent(T);\n        parent_.resize(height_,\
-    \ vector<Vertex>(n, -1));\n        for(Vertex i = 0; i < n; ++i){\n          \
-    \  parent_[0][i] = par[i];\n        }\n        for(int k = 0; k + 1 < height_;\
-    \ ++k){\n            for(Vertex i = 0; i < n; ++i){\n                if(parent_[k][i]\
-    \ < 0) parent_[k + 1][i] = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
-    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
-    \u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\
-    \n     * @param u \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9\
-    \ `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex\
-    \ u, Vertex v){\n        if(depth_[u] < depth_[v]) swap(u, v);\n        for(int\
-    \ k = 0; k < height_; ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n\
-    \                u = parent_[k][u];\n            }\n        }\n        if(u ==\
-    \ v) return u;\n        for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u]\
-    \ != parent_[k][v]){\n                u = parent_[k][u];\n                v =\
-    \ parent_[k][v];\n            }\n        }\n        return parent_[0][u];\n  \
-    \  }\n\n    private:\n    Graph<CostType> &T;\n    int height_;\n    vector<int>\
-    \ depth_;\n    vector<vector<Vertex>> parent_;\n};\n"
+    \  return ret;\n}\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct LowestCommonAncestor{\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n        int n = T.VertexSize();\n\
+    \        height_ = 1;\n        while((1 << height_) < n) ++height_;\n        auto\
+    \ par = CalculateTreeParent(T);\n        parent_.resize(height_, vector<Vertex>(n,\
+    \ -1));\n        for(Vertex i = 0; i < n; ++i){\n            parent_[0][i] = par[i];\n\
+    \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
+    \ i = 0; i < n; ++i){\n                if(parent_[k][i] < 0) parent_[k + 1][i]\
+    \ = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
+    \            }\n        }\n    }\n\n    Vertex Query(Vertex u, Vertex v){\n  \
+    \      if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
+    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
+    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
+    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
+    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
+    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int height_;\n    vector<int> depth_;\n    vector<vector<Vertex>>\
+    \ parent_;\n};\n"
   code: "#pragma once\n\n#include \"Tree.hpp\"\n\ntemplate<typename CostType>\nstruct\
     \ LowestCommonAncestor{\n    public:\n    LowestCommonAncestor(Graph<CostType>\
     \ &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n        int n = T.VertexSize();\n\
@@ -150,19 +134,15 @@ data:
     \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
     \ i = 0; i < n; ++i){\n                if(parent_[k][i] < 0) parent_[k + 1][i]\
     \ = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
-    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
-    \u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\
-    \n     * @param u \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9\
-    \ `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex\
-    \ u, Vertex v){\n        if(depth_[u] < depth_[v]) swap(u, v);\n        for(int\
-    \ k = 0; k < height_; ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n\
-    \                u = parent_[k][u];\n            }\n        }\n        if(u ==\
-    \ v) return u;\n        for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u]\
-    \ != parent_[k][v]){\n                u = parent_[k][u];\n                v =\
-    \ parent_[k][v];\n            }\n        }\n        return parent_[0][u];\n  \
-    \  }\n\n    private:\n    Graph<CostType> &T;\n    int height_;\n    vector<int>\
-    \ depth_;\n    vector<vector<Vertex>> parent_;\n};"
+    \            }\n        }\n    }\n\n    Vertex Query(Vertex u, Vertex v){\n  \
+    \      if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
+    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
+    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
+    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
+    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
+    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int height_;\n    vector<int> depth_;\n    vector<vector<Vertex>>\
+    \ parent_;\n};"
   dependsOn:
   - Library/Tree/Tree.hpp
   - Library/Graph/Graph.hpp
@@ -171,16 +151,57 @@ data:
   path: Library/Tree/LowestCommonAncestor.hpp
   requiredBy:
   - Library/Tree/AuxiliaryTree.hpp
-  timestamp: '2025-05-02 02:04:34+09:00'
+  timestamp: '2026-02-08 19:12:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-LowestCommonAncestor.test.cpp
   - verify/AOJ-GRL-5-C.test.cpp
 documentation_of: Library/Tree/LowestCommonAncestor.hpp
 layout: document
-redirect_from:
-- /library/Library/Tree/LowestCommonAncestor.hpp
-- /library/Library/Tree/LowestCommonAncestor.hpp.html
-title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\
-  \u5148\u3092\u8FD4\u3059\u3002"
+title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
+---
+
+# Lowest Common Ancestor - 最小共通祖先
+
+木上の2つの頂点の最小共通祖先（LCA）を効率的に求めるデータ構造です。
+
+ダブリングを用いて前処理を行い、各クエリを高速に処理します。
+
+## Function
+
+### Constructor
+
+```
+LowestCommonAncestor(Graph<CostType> &tree)
+```
+
+- 木 `tree` に対して LCA を求めるための前処理を行います。
+
+**制約**
+
+- $1 \le N \le 10^5$
+
+**計算量**
+
+- $\textrm{O}(N \log N)$
+
+---
+
+### Query
+
+```
+Vertex Query(Vertex u, Vertex v)
+```
+
+- 頂点 $u$ と頂点 $v$ の最小共通祖先を返します。
+- **0-index** で頂点を指定します。
+
+**制約**
+
+- $0 \le u, v < N$
+
+**計算量**
+
+- $\textrm{O}(\log N)$
+
 ---

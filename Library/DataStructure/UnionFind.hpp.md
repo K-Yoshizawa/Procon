@@ -7,7 +7,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: Library/Graph/Kruskal.hpp
+    title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-1-A.test.cpp

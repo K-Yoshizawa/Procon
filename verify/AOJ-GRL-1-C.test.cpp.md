@@ -9,14 +9,15 @@ data:
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
-    title: Library/Graph/GraphMisc.hpp
+    title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\
+      \u30A3"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
       \u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
-    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -28,17 +29,15 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C
   bundledCode: "#line 1 \"verify/AOJ-GRL-1-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.10\n * @date 2025-03-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
+    \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
+    \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
     \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
     \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
     #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
     \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\n\
-    \ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return\
+    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\n\
+    inline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return\
     \ flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") <<\
     \ '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
     \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
@@ -196,7 +195,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-C.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
+  timestamp: '2026-02-08 19:40:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-C.test.cpp

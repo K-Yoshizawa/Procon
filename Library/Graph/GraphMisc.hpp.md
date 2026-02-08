@@ -13,10 +13,10 @@ data:
     title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: Library/Graph/Kruskal.hpp
+    title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
-    title: Library/Graph/StronglyConnectedComponents.hpp
+    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
@@ -125,8 +125,86 @@ data:
   - verify/LC-MinimumSpanningTree.test.cpp
 documentation_of: Library/Graph/GraphMisc.hpp
 layout: document
-redirect_from:
-- /library/Library/Graph/GraphMisc.hpp
-- /library/Library/Graph/GraphMisc.hpp.html
-title: Library/Graph/GraphMisc.hpp
+title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3"
+---
+
+# Graph Utilities - グラフユーティリティ
+
+グラフ構造を変換・操作するためのユーティリティ関数群です。
+
+## Function
+
+### ConvertEdgeSet
+
+```
+template<typename CostType>
+vector<Edge<CostType>> ConvertEdgeSet(const Graph<CostType> &G)
+```
+
+- グラフ $G$ の辺集合を配列として取得します。
+- 無向グラフの場合、各辺は1回のみ含まれます（重複排除）。
+
+**制約**
+
+- $1 \le \lvert V \rvert \le 10^5$
+- $0 \le \lvert E \rvert \le 10^5$
+
+**計算量**
+
+- $\textrm{O}(\lvert V \rvert + \lvert E \rvert)$
+
+**戻り値**
+
+- グラフの辺のリスト
+
+---
+
+### ConvertDistanceMatrix
+
+```
+template<typename CostType>
+vector<vector<CostType>> ConvertDistanceMatrix(const Graph<CostType> &G)
+```
+
+- グラフ $G$ を距離行列（隣接行列）に変換します。
+- 辺が存在しない場合は `INF` が設定されます。
+- 自己ループは距離 $0$ として設定されます。
+
+**制約**
+
+- $1 \le \lvert V \rvert \le 10^3$（メモリ制約に注意）
+
+**計算量**
+
+- $\textrm{O}(\lvert V \rvert^2)$
+
+**戻り値**
+
+- $\lvert V \rvert \times \lvert V \rvert$ の距離行列
+
+---
+
+### ReverseGraph
+
+```
+template<typename CostType>
+Graph<CostType> ReverseGraph(const Graph<CostType> &G)
+```
+
+- 有向グラフ $G$ のすべての辺の向きを反転したグラフを返します。
+- 辺 $(u, v)$ は辺 $(v, u)$ になります。
+
+**制約**
+
+- $1 \le \lvert V \rvert \le 10^5$
+- $0 \le \lvert E \rvert \le 10^5$
+
+**計算量**
+
+- $\textrm{O}(\lvert V \rvert + \lvert E \rvert)$
+
+**戻り値**
+
+- 辺を反転したグラフ
+
 ---

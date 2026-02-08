@@ -95,32 +95,22 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 3 \"Library/String/Trie.hpp\"\
-    \n\ntemplate<int MAXSIZE = 500010>\nclass Trie{\n    public:\n    Trie(vector<string>\
-    \ &S_) : S(S_), n((int)S_.size()), v(1), vertex_(n), child_(MAXSIZE){\n      \
-    \  for(int i = 0; i < MAXSIZE; ++i){\n            child_[i].fill(-1);\n      \
-    \  }\n        for(int i = 0; i < n; ++i){\n            int p = 0, m = S[i].size();\n\
-    \            vertex_[i].resize(m + 1, 0);\n            for(int j = 0; j < m; ++j){\n\
-    \                int c = S[i][j] - 'a';\n                if(child_[p][c] == -1){\n\
-    \                    child_[p][c] = v++;\n                }\n                p\
-    \ = child_[p][c];\n                vertex_[i][j + 1] = p;\n            }\n   \
-    \     }\n    }\n\n    Graph<int32_t> Build() const {\n        Graph<int32_t> ret(v);\n\
-    \        for(int i = 0; i < v; ++i){\n            for(int j = 0; j < 26; ++j){\n\
-    \                if(child_[i][j] == -1) continue;\n                ret.AddUndirectedEdge(i,\
-    \ child_[i][j]);\n            }\n        }\n        return ret;\n    }\n\n   \
-    \ vector<int> &operator[](const int i){\n        return vertex_[i];\n    }\n\n\
-    \    private:\n    vector<string> &S;\n    int n, v;\n    vector<vector<int>>\
-    \ vertex_;\n    vector<array<int, 26>> child_;\n};\n"
+    \  return ret;\n}\n#line 3 \"Library/String/Trie.hpp\"\n\ntemplate<int MAXSIZE\
+    \ = 500010>\nclass Trie{\n    public:\n    Trie(vector<string> &S_) : S(S_), n((int)S_.size()),\
+    \ v(1), vertex_(n), child_(MAXSIZE){\n        for(int i = 0; i < MAXSIZE; ++i){\n\
+    \            child_[i].fill(-1);\n        }\n        for(int i = 0; i < n; ++i){\n\
+    \            int p = 0, m = S[i].size();\n            vertex_[i].resize(m + 1,\
+    \ 0);\n            for(int j = 0; j < m; ++j){\n                int c = S[i][j]\
+    \ - 'a';\n                if(child_[p][c] == -1){\n                    child_[p][c]\
+    \ = v++;\n                }\n                p = child_[p][c];\n             \
+    \   vertex_[i][j + 1] = p;\n            }\n        }\n    }\n\n    Graph<int32_t>\
+    \ Build() const {\n        Graph<int32_t> ret(v);\n        for(int i = 0; i <\
+    \ v; ++i){\n            for(int j = 0; j < 26; ++j){\n                if(child_[i][j]\
+    \ == -1) continue;\n                ret.AddUndirectedEdge(i, child_[i][j]);\n\
+    \            }\n        }\n        return ret;\n    }\n\n    vector<int> &operator[](const\
+    \ int i){\n        return vertex_[i];\n    }\n\n    private:\n    vector<string>\
+    \ &S;\n    int n, v;\n    vector<vector<int>> vertex_;\n    vector<array<int,\
+    \ 26>> child_;\n};\n"
   code: "#include \"../Common.hpp\"\n#include \"../Tree/Tree.hpp\"\n\ntemplate<int\
     \ MAXSIZE = 500010>\nclass Trie{\n    public:\n    Trie(vector<string> &S_) :\
     \ S(S_), n((int)S_.size()), v(1), vertex_(n), child_(MAXSIZE){\n        for(int\
@@ -144,13 +134,72 @@ data:
   isVerificationFile: false
   path: Library/String/Trie.hpp
   requiredBy: []
-  timestamp: '2025-05-02 02:04:34+09:00'
+  timestamp: '2026-02-08 19:12:56+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/String/Trie.hpp
 layout: document
-redirect_from:
-- /library/Library/String/Trie.hpp
-- /library/Library/String/Trie.hpp.html
-title: Library/String/Trie.hpp
+title: "Trie - \u30C8\u30E9\u30A4\u6728"
+---
+
+# Trie - トライ木
+
+文字列の集合を効率的に管理するデータ構造です。複数の文字列の共通接頭辞を共有することで省スペース化を図ります。
+
+## Function
+
+### Constructor
+
+```
+Trie(vector<string> &S_)
+```
+
+- 文字列の配列 $S$ からトライ木を構築します。
+- 各文字列は英小文字のみで構成されている必要があります。
+
+**制約**
+
+- $1 \le \sum \lvert S_i \rvert \le 5 \times 10^5$
+- 各文字列は英小文字のみで構成される
+
+**計算量**
+
+- $\textrm{O}(\sum \lvert S_i \rvert)$
+
+---
+
+### Build
+
+```
+Graph<int32_t> Build() const
+```
+
+- トライ木をグラフ構造として返します。
+- 各ノードは頂点として、親子関係は辺として表現されます。
+- 返されるグラフは無向グラフです。
+
+**計算量**
+
+- $\textrm{O}(V)$ （$V$ はトライ木の頂点数）
+
+---
+
+### operator[]
+
+```
+vector<int> &operator[](const int i)
+```
+
+- 文字列 $S_i$ に対応するトライ木上のノード列を返します。
+- 返される配列の各要素は、文字列の各文字に対応するノード番号です。
+- 配列のサイズは $\lvert S_i \rvert + 1$ で、最初の要素（インデックス0）は根ノード（0）です。
+
+**制約**
+
+- $0 \le i < \lvert S \rvert$
+
+**計算量**
+
+- $\textrm{O}(1)$
+
 ---

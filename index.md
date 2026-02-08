@@ -8,7 +8,7 @@ data:
       title: Library/Common.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Template.hpp
-      title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+      title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
     - icon: ':warning:'
       path: Library/TemplateExtend.hpp
       title: Library/TemplateExtend.hpp
@@ -22,7 +22,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/BinaryIndexedTree.hpp
-      title: Library/DataStructure/BinaryIndexedTree.hpp
+      title: "Binary Indexed Tree (Fenwick Tree) - \u4E8C\u5206\u7D22\u5F15\u6728"
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/CumulativeSum2D.hpp
       title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
@@ -53,7 +53,7 @@ data:
       title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/CycleDetection.hpp
-      title: Library/Graph/CycleDetection.hpp
+      title: "Cycle Detection - \u9589\u8DEF\u691C\u51FA"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
@@ -62,16 +62,18 @@ data:
       title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/GraphMisc.hpp
-      title: Library/Graph/GraphMisc.hpp
+      title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\
+        \u30A3"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Kruskal.hpp
-      title: Library/Graph/Kruskal.hpp
+      title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/LowLink.hpp
-      title: Library/Graph/LowLink.hpp
+      title: "Low Link - \u95A2\u7BC0\u70B9\u3068\u6A4B\u306E\u691C\u51FA"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/StronglyConnectedComponents.hpp
-      title: Library/Graph/StronglyConnectedComponents.hpp
+      title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\
+        \u89E3"
     - icon: ':heavy_check_mark:'
       path: Library/Graph/WarshallFloyd.hpp
       title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
@@ -86,7 +88,10 @@ data:
     pages:
     - icon: ':warning:'
       path: Library/String/Trie.hpp
-      title: Library/String/Trie.hpp
+      title: "Trie - \u30C8\u30E9\u30A4\u6728"
+    - icon: ':warning:'
+      path: Library/String/ZAlgorithm.hpp
+      title: Z Algorithm
   - name: Library/Tree
     pages:
     - icon: ':warning:'
@@ -103,11 +108,10 @@ data:
       title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: Library/Tree/LowestCommonAncestor.hpp
-      title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
-        \u7956\u5148\u3092\u8FD4\u3059\u3002"
+      title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
     - icon: ':heavy_check_mark:'
       path: Library/Tree/RerootingDP.hpp
-      title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
+      title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
     - icon: ':heavy_check_mark:'
       path: Library/Tree/Tree.hpp
       title: "Tree - \u6728"
@@ -161,9 +165,6 @@ data:
     - icon: ':warning:'
       path: Library/unauthenticated/SlideMin.hpp
       title: "Slide-Min - \u30B9\u30E9\u30A4\u30C9\u6700\u5C0F\u5024"
-    - icon: ':warning:'
-      path: Library/unauthenticated/ZAlgorithm.hpp
-      title: Library/unauthenticated/ZAlgorithm.hpp
   verificationCategories:
   - name: verify
     pages:
@@ -294,8 +295,49 @@ layout: toppage
 
 # log K's Procon Library
 
-log K / lX57が競技プログラミングで使用しているライブラリです。
+log K / lX57 が競技プログラミングで使用しているライブラリです。
+
+---
+
+## 使用方法
+
+各ライブラリのドキュメントには以下の情報が含まれています：
+
+- **概要**: ライブラリの説明
+- **関数/メソッド**: 使用可能な関数やメソッドの詳細
+- **制約**: 入力の制約条件
+- **計算量**: 時間計算量と空間計算量
+
+### コード例
+
+各ライブラリは `#include` でインクルードして使用します：
+
+```cpp
+#include "Library/DataStructure/SegmentTree.hpp"
+```
+
+---
+
+## 命名規則
+
+本ライブラリでは以下の命名規則を採用しています：
+
+- **クラス名**: PascalCase (例: `SegmentTree`)
+- **メソッド名**: PascalCase (例: `Build`, `Product`)
+- **関数名**: PascalCase (例: `InputTree`, `CalculateTreeDepth`)
+- **変数名（private）**: snake_case with trailing underscore (例: `size_`, `data_`)
+- **パラメータ名**: snake_case (例: `merge`, `zero_index`)
+
+---
 
 ## 注意事項
 
-- `Library/unauthenticated` に含まれているファイルは、自動テストによる verify ができていないライブラリです。ただし、多くの場合は手動の verify を通過しています。
+- `Library/unauthenticated` に含まれているファイルは、自動テストによる verify ができていないライブラリや、現在は使われていないライブラリです。
+- すべてのライブラリは C++17 以降での使用を想定しています。
+- セグメント木などのデータ構造は、デフォルトで 1-index ですが、`zero_index = true` を指定することで 0-index でも使用できます。
+
+---
+
+## ライセンス
+
+このライブラリは競技プログラミングでの使用を目的として作成されています。

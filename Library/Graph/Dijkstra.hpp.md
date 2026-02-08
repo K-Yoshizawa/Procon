@@ -73,9 +73,9 @@ data:
     \ &e : G[u]){\n                if(dist_[e.to] > d + e.cost){\n               \
     \     dist_[e.to] = d + e.cost;\n                    prev_edge_[e.to] = e;\n \
     \                   que.emplace(dist_[e.to], e.to);\n                }\n     \
-    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &t){\n\
-    \        return dist_[t];\n    }\n\n    inline const CostType operator[](const\
-    \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
+    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &v){\n\
+    \        return dist_[v];\n    }\n\n    inline const CostType operator[](const\
+    \ Vertex &v) const {\n        return dist_[v];\n    }\n\n    private:\n    Graph<CostType>\
     \ &G;\n    int n;\n    Vertex source_;\n    CostType inf{CostType(INF)};\n   \
     \ vector<CostType> dist_;\n    vector<Edge<CostType>> prev_edge_;\n};\n"
   code: "#pragma once\n\n#include \"Graph.hpp\"\n\ntemplate<typename CostType>\nclass\
@@ -98,9 +98,9 @@ data:
     \ &e : G[u]){\n                if(dist_[e.to] > d + e.cost){\n               \
     \     dist_[e.to] = d + e.cost;\n                    prev_edge_[e.to] = e;\n \
     \                   que.emplace(dist_[e.to], e.to);\n                }\n     \
-    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &t){\n\
-    \        return dist_[t];\n    }\n\n    inline const CostType operator[](const\
-    \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
+    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &v){\n\
+    \        return dist_[v];\n    }\n\n    inline const CostType operator[](const\
+    \ Vertex &v) const {\n        return dist_[v];\n    }\n\n    private:\n    Graph<CostType>\
     \ &G;\n    int n;\n    Vertex source_;\n    CostType inf{CostType(INF)};\n   \
     \ vector<CostType> dist_;\n    vector<Edge<CostType>> prev_edge_;\n};"
   dependsOn:
@@ -109,7 +109,7 @@ data:
   isVerificationFile: false
   path: Library/Graph/Dijkstra.hpp
   requiredBy: []
-  timestamp: '2025-04-30 01:32:17+09:00'
+  timestamp: '2026-02-08 19:33:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-A.test.cpp

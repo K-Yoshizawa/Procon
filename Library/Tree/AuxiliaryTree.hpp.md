@@ -12,8 +12,7 @@ data:
     title: "Euler Tour - \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
-    title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
-      \u7956\u5148\u3092\u8FD4\u3059\u3002"
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
@@ -23,33 +22,25 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\
-      \u3061\u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\
-      \u3066\u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\
-      \u306A\u6728"
     links: []
-  bundledCode: "#line 1 \"Library/Tree/AuxiliaryTree.hpp\"\n/**\n * @file AuxiliaryTree.hpp\n\
-    \ * @brief Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
-    \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\
-    \u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\
-    \u6728\n * @version 2.0\n * @date 2024-10-31\n */\n\n#line 2 \"Library/Tree/Tree.hpp\"\
-    \n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Graph/Graph.hpp\"\
-    \n\nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n\
-    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType\
-    \ cost_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
-    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
-    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
-    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
-    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
-    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+  bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
+    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
+    \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
+    \ CostType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n  \
+    \  Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n     \
+    \   from(from_), to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const\
+    \ Edge<CostType> &e) const {return cost < e.cost;}\n\n    operator int() const\
+    \ {return to;}\n\n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\
+    \ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
+    \ = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n\
+    \    \n    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n\
+    \        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
     \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
     \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
     \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
@@ -110,112 +101,57 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 2 \"Library/Tree/EulerTour.hpp\"\
-    \n\n/**\n * @file EulerTour.hpp\n * @brief Euler Tour - \u30AA\u30A4\u30E9\u30FC\
-    \u30C4\u30A2\u30FC\n * @version 4.0\n * @date 2024-10-31\n */\n\n#line 12 \"Library/Tree/EulerTour.hpp\"\
+    \  return ret;\n}\n#line 2 \"Library/Tree/EulerTour.hpp\"\n\n#line 5 \"Library/Tree/EulerTour.hpp\"\
     \n\ntemplate<typename CostType>\nclass EulerTour{\n    public:\n    using F =\
-    \ function<CostType(CostType)>;\n\n    EulerTour(){}\n\n    /**\n     * @brief\
-    \ \u6728 `T` \u306B\u304A\u3051\u308B\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\
-    \u3092\u69CB\u7BC9\u3059\u308B\u3002\n     * @param one_index `1-index` \u3068\
-    \u3057\u3066\u6271\u3044\u305F\u3044\u304B `(default = false)`\n     */\n    EulerTour(RootedTree<CostType>\
+    \ function<CostType(CostType)>;\n\n    EulerTour(){}\n\n    EulerTour(RootedTree<CostType>\
     \ &T, bool one_index = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
     \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
     \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
-    \ /**\n     * @brief \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3092\
-    \u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F `0-index` \u3067\u8FD4\u308B\
-    \u3002\n     * @return int \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\
-    \n     */\n    int get_in(const Vertex v) const {\n        return in_time_.at(v\
-    \ - one_index_);\n    }\n\n    /**\n     * @brief \u9802\u70B9 `v` \u304B\u3089\
-    \u51FA\u305F\u6642\u523B\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
-    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return int \u9802\u70B9 `v` \u304B\
-    \u3089\u51FA\u305F\u6642\u523B\n     */\n    int get_out(const Vertex v) const\
-    \ {\n        return out_time_.at(v - one_index_);\n    }\n\n    /**\n     * @brief\
-    \ \u9802\u70B9 `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\
-    \u523B\u306E\u4E21\u65B9\u3092\u8FD4\u3059\u3002\n     * @note \u6642\u523B\u306F\
-    \ `0-index` \u3067\u8FD4\u308B\u3002\n     * @return pair<int, int> \u9802\u70B9\
-    \ `v` \u306B\u5165\u3063\u305F\u6642\u523B\u3068\u51FA\u305F\u6642\u523B\n   \
-    \  */\n    pair<int, int> get_pair(const Vertex v) const {\n        return make_pair(in_time_.at(v\
-    \ - one_index_), out_time_.at(v - one_index_));\n    }\n\n    /**\n     * @brief\
-    \ \u914D\u5217 `value` \u3092\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\u306B\u57FA\
-    \u3065\u3044\u3066\u5909\u63DB\u3057\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\
-    \n     * @note \u30BB\u30B0\u30E1\u30F3\u30C8\u6728\u306A\u3069\u306E\u521D\u671F\
-    \u914D\u5217\u3068\u3057\u3066\u6E21\u3059\u5834\u5408\u306B\u306A\u3069\u306B\
-    \u7528\u3044\u308B\u3002\n     * @tparam Type \u6E21\u3059\u30C7\u30FC\u30BF\u306E\
-    \u578B\n     * @param value \u5909\u63DB\u3059\u308B\u914D\u5217\n     * @param\
-    \ in_converter \u9802\u70B9 `v` \u306B\u5165\u308B\u6642\u523B\u306B\u5BFE\u3059\
-    \u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n     * @param\
-    \ out_converter \u9802\u70B9 `v` \u304B\u3089\u51FA\u308B\u6642\u523B\u306B\u5BFE\
-    \u3059\u308B\u30C7\u30FC\u30BF\u3092\u5909\u63DB\u3059\u308B\u95A2\u6570\n   \
-    \  * @return vector<Type> \u5909\u63DB\u3057\u305F\u9577\u3055 `2 * |V|` \u306E\
-    \u914D\u5217\n     */\n    template<typename Type>\n    vector<Type> ConvertVector(const\
-    \ vector<Type> &value, const F in_converter, const F out_converter){\n       \
-    \ vector<Type> ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_;\
-    \ ++i){\n            int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n\
-    \            ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx]\
-    \ = out_converter(value.at(i));\n        }\n        return ret;\n    }\n\n   \
-    \ private:\n    int time_{0}, one_index_, vertex_size_;\n\n    RootedTree<CostType>\
-    \ &T;\n    vector<int> in_time_, out_time_;\n\n    void dfs(Vertex v){\n     \
-    \   in_time_[v] = time_++;\n        for(Vertex c : T.get_child(v)){\n        \
-    \    dfs(c);\n        }\n        out_time_[v] = time_++;\n    }\n};\n#line 2 \"\
-    Library/Tree/LowestCommonAncestor.hpp\"\n\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    public:\n \
-    \   LowestCommonAncestor(Graph<CostType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n\
-    \        int n = T.VertexSize();\n        height_ = 1;\n        while((1 << height_)\
-    \ < n) ++height_;\n        auto par = CalculateTreeParent(T);\n        parent_.resize(height_,\
-    \ vector<Vertex>(n, -1));\n        for(Vertex i = 0; i < n; ++i){\n          \
-    \  parent_[0][i] = par[i];\n        }\n        for(int k = 0; k + 1 < height_;\
-    \ ++k){\n            for(Vertex i = 0; i < n; ++i){\n                if(parent_[k][i]\
-    \ < 0) parent_[k + 1][i] = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
-    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
-    \u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\
-    \n     * @param u \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9\
-    \ `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex\
-    \ u, Vertex v){\n        if(depth_[u] < depth_[v]) swap(u, v);\n        for(int\
-    \ k = 0; k < height_; ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n\
-    \                u = parent_[k][u];\n            }\n        }\n        if(u ==\
-    \ v) return u;\n        for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u]\
-    \ != parent_[k][v]){\n                u = parent_[k][u];\n                v =\
-    \ parent_[k][v];\n            }\n        }\n        return parent_[0][u];\n  \
-    \  }\n\n    private:\n    Graph<CostType> &T;\n    int height_;\n    vector<int>\
-    \ depth_;\n    vector<vector<Vertex>> parent_;\n};\n#line 11 \"Library/Tree/AuxiliaryTree.hpp\"\
-    \n\ntemplate<typename CostType>\nclass AuxiliaryTree{\n    public:\n    /**\n\
-    \     * @brief \u6728 `tree` \u3092\u5143\u306B\u88DC\u52A9\u6728\u3092\u5B9A\u7FA9\
-    \u3059\u308B\u3002\n     * @param tree \u9802\u70B9\u6570 `U` \u306E\u6728\n \
-    \    */\n    AuxiliaryTree(RootedTree<CostType> &tree) :\n            T(tree),\
-    \ lca_(tree), et_(tree), edge_cum_(CalculateTreeCumlativeSum(tree)){\n    }\n\n\
-    \    /**\n     * @brief \u69CB\u7BC9\u3059\u308B\u88DC\u52A9\u6728\u306B\u542B\
-    \u3080\u9802\u70B9\u96C6\u5408\u3092\u30BB\u30C3\u30C8\u3059\u308B\u3002\n   \
-    \  * @note \u5B9F\u969B\u306B\u306F\u3001\u3053\u306E\u9802\u70B9\u96C6\u5408\u306B\
-    \ LCA \u3092\u52A0\u3048\u305F\u9802\u70B9\u96C6\u5408\u304C\u4FDD\u5B58\u3055\
-    \u308C\u308B\u3002\n     * @note \u8A08\u7B97\u91CF : O(V log V)\n     * @param\
-    \ vertex_set \u88DC\u52A9\u6728\u306B\u542B\u3080\u8981\u7D20\u6570 `V` \u306E\
-    \u9802\u70B9\u96C6\u5408 (0-index)\n     */\n    void Set(const vector<Vertex>\
-    \ &vertex_set){\n        auxiliary_tree_vertex_set_ = vertex_set;\n        auxiliary_tree_size_\
-    \ = auxiliary_tree_vertex_set_.size();\n        sort(auxiliary_tree_vertex_set_.begin(),\
-    \ auxiliary_tree_vertex_set_.end(), [&](int i, int j){\n            return et_.get_in(i)\
-    \ < et_.get_in(j);\n        });\n        for(int i = 0; i < auxiliary_tree_size_\
-    \ - 1; ++i){\n            auxiliary_tree_vertex_set_.push_back(lca_.Query(auxiliary_tree_vertex_set_[i],\
+    \ int GetIn(const Vertex v) const {\n        return in_time_.at(v - one_index_);\n\
+    \    }\n\n    int GetOut(const Vertex v) const {\n        return out_time_.at(v\
+    \ - one_index_);\n    }\n\n    pair<int, int> GetPair(const Vertex v) const {\n\
+    \        return make_pair(in_time_.at(v - one_index_), out_time_.at(v - one_index_));\n\
+    \    }\n\n    template<typename Type>\n    vector<Type> ConvertVector(const vector<Type>\
+    \ &value, const F in_converter, const F out_converter){\n        vector<Type>\
+    \ ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_; ++i){\n   \
+    \         int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n          \
+    \  ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx] = out_converter(value.at(i));\n\
+    \        }\n        return ret;\n    }\n\n    private:\n    int time_{0}, one_index_,\
+    \ vertex_size_;\n\n    RootedTree<CostType> &T;\n    vector<int> in_time_, out_time_;\n\
+    \n    void dfs(Vertex v){\n        in_time_[v] = time_++;\n        for(Vertex\
+    \ c : T.get_child(v)){\n            dfs(c);\n        }\n        out_time_[v] =\
+    \ time_++;\n    }\n};\n#line 2 \"Library/Tree/LowestCommonAncestor.hpp\"\n\n#line\
+    \ 4 \"Library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename CostType>\n\
+    struct LowestCommonAncestor{\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n        int n = T.VertexSize();\n\
+    \        height_ = 1;\n        while((1 << height_) < n) ++height_;\n        auto\
+    \ par = CalculateTreeParent(T);\n        parent_.resize(height_, vector<Vertex>(n,\
+    \ -1));\n        for(Vertex i = 0; i < n; ++i){\n            parent_[0][i] = par[i];\n\
+    \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
+    \ i = 0; i < n; ++i){\n                if(parent_[k][i] < 0) parent_[k + 1][i]\
+    \ = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
+    \            }\n        }\n    }\n\n    Vertex Query(Vertex u, Vertex v){\n  \
+    \      if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
+    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
+    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
+    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
+    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
+    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int height_;\n    vector<int> depth_;\n    vector<vector<Vertex>>\
+    \ parent_;\n};\n#line 4 \"Library/Tree/AuxiliaryTree.hpp\"\n\ntemplate<typename\
+    \ CostType>\nclass AuxiliaryTree{\n    public:\n    AuxiliaryTree(RootedTree<CostType>\
+    \ &tree) :\n            T(tree), lca_(tree), et_(tree), edge_cum_(CalculateTreeCumlativeSum(tree)){\n\
+    \    }\n\n    void Set(const vector<Vertex> &vertex_set){\n        auxiliary_tree_vertex_set_\
+    \ = vertex_set;\n        auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n\
+    \        sort(auxiliary_tree_vertex_set_.begin(), auxiliary_tree_vertex_set_.end(),\
+    \ [&](int i, int j){\n            return et_.get_in(i) < et_.get_in(j);\n    \
+    \    });\n        for(int i = 0; i < auxiliary_tree_size_ - 1; ++i){\n       \
+    \     auxiliary_tree_vertex_set_.push_back(lca_.Query(auxiliary_tree_vertex_set_[i],\
     \ auxiliary_tree_vertex_set_[i + 1]));\n        }\n        sort(auxiliary_tree_vertex_set_.begin(),\
     \ auxiliary_tree_vertex_set_.end(), [&](int i, int j){\n            return et_.get_in(i)\
     \ < et_.get_in(j);\n        });\n        auxiliary_tree_vertex_set_.erase(unique(auxiliary_tree_vertex_set_.begin(),\
     \ auxiliary_tree_vertex_set_.end()), auxiliary_tree_vertex_set_.end());\n    \
-    \    auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n    }\n\n    /**\n\
-    \     * @brief \u88DC\u52A9\u6728\u3092\u751F\u6210\u3059\u308B\u3002\n     *\
-    \ @attention \u4E88\u3081\u9802\u70B9\u96C6\u5408\u3092 `Set()` \u3092\u7528\u3044\
-    \u3066\u30BB\u30C3\u30C8\u3057\u3066\u304A\u304F\u5FC5\u8981\u304C\u3042\u308B\
-    \u3002\n     * @note \u8A08\u7B97\u91CF : O(V log V)\n     * @return RootedTree<CostType>\
-    \ \u751F\u6210\u3055\u308C\u305F\u9802\u70B9\u6570 \n     */\n    RootedTree<CostType>\
+    \    auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n    }\n\n    RootedTree<CostType>\
     \ Build(){\n        RootedTree<CostType> ret(auxiliary_tree_size_);\n        stack<Vertex>\
     \ st, idx;\n        st.push(auxiliary_tree_vertex_set_.front());\n        idx.push(0);\n\
     \        for(int i = 1; i < auxiliary_tree_size_; ++i){\n            while(et_.get_out(st.top())\
@@ -223,51 +159,28 @@ data:
     \    if(st.size()){\n                CostType cost = edge_cum_[auxiliary_tree_vertex_set_[i]]\
     \ - edge_cum_[st.top()];\n                ret.AddEdge(idx.top(), i, cost);\n \
     \           }\n            st.push(auxiliary_tree_vertex_set_[i]);\n         \
-    \   idx.push(i);\n        }\n        return ret;\n    }\n\n    /**\n     * @brief\
-    \ \u5143\u306E\u6728\u3068\u88DC\u52A9\u6728\u306B\u30C7\u30FC\u30BF\u3092\u5BFE\
-    \u5FDC\u3055\u305B\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\n     * @tparam Type\
-    \ \u30C7\u30FC\u30BF\u306E\u578B\n     * @param data \u9577\u3055 `U` \u306E\u30C7\
-    \u30FC\u30BF\n     * @return vector<Type> \u9577\u3055 `O(V log V)` \u306E\u5909\
-    \u63DB\u5F8C\u306E\u30C7\u30FC\u30BF\n     */\n    template<typename Type>\n \
-    \   vector<Type> ConvertData(const vector<Type> &data) const {\n        vector<Type>\
-    \ ret(auxiliary_tree_size_);\n        for(int i = 0; i < auxiliary_tree_size_;\
+    \   idx.push(i);\n        }\n        return ret;\n    }\n\n    template<typename\
+    \ Type>\n    vector<Type> ConvertData(const vector<Type> &data) const {\n    \
+    \    vector<Type> ret(auxiliary_tree_size_);\n        for(int i = 0; i < auxiliary_tree_size_;\
     \ ++i){\n            ret[i] = data[auxiliary_tree_vertex_set_[i]];\n        }\n\
     \        return ret;\n    }\n\n    private:\n    RootedTree<CostType> &T;\n  \
     \  LowestCommonAncestor<CostType> lca_;\n    EulerTour<CostType> et_;\n    vector<CostType>\
     \ edge_cum_;\n\n    vector<Vertex> auxiliary_tree_vertex_set_;\n    size_t auxiliary_tree_size_;\n\
     \    vector<Vertex> convert_to_;\n};\n"
-  code: "/**\n * @file AuxiliaryTree.hpp\n * @brief Auxiliary Tree - \u6307\u5B9A\u3055\
-    \u308C\u305F\u9802\u70B9\u305F\u3061\u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\
-    \u95A2\u4FC2\u3092\u4FDD\u3063\u3066\u6728\u3092\u5727\u7E2E\u3057\u3066\u3067\
-    \u304D\u308B\u88DC\u52A9\u7684\u306A\u6728\n * @version 2.0\n * @date 2024-10-31\n\
-    \ */\n\n#include \"Tree.hpp\"\n#include \"EulerTour.hpp\"\n#include \"LowestCommonAncestor.hpp\"\
-    \n\ntemplate<typename CostType>\nclass AuxiliaryTree{\n    public:\n    /**\n\
-    \     * @brief \u6728 `tree` \u3092\u5143\u306B\u88DC\u52A9\u6728\u3092\u5B9A\u7FA9\
-    \u3059\u308B\u3002\n     * @param tree \u9802\u70B9\u6570 `U` \u306E\u6728\n \
-    \    */\n    AuxiliaryTree(RootedTree<CostType> &tree) :\n            T(tree),\
-    \ lca_(tree), et_(tree), edge_cum_(CalculateTreeCumlativeSum(tree)){\n    }\n\n\
-    \    /**\n     * @brief \u69CB\u7BC9\u3059\u308B\u88DC\u52A9\u6728\u306B\u542B\
-    \u3080\u9802\u70B9\u96C6\u5408\u3092\u30BB\u30C3\u30C8\u3059\u308B\u3002\n   \
-    \  * @note \u5B9F\u969B\u306B\u306F\u3001\u3053\u306E\u9802\u70B9\u96C6\u5408\u306B\
-    \ LCA \u3092\u52A0\u3048\u305F\u9802\u70B9\u96C6\u5408\u304C\u4FDD\u5B58\u3055\
-    \u308C\u308B\u3002\n     * @note \u8A08\u7B97\u91CF : O(V log V)\n     * @param\
-    \ vertex_set \u88DC\u52A9\u6728\u306B\u542B\u3080\u8981\u7D20\u6570 `V` \u306E\
-    \u9802\u70B9\u96C6\u5408 (0-index)\n     */\n    void Set(const vector<Vertex>\
-    \ &vertex_set){\n        auxiliary_tree_vertex_set_ = vertex_set;\n        auxiliary_tree_size_\
-    \ = auxiliary_tree_vertex_set_.size();\n        sort(auxiliary_tree_vertex_set_.begin(),\
-    \ auxiliary_tree_vertex_set_.end(), [&](int i, int j){\n            return et_.get_in(i)\
-    \ < et_.get_in(j);\n        });\n        for(int i = 0; i < auxiliary_tree_size_\
-    \ - 1; ++i){\n            auxiliary_tree_vertex_set_.push_back(lca_.Query(auxiliary_tree_vertex_set_[i],\
+  code: "#include \"Tree.hpp\"\n#include \"EulerTour.hpp\"\n#include \"LowestCommonAncestor.hpp\"\
+    \n\ntemplate<typename CostType>\nclass AuxiliaryTree{\n    public:\n    AuxiliaryTree(RootedTree<CostType>\
+    \ &tree) :\n            T(tree), lca_(tree), et_(tree), edge_cum_(CalculateTreeCumlativeSum(tree)){\n\
+    \    }\n\n    void Set(const vector<Vertex> &vertex_set){\n        auxiliary_tree_vertex_set_\
+    \ = vertex_set;\n        auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n\
+    \        sort(auxiliary_tree_vertex_set_.begin(), auxiliary_tree_vertex_set_.end(),\
+    \ [&](int i, int j){\n            return et_.get_in(i) < et_.get_in(j);\n    \
+    \    });\n        for(int i = 0; i < auxiliary_tree_size_ - 1; ++i){\n       \
+    \     auxiliary_tree_vertex_set_.push_back(lca_.Query(auxiliary_tree_vertex_set_[i],\
     \ auxiliary_tree_vertex_set_[i + 1]));\n        }\n        sort(auxiliary_tree_vertex_set_.begin(),\
     \ auxiliary_tree_vertex_set_.end(), [&](int i, int j){\n            return et_.get_in(i)\
     \ < et_.get_in(j);\n        });\n        auxiliary_tree_vertex_set_.erase(unique(auxiliary_tree_vertex_set_.begin(),\
     \ auxiliary_tree_vertex_set_.end()), auxiliary_tree_vertex_set_.end());\n    \
-    \    auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n    }\n\n    /**\n\
-    \     * @brief \u88DC\u52A9\u6728\u3092\u751F\u6210\u3059\u308B\u3002\n     *\
-    \ @attention \u4E88\u3081\u9802\u70B9\u96C6\u5408\u3092 `Set()` \u3092\u7528\u3044\
-    \u3066\u30BB\u30C3\u30C8\u3057\u3066\u304A\u304F\u5FC5\u8981\u304C\u3042\u308B\
-    \u3002\n     * @note \u8A08\u7B97\u91CF : O(V log V)\n     * @return RootedTree<CostType>\
-    \ \u751F\u6210\u3055\u308C\u305F\u9802\u70B9\u6570 \n     */\n    RootedTree<CostType>\
+    \    auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();\n    }\n\n    RootedTree<CostType>\
     \ Build(){\n        RootedTree<CostType> ret(auxiliary_tree_size_);\n        stack<Vertex>\
     \ st, idx;\n        st.push(auxiliary_tree_vertex_set_.front());\n        idx.push(0);\n\
     \        for(int i = 1; i < auxiliary_tree_size_; ++i){\n            while(et_.get_out(st.top())\
@@ -275,14 +188,9 @@ data:
     \    if(st.size()){\n                CostType cost = edge_cum_[auxiliary_tree_vertex_set_[i]]\
     \ - edge_cum_[st.top()];\n                ret.AddEdge(idx.top(), i, cost);\n \
     \           }\n            st.push(auxiliary_tree_vertex_set_[i]);\n         \
-    \   idx.push(i);\n        }\n        return ret;\n    }\n\n    /**\n     * @brief\
-    \ \u5143\u306E\u6728\u3068\u88DC\u52A9\u6728\u306B\u30C7\u30FC\u30BF\u3092\u5BFE\
-    \u5FDC\u3055\u305B\u305F\u914D\u5217\u3092\u8FD4\u3059\u3002\n     * @tparam Type\
-    \ \u30C7\u30FC\u30BF\u306E\u578B\n     * @param data \u9577\u3055 `U` \u306E\u30C7\
-    \u30FC\u30BF\n     * @return vector<Type> \u9577\u3055 `O(V log V)` \u306E\u5909\
-    \u63DB\u5F8C\u306E\u30C7\u30FC\u30BF\n     */\n    template<typename Type>\n \
-    \   vector<Type> ConvertData(const vector<Type> &data) const {\n        vector<Type>\
-    \ ret(auxiliary_tree_size_);\n        for(int i = 0; i < auxiliary_tree_size_;\
+    \   idx.push(i);\n        }\n        return ret;\n    }\n\n    template<typename\
+    \ Type>\n    vector<Type> ConvertData(const vector<Type> &data) const {\n    \
+    \    vector<Type> ret(auxiliary_tree_size_);\n        for(int i = 0; i < auxiliary_tree_size_;\
     \ ++i){\n            ret[i] = data[auxiliary_tree_vertex_set_[i]];\n        }\n\
     \        return ret;\n    }\n\n    private:\n    RootedTree<CostType> &T;\n  \
     \  LowestCommonAncestor<CostType> lca_;\n    EulerTour<CostType> et_;\n    vector<CostType>\
@@ -297,15 +205,96 @@ data:
   isVerificationFile: false
   path: Library/Tree/AuxiliaryTree.hpp
   requiredBy: []
-  timestamp: '2025-05-02 02:04:34+09:00'
+  timestamp: '2026-02-08 19:36:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/Tree/AuxiliaryTree.hpp
 layout: document
-redirect_from:
-- /library/Library/Tree/AuxiliaryTree.hpp
-- /library/Library/Tree/AuxiliaryTree.hpp.html
 title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\u306E\
   \u6700\u5C0F\u5171\u901A\u7956\u5148\u95A2\u4FC2\u3092\u4FDD\u3063\u3066\u6728\u3092\
   \u5727\u7E2E\u3057\u3066\u3067\u304D\u308B\u88DC\u52A9\u7684\u306A\u6728"
+---
+
+# Auxiliary Tree - 指定された頂点たちの最小共通祖先関係を保って木を圧縮してできる補助的な木
+
+木上の指定された頂点集合に対して、それらの頂点と最小共通祖先（LCA）のみを含む圧縮された木を構築するデータ構造です。
+
+元の木の頂点数を $U$、指定する頂点集合のサイズを $V$ とすると、補助木の頂点数は $\textrm{O}(V)$ になります。
+
+## Function
+
+### Constructor
+
+```
+AuxiliaryTree(RootedTree<CostType> &tree)
+```
+
+- 木 `tree` を元に補助木を構築するための準備を行います。
+- 内部で LCA、オイラーツアー、累積和を事前計算します。
+
+**制約**
+
+- $1 \le U \le 10^5$
+
+**計算量**
+
+- $\textrm{O}(U \log U)$
+
+---
+
+### Set
+
+```
+void Set(const vector<Vertex> &vertex_set)
+```
+
+- 構築する補助木に含める頂点集合をセットします。
+- 実際には、この頂点集合とそれらの LCA を加えた頂点集合が保存されます。
+- **0-index** で頂点を指定します。
+
+**制約**
+
+- $1 \le V \le U$
+- 各頂点は元の木に存在する
+
+**計算量**
+
+- $\textrm{O}(V \log V)$
+
+---
+
+### Build
+
+```
+RootedTree<CostType> Build()
+```
+
+- 補助木を生成して返します。
+- 事前に `Set()` で頂点集合をセットしておく必要があります。
+- 元の木の辺の重みは累積和として保持されます。
+
+**計算量**
+
+- $\textrm{O}(V \log V)$
+
+---
+
+### ConvertData
+
+```
+template<typename Type>
+vector<Type> ConvertData(const vector<Type> &data) const
+```
+
+- 元の木のデータ配列を補助木用のデータ配列に変換します。
+- 元の木の頂点 $i$ のデータを、補助木での対応する頂点のデータに写像します。
+
+**制約**
+
+- `data` のサイズは $U$
+
+**計算量**
+
+- $\textrm{O}(V)$
+
 ---

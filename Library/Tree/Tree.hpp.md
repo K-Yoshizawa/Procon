@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: Library/String/Trie.hpp
-    title: Library/String/Trie.hpp
+    title: "Trie - \u30C8\u30E9\u30A4\u6728"
   - icon: ':warning:'
     path: Library/Tree/AuxiliaryTree.hpp
     title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
@@ -25,11 +25,10 @@ data:
     title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
-    title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
-      \u7956\u5148\u3092\u8FD4\u3059\u3002"
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
-    title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
+    title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/TreeDiameter.hpp
     title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"
@@ -74,9 +73,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u5404\u9802\u70B9\u3092\u884C\u304D\u304B\u3051\u9806\u306B\u4E26\
-      \u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\u306B\u76F8\u5F53\u3059\u308B\
-      \u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\u3002"
     links: []
   bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
     \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
@@ -156,17 +152,7 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n"
+    \  return ret;\n}\n"
   code: "#pragma once\n\n#include \"../Graph/Graph.hpp\"\n\ntemplate<typename CostType\
     \ = int32_t>\nGraph<CostType> InputTree(int N, int padding = -1, bool weighted\
     \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < N - 1; ++i){\n\
@@ -213,17 +199,7 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }"
+    \  return ret;\n}"
   dependsOn:
   - Library/Graph/Graph.hpp
   - Library/Common.hpp
@@ -237,7 +213,7 @@ data:
   - Library/Tree/AuxiliaryTree.hpp
   - Library/Tree/EulerTour.hpp
   - Library/String/Trie.hpp
-  timestamp: '2025-05-02 02:04:34+09:00'
+  timestamp: '2026-02-08 19:12:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreePathCompositeSum.test.cpp

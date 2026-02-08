@@ -10,29 +10,30 @@ data:
     title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/CycleDetection.hpp
-    title: Library/Graph/CycleDetection.hpp
+    title: "Cycle Detection - \u9589\u8DEF\u691C\u51FA"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
-    title: Library/Graph/GraphMisc.hpp
+    title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\
+      \u30A3"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: Library/Graph/Kruskal.hpp
+    title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
-    title: Library/Graph/LowLink.hpp
+    title: "Low Link - \u95A2\u7BC0\u70B9\u3068\u6A4B\u306E\u691C\u51FA"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
-    title: Library/Graph/StronglyConnectedComponents.hpp
+    title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
       \u6CD5"
   - icon: ':warning:'
     path: Library/String/Trie.hpp
-    title: Library/String/Trie.hpp
+    title: "Trie - \u30C8\u30E9\u30A4\u6728"
   - icon: ':warning:'
     path: Library/Tree/AuxiliaryTree.hpp
     title: "Auxiliary Tree - \u6307\u5B9A\u3055\u308C\u305F\u9802\u70B9\u305F\u3061\
@@ -47,11 +48,10 @@ data:
     title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
-    title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
-      \u7956\u5148\u3092\u8FD4\u3059\u3002"
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
-    title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728 DP"
+    title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"

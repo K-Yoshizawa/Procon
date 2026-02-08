@@ -12,7 +12,7 @@ data:
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
-    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
@@ -31,16 +31,14 @@ data:
     - https://judge.yosupo.jp/problem/vertex_add_path_sum
   bundledCode: "#line 1 \"verify/LC-VertexAddPathSum.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\n#line 2 \"Library/Template.hpp\"\
-    \n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template -\
-    \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.10\n * @date 2025-03-16\n\
-    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
+    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
     \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
     using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
-    \ 1;\n#line 12 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
+    \ 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
     \ << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool YNPrint(bool\
     \ flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\ntemplate<typename\
     \ Container>\ninline void Sort(Container &container){sort(container.begin(), container.end());}\n\
@@ -182,19 +180,9 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 2 \"Library/Tree/HeavyLightDecomposition.hpp\"\
-    \n\nstruct PathSegment{\n    PathSegment() = default;\n    Vertex head_vertex;\n\
-    \    Vertex tail_vertex;\n    int head_index;\n    int tail_index;\n    bool highest;\n\
+    \  return ret;\n}\n#line 2 \"Library/Tree/HeavyLightDecomposition.hpp\"\n\nstruct\
+    \ PathSegment{\n    PathSegment() = default;\n    Vertex head_vertex;\n    Vertex\
+    \ tail_vertex;\n    int head_index;\n    int tail_index;\n    bool highest;\n\
     \    bool reverse;\n    friend ostream &operator<<(ostream &os, const PathSegment\
     \ &p){\n        return os << \"# Path (\" << p.head_vertex << \" -> \" << p.tail_vertex\
     \ << \", \" << p.head_index << \" -> \" << p.tail_index << \", \" << boolalpha\
@@ -331,7 +319,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexAddPathSum.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:57:50+09:00'
+  timestamp: '2026-02-08 19:40:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexAddPathSum.test.cpp

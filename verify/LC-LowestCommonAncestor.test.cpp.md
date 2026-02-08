@@ -9,8 +9,7 @@ data:
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
-    title: "\u9802\u70B9 `u` \u3068\u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\
-      \u7956\u5148\u3092\u8FD4\u3059\u3002"
+    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
@@ -104,42 +103,28 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n\n// /**\n//  * @brief \u5404\u9802\u70B9\u3092\u884C\u304D\
-    \u304B\u3051\u9806\u306B\u4E26\u3079\u305F\u3068\u304D\u306B\u4F55\u756A\u76EE\
-    \u306B\u76F8\u5F53\u3059\u308B\u304B\u306E\u914D\u5217\u3092\u6C42\u3081\u308B\
-    \u3002\n//  * @param tree \u6728\n//  * @return vector<int> \u5404\u9802\u70B9\
-    \u304C\u884C\u304D\u304B\u3051\u9806\u3067\u4F55\u756A\u76EE\u306B\u306A\u308B\
-    \u304B (0-index)\n//  */\n// template<typename CostType>\n// vector<int> CalculatePreOrder(RootedTree<CostType>\
-    \ &tree){\n//     Vertex root = tree.get_root();\n//     int V = tree.get_vertex_size(),\
-    \ time_stamp = 0;\n//     vector<int> ret(V, -1);\n//     auto rec = [&](auto\
-    \ self, Vertex v) -> void {\n//         ret[v] = time_stamp++;\n//         for(Vertex\
-    \ u : tree.get_child()){\n//             self(self, u);\n//         }\n//    \
-    \ };\n//     rec(rec, root);\n//     return ret;\n// }\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\
-    \n\ntemplate<typename CostType>\nstruct LowestCommonAncestor{\n    public:\n \
-    \   LowestCommonAncestor(Graph<CostType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n\
-    \        int n = T.VertexSize();\n        height_ = 1;\n        while((1 << height_)\
-    \ < n) ++height_;\n        auto par = CalculateTreeParent(T);\n        parent_.resize(height_,\
-    \ vector<Vertex>(n, -1));\n        for(Vertex i = 0; i < n; ++i){\n          \
-    \  parent_[0][i] = par[i];\n        }\n        for(int k = 0; k + 1 < height_;\
-    \ ++k){\n            for(Vertex i = 0; i < n; ++i){\n                if(parent_[k][i]\
-    \ < 0) parent_[k + 1][i] = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
-    \            }\n        }\n    }\n\n    /**\n     * @brief \u9802\u70B9 `u` \u3068\
-    \u9802\u70B9 `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\u3092\u8FD4\u3059\u3002\
-    \n     * @param u \u9802\u70B9\u756A\u53F7 (0-index)\n     * @param v \u9802\u70B9\
-    \u756A\u53F7 (0-index)\n     * @return Vertex \u9802\u70B9 `u` \u3068\u9802\u70B9\
-    \ `v` \u306E\u6700\u5C0F\u5171\u901A\u7956\u5148\n     */\n    Vertex Query(Vertex\
-    \ u, Vertex v){\n        if(depth_[u] < depth_[v]) swap(u, v);\n        for(int\
-    \ k = 0; k < height_; ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n\
-    \                u = parent_[k][u];\n            }\n        }\n        if(u ==\
-    \ v) return u;\n        for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u]\
-    \ != parent_[k][v]){\n                u = parent_[k][u];\n                v =\
-    \ parent_[k][v];\n            }\n        }\n        return parent_[0][u];\n  \
-    \  }\n\n    private:\n    Graph<CostType> &T;\n    int height_;\n    vector<int>\
-    \ depth_;\n    vector<vector<Vertex>> parent_;\n};\n#line 4 \"verify/LC-LowestCommonAncestor.test.cpp\"\
-    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
-    \ N >> Q;\n    auto T = InputRootedTreeParent(N, 0);\n\n    LowestCommonAncestor\
-    \ lca(T);\n    while(Q--){\n        int u, v; cin >> u >> v;\n        cout <<\
-    \ lca.Query(u, v) << '\\n';\n    }\n}\n"
+    \  return ret;\n}\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename\
+    \ CostType>\nstruct LowestCommonAncestor{\n    public:\n    LowestCommonAncestor(Graph<CostType>\
+    \ &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n        int n = T.VertexSize();\n\
+    \        height_ = 1;\n        while((1 << height_) < n) ++height_;\n        auto\
+    \ par = CalculateTreeParent(T);\n        parent_.resize(height_, vector<Vertex>(n,\
+    \ -1));\n        for(Vertex i = 0; i < n; ++i){\n            parent_[0][i] = par[i];\n\
+    \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
+    \ i = 0; i < n; ++i){\n                if(parent_[k][i] < 0) parent_[k + 1][i]\
+    \ = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
+    \            }\n        }\n    }\n\n    Vertex Query(Vertex u, Vertex v){\n  \
+    \      if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
+    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
+    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
+    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
+    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
+    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
+    \    Graph<CostType> &T;\n    int height_;\n    vector<int> depth_;\n    vector<vector<Vertex>>\
+    \ parent_;\n};\n#line 4 \"verify/LC-LowestCommonAncestor.test.cpp\"\n\nint main(){\n\
+    \    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    auto\
+    \ T = InputRootedTreeParent(N, 0);\n\n    LowestCommonAncestor lca(T);\n    while(Q--){\n\
+    \        int u, v; cin >> u >> v;\n        cout << lca.Query(u, v) << '\\n';\n\
+    \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../Library/Tree/LowestCommonAncestor.hpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
     \ N >> Q;\n    auto T = InputRootedTreeParent(N, 0);\n\n    LowestCommonAncestor\
@@ -153,7 +138,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LowestCommonAncestor.test.cpp
   requiredBy: []
-  timestamp: '2025-05-02 02:04:34+09:00'
+  timestamp: '2026-02-08 19:12:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LowestCommonAncestor.test.cpp

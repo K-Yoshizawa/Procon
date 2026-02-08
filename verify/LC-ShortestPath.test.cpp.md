@@ -12,7 +12,7 @@ data:
     title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
-    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -24,17 +24,15 @@ data:
     links:
     - https://judge.yosupo.jp/problem/shortest_path
   bundledCode: "#line 1 \"verify/LC-ShortestPath.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n/**\n * @file Template.hpp\n * @author\
-    \ log K (lX57)\n * @brief Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n *\
-    \ @version 1.10\n * @date 2025-03-16\n */\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
+    \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
+    \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
     \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
     \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
     #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
     \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 12 \"Library/Template.hpp\"\n\
-    \ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return\
+    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\n\
+    inline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return\
     \ flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") <<\
     \ '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
     \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
@@ -151,9 +149,9 @@ data:
     \ &e : G[u]){\n                if(dist_[e.to] > d + e.cost){\n               \
     \     dist_[e.to] = d + e.cost;\n                    prev_edge_[e.to] = e;\n \
     \                   que.emplace(dist_[e.to], e.to);\n                }\n     \
-    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &t){\n\
-    \        return dist_[t];\n    }\n\n    inline const CostType operator[](const\
-    \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    private:\n    Graph<CostType>\
+    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &v){\n\
+    \        return dist_[v];\n    }\n\n    inline const CostType operator[](const\
+    \ Vertex &v) const {\n        return dist_[v];\n    }\n\n    private:\n    Graph<CostType>\
     \ &G;\n    int n;\n    Vertex source_;\n    CostType inf{CostType(INF)};\n   \
     \ vector<CostType> dist_;\n    vector<Edge<CostType>> prev_edge_;\n};\n#line 5\
     \ \"verify/LC-ShortestPath.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
@@ -178,7 +176,7 @@ data:
   isVerificationFile: true
   path: verify/LC-ShortestPath.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
+  timestamp: '2026-02-08 19:40:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-ShortestPath.test.cpp

@@ -6,10 +6,10 @@ data:
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/BinaryIndexedTree.hpp
-    title: Library/DataStructure/BinaryIndexedTree.hpp
+    title: "Binary Indexed Tree (Fenwick Tree) - \u4E8C\u5206\u7D22\u5F15\u6728"
   - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
-    title: "Template - \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,16 +22,14 @@ data:
     - https://judge.yosupo.jp/problem/point_add_range_sum
   bundledCode: "#line 1 \"verify/LC-PointAddRangeSum_BIT.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n#line 2 \"Library/Template.hpp\"\
-    \n\n/**\n * @file Template.hpp\n * @author log K (lX57)\n * @brief Template -\
-    \ \u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @version 1.10\n * @date 2025-03-16\n\
-    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
+    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
     \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
     \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
     using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
-    \ 1;\n#line 12 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
+    \ 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
     \ << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool YNPrint(bool\
     \ flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\ntemplate<typename\
     \ Container>\ninline void Sort(Container &container){sort(container.begin(), container.end());}\n\
@@ -133,7 +131,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointAddRangeSum_BIT.test.cpp
   requiredBy: []
-  timestamp: '2025-05-30 20:02:37+09:00'
+  timestamp: '2026-02-08 19:40:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointAddRangeSum_BIT.test.cpp
