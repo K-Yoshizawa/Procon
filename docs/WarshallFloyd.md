@@ -76,7 +76,7 @@ inline bool Negative() const
 
 **制約**
 
-- `Solve()` が $1$ 回以上呼び出されている
+- なし
 
 **計算量**
 

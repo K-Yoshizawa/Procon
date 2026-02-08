@@ -52,12 +52,12 @@ class Dijkstra{
         }
     }
 
-    inline CostType operator[](const Vertex &t){
-        return dist_[t];
+    inline CostType operator[](const Vertex &v){
+        return dist_[v];
     }
 
-    inline const CostType operator[](const Vertex &t) const {
-        return dist_[t];
+    inline const CostType operator[](const Vertex &v) const {
+        return dist_[v];
     }
 
     private:

@@ -1,13 +1,5 @@
 #pragma once
 
-/**
- * @file Template.hpp
- * @author log K (lX57)
- * @brief Template - テンプレート
- * @version 1.10
- * @date 2025-03-16
- */
-
 #include "Common.hpp"
 
 inline bool YnPrint(bool flag){cout << (flag ? "Yes" : "No") << '\n'; return flag;}

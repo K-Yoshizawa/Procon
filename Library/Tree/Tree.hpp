@@ -129,23 +129,3 @@ vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0){
     rec(rec, r, -1);
     return ret;
 }
-
-// /**
-//  * @brief 各頂点を行きかけ順に並べたときに何番目に相当するかの配列を求める。
-//  * @param tree 木
-//  * @return vector<int> 各頂点が行きかけ順で何番目になるか (0-index)
-//  */
-// template<typename CostType>
-// vector<int> CalculatePreOrder(RootedTree<CostType> &tree){
-//     Vertex root = tree.get_root();
-//     int V = tree.get_vertex_size(), time_stamp = 0;
-//     vector<int> ret(V, -1);
-//     auto rec = [&](auto self, Vertex v) -> void {
-//         ret[v] = time_stamp++;
-//         for(Vertex u : tree.get_child()){
-//             self(self, u);
-//         }
-//     };
-//     rec(rec, root);
-//     return ret;
-// }
