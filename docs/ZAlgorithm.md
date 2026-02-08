@@ -10,7 +10,7 @@ documentation_of: ../Library/String/ZAlgorithm.hpp
 このとき、$0 \le i \lt \lvert S \rvert$ を満たす整数 $i$ に対して、$S$ と $S[i+1]$ の最長共通接頭辞 (Longest Common Prefix) の長さを $\textrm{O}(\lvert S \rvert)$ 時間で求めることができます。
 
 ```
-vector<int> Z_Algorithm(string S)
+vector<int> ZAlgorithm(string S)
 ```
 
 - 長さ $\lvert S \rvert$ の文字列 $S$ に対して、上記の値を格納した配列 `Z` を返します。

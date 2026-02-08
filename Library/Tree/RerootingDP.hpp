@@ -24,7 +24,7 @@ class RerootingDP{
         solve(r);
     }
 
-    vector<Monoid> &get_all_answer(){
+    vector<Monoid> &GetAllAnswer(){
         return dp_;
     }
 

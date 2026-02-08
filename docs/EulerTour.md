@@ -30,10 +30,10 @@ EulerTour(RootedTree<CostType> &T, bool one_index = false)
 
 ---
 
-### get_in
+### GetIn
 
 ```
-int get_in(const Vertex v) const
+int GetIn(const Vertex v) const
 ```
 
 - 頂点 $v$ に入った時刻（行きがけ時刻）を返します。
@@ -45,10 +45,10 @@ int get_in(const Vertex v) const
 
 ---
 
-### get_out
+### GetOut
 
 ```
-int get_out(const Vertex v) const
+int GetOut(const Vertex v) const
 ```
 
 - 頂点 $v$ から出た時刻（帰りがけ時刻）を返します。
@@ -60,10 +60,10 @@ int get_out(const Vertex v) const
 
 ---
 
-### get_pair
+### GetPair
 
 ```
-pair<int, int> get_pair(const Vertex v) const
+pair<int, int> GetPair(const Vertex v) const
 ```
 
 - 頂点 $v$ に入った時刻と出た時刻の両方を返します。

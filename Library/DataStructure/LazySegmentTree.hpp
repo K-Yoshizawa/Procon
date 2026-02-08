@@ -57,13 +57,13 @@ class LazySegmentTree{
         return RecursiveProduct(left + zeroindex_, right + zeroindex_, 1, size_ + 1, 1);
     }
 
-    Monoid get_value(int k){
+    Monoid GetValue(int k){
         Validate(k + zeroindex_);
         return Product(k, k + 1);
     }
 
     Monoid operator[](const int &k){
-        return get_value(k);
+        return GetValue(k);
     }
 
     private:

@@ -2,7 +2,7 @@
 
 #include "../Common.hpp"
 
-vector<int> Z_Algorithm(string S){
+vector<int> ZAlgorithm(string S){
     vector<int> Z(S.size(), 0);
     Z[0] = S.size();
     int i = 1, j = 0;

@@ -19,15 +19,15 @@ class EulerTour{
         dfs(T.get_root());
     }
 
-    int get_in(const Vertex v) const {
+    int GetIn(const Vertex v) const {
         return in_time_.at(v - one_index_);
     }
 
-    int get_out(const Vertex v) const {
+    int GetOut(const Vertex v) const {
         return out_time_.at(v - one_index_);
     }
 
-    pair<int, int> get_pair(const Vertex v) const {
+    pair<int, int> GetPair(const Vertex v) const {
         return make_pair(in_time_.at(v - one_index_), out_time_.at(v - one_index_));
     }
 

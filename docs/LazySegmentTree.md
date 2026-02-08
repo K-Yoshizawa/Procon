@@ -132,10 +132,10 @@ Monoid Product(int left, int right)
 
 ---
 
-### get_value
+### GetValue
 
 ```
-Monoid get_value(int k)
+Monoid GetValue(int k)
 ```
 
 - $A_k$ を取得します。
@@ -156,7 +156,7 @@ Monoid get_value(int k)
 Monoid operator[](const int &k)
 ```
 
-- $A_k$ を取得します。`get_value(k)` と同等です。
+- $A_k$ を取得します。`GetValue(k)` と同等です。
 
 **制約**
 

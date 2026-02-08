@@ -67,10 +67,10 @@ RerootingDP(Graph<CostType> &tree, F merge, G add, H finalize, const Monoid mono
 
 ---
 
-### get_all_answer
+### GetAllAnswer
 
 ```
-vector<Monoid> &get_all_answer()
+vector<Monoid> &GetAllAnswer()
 ```
 
 - 全頂点に関する DP の結果の配列を取得します。
