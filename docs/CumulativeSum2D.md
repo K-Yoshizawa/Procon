@@ -15,8 +15,7 @@ $H \times W$ の二次元配列 $A$ に対し、長方形領域の総和を効�
 CumulativeSum2D(const int height, const int width, const T init_value = 0)
 ```
 
-- 高さ $h$、幅 $w$ の二次元累積和を初期化します。
-- `init_value` は使用されません（後方互換性のために残されています）。
+- 高さ $h$ `= height`、幅 $w$ `= width` の二次元累積和を初期化します。
 
 **制約**
 

@@ -84,7 +84,7 @@ bool Unite(int x, int y)
 
 **計算量**
 
-- $\textrm{O}(\log n)$$
+- $\textrm{O}(\log n)$
 
 ---
 

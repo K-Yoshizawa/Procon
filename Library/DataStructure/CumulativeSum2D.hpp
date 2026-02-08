@@ -15,7 +15,7 @@ struct CumulativeSum2D{
     CumulativeSum2D(const int height, const int width, const T init_value = 0) : height_(height + 1), width_(width + 1){
         data_.resize(height_);
         for(int i = 0; i < height_; ++i){
-            data_.at(i).resize(width_);
+            data_.at(i).resize(width_, init_value);
         }
     }
 
