@@ -29,7 +29,7 @@ documentation_of: ../Library/DataStructure/SegmentTree.hpp
 **制約**
 
 - (1) $1 \le n \le 10^6$
-- (2) $1 \le |A| \le 10^6$
+- (2) $1 \le \lvert A \rvert \le 10^6$
 - `merge` は $M \times M \rightarrow M$ の関数
 - $e$ は $M$ の単位元
 
