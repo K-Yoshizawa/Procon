@@ -1,9 +1,9 @@
 ---
-title: Auxiliary Tree - 補助木
+title: Auxiliary Tree - 指定された頂点たちの最小共通祖先関係を保って木を圧縮してできる補助的な木
 documentation_of: ../Library/Tree/AuxiliaryTree.hpp
 ---
 
-# Auxiliary Tree - 補助木
+# Auxiliary Tree - 指定された頂点たちの最小共通祖先関係を保って木を圧縮してできる補助的な木
 
 木上の指定された頂点集合に対して、それらの頂点と最小共通祖先（LCA）のみを含む圧縮された木を構築するデータ構造です。
 
