@@ -156,8 +156,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-5-B.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
   - verify/LC-TreeDiameter.test.cpp
+  - verify/AOJ-GRL-5-A.test.cpp
 documentation_of: Library/Tree/TreeDiameter.hpp
 layout: document
 title: "Tree Diameter - \u6728\u306E\u76F4\u5F84"

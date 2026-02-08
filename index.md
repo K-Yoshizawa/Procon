@@ -294,5 +294,8 @@ layout: toppage
 
 # log K's Procon Library
 
-log K / lX57の競技プログラミング用のライブラリ。
-絶賛改修中。
+log K / lX57が競技プログラミングで使用しているライブラリです。
+
+## 注意事項
+
+- `Library/unauthenticated` に含まれているファイルは、自動テストによる verify ができていないライブラリです。ただし、多くの場合は手動の verify を通過しています。

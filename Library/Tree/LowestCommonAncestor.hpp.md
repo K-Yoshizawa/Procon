@@ -174,8 +174,8 @@ data:
   timestamp: '2025-05-02 02:04:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-5-C.test.cpp
   - verify/LC-LowestCommonAncestor.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
 documentation_of: Library/Tree/LowestCommonAncestor.hpp
 layout: document
 redirect_from:

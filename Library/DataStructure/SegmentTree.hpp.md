@@ -101,13 +101,13 @@ data:
   timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexAddPathSum.test.cpp
   - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/AOJ-DSL-2-A.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/LC-PointAddRangeSum.test.cpp
-  - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document
 title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -139,7 +139,7 @@ title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
 **制約**
 
 - (1) $1 \le n \le 10^6$
-- (2) $1 \le |A| \le 10^6$
+- (2) $1 \le \lvert A \rvert \le 10^6$
 - `merge` は $M \times M \rightarrow M$ の関数
 - $e$ は $M$ の単位元
 

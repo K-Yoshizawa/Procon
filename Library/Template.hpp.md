@@ -266,40 +266,40 @@ data:
   isVerificationFile: false
   path: Library/Template.hpp
   requiredBy:
-  - Library/TemplateExtend.hpp
   - Library/origin.cpp
+  - Library/TemplateExtend.hpp
   timestamp: '2025-05-30 20:02:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/AOJ-GRL-1-A.test.cpp
-  - verify/AOJ-DSL-2-A.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/AOJ-ALDS1-7-A.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
   - verify/LC-CycleDetectionUndirected.test.cpp
-  - verify/LC-LongestIncreasingSubsequence.test.cpp
-  - verify/LC-ShortestPath.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
-  - verify/LC-PointAddRangeSum.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
   - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-DSL-1-B.test.cpp
-  - verify/LC-RangeAffineRangeSum.test.cpp
-  - verify/LC-StronglyConnectedComponents.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/AOJ-GRL-3-B.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/LC-TreePathCompositeSum.test.cpp
-  - verify/LC-PointAddRangeSum_BIT.test.cpp
   - verify/AOJ-DSL-5-B.test.cpp
-  - verify/AOJ-0560.test.cpp
-  - verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/AOJ-GRL-3-B.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/AOJ-ALDS1-7-A.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-LongestIncreasingSubsequence.test.cpp
   - verify/LC-CycleDetection.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
+  - verify/AOJ-GRL-1-A.test.cpp
+  - verify/LC-LowestCommonAncestor-HLD.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/AOJ-0560.test.cpp
+  - verify/LC-ShortestPath.test.cpp
+  - verify/LC-PointAddRangeSum_BIT.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
 documentation_of: Library/Template.hpp
 layout: document
 redirect_from:

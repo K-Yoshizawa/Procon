@@ -105,12 +105,12 @@ data:
   timestamp: '2025-04-30 01:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
   - verify/LC-RangeAffineRangeSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-UnionfindWithPotential.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-RangeAffinePointGet.test.cpp
-  - verify/LC-UnionfindWithPotential.test.cpp
-  - verify/LC-TreePathCompositeSum.test.cpp
 documentation_of: Library/modint.hpp
 layout: document
 redirect_from:
