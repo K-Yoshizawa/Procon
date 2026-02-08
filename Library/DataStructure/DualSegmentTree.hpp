@@ -1,10 +1,3 @@
-/**
- * @file DualSegmentTree.hpp
- * @brief Dual Segment Tree - 双対セグメント木
- * @version 2.0
- * @date 2024-11-29
- */
-
 #include "../Common.hpp"
 
 template<typename OperatorMonoid>

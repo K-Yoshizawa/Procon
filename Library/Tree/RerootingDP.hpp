@@ -1,10 +1,3 @@
-/**
- * @file RerootingDP.hpp
- * @brief Rerooting DP - 全方位木 DP
- * @version 1.0
- * @date 2024-09-03
- */
-
 #include "Tree.hpp"
 
 template<typename CostType, typename Monoid>
@@ -16,13 +9,6 @@ class RerootingDP{
     using Fsub = function<Monoid(Monoid, Monoid)>;
     using Gsub = function<Monoid(Monoid, CostType)>;
 
-    /**
-     * @brief 木 `tree` に対して全方位木DPを行う。(辺属性のみ)
-     * @param tree 根付き木
-     * @param merge `(Monoid, Monoid) -> Monoid` : `Monoid` 同士に関する二項演算。
-     * @param add `(Monoid, CostType) -> Monoid` : `Monoid` と `CostType` に関する二項演算。
-     * @param monoid_identity `Monoid` の単位元。
-     */
     RerootingDP(Graph<CostType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
             T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
             merge_sub_(merge), add_sub_(add), id_(monoid_identity){
@@ -32,23 +18,12 @@ class RerootingDP{
         solve(r);
     }
 
-    /**
-     * @brief 木 `tree` に対して全方位木DPを行う。(頂点属性を含む)
-     * @param tree 根付き木
-     * @param merge `(Monoid, Monoid, Vertex) -> Monoid` : `Monoid` 同士に関する二項演算。
-     * @param add `(Monoid, CostType, Vertex) -> Monoid` : `Monoid` と `CostType` に関する二項演算。
-     * @param finalize `(Monoid, Vertex) -> Monoid` : `Monoid` に頂点 `Vertex` が根のときの処理。
-     * @param monoid_identity `Monoid` の単位元。
-     */
     RerootingDP(Graph<CostType> &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0) :
             T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
             merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){
         solve(r);
     }
 
-    /**
-     * @brief 全頂点に関するDPの配列を取得する。
-     */
     vector<Monoid> &get_all_answer(){
         return dp_;
     }

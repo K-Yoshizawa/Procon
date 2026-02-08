@@ -22,12 +22,6 @@ struct LowestCommonAncestor{
         }
     }
 
-    /**
-     * @brief 頂点 `u` と頂点 `v` の最小共通祖先を返す。
-     * @param u 頂点番号 (0-index)
-     * @param v 頂点番号 (0-index)
-     * @return Vertex 頂点 `u` と頂点 `v` の最小共通祖先
-     */
     Vertex Query(Vertex u, Vertex v){
         if(depth_[u] < depth_[v]) swap(u, v);
         for(int k = 0; k < height_; ++k){
