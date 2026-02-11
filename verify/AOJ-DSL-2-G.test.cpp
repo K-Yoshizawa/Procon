@@ -24,23 +24,23 @@ int main(){
     cin.tie(0)->sync_with_stdio(false);
     int n, q; cin >> n >> q;
 
+    vector<Monoid> a(n, Monoid());
     LazySegmentTree<Monoid, OperatorMonoid> seg(
-        n,
+        a,
         [&](Monoid l, Monoid r){return Monoid::Merge(l, r);},
         [&](Monoid m, OperatorMonoid o){return Monoid::Mapping(m, o);},
         [&](OperatorMonoid l, OperatorMonoid r){return l + r;},
         Monoid(),
         0
     );
-    seg.Build();
     while(q--){
         int com, s, t, x; cin >> com >> s >> t;
         if(com == 0){
             cin >> x;
-            seg.Update(s, t + 1, x);
+            seg.Apply(s, t + 1, x);
         }
         else{
-            cout << seg.Product(s, t + 1).val << '\n';
+            cout << seg.Fold(s, t + 1).val << '\n';
         }
     }
 }

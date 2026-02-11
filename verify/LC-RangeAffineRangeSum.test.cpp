@@ -44,11 +44,11 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int l, r, b, c; cin >> l >> r >> b >> c;
-            seg.Update(l, r, OperatorMonoid(b, c));
+            seg.Apply(l, r, OperatorMonoid(b, c));
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Product(l, r).a << '\n';
+            cout << seg.Fold(l, r).a << '\n';
         }
     }
 }

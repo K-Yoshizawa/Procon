@@ -22,11 +22,11 @@ int main(){
         if(query == 0){
             int l, r; long long x;
             cin >> l >> r >> x;
-            seg.Update(l, r, x);
+            seg.Apply(l, r, x);
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Product(l, r) << '\n';
+            cout << seg.Fold(l, r) << '\n';
         }
     }
 }
