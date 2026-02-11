@@ -17,13 +17,13 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Set(hld[p], seg[hld[p]] + x);
+            seg.Apply(hld[p], seg[hld[p]] + x);
         }
         else{
             int u, v; cin >> u >> v;
             ll ans = 0;
             for(auto &path : hld.PathQuery(u, v)){
-                ans += seg.Product(path.head_index, path.tail_index);
+                ans += seg.Fold(path.head_index, path.tail_index);
             }
             cout << ans << '\n';
         }

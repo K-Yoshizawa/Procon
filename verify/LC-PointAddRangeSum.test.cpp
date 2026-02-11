@@ -13,11 +13,11 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Set(p, seg[p] + x);
+            seg.Apply(p, seg[p] + x);
         }
         else{
             int l, r; cin >> l >> r;
-            cout << seg.Product(l, r) << '\n';
+            cout << seg.Fold(l, r) << '\n';
         }
     }
 }

@@ -8,15 +8,16 @@ int main(){
     int n, q; cin >> n >> q;
 
     int inf = (1LL << 31) - 1;
-    SegmentTree<int> seg(n, [](int l, int r){return min(l, r);}, inf, true);
+    vector<int> a(n, inf);
+    SegmentTree<int> seg(a, [](int l, int r){return min(l, r);}, inf, true);
     seg.Build();
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){
-            seg.Set(x, y);
+            seg.Apply(x, y);
         }
         else{
-            cout << seg.Product(x, y + 1) << '\n';
+            cout << seg.Fold(x, y + 1) << '\n';
         }
     }
 }

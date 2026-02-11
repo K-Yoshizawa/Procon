@@ -29,11 +29,11 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, c, d; cin >> p >> c >> d;
-            seg.Set(p, Affine(c, d));
+            seg.Apply(p, Affine(c, d));
         }
         else{
             int l, r, x; cin >> l >> r >> x;
-            cout << seg.Product(l, r).Value(x) << '\n';
+            cout << seg.Fold(l, r).Value(x) << '\n';
         }
     }
 }
