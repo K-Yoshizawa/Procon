@@ -28,9 +28,9 @@ LazySegmentTree(
 - セグメント木を配列 $A$ で初期化します。以降、セグメント木の長さを $N = \lvert A \rvert$ で表します。
 - `merge` には $2$ つのモノイドに対する二項演算 $\oplus : M \times M \rightarrow M$ を渡します。
     - 本ドキュメントでは `merge` の計算量を定数時間としています。
-- `mapping` には遅延評価を適用する演算 $\otimes : M \times O \rightarrow M$ を渡します。
+- `mapping` には遅延評価を適用する二項演算 $\otimes : M \times O \rightarrow M$ を渡します。
     - 本ドキュメントでは `mapping` の計算量を定数時間としています。
-- `composite` には遅延評価を合成する演算 $\odot : O \times O \rightarrow O$ を渡します。
+- `composite` には遅延評価を合成する二項演算 $\odot : O \times O \rightarrow O$ を渡します。
     - 本ドキュメントでは `composite` の計算量を定数時間としています。
 - `e_m` にはモノイド $M$ の単位元 $e_M$ を渡します。
 - `e_o` には操作モノイド $O$ の単位元 $e_O$ を渡します。
@@ -41,9 +41,9 @@ LazySegmentTree(
 
 - $1 \le N \le 10^6$
 - $A_i \in M$
-- `merge` は $M \times M \rightarrow M$ の関数
-- `mapping` は $M \times O \rightarrow M$ の関数
-- `composite` は $O \times O \rightarrow O$ の関数
+- `merge` は二項演算 $\oplus : M \times M \rightarrow M$ を行う関数
+- `mapping` は二項演算 $\otimes : M \times O \rightarrow M$ を行う関数
+- `composite` は二項演算 $\odot : O \times O \rightarrow O$ を行う関数
 - $e_M$ は $M$ の単位元
 - $e_O$ は $O$ の単位元
 
@@ -60,8 +60,7 @@ void Apply(int l, int r, OperatorMonoid x)
 ```
 
 - 半開区間 $[l, r)$ に対して区間更新クエリを実行します。
-- すなわち、$l \le i \lt r$ について $A_i$ に $A_i \otimes x$ を適用します。
-- 区間内の各要素に対して $x$ を適用します。
+- すなわち、$l \le i \lt r$ について $A_i \leftarrow A_i \otimes x$ を行います。
 
 **制約**
 
