@@ -9,6 +9,7 @@
 
 ### Ver 5.0.0 (2026/??/??)
 
+- 【追加】Merge Sort Tree
 - 【改修】Segment Tree : 命名規則などを見直しました。
 - 【改修】Lazy Segment Tree : 命名規則などを見直しました。
 
