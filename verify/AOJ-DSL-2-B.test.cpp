@@ -9,7 +9,6 @@ int main(){
 
     vector<int> a(n, 0);
     SegmentTree<int> seg(a, [](int l, int r){return l + r;}, 0, false);
-    seg.Build();
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){

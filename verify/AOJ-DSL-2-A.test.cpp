@@ -10,7 +10,6 @@ int main(){
     int inf = (1LL << 31) - 1;
     vector<int> a(n, inf);
     SegmentTree<int> seg(a, [](int l, int r){return min(l, r);}, inf, true);
-    seg.Build();
     while(q--){
         int com, x, y; cin >> com >> x >> y;
         if(com == 0){
