@@ -1,24 +1,24 @@
 #include "../Common.hpp"
 
-template <typename T, typename U = T>
+template <typename DataType, typename WeightType = DataType>
 class MergeSortTree{
     public:
     MergeSortTree(
-        const vector<T> &A,
-        const vector<U> &B,
+        const vector<DataType> &A,
+        const vector<WeightType> &B,
         bool zero_index = false
     ) : zero_index_(zero_index){
         Build(A, B);
     }
     
     MergeSortTree(
-        const vector<T> &A,
+        const vector<DataType> &A,
         bool zero_index = false
     ) : zero_index_(zero_index){
         Build(A, A);
     }
 
-    int CountAtMost(int l, int r, T x) const {
+    int CountAtMost(int l, int r, DataType x) const {
         if(l >= r) return 0;
         Validate(l + zero_index_);
         Validate(r + zero_index_ - 1);
@@ -38,12 +38,21 @@ class MergeSortTree{
         return lcnt + rcnt;
     }
 
-    U SumAtMost(int l, int r, T x) const {
+    int CountAtLeast(int l, int r, DataType x) const {
+        if(l >= r) return 0;
+        return r - l - CountAtMost(l, r, x - 1);
+    }
+
+    int CountBetween(int l, int r, DataType p, DataType q) const {
+        return CountAtMost(l, r, q) - CountAtMost(l, r, p - 1);
+    }
+
+    WeightType SumAtMost(int l, int r, DataType x) const {
         if(l >= r) return 0;
         Validate(l + zero_index_);
         Validate(r + zero_index_ - 1);
         int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;
-        U lval = 0, rval = 0;
+        WeightType lval = 0, rval = 0;
         while(lh < rh){
             if(lh & 1){
                 int idx = distance(data_[lh].begin(), upper_bound(data_[lh].begin(), data_[lh].end(), x));
@@ -59,13 +68,39 @@ class MergeSortTree{
         }
         return lval + rval;
     }
+
+    WeightType SumAtLeast(int l, int r, DataType x) const {
+        if(l >= r) return 0;
+        Validate(l + zero_index_);
+        Validate(r + zero_index_ - 1);
+        int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;
+        WeightType lval = 0, rval = 0;
+        while(lh < rh){
+            if(lh & 1){
+                int idx = distance(data_[lh].begin(), lower_bound(data_[lh].begin(), data_[lh].end(), x));
+                lval += prefix_sum_[lh].back() - prefix_sum_[lh][idx];
+                ++lh;
+            }
+            if(rh & 1){
+                --rh;
+                int idx = distance(data_[rh].begin(), lower_bound(data_[rh].begin(), data_[rh].end(), x));
+                rval += prefix_sum_[rh].back() - prefix_sum_[rh][idx];
+            }
+            lh >>= 1, rh >>= 1;
+        }
+        return lval + rval;
+    }
+
+    WeightType SumBetween(int l, int r, DataType p, DataType q) const {
+        return SumAtMost(l, r, q) - SumAtMost(l, r, p - 1);
+    }
     
     private:
     int n_, offset_, zero_index_;
-    vector<vector<T>> data_;
-    vector<vector<U>> weight_, prefix_sum_;
+    vector<vector<DataType>> data_;
+    vector<vector<WeightType>> weight_, prefix_sum_;
 
-    void Build(const vector<T> &data, const vector<U> &weight){
+    void Build(const vector<DataType> &data, const vector<WeightType> &weight){
         n_ = 1;
         while(n_ < (int)data.size()) n_ <<= 1;
         offset_ = n_ - 1;
