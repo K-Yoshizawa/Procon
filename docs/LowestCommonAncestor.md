@@ -5,7 +5,7 @@ documentation_of: ../Library/Tree/LowestCommonAncestor.hpp
 
 # Lowest Common Ancestor - 最小共通祖先
 
-木上の2つの頂点の最小共通祖先（LCA）を効率的に求めるデータ構造です。
+頂点数 $V$ の木 $T$ 上の2つの頂点の最小共通祖先を効率的に求めるデータ構造です。
 
 ダブリングを用いて前処理を行い、各クエリを高速に処理します。
 
@@ -14,18 +14,18 @@ documentation_of: ../Library/Tree/LowestCommonAncestor.hpp
 ### Constructor
 
 ```
-LowestCommonAncestor(Graph<CostType> &tree)
+LowestCommonAncestor(Graph<WeightType> &tree)
 ```
 
-- 木 `tree` に対して LCA を求めるための前処理を行います。
+- 木 $T$ を頂点数 $V$ の `tree` で初期化し、前処理を行います。
 
 **制約**
 
-- $1 \le N \le 10^5$
+- `tree` は木
 
 **計算量**
 
-- $\textrm{O}(N \log N)$
+- $\textrm{O}(V \log V)$
 
 ---
 
@@ -36,14 +36,13 @@ Vertex Query(Vertex u, Vertex v)
 ```
 
 - 頂点 $u$ と頂点 $v$ の最小共通祖先を返します。
-- **0-index** で頂点を指定します。
 
 **制約**
 
-- $0 \le u, v < N$
+- $0 \le u, v \lt V$
 
 **計算量**
 
-- $\textrm{O}(\log N)$
+- $\textrm{O}(\log V)$
 
 ---

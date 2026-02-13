@@ -1,15 +1,15 @@
 #include "Graph.hpp"
 #include "GraphMisc.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 struct StronglyConnectedComponents{
     public:
-    StronglyConnectedComponents(Graph<CostType> &graph) :
-        G(graph), RG(ReverseGraph(graph)), n(G.VertexSize()), belong_(n, -1){
-        vector<int> label(n, -1);
-        vector<bool> state(n, false);
+    StronglyConnectedComponents(Graph<WeightType> &graph) :
+        G(graph), RG(ReverseGraph(graph)), V(G.VertexSize()), belong_(V, -1){
+        vector<int> label(V, -1);
+        vector<bool> state(V, false);
         int nex = 0;
-        vector<Vertex> vs(n);
+        vector<Vertex> vs(V);
         iota(vs.begin(), vs.end(), 0);
         for(auto v : vs){
             if(!state[v]) dfs1(v, label, nex, state);
@@ -48,12 +48,12 @@ struct StronglyConnectedComponents{
         return ret;
     }
     
-    Graph<CostType> ContractedGraph() const {
+    Graph<WeightType> ContractedGraph() const {
         int nn = ComponentCount();
-        Graph<CostType> ret(nn);
-        for(int u = 0; u < n; ++u){
+        Graph<WeightType> ret(nn);
+        for(int u = 0; u < V; ++u){
             int nu = BelongComponent(u);
-            for(const Edge<CostType> &e : G[u]){
+            for(const Edge<WeightType> &e : G[u]){
                 int nv = BelongComponent(e.to);
                 if(nu == nv) continue;
                 ret.AddDirectedEdge(nu, nv, e.cost);
@@ -71,15 +71,15 @@ struct StronglyConnectedComponents{
     }
 
     private:
-    Graph<CostType> &G;
-    Graph<CostType> RG;
-    int n;
+    Graph<WeightType> &G;
+    Graph<WeightType> RG;
+    int V;
     vector<vector<Vertex>> components_;
     vector<int> belong_;
 
     void dfs1(Vertex v, vector<int> &label, int &nex, vector<bool> &state){
         state[v] = true;
-        for(const Edge<CostType> &e : G[v]){
+        for(const Edge<WeightType> &e : G[v]){
             if(state[e.to]) continue;
             dfs1(e.to, label, nex, state);
         }
@@ -91,7 +91,7 @@ struct StronglyConnectedComponents{
         components_[component].push_back(v);
         belong_[v] = component;
         state[v] = false;
-        for(const Edge<CostType> &e : RG[v]){
+        for(const Edge<WeightType> &e : RG[v]){
             if(!state[e.to]) continue;
             dfs2(e.to, label, component, state);
         }

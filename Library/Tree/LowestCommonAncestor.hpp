@@ -2,20 +2,20 @@
 
 #include "Tree.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 struct LowestCommonAncestor{
     public:
-    LowestCommonAncestor(Graph<CostType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){
-        int n = T.VertexSize();
+    LowestCommonAncestor(Graph<WeightType> &tree) : T(tree), depth_(CalculateTreeDepth(tree)){
+        int V = T.VertexSize();
         height_ = 1;
-        while((1 << height_) < n) ++height_;
+        while((1 << height_) < V) ++height_;
         auto par = CalculateTreeParent(T);
-        parent_.resize(height_, vector<Vertex>(n, -1));
-        for(Vertex i = 0; i < n; ++i){
+        parent_.resize(height_, vector<Vertex>(V, -1));
+        for(Vertex i = 0; i < V; ++i){
             parent_[0][i] = par[i];
         }
         for(int k = 0; k + 1 < height_; ++k){
-            for(Vertex i = 0; i < n; ++i){
+            for(Vertex i = 0; i < V; ++i){
                 if(parent_[k][i] < 0) parent_[k + 1][i] = -1;
                 else parent_[k + 1][i] = parent_[k][parent_[k][i]];
             }
@@ -40,7 +40,7 @@ struct LowestCommonAncestor{
     }
 
     private:
-    Graph<CostType> &T;
+    Graph<WeightType> &T;
     int height_;
     vector<int> depth_;
     vector<vector<Vertex>> parent_;

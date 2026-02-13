@@ -5,26 +5,26 @@ documentation_of: ../Library/Graph/Dijkstra.hpp
 
 # Dijkstra - ダイクストラ法
 
-$N$ 頂点 $M$ 辺のグラフにおける単一始点最短経路問題をダイクストラ法を用いて解きます。
+頂点数 $V$ 辺数 $E$ のグラフにおける単一始点最短経路問題をダイクストラ法を用いて解きます。
 
 ## Function
 
 ### Constructor
 
 ```
-Dijkstra(Graph<CostType> &graph, Vertex s = -1)
+Dijkstra(Graph<WeightType> &graph, Vertex s = -1)
 ```
 
-- $N$ 頂点 $M$ 辺のグラフで初期化をします。
-- `s` を指定すると、初期化後に `Solve(s)` を呼び出します。
+- グラフ $G$ を頂点数 $V$ 辺数 $E$ の `graph` で初期化します。
+- 始点頂点 $s$ を指定すると、初期化後に `Solve(s)` を呼び出します。
 
 **制約**
 
-- $-1 \le s \le N$
+- $-1 \le s \lt V$
 
 **計算量**
 
-- $\textrm{O}(N)$
+- $\textrm{O}(V)$
 
 ---
 
@@ -38,7 +38,7 @@ inline bool Reachable(const Vertex &t) const
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve()` が $1$ 回以上呼び出されている
 
 **計算量**
@@ -50,7 +50,7 @@ inline bool Reachable(const Vertex &t) const
 ### Distance
 
 ```
-inline CostType Distance(const Vertex &t) const
+inline WeightType Distance(const Vertex &t) const
 ```
 
 - 頂点 $s$ から頂点 $t$ への最短経路長を返します。
@@ -58,7 +58,7 @@ inline CostType Distance(const Vertex &t) const
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve()` が $1$ 回以上呼び出されている
 
 **計算量**
@@ -70,20 +70,21 @@ inline CostType Distance(const Vertex &t) const
 ### Path
 
 ```
-vector<Edge<CostType>> Path(const Vertex &t) const
+vector<Edge<WeightType>> Path(const Vertex &t) const
 ```
 
-- 頂点 $s$ から頂点 $t$ への最短経路を辺の集合として返します。
+- 頂点 $s$ から頂点 $t$ への最短経路を辺の列として返します。
+- 最短経路が複数ある場合、そのうちの $1$ つを返します。
 - 頂点 $t$ に到達不能であるとき空列を返します。
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve()` が $1$ 回以上呼び出されている
 
 **計算量**
 
-- $\textrm{O}(N)$
+- $\textrm{O}(V)$
 
 ---
 
@@ -97,26 +98,26 @@ void Solve(Vertex s)
 
 **制約**
 
-- $0 \le s \lt N$
+- $0 \le s \lt V$
 
 **計算量**
 
-- $\textrm{O}((N + M) \log M)$
+- $\textrm{O}((V + E) \log V)$
 
 ---
 
 ### operator[]
 
 ```
-(1) CostType operator[](const Vertex &t)
-(1) const CostType operator[](const Vertex &t) const 
+(1) WeightType operator[](const Vertex &t)
+(2) const WeightType operator[](const Vertex &t) const 
 ```
 
 - `Distance(t)` を返します。
 
 **制約**
 
-- $0 \le v \lt N$
+- $0 \le t \lt V$
 - `Solve(s)` が $1$ 回以上呼び出されている
 
 **計算量**

@@ -12,31 +12,31 @@ using namespace std;
 
 using Vertex = int;
 
-template<typename CostType>
+template<typename WeightType>
 struct Edge{
     public:
     Vertex from, to;
-    CostType cost;
+    WeightType cost;
     int loc{-1}, id{-1};
 
     Edge() = default;
-    Edge(Vertex from, Vertex to, CostType cost) : from(from), to(to), cost(cost){}
+    Edge(Vertex from, Vertex to, WeightType cost) : from(from), to(to), cost(cost){}
 
     operator int(){
         return to;
     }
 };
 
-template<typename CostType = int>
+template<typename WeightType = int>
 struct Graph{
     private:
     int vertex_size_{0}, edge_size_{0};
     bool is_directed_{false}, is_weighted_{false};
-    vector<vector<Edge<CostType>>> adj_;
+    vector<vector<Edge<WeightType>>> adj_;
     vector<int> indegree_;
 
     public:
-    CostType INF{numeric_limits<CostType>::max() >> 2};
+    WeightType INF{numeric_limits<WeightType>::max() >> 2};
 
     Graph() = default;
 
@@ -58,11 +58,11 @@ struct Graph{
      * @param to 頂点番号
      * @param cost 重み (option, default = `1`)
      */
-    void add(Vertex from, Vertex to, CostType cost = 1){
+    void add(Vertex from, Vertex to, WeightType cost = 1){
         assert(0 <= from and from < vertex_size_);
         assert(0 <= to and to < vertex_size_);
         is_weighted_ |= cost > 1;
-        Edge<CostType> e1(from, to, cost);
+        Edge<WeightType> e1(from, to, cost);
         e1.loc = adj_[from].size();
         e1.id = edge_size_;
         adj_[from].push_back(e1);
@@ -71,7 +71,7 @@ struct Graph{
             ++indegree_[to];
             return;
         }
-        Edge<CostType> e2(to, from, cost);
+        Edge<WeightType> e2(to, from, cost);
         e2.loc = adj_[to].size();
         e2.id = e1.id;
         adj_[to].push_back(e2);
@@ -88,7 +88,7 @@ struct Graph{
         for(int i = 0; i < edge_size; ++i){
             Vertex s, t; cin >> s >> t;
             if(!zero_index) --s, --t;
-            CostType c = 1;
+            WeightType c = 1;
             if(weighted) cin >> c;
             add(s, t, c);
         }
@@ -165,7 +165,7 @@ struct Graph{
      * @param v 頂点番号
      * @return vector<Edge<CostType>>& 頂点 `v` の隣接リスト
      */
-    vector<Edge<CostType>> &get_adj(Vertex v){
+    vector<Edge<WeightType>> &get_adj(Vertex v){
         return adj_.at(v);
     }
 
@@ -174,7 +174,7 @@ struct Graph{
      * @attention 有向グラフであることを要件とする。
      * @return Graph<CostType> 逆辺グラフ
      */
-    Graph<CostType> reverse(){
+    Graph<WeightType> reverse(){
         assert(is_directed_);
         Graph ret(vertex_size_, true);
         for(auto es : adj_){
@@ -211,8 +211,8 @@ struct Graph{
      * @note 辺集合は重みで昇順ソートされた状態で返される。
      * @return vector<Edge<CostType>> 辺集合
      */
-    vector<Edge<CostType>> edge_set(){
-        vector<Edge<CostType>> ret;
+    vector<Edge<WeightType>> edge_set(){
+        vector<Edge<WeightType>> ret;
         vector<int> es(edge_size_, 0);
         for(int i = 0; i < vertex_size_; ++i){
             for(auto e : adj_[i]){
@@ -221,15 +221,15 @@ struct Graph{
                 ret.push_back(e);
             }
         }
-        sort(ret.begin(), ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){
+        sort(ret.begin(), ret.end(), [&](Edge<WeightType> &l, Edge<WeightType> &r){
             return l.cost < r.cost;
         });
         return ret;
     }
 
-    vector<vector<CostType>> matrix(){
+    vector<vector<WeightType>> matrix(){
         int n = vertex_size_;
-        vector<vector<CostType>> ret(n, vector<CostType>(n, INF));
+        vector<vector<WeightType>> ret(n, vector<WeightType>(n, INF));
         for(int i = 0; i < n; ++i) ret[i][i] = 0;
         for(int v = 0; v < n; ++v){
             for(auto &e : adj_[v]){
@@ -239,7 +239,7 @@ struct Graph{
         return ret;
     }
 
-    friend ostream &operator<<(ostream &os, Graph<CostType> &G){
+    friend ostream &operator<<(ostream &os, Graph<WeightType> &G){
         for(int i = 0; i < G.size(); ++i){
             os << "Vertex " << i << " : ";
             if(G[i].empty()){
@@ -255,7 +255,7 @@ struct Graph{
         return os;
     }
 
-    vector<Edge<CostType>> &operator[](Vertex v){
+    vector<Edge<WeightType>> &operator[](Vertex v){
         return get_adj(v);
     }
 };

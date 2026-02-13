@@ -5,26 +5,26 @@ documentation_of: ../Library/Graph/BellmanFord.hpp
 
 # Bellman Ford - ベルマンフォード法
 
-$N$ 頂点 $M$ 辺のグラフにおける単一始点最短経路問題をベルマンフォード法を用いて解きます。
+頂点数 $V$ 辺数 $E$ のグラフにおける単一始点最短経路問題をベルマンフォード法を用いて解きます。
 
 ## Function
 
 ### Constructor
 
 ```
-BellmanFord(Graph<CostType> &graph, Vertex s = -1)
+BellmanFord(Graph<WeightType> &graph, Vertex s = -1)
 ```
 
-- $N$ 頂点 $M$ 辺のグラフで初期化をします。
-- `s` を指定すると、初期化後に `Solve(s)` を呼び出します。
+- グラフ $G$ を頂点数 $V$ 辺数 $E$ の `graph` で初期化します。
+- 始点頂点 $s$ を指定すると、初期化後に `Solve(s)` を呼び出します。
 
 **制約**
 
-- $-1 \le s \le N$
+- $-1 \le s \lt V$
 
 **計算量**
 
-- $\textrm{O}(N)$
+- $\textrm{O}(V)$
 
 ---
 
@@ -38,7 +38,7 @@ inline bool Reachable(const Vertex &t) const
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve()` が $1$ 回以上呼び出されている
 
 **計算量**
@@ -50,7 +50,7 @@ inline bool Reachable(const Vertex &t) const
 ### Distance
 
 ```
-inline CostType Distance(const Vertex &t) const
+inline WeightType Distance(const Vertex &t) const
 ```
 
 - 頂点 $s$ から頂点 $t$ への最短経路長を返します。
@@ -58,7 +58,7 @@ inline CostType Distance(const Vertex &t) const
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve()` が $1$ 回以上呼び出されている
 
 **計算量**
@@ -67,10 +67,10 @@ inline CostType Distance(const Vertex &t) const
 
 ---
 
-### Negative
+### NegativeCycle
 
 ```
-inline bool Negative() const
+inline bool NegativeCycle() const
 ```
 
 - $G$ が負閉路を含むかを判定します。
@@ -95,26 +95,26 @@ void Solve(Vertex s)
 
 **制約**
 
-- $0 \le s \lt N$
+- $0 \le s \lt V$
 
 **計算量**
 
-- $\textrm{O}(NM)$
+- $\textrm{O}(VE)$
 
 ---
 
 ### operator[]
 
 ```
-(1) CostType operator[](const Vertex &t)
-(1) const CostType operator[](const Vertex &t) const 
+(1) WeightType operator[](const Vertex &t)
+(2) const WeightType operator[](const Vertex &t) const 
 ```
 
 - `Distance(t)` を返します。
 
 **制約**
 
-- $0 \le t \lt N$
+- $0 \le t \lt V$
 - `Solve(s)` が $1$ 回以上呼び出されている
 
 **計算量**

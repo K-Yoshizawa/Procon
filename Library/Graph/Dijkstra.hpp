@@ -2,11 +2,11 @@
 
 #include "Graph.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class Dijkstra{
     public:
-    Dijkstra(Graph<CostType> &graph, Vertex s = -1) :
-        G(graph), n(graph.VertexSize()), dist_(n), prev_edge_(n){
+    Dijkstra(Graph<WeightType> &graph, Vertex s = -1) :
+        G(graph), V(graph.VertexSize()), dist_(V), prev_edge_(V){
         if(s != -1) Solve(s);
     }
 
@@ -14,13 +14,13 @@ class Dijkstra{
         return dist_[t] != inf;
     }
 
-    inline CostType Distance(const Vertex &t) const {
+    inline WeightType Distance(const Vertex &t) const {
         return dist_[t];
     }
 
-    vector<Edge<CostType>> Path(const Vertex &t) const {
-        if(!Reachable(t)) return vector<Edge<CostType>>{};
-        vector<Edge<CostType>> ret;
+    vector<Edge<WeightType>> Path(const Vertex &t) const {
+        if(!Reachable(t)) return vector<Edge<WeightType>>{};
+        vector<Edge<WeightType>> ret;
         int v = t;
         while(1){
             if(prev_edge_[v].from == -1) break;
@@ -32,17 +32,17 @@ class Dijkstra{
     }
 
     void Solve(Vertex s){
-        using P = pair<CostType, Vertex>;
+        using P = pair<WeightType, Vertex>;
         fill(dist_.begin(), dist_.end(), inf);
-        dist_[s] = CostType(0);
-        fill(prev_edge_.begin(), prev_edge_.end(), Edge<CostType>{});
-        prev_edge_[s] = Edge<CostType>(-1, -1);
+        dist_[s] = WeightType(0);
+        fill(prev_edge_.begin(), prev_edge_.end(), Edge<WeightType>{});
+        prev_edge_[s] = Edge<WeightType>(-1, -1);
         priority_queue<P, vector<P>, greater<P>> que;
-        que.emplace(CostType(0), s);
+        que.emplace(WeightType(0), s);
         while(que.size()){
             auto [d, u] = que.top(); que.pop();
             if(dist_[u] != d) continue;
-            for(const Edge<CostType> &e : G[u]){
+            for(const Edge<WeightType> &e : G[u]){
                 if(dist_[e.to] > d + e.cost){
                     dist_[e.to] = d + e.cost;
                     prev_edge_[e.to] = e;
@@ -52,19 +52,19 @@ class Dijkstra{
         }
     }
 
-    inline CostType operator[](const Vertex &v){
+    inline WeightType operator[](const Vertex &v){
         return dist_[v];
     }
 
-    inline const CostType operator[](const Vertex &v) const {
+    inline const WeightType operator[](const Vertex &v) const {
         return dist_[v];
     }
 
     private:
-    Graph<CostType> &G;
-    int n;
+    Graph<WeightType> &G;
+    int V;
     Vertex source_;
-    CostType inf{CostType(INF)};
-    vector<CostType> dist_;
-    vector<Edge<CostType>> prev_edge_;
+    WeightType inf{WeightType(INF)};
+    vector<WeightType> dist_;
+    vector<Edge<WeightType>> prev_edge_;
 };

@@ -2,15 +2,15 @@
 #include "GraphMisc.hpp"
 #include "../DataStructure/UnionFind.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class Kruskal{
     public:
-    Kruskal(Graph<CostType> &graph) : G(graph), cost_(0){
-        int N = G.VertexSize();
-        auto E = ConvertEdgeSet(G);
-        sort(E.begin(), E.end());
-        UnionFind uf(N);
-        for(const Edge<CostType> &e : E){
+    Kruskal(Graph<WeightType> &graph) : G(graph), cost_(0){
+        int V = G.VertexSize();
+        auto Es = ConvertEdgeSet(G);
+        sort(Es.begin(), Es.end());
+        UnionFind uf(V);
+        for(const Edge<WeightType> &e : Es){
             if(uf.Unite(e.from, e.to)){
                 cost_ += e.cost;
                 edges_.push_back(e);
@@ -18,16 +18,16 @@ class Kruskal{
         }
     }
 
-    inline vector<Edge<CostType>> &GetEdgeSet(){
+    inline vector<Edge<WeightType>> &GetEdgeSet(){
         return edges_;
     }
 
-    inline CostType GetCost() const {
+    inline WeightType GetCost() const {
         return cost_;
     }
 
     private:
-    Graph<CostType> &G;
-    vector<Edge<CostType>> edges_;
-    CostType cost_;
+    Graph<WeightType> &G;
+    vector<Edge<WeightType>> edges_;
+    WeightType cost_;
 };

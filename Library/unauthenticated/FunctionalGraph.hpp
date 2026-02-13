@@ -7,7 +7,7 @@
 
 #include "../Common.hpp"
 
-template<typename CostType = int32_t>
+template<typename WeightType = int32_t>
 class FunctionalGraph{
     public:
     /**
@@ -18,7 +18,7 @@ class FunctionalGraph{
      */
     FunctionalGraph(vector<int> &to, bool one_index = true, int doubling_size = 60) :
         vertex_size_((int)to.size()), doubling_size_(doubling_size), one_index_(one_index){
-        vector<CostType> cost(vertex_size_, 1);
+        vector<WeightType> cost(vertex_size_, 1);
         Build(to, cost);
     }
     
@@ -29,7 +29,7 @@ class FunctionalGraph{
      * @param one_index 頂点番号を 1-index として扱うか `(default = true)`
      * @param doubling_size ダブリングのテーブルサイズ `(default = 60)`
      */
-    FunctionalGraph(vector<int> &to, vector<CostType> &cost, bool one_index = true, int doubling_size = 60) :
+    FunctionalGraph(vector<int> &to, vector<WeightType> &cost, bool one_index = true, int doubling_size = 60) :
         vertex_size_((int)to.size()), doubling_size_(doubling_size), one_index_(one_index){
         Build(to, cost);
     }
@@ -67,8 +67,8 @@ class FunctionalGraph{
      * @param step 移動回数
      * @return CostType 辺の重みの総和
      */
-    CostType JumpCost(int start, int64_t step){
-        CostType ret = 0;
+    WeightType JumpCost(int start, int64_t step){
+        WeightType ret = 0;
         int64_t k = step, d = 0;
         int v = start - one_index_;
         while(k){
@@ -97,14 +97,14 @@ class FunctionalGraph{
     int vertex_size_, doubling_size_, one_index_;
 
     vector<vector<int>> next_to_;
-    vector<vector<CostType>> next_cost_;
+    vector<vector<WeightType>> next_cost_;
 
     vector<int> belong_cycle_;
     vector<vector<int>> cycle_;
 
-    void Build(vector<int> &to, vector<CostType> &cost){
+    void Build(vector<int> &to, vector<WeightType> &cost){
         next_to_.resize(doubling_size_, vector<int>(vertex_size_, -1));
-        next_cost_.resize(doubling_size_, vector<CostType>(vertex_size_, 0));
+        next_cost_.resize(doubling_size_, vector<WeightType>(vertex_size_, 0));
         for(int i = 0; i < vertex_size_; ++i){
             next_to_[0][i] = to[i] - (int)one_index_;
             next_cost_[0][i] = cost[i];

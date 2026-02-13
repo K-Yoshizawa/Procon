@@ -9,7 +9,7 @@ int main(){
     auto G = InputGraph<ll>(V, E, 0, true, true);
     
     BellmanFord bf(G, r);
-    if(bf.Negative()){
+    if(bf.NegativeCycle()){
         cout << "NEGATIVE CYCLE" << '\n';
         return 0;
     }

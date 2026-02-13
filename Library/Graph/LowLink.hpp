@@ -2,19 +2,19 @@
 
 #include "Graph.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class LowLink{
     public:
-    LowLink(Graph<CostType> &graph) : G(graph), n(graph.VertexSize()), ord_(n, -1), low_(n, -1), in_(n), out_(n){
-        for(int i = 0, k = 0, t = 0; i < n; ++i){
+    LowLink(Graph<WeightType> &graph) : G(graph), V(graph.VertexSize()), ord_(V, -1), low_(V, -1), in_(V), out_(V){
+        for(int i = 0, k = 0, t = 0; i < V; ++i){
             if(ord_[i] == -1){
                 k = dfs(i, -1, k, t);
             }
         }
     }
 
-    vector<Vertex> &ArticulationVertex(){
-        return articulation_vertex_;
+    vector<Vertex> &ArticulationPoint(){
+        return articulation_point_;
     }
 
     vector<pair<Vertex, Vertex>> &Bridge(){
@@ -26,10 +26,10 @@ class LowLink{
     }
 
     private:
-    Graph<CostType> &G;
-    int n;
+    Graph<WeightType> &G;
+    int V;
     vector<int> ord_, low_, in_, out_;
-    vector<Vertex> articulation_vertex_;
+    vector<Vertex> articulation_point_;
     vector<pair<Vertex, Vertex>> bridge_;
 
     int dfs(Vertex v, int p, int k, int &t){
@@ -55,7 +55,7 @@ class LowLink{
             }
         }
         is_articulation |= (p == -1) && (cnt > 1);
-        if(is_articulation) articulation_vertex_.emplace_back(v);
+        if(is_articulation) articulation_point_.emplace_back(v);
         out_[v] = t;
         return k;
     }

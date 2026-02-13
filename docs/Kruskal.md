@@ -5,7 +5,7 @@ documentation_of: ../Library/Graph/Kruskal.hpp
 
 # Kruskal - クラスカル法
 
-無向連結グラフの最小全域木(Minimum Spanning Tree)をクラスカル法により求めます。
+頂点数 $V$ 辺数 $E$ の**無向**連結グラフの最小全域木をクラスカル法により求めます。
 
 辺を重みの小さい順にソートし、Union-Find を用いて閉路を作らないように辺を追加していきます。
 
@@ -14,29 +14,27 @@ documentation_of: ../Library/Graph/Kruskal.hpp
 ### Constructor
 
 ```
-Kruskal(Graph<CostType> &graph)
+Kruskal(Graph<WeightType> &graph)
 ```
 
-- $N$ 頂点 $M$ 辺の無向連結グラフ $G$ を `graph` で初期化し、$G$ の最小全域木をクラスカル法により構築します。
+- 頂点数 $V$ 辺数 $E$ の無向連結グラフ $G$ を `graph` で初期化し、$G$ の最小全域木をクラスカル法により構築します。
 - $G$ が無向グラフでない場合や、連結でない場合の挙動は未定義です。
 
 **制約**
 
 - $G$ は無向グラフ
 - $G$ は連結
-- $1 \le N \le 10^5$
-- $0 \le M \le 10^5$
 
 **計算量**
 
-- $\textrm{O}(M \log M)$
+- $\textrm{O}(E \log E)$
 
 ---
 
 ### GetEdgeSet
 
 ```
-vector<Edge<CostType>> &GetEdgeSet()
+vector<Edge<WeightType>> &GetEdgeSet()
 ```
 
 - 最小全域木を構成する辺集合を返します。
@@ -50,7 +48,7 @@ vector<Edge<CostType>> &GetEdgeSet()
 ### GetCost
 
 ```
-CostType GetCost() const
+WeightType GetCost() const
 ```
 
 - 最小全域木の総コスト(辺の重みの総和)を返します。

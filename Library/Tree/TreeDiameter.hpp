@@ -1,10 +1,10 @@
 #include "Tree.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class TreeDiameter{
     public:
-    TreeDiameter(Graph<CostType> &tree) : T(tree){
-        int n = T.VertexSize(), s = 0;
+    TreeDiameter(Graph<WeightType> &tree) : T(tree){
+        int V = T.VertexSize(), s = 0;
         dist_s_ = CalculateTreeDistance(T, s);
         s = distance(dist_s_.begin(), max_element(dist_s_.begin(), dist_s_.end()));
         dist_s_ = CalculateTreeDistance(T, s);
@@ -20,11 +20,11 @@ class TreeDiameter{
         path_.emplace_back(s);
     }
     
-    CostType Diameter() const {
+    WeightType Diameter() const {
         return diameter_;
     }
     
-    CostType Height(Vertex v) const {
+    WeightType Height(Vertex v) const {
         return max(dist_s_[v], dist_t_[v]);
     }
 
@@ -37,8 +37,8 @@ class TreeDiameter{
     }
 
     private:
-    Graph<CostType> &T;
-    vector<CostType> dist_s_, dist_t_;
+    Graph<WeightType> &T;
+    vector<WeightType> dist_s_, dist_t_;
     vector<Vertex> path_;
-    CostType diameter_;
+    WeightType diameter_;
 };

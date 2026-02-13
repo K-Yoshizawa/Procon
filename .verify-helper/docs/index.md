@@ -36,6 +36,12 @@ log K / lX57 が競技プログラミングで使用しているライブラリ�
 - **変数名（private）**: snake_case with trailing underscore (例: `size_`, `data_`)
 - **パラメータ名**: snake_case (例: `merge`, `zero_index`)
 
+ただし、次の例外規則を設けています。
+
+- グラフ : `G`
+- グラフ $G$ の頂点数 : `V`
+- 十分大きな定数 : `inf`
+
 ---
 
 ## 注意事項
@@ -43,19 +49,12 @@ log K / lX57 が競技プログラミングで使用しているライブラリ�
 - `Library/unauthenticated` に含まれているファイルは、自動テストによる verify ができていないライブラリや、現在は使われていないライブラリです。
 - すべてのライブラリは C++17 以降での使用を想定しています。
 
-### グラフ系ライブラリのドキュメントについて
-
-- グラフ $G$ について、断りなく以下の記号を用いています。
-    - 頂点集合 : $V$
-    - 頂点数 : $\lvert V \rvert$
-    - 辺集合 : $E$
-    - 辺数 : $\lvert E \rvert$
-
 ---
 
 ## 更新予定
 
-
+- 【ドキュメント整備】Heavy Light Decomposition
+- 【ドキュメント整備】Rerooting DP
 
 ---
 
@@ -66,6 +65,7 @@ log K / lX57 が競技プログラミングで使用しているライブラリ�
 - 【追加】Merge Sort Tree
 - 【改修】Segment Tree : 命名規則などを見直しました。
 - 【改修】Lazy Segment Tree : 命名規則などを見直しました。
+- 【改修】(グラフ系全般) : 命名規則などを見直しました。
 
 <details>
 

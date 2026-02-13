@@ -5,16 +5,14 @@ documentation_of: ../Library/Tree/Tree.hpp
 
 # Tree - 木
 
-グラフテンプレートを木として用いるときに便利なライブラリ群です。
-
-本ドキュメントにおいて、木 $T$ の頂点数は $n$ とし、頂点は 0-index でラベリングされているものとします。
+グラフ $G$ が木構造のときに便利なライブラリ群です。
 
 ---
 
 ### InputTree
 
 ```
-Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false)
+Graph<WeightType> InputTree(int V, int padding = -1, bool weighted = false)
 ```
 
 - 木 $T$ を標準入力から読み込みます。
@@ -30,18 +28,18 @@ u v w
 
 **制約**
 
-- $0 \le n \le 10^{6}$
+- $0 \le V \le 10^{6}$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### InputRootedTreeChild
 
 ```
-Graph<CostType> InputRootedTreeChild(int N, int padding = -1)
+Graph<WeightType> InputRootedTreeChild(int V, int padding = -1)
 ```
 
 - 木 $T$ を標準入力から読み込みます。
@@ -53,41 +51,59 @@ k c_0 c_1 ... c_k
 
 **制約**
 
-- $0 \le n \le 10^{6}$
+- $0 \le V \le 10^{6}$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### InputRootedTreeParent
 
 ```
-Graph<CostType> InputRootedTreeParent(int N, int padding = -1)
+Graph<WeightType> InputRootedTreeParent(int V, int padding = -1)
 ```
 
 - 木 $T$ を標準入力から読み込みます。
 - 入力形式は以下の形式であることを想定しています。
 
 ```
-p_1 p_2 ... p_{N - 1}
+p_1 p_2 ... p_{V - 1}
 ```
 
 **制約**
 
-- $0 \le n \le 10^{6}$
+- $0 \le V \le 10^{6}$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
+
+---
+
+### RootedTreeAdjacentList
+
+```
+vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<WeightType> &T, const Vertex r = 0)
+```
+
+- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の子の頂点の隣接リストを作成します。
+
+**制約**
+
+- $0 \le r \lt V$
+
+**計算量**
+
+- $\textrm{O}(V)$
 
 ---
 
 ### CalculateTreeParent
 
 ```
-vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
+vector<Vertex> CalculateTreeParent(Graph<WeightType> &T, Vertex r = 0)
 ```
 
 - 頂点 $r$ を根とした根付き木 $T$ について、各頂点の親を求めます。
@@ -95,18 +111,18 @@ vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0)
 
 **制約**
 
-- $0 \le r \lt n$
+- $0 \le r \lt V$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### CalculateTreeCost
 
 ```
-vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0)
+vector<WeightType> CalculateTreeCost(Graph<WeightType> &T, Vertex r = 0)
 ```
 
 - 頂点 $r$ を根とした根付き木 $T$ について、各頂点の親と結ぶ辺の重みを求めます。
@@ -114,18 +130,18 @@ vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0)
 
 **制約**
 
-- $0 \le r \lt n$
+- $0 \le r \lt V$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### CalculateTreeDepth
 
 ```
-vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0)
+vector<int> CalculateTreeDepth(Graph<WeightType> &T, Vertex r = 0)
 ```
 
 - 頂点 $r$ を根とした根付き木 $T$ について、各頂点の深さを求めます。
@@ -133,18 +149,18 @@ vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0)
 
 **制約**
 
-- $0 \le r \lt n$
+- $0 \le r \lt V$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### CalculateTreeDistance
 
 ```
-vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0)
+vector<WeightType> CalculateTreeDistance(Graph<WeightType> &T, Vertex r = 0)
 ```
 
 - 木 $T$ について、頂点 $r$ を始点としたときの各頂点までの距離を求めます。
@@ -152,18 +168,18 @@ vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0)
 
 **制約**
 
-- $0 \le r \lt n$
+- $0 \le r \lt V$
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### CalculateSubtreeSize
 
 ```
-vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0)
+vector<int> CalculateSubtreeSize(Graph<WeightType> &tree, Vertex r = 0)
 ```
 
 - 頂点 $r$ を根とした根付き木 $T$ について、各頂点を根とする部分木の大きさを求めます。
@@ -171,28 +187,10 @@ vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0)
 
 **制約**
 
-- $0 \le r \lt n$
+- $0 \le r \lt V$
 
 **計算量**
 
-- $\textrm{O}(n)$
-
----
-
-### RootedTreeAdjacentList
-
-```
-vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType> &T, const Vertex r = 0)
-```
-
-- 頂点 $r$ を根とした根付き木 $T$ について、各頂点の子の頂点の隣接リストを作成します。
-
-**制約**
-
-- $0 \le r \lt n$
-
-**計算量**
-
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---

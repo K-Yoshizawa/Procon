@@ -5,17 +5,17 @@ documentation_of: ../Library/Tree/TreeDiameter.hpp
 
 # Tree Diameter - 木の直径
 
-$n$ 頂点の木 $T$ の直径に関するライブラリです。
+頂点数 $V$ の木 $T$ の直径に関するライブラリです。
 
 ## Function
 
 ### Constructor
 
 ```
-TreeDiameter(Graph<CostType> &tree)
+TreeDiameter(Graph<WeightType> &tree)
 ```
 
-- 木 $T =$ `tree` の直径を求めます。
+- 木 $T$ を頂点数 $V$ の `tree` で初期化し、その直径を求めます。
 
 **制約**
 
@@ -23,14 +23,14 @@ TreeDiameter(Graph<CostType> &tree)
 
 **計算量**
 
-- $\textrm{O}(n)$
+- $\textrm{O}(V)$
 
 ---
 
 ### Diameter
 
 ```
-CostType Diameter() const
+WeightType Diameter() const
 ```
 
 - 木 $T$ の直径を返します。
@@ -44,7 +44,7 @@ CostType Diameter() const
 ### Height
 
 ```
-CostType Height(Vertex v) const
+WeightType Height(Vertex v) const
 ```
 
 - 木 $T$ について、頂点 $v$ を根としたときの木の高さを返します。
@@ -52,7 +52,7 @@ CostType Height(Vertex v) const
 
 **制約**
 
-- $0 \le v \lt n$
+- $0 \le v \lt V$
 
 **計算量**
 

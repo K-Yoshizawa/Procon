@@ -8,9 +8,9 @@
 
 #include "GraphTemplate.hpp"
 
-template<typename CostType>
-vector<CostType> longestdistance(Graph<CostType> &G, CostType INF, Vertex start = -1, CostType init = 0){
-    vector<CostType> dp(G.size(), INF);
+template<typename WeightType>
+vector<WeightType> longestdistance(Graph<WeightType> &G, WeightType INF, Vertex start = -1, WeightType init = 0){
+    vector<WeightType> dp(G.size(), INF);
     if(start == -1){
         for(auto v : G.source()) dp[v] = init;
     }

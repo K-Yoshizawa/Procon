@@ -3,14 +3,14 @@
 #include "../Common.hpp"
 #include "Tree.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class EulerTour{
     public:
-    using F = function<CostType(CostType)>;
+    using F = function<WeightType(CostType)>;
 
     EulerTour(){}
 
-    EulerTour(RootedTree<CostType> &T, bool one_index = false) :
+    EulerTour(RootedTree<WeightType> &T, bool one_index = false) :
             T(T),
             vertex_size_(T.get_vertex_size()),
             in_time_(T.get_vertex_size()),
@@ -45,7 +45,7 @@ class EulerTour{
     private:
     int time_{0}, one_index_, vertex_size_;
 
-    RootedTree<CostType> &T;
+    RootedTree<WeightType> &T;
     vector<int> in_time_, out_time_;
 
     void dfs(Vertex v){

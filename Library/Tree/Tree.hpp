@@ -2,11 +2,11 @@
 
 #include "../Graph/Graph.hpp"
 
-template<typename CostType = int32_t>
-Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false){
-    Graph<CostType> G(N);
-    for(int i = 0; i < N - 1; ++i){
-        Vertex u, v; CostType w = 1;
+template<typename WeightType = int32_t>
+Graph<WeightType> InputTree(int V, int padding = -1, bool weighted = false){
+    Graph<WeightType> G(V);
+    for(int i = 0; i < V - 1; ++i){
+        Vertex u, v; WeightType w = 1;
         cin >> u >> v, u += padding, v += padding;
         if(weighted) cin >> w;
         G.AddUndirectedEdge(u, v, w);
@@ -14,10 +14,10 @@ Graph<CostType> InputTree(int N, int padding = -1, bool weighted = false){
     return G;
 }
 
-template<typename CostType = int32_t>
-Graph<CostType> InputRootedTreeChild(int N, int padding = -1){
-    Graph<CostType> G(N);
-    for(Vertex u = 0; u < N; ++u){
+template<typename WeightType = int32_t>
+Graph<WeightType> InputRootedTreeChild(int V, int padding = -1){
+    Graph<WeightType> G(V);
+    for(Vertex u = 0; u < V; ++u){
         int k; cin >> k;
         for(int i = 0; i < k; ++i){
             Vertex v; cin >> v, v += padding;
@@ -27,20 +27,20 @@ Graph<CostType> InputRootedTreeChild(int N, int padding = -1){
     return G;
 }
 
-template<typename CostType = int32_t>
-Graph<CostType> InputRootedTreeParent(int N, int padding = -1){
-    Graph<CostType> G(N);
-    for(Vertex u = 1; u < N; ++u){
+template<typename WeightType = int32_t>
+Graph<WeightType> InputRootedTreeParent(int V, int padding = -1){
+    Graph<WeightType> G(V);
+    for(Vertex u = 1; u < V; ++u){
         Vertex v; cin >> v, v += padding;
         G.AddUndirectedEdge(u, v);
     }
     return G;
 }
 
-template<typename CostType = int32_t>
-vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType> &T, const Vertex r = 0){
-    int n = T.VertexSize();
-    vector<vector<Vertex>> ret(n);
+template<typename WeightType = int32_t>
+vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<WeightType> &T, const Vertex r = 0){
+    int V = T.VertexSize();
+    vector<vector<Vertex>> ret(V);
     auto rec = [&](auto &self, Vertex u, Vertex p) -> void {
         for(Vertex v : T[u]){
             if(v == p) continue;
@@ -52,10 +52,10 @@ vector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType> &T, const Ve
     return ret;
 }
 
-template<typename CostType>
-vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
-    int n = T.VertexSize();
-    vector<int> ret(n, -1);
+template<typename WeightType>
+vector<Vertex> CalculateTreeParent(Graph<WeightType> &T, Vertex r = 0){
+    int V = T.VertexSize();
+    vector<Vertex> ret(V, -1);
     auto rec = [&](auto &self, Vertex u) -> void {
         for(Vertex v : T[u]){
             if(v == ret[u]) continue;
@@ -67,12 +67,12 @@ vector<int> CalculateTreeParent(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-template<typename CostType>
-vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0){
-    int n = T.VertexSize();
-    vector<CostType> ret(n);
+template<typename WeightType>
+vector<WeightType> CalculateTreeCost(Graph<WeightType> &T, Vertex r = 0){
+    int V = T.VertexSize();
+    vector<WeightType> ret(V);
     auto rec = [&](auto &self, Vertex u, Vertex p) -> void {
-        for(const Edge<CostType> &e : T[u]){
+        for(const Edge<WeightType> &e : T[u]){
             Vertex v = e.to;
             if(v == p) continue;
             ret[v] = e.cost;
@@ -83,10 +83,10 @@ vector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-template<typename CostType>
-vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
-    int n = T.VertexSize();
-    vector<int> ret(n, 0);
+template<typename WeightType>
+vector<int> CalculateTreeDepth(Graph<WeightType> &T, Vertex r = 0){
+    int V = T.VertexSize();
+    vector<int> ret(V, 0);
     auto rec = [&](auto &self, Vertex u, Vertex p, int d) -> void {
         ret[u] = d;
         for(Vertex v : T[u]){
@@ -98,12 +98,12 @@ vector<int> CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-template<typename CostType>
-vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){
-    int n = T.VertexSize();
-    vector<CostType> ret(n, CostType(INF));
+template<typename WeightType>
+vector<WeightType> CalculateTreeDistance(Graph<WeightType> &T, Vertex r = 0){
+    int V = T.VertexSize();
+    vector<WeightType> ret(V, WeightType(INF));
     auto rec = [&](auto &self, Vertex u) -> void {
-        for(const Edge<CostType> &e : T[u]){
+        for(const Edge<WeightType> &e : T[u]){
             if(ret[e.to] > ret[u] + e.cost){
                 ret[e.to] = ret[u] + e.cost;
                 self(self, e.to);
@@ -115,10 +115,10 @@ vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){
     return ret;
 }
 
-template<typename CostType>
-vector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r = 0){
-    int n = tree.VertexSize();
-    vector<int> ret(n, 1);
+template<typename WeightType>
+vector<int> CalculateSubtreeSize(Graph<WeightType> &tree, Vertex r = 0){
+    int V = tree.VertexSize();
+    vector<int> ret(V, 1);
     auto rec = [&](auto self, Vertex u, Vertex p) -> int {
         for(const int v : tree[u]){
             if(v == p) continue;

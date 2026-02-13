@@ -1,11 +1,11 @@
 #include "Graph.hpp"
 #include "GraphMisc.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class BellmanFord{
     public:
-    BellmanFord(Graph<CostType> &graph, Vertex s = -1) :
-        G(graph), n(graph.VertexSize()), dist_(n){
+    BellmanFord(Graph<WeightType> &graph, Vertex s = -1) :
+        G(graph), V(graph.VertexSize()), dist_(V){
         if(s != -1) Solve(s);
     }
 
@@ -13,27 +13,27 @@ class BellmanFord{
         return dist_[t] != inf;
     }
 
-    inline CostType Distance(const Vertex &t) const {
+    inline WeightType Distance(const Vertex &t) const {
         return dist_[t];
     }
 
-    inline bool Negative() const {
+    inline bool NegativeCycle() const {
         return negative_cycle_;
     }
 
     void Solve(Vertex s){
         fill(dist_.begin(), dist_.end(), inf);
-        dist_[s] = CostType(0);
+        dist_[s] = WeightType(0);
         negative_cycle_ = false;
         int update_count = 0;
         auto E = ConvertEdgeSet(G);
         while(1){
-            if(update_count == n){
+            if(update_count == V){
                 negative_cycle_ = true;
                 break;
             }
             bool update_flag = false;
-            for(const Edge<CostType> &e : E){
+            for(const Edge<WeightType> &e : E){
                 if(dist_[e.from] == inf) continue;
                 if(dist_[e.to] > dist_[e.from] + e.cost){
                     dist_[e.to] = dist_[e.from] + e.cost;
@@ -45,18 +45,18 @@ class BellmanFord{
         }
     }
 
-    inline CostType operator[](const Vertex &t){
+    inline WeightType operator[](const Vertex &t){
         return dist_[t];
     }
 
-    inline const CostType operator[](const Vertex &t) const {
+    inline const WeightType operator[](const Vertex &t) const {
         return dist_[t];
     }
 
     private:
-    Graph<CostType> &G;
-    int n;
-    CostType inf{CostType(INF)};
+    Graph<WeightType> &G;
+    int V;
+    WeightType inf{WeightType(INF)};
     bool negative_cycle_;
-    vector<CostType> dist_;
+    vector<WeightType> dist_;
 };
