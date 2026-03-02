@@ -17,12 +17,12 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int p, x; cin >> p >> x;
-            seg.Set(hld[p], seg[hld[p]] + x);
+            seg.Apply(hld[p], seg[hld[p]] + x);
         }
         else{
             int u; cin >> u;
             auto [l, r] = hld.SubtreeQuery(u);
-            cout << seg.Product(l, r) << '\n';
+            cout << seg.Fold(l, r) << '\n';
         }
     }
 }

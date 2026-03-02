@@ -3,6 +3,8 @@ title: Heavy Light Decomposition - 重軽分解
 documentation_of: ../Library/Tree/HeavyLightDecomposition.hpp
 ---
 
+**Attention:** このドキュメントは未完成です。
+
 # Heavy Light Decomposition - 重軽分解
 
 $n$ 頂点の根付き木 $T$ を $\textrm{O}(\log n)$ 個のパスの集合に分解します。

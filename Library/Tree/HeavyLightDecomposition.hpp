@@ -13,10 +13,10 @@ struct PathSegment{
     }
 };
 
-template<typename CostType>
+template<typename WeightType>
 class HeavyLightDecomposition{
     public:
-    HeavyLightDecomposition(Graph<CostType> &tree, Vertex r = 0) :
+    HeavyLightDecomposition(Graph<WeightType> &tree, Vertex r = 0) :
         T(tree), parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n), rev_order_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){
         vector<int> ss = CalculateSubtreeSize(T, r);
         for(int i = 0; i < n; ++i){
@@ -183,7 +183,7 @@ class HeavyLightDecomposition{
         return euler_tour_[v].second;
     }
 
-    Graph<CostType> &T;
+    Graph<WeightType> &T;
     vector<Vertex> parent;
     vector<vector<Vertex>> child;
     int n, timer_;

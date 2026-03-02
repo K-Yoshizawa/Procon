@@ -1,6 +1,6 @@
 #include "Tree.hpp"
 
-template<typename CostType, typename Monoid>
+template<typename WeightType, typename Monoid>
 class RerootingDP{
     public:
     using F = function<Monoid(Monoid, Monoid, Vertex)>;
@@ -9,16 +9,16 @@ class RerootingDP{
     using Fsub = function<Monoid(Monoid, Monoid)>;
     using Gsub = function<Monoid(Monoid, CostType)>;
 
-    RerootingDP(Graph<CostType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
+    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
             T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
             merge_sub_(merge), add_sub_(add), id_(monoid_identity){
         merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};
-        add_ = [&](Monoid x, CostType y, Vertex i){return add_sub_(x, y);};
+        add_ = [&](Monoid x, WeightType y, Vertex i){return add_sub_(x, y);};
         finalize_ = [](Monoid x, Vertex i){return x;};
         solve(r);
     }
 
-    RerootingDP(Graph<CostType> &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0) :
+    RerootingDP(Graph<WeightType> &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0) :
             T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
             merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){
         solve(r);
@@ -64,10 +64,10 @@ class RerootingDP{
     }
 
     private:
-    Graph<CostType> &T;
+    Graph<WeightType> &T;
     int n;
     vector<Vertex> parent;
-    vector<CostType> cost;
+    vector<WeightType> cost;
     vector<vector<Vertex>> child;
     
     vector<Monoid> dp_;

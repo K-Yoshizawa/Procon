@@ -4,18 +4,6 @@ template<typename Monoid>
 class SegmentTree{
     public:
     using F = function<Monoid(Monoid, Monoid)>;
-
-    SegmentTree(
-        int n,
-        F merge,
-        const Monoid &e,
-        bool zero_index = false
-    ) : f(merge), id_(e), zero_index_(zero_index){
-        size_ = 1;
-        while(size_ < n) size_ <<= 1;
-        offset_ = size_ - 1;
-        data_.resize(2 * size_, id_);
-    }
     
     SegmentTree(
         vector<Monoid> &A, 
@@ -30,25 +18,21 @@ class SegmentTree{
         for(int i = 0; i < (int)A.size(); ++i){
             data_[size_ + i] = A[i];
         }
-        Build();
-    }
-
-    void Build(){
         for(int i = offset_; i >= 1; --i){
             data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);
         }
     }
 
-    void Set(int i, Monoid v){
-        Validate(i + zero_index_);
-        int k = offset_ + i + zero_index_;
-        data_[k] = v;
+    void Apply(int k, Monoid x){
+        Validate(k + zero_index_);
+        k = offset_ + k + zero_index_;
+        data_[k] = x;
         while(k >>= 1){
             data_[k] = f(data_[2 * k], data_[2 * k + 1]);
         }
     }
 
-    Monoid Product(int l, int r){
+    Monoid Fold(int l, int r){
         if(l == r) return id_;
         Validate(l + zero_index_);
         Validate(r + zero_index_ - 1);
@@ -62,9 +46,9 @@ class SegmentTree{
         return f(al, ar);
     }
 
-    Monoid operator[](const int &i){
-        Validate(i + zero_index_);
-        return data_[offset_ + i + zero_index_];
+    Monoid operator[](const int &k){
+        Validate(k + zero_index_);
+        return data_[offset_ + k + zero_index_];
     }
 
     private:

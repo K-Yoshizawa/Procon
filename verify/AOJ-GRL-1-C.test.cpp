@@ -9,7 +9,7 @@ int main(){
     auto G = InputGraph<ll>(V, E, 0, true, true);
     
     WarshallFloyd wf(G);
-    if(wf.Negative()){
+    if(wf.NegativeCycle()){
         cout << "NEGATIVE CYCLE" << '\n';
         return 0;
     }

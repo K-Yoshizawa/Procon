@@ -2,10 +2,10 @@
 #include "EulerTour.hpp"
 #include "LowestCommonAncestor.hpp"
 
-template<typename CostType>
+template<typename WeightType>
 class AuxiliaryTree{
     public:
-    AuxiliaryTree(RootedTree<CostType> &tree) :
+    AuxiliaryTree(RootedTree<WeightType> &tree) :
             T(tree), lca_(tree), et_(tree), edge_cum_(CalculateTreeCumlativeSum(tree)){
     }
 
@@ -25,15 +25,15 @@ class AuxiliaryTree{
         auxiliary_tree_size_ = auxiliary_tree_vertex_set_.size();
     }
 
-    RootedTree<CostType> Build(){
-        RootedTree<CostType> ret(auxiliary_tree_size_);
+    RootedTree<WeightType> Build(){
+        RootedTree<WeightType> ret(auxiliary_tree_size_);
         stack<Vertex> st, idx;
         st.push(auxiliary_tree_vertex_set_.front());
         idx.push(0);
         for(int i = 1; i < auxiliary_tree_size_; ++i){
             while(et_.get_out(st.top()) < et_.get_in(auxiliary_tree_vertex_set_[i])) st.pop(), idx.pop();
             if(st.size()){
-                CostType cost = edge_cum_[auxiliary_tree_vertex_set_[i]] - edge_cum_[st.top()];
+                WeightType cost = edge_cum_[auxiliary_tree_vertex_set_[i]] - edge_cum_[st.top()];
                 ret.AddEdge(idx.top(), i, cost);
             }
             st.push(auxiliary_tree_vertex_set_[i]);
@@ -52,10 +52,10 @@ class AuxiliaryTree{
     }
 
     private:
-    RootedTree<CostType> &T;
-    LowestCommonAncestor<CostType> lca_;
-    EulerTour<CostType> et_;
-    vector<CostType> edge_cum_;
+    RootedTree<WeightType> &T;
+    LowestCommonAncestor<WeightType> lca_;
+    EulerTour<WeightType> et_;
+    vector<WeightType> edge_cum_;
 
     vector<Vertex> auxiliary_tree_vertex_set_;
     size_t auxiliary_tree_size_;

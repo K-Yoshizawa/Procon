@@ -3,6 +3,8 @@ title: Rerooting DP - 全方位木DP
 documentation_of: ../Library/Tree/RerootingDP.hpp
 ---
 
+**Attention:** このドキュメントは未完成です。
+
 # Rerooting DP - 全方位木DP
 
 木のすべての頂点を根としたときの DP の値を効率的に計算するデータ構造です。

@@ -9,7 +9,7 @@ int main(){
     auto G = InputGraph<ll>(V, E, 0, false, false);
     
     LowLink llk(G);
-    auto ans = llk.ArticulationVertex();
+    auto ans = llk.ArticulationPoint();
     Sort(ans);
     for(const int v : ans) cout << v << '\n';
 }

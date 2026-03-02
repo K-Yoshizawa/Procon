@@ -5,32 +5,28 @@ documentation_of: ../Library/Graph/StronglyConnectedComponents.hpp
 
 # Strongly Connected Components - 強連結成分分解
 
-有向グラフを強連結成分（SCC）に分解します。
+頂点数 $V$ 辺数 $E$ の有向グラフを強連結成分に分解します。
 
 強連結成分とは、その成分内の任意の2頂点間に互いに到達可能な経路が存在する極大な部分グラフです。
-
-Kosaraju のアルゴリズムを用いて、$\textrm{O}(\lvert V \rvert + \lvert E \rvert)$ で計算します。
 
 ## Function
 
 ### Constructor
 
 ```
-StronglyConnectedComponents(Graph<CostType> &graph)
+StronglyConnectedComponents(Graph<WeightType> &graph)
 ```
 
-- 有向グラフ `graph` を強連結成分に分解します。
+- 有向グラフ $G$ を頂点数 $V$ 辺数 $E$ の `graph` で初期化し、強連結成分に分解します。
 - 各成分はトポロジカル順序でソートされます。
 
 **制約**
 
 - $G$ は有向グラフ
-- $1 \le \lvert V \rvert \le 10^5$
-- $0 \le \lvert E \rvert \le 10^5$
 
 **計算量**
 
-- $\textrm{O}(\lvert V \rvert + \lvert E \rvert)$
+- $\textrm{O}(V + E)$
 
 ---
 
@@ -73,6 +69,10 @@ int BelongComponent(const Vertex &v) const
 - 頂点 $v$ が属する強連結成分の番号を返します。
 - 成分番号はトポロジカル順序に対応します。
 
+**制約**
+
+- $0 \le v \lt V$
+
 **計算量**
 
 - $\textrm{O}(1)$
@@ -90,14 +90,14 @@ vector<Vertex> TopologicalSort() const
 
 **計算量**
 
-- $\textrm{O}(\lvert V \rvert)$
+- $\textrm{O}(V)$
 
 ---
 
 ### ContractedGraph
 
 ```
-Graph<CostType> ContractedGraph() const
+Graph<WeightType> ContractedGraph() const
 ```
 
 - 各強連結成分を1つの頂点に縮約したグラフを返します。
@@ -106,7 +106,7 @@ Graph<CostType> ContractedGraph() const
 
 **計算量**
 
-- $\textrm{O}(\lvert V \rvert + \lvert E \rvert)$
+- $\textrm{O}(V + E)$
 
 ---
 
@@ -119,6 +119,10 @@ const int operator[](const Vertex &v) const
 
 - 頂点 $v$ が属する強連結成分の番号を返します。
 - `BelongComponent(v)` と同等です。
+
+**制約**
+
+- $0 \le v \lt V$
 
 **計算量**
 
