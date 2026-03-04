@@ -1,6 +1,6 @@
-#include "Tree.hpp"
+#include "../Tree/Tree.hpp"
 #include "EulerTour.hpp"
-#include "LowestCommonAncestor.hpp"
+#include "../Tree/LowestCommonAncestor.hpp"
 
 template<typename WeightType>
 class AuxiliaryTree{
