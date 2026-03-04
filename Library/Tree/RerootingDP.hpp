@@ -4,10 +4,10 @@ template<typename WeightType, typename Monoid>
 class RerootingDP{
     public:
     using F = function<Monoid(Monoid, Monoid, Vertex)>;
-    using G = function<Monoid(Monoid, CostType, Vertex)>;
+    using G = function<Monoid(Monoid, WeightType, Vertex)>;
     using H = function<Monoid(Monoid, Vertex)>;
     using Fsub = function<Monoid(Monoid, Monoid)>;
-    using Gsub = function<Monoid(Monoid, CostType)>;
+    using Gsub = function<Monoid(Monoid, WeightType)>;
 
     RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
             T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
