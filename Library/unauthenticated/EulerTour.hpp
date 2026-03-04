@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Common.hpp"
-#include "Tree.hpp"
+#include "../Tree/Tree.hpp"
 
 template<typename WeightType>
 class EulerTour{
