@@ -5,8 +5,9 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/DataStructure/BinaryIndexedTree.hpp
-    title: "Binary Indexed Tree (Fenwick Tree) - \u4E8C\u5206\u7D22\u5F15\u6728"
+    path: Library/DataStructure/LazySegmentTree.hpp
+    title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
+      \u6728"
   - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
@@ -17,11 +18,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
+    PROBLEM: https://judge.yosupo.jp/problem/range_add_range_min
     links:
-    - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"verify/LC-PointAddRangeSum_BIT.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\n#line 2 \"Library/Template.hpp\"\
+    - https://judge.yosupo.jp/problem/range_add_range_min
+  bundledCode: "#line 1 \"verify/LC-RangeAddRangeMin.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/range_add_range_min\"\n\n#line 2 \"Library/Template.hpp\"\
     \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
     \ <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n#include\
     \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
@@ -100,44 +101,86 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/BinaryIndexedTree.hpp\"\
-    \n\ntemplate<typename T>\nstruct BinaryIndexedTree{\n    public:\n    BinaryIndexedTree(int\
-    \ n) : size_(n){\n        data_.resize(size_ + 1, 0);\n    }\n\n    T Sum(int\
-    \ i){\n        T ret = 0;\n        for(; i > 0; i -= i & -i) ret += data_[i];\n\
-    \        return ret;\n    }\n    \n    T Sum(int l, int r){\n        return Sum(r)\
-    \ - Sum(l - 1);\n    }\n\n    void Add(int i, T v){\n        for(; i <= size_;\
-    \ i += i & -i) data_[i] += v;\n    }\n\n    private:\n    int size_;\n    vector<T>\
-    \ data_;\n};\n#line 5 \"verify/LC-PointAddRangeSum_BIT.test.cpp\"\n\nint main(){\n\
-    \    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin >> N >> Q;\n   \
-    \ BinaryIndexedTree<ll> BIT(N);\n    for(int i = 1; i <= N; ++i){\n        ll\
-    \ a; cin >> a;\n        BIT.Add(i, a);\n    }\n\n    while(Q--){\n        int\
-    \ t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p >> x, ++p;\n\
-    \            BIT.Add(p, x);\n        }\n        else{\n            int l, r; cin\
-    \ >> l >> r, ++l;\n            cout << BIT.Sum(l, r) << '\\n';\n        }\n  \
-    \  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/BinaryIndexedTree.hpp\"\
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/LazySegmentTree.hpp\"\
+    \n\ntemplate<typename Monoid, typename OperatorMonoid = Monoid>\nclass LazySegmentTree{\n\
+    \    public:\n    using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
+    \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
+    \n    LazySegmentTree(\n        vector<Monoid> &A,\n        F merge,\n       \
+    \ G mapping,\n        H composite,\n        const Monoid &e_m,\n        const\
+    \ OperatorMonoid &e_o,\n        bool zero_index = false\n    ) : f(merge), g(mapping),\
+    \ h(composite), m1_(e_m), om1_(e_o), zero_index_(zero_index){\n        size_ =\
+    \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
+    \ - 1;\n        data_.resize(2 * size_, m1_);\n        lazy_.resize(2 * size_,\
+    \ om1_);\n        is_identity_.resize(2 * size_, true);\n        for(int i = 0;\
+    \ i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n        }\n\
+    \        for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i\
+    \ * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Apply(int l, int\
+    \ r, OperatorMonoid x){\n        Validate(l + zero_index_);\n        Validate(r\
+    \ + zero_index_ - 1);\n        RecursiveApply(l + zero_index_, r + zero_index_,\
+    \ x, 1, size_ + 1, 1);\n    }\n\n    Monoid Fold(int l, int r){\n        Validate(l\
+    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        return RecursiveFold(l\
+    \ + zero_index_, r + zero_index_, 1, size_ + 1, 1);\n    }\n\n    Monoid operator[](const\
+    \ int &k){\n        Validate(k + zero_index_);\n        return Fold(k, k + 1);\n\
+    \    }\n\n    private:\n    int size_, offset_, zero_index_;\n    vector<Monoid>\
+    \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
+    \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
+    \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
+    \ x && x <= size_);\n    }\n\n    void Evaluate(int k){\n        if(is_identity_[k])\
+    \ return;\n        if(k < size_){\n            lazy_[k * 2 + 0] = h(lazy_[k *\
+    \ 2 + 0], lazy_[k]);\n            is_identity_[k * 2 + 0] = false;\n         \
+    \   lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);\n            is_identity_[k\
+    \ * 2 + 1] = false;\n        }\n        data_[k] = g(data_[k], lazy_[k]);\n  \
+    \      lazy_[k] = om1_;\n        is_identity_[k] = true;\n    }\n\n    void RecursiveApply(int\
+    \ ul, int ur, OperatorMonoid x, int left, int right, int cell){\n        Evaluate(cell);\n\
+    \        if(ul <= left && right <= ur){\n            lazy_[cell] = h(lazy_[cell],\
+    \ x);\n            is_identity_[cell] = false;\n            Evaluate(cell);\n\
+    \        }\n        else if(ul < right && left < ur){\n            int mid = (left\
+    \ + right) / 2;\n            RecursiveApply(ul, ur, x, left, mid, cell * 2 + 0);\n\
+    \            RecursiveApply(ul, ur, x, mid, right, cell * 2 + 1);\n          \
+    \  data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n        }\n   \
+    \ }\n\n    Monoid RecursiveFold(int ql, int qr, int left, int right, int cell){\n\
+    \        Evaluate(cell);\n        if(qr <= left || right <= ql){\n           \
+    \ return m1_;\n        }\n        if(ql <= left && right <= qr){\n           \
+    \ return data_[cell];\n        }\n        int mid = (left + right) / 2;\n    \
+    \    Monoid ans_left = RecursiveFold(ql, qr, left, mid, cell * 2 + 0);\n     \
+    \   Monoid ans_right = RecursiveFold(ql, qr, mid, right, cell * 2 + 1);\n    \
+    \    return f(ans_left, ans_right);\n    }\n};\n#line 5 \"verify/LC-RangeAddRangeMin.test.cpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin\
-    \ >> N >> Q;\n    BinaryIndexedTree<ll> BIT(N);\n    for(int i = 1; i <= N; ++i){\n\
-    \        ll a; cin >> a;\n        BIT.Add(i, a);\n    }\n\n    while(Q--){\n \
-    \       int t; cin >> t;\n        if(t == 0){\n            int p, x; cin >> p\
-    \ >> x, ++p;\n            BIT.Add(p, x);\n        }\n        else{\n         \
-    \   int l, r; cin >> l >> r, ++l;\n            cout << BIT.Sum(l, r) << '\\n';\n\
-    \        }\n    }\n}"
+    \ >> N >> Q;\n    vector<long long> a(N); cin >> a;\n    LazySegmentTree<long\
+    \ long> seg(\n        a,\n        [](long long l, long long r){return min(l, r);},\n\
+    \        [](long long m, long long o){return m + o;},\n        [](long long l,\
+    \ long long r){return l + r;},\n        1LL << 60,\n        0LL,\n        true\n\
+    \    );\n    while(Q--){\n        int query; cin >> query;\n        if(query ==\
+    \ 0){\n            int l, r; long long x;\n            cin >> l >> r >> x;\n \
+    \           seg.Apply(l, r, x);\n        }\n        else{\n            int l,\
+    \ r; cin >> l >> r;\n            cout << seg.Fold(l, r) << '\\n';\n        }\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_add_range_min\"\n\
+    \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/LazySegmentTree.hpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin\
+    \ >> N >> Q;\n    vector<long long> a(N); cin >> a;\n    LazySegmentTree<long\
+    \ long> seg(\n        a,\n        [](long long l, long long r){return min(l, r);},\n\
+    \        [](long long m, long long o){return m + o;},\n        [](long long l,\
+    \ long long r){return l + r;},\n        1LL << 60,\n        0LL,\n        true\n\
+    \    );\n    while(Q--){\n        int query; cin >> query;\n        if(query ==\
+    \ 0){\n            int l, r; long long x;\n            cin >> l >> r >> x;\n \
+    \           seg.Apply(l, r, x);\n        }\n        else{\n            int l,\
+    \ r; cin >> l >> r;\n            cout << seg.Fold(l, r) << '\\n';\n        }\n\
+    \    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/DataStructure/BinaryIndexedTree.hpp
+  - Library/DataStructure/LazySegmentTree.hpp
   isVerificationFile: true
-  path: verify/LC-PointAddRangeSum_BIT.test.cpp
+  path: verify/LC-RangeAddRangeMin.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 01:36:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/LC-PointAddRangeSum_BIT.test.cpp
+documentation_of: verify/LC-RangeAddRangeMin.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/LC-PointAddRangeSum_BIT.test.cpp
-- /verify/verify/LC-PointAddRangeSum_BIT.test.cpp.html
-title: verify/LC-PointAddRangeSum_BIT.test.cpp
+- /verify/verify/LC-RangeAddRangeMin.test.cpp
+- /verify/verify/LC-RangeAddRangeMin.test.cpp.html
+title: verify/LC-RangeAddRangeMin.test.cpp
 ---

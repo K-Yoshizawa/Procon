@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: "Heavy Light Decomposition - \u91CD\u8EFD\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -114,72 +114,73 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2\
     \ \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n    public:\n\
-    \    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType cost_ =\
-    \ 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
-    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
-    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
-    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
-    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
-    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ Vertex = int;\n\ntemplate<typename WeightType = int32_t>\nstruct Edge{\n   \
+    \ public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, WeightType\
+    \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
+    \ idx(idx_){}\n    \n    bool operator<(const Edge<WeightType> &e) const {return\
+    \ cost < e.cost;}\n\n    operator int() const {return to;}\n\n    Vertex from,\
+    \ to;\n    WeightType cost;\n    int idx;\n};\n\ntemplate<typename WeightType\
+    \ = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n    Graph(int\
+    \ V) : edge_size_(0), adjacent_list_(V){}\n    \n    inline void AddUndirectedEdge(Vertex\
+    \ u, Vertex v, WeightType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w,\
+    \ idx));\n    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType\
+    \ w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Tree/Tree.hpp\"\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
-    \ InputTree(int N, int padding = -1, bool weighted = false){\n    Graph<CostType>\
-    \ G(N);\n    for(int i = 0; i < N - 1; ++i){\n        Vertex u, v; CostType w\
-    \ = 1;\n        cin >> u >> v, u += padding, v += padding;\n        if(weighted)\
-    \ cin >> w;\n        G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\n\
-    template<typename CostType = int32_t>\nGraph<CostType> InputRootedTreeChild(int\
-    \ N, int padding = -1){\n    Graph<CostType> G(N);\n    for(Vertex u = 0; u <\
-    \ N; ++u){\n        int k; cin >> k;\n        for(int i = 0; i < k; ++i){\n  \
-    \          Vertex v; cin >> v, v += padding;\n            G.AddUndirectedEdge(u,\
-    \ v);\n        }\n    }\n    return G;\n}\n\ntemplate<typename CostType = int32_t>\n\
-    Graph<CostType> InputRootedTreeParent(int N, int padding = -1){\n    Graph<CostType>\
-    \ G(N);\n    for(Vertex u = 1; u < N; ++u){\n        Vertex v; cin >> v, v +=\
-    \ padding;\n        G.AddUndirectedEdge(u, v);\n    }\n    return G;\n}\n\ntemplate<typename\
-    \ CostType = int32_t>\nvector<vector<Vertex>> RootedTreeAdjacentList(const Graph<CostType>\
-    \ &T, const Vertex r = 0){\n    int n = T.VertexSize();\n    vector<vector<Vertex>>\
-    \ ret(n);\n    auto rec = [&](auto &self, Vertex u, Vertex p) -> void {\n    \
-    \    for(Vertex v : T[u]){\n            if(v == p) continue;\n            ret[u].push_back(v);\n\
-    \            self(self, v, u);\n        }\n    };\n    rec(rec, r, -1);\n    return\
-    \ ret;\n}\n\ntemplate<typename CostType>\nvector<int> CalculateTreeParent(Graph<CostType>\
-    \ &T, Vertex r = 0){\n    int n = T.VertexSize();\n    vector<int> ret(n, -1);\n\
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 4 \"Library/Tree/Tree.hpp\"\n\ntemplate<typename WeightType = int32_t>\n\
+    Graph<WeightType> InputTree(int V, int padding = -1, bool weighted = false){\n\
+    \    Graph<WeightType> G(V);\n    for(int i = 0; i < V - 1; ++i){\n        Vertex\
+    \ u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
+    \        if(weighted) cin >> w;\n        G.AddUndirectedEdge(u, v, w);\n    }\n\
+    \    return G;\n}\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
+    \ InputRootedTreeChild(int V, int padding = -1){\n    Graph<WeightType> G(V);\n\
+    \    for(Vertex u = 0; u < V; ++u){\n        int k; cin >> k;\n        for(int\
+    \ i = 0; i < k; ++i){\n            Vertex v; cin >> v, v += padding;\n       \
+    \     G.AddUndirectedEdge(u, v);\n        }\n    }\n    return G;\n}\n\ntemplate<typename\
+    \ WeightType = int32_t>\nGraph<WeightType> InputRootedTreeParent(int V, int padding\
+    \ = -1){\n    Graph<WeightType> G(V);\n    for(Vertex u = 1; u < V; ++u){\n  \
+    \      Vertex v; cin >> v, v += padding;\n        G.AddUndirectedEdge(u, v);\n\
+    \    }\n    return G;\n}\n\ntemplate<typename WeightType = int32_t>\nvector<vector<Vertex>>\
+    \ RootedTreeAdjacentList(const Graph<WeightType> &T, const Vertex r = 0){\n  \
+    \  int V = T.VertexSize();\n    vector<vector<Vertex>> ret(V);\n    auto rec =\
+    \ [&](auto &self, Vertex u, Vertex p) -> void {\n        for(Vertex v : T[u]){\n\
+    \            if(v == p) continue;\n            ret[u].push_back(v);\n        \
+    \    self(self, v, u);\n        }\n    };\n    rec(rec, r, -1);\n    return ret;\n\
+    }\n\ntemplate<typename WeightType>\nvector<Vertex> CalculateTreeParent(Graph<WeightType>\
+    \ &T, Vertex r = 0){\n    int V = T.VertexSize();\n    vector<Vertex> ret(V, -1);\n\
     \    auto rec = [&](auto &self, Vertex u) -> void {\n        for(Vertex v : T[u]){\n\
     \            if(v == ret[u]) continue;\n            ret[v] = u;\n            self(self,\
     \ v);\n        }\n    };\n    rec(rec, r);\n    return ret;\n}\n\ntemplate<typename\
-    \ CostType>\nvector<CostType> CalculateTreeCost(Graph<CostType> &T, Vertex r =\
-    \ 0){\n    int n = T.VertexSize();\n    vector<CostType> ret(n);\n    auto rec\
-    \ = [&](auto &self, Vertex u, Vertex p) -> void {\n        for(const Edge<CostType>\
+    \ WeightType>\nvector<WeightType> CalculateTreeCost(Graph<WeightType> &T, Vertex\
+    \ r = 0){\n    int V = T.VertexSize();\n    vector<WeightType> ret(V);\n    auto\
+    \ rec = [&](auto &self, Vertex u, Vertex p) -> void {\n        for(const Edge<WeightType>\
     \ &e : T[u]){\n            Vertex v = e.to;\n            if(v == p) continue;\n\
     \            ret[v] = e.cost;\n            self(self, v, u);\n        }\n    };\n\
-    \    rec(rec, r, -1);\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<int>\
-    \ CalculateTreeDepth(Graph<CostType> &T, Vertex r = 0){\n    int n = T.VertexSize();\n\
-    \    vector<int> ret(n, 0);\n    auto rec = [&](auto &self, Vertex u, Vertex p,\
+    \    rec(rec, r, -1);\n    return ret;\n}\n\ntemplate<typename WeightType>\nvector<int>\
+    \ CalculateTreeDepth(Graph<WeightType> &T, Vertex r = 0){\n    int V = T.VertexSize();\n\
+    \    vector<int> ret(V, 0);\n    auto rec = [&](auto &self, Vertex u, Vertex p,\
     \ int d) -> void {\n        ret[u] = d;\n        for(Vertex v : T[u]){\n     \
     \       if(v == p) continue;\n            self(self, v, u, d + 1);\n        }\n\
-    \    };\n    rec(rec, r, -1, 0);\n    return ret;\n}\n\ntemplate<typename CostType>\n\
-    vector<CostType> CalculateTreeDistance(Graph<CostType> &T, Vertex r = 0){\n  \
-    \  int n = T.VertexSize();\n    vector<CostType> ret(n, CostType(INF));\n    auto\
-    \ rec = [&](auto &self, Vertex u) -> void {\n        for(const Edge<CostType>\
+    \    };\n    rec(rec, r, -1, 0);\n    return ret;\n}\n\ntemplate<typename WeightType>\n\
+    vector<WeightType> CalculateTreeDistance(Graph<WeightType> &T, Vertex r = 0){\n\
+    \    int V = T.VertexSize();\n    vector<WeightType> ret(V, WeightType(INF));\n\
+    \    auto rec = [&](auto &self, Vertex u) -> void {\n        for(const Edge<WeightType>\
     \ &e : T[u]){\n            if(ret[e.to] > ret[u] + e.cost){\n                ret[e.to]\
     \ = ret[u] + e.cost;\n                self(self, e.to);\n            }\n     \
     \   }\n    };\n    ret[r] = 0;\n    rec(rec, r);\n    return ret;\n}\n\ntemplate<typename\
-    \ CostType>\nvector<int> CalculateSubtreeSize(Graph<CostType> &tree, Vertex r\
-    \ = 0){\n    int n = tree.VertexSize();\n    vector<int> ret(n, 1);\n    auto\
+    \ WeightType>\nvector<int> CalculateSubtreeSize(Graph<WeightType> &tree, Vertex\
+    \ r = 0){\n    int V = tree.VertexSize();\n    vector<int> ret(V, 1);\n    auto\
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
@@ -190,7 +191,7 @@ data:
     \ &p){\n        return os << \"# Path (\" << p.head_vertex << \" -> \" << p.tail_vertex\
     \ << \", \" << p.head_index << \" -> \" << p.tail_index << \", \" << boolalpha\
     \ << p.highest << \", \" << p.reverse << \")\";\n    }\n};\n\ntemplate<typename\
-    \ CostType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(Graph<CostType>\
+    \ WeightType>\nclass HeavyLightDecomposition{\n    public:\n    HeavyLightDecomposition(Graph<WeightType>\
     \ &tree, Vertex r = 0) :\n        T(tree), parent(CalculateTreeParent(tree, r)),\
     \ child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n),\
     \ rev_order_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){\n    \
@@ -257,7 +258,7 @@ data:
     \    }\n\n    Vertex RevOrder(int idx) const {\n        return rev_order_[idx];\n\
     \    }\n\n    int PreOrder(Vertex v) const {\n        return euler_tour_[v].first;\n\
     \    }\n\n    int PostOrder(Vertex v) const {\n        return euler_tour_[v].second;\n\
-    \    }\n\n    Graph<CostType> &T;\n    vector<Vertex> parent;\n    vector<vector<Vertex>>\
+    \    }\n\n    Graph<WeightType> &T;\n    vector<Vertex> parent;\n    vector<vector<Vertex>>\
     \ child;\n    int n, timer_;\n\n    vector<pair<int, int>> euler_tour_;\n    vector<Vertex>\
     \ rev_order_;\n    vector<int> depth_;\n\n    vector<Vertex> hp_head_; // \u5404\
     \ heavy path \u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\u70B9\n    vector<int>\
@@ -265,28 +266,24 @@ data:
     \ // \u5404\u9802\u70B9\u304C\u5C5E\u3059\u308B heavy path \u306E\u756A\u53F7\n\
     };\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\n\ntemplate<typename Monoid>\n\
     class SegmentTree{\n    public:\n    using F = function<Monoid(Monoid, Monoid)>;\n\
-    \n    SegmentTree(\n        int n,\n        F merge,\n        const Monoid &e,\n\
-    \        bool zero_index = false\n    ) : f(merge), id_(e), zero_index_(zero_index){\n\
-    \        size_ = 1;\n        while(size_ < n) size_ <<= 1;\n        offset_ =\
-    \ size_ - 1;\n        data_.resize(2 * size_, id_);\n    }\n    \n    SegmentTree(\n\
-    \        vector<Monoid> &A, \n        F merge, \n        const Monoid &e, \n \
-    \       bool zero_index = false\n    ) : f(merge), id_(e), zero_index_(zero_index){\n\
-    \        size_ = 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n     \
-    \   offset_ = size_ - 1;\n        data_.resize(2 * size_, id_);\n        for(int\
-    \ i = 0; i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n    \
-    \    }\n        Build();\n    }\n\n    void Build(){\n        for(int i = offset_;\
-    \ i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n\
-    \        }\n    }\n\n    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n\
-    \        int k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k\
-    \ >>= 1){\n            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n       \
-    \ }\n    }\n\n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n\
-    \        Validate(l + zero_index_);\n        Validate(r + zero_index_ - 1);\n\
-    \        int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n\
-    \        Monoid al = id_, ar = id_;\n        while(lh < rh){\n            if(lh\
+    \    \n    SegmentTree(\n        vector<Monoid> &A, \n        F merge, \n    \
+    \    const Monoid &e, \n        bool zero_index = false\n    ) : f(merge), id_(e),\
+    \ zero_index_(zero_index){\n        size_ = 1;\n        while(size_ < (int)A.size())\
+    \ size_ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2 * size_,\
+    \ id_);\n        for(int i = 0; i < (int)A.size(); ++i){\n            data_[size_\
+    \ + i] = A[i];\n        }\n        for(int i = offset_; i >= 1; --i){\n      \
+    \      data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
+    \    void Apply(int k, Monoid x){\n        Validate(k + zero_index_);\n      \
+    \  k = offset_ + k + zero_index_;\n        data_[k] = x;\n        while(k >>=\
+    \ 1){\n            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n\
+    \    }\n\n    Monoid Fold(int l, int r){\n        if(l == r) return id_;\n   \
+    \     Validate(l + zero_index_);\n        Validate(r + zero_index_ - 1);\n   \
+    \     int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n  \
+    \      Monoid al = id_, ar = id_;\n        while(lh < rh){\n            if(lh\
     \ & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n\
     \            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\
-    \n    Monoid operator[](const int &i){\n        Validate(i + zero_index_);\n \
-    \       return data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int\
+    \n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n \
+    \       return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n    int\
     \ size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n  \
     \  const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
     \ <= x && x <= size_);\n    }\n};\n#line 2 \"Library/modint.hpp\"\n\n/**\n * @file\
@@ -333,12 +330,12 @@ data:
     \ l, Affine r){return Affine::left_merge(l, r);}, Affine(), true);\n    SegmentTree<Affine>\
     \ seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l, r);}, Affine(),\
     \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
-    \         int p, c, d; cin >> p >> c >> d;\n            seg1.Set(hld[p], Affine(c,\
-    \ d));\n            seg2.Set(hld[p], Affine(c, d));\n        }\n        else{\n\
+    \         int p, c, d; cin >> p >> c >> d;\n            seg1.Apply(hld[p], Affine(c,\
+    \ d));\n            seg2.Apply(hld[p], Affine(c, d));\n        }\n        else{\n\
     \            int u, v, x; cin >> u >> v >> x;\n            Affine ans;\n     \
     \       for(auto &path : hld.PathQuery(u, v)){\n                if(path.reverse)\
-    \ ans = Affine::left_merge(ans, seg2.Product(path.head_index, path.tail_index));\n\
-    \                else ans = Affine::left_merge(ans, seg1.Product(path.head_index,\
+    \ ans = Affine::left_merge(ans, seg2.Fold(path.head_index, path.tail_index));\n\
+    \                else ans = Affine::left_merge(ans, seg1.Fold(path.head_index,\
     \ path.tail_index));\n            }\n            cout << ans.a * x + ans.b <<\
     \ '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
@@ -358,12 +355,12 @@ data:
     \ l, Affine r){return Affine::left_merge(l, r);}, Affine(), true);\n    SegmentTree<Affine>\
     \ seg2(init_data, [](Affine l, Affine r){return Affine::right_merge(l, r);}, Affine(),\
     \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
-    \         int p, c, d; cin >> p >> c >> d;\n            seg1.Set(hld[p], Affine(c,\
-    \ d));\n            seg2.Set(hld[p], Affine(c, d));\n        }\n        else{\n\
+    \         int p, c, d; cin >> p >> c >> d;\n            seg1.Apply(hld[p], Affine(c,\
+    \ d));\n            seg2.Apply(hld[p], Affine(c, d));\n        }\n        else{\n\
     \            int u, v, x; cin >> u >> v >> x;\n            Affine ans;\n     \
     \       for(auto &path : hld.PathQuery(u, v)){\n                if(path.reverse)\
-    \ ans = Affine::left_merge(ans, seg2.Product(path.head_index, path.tail_index));\n\
-    \                else ans = Affine::left_merge(ans, seg1.Product(path.head_index,\
+    \ ans = Affine::left_merge(ans, seg2.Fold(path.head_index, path.tail_index));\n\
+    \                else ans = Affine::left_merge(ans, seg1.Fold(path.head_index,\
     \ path.tail_index));\n            }\n            cout << ans.a * x + ans.b <<\
     \ '\\n';\n        }\n    }\n}"
   dependsOn:
@@ -377,7 +374,7 @@ data:
   isVerificationFile: true
   path: verify/LC-VertexSetPathComposite.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-VertexSetPathComposite.test.cpp

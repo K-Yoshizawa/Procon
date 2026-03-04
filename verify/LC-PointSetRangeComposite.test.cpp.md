@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -105,42 +105,37 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\
     \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using F =\
-    \ function<Monoid(Monoid, Monoid)>;\n\n    SegmentTree(\n        int n,\n    \
-    \    F merge,\n        const Monoid &e,\n        bool zero_index = false\n   \
-    \ ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n       \
-    \ while(size_ < n) size_ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2\
-    \ * size_, id_);\n    }\n    \n    SegmentTree(\n        vector<Monoid> &A, \n\
-    \        F merge, \n        const Monoid &e, \n        bool zero_index = false\n\
-    \    ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n    \
-    \    while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_ - 1;\n\
-    \        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
-    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        Build();\n \
-    \   }\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n     \
-    \       data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
-    \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
-    \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
-    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
-    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
-    \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
-    \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
-    \ data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n           \
-    \ lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\n    Monoid\
-    \ operator[](const int &i){\n        Validate(i + zero_index_);\n        return\
-    \ data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int size_, offset_,\
-    \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
-    \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
-    \    }\n};\n#line 2 \"Library/modint.hpp\"\n\n/**\n * @file modint.hpp\n * @author\
-    \ log K (lX57)\n * @brief modint\n * @version 1.0\n * @date 2023-08-24\n */\n\n\
-    #line 12 \"Library/modint.hpp\"\nusing namespace std;\n\nconst int mod998 = 998244353;\n\
-    const int mod107 = 1000000007;\n\ntemplate< int mod >\nstruct ModInt {\n    int\
-    \ x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t y) : x(y >= 0 ? y % mod :\
-    \ (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const ModInt &p) {\n\
-    \        if((x += p.x) >= mod) x -= mod;\n        return *this;\n    }\n\n   \
-    \ ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x) >= mod) x\
-    \ -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const ModInt\
-    \ &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n   \
-    \ }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
+    \ function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n        vector<Monoid>\
+    \ &A, \n        F merge, \n        const Monoid &e, \n        bool zero_index\
+    \ = false\n    ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ =\
+    \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
+    \ - 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
+    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        for(int i =\
+    \ offset_; i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i *\
+    \ 2 + 1]);\n        }\n    }\n\n    void Apply(int k, Monoid x){\n        Validate(k\
+    \ + zero_index_);\n        k = offset_ + k + zero_index_;\n        data_[k] =\
+    \ x;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
+    \ * k + 1]);\n        }\n    }\n\n    Monoid Fold(int l, int r){\n        if(l\
+    \ == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r +\
+    \ zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
+    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
+    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
+    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
+    \    }\n\n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n   \
+    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n\
+    \    const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
+    \ <= x && x <= size_);\n    }\n};\n#line 2 \"Library/modint.hpp\"\n\n/**\n * @file\
+    \ modint.hpp\n * @author log K (lX57)\n * @brief modint\n * @version 1.0\n * @date\
+    \ 2023-08-24\n */\n\n#line 12 \"Library/modint.hpp\"\nusing namespace std;\n\n\
+    const int mod998 = 998244353;\nconst int mod107 = 1000000007;\n\ntemplate< int\
+    \ mod >\nstruct ModInt {\n    int x;\n\n    ModInt() : x(0) {}\n\n    ModInt(int64_t\
+    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n    ModInt &operator+=(const\
+    \ ModInt &p) {\n        if((x += p.x) >= mod) x -= mod;\n        return *this;\n\
+    \    }\n\n    ModInt &operator-=(const ModInt &p) {\n        if((x += mod - p.x)\
+    \ >= mod) x -= mod;\n        return *this;\n    }\n\n    ModInt &operator*=(const\
+    \ ModInt &p) {\n        x = (int) (1LL * x * p.x % mod);\n        return *this;\n\
+    \    }\n\n    ModInt &operator/=(const ModInt &p) {\n        *this *= p.inverse();\n\
     \        return *this;\n    }\n\n    ModInt operator-() const { return ModInt(-x);\
     \ }\n\n    ModInt operator+(const ModInt &p) const { return ModInt(*this) += p;\
     \ }\n\n    ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p;\
@@ -169,9 +164,9 @@ data:
     \        init_data.push_back(Affine(a, b));\n    }\n\n    SegmentTree<Affine>\
     \ seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(),\
     \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
-    \         int p, c, d; cin >> p >> c >> d;\n            seg.Set(p, Affine(c, d));\n\
-    \        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n    \
-    \        cout << seg.Product(l, r).Value(x) << '\\n';\n        }\n    }\n}\n"
+    \         int p, c, d; cin >> p >> c >> d;\n            seg.Apply(p, Affine(c,\
+    \ d));\n        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n\
+    \            cout << seg.Fold(l, r).Value(x) << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
     \n#include \"../Library/modint.hpp\"\n\nstruct Affine{\n    Affine(mint a = 1,\
@@ -183,9 +178,9 @@ data:
     \        init_data.push_back(Affine(a, b));\n    }\n\n    SegmentTree<Affine>\
     \ seg(init_data, [](Affine l, Affine r){return Affine::Merge(l, r);}, Affine(),\
     \ true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n   \
-    \         int p, c, d; cin >> p >> c >> d;\n            seg.Set(p, Affine(c, d));\n\
-    \        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n    \
-    \        cout << seg.Product(l, r).Value(x) << '\\n';\n        }\n    }\n}"
+    \         int p, c, d; cin >> p >> c >> d;\n            seg.Apply(p, Affine(c,\
+    \ d));\n        }\n        else{\n            int l, r, x; cin >> l >> r >> x;\n\
+    \            cout << seg.Fold(l, r).Value(x) << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -194,7 +189,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointSetRangeComposite.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 02:10:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointSetRangeComposite.test.cpp

@@ -5,8 +5,8 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/DataStructure/CumulativeSum2D.hpp
-    title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
+    path: Library/DataStructure/MergeSortTree.hpp
+    title: "Merge Sort Tree - \u9818\u57DF\u6728"
   - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
@@ -17,10 +17,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B
+    PROBLEM: https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B
-  bundledCode: "#line 1 \"verify/AOJ-DSL-5-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
+    - https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound
+  bundledCode: "#line 1 \"verify/LC-StaticRangeSumWithUpperBound.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound\"\
     \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
     \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
@@ -100,64 +101,94 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/CumulativeSum2D.hpp\"\
-    \n\ntemplate<typename T = int32_t>\nstruct CumulativeSum2D{\n    private:\n  \
-    \  int height_, width_;\n    vector<vector<T>> data_;\n\n    void Validate(const\
-    \ int y, const int x) const {\n        assert(0 <= y && y < height_ - 1);\n  \
-    \      assert(0 <= x && x < width_ - 1);\n    }\n\n    public:\n    CumulativeSum2D(const\
-    \ int height, const int width, const T init_value = 0) : height_(height + 1),\
-    \ width_(width + 1){\n        data_.resize(height_);\n        for(int i = 0; i\
-    \ < height_; ++i){\n            data_.at(i).resize(width_, init_value);\n    \
-    \    }\n    }\n\n    void Build(){\n        for(int i = 1; i < height_; ++i){\n\
-    \            for(int j = 0; j < width_; ++j){\n                data_[i][j] +=\
-    \ data_[i - 1][j];\n            }\n        }\n        for(int i = 0; i < height_;\
-    \ ++i){\n            for(int j = 1; j < width_; ++j){\n                data_[i][j]\
-    \ += data_[i][j - 1];\n            }\n        }\n    }\n\n    void Set(const int\
-    \ y, const int x, const T value){\n        Validate(y, x);\n        data_[y][x]\
-    \ = value;\n    }\n\n    void Add(const int y, const int x, const T value){\n\
-    \        Add(y, x, y, x, value);\n    }\n\n    void Add(const int y1, const int\
-    \ x1, const int y2, const int x2, const T value){\n        Validate(y1, x1);\n\
-    \        Validate(y2, x2);\n        data_[y1][x1] += value;\n        data_[y2\
-    \ + 1][x1] -= value;\n        data_[y1][x2 + 1] -= value;\n        data_[y2 +\
-    \ 1][x2 + 1] += value;\n    }\n\n    T Sum(const int y, const int x) const {\n\
-    \        Validate(y, x);\n        return data_[y][x];\n    }\n\n    T Sum(const\
-    \ int y1, const int x1, const int y2, const int x2) const {\n        Validate(y1,\
-    \ x1);\n        Validate(y2, x2);\n        T ret = Sum(y2, x2);\n        if(y1\
-    \ > 0) ret -= Sum(y1 - 1, x2);\n        if(x1 > 0) ret -= Sum(y2, x1 - 1);\n \
-    \       if(y1 > 0 && x1 > 0) ret += Sum(y1 - 1, x1 - 1);\n        return ret;\n\
-    \    }\n\n    T Max() const {\n        T ret = data_[0][0];\n        for(int i\
-    \ = 0; i < height_; ++i){\n            for(int j = 0; j < width_; ++j){\n    \
-    \            ret = max(ret, data_[i][j]);\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    T Min() const {\n        T ret = data_[0][0];\n        for(int\
-    \ i = 0; i < height_; ++i){\n            for(int j = 0; j < width_; ++j){\n  \
-    \              ret = min(ret, data_[i][j]);\n            }\n        }\n      \
-    \  return ret;\n    }\n\n    vector<T> &operator[](const int k){\n        return\
-    \ data_.at(k);\n    }\n};\n#line 5 \"verify/AOJ-DSL-5-B.test.cpp\"\n\nint main(){\n\
-    \    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\n    CumulativeSum2D<int>\
-    \ cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n        int x1, y1, x2, y2;\
-    \ cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1, x1, y2 - 1, x2 - 1, 1);\n\
-    \    }\n    cum.Build();\n    cout << cum.Max() << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/CumulativeSum2D.hpp\"\
-    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\
-    \n    CumulativeSum2D<int> cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n\
-    \        int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1,\
-    \ x1, y2 - 1, x2 - 1, 1);\n    }\n    cum.Build();\n    cout << cum.Max() << '\\\
-    n';\n}"
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/MergeSortTree.hpp\"\
+    \n\ntemplate <typename DataType, typename WeightType = DataType>\nclass MergeSortTree{\n\
+    \    public:\n    MergeSortTree(\n        const vector<DataType> &A,\n       \
+    \ const vector<WeightType> &B,\n        bool zero_index = false\n    ) : zero_index_(zero_index){\n\
+    \        Build(A, B);\n    }\n    \n    MergeSortTree(\n        const vector<DataType>\
+    \ &A,\n        bool zero_index = false\n    ) : zero_index_(zero_index){\n   \
+    \     Build(A, A);\n    }\n\n    int CountAtMost(int l, int r, DataType x) const\
+    \ {\n        if(l >= r) return 0;\n        Validate(l + zero_index_);\n      \
+    \  Validate(r + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_,\
+    \ rh = r + zero_index_ + offset_;\n        int lcnt = 0, rcnt = 0;\n        while(lh\
+    \ < rh){\n            if(lh & 1){\n                lcnt += distance(data_[lh].begin(),\
+    \ upper_bound(data_[lh].begin(), data_[lh].end(), x));\n                ++lh;\n\
+    \            }\n            if(rh & 1){\n                --rh;\n             \
+    \   rcnt += distance(data_[rh].begin(), upper_bound(data_[rh].begin(), data_[rh].end(),\
+    \ x));\n            }\n            lh >>= 1, rh >>= 1;\n        }\n        return\
+    \ lcnt + rcnt;\n    }\n\n    int CountAtLeast(int l, int r, DataType x) const\
+    \ {\n        if(l >= r) return 0;\n        return r - l - CountAtMost(l, r, x\
+    \ - 1);\n    }\n\n    int CountBetween(int l, int r, DataType p, DataType q) const\
+    \ {\n        return CountAtMost(l, r, q) - CountAtMost(l, r, p - 1);\n    }\n\n\
+    \    WeightType SumAtMost(int l, int r, DataType x) const {\n        if(l >= r)\
+    \ return 0;\n        Validate(l + zero_index_);\n        Validate(r + zero_index_\
+    \ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n\
+    \        WeightType lval = 0, rval = 0;\n        while(lh < rh){\n           \
+    \ if(lh & 1){\n                int idx = distance(data_[lh].begin(), upper_bound(data_[lh].begin(),\
+    \ data_[lh].end(), x));\n                lval += prefix_sum_[lh][idx];\n     \
+    \           ++lh;\n            }\n            if(rh & 1){\n                --rh;\n\
+    \                int idx = distance(data_[rh].begin(), upper_bound(data_[rh].begin(),\
+    \ data_[rh].end(), x));\n                rval += prefix_sum_[rh][idx];\n     \
+    \       }\n            lh >>= 1, rh >>= 1;\n        }\n        return lval + rval;\n\
+    \    }\n\n    WeightType SumAtLeast(int l, int r, DataType x) const {\n      \
+    \  if(l >= r) return 0;\n        Validate(l + zero_index_);\n        Validate(r\
+    \ + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
+    \ + offset_;\n        WeightType lval = 0, rval = 0;\n        while(lh < rh){\n\
+    \            if(lh & 1){\n                int idx = distance(data_[lh].begin(),\
+    \ lower_bound(data_[lh].begin(), data_[lh].end(), x));\n                lval +=\
+    \ prefix_sum_[lh].back() - prefix_sum_[lh][idx];\n                ++lh;\n    \
+    \        }\n            if(rh & 1){\n                --rh;\n                int\
+    \ idx = distance(data_[rh].begin(), lower_bound(data_[rh].begin(), data_[rh].end(),\
+    \ x));\n                rval += prefix_sum_[rh].back() - prefix_sum_[rh][idx];\n\
+    \            }\n            lh >>= 1, rh >>= 1;\n        }\n        return lval\
+    \ + rval;\n    }\n\n    WeightType SumBetween(int l, int r, DataType p, DataType\
+    \ q) const {\n        return SumAtMost(l, r, q) - SumAtMost(l, r, p - 1);\n  \
+    \  }\n    \n    private:\n    int n_, offset_, zero_index_;\n    vector<vector<DataType>>\
+    \ data_;\n    vector<vector<WeightType>> weight_, prefix_sum_;\n\n    void Build(const\
+    \ vector<DataType> &data, const vector<WeightType> &weight){\n        n_ = 1;\n\
+    \        while(n_ < (int)data.size()) n_ <<= 1;\n        offset_ = n_ - 1;\n \
+    \       data_.resize(2 * n_);\n        weight_.resize(2 * n_);\n        prefix_sum_.resize(2\
+    \ * n_);\n        for(int i = 0; i < (int)data.size(); ++i){\n            data_[n_\
+    \ + i].emplace_back(data[i]);\n            weight_[n_ + i].emplace_back(weight[i]);\n\
+    \            prefix_sum_[n_ + i].emplace_back(0);\n            prefix_sum_[n_\
+    \ + i].emplace_back(weight[i]);\n        }\n        for(int i = offset_; i >=\
+    \ 1; --i){\n            int l = i * 2 + 0, r = i * 2 + 1, li = 0, ri = 0, j =\
+    \ 0;\n            int ls = (int)data_[l].size(), rs = (int)data_[r].size();\n\
+    \            data_[i].resize(ls + rs);\n            weight_[i].resize(ls + rs);\n\
+    \            prefix_sum_[i].resize(ls + rs + 1);\n            while(li < ls ||\
+    \ ri < rs){\n                if(ri == rs || li != ls && data_[l][li] < data_[r][ri]){\n\
+    \                    data_[i][j] = data_[l][li];\n                    weight_[i][j]\
+    \ = weight_[l][li];\n                    prefix_sum_[i][j + 1] = prefix_sum_[i][j]\
+    \ + weight_[i][j];\n                    ++j, ++li;\n                }\n      \
+    \          else{\n                    data_[i][j] = data_[r][ri];\n          \
+    \          weight_[i][j] = weight_[r][ri];\n                    prefix_sum_[i][j\
+    \ + 1] = prefix_sum_[i][j] + weight_[i][j];\n                    ++j, ++ri;\n\
+    \                }\n            }\n        }\n    }\n    \n    inline void Validate(int\
+    \ x) const {\n        assert(1 <= x && x <= n_);\n    }\n};\n#line 5 \"verify/LC-StaticRangeSumWithUpperBound.test.cpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin\
+    \ >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    MergeSortTree<ll> mst(a, true);\n\
+    \    while(Q--){\n        ll l, r, x; cin >> l >> r >> x;\n        cout << mst.CountAtMost(l,\
+    \ r, x) << ' ' << mst.SumAtMost(l, r, x) << '\\n';\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_sum_with_upper_bound\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/MergeSortTree.hpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\n    int N, Q; cin\
+    \ >> N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    MergeSortTree<ll> mst(a, true);\n\
+    \    while(Q--){\n        ll l, r, x; cin >> l >> r >> x;\n        cout << mst.CountAtMost(l,\
+    \ r, x) << ' ' << mst.SumAtMost(l, r, x) << '\\n';\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/DataStructure/CumulativeSum2D.hpp
+  - Library/DataStructure/MergeSortTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-5-B.test.cpp
+  path: verify/LC-StaticRangeSumWithUpperBound.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 16:49:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-5-B.test.cpp
+documentation_of: verify/LC-StaticRangeSumWithUpperBound.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-5-B.test.cpp
-- /verify/verify/AOJ-DSL-5-B.test.cpp.html
-title: verify/AOJ-DSL-5-B.test.cpp
+- /verify/verify/LC-StaticRangeSumWithUpperBound.test.cpp
+- /verify/verify/LC-StaticRangeSumWithUpperBound.test.cpp.html
+title: verify/LC-StaticRangeSumWithUpperBound.test.cpp
 ---

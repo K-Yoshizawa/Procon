@@ -7,32 +7,28 @@ data:
   - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
-    path: Library/Tree/LowestCommonAncestor.hpp
-    title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
   - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: Library/unauthenticated/AuxiliaryTree.hpp
+    title: Library/unauthenticated/AuxiliaryTree.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C
-  bundledCode: "#line 1 \"verify/AOJ-GRL-5-C.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
-    \n\n#line 2 \"Library/Tree/LowestCommonAncestor.hpp\"\n\n#line 2 \"Library/Tree/Tree.hpp\"\
-    \n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n\
-    /**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Graph/Graph.hpp\"\
+    links: []
+  bundledCode: "#line 2 \"Library/unauthenticated/EulerTour.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
+    \n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n\
+    #include <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n\
+    #include <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n\
+    #include <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include\
+    \ <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
+    using namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr\
+    \ const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 2 \"Library/Tree/Tree.hpp\"\
+    \n\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\
     \n\nusing Vertex = int;\n\ntemplate<typename WeightType = int32_t>\nstruct Edge{\n\
     \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, WeightType\
     \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
@@ -103,48 +99,61 @@ data:
     \ rec = [&](auto self, Vertex u, Vertex p) -> int {\n        for(const int v :\
     \ tree[u]){\n            if(v == p) continue;\n            ret[u] += self(self,\
     \ v, u);\n        }\n        return ret[u];\n    };\n    rec(rec, r, -1);\n  \
-    \  return ret;\n}\n#line 4 \"Library/Tree/LowestCommonAncestor.hpp\"\n\ntemplate<typename\
-    \ WeightType>\nstruct LowestCommonAncestor{\n    public:\n    LowestCommonAncestor(Graph<WeightType>\
-    \ &tree) : T(tree), depth_(CalculateTreeDepth(tree)){\n        int V = T.VertexSize();\n\
-    \        height_ = 1;\n        while((1 << height_) < V) ++height_;\n        auto\
-    \ par = CalculateTreeParent(T);\n        parent_.resize(height_, vector<Vertex>(V,\
-    \ -1));\n        for(Vertex i = 0; i < V; ++i){\n            parent_[0][i] = par[i];\n\
-    \        }\n        for(int k = 0; k + 1 < height_; ++k){\n            for(Vertex\
-    \ i = 0; i < V; ++i){\n                if(parent_[k][i] < 0) parent_[k + 1][i]\
-    \ = -1;\n                else parent_[k + 1][i] = parent_[k][parent_[k][i]];\n\
-    \            }\n        }\n    }\n\n    Vertex Query(Vertex u, Vertex v){\n  \
-    \      if(depth_[u] < depth_[v]) swap(u, v);\n        for(int k = 0; k < height_;\
-    \ ++k){\n            if((depth_[u] - depth_[v]) >> k & 1){\n                u\
-    \ = parent_[k][u];\n            }\n        }\n        if(u == v) return u;\n \
-    \       for(int k = height_ - 1; k >= 0; --k){\n            if(parent_[k][u] !=\
-    \ parent_[k][v]){\n                u = parent_[k][u];\n                v = parent_[k][v];\n\
-    \            }\n        }\n        return parent_[0][u];\n    }\n\n    private:\n\
-    \    Graph<WeightType> &T;\n    int height_;\n    vector<int> depth_;\n    vector<vector<Vertex>>\
-    \ parent_;\n};\n#line 4 \"verify/AOJ-GRL-5-C.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
-    \    int n; cin >> n;\n    auto T = InputRootedTreeChild(n, 0);\n\n    LowestCommonAncestor\
-    \ lca(T);\n    int q; cin >> q;\n    while(q--){\n        int u, v; cin >> u >>\
-    \ v;\n        cout << lca.Query(u, v) << '\\n';\n    }\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_C\"\
-    \n\n#include \"../Library/Tree/LowestCommonAncestor.hpp\"\n\nint main(){\n   \
-    \ cin.tie(0)->sync_with_stdio(false);\n    int n; cin >> n;\n    auto T = InputRootedTreeChild(n,\
-    \ 0);\n\n    LowestCommonAncestor lca(T);\n    int q; cin >> q;\n    while(q--){\n\
-    \        int u, v; cin >> u >> v;\n        cout << lca.Query(u, v) << '\\n';\n\
-    \    }\n}"
+    \  return ret;\n}\n#line 5 \"Library/unauthenticated/EulerTour.hpp\"\n\ntemplate<typename\
+    \ WeightType>\nclass EulerTour{\n    public:\n    using F = function<WeightType(CostType)>;\n\
+    \n    EulerTour(){}\n\n    EulerTour(RootedTree<WeightType> &T, bool one_index\
+    \ = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
+    \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
+    \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
+    \ int GetIn(const Vertex v) const {\n        return in_time_.at(v - one_index_);\n\
+    \    }\n\n    int GetOut(const Vertex v) const {\n        return out_time_.at(v\
+    \ - one_index_);\n    }\n\n    pair<int, int> GetPair(const Vertex v) const {\n\
+    \        return make_pair(in_time_.at(v - one_index_), out_time_.at(v - one_index_));\n\
+    \    }\n\n    template<typename Type>\n    vector<Type> ConvertVector(const vector<Type>\
+    \ &value, const F in_converter, const F out_converter){\n        vector<Type>\
+    \ ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_; ++i){\n   \
+    \         int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n          \
+    \  ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx] = out_converter(value.at(i));\n\
+    \        }\n        return ret;\n    }\n\n    private:\n    int time_{0}, one_index_,\
+    \ vertex_size_;\n\n    RootedTree<WeightType> &T;\n    vector<int> in_time_, out_time_;\n\
+    \n    void dfs(Vertex v){\n        in_time_[v] = time_++;\n        for(Vertex\
+    \ c : T.get_child(v)){\n            dfs(c);\n        }\n        out_time_[v] =\
+    \ time_++;\n    }\n};\n"
+  code: "#pragma once\n\n#include \"../Common.hpp\"\n#include \"../Tree/Tree.hpp\"\
+    \n\ntemplate<typename WeightType>\nclass EulerTour{\n    public:\n    using F\
+    \ = function<WeightType(CostType)>;\n\n    EulerTour(){}\n\n    EulerTour(RootedTree<WeightType>\
+    \ &T, bool one_index = false) :\n            T(T),\n            vertex_size_(T.get_vertex_size()),\n\
+    \            in_time_(T.get_vertex_size()),\n            out_time_(T.get_vertex_size()),\n\
+    \            one_index_(one_index){\n        dfs(T.get_root());\n    }\n\n   \
+    \ int GetIn(const Vertex v) const {\n        return in_time_.at(v - one_index_);\n\
+    \    }\n\n    int GetOut(const Vertex v) const {\n        return out_time_.at(v\
+    \ - one_index_);\n    }\n\n    pair<int, int> GetPair(const Vertex v) const {\n\
+    \        return make_pair(in_time_.at(v - one_index_), out_time_.at(v - one_index_));\n\
+    \    }\n\n    template<typename Type>\n    vector<Type> ConvertVector(const vector<Type>\
+    \ &value, const F in_converter, const F out_converter){\n        vector<Type>\
+    \ ret(2 * vertex_size_);\n        for(int i = 0; i < vertex_size_; ++i){\n   \
+    \         int in_idx = in_time_.at(i), out_idx = out_time_.at(i);\n          \
+    \  ret[in_idx] = in_converter(value.at(i));\n            ret[out_idx] = out_converter(value.at(i));\n\
+    \        }\n        return ret;\n    }\n\n    private:\n    int time_{0}, one_index_,\
+    \ vertex_size_;\n\n    RootedTree<WeightType> &T;\n    vector<int> in_time_, out_time_;\n\
+    \n    void dfs(Vertex v){\n        in_time_[v] = time_++;\n        for(Vertex\
+    \ c : T.get_child(v)){\n            dfs(c);\n        }\n        out_time_[v] =\
+    \ time_++;\n    }\n};"
   dependsOn:
-  - Library/Tree/LowestCommonAncestor.hpp
+  - Library/Common.hpp
   - Library/Tree/Tree.hpp
   - Library/Graph/Graph.hpp
-  - Library/Common.hpp
-  isVerificationFile: true
-  path: verify/AOJ-GRL-5-C.test.cpp
-  requiredBy: []
-  timestamp: '2026-02-13 15:23:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  isVerificationFile: false
+  path: Library/unauthenticated/EulerTour.hpp
+  requiredBy:
+  - Library/unauthenticated/AuxiliaryTree.hpp
+  timestamp: '2026-03-04 10:33:00+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/AOJ-GRL-5-C.test.cpp
+documentation_of: Library/unauthenticated/EulerTour.hpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-GRL-5-C.test.cpp
-- /verify/verify/AOJ-GRL-5-C.test.cpp.html
-title: verify/AOJ-GRL-5-C.test.cpp
+- /library/Library/unauthenticated/EulerTour.hpp
+- /library/Library/unauthenticated/EulerTour.hpp.html
+title: Library/unauthenticated/EulerTour.hpp
 ---

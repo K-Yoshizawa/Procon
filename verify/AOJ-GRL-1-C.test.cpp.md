@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphMisc.hpp
     title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\
@@ -15,7 +15,7 @@ data:
     path: Library/Graph/WarshallFloyd.hpp
     title: "Warshall Floyd - \u30EF\u30FC\u30B7\u30E3\u30EB\u30D5\u30ED\u30A4\u30C9\
       \u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
@@ -109,80 +109,81 @@ data:
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line\
-    \ 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename CostType\
+    \ 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename WeightType\
     \ = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n    Edge(Vertex\
-    \ from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n        from(from_),\
-    \ to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const Edge<CostType>\
+    \ from_, Vertex to_, WeightType weight_ = 1, int idx_ = -1) :\n        from(from_),\
+    \ to(to_), cost(weight_), idx(idx_){}\n    \n    bool operator<(const Edge<WeightType>\
     \ &e) const {return cost < e.cost;}\n\n    operator int() const {return to;}\n\
-    \n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\ntemplate<typename\
-    \ CostType = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n \
-    \   Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n    \n\
-    \    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n    \
-    \    int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \n    Vertex from, to;\n    WeightType cost;\n    int idx;\n};\n\ntemplate<typename\
+    \ WeightType = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n\
+    \    Graph(int V) : edge_size_(0), adjacent_list_(V){}\n    \n    inline void\
+    \ AddUndirectedEdge(Vertex u, Vertex v, WeightType w = 1){\n        int idx =\
+    \ edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u, v, w,\
+    \ idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w, idx));\n\
+    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType w\
+    \ = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 2 \"Library/Graph/GraphMisc.hpp\"\n\n#line 4 \"Library/Graph/GraphMisc.hpp\"\
-    \n\ntemplate<typename CostType>\nvector<Edge<CostType>> ConvertEdgeSet(const Graph<CostType>\
-    \ &G){\n    vector<Edge<CostType>> ret;\n    vector<bool> check(G.EdgeSize(),\
-    \ false);\n    int n = G.VertexSize();\n    for(int u = 0; u < n; ++u){\n    \
-    \    for(const Edge<CostType> &e : G[u]){\n            if(check[e.idx]) continue;\n\
-    \            check[e.idx] = true;\n            ret.push_back(e);\n        }\n\
-    \    }\n    return ret;\n}\n\ntemplate<typename CostType>\nvector<vector<CostType>>\
-    \ ConvertDistanceMatrix(const Graph<CostType> &G){\n    int n = G.VertexSize();\n\
-    \    vector<vector<CostType>> ret(n, vector<CostType>(n, CostType(INF)));\n  \
-    \  for(int u = 0; u < n; ++u){\n        ret[u][u] = CostType(0);\n        for(const\
-    \ Edge<CostType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n        }\n\
-    \    }\n    return ret;\n}\n\ntemplate<typename CostType>\nGraph<CostType> ReverseGraph(const\
-    \ Graph<CostType> &G){\n    int n = G.VertexSize();\n    Graph<CostType> ret(n);\n\
-    \    for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e : G[u]){\n\
-    \            ret.AddDirectedEdge(e.to, e.from, e.cost);\n        }\n    }\n  \
-    \  return ret;\n}\n#line 3 \"Library/Graph/WarshallFloyd.hpp\"\n\ntemplate<typename\
-    \ CostType>\nclass WarshallFloyd{\n    public:\n    WarshallFloyd(Graph<CostType>\
-    \ &G) :\n        n(G.VertexSize()), dist_(ConvertDistanceMatrix(G)){\n       \
-    \ Solve();\n    }\n\n    WarshallFloyd(vector<vector<CostType>> &D) :\n      \
-    \  n((int)D.size()), dist_(D){\n        Solve();\n    }\n\n    inline bool Reachable(const\
-    \ Vertex &s, const Vertex &t) const {\n        return dist_[s][t] != inf;\n  \
-    \  }\n\n    inline CostType Distance(const Vertex &s, const Vertex &t) const {\n\
-    \        return dist_[s][t];\n    }\n\n    inline bool Negative() const {\n  \
-    \      return negative_cycle_;\n    }\n\n    inline vector<CostType> &operator[](const\
-    \ Vertex &s){\n        return dist_[s];\n    }\n\n    inline const vector<CostType>\
-    \ &operator[](const Vertex &s) const {\n        return dist_[s];\n    }\n\n  \
-    \  private:\n    int n;\n    CostType inf{CostType(INF)};\n    bool negative_cycle_{false};\n\
-    \    vector<vector<CostType>> dist_;\n\n    void Solve(){\n        for(int i =\
-    \ 0; i < n; ++i) dist_[i][i] = min(dist_[i][i], CostType(0));\n        for(int\
-    \ k = 0; k < n; ++k){\n            for(int i = 0; i < n; ++i){\n             \
-    \   for(int j = 0; j < n; ++j){\n                    if(dist_[i][k] == inf ||\
-    \ dist_[k][j] == inf) continue;\n                    dist_[i][j] = min(dist_[i][j],\
-    \ dist_[i][k] + dist_[k][j]);\n                }\n            }\n        }\n \
-    \       for(int i = 0; i < n; ++i) negative_cycle_ |= dist_[i][i] < 0;\n    }\n\
-    };\n#line 5 \"verify/AOJ-GRL-1-C.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
-    \    int V, E; cin >> V >> E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n\
-    \    \n    WarshallFloyd wf(G);\n    if(wf.Negative()){\n        cout << \"NEGATIVE\
-    \ CYCLE\" << '\\n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n\
-    \        for(int j = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n  \
-    \              cout << wf[i][j];\n            }\n            else{\n         \
-    \       cout << \"INF\";\n            }\n            cout << \" \\n\"[j + 1 ==\
-    \ V];\n        }\n    }\n}\n"
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 2 \"Library/Graph/GraphMisc.hpp\"\n\n#line 4 \"Library/Graph/GraphMisc.hpp\"\
+    \n\ntemplate<typename WeightType>\nvector<Edge<WeightType>> ConvertEdgeSet(const\
+    \ Graph<WeightType> &G){\n    vector<Edge<WeightType>> ret;\n    vector<bool>\
+    \ check(G.EdgeSize(), false);\n    int n = G.VertexSize();\n    for(int u = 0;\
+    \ u < n; ++u){\n        for(const Edge<WeightType> &e : G[u]){\n            if(check[e.idx])\
+    \ continue;\n            check[e.idx] = true;\n            ret.push_back(e);\n\
+    \        }\n    }\n    return ret;\n}\n\ntemplate<typename WeightType>\nvector<vector<WeightType>>\
+    \ ConvertDistanceMatrix(const Graph<WeightType> &G){\n    int n = G.VertexSize();\n\
+    \    vector<vector<WeightType>> ret(n, vector<WeightType>(n, WeightType(INF)));\n\
+    \    for(int u = 0; u < n; ++u){\n        ret[u][u] = WeightType(0);\n       \
+    \ for(const Edge<WeightType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n\
+    \        }\n    }\n    return ret;\n}\n\ntemplate<typename WeightType>\nGraph<WeightType>\
+    \ ReverseGraph(const Graph<WeightType> &G){\n    int n = G.VertexSize();\n   \
+    \ Graph<WeightType> ret(n);\n    for(int u = 0; u < n; ++u){\n        for(const\
+    \ Edge<WeightType> &e : G[u]){\n            ret.AddDirectedEdge(e.to, e.from,\
+    \ e.cost);\n        }\n    }\n    return ret;\n}\n#line 3 \"Library/Graph/WarshallFloyd.hpp\"\
+    \n\ntemplate<typename WeightType>\nclass WarshallFloyd{\n    public:\n    WarshallFloyd(Graph<WeightType>\
+    \ &graph) :\n        V(graph.VertexSize()), dist_(ConvertDistanceMatrix(graph)){\n\
+    \        Solve();\n    }\n\n    WarshallFloyd(vector<vector<WeightType>> &A) :\n\
+    \        V((int)A.size()), dist_(A){\n        Solve();\n    }\n\n    inline bool\
+    \ Reachable(const Vertex &s, const Vertex &t) const {\n        return dist_[s][t]\
+    \ != inf;\n    }\n\n    inline WeightType Distance(const Vertex &s, const Vertex\
+    \ &t) const {\n        return dist_[s][t];\n    }\n\n    inline bool NegativeCycle()\
+    \ const {\n        return negative_cycle_;\n    }\n\n    inline vector<WeightType>\
+    \ &operator[](const Vertex &s){\n        return dist_[s];\n    }\n\n    inline\
+    \ const vector<WeightType> &operator[](const Vertex &s) const {\n        return\
+    \ dist_[s];\n    }\n\n    private:\n    int V;\n    WeightType inf{WeightType(INF)};\n\
+    \    bool negative_cycle_{false};\n    vector<vector<WeightType>> dist_;\n\n \
+    \   void Solve(){\n        for(int i = 0; i < V; ++i) dist_[i][i] = min(dist_[i][i],\
+    \ WeightType(0));\n        for(int k = 0; k < V; ++k){\n            for(int i\
+    \ = 0; i < V; ++i){\n                for(int j = 0; j < V; ++j){\n           \
+    \         if(dist_[i][k] == inf || dist_[k][j] == inf) continue;\n           \
+    \         dist_[i][j] = min(dist_[i][j], dist_[i][k] + dist_[k][j]);\n       \
+    \         }\n            }\n        }\n        for(int i = 0; i < V; ++i) negative_cycle_\
+    \ |= dist_[i][i] < 0;\n    }\n};\n#line 5 \"verify/AOJ-GRL-1-C.test.cpp\"\n\n\
+    int main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >> V >>\
+    \ E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    WarshallFloyd\
+    \ wf(G);\n    if(wf.NegativeCycle()){\n        cout << \"NEGATIVE CYCLE\" << '\\\
+    n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n        for(int\
+    \ j = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n                cout\
+    \ << wf[i][j];\n            }\n            else{\n                cout << \"INF\"\
+    ;\n            }\n            cout << \" \\n\"[j + 1 == V];\n        }\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/1/GRL_1_C\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/WarshallFloyd.hpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
     \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, true, true);\n    \n    WarshallFloyd\
-    \ wf(G);\n    if(wf.Negative()){\n        cout << \"NEGATIVE CYCLE\" << '\\n';\n\
-    \        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n        for(int j\
-    \ = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n                cout\
+    \ wf(G);\n    if(wf.NegativeCycle()){\n        cout << \"NEGATIVE CYCLE\" << '\\\
+    n';\n        return 0;\n    }\n    for(int i = 0; i < V; ++i){\n        for(int\
+    \ j = 0; j < V; ++j){\n            if(wf.Reachable(i, j)){\n                cout\
     \ << wf[i][j];\n            }\n            else{\n                cout << \"INF\"\
     ;\n            }\n            cout << \" \\n\"[j + 1 == V];\n        }\n    }\n\
     }"
@@ -195,7 +196,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-C.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-C.test.cpp

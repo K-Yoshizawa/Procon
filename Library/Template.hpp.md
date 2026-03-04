@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -27,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-2-B.test.cpp
     title: verify/AOJ-DSL-2-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-2-G.test.cpp
+    title: verify/AOJ-DSL-2-G.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-5-B.test.cpp
     title: verify/AOJ-DSL-5-B.test.cpp
@@ -76,18 +79,27 @@ data:
     path: verify/LC-PointSetRangeComposite.test.cpp
     title: verify/LC-PointSetRangeComposite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-RangeAddRangeMin.test.cpp
+    title: verify/LC-RangeAddRangeMin.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffinePointGet.test.cpp
     title: verify/LC-RangeAffinePointGet.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-RectangleSum.test.cpp
+    title: verify/LC-RectangleSum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/LC-StaticRangeSumWithUpperBound.test.cpp
+    title: verify/LC-StaticRangeSumWithUpperBound.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -99,9 +111,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
@@ -264,37 +276,41 @@ data:
   - Library/origin.cpp
   - Library/TemplateExtend.hpp
   timestamp: '2026-02-08 19:40:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/LC-TreePathCompositeSum.test.cpp
-  - verify/LC-CycleDetectionUndirected.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
-  - verify/LC-RangeAffineRangeSum.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-4-A.test.cpp
-  - verify/AOJ-DSL-1-B.test.cpp
-  - verify/AOJ-DSL-5-B.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/AOJ-GRL-3-B.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-DSL-2-B.test.cpp
-  - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/AOJ-ALDS1-7-A.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/LC-LongestIncreasingSubsequence.test.cpp
-  - verify/LC-CycleDetection.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
-  - verify/AOJ-DSL-2-A.test.cpp
-  - verify/LC-RangeAffinePointGet.test.cpp
+  - verify/AOJ-DSL-1-B.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
+  - verify/AOJ-GRL-3-B.test.cpp
+  - verify/LC-RangeAddRangeMin.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
+  - verify/AOJ-0560.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
-  - verify/AOJ-0560.test.cpp
-  - verify/LC-ShortestPath.test.cpp
+  - verify/AOJ-DSL-5-B.test.cpp
   - verify/LC-PointAddRangeSum_BIT.test.cpp
-  - verify/LC-PointAddRangeSum.test.cpp
+  - verify/AOJ-DSL-2-G.test.cpp
+  - verify/LC-ShortestPath.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/LC-CycleDetectionUndirected.test.cpp
+  - verify/AOJ-GRL-4-A.test.cpp
+  - verify/LC-RangeAffinePointGet.test.cpp
+  - verify/LC-StaticRangeSumWithUpperBound.test.cpp
+  - verify/LC-LongestIncreasingSubsequence.test.cpp
+  - verify/LC-CycleDetection.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/AOJ-ALDS1-7-A.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-RectangleSum.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
 documentation_of: Library/Template.hpp
 layout: document
 title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"

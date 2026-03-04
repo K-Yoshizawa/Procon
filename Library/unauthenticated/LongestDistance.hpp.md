@@ -20,13 +20,13 @@ data:
     \ GraphTemplate.hpp\n * @brief Graph Template - \u30B0\u30E9\u30D5\u30C6\u30F3\
     \u30D7\u30EC\u30FC\u30C8\n * @version 3.0\n * @date 2024-01-09\n */\n\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    CostType cost;\n\
-    \    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from, Vertex\
-    \ to, CostType cost) : from(from), to(to), cost(cost){}\n\n    operator int(){\n\
-    \        return to;\n    }\n};\n\ntemplate<typename CostType = int>\nstruct Graph{\n\
-    \    private:\n    int vertex_size_{0}, edge_size_{0};\n    bool is_directed_{false},\
-    \ is_weighted_{false};\n    vector<vector<Edge<CostType>>> adj_;\n    vector<int>\
-    \ indegree_;\n\n    public:\n    CostType INF{numeric_limits<CostType>::max()\
+    \ WeightType>\nstruct Edge{\n    public:\n    Vertex from, to;\n    WeightType\
+    \ cost;\n    int loc{-1}, id{-1};\n\n    Edge() = default;\n    Edge(Vertex from,\
+    \ Vertex to, WeightType cost) : from(from), to(to), cost(cost){}\n\n    operator\
+    \ int(){\n        return to;\n    }\n};\n\ntemplate<typename WeightType = int>\n\
+    struct Graph{\n    private:\n    int vertex_size_{0}, edge_size_{0};\n    bool\
+    \ is_directed_{false}, is_weighted_{false};\n    vector<vector<Edge<WeightType>>>\
+    \ adj_;\n    vector<int> indegree_;\n\n    public:\n    WeightType INF{numeric_limits<WeightType>::max()\
     \ >> 2};\n\n    Graph() = default;\n\n    /**\n     * @brief `vertex_size` \u9802\
     \u70B9 `0` \u8FBA\u306E\u30B0\u30E9\u30D5\u3092\u4F5C\u6210\u3059\u308B\u3002\n\
     \     * @note `directed` \u3092 `true` \u306B\u3059\u308B\u3068\u6709\u5411\u30B0\
@@ -40,12 +40,12 @@ data:
     \u3059\u308B\u3053\u3068\u3067\u91CD\u307F\u3092\u3064\u3051\u308B\u3053\u3068\
     \u304C\u3067\u304D\u308B\u3002\n     * @param from \u9802\u70B9\u756A\u53F7\n\
     \     * @param to \u9802\u70B9\u756A\u53F7\n     * @param cost \u91CD\u307F (option,\
-    \ default = `1`)\n     */\n    void add(Vertex from, Vertex to, CostType cost\
+    \ default = `1`)\n     */\n    void add(Vertex from, Vertex to, WeightType cost\
     \ = 1){\n        assert(0 <= from and from < vertex_size_);\n        assert(0\
-    \ <= to and to < vertex_size_);\n        is_weighted_ |= cost > 1;\n        Edge<CostType>\
+    \ <= to and to < vertex_size_);\n        is_weighted_ |= cost > 1;\n        Edge<WeightType>\
     \ e1(from, to, cost);\n        e1.loc = adj_[from].size();\n        e1.id = edge_size_;\n\
     \        adj_[from].push_back(e1);\n        ++edge_size_;\n        if(is_directed_){\n\
-    \            ++indegree_[to];\n            return;\n        }\n        Edge<CostType>\
+    \            ++indegree_[to];\n            return;\n        }\n        Edge<WeightType>\
     \ e2(to, from, cost);\n        e2.loc = adj_[to].size();\n        e2.id = e1.id;\n\
     \        adj_[to].push_back(e2);\n    }\n\n    /**\n     * @brief \u30B0\u30E9\
     \u30D5\u306B `edge_size` \u672C\u306E\u8FBA\u3092\u5165\u529B\u3055\u305B\u308B\
@@ -55,7 +55,7 @@ data:
     \ \u304B (option, default = `false`)\n     */\n    void input(int edge_size, bool\
     \ weighted = false, bool zero_index = false){\n        is_weighted_ = weighted;\n\
     \        for(int i = 0; i < edge_size; ++i){\n            Vertex s, t; cin >>\
-    \ s >> t;\n            if(!zero_index) --s, --t;\n            CostType c = 1;\n\
+    \ s >> t;\n            if(!zero_index) --s, --t;\n            WeightType c = 1;\n\
     \            if(weighted) cin >> c;\n            add(s, t, c);\n        }\n  \
     \  }\n\n    /**\n     * @brief \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\
     \u8FD4\u3059\u3002\n     * @return size_t \u9802\u70B9\u6570\n     */\n    size_t\
@@ -82,13 +82,13 @@ data:
     \ == 1) ret.push_back(i);\n        }\n        return ret;\n    }\n\n    /**\n\
     \     * @brief \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\u3092\u8FD4\
     \u3059\u3002\n     * @param v \u9802\u70B9\u756A\u53F7\n     * @return vector<Edge<CostType>>&\
-    \ \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\n     */\n    vector<Edge<CostType>>\
+    \ \u9802\u70B9 `v` \u306E\u96A3\u63A5\u30EA\u30B9\u30C8\n     */\n    vector<Edge<WeightType>>\
     \ &get_adj(Vertex v){\n        return adj_.at(v);\n    }\n\n    /**\n     * @brief\
     \ \u8FBA\u306E\u5411\u304D\u3092\u3059\u3079\u3066\u9006\u306B\u3057\u305F\u30B0\
     \u30E9\u30D5\u3092\u8FD4\u3059\u3002\n     * @attention \u6709\u5411\u30B0\u30E9\
     \u30D5\u3067\u3042\u308B\u3053\u3068\u3092\u8981\u4EF6\u3068\u3059\u308B\u3002\
     \n     * @return Graph<CostType> \u9006\u8FBA\u30B0\u30E9\u30D5\n     */\n   \
-    \ Graph<CostType> reverse(){\n        assert(is_directed_);\n        Graph ret(vertex_size_,\
+    \ Graph<WeightType> reverse(){\n        assert(is_directed_);\n        Graph ret(vertex_size_,\
     \ true);\n        for(auto es : adj_){\n            for(auto e : es){\n      \
     \          ret.add(e.to, e.from, e.cost);\n            }\n        }\n        return\
     \ ret;\n    }\n\n    /**\n     * @brief \u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\u30BD\
@@ -105,28 +105,28 @@ data:
     \ \u30B0\u30E9\u30D5\u304B\u3089\u8FBA\u96C6\u5408\u3092\u4F5C\u6210\u3059\u308B\
     \u3002\n     * @note \u8FBA\u96C6\u5408\u306F\u91CD\u307F\u3067\u6607\u9806\u30BD\
     \u30FC\u30C8\u3055\u308C\u305F\u72B6\u614B\u3067\u8FD4\u3055\u308C\u308B\u3002\
-    \n     * @return vector<Edge<CostType>> \u8FBA\u96C6\u5408\n     */\n    vector<Edge<CostType>>\
-    \ edge_set(){\n        vector<Edge<CostType>> ret;\n        vector<int> es(edge_size_,\
+    \n     * @return vector<Edge<CostType>> \u8FBA\u96C6\u5408\n     */\n    vector<Edge<WeightType>>\
+    \ edge_set(){\n        vector<Edge<WeightType>> ret;\n        vector<int> es(edge_size_,\
     \ 0);\n        for(int i = 0; i < vertex_size_; ++i){\n            for(auto e\
     \ : adj_[i]){\n                if(es[e.id]) continue;\n                es[e.id]\
     \ = 1;\n                ret.push_back(e);\n            }\n        }\n        sort(ret.begin(),\
-    \ ret.end(), [&](Edge<CostType> &l, Edge<CostType> &r){\n            return l.cost\
-    \ < r.cost;\n        });\n        return ret;\n    }\n\n    vector<vector<CostType>>\
-    \ matrix(){\n        int n = vertex_size_;\n        vector<vector<CostType>> ret(n,\
-    \ vector<CostType>(n, INF));\n        for(int i = 0; i < n; ++i) ret[i][i] = 0;\n\
-    \        for(int v = 0; v < n; ++v){\n            for(auto &e : adj_[v]){\n  \
-    \              ret[v][e.to] = e.cost;\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<CostType> &G){\n\
-    \        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex \" <<\
-    \ i << \" : \";\n            if(G[i].empty()){\n                os << \"<none>\"\
-    \ << '\\n';\n                continue;\n            }\n            for(auto &e\
-    \ : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \", \"\
-    \ << e.cost << \"} \";\n                else os << e.to << \" \";\n          \
-    \  }\n            if(i + 1 < G.size()) os << '\\n';\n        }\n        return\
-    \ os;\n    }\n\n    vector<Edge<CostType>> &operator[](Vertex v){\n        return\
+    \ ret.end(), [&](Edge<WeightType> &l, Edge<WeightType> &r){\n            return\
+    \ l.cost < r.cost;\n        });\n        return ret;\n    }\n\n    vector<vector<WeightType>>\
+    \ matrix(){\n        int n = vertex_size_;\n        vector<vector<WeightType>>\
+    \ ret(n, vector<WeightType>(n, INF));\n        for(int i = 0; i < n; ++i) ret[i][i]\
+    \ = 0;\n        for(int v = 0; v < n; ++v){\n            for(auto &e : adj_[v]){\n\
+    \                ret[v][e.to] = e.cost;\n            }\n        }\n        return\
+    \ ret;\n    }\n\n    friend ostream &operator<<(ostream &os, Graph<WeightType>\
+    \ &G){\n        for(int i = 0; i < G.size(); ++i){\n            os << \"Vertex\
+    \ \" << i << \" : \";\n            if(G[i].empty()){\n                os << \"\
+    <none>\" << '\\n';\n                continue;\n            }\n            for(auto\
+    \ &e : G[i]){\n                if(G.is_weighted()) os << \"{\" << e.to << \",\
+    \ \" << e.cost << \"} \";\n                else os << e.to << \" \";\n       \
+    \     }\n            if(i + 1 < G.size()) os << '\\n';\n        }\n        return\
+    \ os;\n    }\n\n    vector<Edge<WeightType>> &operator[](Vertex v){\n        return\
     \ get_adj(v);\n    }\n};\n#line 10 \"Library/unauthenticated/LongestDistance.hpp\"\
-    \n\ntemplate<typename CostType>\nvector<CostType> longestdistance(Graph<CostType>\
-    \ &G, CostType INF, Vertex start = -1, CostType init = 0){\n    vector<CostType>\
+    \n\ntemplate<typename WeightType>\nvector<WeightType> longestdistance(Graph<WeightType>\
+    \ &G, WeightType INF, Vertex start = -1, WeightType init = 0){\n    vector<WeightType>\
     \ dp(G.size(), INF);\n    if(start == -1){\n        for(auto v : G.source()) dp[v]\
     \ = init;\n    }\n    else dp[start] = init;\n    for(int i : G.topological_sort()){\n\
     \        if(dp[i] == INF) continue;\n        for(auto &e : G[i]){\n          \
@@ -135,18 +135,19 @@ data:
   code: "/**\n * @file LongestDistance.hpp\n * @author log K (lX57)\n * @brief Longest\
     \ Distance - DAG\u306B\u304A\u3051\u308B\u6700\u9577\u8DDD\u96E2\n * @version\
     \ 1.0\n * @date 2024-02-11\n */\n\n#include \"GraphTemplate.hpp\"\n\ntemplate<typename\
-    \ CostType>\nvector<CostType> longestdistance(Graph<CostType> &G, CostType INF,\
-    \ Vertex start = -1, CostType init = 0){\n    vector<CostType> dp(G.size(), INF);\n\
-    \    if(start == -1){\n        for(auto v : G.source()) dp[v] = init;\n    }\n\
-    \    else dp[start] = init;\n    for(int i : G.topological_sort()){\n        if(dp[i]\
-    \ == INF) continue;\n        for(auto &e : G[i]){\n            dp[e.to] = max(dp[e.to],\
-    \ dp[i] + e.cost);\n        }\n    }\n    return dp;\n}"
+    \ WeightType>\nvector<WeightType> longestdistance(Graph<WeightType> &G, WeightType\
+    \ INF, Vertex start = -1, WeightType init = 0){\n    vector<WeightType> dp(G.size(),\
+    \ INF);\n    if(start == -1){\n        for(auto v : G.source()) dp[v] = init;\n\
+    \    }\n    else dp[start] = init;\n    for(int i : G.topological_sort()){\n \
+    \       if(dp[i] == INF) continue;\n        for(auto &e : G[i]){\n           \
+    \ dp[e.to] = max(dp[e.to], dp[i] + e.cost);\n        }\n    }\n    return dp;\n\
+    }"
   dependsOn:
   - Library/unauthenticated/GraphTemplate.hpp
   isVerificationFile: false
   path: Library/unauthenticated/LongestDistance.hpp
   requiredBy: []
-  timestamp: '2025-05-30 19:43:59+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/LongestDistance.hpp

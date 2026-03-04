@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/LazySegmentTree.hpp
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
@@ -138,56 +138,46 @@ data:
     \ typename OperatorMonoid = Monoid>\nclass LazySegmentTree{\n    public:\n   \
     \ using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
     \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
-    \n    LazySegmentTree(int size, F merge, G mapping, H composite,\n    const Monoid\
-    \ &monoid_identity, const OperatorMonoid &operator_identity, bool zero_index =\
-    \ false)\n    : f(merge), g(mapping), h(composite), m1_(monoid_identity), om1_(operator_identity),\
-    \ zeroindex_(zero_index){\n        size_ = 1;\n        while(size_ < size) size_\
-    \ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2 * size_, m1_);\n\
-    \        lazy_.resize(2 * size_, om1_);\n        is_identity_.resize(2 * size_,\
-    \ true);\n    }\n\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n\
-    \            data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n  \
-    \  }\n\n    void Set(int index, Monoid value){\n        Validate(index + zeroindex_);\n\
-    \        data_[offset_ + index + zeroindex_] = value;\n    }\n\n    LazySegmentTree(vector<Monoid>\
-    \ &init_data, F merge, G mapping, H composite,\n    const Monoid &monoid_identity,\
-    \ const OperatorMonoid &operator_identity, bool zero_index = false)\n    : f(merge),\
-    \ g(mapping), h(composite), m1_(monoid_identity), om1_(operator_identity), zeroindex_(zero_index){\n\
-    \        size_ = 1;\n        while(size_ < (int)init_data.size()) size_ <<= 1;\n\
-    \        offset_ = size_ - 1;\n        data_.resize(2 * size_, m1_);\n       \
-    \ lazy_.resize(2 * size_, om1_);\n        is_identity_.resize(2 * size_, true);\n\
-    \        for(int i = 0; i < (int)init_data.size(); ++i){\n            data_[size_\
-    \ + i] = init_data[i];\n        }\n        Build();\n    }\n\n    void Update(int\
-    \ left, int right, OperatorMonoid operation){\n        Validate(left + zeroindex_);\n\
-    \        Validate(right + zeroindex_ - 1);\n        RecursiveUpdate(left + zeroindex_,\
-    \ right + zeroindex_, operation, 1, size_ + 1, 1);\n    }\n\n    Monoid Product(int\
-    \ left, int right){\n        Validate(left + zeroindex_);\n        Validate(right\
-    \ + zeroindex_ - 1);\n        return RecursiveProduct(left + zeroindex_, right\
-    \ + zeroindex_, 1, size_ + 1, 1);\n    }\n\n    Monoid GetValue(int k){\n    \
-    \    Validate(k + zeroindex_);\n        return Product(k, k + 1);\n    }\n\n \
-    \   Monoid operator[](const int &k){\n        return GetValue(k);\n    }\n\n \
-    \   private:\n    int size_, offset_, zeroindex_;\n    vector<Monoid> data_;\n\
-    \    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n    const\
-    \ F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const OperatorMonoid\
-    \ om1_;\n\n    inline void Validate(int x){\n        assert(1 <= x && x <= size_);\n\
-    \    }\n\n    void Evaluate(int k){\n        if(is_identity_[k]) return;\n   \
-    \     if(k < size_){\n            lazy_[k * 2 + 0] = h(lazy_[k * 2 + 0], lazy_[k]);\n\
-    \            is_identity_[k * 2 + 0] = false;\n            lazy_[k * 2 + 1] =\
-    \ h(lazy_[k * 2 + 1], lazy_[k]);\n            is_identity_[k * 2 + 1] = false;\n\
-    \        }\n        data_[k] = g(data_[k], lazy_[k]);\n        lazy_[k] = om1_;\n\
-    \        is_identity_[k] = true;\n    }\n\n    void RecursiveUpdate(int ul, int\
-    \ ur, OperatorMonoid x, int left, int right, int cell){\n        Evaluate(cell);\n\
+    \n    LazySegmentTree(\n        vector<Monoid> &A,\n        F merge,\n       \
+    \ G mapping,\n        H composite,\n        const Monoid &e_m,\n        const\
+    \ OperatorMonoid &e_o,\n        bool zero_index = false\n    ) : f(merge), g(mapping),\
+    \ h(composite), m1_(e_m), om1_(e_o), zero_index_(zero_index){\n        size_ =\
+    \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
+    \ - 1;\n        data_.resize(2 * size_, m1_);\n        lazy_.resize(2 * size_,\
+    \ om1_);\n        is_identity_.resize(2 * size_, true);\n        for(int i = 0;\
+    \ i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n        }\n\
+    \        for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i\
+    \ * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Apply(int l, int\
+    \ r, OperatorMonoid x){\n        Validate(l + zero_index_);\n        Validate(r\
+    \ + zero_index_ - 1);\n        RecursiveApply(l + zero_index_, r + zero_index_,\
+    \ x, 1, size_ + 1, 1);\n    }\n\n    Monoid Fold(int l, int r){\n        Validate(l\
+    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        return RecursiveFold(l\
+    \ + zero_index_, r + zero_index_, 1, size_ + 1, 1);\n    }\n\n    Monoid operator[](const\
+    \ int &k){\n        Validate(k + zero_index_);\n        return Fold(k, k + 1);\n\
+    \    }\n\n    private:\n    int size_, offset_, zero_index_;\n    vector<Monoid>\
+    \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
+    \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
+    \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
+    \ x && x <= size_);\n    }\n\n    void Evaluate(int k){\n        if(is_identity_[k])\
+    \ return;\n        if(k < size_){\n            lazy_[k * 2 + 0] = h(lazy_[k *\
+    \ 2 + 0], lazy_[k]);\n            is_identity_[k * 2 + 0] = false;\n         \
+    \   lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);\n            is_identity_[k\
+    \ * 2 + 1] = false;\n        }\n        data_[k] = g(data_[k], lazy_[k]);\n  \
+    \      lazy_[k] = om1_;\n        is_identity_[k] = true;\n    }\n\n    void RecursiveApply(int\
+    \ ul, int ur, OperatorMonoid x, int left, int right, int cell){\n        Evaluate(cell);\n\
     \        if(ul <= left && right <= ur){\n            lazy_[cell] = h(lazy_[cell],\
     \ x);\n            is_identity_[cell] = false;\n            Evaluate(cell);\n\
     \        }\n        else if(ul < right && left < ur){\n            int mid = (left\
-    \ + right) / 2;\n            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 +\
-    \ 0);\n            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);\n   \
-    \         data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n       \
-    \ }\n    }\n\n    Monoid RecursiveProduct(int ql, int qr, int left, int right,\
-    \ int cell){\n        Evaluate(cell);\n        if(qr <= left || right <= ql){\n\
-    \            return m1_;\n        }\n        if(ql <= left && right <= qr){\n\
-    \            return data_[cell];\n        }\n        int mid = (left + right)\
-    \ / 2;\n        Monoid ans_left = RecursiveProduct(ql, qr, left, mid, cell * 2\
-    \ + 0);\n        Monoid ans_right = RecursiveProduct(ql, qr, mid, right, cell\
-    \ * 2 + 1);\n        return f(ans_left, ans_right);\n    }\n};\n#line 6 \"verify/LC-RangeAffineRangeSum.test.cpp\"\
+    \ + right) / 2;\n            RecursiveApply(ul, ur, x, left, mid, cell * 2 + 0);\n\
+    \            RecursiveApply(ul, ur, x, mid, right, cell * 2 + 1);\n          \
+    \  data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n        }\n   \
+    \ }\n\n    Monoid RecursiveFold(int ql, int qr, int left, int right, int cell){\n\
+    \        Evaluate(cell);\n        if(qr <= left || right <= ql){\n           \
+    \ return m1_;\n        }\n        if(ql <= left && right <= qr){\n           \
+    \ return data_[cell];\n        }\n        int mid = (left + right) / 2;\n    \
+    \    Monoid ans_left = RecursiveFold(ql, qr, left, mid, cell * 2 + 0);\n     \
+    \   Monoid ans_right = RecursiveFold(ql, qr, mid, right, cell * 2 + 1);\n    \
+    \    return f(ans_left, ans_right);\n    }\n};\n#line 6 \"verify/LC-RangeAffineRangeSum.test.cpp\"\
     \n\nstruct Monoid{\n    mint a;\n    int len;\n    Monoid(mint a_ = 0, int len_\
     \ = 1) : a(a_), len(len_){}\n    static Monoid Merge(Monoid &l, Monoid &r){\n\
     \        return Monoid(l.a + r.a, l.len + r.len);\n    }\n};\n\nstruct OperatorMonoid{\n\
@@ -203,10 +193,10 @@ data:
     \ OperatorMonoid::Mapping(m, op);},\n        [](OperatorMonoid l, OperatorMonoid\
     \ r){return OperatorMonoid::Composite(l, r);},\n        Monoid(),\n        OperatorMonoid(),\n\
     \        true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n\
-    \            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Update(l,\
+    \            int l, r, b, c; cin >> l >> r >> b >> c;\n            seg.Apply(l,\
     \ r, OperatorMonoid(b, c));\n        }\n        else{\n            int l, r; cin\
-    \ >> l >> r;\n            cout << seg.Product(l, r).a << '\\n';\n        }\n \
-    \   }\n}\n"
+    \ >> l >> r;\n            cout << seg.Fold(l, r).a << '\\n';\n        }\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/modint.hpp\"\n\
     #include \"../Library/DataStructure/LazySegmentTree.hpp\"\n\nstruct Monoid{\n\
@@ -225,9 +215,9 @@ data:
     \ op);},\n        [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l,\
     \ r);},\n        Monoid(),\n        OperatorMonoid(),\n        true);\n    while(Q--){\n\
     \        int t; cin >> t;\n        if(t == 0){\n            int l, r, b, c; cin\
-    \ >> l >> r >> b >> c;\n            seg.Update(l, r, OperatorMonoid(b, c));\n\
-    \        }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
-    \ << seg.Product(l, r).a << '\\n';\n        }\n    }\n}"
+    \ >> l >> r >> b >> c;\n            seg.Apply(l, r, OperatorMonoid(b, c));\n \
+    \       }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
+    \ << seg.Fold(l, r).a << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -236,7 +226,7 @@ data:
   isVerificationFile: true
   path: verify/LC-RangeAffineRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 01:36:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-RangeAffineRangeSum.test.cpp

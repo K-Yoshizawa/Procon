@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
@@ -105,56 +105,56 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/Dijkstra.hpp\"\n\n#line\
     \ 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n    public:\n\
-    \    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType cost_ =\
-    \ 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
-    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
-    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
-    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
-    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
-    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ Vertex = int;\n\ntemplate<typename WeightType = int32_t>\nstruct Edge{\n   \
+    \ public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, WeightType\
+    \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
+    \ idx(idx_){}\n    \n    bool operator<(const Edge<WeightType> &e) const {return\
+    \ cost < e.cost;}\n\n    operator int() const {return to;}\n\n    Vertex from,\
+    \ to;\n    WeightType cost;\n    int idx;\n};\n\ntemplate<typename WeightType\
+    \ = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n    Graph(int\
+    \ V) : edge_size_(0), adjacent_list_(V){}\n    \n    inline void AddUndirectedEdge(Vertex\
+    \ u, Vertex v, WeightType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w,\
+    \ idx));\n    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType\
+    \ w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Graph/Dijkstra.hpp\"\n\ntemplate<typename CostType>\nclass Dijkstra{\n\
-    \    public:\n    Dijkstra(Graph<CostType> &graph, Vertex s = -1) :\n        G(graph),\
-    \ n(graph.VertexSize()), dist_(n), prev_edge_(n){\n        if(s != -1) Solve(s);\n\
-    \    }\n\n    inline bool Reachable(const Vertex &t) const {\n        return dist_[t]\
-    \ != inf;\n    }\n\n    inline CostType Distance(const Vertex &t) const {\n  \
-    \      return dist_[t];\n    }\n\n    vector<Edge<CostType>> Path(const Vertex\
-    \ &t) const {\n        if(!Reachable(t)) return vector<Edge<CostType>>{};\n  \
-    \      vector<Edge<CostType>> ret;\n        int v = t;\n        while(1){\n  \
-    \          if(prev_edge_[v].from == -1) break;\n            ret.push_back(prev_edge_[v]);\n\
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 4 \"Library/Graph/Dijkstra.hpp\"\n\ntemplate<typename WeightType>\nclass\
+    \ Dijkstra{\n    public:\n    Dijkstra(Graph<WeightType> &graph, Vertex s = -1)\
+    \ :\n        G(graph), V(graph.VertexSize()), dist_(V), prev_edge_(V){\n     \
+    \   if(s != -1) Solve(s);\n    }\n\n    inline bool Reachable(const Vertex &t)\
+    \ const {\n        return dist_[t] != inf;\n    }\n\n    inline WeightType Distance(const\
+    \ Vertex &t) const {\n        return dist_[t];\n    }\n\n    vector<Edge<WeightType>>\
+    \ Path(const Vertex &t) const {\n        if(!Reachable(t)) return vector<Edge<WeightType>>{};\n\
+    \        vector<Edge<WeightType>> ret;\n        int v = t;\n        while(1){\n\
+    \            if(prev_edge_[v].from == -1) break;\n            ret.push_back(prev_edge_[v]);\n\
     \            v = prev_edge_[v].from;\n        }\n        reverse(ret.begin(),\
     \ ret.end());\n        return ret;\n    }\n\n    void Solve(Vertex s){\n     \
-    \   using P = pair<CostType, Vertex>;\n        fill(dist_.begin(), dist_.end(),\
-    \ inf);\n        dist_[s] = CostType(0);\n        fill(prev_edge_.begin(), prev_edge_.end(),\
-    \ Edge<CostType>{});\n        prev_edge_[s] = Edge<CostType>(-1, -1);\n      \
-    \  priority_queue<P, vector<P>, greater<P>> que;\n        que.emplace(CostType(0),\
+    \   using P = pair<WeightType, Vertex>;\n        fill(dist_.begin(), dist_.end(),\
+    \ inf);\n        dist_[s] = WeightType(0);\n        fill(prev_edge_.begin(), prev_edge_.end(),\
+    \ Edge<WeightType>{});\n        prev_edge_[s] = Edge<WeightType>(-1, -1);\n  \
+    \      priority_queue<P, vector<P>, greater<P>> que;\n        que.emplace(WeightType(0),\
     \ s);\n        while(que.size()){\n            auto [d, u] = que.top(); que.pop();\n\
-    \            if(dist_[u] != d) continue;\n            for(const Edge<CostType>\
+    \            if(dist_[u] != d) continue;\n            for(const Edge<WeightType>\
     \ &e : G[u]){\n                if(dist_[e.to] > d + e.cost){\n               \
     \     dist_[e.to] = d + e.cost;\n                    prev_edge_[e.to] = e;\n \
     \                   que.emplace(dist_[e.to], e.to);\n                }\n     \
-    \       }\n        }\n    }\n\n    inline CostType operator[](const Vertex &v){\n\
-    \        return dist_[v];\n    }\n\n    inline const CostType operator[](const\
-    \ Vertex &v) const {\n        return dist_[v];\n    }\n\n    private:\n    Graph<CostType>\
-    \ &G;\n    int n;\n    Vertex source_;\n    CostType inf{CostType(INF)};\n   \
-    \ vector<CostType> dist_;\n    vector<Edge<CostType>> prev_edge_;\n};\n#line 5\
-    \ \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \       }\n        }\n    }\n\n    inline WeightType operator[](const Vertex &v){\n\
+    \        return dist_[v];\n    }\n\n    inline const WeightType operator[](const\
+    \ Vertex &v) const {\n        return dist_[v];\n    }\n\n    private:\n    Graph<WeightType>\
+    \ &G;\n    int V;\n    Vertex source_;\n    WeightType inf{WeightType(INF)};\n\
+    \    vector<WeightType> dist_;\n    vector<Edge<WeightType>> prev_edge_;\n};\n\
+    #line 5 \"verify/AOJ-GRL-1-A.test.cpp\"\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
     \    int V, E, r; cin >> V >> E >> r;\n    auto G = InputGraph<ll>(V, E, 0, true,\
     \ true);\n    \n    Dijkstra dk(G, r);\n    for(int i = 0; i < V; ++i){\n    \
     \    if(dk.Reachable(i)){\n            cout << dk.Distance(i) << '\\n';\n    \
@@ -175,7 +175,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-1-A.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-1-A.test.cpp

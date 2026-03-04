@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/BellmanFord.hpp
     title: "Bellman Ford - \u30D9\u30EB\u30DE\u30F3\u30D5\u30A9\u30FC\u30C9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
+    title: "Kruskal - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: "Strongly Connected Components - \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
@@ -51,60 +51,60 @@ data:
     #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
     using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
     \ 1;\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ CostType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n  \
-    \  Edge(Vertex from_, Vertex to_, CostType cost_ = 1, int idx_ = -1) :\n     \
-    \   from(from_), to(to_), cost(cost_), idx(idx_){}\n    \n    bool operator<(const\
-    \ Edge<CostType> &e) const {return cost < e.cost;}\n\n    operator int() const\
-    \ {return to;}\n\n    Vertex from, to;\n    CostType cost;\n    int idx;\n};\n\
-    \ntemplate<typename CostType = int32_t>\nclass Graph{\n    public:\n    Graph()\
-    \ = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0), adjacent_list_(n){}\n\
-    \    \n    inline void AddUndirectedEdge(Vertex u, Vertex v, CostType w = 1){\n\
-    \        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ WeightType = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n\
+    \    Edge(Vertex from_, Vertex to_, WeightType weight_ = 1, int idx_ = -1) :\n\
+    \        from(from_), to(to_), cost(weight_), idx(idx_){}\n    \n    bool operator<(const\
+    \ Edge<WeightType> &e) const {return cost < e.cost;}\n\n    operator int() const\
+    \ {return to;}\n\n    Vertex from, to;\n    WeightType cost;\n    int idx;\n};\n\
+    \ntemplate<typename WeightType = int32_t>\nclass Graph{\n    public:\n    Graph()\
+    \ = default;\n\n    Graph(int V) : edge_size_(0), adjacent_list_(V){}\n    \n\
+    \    inline void AddUndirectedEdge(Vertex u, Vertex v, WeightType w = 1){\n  \
+    \      int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w,\
+    \ idx));\n    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType\
+    \ w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Graph/GraphMisc.hpp\"\n\ntemplate<typename CostType>\nvector<Edge<CostType>>\
-    \ ConvertEdgeSet(const Graph<CostType> &G){\n    vector<Edge<CostType>> ret;\n\
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 4 \"Library/Graph/GraphMisc.hpp\"\n\ntemplate<typename WeightType>\nvector<Edge<WeightType>>\
+    \ ConvertEdgeSet(const Graph<WeightType> &G){\n    vector<Edge<WeightType>> ret;\n\
     \    vector<bool> check(G.EdgeSize(), false);\n    int n = G.VertexSize();\n \
-    \   for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e : G[u]){\n\
+    \   for(int u = 0; u < n; ++u){\n        for(const Edge<WeightType> &e : G[u]){\n\
     \            if(check[e.idx]) continue;\n            check[e.idx] = true;\n  \
     \          ret.push_back(e);\n        }\n    }\n    return ret;\n}\n\ntemplate<typename\
-    \ CostType>\nvector<vector<CostType>> ConvertDistanceMatrix(const Graph<CostType>\
-    \ &G){\n    int n = G.VertexSize();\n    vector<vector<CostType>> ret(n, vector<CostType>(n,\
-    \ CostType(INF)));\n    for(int u = 0; u < n; ++u){\n        ret[u][u] = CostType(0);\n\
-    \        for(const Edge<CostType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n\
-    \        }\n    }\n    return ret;\n}\n\ntemplate<typename CostType>\nGraph<CostType>\
-    \ ReverseGraph(const Graph<CostType> &G){\n    int n = G.VertexSize();\n    Graph<CostType>\
-    \ ret(n);\n    for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e\
-    \ : G[u]){\n            ret.AddDirectedEdge(e.to, e.from, e.cost);\n        }\n\
-    \    }\n    return ret;\n}\n"
-  code: "#pragma once\n\n#include \"Graph.hpp\"\n\ntemplate<typename CostType>\nvector<Edge<CostType>>\
-    \ ConvertEdgeSet(const Graph<CostType> &G){\n    vector<Edge<CostType>> ret;\n\
-    \    vector<bool> check(G.EdgeSize(), false);\n    int n = G.VertexSize();\n \
-    \   for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e : G[u]){\n\
+    \ WeightType>\nvector<vector<WeightType>> ConvertDistanceMatrix(const Graph<WeightType>\
+    \ &G){\n    int n = G.VertexSize();\n    vector<vector<WeightType>> ret(n, vector<WeightType>(n,\
+    \ WeightType(INF)));\n    for(int u = 0; u < n; ++u){\n        ret[u][u] = WeightType(0);\n\
+    \        for(const Edge<WeightType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n\
+    \        }\n    }\n    return ret;\n}\n\ntemplate<typename WeightType>\nGraph<WeightType>\
+    \ ReverseGraph(const Graph<WeightType> &G){\n    int n = G.VertexSize();\n   \
+    \ Graph<WeightType> ret(n);\n    for(int u = 0; u < n; ++u){\n        for(const\
+    \ Edge<WeightType> &e : G[u]){\n            ret.AddDirectedEdge(e.to, e.from,\
+    \ e.cost);\n        }\n    }\n    return ret;\n}\n"
+  code: "#pragma once\n\n#include \"Graph.hpp\"\n\ntemplate<typename WeightType>\n\
+    vector<Edge<WeightType>> ConvertEdgeSet(const Graph<WeightType> &G){\n    vector<Edge<WeightType>>\
+    \ ret;\n    vector<bool> check(G.EdgeSize(), false);\n    int n = G.VertexSize();\n\
+    \    for(int u = 0; u < n; ++u){\n        for(const Edge<WeightType> &e : G[u]){\n\
     \            if(check[e.idx]) continue;\n            check[e.idx] = true;\n  \
     \          ret.push_back(e);\n        }\n    }\n    return ret;\n}\n\ntemplate<typename\
-    \ CostType>\nvector<vector<CostType>> ConvertDistanceMatrix(const Graph<CostType>\
-    \ &G){\n    int n = G.VertexSize();\n    vector<vector<CostType>> ret(n, vector<CostType>(n,\
-    \ CostType(INF)));\n    for(int u = 0; u < n; ++u){\n        ret[u][u] = CostType(0);\n\
-    \        for(const Edge<CostType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n\
-    \        }\n    }\n    return ret;\n}\n\ntemplate<typename CostType>\nGraph<CostType>\
-    \ ReverseGraph(const Graph<CostType> &G){\n    int n = G.VertexSize();\n    Graph<CostType>\
-    \ ret(n);\n    for(int u = 0; u < n; ++u){\n        for(const Edge<CostType> &e\
-    \ : G[u]){\n            ret.AddDirectedEdge(e.to, e.from, e.cost);\n        }\n\
-    \    }\n    return ret;\n}"
+    \ WeightType>\nvector<vector<WeightType>> ConvertDistanceMatrix(const Graph<WeightType>\
+    \ &G){\n    int n = G.VertexSize();\n    vector<vector<WeightType>> ret(n, vector<WeightType>(n,\
+    \ WeightType(INF)));\n    for(int u = 0; u < n; ++u){\n        ret[u][u] = WeightType(0);\n\
+    \        for(const Edge<WeightType> &e : G[u]){\n            ret[u][e.to] = e.cost;\n\
+    \        }\n    }\n    return ret;\n}\n\ntemplate<typename WeightType>\nGraph<WeightType>\
+    \ ReverseGraph(const Graph<WeightType> &G){\n    int n = G.VertexSize();\n   \
+    \ Graph<WeightType> ret(n);\n    for(int u = 0; u < n; ++u){\n        for(const\
+    \ Edge<WeightType> &e : G[u]){\n            ret.AddDirectedEdge(e.to, e.from,\
+    \ e.cost);\n        }\n    }\n    return ret;\n}"
   dependsOn:
   - Library/Graph/Graph.hpp
   - Library/Common.hpp
@@ -112,17 +112,17 @@ data:
   path: Library/Graph/GraphMisc.hpp
   requiredBy:
   - Library/Graph/StronglyConnectedComponents.hpp
-  - Library/Graph/Kruskal.hpp
   - Library/Graph/WarshallFloyd.hpp
+  - Library/Graph/Kruskal.hpp
   - Library/Graph/BellmanFord.hpp
-  timestamp: '2025-04-30 01:32:17+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/AOJ-GRL-1-C.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
   - verify/LC-StronglyConnectedComponents.test.cpp
+  - verify/AOJ-GRL-1-C.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
 documentation_of: Library/Graph/GraphMisc.hpp
 layout: document
 title: "Graph Utilities - \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3"

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
-    title: "Low Link - \u95A2\u7BC0\u70B9\u3068\u6A4B\u306E\u691C\u51FA"
-  - icon: ':heavy_check_mark:'
+    title: "Low Link - \u95A2\u7BC0\u70B9\u3068\u6A4B"
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
@@ -105,40 +105,40 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/LowLink.hpp\"\n\n#line\
     \ 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing\
-    \ Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n    public:\n\
-    \    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType cost_ =\
-    \ 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
-    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
-    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
-    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
-    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
-    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \ Vertex = int;\n\ntemplate<typename WeightType = int32_t>\nstruct Edge{\n   \
+    \ public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, WeightType\
+    \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
+    \ idx(idx_){}\n    \n    bool operator<(const Edge<WeightType> &e) const {return\
+    \ cost < e.cost;}\n\n    operator int() const {return to;}\n\n    Vertex from,\
+    \ to;\n    WeightType cost;\n    int idx;\n};\n\ntemplate<typename WeightType\
+    \ = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n    Graph(int\
+    \ V) : edge_size_(0), adjacent_list_(V){}\n    \n    inline void AddUndirectedEdge(Vertex\
+    \ u, Vertex v, WeightType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w,\
+    \ idx));\n    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType\
+    \ w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Graph/LowLink.hpp\"\n\ntemplate<typename CostType>\nclass LowLink{\n\
-    \    public:\n    LowLink(Graph<CostType> &graph) : G(graph), n(graph.VertexSize()),\
-    \ ord_(n, -1), low_(n, -1), in_(n), out_(n){\n        for(int i = 0, k = 0, t\
-    \ = 0; i < n; ++i){\n            if(ord_[i] == -1){\n                k = dfs(i,\
-    \ -1, k, t);\n            }\n        }\n    }\n\n    vector<Vertex> &ArticulationVertex(){\n\
-    \        return articulation_vertex_;\n    }\n\n    vector<pair<Vertex, Vertex>>\
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 4 \"Library/Graph/LowLink.hpp\"\n\ntemplate<typename WeightType>\nclass\
+    \ LowLink{\n    public:\n    LowLink(Graph<WeightType> &graph) : G(graph), V(graph.VertexSize()),\
+    \ ord_(V, -1), low_(V, -1), in_(V), out_(V){\n        for(int i = 0, k = 0, t\
+    \ = 0; i < V; ++i){\n            if(ord_[i] == -1){\n                k = dfs(i,\
+    \ -1, k, t);\n            }\n        }\n    }\n\n    vector<Vertex> &ArticulationPoint(){\n\
+    \        return articulation_point_;\n    }\n\n    vector<pair<Vertex, Vertex>>\
     \ &Bridge(){\n        return bridge_;\n    }\n\n    pair<int, int> EulerTour(const\
     \ Vertex v) const {\n        return {in_[v], out_[v]};\n    }\n\n    private:\n\
-    \    Graph<CostType> &G;\n    int n;\n    vector<int> ord_, low_, in_, out_;\n\
-    \    vector<Vertex> articulation_vertex_;\n    vector<pair<Vertex, Vertex>> bridge_;\n\
+    \    Graph<WeightType> &G;\n    int V;\n    vector<int> ord_, low_, in_, out_;\n\
+    \    vector<Vertex> articulation_point_;\n    vector<pair<Vertex, Vertex>> bridge_;\n\
     \n    int dfs(Vertex v, int p, int k, int &t){\n        in_[v] = t++;\n      \
     \  low_[v] = (ord_[v] = k++);\n        int cnt = 0;\n        bool is_articulation\
     \ = false, second = false;\n        for(int u : G[v]){\n            if(ord_[u]\
@@ -149,17 +149,17 @@ data:
     \            }\n            else if(u != p || second){\n                low_[v]\
     \ = min(low_[v], ord_[u]);\n            }\n            else{\n               \
     \ second = true;\n            }\n        }\n        is_articulation |= (p == -1)\
-    \ && (cnt > 1);\n        if(is_articulation) articulation_vertex_.emplace_back(v);\n\
+    \ && (cnt > 1);\n        if(is_articulation) articulation_point_.emplace_back(v);\n\
     \        out_[v] = t;\n        return k;\n    }\n};\n#line 5 \"verify/AOJ-GRL-3-A.test.cpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
     \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, false);\n    \n    LowLink\
-    \ llk(G);\n    auto ans = llk.ArticulationVertex();\n    Sort(ans);\n    for(const\
+    \ llk(G);\n    auto ans = llk.ArticulationPoint();\n    Sort(ans);\n    for(const\
     \ int v : ans) cout << v << '\\n';\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/3/GRL_3_A\"\
     \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/Graph/LowLink.hpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int V, E; cin >>\
     \ V >> E;\n    auto G = InputGraph<ll>(V, E, 0, false, false);\n    \n    LowLink\
-    \ llk(G);\n    auto ans = llk.ArticulationVertex();\n    Sort(ans);\n    for(const\
+    \ llk(G);\n    auto ans = llk.ArticulationPoint();\n    Sort(ans);\n    for(const\
     \ int v : ans) cout << v << '\\n';\n}"
   dependsOn:
   - Library/Template.hpp
@@ -169,7 +169,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-GRL-3-A.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-GRL-3-A.test.cpp

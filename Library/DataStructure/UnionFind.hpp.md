@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/Kruskal.hpp
-    title: "Kruskal's Algorithm - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
+    title: "Kruskal - \u30AF\u30E9\u30B9\u30AB\u30EB\u6CD5"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-DSL-1-A.test.cpp
@@ -66,9 +66,9 @@ data:
   timestamp: '2025-04-30 01:32:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/LC-Unionfind.test.cpp
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/LC-Unionfind.test.cpp
 documentation_of: Library/DataStructure/UnionFind.hpp
 layout: document
 title: "Union-Find - \u7D20\u96C6\u5408\u30C7\u30FC\u30BF\u69CB\u9020"

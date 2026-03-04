@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/CycleDetection.hpp
     title: "Cycle Detection - \u9589\u8DEF\u691C\u51FA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
-    title: "Graph - \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+    title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
@@ -105,43 +105,43 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/Graph/CycleDetection.hpp\"\n\
     \n#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 4 \"Library/Graph/Graph.hpp\"\n\
-    \nusing Vertex = int;\n\ntemplate<typename CostType = int32_t>\nstruct Edge{\n\
-    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, CostType\
-    \ cost_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(cost_), idx(idx_){}\n\
-    \    \n    bool operator<(const Edge<CostType> &e) const {return cost < e.cost;}\n\
-    \n    operator int() const {return to;}\n\n    Vertex from, to;\n    CostType\
-    \ cost;\n    int idx;\n};\n\ntemplate<typename CostType = int32_t>\nclass Graph{\n\
-    \    public:\n    Graph() = default;\n\n    Graph(int n) : vertex_size_(n), edge_size_(0),\
-    \ adjacent_list_(n){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
-    \ v, CostType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
-    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<CostType>(v, u, w, idx));\n\
-    \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, CostType w =\
-    \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<CostType>(u,\
+    \nusing Vertex = int;\n\ntemplate<typename WeightType = int32_t>\nstruct Edge{\n\
+    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, WeightType\
+    \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
+    \ idx(idx_){}\n    \n    bool operator<(const Edge<WeightType> &e) const {return\
+    \ cost < e.cost;}\n\n    operator int() const {return to;}\n\n    Vertex from,\
+    \ to;\n    WeightType cost;\n    int idx;\n};\n\ntemplate<typename WeightType\
+    \ = int32_t>\nclass Graph{\n    public:\n    Graph() = default;\n\n    Graph(int\
+    \ V) : edge_size_(0), adjacent_list_(V){}\n    \n    inline void AddUndirectedEdge(Vertex\
+    \ u, Vertex v, WeightType w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
+    \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<WeightType>(v, u, w,\
+    \ idx));\n    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, WeightType\
+    \ w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<WeightType>(u,\
     \ v, w, idx));\n    }\n\n    inline size_t VertexSize() const {\n        return\
-    \ vertex_size_;\n    }\n\n    inline size_t EdgeSize() const {\n        return\
-    \ edge_size_;\n    }\n\n    inline vector<Edge<CostType>> &operator[](const int\
-    \ v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<CostType>>\
-    \ &operator[](const int v) const {\n        return adjacent_list_[v];\n    }\n\
-    \    \n    private:\n    size_t vertex_size_, edge_size_;\n    vector<vector<Edge<CostType>>>\
-    \ adjacent_list_;\n};\n\ntemplate<typename CostType = int32_t>\nGraph<CostType>\
+    \ adjacent_list_.size();\n    }\n\n    inline size_t EdgeSize() const {\n    \
+    \    return edge_size_;\n    }\n\n    inline vector<Edge<WeightType>> &operator[](const\
+    \ Vertex v){\n        return adjacent_list_[v];\n    }\n\n    inline const vector<Edge<WeightType>>\
+    \ &operator[](const Vertex v) const {\n        return adjacent_list_[v];\n   \
+    \ }\n    \n    private:\n    size_t edge_size_;\n    vector<vector<Edge<WeightType>>>\
+    \ adjacent_list_;\n};\n\ntemplate<typename WeightType = int32_t>\nGraph<WeightType>\
     \ InputGraph(int N, int M, int padding = -1, bool weighted = false, bool directed\
-    \ = false){\n    Graph<CostType> G(N);\n    for(int i = 0; i < M; ++i){\n    \
-    \    Vertex u, v; CostType w = 1;\n        cin >> u >> v, u += padding, v += padding;\n\
-    \        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u, v,\
-    \ w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n#line\
-    \ 4 \"Library/Graph/CycleDetection.hpp\"\n\ntemplate<typename CostType>\nvector<Edge<CostType>>\
-    \ CycleDetection(Graph<CostType> &G){\n    int N = G.VertexSize();\n    vector<Edge<CostType>>\
-    \ history;\n    vector<int> state(N, 0);\n    vector<Edge<CostType>> ret;\n  \
-    \  bool detected = false;\n    auto dfs = [&](auto &self, int v, int pre) -> void\
-    \ {\n        state[v] = 1;\n        for(const Edge<CostType> &e : G[v]){\n   \
-    \         if(e.idx == pre) continue;\n            if(state[e.to] == 2) continue;\n\
-    \            else if(state[e.to] == 1){\n                ret.push_back(e);\n \
-    \               for(int i = history.size() - 1; i >= 0 && history[i].to != e.to;\
+    \ = false){\n    Graph<WeightType> G(N);\n    for(int i = 0; i < M; ++i){\n  \
+    \      Vertex u, v; WeightType w = 1;\n        cin >> u >> v, u += padding, v\
+    \ += padding;\n        if(weighted) cin >> w;\n        if(directed) G.AddDirectedEdge(u,\
+    \ v, w);\n        else G.AddUndirectedEdge(u, v, w);\n    }\n    return G;\n}\n\
+    #line 4 \"Library/Graph/CycleDetection.hpp\"\n\ntemplate<typename WeightType>\n\
+    vector<Edge<WeightType>> CycleDetection(Graph<WeightType> &G){\n    int V = G.VertexSize();\n\
+    \    vector<Edge<WeightType>> history;\n    vector<int> state(V, 0);\n    vector<Edge<WeightType>>\
+    \ ret;\n    bool detected = false;\n    auto dfs = [&](auto &self, int v, int\
+    \ pre) -> void {\n        state[v] = 1;\n        for(const Edge<WeightType> &e\
+    \ : G[v]){\n            if(e.idx == pre) continue;\n            if(state[e.to]\
+    \ == 2) continue;\n            else if(state[e.to] == 1){\n                ret.push_back(e);\n\
+    \                for(int i = history.size() - 1; i >= 0 && history[i].to != e.to;\
     \ --i){\n                    ret.push_back(history[i]);\n                }\n \
     \               detected = true;\n            }\n            else{\n         \
     \       history.push_back(e);\n                self(self, e.to, e.idx);\n    \
     \            history.pop_back();\n            }\n            if(detected) return;\n\
-    \        }\n        state[v] = 2;\n    };\n    for(int v = 0; v < N && !detected;\
+    \        }\n        state[v] = 2;\n    };\n    for(int v = 0; v < V && !detected;\
     \ ++v){\n        if(state[v] == 0) dfs(dfs, v, -1);\n    }\n    reverse(ret.begin(),\
     \ ret.end());\n    return ret;\n}\n#line 5 \"verify/LC-CycleDetectionUndirected.test.cpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, M; cin >>\
@@ -168,7 +168,7 @@ data:
   isVerificationFile: true
   path: verify/LC-CycleDetectionUndirected.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-CycleDetectionUndirected.test.cpp

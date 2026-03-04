@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
   _extendedRequiredBy: []
@@ -102,46 +102,41 @@ data:
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
     \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\
     \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using F =\
-    \ function<Monoid(Monoid, Monoid)>;\n\n    SegmentTree(\n        int n,\n    \
-    \    F merge,\n        const Monoid &e,\n        bool zero_index = false\n   \
-    \ ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n       \
-    \ while(size_ < n) size_ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2\
-    \ * size_, id_);\n    }\n    \n    SegmentTree(\n        vector<Monoid> &A, \n\
-    \        F merge, \n        const Monoid &e, \n        bool zero_index = false\n\
-    \    ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ = 1;\n    \
-    \    while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_ - 1;\n\
-    \        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
-    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        Build();\n \
-    \   }\n\n    void Build(){\n        for(int i = offset_; i >= 1; --i){\n     \
-    \       data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
-    \    void Set(int i, Monoid v){\n        Validate(i + zero_index_);\n        int\
-    \ k = offset_ + i + zero_index_;\n        data_[k] = v;\n        while(k >>= 1){\n\
-    \            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n    }\n\
-    \n    Monoid Product(int l, int r){\n        if(l == r) return id_;\n        Validate(l\
-    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        int lh = l\
-    \ + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n        Monoid al\
-    \ = id_, ar = id_;\n        while(lh < rh){\n            if(lh & 1) al = f(al,\
-    \ data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n           \
-    \ lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\n    Monoid\
-    \ operator[](const int &i){\n        Validate(i + zero_index_);\n        return\
-    \ data_[offset_ + i + zero_index_];\n    }\n\n    private:\n    int size_, offset_,\
-    \ zero_index_;\n    vector<Monoid> data_;\n    const F f;\n    const Monoid id_;\n\
-    \n    inline void Validate(int x) const {\n        assert(1 <= x && x <= size_);\n\
-    \    }\n};\n#line 5 \"verify/LC-PointAddRangeSum.test.cpp\"\n\nint main(){\n \
-    \   cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >> N >> Q;\n    vector<ll>\
-    \ a(N); cin >> a;\n\n    SegmentTree<ll> seg(a, [](ll l, ll r){return l + r;},\
-    \ 0LL, true);\n    while(Q--){\n        int t; cin >> t;\n        if(t == 0){\n\
-    \            int p, x; cin >> p >> x;\n            seg.Set(p, seg[p] + x);\n \
-    \       }\n        else{\n            int l, r; cin >> l >> r;\n            cout\
-    \ << seg.Product(l, r) << '\\n';\n        }\n    }\n}\n"
+    \ function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n        vector<Monoid>\
+    \ &A, \n        F merge, \n        const Monoid &e, \n        bool zero_index\
+    \ = false\n    ) : f(merge), id_(e), zero_index_(zero_index){\n        size_ =\
+    \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
+    \ - 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
+    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        for(int i =\
+    \ offset_; i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i *\
+    \ 2 + 1]);\n        }\n    }\n\n    void Apply(int k, Monoid x){\n        Validate(k\
+    \ + zero_index_);\n        k = offset_ + k + zero_index_;\n        data_[k] =\
+    \ x;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
+    \ * k + 1]);\n        }\n    }\n\n    Monoid Fold(int l, int r){\n        if(l\
+    \ == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r +\
+    \ zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
+    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
+    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
+    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
+    \    }\n\n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n   \
+    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const F f;\n\
+    \    const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
+    \ <= x && x <= size_);\n    }\n};\n#line 5 \"verify/LC-PointAddRangeSum.test.cpp\"\
+    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
+    \ N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    SegmentTree<ll> seg(a, [](ll\
+    \ l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n        int t; cin >>\
+    \ t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n            seg.Apply(p,\
+    \ seg[p] + x);\n        }\n        else{\n            int l, r; cin >> l >> r;\n\
+    \            cout << seg.Fold(l, r) << '\\n';\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
     \n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/SegmentTree.hpp\"\
     \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N, Q; cin >>\
     \ N >> Q;\n    vector<ll> a(N); cin >> a;\n\n    SegmentTree<ll> seg(a, [](ll\
     \ l, ll r){return l + r;}, 0LL, true);\n    while(Q--){\n        int t; cin >>\
-    \ t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n            seg.Set(p,\
+    \ t;\n        if(t == 0){\n            int p, x; cin >> p >> x;\n            seg.Apply(p,\
     \ seg[p] + x);\n        }\n        else{\n            int l, r; cin >> l >> r;\n\
-    \            cout << seg.Product(l, r) << '\\n';\n        }\n    }\n}"
+    \            cout << seg.Fold(l, r) << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
@@ -149,7 +144,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointAddRangeSum.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 02:10:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointAddRangeSum.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-RangeAffineRangeSum.test.cpp
     title: verify/LC-RangeAffineRangeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: modint
     links: []
@@ -103,14 +103,14 @@ data:
   path: Library/modint.hpp
   requiredBy: []
   timestamp: '2025-04-30 01:32:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/LC-TreePathCompositeSum.test.cpp
-  - verify/LC-RangeAffineRangeSum.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
   - verify/LC-UnionfindWithPotential.test.cpp
   - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-RangeAffinePointGet.test.cpp
+  - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-RangeAffineRangeSum.test.cpp
 documentation_of: Library/modint.hpp
 layout: document
 redirect_from:

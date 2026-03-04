@@ -5,8 +5,9 @@ data:
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
-    path: Library/DataStructure/CumulativeSum2D.hpp
-    title: "Cumulative Sum 2D - \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
+    path: Library/DataStructure/LazySegmentTree.hpp
+    title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
+      \u6728"
   - icon: ':question:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
@@ -17,10 +18,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B
-  bundledCode: "#line 1 \"verify/AOJ-DSL-5-B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G
+  bundledCode: "#line 1 \"verify/AOJ-DSL-2-G.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
     \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
     \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
     \ <bitset>\n#include <cassert>\n#include <cstdint>\n#include <deque>\n#include\
@@ -100,64 +101,94 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/CumulativeSum2D.hpp\"\
-    \n\ntemplate<typename T = int32_t>\nstruct CumulativeSum2D{\n    private:\n  \
-    \  int height_, width_;\n    vector<vector<T>> data_;\n\n    void Validate(const\
-    \ int y, const int x) const {\n        assert(0 <= y && y < height_ - 1);\n  \
-    \      assert(0 <= x && x < width_ - 1);\n    }\n\n    public:\n    CumulativeSum2D(const\
-    \ int height, const int width, const T init_value = 0) : height_(height + 1),\
-    \ width_(width + 1){\n        data_.resize(height_);\n        for(int i = 0; i\
-    \ < height_; ++i){\n            data_.at(i).resize(width_, init_value);\n    \
-    \    }\n    }\n\n    void Build(){\n        for(int i = 1; i < height_; ++i){\n\
-    \            for(int j = 0; j < width_; ++j){\n                data_[i][j] +=\
-    \ data_[i - 1][j];\n            }\n        }\n        for(int i = 0; i < height_;\
-    \ ++i){\n            for(int j = 1; j < width_; ++j){\n                data_[i][j]\
-    \ += data_[i][j - 1];\n            }\n        }\n    }\n\n    void Set(const int\
-    \ y, const int x, const T value){\n        Validate(y, x);\n        data_[y][x]\
-    \ = value;\n    }\n\n    void Add(const int y, const int x, const T value){\n\
-    \        Add(y, x, y, x, value);\n    }\n\n    void Add(const int y1, const int\
-    \ x1, const int y2, const int x2, const T value){\n        Validate(y1, x1);\n\
-    \        Validate(y2, x2);\n        data_[y1][x1] += value;\n        data_[y2\
-    \ + 1][x1] -= value;\n        data_[y1][x2 + 1] -= value;\n        data_[y2 +\
-    \ 1][x2 + 1] += value;\n    }\n\n    T Sum(const int y, const int x) const {\n\
-    \        Validate(y, x);\n        return data_[y][x];\n    }\n\n    T Sum(const\
-    \ int y1, const int x1, const int y2, const int x2) const {\n        Validate(y1,\
-    \ x1);\n        Validate(y2, x2);\n        T ret = Sum(y2, x2);\n        if(y1\
-    \ > 0) ret -= Sum(y1 - 1, x2);\n        if(x1 > 0) ret -= Sum(y2, x1 - 1);\n \
-    \       if(y1 > 0 && x1 > 0) ret += Sum(y1 - 1, x1 - 1);\n        return ret;\n\
-    \    }\n\n    T Max() const {\n        T ret = data_[0][0];\n        for(int i\
-    \ = 0; i < height_; ++i){\n            for(int j = 0; j < width_; ++j){\n    \
-    \            ret = max(ret, data_[i][j]);\n            }\n        }\n        return\
-    \ ret;\n    }\n\n    T Min() const {\n        T ret = data_[0][0];\n        for(int\
-    \ i = 0; i < height_; ++i){\n            for(int j = 0; j < width_; ++j){\n  \
-    \              ret = min(ret, data_[i][j]);\n            }\n        }\n      \
-    \  return ret;\n    }\n\n    vector<T> &operator[](const int k){\n        return\
-    \ data_.at(k);\n    }\n};\n#line 5 \"verify/AOJ-DSL-5-B.test.cpp\"\n\nint main(){\n\
-    \    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\n    CumulativeSum2D<int>\
-    \ cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n        int x1, y1, x2, y2;\
-    \ cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1, x1, y2 - 1, x2 - 1, 1);\n\
-    \    }\n    cum.Build();\n    cout << cum.Max() << '\\n';\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/5/DSL_5_B\"\
-    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/CumulativeSum2D.hpp\"\
-    \n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n    int N; cin >> N;\n\
-    \n    CumulativeSum2D<int> cum(2000, 2000);\n    for(int i = 0; i < N; ++i){\n\
-    \        int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;\n        cum.Add(y1,\
-    \ x1, y2 - 1, x2 - 1, 1);\n    }\n    cum.Build();\n    cout << cum.Max() << '\\\
-    n';\n}"
+    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/DataStructure/LazySegmentTree.hpp\"\
+    \n\ntemplate<typename Monoid, typename OperatorMonoid = Monoid>\nclass LazySegmentTree{\n\
+    \    public:\n    using F = function<Monoid(Monoid, Monoid)>;\n    using G = function<Monoid(Monoid,\
+    \ OperatorMonoid)>;\n    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;\n\
+    \n    LazySegmentTree(\n        vector<Monoid> &A,\n        F merge,\n       \
+    \ G mapping,\n        H composite,\n        const Monoid &e_m,\n        const\
+    \ OperatorMonoid &e_o,\n        bool zero_index = false\n    ) : f(merge), g(mapping),\
+    \ h(composite), m1_(e_m), om1_(e_o), zero_index_(zero_index){\n        size_ =\
+    \ 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_\
+    \ - 1;\n        data_.resize(2 * size_, m1_);\n        lazy_.resize(2 * size_,\
+    \ om1_);\n        is_identity_.resize(2 * size_, true);\n        for(int i = 0;\
+    \ i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n        }\n\
+    \        for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i\
+    \ * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Apply(int l, int\
+    \ r, OperatorMonoid x){\n        Validate(l + zero_index_);\n        Validate(r\
+    \ + zero_index_ - 1);\n        RecursiveApply(l + zero_index_, r + zero_index_,\
+    \ x, 1, size_ + 1, 1);\n    }\n\n    Monoid Fold(int l, int r){\n        Validate(l\
+    \ + zero_index_);\n        Validate(r + zero_index_ - 1);\n        return RecursiveFold(l\
+    \ + zero_index_, r + zero_index_, 1, size_ + 1, 1);\n    }\n\n    Monoid operator[](const\
+    \ int &k){\n        Validate(k + zero_index_);\n        return Fold(k, k + 1);\n\
+    \    }\n\n    private:\n    int size_, offset_, zero_index_;\n    vector<Monoid>\
+    \ data_;\n    vector<OperatorMonoid> lazy_;\n    vector<bool> is_identity_;\n\
+    \    const F f;\n    const G g;\n    const H h;\n    const Monoid m1_;\n    const\
+    \ OperatorMonoid om1_;\n\n    inline void Validate(int x){\n        assert(1 <=\
+    \ x && x <= size_);\n    }\n\n    void Evaluate(int k){\n        if(is_identity_[k])\
+    \ return;\n        if(k < size_){\n            lazy_[k * 2 + 0] = h(lazy_[k *\
+    \ 2 + 0], lazy_[k]);\n            is_identity_[k * 2 + 0] = false;\n         \
+    \   lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);\n            is_identity_[k\
+    \ * 2 + 1] = false;\n        }\n        data_[k] = g(data_[k], lazy_[k]);\n  \
+    \      lazy_[k] = om1_;\n        is_identity_[k] = true;\n    }\n\n    void RecursiveApply(int\
+    \ ul, int ur, OperatorMonoid x, int left, int right, int cell){\n        Evaluate(cell);\n\
+    \        if(ul <= left && right <= ur){\n            lazy_[cell] = h(lazy_[cell],\
+    \ x);\n            is_identity_[cell] = false;\n            Evaluate(cell);\n\
+    \        }\n        else if(ul < right && left < ur){\n            int mid = (left\
+    \ + right) / 2;\n            RecursiveApply(ul, ur, x, left, mid, cell * 2 + 0);\n\
+    \            RecursiveApply(ul, ur, x, mid, right, cell * 2 + 1);\n          \
+    \  data_[cell] = f(data_[cell * 2 + 0], data_[cell * 2 + 1]);\n        }\n   \
+    \ }\n\n    Monoid RecursiveFold(int ql, int qr, int left, int right, int cell){\n\
+    \        Evaluate(cell);\n        if(qr <= left || right <= ql){\n           \
+    \ return m1_;\n        }\n        if(ql <= left && right <= qr){\n           \
+    \ return data_[cell];\n        }\n        int mid = (left + right) / 2;\n    \
+    \    Monoid ans_left = RecursiveFold(ql, qr, left, mid, cell * 2 + 0);\n     \
+    \   Monoid ans_right = RecursiveFold(ql, qr, mid, right, cell * 2 + 1);\n    \
+    \    return f(ans_left, ans_right);\n    }\n};\n#line 5 \"verify/AOJ-DSL-2-G.test.cpp\"\
+    \n\nusing OperatorMonoid = int;\n\nstruct Monoid{\n    long long val, len;\n\n\
+    \    Monoid(long long v = 0) : val(v), len(1){}\n    Monoid(long long v, long\
+    \ long l) : val(v), len(l){}\n\n    static Monoid Merge(const Monoid &l, const\
+    \ Monoid &r){\n        return Monoid(l.val + r.val, l.len + r.len);\n    }\n\n\
+    \    static Monoid Mapping(const Monoid &m, const OperatorMonoid o){\n       \
+    \ return Monoid(m.val + o * m.len, m.len);\n    }\n};\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int n, q; cin >> n >> q;\n\n    vector<Monoid> a(n, Monoid());\n    LazySegmentTree<Monoid,\
+    \ OperatorMonoid> seg(\n        a,\n        [&](Monoid l, Monoid r){return Monoid::Merge(l,\
+    \ r);},\n        [&](Monoid m, OperatorMonoid o){return Monoid::Mapping(m, o);},\n\
+    \        [&](OperatorMonoid l, OperatorMonoid r){return l + r;},\n        Monoid(),\n\
+    \        0\n    );\n    while(q--){\n        int com, s, t, x; cin >> com >> s\
+    \ >> t;\n        if(com == 0){\n            cin >> x;\n            seg.Apply(s,\
+    \ t + 1, x);\n        }\n        else{\n            cout << seg.Fold(s, t + 1).val\
+    \ << '\\n';\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_G\"\
+    \n\n#include \"../Library/Template.hpp\"\n#include \"../Library/DataStructure/LazySegmentTree.hpp\"\
+    \n\nusing OperatorMonoid = int;\n\nstruct Monoid{\n    long long val, len;\n\n\
+    \    Monoid(long long v = 0) : val(v), len(1){}\n    Monoid(long long v, long\
+    \ long l) : val(v), len(l){}\n\n    static Monoid Merge(const Monoid &l, const\
+    \ Monoid &r){\n        return Monoid(l.val + r.val, l.len + r.len);\n    }\n\n\
+    \    static Monoid Mapping(const Monoid &m, const OperatorMonoid o){\n       \
+    \ return Monoid(m.val + o * m.len, m.len);\n    }\n};\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
+    \    int n, q; cin >> n >> q;\n\n    vector<Monoid> a(n, Monoid());\n    LazySegmentTree<Monoid,\
+    \ OperatorMonoid> seg(\n        a,\n        [&](Monoid l, Monoid r){return Monoid::Merge(l,\
+    \ r);},\n        [&](Monoid m, OperatorMonoid o){return Monoid::Mapping(m, o);},\n\
+    \        [&](OperatorMonoid l, OperatorMonoid r){return l + r;},\n        Monoid(),\n\
+    \        0\n    );\n    while(q--){\n        int com, s, t, x; cin >> com >> s\
+    \ >> t;\n        if(com == 0){\n            cin >> x;\n            seg.Apply(s,\
+    \ t + 1, x);\n        }\n        else{\n            cout << seg.Fold(s, t + 1).val\
+    \ << '\\n';\n        }\n    }\n}"
   dependsOn:
   - Library/Template.hpp
   - Library/Common.hpp
-  - Library/DataStructure/CumulativeSum2D.hpp
+  - Library/DataStructure/LazySegmentTree.hpp
   isVerificationFile: true
-  path: verify/AOJ-DSL-5-B.test.cpp
+  path: verify/AOJ-DSL-2-G.test.cpp
   requiredBy: []
-  timestamp: '2026-02-08 19:40:56+09:00'
+  timestamp: '2026-02-12 01:36:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/AOJ-DSL-5-B.test.cpp
+documentation_of: verify/AOJ-DSL-2-G.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/AOJ-DSL-5-B.test.cpp
-- /verify/verify/AOJ-DSL-5-B.test.cpp.html
-title: verify/AOJ-DSL-5-B.test.cpp
+- /verify/verify/AOJ-DSL-2-G.test.cpp
+- /verify/verify/AOJ-DSL-2-G.test.cpp.html
+title: verify/AOJ-DSL-2-G.test.cpp
 ---
