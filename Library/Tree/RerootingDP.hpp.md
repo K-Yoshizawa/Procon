@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Tree/Tree.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
@@ -102,9 +102,9 @@ data:
     \  return ret;\n}\n#line 2 \"Library/Tree/RerootingDP.hpp\"\n\ntemplate<typename\
     \ WeightType, typename Monoid>\nclass RerootingDP{\n    public:\n    using F =\
     \ function<Monoid(Monoid, Monoid, Vertex)>;\n    using G = function<Monoid(Monoid,\
-    \ CostType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n    using\
-    \ Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
-    \ CostType)>;\n\n    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add,\
+    \ WeightType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n   \
+    \ using Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
+    \ WeightType)>;\n\n    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add,\
     \ const Monoid monoid_identity, Vertex r = 0) :\n            T(tree), n(tree.VertexSize()),\
     \ parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree,\
     \ r)),\n            merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n\
@@ -166,9 +166,9 @@ data:
     \            }\n        }\n    }\n};\n"
   code: "#include \"Tree.hpp\"\n\ntemplate<typename WeightType, typename Monoid>\n\
     class RerootingDP{\n    public:\n    using F = function<Monoid(Monoid, Monoid,\
-    \ Vertex)>;\n    using G = function<Monoid(Monoid, CostType, Vertex)>;\n    using\
-    \ H = function<Monoid(Monoid, Vertex)>;\n    using Fsub = function<Monoid(Monoid,\
-    \ Monoid)>;\n    using Gsub = function<Monoid(Monoid, CostType)>;\n\n    RerootingDP(Graph<WeightType>\
+    \ Vertex)>;\n    using G = function<Monoid(Monoid, WeightType, Vertex)>;\n   \
+    \ using H = function<Monoid(Monoid, Vertex)>;\n    using Fsub = function<Monoid(Monoid,\
+    \ Monoid)>;\n    using Gsub = function<Monoid(Monoid, WeightType)>;\n\n    RerootingDP(Graph<WeightType>\
     \ &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :\n\
     \            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)),\
     \ cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),\n\
@@ -236,8 +236,8 @@ data:
   isVerificationFile: false
   path: Library/Tree/RerootingDP.hpp
   requiredBy: []
-  timestamp: '2026-02-13 15:23:31+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-03-04 11:13:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-TreePathCompositeSum.test.cpp
 documentation_of: Library/Tree/RerootingDP.hpp

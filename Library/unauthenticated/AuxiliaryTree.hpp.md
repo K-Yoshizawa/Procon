@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
     title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
   - icon: ':warning:'

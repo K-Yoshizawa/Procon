@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: "Tree - \u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
@@ -214,9 +214,9 @@ data:
     \  return ret;\n}\n#line 2 \"Library/Tree/RerootingDP.hpp\"\n\ntemplate<typename\
     \ WeightType, typename Monoid>\nclass RerootingDP{\n    public:\n    using F =\
     \ function<Monoid(Monoid, Monoid, Vertex)>;\n    using G = function<Monoid(Monoid,\
-    \ CostType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n    using\
-    \ Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
-    \ CostType)>;\n\n    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add,\
+    \ WeightType, Vertex)>;\n    using H = function<Monoid(Monoid, Vertex)>;\n   \
+    \ using Fsub = function<Monoid(Monoid, Monoid)>;\n    using Gsub = function<Monoid(Monoid,\
+    \ WeightType)>;\n\n    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add,\
     \ const Monoid monoid_identity, Vertex r = 0) :\n            T(tree), n(tree.VertexSize()),\
     \ parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree,\
     \ r)),\n            merge_sub_(merge), add_sub_(add), id_(monoid_identity){\n\
@@ -323,8 +323,8 @@ data:
   isVerificationFile: true
   path: verify/LC-TreePathCompositeSum.test.cpp
   requiredBy: []
-  timestamp: '2026-02-13 15:23:31+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-03-04 11:13:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-TreePathCompositeSum.test.cpp
 layout: document

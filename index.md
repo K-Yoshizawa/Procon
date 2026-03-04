@@ -3,16 +3,16 @@ data:
   libraryCategories:
   - name: Library
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Common.hpp
       title: Library/Common.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Template.hpp
       title: "Template - \u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\u95A2\u6570\u7FA4"
     - icon: ':warning:'
       path: Library/TemplateExtend.hpp
       title: Library/TemplateExtend.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/modint.hpp
       title: modint
     - icon: ':warning:'
@@ -60,7 +60,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Graph/Dijkstra.hpp
       title: "Dijkstra - \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Graph/Graph.hpp
       title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
     - icon: ':heavy_check_mark:'
@@ -106,10 +106,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Tree/LowestCommonAncestor.hpp
       title: "Lowest Common Ancestor - \u6700\u5C0F\u5171\u901A\u7956\u5148"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/RerootingDP.hpp
       title: "Rerooting DP - \u5168\u65B9\u4F4D\u6728DP"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Library/Tree/Tree.hpp
       title: "Tree - \u6728"
     - icon: ':heavy_check_mark:'
@@ -279,7 +279,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-TreeDiameter.test.cpp
       title: verify/LC-TreeDiameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/LC-TreePathCompositeSum.test.cpp
       title: verify/LC-TreePathCompositeSum.test.cpp
     - icon: ':heavy_check_mark:'
