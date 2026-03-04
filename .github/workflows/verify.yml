@@ -1,6 +1,13 @@
 name: verify
 
-on: push
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
   verify:
@@ -8,6 +15,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Fetch gh-pages branch
+      run: git fetch origin gh-pages:gh-pages || true
 
     - name: Set up Python
       uses: actions/setup-python@v5
