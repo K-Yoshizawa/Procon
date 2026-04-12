@@ -1,9 +1,9 @@
 ---
-title: Binary Indexed Tree (Fenwick Tree) - 二分索引木
+title: Binary Indexed Tree (Fenwick Tree)
 documentation_of: ../Library/DataStructure/BinaryIndexedTree.hpp
 ---
 
-# Binary Indexed Tree (Fenwick Tree) - 二分索引木
+# Binary Indexed Tree (Fenwick Tree)
 
 長さ $N$ の数列 $A = (A_1, \dots, A_N)$ に対し、一点加算・区間和取得クエリを効率的に行うことができるデータ構造です。
 
