@@ -4,9 +4,10 @@
 // 
 // Main Program
 // 
+// Author  : lX57
 // Contest : {contest}
 // Problem : {problem}
-// Date    : {date}
+// Created : {date}
 // 
 // ===================================================================
 
