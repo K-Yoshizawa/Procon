@@ -11,6 +11,7 @@
 
 - 【追加】Montgomery - モンゴメリ乗算
 - 【追加】Miller-Rabin - ミラー・ラビン素数判定法
+- 【追加】Stern-Brocot Tree
 
 ## 過去の更新履歴
 
