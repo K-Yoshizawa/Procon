@@ -6,8 +6,10 @@
 
 #include <algorithm>
 #include <array>
+#include <bit>
 #include <bitset>
 #include <cassert>
+#include <cmath>
 #include <cstdint>
 #include <deque>
 #include <functional>
