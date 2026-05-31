@@ -1,8 +1,12 @@
+#pragma once
+
 #include "../Common.hpp"
 
 template<typename IMonoid>
 class SparseTable{
     public:
+    SparseTable() = default;
+
     SparseTable(
         const vector<IMonoid> &A,
         const function<IMonoid(IMonoid, IMonoid)> f = [](IMonoid x, IMonoid y){
@@ -28,6 +32,6 @@ class SparseTable{
 
     private:
     vector<vector<IMonoid>> data_;
-    const function<IMonoid(IMonoid, IMonoid)> op_;
+    function<IMonoid(IMonoid, IMonoid)> op_;
     int N_, rows_;
 };

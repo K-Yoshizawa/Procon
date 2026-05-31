@@ -7,21 +7,21 @@ documentation_of: ../Library/Tree/LowestCommonAncestor.hpp
 
 頂点数 $V$ の木 $T$ 上の2つの頂点の最小共通祖先を効率的に求めるデータ構造です。
 
-ダブリングを用いて前処理を行い、各クエリを高速に処理します。
+Sparse Table を用いて前処理を行い、各クエリを高速に処理します。
 
 ## Function
 
 ### Constructor
 
 ```
-LowestCommonAncestor(Graph<WeightType> &tree)
+LowestCommonAncestor(Graph<WeightType> &T, Vertex r = 0)
 ```
 
-- 木 $T$ を頂点数 $V$ の `tree` で初期化し、前処理を行います。
+- 頂点数が $V$ で、頂点 $r$ を根とする根付き木 $T$ に対して前処理を行います。
 
 **制約**
 
-- `tree` は木
+- $T$ は木
 
 **計算量**
 
@@ -43,6 +43,6 @@ Vertex Query(Vertex u, Vertex v)
 
 **計算量**
 
-- $\textrm{O}(\log V)$
+- $\textrm{O}(1)$
 
 ---
