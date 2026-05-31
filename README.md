@@ -10,6 +10,7 @@
 ### Ver 5.1.0 (2026/??/??)
 
 - 【改修】`Common.hpp` - `<bit>` と `<cmath>` の include 文を追加
+- 【改修】Lowest Common Ancestor を Sparse Table を用いた $<\textrm{O}(N \log N), O(1)>$ 手法に変更
 - 【追加】Montgomery - モンゴメリ乗算
 - 【追加】Miller-Rabin - ミラー・ラビン素数判定法
 - 【追加】Sparse Table
