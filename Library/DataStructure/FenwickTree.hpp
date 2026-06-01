@@ -1,27 +1,27 @@
 #include "../Common.hpp"
 
-template<typename T>
-struct BinaryIndexedTree{
+template<typename Ordered>
+struct FenwickTree{
     public:
-    BinaryIndexedTree(int n) : size_(n){
+    FenwickTree(int N) : size_(N){
         data_.resize(size_ + 1, 0);
     }
 
-    T Sum(int i){
-        T ret = 0;
+    Ordered Sum(int i){
+        Ordered ret = 0;
         for(; i > 0; i -= i & -i) ret += data_[i];
         return ret;
     }
     
-    T Sum(int l, int r){
+    Ordered Sum(int l, int r){
         return Sum(r) - Sum(l - 1);
     }
 
-    void Add(int i, T v){
+    void Add(int i, Ordered v){
         for(; i <= size_; i += i & -i) data_[i] += v;
     }
 
     private:
     int size_;
-    vector<T> data_;
+    vector<Ordered> data_;
 };

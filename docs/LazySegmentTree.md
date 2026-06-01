@@ -5,9 +5,12 @@ documentation_of: ../Library/DataStructure/LazySegmentTree.hpp
 
 # Lazy Segment Tree - 遅延評価セグメント木
 
-長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、区間更新・区間取得クエリを効率的に行うことができるデータ構造です。
+長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、次の $2$ 種類のクエリを効率的に処理することができるデータ構造です。
 
-数列 $A$ の要素はモノイド $M$ である必要があり、更新操作もモノイド $O$ である必要があります。以下、モノイドの単位元を $e_M$、操作モノイドの単位元を $e_O$ とします。
+- 区間更新クエリ : $\textrm{O}(\log N)$
+- 区間積クエリ : $\textrm{O}(\log N)$
+
+数列 $A$ の要素はモノイド $M$ であり、更新操作もモノイド $O$ である必要があります。
 
 ## Function
 
@@ -16,24 +19,21 @@ documentation_of: ../Library/DataStructure/LazySegmentTree.hpp
 ```
 LazySegmentTree(
     vector<Monoid> &A,
-    F merge,
-    G mapping,
-    H composite,
+    Merge f,
+    Mapping g,
+    Composite h,
     const Monoid &e_m,
     const OperatorMonoid &e_o,
     bool zero_index = false
 )
 ```
 
-- セグメント木を配列 $A$ で初期化します。以降、セグメント木の長さを $N = \lvert A \rvert$ で表します。
-- `merge` には $2$ つのモノイドに対する二項演算 $\oplus : M \times M \rightarrow M$ を渡します。
-    - 本ドキュメントでは `merge` の計算量を定数時間としています。
-- `mapping` には遅延評価を適用する二項演算 $\otimes : M \times O \rightarrow M$ を渡します。
-    - 本ドキュメントでは `mapping` の計算量を定数時間としています。
-- `composite` には遅延評価を合成する二項演算 $\odot : O \times O \rightarrow O$ を渡します。
-    - 本ドキュメントでは `composite` の計算量を定数時間としています。
-- `e_m` にはモノイド $M$ の単位元 $e_M$ を渡します。
-- `e_o` には操作モノイド $O$ の単位元 $e_O$ を渡します。
+- セグメント木を配列 $A$ で初期化します。以降、$N = \lvert A \rvert$ とします。
+- $f$ は $2$ つのモノイド $M$ に対する二項演算 $\oplus : M \times M \rightarrow M$ を表します。
+- $g$ は遅延評価を適用する二項演算 $\otimes : M \times O \rightarrow M$ を表します。
+- $h$ は遅延評価を合成する二項演算 $\odot : O \times O \rightarrow O$ を表します。
+- `e_m` にはモノイド $M$ の単位元 $e_M$ を表します。
+- `e_o` には操作モノイド $O$ の単位元 $e_O$ を表します。
 - `zero_index` に `true` を指定すると、セグメント木にアクセスする添え字を 0-index でアクセスすることができます。デフォルトでは 1-index です。
     - 本ドキュメントでは添え字に関する制約は 1-index で示します。
 
@@ -41,15 +41,16 @@ LazySegmentTree(
 
 - $1 \le N \le 10^6$
 - $A_i \in M$
-- `merge` は二項演算 $\oplus : M \times M \rightarrow M$ を行う関数
-- `mapping` は二項演算 $\otimes : M \times O \rightarrow M$ を行う関数
-- `composite` は二項演算 $\odot : O \times O \rightarrow O$ を行う関数
+- $f$ は二項演算 $\oplus : M \times M \rightarrow M$ を行う `function<Monoid(Monoid, Monoid)>` 型
+- $g$ は二項演算 $\otimes : M \times O \rightarrow M$ を行う `function<Monoid(Monoid, OperatorMonoid)>` 型
+- $h$ は二項演算 $\odot : O \times O \rightarrow O$ を行う `function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>` 型
 - $e_M$ は $M$ の単位元
 - $e_O$ は $O$ の単位元
 
 **計算量**
 
-- $\textrm{O}(N)$
+- 時間計算量 : $\textrm{O}(N)$
+- 空間計算量 : $\textrm{O}(N)$
 
 ---
 
@@ -109,5 +110,9 @@ Monoid operator[](const int &k)
 **計算量**
 
 - $\textrm{O}(\log N)$
+
+---
+
+最終更新 : Ver.6.0.0
 
 ---

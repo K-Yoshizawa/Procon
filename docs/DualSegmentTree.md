@@ -5,94 +5,106 @@ documentation_of: ../Library/DataStructure/DualSegmentTree.hpp
 
 # Dual Segment Tree - 双対セグメント木
 
-長さ $N$ の数列 $A = (A_1, \dots, A_N)$ に対し、区間更新・一点取得クエリを効率的に行うことができるデータ構造です。
+長さ $N$ の数列 $A = (A_1, \dots, A_N)$ に対し、次の $2$ 種類のクエリを効率的に処理することができるデータ構造です。
 
-更新操作はモノイド $O$ である必要があります。以下、操作モノイドの単位元を $e_O$ とします。
+- 区間更新クエリ : $\textrm{O}(\log N)$
+- 一点取得クエリ : $\textrm{O}(\log N)$
+
+数列 $A$ の要素はモノイド $M$ であり、更新操作もモノイド $O$ である必要があります。
 
 ## Function
 
 ### Constructor
 
 ```
-DualSegmentTree(int size, H composite, const OperatorMonoid &operator_identity, bool zero_index = false)
+DualSegmentTree(
+    vector<Monoid> &A, 
+    Mapping g, 
+    Composite h, 
+    const OperatorMonoid &e, 
+    bool zero_index = false
+)
 ```
 
-- セグメント木の数列 $A$ を長さ $n$ で初期化します。初期値はすべて $e_O$ です。
-- `composite` には遅延評価を合成する演算 $\odot : O \times O \rightarrow O$ を渡します。
-    - 区間加算 : `[](int x, int y){return x + y;}`
-    - 区間代入 : `[](int x, int y){return y;}`
-- `operator_identity` には操作モノイド $O$ の単位元 $e_O$ を渡します。
+- セグメント木を配列 $A$ で初期化します。以降、$N = \lvert A \rvert$ とします。
+- $g$ は遅延評価を適用する二項演算 $\otimes : M \times O \rightarrow M$ を表します。
+- $h$ は遅延評価を合成する二項演算 $\odot : O \times O \rightarrow O$ を表します。
+- `e` には操作モノイド $O$ の単位元 $e$ を渡します。
 - `zero_index` に `true` を指定すると、セグメント木にアクセスする添え字を 0-index でアクセスすることができます。デフォルトでは 1-index です。
     - 本ドキュメントでは添え字に関する制約は 1-index で示します。
 
 **制約**
 
-- $1 \le n \le 10^6$
-- `composite` は $O \times O \rightarrow O$ の関数
-- $e_O$ は $O$ の単位元
+- $1 \le N \le 10^6$
+- $A_i \in M$
+- $g$ は二項演算 $\otimes : M \times O \rightarrow M$ を行う `function<Monoid(Monoid, OperatorMonoid)>` 型
+- $h$ は二項演算 $\odot : O \times O \rightarrow O$ を行う `function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>` 型
+- $e$ は $O$ の単位元
 
 **計算量**
 
-- $\textrm{O}(n)$
+- 時間計算量 : $\textrm{O}(N)$
+- 空間計算量 : $\textrm{O}(N)$
 
 ---
 
-### Set
+### Apply
 
 ```
-void Set(int index, OperatorMonoid value)
+void Apply(int l, int r, OperatorMonoid x)
 ```
 
-- $A_i$ に初期値 $v$ を代入します。（`index` が $i$ に対応）
-- 初期値を設定するために使用します。
+- 半開区間 $[l, r)$ に対して区間更新クエリを実行します。
+- すなわち、$l \le i \lt r$ について $A_i \leftarrow A_i \otimes x$ を行います。
 
 **制約**
 
-- $1 \le i \le n$
-- $v \in O$
+- $1 \le l \le N$
+- $l \le r \le N + 1$
+- $x \in O$
 
 **計算量**
 
-- $\textrm{O}(1)$
+- $\textrm{O}(\log N)$
 
 ---
 
-### Update
+### Fold
 
 ```
-void Update(int left, int right, OperatorMonoid operation)
+Monoid Fold(int k)
 ```
 
-- 半開区間 $[l, r)$ に対して区間更新クエリを実行します。（`left` が $l$、`right` が $r$ に対応）
-- 区間内の各要素に対して `operation` を適用します。
+- $A_k$ を取得します。
 
 **制約**
 
-- $1 \le l \le n$
-- $l \le r \le n + 1$
-- $operation \in O$
+- $1 \le k \le N$
 
 **計算量**
 
-- $\textrm{O}(\log n)$
+- $\textrm{O}(\log N)$
 
 ---
 
-### Product
+### operator[]
 
 ```
-OperatorMonoid Product(int index)
+Monoid operator[](const int &k)
 ```
 
-- $A_i$ を取得します。（`index` が $i$ に対応）
-- これまでに適用されたすべての操作の合成結果を返します。
+- $A_k$ を取得します。
 
 **制約**
 
-- $1 \le i \le n$
+- $1 \le k \le N$
 
 **計算量**
 
-- $\textrm{O}(\log n)$
+- $\textrm{O}(\log N)$
+
+---
+
+最終更新 : Ver.6.0.0
 
 ---

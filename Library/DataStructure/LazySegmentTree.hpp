@@ -3,19 +3,19 @@
 template<typename Monoid, typename OperatorMonoid = Monoid>
 class LazySegmentTree{
     public:
-    using F = function<Monoid(Monoid, Monoid)>;
-    using G = function<Monoid(Monoid, OperatorMonoid)>;
-    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
+    using Merge = function<Monoid(Monoid, Monoid)>;
+    using Mapping = function<Monoid(Monoid, OperatorMonoid)>;
+    using Composite = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
 
     LazySegmentTree(
         vector<Monoid> &A,
-        F merge,
-        G mapping,
-        H composite,
+        Merge f,
+        Mapping g,
+        Composite h,
         const Monoid &e_m,
         const OperatorMonoid &e_o,
         bool zero_index = false
-    ) : f(merge), g(mapping), h(composite), m1_(e_m), om1_(e_o), zero_index_(zero_index){
+    ) : f(f), g(g), h(h), m1_(e_m), om1_(e_o), zero_index_(zero_index){
         size_ = 1;
         while(size_ < (int)A.size()) size_ <<= 1;
         offset_ = size_ - 1;
@@ -52,9 +52,9 @@ class LazySegmentTree{
     vector<Monoid> data_;
     vector<OperatorMonoid> lazy_;
     vector<bool> is_identity_;
-    const F f;
-    const G g;
-    const H h;
+    const Merge f;
+    const Mapping g;
+    const Composite h;
     const Monoid m1_;
     const OperatorMonoid om1_;
 

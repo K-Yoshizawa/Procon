@@ -17,8 +17,9 @@ int main(){
     int N, Q; cin >> N >> Q;
     vector<mint> a(N); cin >> a;
 
-    DualSegmentTree<OperatorMonoid> seg(
-        N,
+    DualSegmentTree<mint, OperatorMonoid> seg(
+        a,
+        [](mint v, OperatorMonoid x){return x.b * v + x.c;},
         [](OperatorMonoid l, OperatorMonoid r){return OperatorMonoid::Composite(l, r);},
         OperatorMonoid(),
         true
@@ -27,12 +28,11 @@ int main(){
         int t; cin >> t;
         if(t == 0){
             int l, r, b, c; cin >> l >> r >> b >> c;
-            seg.Update(l, r, OperatorMonoid(b, c));
+            seg.Apply(l, r, OperatorMonoid(b, c));
         }
         else{
             int i; cin >> i;
-            OperatorMonoid op = seg.Product(i);
-            cout << op.b * a[i] + op.c << '\n';
+            cout << seg.Fold(i) << '\n';
         }
     }
 }

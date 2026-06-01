@@ -2,11 +2,10 @@
 
 #include "Graph.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 class Dijkstra{
     public:
-    Dijkstra(Graph<WeightType> &graph, Vertex s = -1) :
-        G(graph), V(graph.VertexSize()), dist_(V), prev_edge_(V){
+    Dijkstra(Graph<Ordered> &G, Vertex s = -1) : G(G), V(G.VertexSize()), dist_(V), prev_edge_(V){
         if(s != -1) Solve(s);
     }
 
@@ -14,13 +13,13 @@ class Dijkstra{
         return dist_[t] != inf;
     }
 
-    inline WeightType Distance(const Vertex &t) const {
+    inline Ordered Distance(const Vertex &t) const {
         return dist_[t];
     }
 
-    vector<Edge<WeightType>> Path(const Vertex &t) const {
-        if(!Reachable(t)) return vector<Edge<WeightType>>{};
-        vector<Edge<WeightType>> ret;
+    vector<Edge<Ordered>> Path(const Vertex &t) const {
+        if(!Reachable(t)) return vector<Edge<Ordered>>{};
+        vector<Edge<Ordered>> ret;
         int v = t;
         while(1){
             if(prev_edge_[v].from == -1) break;
@@ -32,17 +31,17 @@ class Dijkstra{
     }
 
     void Solve(Vertex s){
-        using P = pair<WeightType, Vertex>;
+        using P = pair<Ordered, Vertex>;
         fill(dist_.begin(), dist_.end(), inf);
-        dist_[s] = WeightType(0);
-        fill(prev_edge_.begin(), prev_edge_.end(), Edge<WeightType>{});
-        prev_edge_[s] = Edge<WeightType>(-1, -1);
+        dist_[s] = Ordered(0);
+        fill(prev_edge_.begin(), prev_edge_.end(), Edge<Ordered>{});
+        prev_edge_[s] = Edge<Ordered>(-1, -1);
         priority_queue<P, vector<P>, greater<P>> que;
-        que.emplace(WeightType(0), s);
+        que.emplace(Ordered(0), s);
         while(que.size()){
             auto [d, u] = que.top(); que.pop();
             if(dist_[u] != d) continue;
-            for(const Edge<WeightType> &e : G[u]){
+            for(const Edge<Ordered> &e : G[u]){
                 if(dist_[e.to] > d + e.cost){
                     dist_[e.to] = d + e.cost;
                     prev_edge_[e.to] = e;
@@ -52,19 +51,19 @@ class Dijkstra{
         }
     }
 
-    inline WeightType operator[](const Vertex &v){
+    inline Ordered operator[](const Vertex &v){
         return dist_[v];
     }
 
-    inline const WeightType operator[](const Vertex &v) const {
+    inline const Ordered operator[](const Vertex &v) const {
         return dist_[v];
     }
 
     private:
-    Graph<WeightType> &G;
+    Graph<Ordered> &G;
     int V;
     Vertex source_;
-    WeightType inf{WeightType(INF)};
-    vector<WeightType> dist_;
-    vector<Edge<WeightType>> prev_edge_;
+    Ordered inf{Ordered(INF)};
+    vector<Ordered> dist_;
+    vector<Edge<Ordered>> prev_edge_;
 };

@@ -1,25 +1,25 @@
 #include "Tree.hpp"
 
-template<typename WeightType, typename Monoid>
+template<typename Ordered, typename Monoid>
 class RerootingDP{
     public:
     using F = function<Monoid(Monoid, Monoid, Vertex)>;
-    using G = function<Monoid(Monoid, WeightType, Vertex)>;
+    using G = function<Monoid(Monoid, Ordered, Vertex)>;
     using H = function<Monoid(Monoid, Vertex)>;
     using Fsub = function<Monoid(Monoid, Monoid)>;
-    using Gsub = function<Monoid(Monoid, WeightType)>;
+    using Gsub = function<Monoid(Monoid, Ordered)>;
 
-    RerootingDP(Graph<WeightType> &tree, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
-            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
+    RerootingDP(Graph<Ordered> &T, Fsub merge, Gsub add, const Monoid monoid_identity, Vertex r = 0) :
+            T(T), V(T.VertexSize()), parent(CalculateTreeParent(T, r)), cost(CalculateTreeCost(T, r)), child(RootedTreeAdjacentList(T, r)),
             merge_sub_(merge), add_sub_(add), id_(monoid_identity){
         merge_ = [&](Monoid x, Monoid y, Vertex i){return merge_sub_(x, y);};
-        add_ = [&](Monoid x, WeightType y, Vertex i){return add_sub_(x, y);};
+        add_ = [&](Monoid x, Ordered y, Vertex i){return add_sub_(x, y);};
         finalize_ = [](Monoid x, Vertex i){return x;};
         solve(r);
     }
 
-    RerootingDP(Graph<WeightType> &tree, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0) :
-            T(tree), n(tree.VertexSize()), parent(CalculateTreeParent(tree, r)), cost(CalculateTreeCost(tree, r)), child(RootedTreeAdjacentList(tree, r)),
+    RerootingDP(Graph<Ordered> &T, F merge, G add, H finalize, const Monoid monoid_identity, Vertex r = 0) :
+            T(T), V(T.VertexSize()), parent(CalculateTreeParent(T, r)), cost(CalculateTreeCost(T, r)), child(RootedTreeAdjacentList(T, r)),
             merge_(merge), add_(add), finalize_(finalize), id_(monoid_identity){
         solve(r);
     }
@@ -38,12 +38,12 @@ class RerootingDP{
 
     void Print() const {
         cerr << "# dp table :";
-        for(int i = 0; i < n; ++i){
+        for(int i = 0; i < V; ++i){
             cerr << " " << dp_[i];
         }
         cerr << '\n';
         cerr << "# subtree_dp table" << '\n';
-        for(int i = 0; i < n; ++i){
+        for(int i = 0; i < V; ++i){
             cerr << "# vertex " << i << '\n';
             cerr << "#    subtree_dp :";
             for(int j = 0; j < subtree_dp_[i].size(); ++j){
@@ -64,10 +64,10 @@ class RerootingDP{
     }
 
     private:
-    Graph<WeightType> &T;
-    int n;
+    Graph<Ordered> &T;
+    int V;
     vector<Vertex> parent;
-    vector<WeightType> cost;
+    vector<Ordered> cost;
     vector<vector<Vertex>> child;
     
     vector<Monoid> dp_;
@@ -94,10 +94,10 @@ class RerootingDP{
     }
 
     void solve(Vertex r){
-        dp_.resize(n, id_);
-        subtree_dp_.resize(n, vector<Monoid>{id_});
-        left_cum_.resize(n);
-        right_cum_.resize(n);
+        dp_.resize(V, id_);
+        subtree_dp_.resize(V, vector<Monoid>{id_});
+        left_cum_.resize(V);
+        right_cum_.resize(V);
 
         dp_[r] = dfs(r, true);
         int root_size = subtree_dp_[r].size();

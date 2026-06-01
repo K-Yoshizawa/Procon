@@ -1,11 +1,10 @@
 #include "Graph.hpp"
-#include "GraphMisc.hpp"
+#include "GraphUtilities.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 class BellmanFord{
     public:
-    BellmanFord(Graph<WeightType> &graph, Vertex s = -1) :
-        G(graph), V(graph.VertexSize()), dist_(V){
+    BellmanFord(Graph<Ordered> &G, Vertex s = -1) : G(G), V(G.VertexSize()), dist_(V){
         if(s != -1) Solve(s);
     }
 
@@ -13,7 +12,7 @@ class BellmanFord{
         return dist_[t] != inf;
     }
 
-    inline WeightType Distance(const Vertex &t) const {
+    inline Ordered Distance(const Vertex &t) const {
         return dist_[t];
     }
 
@@ -23,7 +22,7 @@ class BellmanFord{
 
     void Solve(Vertex s){
         fill(dist_.begin(), dist_.end(), inf);
-        dist_[s] = WeightType(0);
+        dist_[s] = Ordered(0);
         negative_cycle_ = false;
         int update_count = 0;
         auto E = ConvertEdgeSet(G);
@@ -33,7 +32,7 @@ class BellmanFord{
                 break;
             }
             bool update_flag = false;
-            for(const Edge<WeightType> &e : E){
+            for(const Edge<Ordered> &e : E){
                 if(dist_[e.from] == inf) continue;
                 if(dist_[e.to] > dist_[e.from] + e.cost){
                     dist_[e.to] = dist_[e.from] + e.cost;
@@ -45,18 +44,18 @@ class BellmanFord{
         }
     }
 
-    inline WeightType operator[](const Vertex &t){
+    inline Ordered operator[](const Vertex &t){
         return dist_[t];
     }
 
-    inline const WeightType operator[](const Vertex &t) const {
+    inline const Ordered operator[](const Vertex &t) const {
         return dist_[t];
     }
 
     private:
-    Graph<WeightType> &G;
+    Graph<Ordered> &G;
     int V;
-    WeightType inf{WeightType(INF)};
+    Ordered inf{Ordered(INF)};
     bool negative_cycle_;
-    vector<WeightType> dist_;
+    vector<Ordered> dist_;
 };

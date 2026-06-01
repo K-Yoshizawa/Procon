@@ -2,10 +2,10 @@
 
 #include "Graph.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 class LowLink{
     public:
-    LowLink(Graph<WeightType> &graph) : G(graph), V(graph.VertexSize()), ord_(V, -1), low_(V, -1), in_(V), out_(V){
+    LowLink(Graph<Ordered> &G) : G(G), V(G.VertexSize()), ord_(V, -1), low_(V, -1), in_(V), out_(V){
         for(int i = 0, k = 0, t = 0; i < V; ++i){
             if(ord_[i] == -1){
                 k = dfs(i, -1, k, t);
@@ -26,7 +26,7 @@ class LowLink{
     }
 
     private:
-    Graph<WeightType> &G;
+    Graph<Ordered> &G;
     int V;
     vector<int> ord_, low_, in_, out_;
     vector<Vertex> articulation_point_;

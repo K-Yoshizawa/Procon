@@ -2,16 +2,16 @@
 
 #include "Graph.hpp"
 
-template<typename WeightType>
-vector<Edge<WeightType>> CycleDetection(Graph<WeightType> &G){
+template<typename Ordered>
+vector<Edge<Ordered>> CycleDetection(Graph<Ordered> &G){
     int V = G.VertexSize();
-    vector<Edge<WeightType>> history;
+    vector<Edge<Ordered>> history;
     vector<int> state(V, 0);
-    vector<Edge<WeightType>> ret;
+    vector<Edge<Ordered>> ret;
     bool detected = false;
     auto dfs = [&](auto &self, int v, int pre) -> void {
         state[v] = 1;
-        for(const Edge<WeightType> &e : G[v]){
+        for(const Edge<Ordered> &e : G[v]){
             if(e.idx == pre) continue;
             if(state[e.to] == 2) continue;
             else if(state[e.to] == 1){
