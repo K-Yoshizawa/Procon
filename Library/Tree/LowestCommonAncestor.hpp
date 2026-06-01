@@ -2,12 +2,12 @@
 
 #include "Tree.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 struct LowestCommonAncestor{
     public:
     using P = pair<int, int>;
 
-    LowestCommonAncestor(Graph<WeightType> &T) : T(T){
+    LowestCommonAncestor(Graph<Ordered> &T) : T(T){
         int V = (int)T.VertexSize(), r = 0;
         while(1 << (r + 1) <= 2 * V) ++r;
         sparse_table_.resize(r + 1, vector<P>(2 * V));
@@ -39,7 +39,7 @@ struct LowestCommonAncestor{
     }
 
     private:
-    Graph<WeightType> &T;
+    Graph<Ordered> &T;
     vector<vector<P>> sparse_table_;
     vector<int> leftest_;
 };

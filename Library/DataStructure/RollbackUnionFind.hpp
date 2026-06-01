@@ -2,7 +2,7 @@
 
 class RollbackUnionFind{
     public:
-    RollbackUnionFind(size_t n) : data_(n, -1), record_(0){}
+    RollbackUnionFind(size_t N) : data_(N, -1), record_(0){}
 
     int Find(const int k) const {
         if(data_[k] < 0) return k;

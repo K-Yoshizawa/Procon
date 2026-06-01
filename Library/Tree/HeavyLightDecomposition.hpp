@@ -13,13 +13,12 @@ struct PathSegment{
     }
 };
 
-template<typename WeightType>
+template<typename Ordered>
 class HeavyLightDecomposition{
     public:
-    HeavyLightDecomposition(Graph<WeightType> &tree, Vertex r = 0) :
-        T(tree), parent(CalculateTreeParent(tree, r)), child(RootedTreeAdjacentList(tree, r)), n((int)tree.VertexSize()), euler_tour_(n), rev_order_(n), depth_(CalculateTreeDepth(tree, r)), belong_hp_id_(n){
+    HeavyLightDecomposition(Graph<Ordered> &T, Vertex r = 0) : T(T), parent(CalculateTreeParent(T, r)), child(RootedTreeAdjacentList(T, r)), V((int)T.VertexSize()), euler_tour_(V), rev_order_(V), depth_(CalculateTreeDepth(T, r)), belong_hp_id_(V){
         vector<int> ss = CalculateSubtreeSize(T, r);
-        for(int i = 0; i < n; ++i){
+        for(int i = 0; i < V; ++i){
             if(child[i].empty()) continue;
             nth_element(child[i].begin(), child[i].begin() + 1, child[i].end(), [&](Vertex i, Vertex j){
                 return ss[i] > ss[j];
@@ -121,9 +120,9 @@ class HeavyLightDecomposition{
 
     template<typename T>
     void SortVertex(vector<T> &A){
-        assert(A.size() == n);
-        vector<T> sub(n);
-        for(int i = 0; i < n; ++i){
+        assert(A.size() == V);
+        vector<T> sub(V);
+        for(int i = 0; i < V; ++i){
             sub[PreOrder(i)] = A[i];
         }
         swap(A, sub);
@@ -183,10 +182,10 @@ class HeavyLightDecomposition{
         return euler_tour_[v].second;
     }
 
-    Graph<WeightType> &T;
+    Graph<Ordered> &T;
     vector<Vertex> parent;
     vector<vector<Vertex>> child;
-    int n, timer_;
+    int V, timer_;
 
     vector<pair<int, int>> euler_tour_;
     vector<Vertex> rev_order_;

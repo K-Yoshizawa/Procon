@@ -1,9 +1,9 @@
 #include "Tree.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 class TreeDiameter{
     public:
-    TreeDiameter(Graph<WeightType> &tree) : T(tree){
+    TreeDiameter(Graph<Ordered> &T) : T(T){
         int V = T.VertexSize(), s = 0;
         dist_s_ = CalculateTreeDistance(T, s);
         s = distance(dist_s_.begin(), max_element(dist_s_.begin(), dist_s_.end()));
@@ -20,11 +20,11 @@ class TreeDiameter{
         path_.emplace_back(s);
     }
     
-    WeightType Diameter() const {
+    Ordered Diameter() const {
         return diameter_;
     }
     
-    WeightType Height(Vertex v) const {
+    Ordered Height(Vertex v) const {
         return max(dist_s_[v], dist_t_[v]);
     }
 
@@ -37,8 +37,8 @@ class TreeDiameter{
     }
 
     private:
-    Graph<WeightType> &T;
-    vector<WeightType> dist_s_, dist_t_;
+    Graph<Ordered> &T;
+    vector<Ordered> dist_s_, dist_t_;
     vector<Vertex> path_;
-    WeightType diameter_;
+    Ordered diameter_;
 };

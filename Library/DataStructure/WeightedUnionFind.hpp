@@ -1,9 +1,9 @@
 #include "../Common.hpp"
 
-template<typename Abel = int32_t>
+template<typename Arithmetic = int32_t>
 class WeightedUnionFind{
     public:
-    WeightedUnionFind(int n) : data_(n, -1), weight_(n, Abel{}){}
+    WeightedUnionFind(int N) : data_(N, -1), weight_(N, Arithmetic{}){}
 
     int Find(const int k){
         if(data_[k] < 0) return k;
@@ -12,12 +12,12 @@ class WeightedUnionFind{
         return data_[k] = r;
     }
 
-    Abel Weight(const int k){
+    Arithmetic Weight(const int k){
         Find(k);
         return weight_[k];
     }
 
-    Abel Diff(const int x, const int y){
+    Arithmetic Diff(const int x, const int y){
         return Weight(y) - Weight(x);
     }
 
@@ -25,7 +25,7 @@ class WeightedUnionFind{
         return Find(x) == Find(y);
     }
 
-    bool Unite(int x, int y, Abel w){
+    bool Unite(int x, int y, Arithmetic w){
         w += Weight(x) - Weight(y);
         x = Find(x), y = Find(y);
         if(x == y) return false;
@@ -38,5 +38,5 @@ class WeightedUnionFind{
 
     private:
     vector<int> data_;
-    vector<Abel> weight_;
+    vector<Arithmetic> weight_;
 };

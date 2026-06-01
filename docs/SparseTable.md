@@ -12,7 +12,7 @@ documentation_of: ../Library/DataStructure/SparseTable.hpp
 ### Constructor
 
 ```
-SparseTable(const vector<ValueType> &A)
+SparseTable(const vector<Ordered> &A)
 ```
 
 - 長さ $N$ の列 $A$ を渡し、Sparse Table を構築します。
@@ -31,7 +31,7 @@ SparseTable(const vector<ValueType> &A)
 ### Fold
 
 ```
-inline ValueType Fold(int l, int r) const
+inline Ordered Fold(int l, int r) const
 ```
 
 - 半開区間 $[l, r)$ に対して $\displaystyle \underset{k \in [l, r)}{\min}\ A_k$ を返します。

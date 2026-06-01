@@ -1,11 +1,10 @@
 #include "Graph.hpp"
-#include "GraphMisc.hpp"
+#include "GraphUtilities.hpp"
 
-template<typename WeightType>
+template<typename Ordered>
 struct StronglyConnectedComponents{
     public:
-    StronglyConnectedComponents(Graph<WeightType> &graph) :
-        G(graph), RG(ReverseGraph(graph)), V(G.VertexSize()), belong_(V, -1){
+    StronglyConnectedComponents(Graph<Ordered> &G) : G(G), RG(ReverseGraph(G)), V(G.VertexSize()), belong_(V, -1){
         vector<int> label(V, -1);
         vector<bool> state(V, false);
         int nex = 0;
@@ -48,12 +47,12 @@ struct StronglyConnectedComponents{
         return ret;
     }
     
-    Graph<WeightType> ContractedGraph() const {
+    Graph<Ordered> ContractedGraph() const {
         int nn = ComponentCount();
-        Graph<WeightType> ret(nn);
+        Graph<Ordered> ret(nn);
         for(int u = 0; u < V; ++u){
             int nu = BelongComponent(u);
-            for(const Edge<WeightType> &e : G[u]){
+            for(const Edge<Ordered> &e : G[u]){
                 int nv = BelongComponent(e.to);
                 if(nu == nv) continue;
                 ret.AddDirectedEdge(nu, nv, e.cost);
@@ -71,15 +70,15 @@ struct StronglyConnectedComponents{
     }
 
     private:
-    Graph<WeightType> &G;
-    Graph<WeightType> RG;
+    Graph<Ordered> &G;
+    Graph<Ordered> RG;
     int V;
     vector<vector<Vertex>> components_;
     vector<int> belong_;
 
     void dfs1(Vertex v, vector<int> &label, int &nex, vector<bool> &state){
         state[v] = true;
-        for(const Edge<WeightType> &e : G[v]){
+        for(const Edge<Ordered> &e : G[v]){
             if(state[e.to]) continue;
             dfs1(e.to, label, nex, state);
         }
@@ -91,7 +90,7 @@ struct StronglyConnectedComponents{
         components_[component].push_back(v);
         belong_[v] = component;
         state[v] = false;
-        for(const Edge<WeightType> &e : RG[v]){
+        for(const Edge<Ordered> &e : RG[v]){
             if(!state[e.to]) continue;
             dfs2(e.to, label, component, state);
         }

@@ -4,7 +4,7 @@
 
 class UnionFind{
     public:
-    UnionFind(size_t n) : data_(n, -1){}
+    UnionFind(size_t N) : data_(N, -1){}
 
     int Find(const int k){
         if(data_[k] < 0) return k;
