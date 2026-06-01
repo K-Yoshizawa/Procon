@@ -1,41 +1,53 @@
 #include "../Common.hpp"
 
-template<typename OperatorMonoid>
+template<typename Monoid, typename OperatorMonoid>
 class DualSegmentTree{
     public:
-    using H = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
+    using Mapping = function<Monoid(Monoid, OperatorMonoid)>;
+    using Composite = function<OperatorMonoid(OperatorMonoid, OperatorMonoid)>;
     
-    DualSegmentTree(int size, H composite, const OperatorMonoid &operator_identity, bool zero_index = false)
-    : h(composite), om1_(operator_identity), zeroindex_(zero_index){
+    DualSegmentTree(
+        vector<Monoid> &A, 
+        Mapping g, 
+        Composite h, 
+        const OperatorMonoid &e, 
+        bool zero_index = false
+    ) : g(g), h(h), e(e), zero_index_(zero_index){
         size_ = 1;
-        while(size_ < size) size_ <<= 1;
+        while(size_ < (int)A.size()) size_ <<= 1;
         offset_ = size_ - 1;
-        lazy_.resize(2 * size_, om1_);
+        data_.resize(2 * size_);
+        lazy_.resize(2 * size_, e);
         is_identity_.resize(2 * size_, true);
+        for(int i = 0; i < (int)A.size(); ++i){
+            data_[size_ + i] = A[i];
+        }
     }
 
-    void Set(int index, OperatorMonoid value){
-        Validate(index + zeroindex_);
-        lazy_[offset_ + index + zeroindex_] = value;
+    void Apply(int l, int r, OperatorMonoid x){
+        Validate(l + zero_index_);
+        Validate(r + zero_index_ - 1);
+        RecursiveApply(l + zero_index_, r + zero_index_, x, 1, size_ + 1, 1);
     }
 
-    void Update(int left, int right, OperatorMonoid operation){
-        Validate(left + zeroindex_);
-        Validate(right + zeroindex_ - 1);
-        RecursiveUpdate(left + zeroindex_, right + zeroindex_, operation, 1, size_ + 1, 1);
+    Monoid Fold(int k){
+        Validate(k + zero_index_);
+        return RecursiveFold(k + zero_index_, 1, size_ + 1, 1);
     }
 
-    OperatorMonoid Product(int index){
-        Validate(index + zeroindex_);
-        return RecursiveProduct(index + zeroindex_, 1, size_ + 1, 1);
+    Monoid operator[](const int &k){
+        Validate(k + zero_index_);
+        return Fold(k);
     }
 
     private:
-    int size_, offset_, zeroindex_;
+    int size_, offset_, zero_index_;
+    vector<Monoid> data_;
     vector<OperatorMonoid> lazy_;
     vector<bool> is_identity_;
-    const H h;
-    const OperatorMonoid om1_;
+    const Mapping g;
+    const Composite h;
+    const OperatorMonoid e;
 
     inline void Validate(int x){
         assert(1 <= x && x <= size_);
@@ -48,12 +60,13 @@ class DualSegmentTree{
             is_identity_[k * 2 + 0] = false;
             lazy_[k * 2 + 1] = h(lazy_[k * 2 + 1], lazy_[k]);
             is_identity_[k * 2 + 1] = false;
-            lazy_[k] = om1_;
-            is_identity_[k] = true;
         }
+        data_[k] = g(data_[k], lazy_[k]);
+        lazy_[k] = e;
+        is_identity_[k] = true;
     }
 
-    void RecursiveUpdate(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
+    void RecursiveApply(int ul, int ur, OperatorMonoid x, int left, int right, int cell){
         Evaluate(cell);
         if(ul <= left && right <= ur){
             lazy_[cell] = h(lazy_[cell], x);
@@ -62,16 +75,16 @@ class DualSegmentTree{
         }
         else if(ul < right && left < ur){
             int mid = (left + right) / 2;
-            RecursiveUpdate(ul, ur, x, left, mid, cell * 2 + 0);
-            RecursiveUpdate(ul, ur, x, mid, right, cell * 2 + 1);
+            RecursiveApply(ul, ur, x, left, mid, cell * 2 + 0);
+            RecursiveApply(ul, ur, x, mid, right, cell * 2 + 1);
         }
     }
     
-    OperatorMonoid RecursiveProduct(int q, int left, int right, int cell){
+    Monoid RecursiveFold(int q, int left, int right, int cell){
         Evaluate(cell);
-        if(q == left && right - left == 1) return lazy_[cell];
+        if(q == left && right - left == 1) return data_[cell];
         int mid = (left + right) / 2;
-        if(q < mid) return RecursiveProduct(q, left, mid, cell * 2 + 0);
-        else return RecursiveProduct(q, mid, right, cell * 2 + 1);
+        if(q < mid) return RecursiveFold(q, left, mid, cell * 2 + 0);
+        else return RecursiveFold(q, mid, right, cell * 2 + 1);
     }
 };
