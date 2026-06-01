@@ -3,14 +3,14 @@
 template<typename Monoid>
 class SegmentTree{
     public:
-    using F = function<Monoid(Monoid, Monoid)>;
+    using Merge = function<Monoid(Monoid, Monoid)>;
     
     SegmentTree(
         vector<Monoid> &A, 
-        F merge, 
+        Merge f, 
         const Monoid &e, 
         bool zero_index = false
-    ) : f(merge), id_(e), zero_index_(zero_index){
+    ) : f(f), id_(e), zero_index_(zero_index){
         size_ = 1;
         while(size_ < (int)A.size()) size_ <<= 1;
         offset_ = size_ - 1;
@@ -54,7 +54,7 @@ class SegmentTree{
     private:
     int size_, offset_, zero_index_;
     vector<Monoid> data_;
-    const F f;
+    const Merge f;
     const Monoid id_;
 
     inline void Validate(int x) const {

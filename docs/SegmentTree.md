@@ -5,9 +5,12 @@ documentation_of: ../Library/DataStructure/SegmentTree.hpp
 
 # Segment Tree - セグメント木
 
-長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、一点更新・区間取得クエリを効率的に行うことができるデータ構造です。
+長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、次の $2$ 種類のクエリを効率的に処理することができるデータ構造です。
 
-数列 $A$ の要素はモノイド $M$ である必要があります。以下、モノイドの単位元を $e$ とします。
+- 一点更新クエリ : $\textrm{O}(\log N)$
+- 区間積クエリ : $\textrm{O}(\log N)$
+
+列 $A$ の要素はモノイド $M$ である必要があります。
 
 ## Function
 
@@ -16,17 +19,18 @@ documentation_of: ../Library/DataStructure/SegmentTree.hpp
 ```
 SegmentTree(
     vector<Monoid> &A,
-    F merge,
+    MergeFunction f,
     const Monoid &e,
     bool zero_index = false
 )
 ```
 
-- セグメント木を配列 $A$ で初期化します。以降、セグメント木の長さを $N = \lvert A \rvert$ で表します。
-- `merge` には $2$ つのモノイドに対する二項演算 $\oplus : M \times M \rightarrow M$ を渡します。
-    - 本ドキュメントでは `merge` の計算量を定数時間としています。
+- セグメント木を配列 $A$ で初期化します。以降、$N = \lvert A \rvert$ とします。
+- $f$ は $2$ つのモノイドに対する二項演算 $\oplus : M \times M \rightarrow M$ を表します。
+    - 本ドキュメントでは $f$ の計算量を定数時間としています。
     - 区間最小値 : `[](int x, int y){return min(x, y);}`
     - 区間総和 : `[](int x, int y){return x + y;}`
+- $e$ は $M$ の単位元を表し、任意の $x \in M$ に対し $x \oplus e = e \oplus x = x$ を満たす必要があります。
 - `zero_index` に `true` を指定すると、セグメント木にアクセスする添え字を 0-index でアクセスすることができます。デフォルトでは 1-index です。
     - 本ドキュメントでは添え字に関する制約は 1-index で示します。
 
@@ -34,12 +38,13 @@ SegmentTree(
 
 - $1 \le N \le 10^6$
 - $A_i \in M$
-- `merge` は二項演算 $\oplus : M \times M \rightarrow M$ を行う関数
+- $f$ は二項演算 $\oplus : M \times M \rightarrow M$ を行う関数
 - $e$ は $M$ の単位元
 
 **計算量**
 
-- $\textrm{O}(N)$
+- 時間計算量 : $\textrm{O}(N)$
+- 空間計算量 : $\textrm{O}(N)$
 
 ---
 
@@ -69,7 +74,7 @@ void Apply(int k, Monoid x)
 Monoid Fold(int l, int r)
 ```
 
-- 半開区間 $[l, r)$ に対して区間取得クエリを実行します。
+- 半開区間 $[l, r)$ に対して区間積クエリを実行します。
 - すなわち、$A_l \oplus A_{l+1} \oplus \dots \oplus A_{r - 1}$ を計算した結果を返します。
 
 **制約**
@@ -101,3 +106,6 @@ Monoid operator[](const int &k)
 
 ---
 
+最終更新 : Ver.6.0.0
+
+---
