@@ -5,19 +5,17 @@ documentation_of: ../Library/Tree/LowestCommonAncestor.hpp
 
 # Lowest Common Ancestor - 最小共通祖先
 
-頂点数 $V$ の木 $T$ 上の2つの頂点の最小共通祖先を効率的に求めるデータ構造です。
-
-Sparse Table を用いて前処理を行い、各クエリを高速に処理します。
+頂点数 $V$ の木 $T$ 上について、任意の $2$ 頂点の最小共通祖先を効率的に求めます。
 
 ## Function
 
 ### Constructor
 
 ```
-LowestCommonAncestor(Graph<WeightType> &T, Vertex r = 0)
+LowestCommonAncestor(Graph<WeightType> &T)
 ```
 
-- 頂点数が $V$ で、頂点 $r$ を根とする根付き木 $T$ に対して前処理を行います。
+- 頂点数が $V$ で、頂点 $0$ を根とする根付き木 $T$ に対して前処理を行います。
 
 **制約**
 
@@ -25,7 +23,8 @@ LowestCommonAncestor(Graph<WeightType> &T, Vertex r = 0)
 
 **計算量**
 
-- $\textrm{O}(V \log V)$
+- 時間計算量 : $\textrm{O}(V \log V)$
+- 空間計算量 : $\textrm{O}(V \log V)$
 
 ---
 
@@ -44,5 +43,9 @@ Vertex Query(Vertex u, Vertex v)
 **計算量**
 
 - $\textrm{O}(1)$
+
+---
+
+最終更新 : Ver.6.0.0
 
 ---
