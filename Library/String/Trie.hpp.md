@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: Library/Tree/Tree.hpp
   _extendedRequiredBy: []
@@ -133,7 +133,7 @@ data:
   isVerificationFile: false
   path: Library/String/Trie.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2026-06-01 14:23:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/String/Trie.hpp

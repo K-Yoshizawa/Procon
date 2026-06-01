@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/DualSegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2026-06-01 12:57:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-RangeAffinePointGet.test.cpp

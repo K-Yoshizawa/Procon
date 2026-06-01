@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/FenwickTree.hpp
     title: Library/DataStructure/FenwickTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
@@ -132,7 +132,7 @@ data:
   isVerificationFile: true
   path: verify/LC-PointAddRangeSum-FenwickTree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2026-06-01 14:08:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-PointAddRangeSum-FenwickTree.test.cpp

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-StaricRMQ.test.cpp
     title: verify/LC-StaricRMQ.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/DataStructure/SparseTable.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
@@ -49,8 +49,8 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/SparseTable.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-01 14:08:55+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-StaricRMQ.test.cpp
 documentation_of: Library/DataStructure/SparseTable.hpp

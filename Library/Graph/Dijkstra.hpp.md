@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/AOJ-GRL-1-A.test.cpp
     title: verify/AOJ-GRL-1-A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Graph/Dijkstra.hpp\"\n\n#line 2 \"Library/Graph/Graph.hpp\"\
@@ -109,8 +109,8 @@ data:
   isVerificationFile: false
   path: Library/Graph/Dijkstra.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-06-01 14:23:03+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/LC-ShortestPath.test.cpp

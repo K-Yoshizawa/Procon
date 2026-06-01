@@ -15,22 +15,22 @@ data:
     path: Library/DataStructure/LazySegmentTree.hpp
     title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/MergeSortTree.hpp
     title: Library/DataStructure/MergeSortTree.hpp
   - icon: ':heavy_check_mark:'
     path: Library/DataStructure/RollbackUnionFind.hpp
     title: Library/DataStructure/RollbackUnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SegmentTree.hpp
     title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/UnionFind.hpp
     title: Library/DataStructure/UnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
     title: Library/DataStructure/WeightedUnionFind.hpp
   - icon: ':heavy_check_mark:'
@@ -39,13 +39,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/CycleDetection.hpp
     title: Library/Graph/CycleDetection.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Dijkstra.hpp
     title: Library/Graph/Dijkstra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/GraphUtilities.hpp
     title: Library/Graph/GraphUtilities.hpp
   - icon: ':heavy_check_mark:'
@@ -54,7 +54,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
     title: Library/Graph/LowLink.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: Library/Graph/StronglyConnectedComponents.hpp
   - icon: ':heavy_check_mark:'
@@ -81,31 +81,31 @@ data:
   - icon: ':warning:'
     path: Library/String/ZAlgorithm.hpp
     title: Library/String/ZAlgorithm.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   - icon: ':warning:'
     path: Library/TemplateExtend.hpp
     title: Library/TemplateExtend.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: Library/Tree/HeavyLightDecomposition.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
     title: Library/Tree/LowestCommonAncestor.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/RerootingDP.hpp
     title: Library/Tree/RerootingDP.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/Tree.hpp
     title: Library/Tree/Tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Tree/TreeDiameter.hpp
     title: Library/Tree/TreeDiameter.hpp
   - icon: ':warning:'
     path: Library/Tree/tmp.hpp
     title: Library/Tree/tmp.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/modint.hpp
     title: modint
   - icon: ':warning:'
@@ -223,42 +223,42 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-RectangleSum.test.cpp
     title: verify/LC-RectangleSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-StaricRMQ.test.cpp
     title: verify/LC-StaricRMQ.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-StaticRangeSumWithUpperBound.test.cpp
     title: verify/LC-StaticRangeSumWithUpperBound.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-TreePathCompositeSum.test.cpp
     title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-UnionfindWithPotential.test.cpp
     title: verify/LC-UnionfindWithPotential.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-VertexSetPathComposite.test.cpp
     title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
@@ -319,8 +319,8 @@ data:
   - Library/unauthenticated/FunctionalGraph.hpp
   - Library/unauthenticated/AuxiliaryTree.hpp
   - Library/TemplateExtend.hpp
-  timestamp: '2026-06-01 15:49:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-04-12 14:16:26+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-2-G.test.cpp
   - verify/AOJ-GRL-5-B.test.cpp

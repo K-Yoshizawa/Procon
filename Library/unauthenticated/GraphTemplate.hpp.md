@@ -235,7 +235,7 @@ data:
   path: Library/unauthenticated/GraphTemplate.hpp
   requiredBy:
   - Library/unauthenticated/LongestDistance.hpp
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2026-02-13 15:23:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/GraphTemplate.hpp

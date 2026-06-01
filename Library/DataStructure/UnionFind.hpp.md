@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/LC-Unionfind.test.cpp
     title: verify/LC-Unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/DataStructure/UnionFind.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
@@ -64,8 +64,8 @@ data:
   path: Library/DataStructure/UnionFind.hpp
   requiredBy:
   - Library/Graph/Kruskal.hpp
-  timestamp: '2026-06-01 15:49:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-06-01 14:08:55+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/AOJ-DSL-1-A.test.cpp
   - verify/LC-Unionfind.test.cpp

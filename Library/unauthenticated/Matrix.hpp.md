@@ -168,7 +168,7 @@ data:
   isVerificationFile: false
   path: Library/unauthenticated/Matrix.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2025-05-30 19:43:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/Matrix.hpp

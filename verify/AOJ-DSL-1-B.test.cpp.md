@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/DataStructure/WeightedUnionFind.hpp
     title: Library/DataStructure/WeightedUnionFind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
@@ -137,7 +137,7 @@ data:
   isVerificationFile: true
   path: verify/AOJ-DSL-1-B.test.cpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2026-06-01 14:08:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/AOJ-DSL-1-B.test.cpp

@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: Library/unauthenticated/Manacher.hpp
   requiredBy: []
-  timestamp: '2026-06-01 15:49:42+09:00'
+  timestamp: '2024-09-04 01:04:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/Manacher.hpp
