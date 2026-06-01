@@ -19,18 +19,15 @@ documentation_of: ../Library/DataStructure/SegmentTree.hpp
 ```
 SegmentTree(
     vector<Monoid> &A,
-    MergeFunction f,
+    Merge f,
     const Monoid &e,
     bool zero_index = false
 )
 ```
 
 - セグメント木を配列 $A$ で初期化します。以降、$N = \lvert A \rvert$ とします。
-- $f$ は $2$ つのモノイドに対する二項演算 $\oplus : M \times M \rightarrow M$ を表します。
-    - 本ドキュメントでは $f$ の計算量を定数時間としています。
-    - 区間最小値 : `[](int x, int y){return min(x, y);}`
-    - 区間総和 : `[](int x, int y){return x + y;}`
-- $e$ は $M$ の単位元を表し、任意の $x \in M$ に対し $x \oplus e = e \oplus x = x$ を満たす必要があります。
+- $f$ は $2$ つのモノイド $M$ に対する二項演算 $\oplus : M \times M \rightarrow M$ を表します。
+- $e$ は $M$ の単位元を表します。
 - `zero_index` に `true` を指定すると、セグメント木にアクセスする添え字を 0-index でアクセスすることができます。デフォルトでは 1-index です。
     - 本ドキュメントでは添え字に関する制約は 1-index で示します。
 
@@ -38,7 +35,7 @@ SegmentTree(
 
 - $1 \le N \le 10^6$
 - $A_i \in M$
-- $f$ は二項演算 $\oplus : M \times M \rightarrow M$ を行う関数
+- $f$ は二項演算 $\oplus : M \times M \rightarrow M$ を行う `function<Monoid(Monoid, Monoid)>` 型
 - $e$ は $M$ の単位元
 
 **計算量**
