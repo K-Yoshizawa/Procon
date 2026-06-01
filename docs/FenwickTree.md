@@ -5,7 +5,10 @@ documentation_of: ../Library/DataStructure/FenwickTree.hpp
 
 # Fenwick Tree
 
-長さ $N$ の配列 $A = (A_1, \dots, A_N)$ に対し、一点加算・区間和取得クエリを効率的に行うことができるデータ構造です。
+長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、次の $2$ 種類のクエリを効率的に処理することができるデータ構造です。
+
+- 一点加算クエリ : $\textrm{O}(\log N)$
+- 区間和クエリ : $\textrm{O}(\log N)$
 
 ## Function
 
@@ -23,7 +26,8 @@ FenwickTree(int N)
 
 **計算量**
 
-- $\textrm{O}(N)$
+- 時間計算量 : $\textrm{O}(N)$
+- 空間計算量 : $\textrm{O}(N)$
 
 ---
 
@@ -33,7 +37,7 @@ FenwickTree(int N)
 void Add(int i, ValueType v)
 ```
 
-- $A_i$ に値 $v$ を加算します。
+- $A_i$ に $v$ を加算します。
 
 **制約**
 
