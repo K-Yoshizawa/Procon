@@ -1,0 +1,209 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: Library/Common.hpp
+    title: Library/Common.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-2-A.test.cpp
+    title: verify/AOJ-DSL-2-A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/AOJ-DSL-2-B.test.cpp
+    title: verify/AOJ-DSL-2-B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-PointAddRangeSum.test.cpp
+    title: verify/LC-PointAddRangeSum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/LC-PointSetRangeComposite.test.cpp
+    title: verify/LC-PointSetRangeComposite.test.cpp
+  - icon: ':x:'
+    path: verify/LC-VertexAddPathSum.test.cpp
+    title: verify/LC-VertexAddPathSum.test.cpp
+  - icon: ':x:'
+    path: verify/LC-VertexAddSubtreeSum.test.cpp
+    title: verify/LC-VertexAddSubtreeSum.test.cpp
+  - icon: ':x:'
+    path: verify/LC-VertexSetPathComposite.test.cpp
+    title: verify/LC-VertexSetPathComposite.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':question:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
+    #include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include\
+    \ <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
+    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
+    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
+    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
+    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\
+    \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using Merge\
+    \ = function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n        vector<Monoid>\
+    \ &A, \n        Merge f, \n        const Monoid &e, \n        bool zero_index\
+    \ = false\n    ) : f(f), id_(e), zero_index_(zero_index){\n        size_ = 1;\n\
+    \        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_ -\
+    \ 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
+    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        for(int i =\
+    \ offset_; i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i *\
+    \ 2 + 1]);\n        }\n    }\n\n    void Apply(int k, Monoid x){\n        Validate(k\
+    \ + zero_index_);\n        k = offset_ + k + zero_index_;\n        data_[k] =\
+    \ x;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
+    \ * k + 1]);\n        }\n    }\n\n    Monoid Fold(int l, int r){\n        if(l\
+    \ == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r +\
+    \ zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
+    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
+    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
+    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
+    \    }\n\n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n   \
+    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const Merge\
+    \ f;\n    const Monoid id_;\n\n    inline void Validate(int x) const {\n     \
+    \   assert(1 <= x && x <= size_);\n    }\n};\n"
+  code: "#include \"../Common.hpp\"\n\ntemplate<typename Monoid>\nclass SegmentTree{\n\
+    \    public:\n    using Merge = function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n\
+    \        vector<Monoid> &A, \n        Merge f, \n        const Monoid &e, \n \
+    \       bool zero_index = false\n    ) : f(f), id_(e), zero_index_(zero_index){\n\
+    \        size_ = 1;\n        while(size_ < (int)A.size()) size_ <<= 1;\n     \
+    \   offset_ = size_ - 1;\n        data_.resize(2 * size_, id_);\n        for(int\
+    \ i = 0; i < (int)A.size(); ++i){\n            data_[size_ + i] = A[i];\n    \
+    \    }\n        for(int i = offset_; i >= 1; --i){\n            data_[i] = f(data_[i\
+    \ * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n    void Apply(int k, Monoid\
+    \ x){\n        Validate(k + zero_index_);\n        k = offset_ + k + zero_index_;\n\
+    \        data_[k] = x;\n        while(k >>= 1){\n            data_[k] = f(data_[2\
+    \ * k], data_[2 * k + 1]);\n        }\n    }\n\n    Monoid Fold(int l, int r){\n\
+    \        if(l == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r\
+    \ + zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
+    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
+    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
+    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
+    \    }\n\n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n\
+    \        return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n   \
+    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const Merge\
+    \ f;\n    const Monoid id_;\n\n    inline void Validate(int x) const {\n     \
+    \   assert(1 <= x && x <= size_);\n    }\n};"
+  dependsOn:
+  - Library/Common.hpp
+  isVerificationFile: false
+  path: Library/DataStructure/SegmentTree.hpp
+  requiredBy: []
+  timestamp: '2026-06-01 15:49:42+09:00'
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - verify/AOJ-DSL-2-B.test.cpp
+  - verify/AOJ-DSL-2-A.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/LC-PointSetRangeComposite.test.cpp
+  - verify/LC-VertexSetPathComposite.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/LC-PointAddRangeSum.test.cpp
+documentation_of: Library/DataStructure/SegmentTree.hpp
+layout: document
+title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+---
+
+# Segment Tree - セグメント木
+
+長さ $N$ の列 $A = (A_1, \dots, A_N)$ に対し、次の $2$ 種類のクエリを効率的に処理することができるデータ構造です。
+
+- 一点更新クエリ : $\textrm{O}(\log N)$
+- 区間積クエリ : $\textrm{O}(\log N)$
+
+列 $A$ の要素はモノイド $M$ である必要があります。
+
+## Function
+
+### Constructor
+
+```
+SegmentTree(
+    vector<Monoid> &A,
+    Merge f,
+    const Monoid &e,
+    bool zero_index = false
+)
+```
+
+- セグメント木を配列 $A$ で初期化します。以降、$N = \lvert A \rvert$ とします。
+- $f$ は $2$ つのモノイド $M$ に対する二項演算 $\oplus : M \times M \rightarrow M$ を表します。
+- $e$ は $M$ の単位元を表します。
+- `zero_index` に `true` を指定すると、セグメント木にアクセスする添え字を 0-index でアクセスすることができます。デフォルトでは 1-index です。
+    - 本ドキュメントでは添え字に関する制約は 1-index で示します。
+
+**制約**
+
+- $1 \le N \le 10^6$
+- $A_i \in M$
+- $f$ は二項演算 $\oplus : M \times M \rightarrow M$ を行う `function<Monoid(Monoid, Monoid)>` 型
+- $e$ は $M$ の単位元
+
+**計算量**
+
+- 時間計算量 : $\textrm{O}(N)$
+- 空間計算量 : $\textrm{O}(N)$
+
+---
+
+### Apply
+
+```
+void Apply(int k, Monoid x)
+```
+
+- $A_k$ に対して一点更新クエリを実行します。
+- すなわち、$A_k \leftarrow x$ を行います。
+
+**制約**
+
+- $1 \le k \le N$
+- $x \in M$
+
+**計算量**
+
+- $\textrm{O}(\log N)$
+
+---
+
+### Fold
+
+```
+Monoid Fold(int l, int r)
+```
+
+- 半開区間 $[l, r)$ に対して区間積クエリを実行します。
+- すなわち、$A_l \oplus A_{l+1} \oplus \dots \oplus A_{r - 1}$ を計算した結果を返します。
+
+**制約**
+
+- $1 \le l \le N$
+- $l \le r \le N + 1$
+
+**計算量**
+
+- $\textrm{O}(\log N)$
+
+---
+
+### operator[]
+
+```
+Monoid operator[](const int &k)
+```
+
+- $A_k$ を取得します。
+
+**制約**
+
+- $1 \le k \le N$
+
+**計算量**
+
+- $\textrm{O}(1)$
+
+---
+
+最終更新 : Ver.6.0.0
+
+---

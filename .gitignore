@@ -1,0 +1,13 @@
+*.out
+*.cpp
+*.c
+*.txt
+ac-library/
+!/docs/Template.txt
+!/Library/origin.cpp
+!/verify/**
+!/verify_icpc/**
+!/verify_latest/**
+!/verify_old/**
+tools/
+.vscode/
