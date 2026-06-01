@@ -13,6 +13,6 @@ int main(){
 
     while(Q--){
         int l, r; cin >> l >> r;
-        cout << st.Query(l, r) << '\n';
+        cout << st.Fold(l, r) << '\n';
     }
 }
