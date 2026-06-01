@@ -33,6 +33,7 @@ struct LowestCommonAncestor{
     }
 
     Vertex Query(Vertex u, Vertex v) const {
+        if(u == v) return u;
         if(leftest_[u] > leftest_[v]) swap(u, v);
         int k = bit_width((uint32_t)leftest_[v] - leftest_[u]) - 1;
         return min(sparse_table_[k][leftest_[u]], sparse_table_[k][leftest_[v] - (1 << k)]).second;

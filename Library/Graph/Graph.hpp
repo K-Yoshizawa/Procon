@@ -59,3 +59,16 @@ class Graph{
     size_t edge_size_;
     vector<vector<Edge<Ordered>>> adjacent_list_;
 };
+
+template<typename Ordered = int32_t>
+Graph<Ordered> InputGraph(int V, int E, int padding = -1, bool weighted = false, bool directed = false){
+    Graph<Ordered> G(V);
+    for(int i = 0; i < E; ++i){
+        Vertex u, v; Ordered w = 1;
+        cin >> u >> v, u += padding, v += padding;
+        if(weighted) cin >> w;
+        if(directed) G.AddDirectedEdge(u, v, w);
+        else G.AddUndirectedEdge(u, v, w);
+    }
+    return G;
+}
