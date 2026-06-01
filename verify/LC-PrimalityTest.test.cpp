@@ -8,6 +8,6 @@ int main(){
     int Q; cin >> Q;
     while(Q--){
         long long N; cin >> N;
-        cout << YnPrint(MillerRabin(N)) << '\n';
+        YnPrint(MillerRabin(N));
     }
 }
