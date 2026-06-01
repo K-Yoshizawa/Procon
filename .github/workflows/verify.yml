@@ -3,34 +3,25 @@ name: verify
 on:
   push:
     branches:
-      - master
-
-concurrency:
-  group: gh-pages
-  cancel-in-progress: false
+    - master
+  pull_request:
 
 jobs:
   verify:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Fetch gh-pages branch
-      run: git fetch origin gh-pages:gh-pages || true
+    - uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
 
     - name: Install dependencies
-      run: pip install -U online-judge-verify-helper
+      run: pip3 install -U git+https://github.com/${{ github.repository }}.git@master
 
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DROPBOX_TOKEN: ${{ secrets.DROPBOX_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
