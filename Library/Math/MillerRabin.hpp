@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Montgomery.hpp"
 
 bool MillerRabin(const long long N){
@@ -11,7 +13,7 @@ bool MillerRabin(const long long N){
     long long s = 0, d = N - 1;
     while(!(d & 1)) ++s, d >>= 1;
     for(const auto &a : as){
-        Montgomery x = Montgomery(a).Power(d);
+        Montgomery x = Montgomery(a).Powerer(d);
         if(x != 1 && x != 0){
             long long t;
             for(t = 0; t < s; ++t){
