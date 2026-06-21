@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential"
 
-#include "../Library/modint.hpp"
+#include "../Library/ModInt.hpp"
 #include "../Library/DataStructure/WeightedUnionFind.hpp"
 
 int main(){

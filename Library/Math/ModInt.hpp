@@ -1,18 +1,6 @@
 #pragma once
 
-/**
- * @file modint.hpp
- * @author log K (lX57)
- * @brief modint
- * @version 1.0
- * @date 2023-08-24
- */
-
-#include "Common.hpp"
-using namespace std;
-
-const int mod998 = 998244353;
-const int mod107 = 1000000007;
+#include "../Common.hpp"
 
 template< int mod >
 struct ModInt {
@@ -38,7 +26,7 @@ struct ModInt {
     }
 
     ModInt &operator/=(const ModInt &p) {
-        *this *= p.inverse();
+        *this *= p.Inverse();
         return *this;
     }
 
@@ -56,7 +44,7 @@ struct ModInt {
 
     bool operator!=(const ModInt &p) const { return x != p.x; }
 
-    ModInt inverse() const {
+    ModInt Inverse() const {
         int a = x, b = mod, u = 1, v = 0, t;
         while(b > 0) {
             t = a / b;
@@ -66,7 +54,7 @@ struct ModInt {
         return ModInt(u);
     }
 
-    ModInt pow(int64_t n) const {
+    ModInt Power(int64_t n) const {
         if(n == 0) return ModInt(1);
         ModInt ret(1), mul(x);
         while(n > 0) {
@@ -91,10 +79,7 @@ struct ModInt {
     static int get_mod() { return mod; }
 };
 
-using mint = ModInt<mod998>;
-using mint107 = ModInt<mod107>;
-
-using vm = vector<mint>;
-using vvm = vector<vector<mint>>;
-using vm107 = vector<mint107>;
-using vvm107 = vector<vector<mint107>>;
+const int MOD998244353 = 998244353;
+const int MOD1000000007 = 1000000007;
+using mint = ModInt<MOD998244353>;
+using mmint = ModInt<MOD1000000007>;
