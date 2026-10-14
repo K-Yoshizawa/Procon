@@ -1,13 +1,17 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 lX57
+// License: https://opensource.org/license/mit/
+
 #include "../Library/Template.hpp"
 
 // ===================================================================
 // 
 // Main Program
 // 
-// Author  : lX57
-// Contest : {contest}
-// Problem : {problem}
-// Created : {date}
+// Author   : lX57
+// Contest  : {contest}
+// Problem  : {problem}
+// Compiled : {date}
 // 
 // ===================================================================
 
