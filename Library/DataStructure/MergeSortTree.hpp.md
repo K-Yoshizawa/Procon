@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-RectangleSum.test.cpp
     title: verify/LC-RectangleSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-StaticRangeSumWithUpperBound.test.cpp
     title: verify/LC-StaticRangeSumWithUpperBound.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
-    #include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include\
-    \ <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 2 \"Library/DataStructure/MergeSortTree.hpp\"\
-    \n\ntemplate <typename DataType, typename WeightType = DataType>\nclass MergeSortTree{\n\
-    \    public:\n    MergeSortTree(\n        const vector<DataType> &A,\n       \
-    \ const vector<WeightType> &B,\n        bool zero_index = false\n    ) : zero_index_(zero_index){\n\
-    \        Build(A, B);\n    }\n    \n    MergeSortTree(\n        const vector<DataType>\
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 2 \"Library/DataStructure/MergeSortTree.hpp\"\n\ntemplate <typename\
+    \ DataType, typename WeightType = DataType>\nclass MergeSortTree{\n    public:\n\
+    \    MergeSortTree(\n        const vector<DataType> &A,\n        const vector<WeightType>\
+    \ &B,\n        bool zero_index = false\n    ) : zero_index_(zero_index){\n   \
+    \     Build(A, B);\n    }\n    \n    MergeSortTree(\n        const vector<DataType>\
     \ &A,\n        bool zero_index = false\n    ) : zero_index_(zero_index){\n   \
     \     Build(A, A);\n    }\n\n    int CountAtMost(int l, int r, DataType x) const\
     \ {\n        if(l >= r) return 0;\n        Validate(l + zero_index_);\n      \
@@ -156,8 +156,8 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/MergeSortTree.hpp
   requiredBy: []
-  timestamp: '2026-04-12 14:16:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-21 14:34:19+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/LC-StaticRangeSumWithUpperBound.test.cpp
   - verify/LC-RectangleSum.test.cpp

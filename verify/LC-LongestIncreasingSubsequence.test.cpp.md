@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Other/LongestIncreasingSubsequence.hpp
     title: "Longest Increasing Subsequence - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
@@ -22,20 +22,20 @@ data:
     - https://judge.yosupo.jp/problem/longest_increasing_subsequence
   bundledCode: "#line 1 \"verify/LC-LongestIncreasingSubsequence.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/longest_increasing_subsequence\"\n\
-    \n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
-    \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include <cstdint>\n\
-    #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
-    #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
-    \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconstexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\
-    \n\ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n';\
-    \ return flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\"\
-    ) << '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
-    \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
-    inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}\n\
-    template<typename Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
+    \n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n#include\
+    \ <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include <cassert>\n\
+    #include <cmath>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
+    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
+    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
+    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
+    \ << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
+    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
+    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
+    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
+    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
+    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
+    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
     \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
     \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
     \ Value Floor(Value numerator, Value denominator){if(denominator < 0) numerator\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: true
   path: verify/LC-LongestIncreasingSubsequence.test.cpp
   requiredBy: []
-  timestamp: '2026-04-12 14:16:26+09:00'
+  timestamp: '2026-06-21 14:34:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-LongestIncreasingSubsequence.test.cpp

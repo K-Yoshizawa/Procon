@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -20,13 +20,13 @@ data:
     \ * @file LongestIncreasingSubsequence.hpp\n * @brief Longest Increasing Subsequence\
     \ - \u6700\u9577\u5897\u52A0\u90E8\u5206\u5217\n * @author ei1333 (Original)\n\
     \ * @version 2.0\n * @date 2024-10-29\n */\n\n#line 2 \"Library/Common.hpp\"\n\
-    \n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include <cstdint>\n\
-    #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
-    #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
-    \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconstexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 10 \"Library/Other/LongestIncreasingSubsequence.hpp\"\
+    \n#include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n\
+    #include <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
+    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
+    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
+    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
+    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 10 \"Library/Other/LongestIncreasingSubsequence.hpp\"\
     \n\n/**\n * @brief \u914D\u5217 `data` \u306E\u6700\u9577\u5897\u52A0\u90E8\u5206\
     \u5217\u3092\u6C42\u3081\u308B\u3002\n * @tparam Strict \u72ED\u7FA9\u5358\u8ABF\
     \u5897\u52A0\u3067\u3042\u308B\u304B\n * @param data \u6C42\u3081\u308B\u914D\u5217\
@@ -69,7 +69,7 @@ data:
   isVerificationFile: false
   path: Library/Other/LongestIncreasingSubsequence.hpp
   requiredBy: []
-  timestamp: '2026-04-12 14:16:26+09:00'
+  timestamp: '2026-06-21 14:34:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/LC-LongestIncreasingSubsequence.test.cpp

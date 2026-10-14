@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy:
@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/CycleDetection.hpp
     title: Library/Graph/CycleDetection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Dijkstra.hpp
     title: Library/Graph/Dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/GraphUtilities.hpp
     title: Library/Graph/GraphUtilities.hpp
   - icon: ':heavy_check_mark:'
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Library/Graph/LowLink.hpp
     title: Library/Graph/LowLink.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/StronglyConnectedComponents.hpp
     title: Library/Graph/StronglyConnectedComponents.hpp
   - icon: ':heavy_check_mark:'
@@ -32,19 +32,19 @@ data:
   - icon: ':warning:'
     path: Library/String/Trie.hpp
     title: Library/String/Trie.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/HeavyLightDecomposition.hpp
     title: Library/Tree/HeavyLightDecomposition.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Tree/LowestCommonAncestor.hpp
     title: Library/Tree/LowestCommonAncestor.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: Library/Tree/RerootingDP.hpp
     title: Library/Tree/RerootingDP.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/Tree.hpp
     title: Library/Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Tree/TreeDiameter.hpp
     title: Library/Tree/TreeDiameter.hpp
   - icon: ':warning:'
@@ -105,50 +105,43 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-MinimumSpanningTree.test.cpp
     title: verify/LC-MinimumSpanningTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-ShortestPath.test.cpp
     title: verify/LC-ShortestPath.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-StronglyConnectedComponents.test.cpp
     title: verify/LC-StronglyConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-TreeDiameter.test.cpp
     title: verify/LC-TreeDiameter.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-TreePathCompositeSum.test.cpp
-    title: verify/LC-TreePathCompositeSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-VertexSetPathComposite.test.cpp
-    title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Library/Graph/Graph.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
-    \n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n\
-    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
-    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
-    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
-    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
-    \ 1;\n#line 4 \"Library/Graph/Graph.hpp\"\n\nusing Vertex = int;\n\ntemplate<typename\
-    \ Ordered = int32_t>\nstruct Edge{\n    public:\n    Edge() = default;\n\n   \
-    \ Edge(Vertex from_, Vertex to_, Ordered weight_ = 1, int idx_ = -1) :\n     \
-    \   from(from_), to(to_), cost(weight_), idx(idx_){}\n    \n    bool operator<(const\
-    \ Edge<Ordered> &e) const {return cost < e.cost;}\n\n    operator int() const\
-    \ {return to;}\n\n    Vertex from, to;\n    Ordered cost;\n    int idx;\n};\n\n\
-    template<typename Ordered = int32_t>\nclass Graph{\n    public:\n    Graph() =\
-    \ default;\n\n    Graph(int V) : edge_size_(0), adjacent_list_(V){}\n    \n  \
-    \  inline void AddUndirectedEdge(Vertex u, Vertex v, Ordered w = 1){\n       \
-    \ int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<Ordered>(u,\
+    \n\n#include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n\
+    #include <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
+    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
+    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
+    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
+    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Graph/Graph.hpp\"\
+    \n\nusing Vertex = int;\n\ntemplate<typename Ordered = int32_t>\nstruct Edge{\n\
+    \    public:\n    Edge() = default;\n\n    Edge(Vertex from_, Vertex to_, Ordered\
+    \ weight_ = 1, int idx_ = -1) :\n        from(from_), to(to_), cost(weight_),\
+    \ idx(idx_){}\n    \n    bool operator<(const Edge<Ordered> &e) const {return\
+    \ cost < e.cost;}\n\n    operator int() const {return to;}\n\n    Vertex from,\
+    \ to;\n    Ordered cost;\n    int idx;\n};\n\ntemplate<typename Ordered = int32_t>\n\
+    class Graph{\n    public:\n    Graph() = default;\n\n    Graph(int V) : edge_size_(0),\
+    \ adjacent_list_(V){}\n    \n    inline void AddUndirectedEdge(Vertex u, Vertex\
+    \ v, Ordered w = 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<Ordered>(u,\
     \ v, w, idx));\n        adjacent_list_[v].push_back(Edge<Ordered>(v, u, w, idx));\n\
     \    }\n    \n    inline void AddDirectedEdge(Vertex u, Vertex v, Ordered w =\
     \ 1){\n        int idx = edge_size_++;\n        adjacent_list_[u].push_back(Edge<Ordered>(u,\
@@ -194,49 +187,47 @@ data:
   isVerificationFile: false
   path: Library/Graph/Graph.hpp
   requiredBy:
+  - Library/String/Trie.hpp
+  - Library/Tree/LowestCommonAncestor.hpp
+  - Library/Tree/RerootingDP.hpp
+  - Library/Tree/TreeDiameter.hpp
+  - Library/Tree/tmp.hpp
   - Library/Tree/Tree.hpp
   - Library/Tree/HeavyLightDecomposition.hpp
-  - Library/Tree/tmp.hpp
-  - Library/Tree/TreeDiameter.hpp
-  - Library/Tree/RerootingDP.hpp
-  - Library/Tree/LowestCommonAncestor.hpp
-  - Library/String/Trie.hpp
   - Library/Graph/StronglyConnectedComponents.hpp
   - Library/Graph/LowLink.hpp
-  - Library/Graph/Kruskal.hpp
-  - Library/Graph/Dijkstra.hpp
-  - Library/Graph/BellmanFord.hpp
-  - Library/Graph/CycleDetection.hpp
-  - Library/Graph/GraphUtilities.hpp
   - Library/Graph/WarshallFloyd.hpp
+  - Library/Graph/BellmanFord.hpp
+  - Library/Graph/Kruskal.hpp
+  - Library/Graph/CycleDetection.hpp
+  - Library/Graph/Dijkstra.hpp
+  - Library/Graph/GraphUtilities.hpp
   - Library/unauthenticated/AuxiliaryTree.hpp
-  timestamp: '2026-06-01 14:23:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-21 14:34:19+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-GRL-5-B.test.cpp
-  - verify/LC-CycleDetection.test.cpp
-  - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-ALDS1-7-A.test.cpp
-  - verify/LC-TreePathCompositeSum.test.cpp
+  - verify/AOJ-GRL-5-C.test.cpp
+  - verify/LC-JumponTree.test.cpp
   - verify/AOJ-GRL-1-C.test.cpp
+  - verify/LC-VertexAddPathSum.test.cpp
+  - verify/AOJ-GRL-5-A.test.cpp
+  - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/LC-StronglyConnectedComponents.test.cpp
+  - verify/AOJ-GRL-5-B.test.cpp
+  - verify/AOJ-GRL-3-C.test.cpp
+  - verify/LC-ShortestPath.test.cpp
+  - verify/LC-VertexAddSubtreeSum.test.cpp
+  - verify/AOJ-GRL-3-B.test.cpp
   - verify/AOJ-GRL-1-A.test.cpp
   - verify/LC-LowestCommonAncestor-HLD.test.cpp
-  - verify/LC-VertexAddPathSum.test.cpp
-  - verify/AOJ-GRL-3-B.test.cpp
-  - verify/LC-ShortestPath.test.cpp
-  - verify/LC-LowestCommonAncestor.test.cpp
-  - verify/AOJ-GRL-1-B.test.cpp
-  - verify/LC-StronglyConnectedComponents.test.cpp
-  - verify/LC-CycleDetectionUndirected.test.cpp
-  - verify/AOJ-GRL-5-C.test.cpp
-  - verify/AOJ-GRL-3-C.test.cpp
-  - verify/LC-TreeDiameter.test.cpp
-  - verify/LC-VertexSetPathComposite.test.cpp
-  - verify/LC-VertexAddSubtreeSum.test.cpp
-  - verify/LC-JumponTree.test.cpp
-  - verify/LC-MinimumSpanningTree.test.cpp
+  - verify/AOJ-GRL-4-A.test.cpp
   - verify/AOJ-GRL-3-A.test.cpp
-  - verify/AOJ-GRL-5-A.test.cpp
+  - verify/LC-CycleDetection.test.cpp
+  - verify/LC-TreeDiameter.test.cpp
+  - verify/AOJ-GRL-1-B.test.cpp
+  - verify/LC-CycleDetectionUndirected.test.cpp
+  - verify/LC-LowestCommonAncestor.test.cpp
 documentation_of: Library/Graph/Graph.hpp
 layout: document
 title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"

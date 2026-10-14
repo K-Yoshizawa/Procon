@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
@@ -13,29 +13,32 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\
-    \n\n/**\n * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n\
-    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
-    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
-    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
-    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
-    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
-    \ 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
-    \ << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool YNPrint(bool\
-    \ flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\ntemplate<typename\
-    \ Container>\ninline void Sort(Container &container){sort(container.begin(), container.end());}\n\
-    template<typename Container>\ninline void ReverseSort(Container &container){sort(container.rbegin(),\
-    \ container.rend());}\ntemplate<typename Container>\ninline void Reverse(Container\
-    \ &container){reverse(container.begin(), container.end());}\ntemplate<typename\
-    \ Value>\ninline int PopCount(const Value &value){return __builtin_popcount(value);}\n\
-    template<typename Value>\ninline Value Floor(Value numerator, Value denominator){if(denominator\
-    \ < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator +\
-    \ 1) / denominator - 1 : numerator / denominator;}\ntemplate<typename Value>\n\
-    inline Value Ceil(Value numerator, Value denominator){if(denominator < 0) numerator\
-    \ *= -1, denominator *= -1; return numerator > 0 ? (numerator - 1) / denominator\
-    \ + 1 : numerator / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
+    links:
+    - https://opensource.org/license/mit/
+  bundledCode: "#line 1 \"Library/origin.cpp\"\n// SPDX-License-Identifier: MIT\n\
+    // Copyright (c) 2026 lX57\n// License: https://opensource.org/license/mit/\n\n\
+    #line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n#include\
+    \ <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include <cassert>\n\
+    #include <cmath>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
+    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
+    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
+    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
+    \ << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
+    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
+    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
+    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
+    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
+    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
+    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
+    \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
+    \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
+    \ Value Floor(Value numerator, Value denominator){if(denominator < 0) numerator\
+    \ *= -1, denominator *= -1; return numerator < 0 ? (numerator + 1) / denominator\
+    \ - 1 : numerator / denominator;}\ntemplate<typename Value>\ninline Value Ceil(Value\
+    \ numerator, Value denominator){if(denominator < 0) numerator *= -1, denominator\
+    \ *= -1; return numerator > 0 ? (numerator - 1) / denominator + 1 : numerator\
+    \ / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
     \ vector<Value> &container, const Value &value){return distance(container.begin(),\
     \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
     \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
@@ -93,15 +96,17 @@ data:
     }\n\ntemplate<typename T1 = int, typename T2 = T1, typename T3 = T1>\ntuple<vector<T1>,\
     \ vector<T2>, vector<T3>> InputVectorTuple(int size){\n    vector<tuple<T1, T2,\
     \ T3>> v(size);\n    for(auto &[p, q, r] : v) cin >> p >> q >> r;\n    return\
-    \ DisassembleVectorTuple(v);\n}\n#line 2 \"Library/origin.cpp\"\n\n// ===================================================================\n\
-    // \n// Main Program\n// \n// Author  : lX57\n// Contest : {contest}\n// Problem\
-    \ : {problem}\n// Created : {date}\n// \n// ===================================================================\n\
+    \ DisassembleVectorTuple(v);\n}\n#line 6 \"Library/origin.cpp\"\n\n// ===================================================================\n\
+    // \n// Main Program\n// \n// Author   : lX57\n// Contest  : {contest}\n// Problem\
+    \  : {problem}\n// Compiled : {date}\n// \n// ===================================================================\n\
     \nvoid solve(){\n\n}\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
     \    cout << fixed << setprecision(10);\n    // int T; cin >> T;\n    // while(T--)\n\
     \    solve();\n}\n"
-  code: "#include \"../Library/Template.hpp\"\n\n// ===================================================================\n\
-    // \n// Main Program\n// \n// Author  : lX57\n// Contest : {contest}\n// Problem\
-    \ : {problem}\n// Created : {date}\n// \n// ===================================================================\n\
+  code: "// SPDX-License-Identifier: MIT\n// Copyright (c) 2026 lX57\n// License:\
+    \ https://opensource.org/license/mit/\n\n#include \"../Library/Template.hpp\"\n\
+    \n// ===================================================================\n// \n\
+    // Main Program\n// \n// Author   : lX57\n// Contest  : {contest}\n// Problem\
+    \  : {problem}\n// Compiled : {date}\n// \n// ===================================================================\n\
     \nvoid solve(){\n\n}\n\nint main(){\n    cin.tie(0)->sync_with_stdio(false);\n\
     \    cout << fixed << setprecision(10);\n    // int T; cin >> T;\n    // while(T--)\n\
     \    solve();\n}"
@@ -111,7 +116,7 @@ data:
   isVerificationFile: false
   path: Library/origin.cpp
   requiredBy: []
-  timestamp: '2026-05-31 21:03:41+09:00'
+  timestamp: '2026-10-14 19:07:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/origin.cpp

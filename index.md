@@ -3,18 +3,15 @@ data:
   libraryCategories:
   - name: Library
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Common.hpp
       title: Library/Common.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Template.hpp
       title: Library/Template.hpp
     - icon: ':warning:'
       path: Library/TemplateExtend.hpp
       title: Library/TemplateExtend.hpp
-    - icon: ':heavy_check_mark:'
-      path: Library/modint.hpp
-      title: modint
     - icon: ':warning:'
       path: Library/origin.cpp
       title: Library/origin.cpp
@@ -23,34 +20,52 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/CumulativeSum2D.hpp
       title: Library/DataStructure/CumulativeSum2D.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: Library/DataStructure/DualSegmentTree.hpp
       title: "Dual Segment Tree - \u53CC\u5BFE\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':warning:'
+      path: Library/DataStructure/ErasablePriorityQueue.hpp
+      title: Library/DataStructure/ErasablePriorityQueue.hpp
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/FenwickTree.hpp
       title: Library/DataStructure/FenwickTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/DataStructure/LazySegmentTree.hpp
       title: "Lazy Segment Tree - \u9045\u5EF6\u8A55\u4FA1\u30BB\u30B0\u30E1\u30F3\
         \u30C8\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Library/DataStructure/MergeSortTree.hpp
       title: Library/DataStructure/MergeSortTree.hpp
     - icon: ':heavy_check_mark:'
+      path: Library/DataStructure/RedBlackTree.hpp
+      title: "Red-Black Tree - \u5E73\u8861\u4E8C\u5206\u63A2\u7D22\u6728 (\u8D64\u9ED2\
+        \u6728)"
+    - icon: ':heavy_check_mark:'
       path: Library/DataStructure/RollbackUnionFind.hpp
       title: Library/DataStructure/RollbackUnionFind.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/DataStructure/SegmentTree.hpp
       title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Library/DataStructure/SparseTable.hpp
       title: Sparse Table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/DataStructure/UnionFind.hpp
       title: Library/DataStructure/UnionFind.hpp
     - icon: ':heavy_check_mark:'
       path: Library/DataStructure/WeightedUnionFind.hpp
       title: Library/DataStructure/WeightedUnionFind.hpp
+  - name: Library/FormalPowerSeries
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Library/FormalPowerSeries/Convolution.hpp
+      title: Library/FormalPowerSeries/Convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Library/FormalPowerSeries/FormalPowerSeries.hpp
+      title: Library/FormalPowerSeries/FormalPowerSeries.hpp
+    - icon: ':heavy_check_mark:'
+      path: Library/FormalPowerSeries/MontgomeryModInt998244353.hpp
+      title: Library/FormalPowerSeries/MontgomeryModInt998244353.hpp
   - name: Library/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -59,13 +74,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Graph/CycleDetection.hpp
       title: Library/Graph/CycleDetection.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Graph/Dijkstra.hpp
       title: Library/Graph/Dijkstra.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Graph/Graph.hpp
       title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Graph/GraphUtilities.hpp
       title: Library/Graph/GraphUtilities.hpp
     - icon: ':heavy_check_mark:'
@@ -74,7 +89,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Library/Graph/LowLink.hpp
       title: Library/Graph/LowLink.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Graph/StronglyConnectedComponents.hpp
       title: Library/Graph/StronglyConnectedComponents.hpp
     - icon: ':heavy_check_mark:'
@@ -82,9 +97,18 @@ data:
       title: Library/Graph/WarshallFloyd.hpp
   - name: Library/Math
     pages:
+    - icon: ':x:'
+      path: Library/Math/Combinatorics.hpp
+      title: Library/Math/Combinatorics.hpp
+    - icon: ':x:'
+      path: Library/Math/FactorialTable.hpp
+      title: Library/Math/FactorialTable.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Math/MillerRabin.hpp
       title: Library/Math/MillerRabin.hpp
+    - icon: ':x:'
+      path: Library/Math/ModInt.hpp
+      title: Library/Math/ModInt.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Math/Montgomery.hpp
       title: Library/Math/Montgomery.hpp
@@ -93,7 +117,7 @@ data:
       title: Library/Math/SternBrocotTree.hpp
   - name: Library/Other
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Library/Other/Compress.hpp
       title: Library/Other/Compress.hpp
     - icon: ':heavy_check_mark:'
@@ -110,19 +134,19 @@ data:
       title: Library/String/ZAlgorithm.hpp
   - name: Library/Tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Tree/HeavyLightDecomposition.hpp
       title: Library/Tree/HeavyLightDecomposition.hpp
     - icon: ':heavy_check_mark:'
       path: Library/Tree/LowestCommonAncestor.hpp
       title: Library/Tree/LowestCommonAncestor.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: Library/Tree/RerootingDP.hpp
       title: Library/Tree/RerootingDP.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Tree/Tree.hpp
       title: Library/Tree/Tree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Library/Tree/TreeDiameter.hpp
       title: Library/Tree/TreeDiameter.hpp
     - icon: ':warning:'
@@ -133,12 +157,6 @@ data:
     - icon: ':warning:'
       path: Library/unauthenticated/AuxiliaryTree.hpp
       title: Library/unauthenticated/AuxiliaryTree.hpp
-    - icon: ':warning:'
-      path: Library/unauthenticated/Combination.hpp
-      title: "Combination - \u7D44\u5408\u305B"
-    - icon: ':warning:'
-      path: Library/unauthenticated/ErasablePriorityQueue.hpp
-      title: "Erasable Priority Queue - \u6D88\u305B\u308B Priority Queue"
     - icon: ':warning:'
       path: Library/unauthenticated/FunctionalGraph.hpp
       title: Functional Graph
@@ -259,57 +277,87 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/LC-PointAddRangeSum.test.cpp
       title: verify/LC-PointAddRangeSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-PointSetRangeComposite.test.cpp
       title: verify/LC-PointSetRangeComposite.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/LC-PrimalityTest.test.cpp
       title: verify/LC-PrimalityTest.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RangeAddRangeMin.test.cpp
       title: verify/LC-RangeAddRangeMin.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RangeAffinePointGet.test.cpp
       title: verify/LC-RangeAffinePointGet.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RangeAffineRangeSum.test.cpp
       title: verify/LC-RangeAffineRangeSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-RectangleSum.test.cpp
       title: verify/LC-RectangleSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-ShortestPath.test.cpp
       title: verify/LC-ShortestPath.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-StaricRMQ.test.cpp
       title: verify/LC-StaricRMQ.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-StaticRangeSumWithUpperBound.test.cpp
       title: verify/LC-StaticRangeSumWithUpperBound.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-StronglyConnectedComponents.test.cpp
       title: verify/LC-StronglyConnectedComponents.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-TreeDiameter.test.cpp
       title: verify/LC-TreeDiameter.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-TreePathCompositeSum.test.cpp
       title: verify/LC-TreePathCompositeSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-Unionfind.test.cpp
       title: verify/LC-Unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-UnionfindWithPotential.test.cpp
       title: verify/LC-UnionfindWithPotential.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexAddPathSum.test.cpp
       title: verify/LC-VertexAddPathSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexAddSubtreeSum.test.cpp
       title: verify/LC-VertexAddSubtreeSum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/LC-VertexSetPathComposite.test.cpp
       title: verify/LC-VertexSetPathComposite.test.cpp
+  - name: verify/DataStructure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/DataStructure/LC-OrderedSet.test.cpp
+      title: verify/DataStructure/LC-OrderedSet.test.cpp
+  - name: verify/FormalPowerSeries
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/FormalPowerSeries/LC-ConvolutionMod.test.cpp
+      title: verify/FormalPowerSeries/LC-ConvolutionMod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/FormalPowerSeries/LC-ExpFormalPowerSeries.test.cpp
+      title: verify/FormalPowerSeries/LC-ExpFormalPowerSeries.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/FormalPowerSeries/LC-InvFormalPowerSeries.test.cpp
+      title: verify/FormalPowerSeries/LC-InvFormalPowerSeries.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/FormalPowerSeries/LC-LogFormalPowerSeries.test.cpp
+      title: verify/FormalPowerSeries/LC-LogFormalPowerSeries.test.cpp
+  - name: verify/Math
+    pages:
+    - icon: ':x:'
+      path: verify/Math/AOJ-DPL-5-B.test.cpp
+      title: verify/Math/AOJ-DPL-5-B.test.cpp
+    - icon: ':x:'
+      path: verify/Math/AOJ-DPL-5-D.test.cpp
+      title: verify/Math/AOJ-DPL-5-D.test.cpp
+    - icon: ':x:'
+      path: verify/Math/AOJ-DPL-5-E.test.cpp
+      title: verify/Math/AOJ-DPL-5-E.test.cpp
 layout: toppage
 ---
 [![lX57](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FlX57)](https://atcoder.jp/users/lX57)

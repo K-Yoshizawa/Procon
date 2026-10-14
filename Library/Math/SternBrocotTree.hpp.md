@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -11,34 +11,33 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
-    #include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include\
-    \ <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 2 \"Library/Math/SternBrocotTree.hpp\"\
-    \n\nstruct SBTR{\n    using i64 = int64_t;\n    using u64 = uint64_t;\n    using\
-    \ u128 = __uint128_t;\n\n    i64 nume;\n    u64 deno;\n\n    SBTR(i64 n = 0, u64\
-    \ d = 1) : nume(n), deno(d){}\n\n    SBTR &operator+=(const SBTR &r){\n      \
-    \  nume += r.nume;\n        deno += r.deno;\n        return (*this);\n    }\n\n\
-    \    SBTR &operator*=(const u64 &r){\n        nume *= r;\n        deno *= r;\n\
-    \        return (*this);\n    }\n\n    SBTR operator+(const SBTR &r) const {\n\
-    \        return SBTR(*this) += r;\n    }\n\n    SBTR operator*(const u64 &r) const\
-    \ {\n        return SBTR(*this) *= r;\n    }\n\n    bool operator==(const SBTR\
-    \ &r) const {\n        return u128(nume) * r.deno == u128(deno) * r.nume;\n  \
-    \  }\n\n    bool operator!=(const SBTR &r) const {\n        return u128(nume)\
-    \ * r.deno != u128(deno) * r.nume;\n    }\n\n    bool operator<(const SBTR &r)\
-    \ const {\n        return u128(nume) * r.deno < u128(deno) * r.nume;\n    }\n\n\
-    \    bool operator>(const SBTR &r) const {\n        return u128(nume) * r.deno\
-    \ > u128(deno) * r.nume;\n    }\n\n    bool operator<=(const SBTR &r) const {\n\
-    \        return u128(nume) * r.deno <= u128(deno) * r.nume;\n    }\n\n    bool\
-    \ operator>=(const SBTR &r) const {\n        return u128(nume) * r.deno >= u128(deno)\
-    \ * r.nume;\n    }\n\n    bool operator<(const u64 &r) const {\n        return\
-    \ nume < r || deno < r;\n    }\n\n    bool operator>(const u64 &r) const {\n \
-    \       return nume > r || deno > r;\n    }\n\n    bool operator<=(const u64 &r)\
-    \ const {\n        return nume <= r || deno <= r;\n    }\n\n    bool operator>=(const\
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 2 \"Library/Math/SternBrocotTree.hpp\"\n\nstruct SBTR{\n    using\
+    \ i64 = int64_t;\n    using u64 = uint64_t;\n    using u128 = __uint128_t;\n\n\
+    \    i64 nume;\n    u64 deno;\n\n    SBTR(i64 n = 0, u64 d = 1) : nume(n), deno(d){}\n\
+    \n    SBTR &operator+=(const SBTR &r){\n        nume += r.nume;\n        deno\
+    \ += r.deno;\n        return (*this);\n    }\n\n    SBTR &operator*=(const u64\
+    \ &r){\n        nume *= r;\n        deno *= r;\n        return (*this);\n    }\n\
+    \n    SBTR operator+(const SBTR &r) const {\n        return SBTR(*this) += r;\n\
+    \    }\n\n    SBTR operator*(const u64 &r) const {\n        return SBTR(*this)\
+    \ *= r;\n    }\n\n    bool operator==(const SBTR &r) const {\n        return u128(nume)\
+    \ * r.deno == u128(deno) * r.nume;\n    }\n\n    bool operator!=(const SBTR &r)\
+    \ const {\n        return u128(nume) * r.deno != u128(deno) * r.nume;\n    }\n\
+    \n    bool operator<(const SBTR &r) const {\n        return u128(nume) * r.deno\
+    \ < u128(deno) * r.nume;\n    }\n\n    bool operator>(const SBTR &r) const {\n\
+    \        return u128(nume) * r.deno > u128(deno) * r.nume;\n    }\n\n    bool\
+    \ operator<=(const SBTR &r) const {\n        return u128(nume) * r.deno <= u128(deno)\
+    \ * r.nume;\n    }\n\n    bool operator>=(const SBTR &r) const {\n        return\
+    \ u128(nume) * r.deno >= u128(deno) * r.nume;\n    }\n\n    bool operator<(const\
+    \ u64 &r) const {\n        return nume < r || deno < r;\n    }\n\n    bool operator>(const\
+    \ u64 &r) const {\n        return nume > r || deno > r;\n    }\n\n    bool operator<=(const\
+    \ u64 &r) const {\n        return nume <= r || deno <= r;\n    }\n\n    bool operator>=(const\
     \ u64 &r) const {\n        return nume >= r || deno >= r;\n    }\n\n    friend\
     \ ostream &operator<<(ostream &os, const SBTR &p) {\n        return os << p.nume\
     \ << ' ' << p.deno;\n    }\n};\n\nclass SternBrocotTree{\n    public:\n    using\
@@ -172,7 +171,7 @@ data:
   isVerificationFile: false
   path: Library/Math/SternBrocotTree.hpp
   requiredBy: []
-  timestamp: '2026-04-12 14:16:26+09:00'
+  timestamp: '2026-06-21 14:34:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/Math/SternBrocotTree.hpp

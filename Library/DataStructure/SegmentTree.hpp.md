@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -15,53 +15,47 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/LC-PointAddRangeSum.test.cpp
     title: verify/LC-PointAddRangeSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-PointSetRangeComposite.test.cpp
-    title: verify/LC-PointSetRangeComposite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddPathSum.test.cpp
     title: verify/LC-VertexAddPathSum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/LC-VertexAddSubtreeSum.test.cpp
     title: verify/LC-VertexAddSubtreeSum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/LC-VertexSetPathComposite.test.cpp
-    title: verify/LC-VertexSetPathComposite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n\
-    #include <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include\
-    \ <cassert>\n#include <cmath>\n#include <cstdint>\n#include <deque>\n#include\
-    \ <functional>\n#include <iomanip>\n#include <iostream>\n#include <limits>\n#include\
-    \ <map>\n#include <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n\
-    #include <string>\n#include <tuple>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const\
-    \ ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\
-    \n\ntemplate<typename Monoid>\nclass SegmentTree{\n    public:\n    using Merge\
-    \ = function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n        vector<Monoid>\
-    \ &A, \n        Merge f, \n        const Monoid &e, \n        bool zero_index\
-    \ = false\n    ) : f(f), id_(e), zero_index_(zero_index){\n        size_ = 1;\n\
-    \        while(size_ < (int)A.size()) size_ <<= 1;\n        offset_ = size_ -\
-    \ 1;\n        data_.resize(2 * size_, id_);\n        for(int i = 0; i < (int)A.size();\
-    \ ++i){\n            data_[size_ + i] = A[i];\n        }\n        for(int i =\
-    \ offset_; i >= 1; --i){\n            data_[i] = f(data_[i * 2 + 0], data_[i *\
-    \ 2 + 1]);\n        }\n    }\n\n    void Apply(int k, Monoid x){\n        Validate(k\
-    \ + zero_index_);\n        k = offset_ + k + zero_index_;\n        data_[k] =\
-    \ x;\n        while(k >>= 1){\n            data_[k] = f(data_[2 * k], data_[2\
-    \ * k + 1]);\n        }\n    }\n\n    Monoid Fold(int l, int r){\n        if(l\
-    \ == r) return id_;\n        Validate(l + zero_index_);\n        Validate(r +\
-    \ zero_index_ - 1);\n        int lh = l + zero_index_ + offset_, rh = r + zero_index_\
-    \ + offset_;\n        Monoid al = id_, ar = id_;\n        while(lh < rh){\n  \
-    \          if(lh & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh],\
-    \ ar);\n            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n\
-    \    }\n\n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n\
-    \        return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n   \
-    \ int size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const Merge\
-    \ f;\n    const Monoid id_;\n\n    inline void Validate(int x) const {\n     \
-    \   assert(1 <= x && x <= size_);\n    }\n};\n"
+  bundledCode: "#line 2 \"Library/Common.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 2 \"Library/DataStructure/SegmentTree.hpp\"\n\ntemplate<typename Monoid>\n\
+    class SegmentTree{\n    public:\n    using Merge = function<Monoid(Monoid, Monoid)>;\n\
+    \    \n    SegmentTree(\n        vector<Monoid> &A, \n        Merge f, \n    \
+    \    const Monoid &e, \n        bool zero_index = false\n    ) : f(f), id_(e),\
+    \ zero_index_(zero_index){\n        size_ = 1;\n        while(size_ < (int)A.size())\
+    \ size_ <<= 1;\n        offset_ = size_ - 1;\n        data_.resize(2 * size_,\
+    \ id_);\n        for(int i = 0; i < (int)A.size(); ++i){\n            data_[size_\
+    \ + i] = A[i];\n        }\n        for(int i = offset_; i >= 1; --i){\n      \
+    \      data_[i] = f(data_[i * 2 + 0], data_[i * 2 + 1]);\n        }\n    }\n\n\
+    \    void Apply(int k, Monoid x){\n        Validate(k + zero_index_);\n      \
+    \  k = offset_ + k + zero_index_;\n        data_[k] = x;\n        while(k >>=\
+    \ 1){\n            data_[k] = f(data_[2 * k], data_[2 * k + 1]);\n        }\n\
+    \    }\n\n    Monoid Fold(int l, int r){\n        if(l == r) return id_;\n   \
+    \     Validate(l + zero_index_);\n        Validate(r + zero_index_ - 1);\n   \
+    \     int lh = l + zero_index_ + offset_, rh = r + zero_index_ + offset_;\n  \
+    \      Monoid al = id_, ar = id_;\n        while(lh < rh){\n            if(lh\
+    \ & 1) al = f(al, data_[lh++]);\n            if(rh & 1) ar = f(data_[--rh], ar);\n\
+    \            lh >>= 1, rh >>= 1;\n        }\n        return f(al, ar);\n    }\n\
+    \n    Monoid operator[](const int &k){\n        Validate(k + zero_index_);\n \
+    \       return data_[offset_ + k + zero_index_];\n    }\n\n    private:\n    int\
+    \ size_, offset_, zero_index_;\n    vector<Monoid> data_;\n    const Merge f;\n\
+    \    const Monoid id_;\n\n    inline void Validate(int x) const {\n        assert(1\
+    \ <= x && x <= size_);\n    }\n};\n"
   code: "#include \"../Common.hpp\"\n\ntemplate<typename Monoid>\nclass SegmentTree{\n\
     \    public:\n    using Merge = function<Monoid(Monoid, Monoid)>;\n    \n    SegmentTree(\n\
     \        vector<Monoid> &A, \n        Merge f, \n        const Monoid &e, \n \
@@ -89,16 +83,14 @@ data:
   isVerificationFile: false
   path: Library/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-06-01 12:19:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-21 14:34:19+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/AOJ-DSL-2-B.test.cpp
   - verify/AOJ-DSL-2-A.test.cpp
   - verify/LC-VertexAddPathSum.test.cpp
-  - verify/LC-PointSetRangeComposite.test.cpp
-  - verify/LC-VertexSetPathComposite.test.cpp
   - verify/LC-VertexAddSubtreeSum.test.cpp
   - verify/LC-PointAddRangeSum.test.cpp
+  - verify/AOJ-DSL-2-B.test.cpp
 documentation_of: Library/DataStructure/SegmentTree.hpp
 layout: document
 title: "Segment Tree - \u30BB\u30B0\u30E1\u30F3\u30C8\u6728"

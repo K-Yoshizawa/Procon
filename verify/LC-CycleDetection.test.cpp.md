@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   - icon: ':heavy_check_mark:'
     path: Library/Graph/CycleDetection.hpp
     title: Library/Graph/CycleDetection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
@@ -25,28 +25,27 @@ data:
     - https://judge.yosupo.jp/problem/cycle_detection
   bundledCode: "#line 1 \"verify/LC-CycleDetection.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/cycle_detection\"\n\n#line 2 \"Library/Template.hpp\"\
-    \n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
-    \ <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include <cassert>\n\
-    #include <cmath>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
-    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
-    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
-    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
-    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
-    \ << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
-    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
-    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
-    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
-    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
-    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
-    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
-    \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
-    \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
-    \ Value Floor(Value numerator, Value denominator){if(denominator < 0) numerator\
-    \ *= -1, denominator *= -1; return numerator < 0 ? (numerator + 1) / denominator\
-    \ - 1 : numerator / denominator;}\ntemplate<typename Value>\ninline Value Ceil(Value\
-    \ numerator, Value denominator){if(denominator < 0) numerator *= -1, denominator\
-    \ *= -1; return numerator > 0 ? (numerator - 1) / denominator + 1 : numerator\
-    \ / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
+    \n\n#line 2 \"Library/Common.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool flag){cout\
+    \ << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool YNPrint(bool\
+    \ flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\ntemplate<typename\
+    \ Container>\ninline void Sort(Container &container){sort(container.begin(), container.end());}\n\
+    template<typename Container>\ninline void ReverseSort(Container &container){sort(container.rbegin(),\
+    \ container.rend());}\ntemplate<typename Container>\ninline void Reverse(Container\
+    \ &container){reverse(container.begin(), container.end());}\ntemplate<typename\
+    \ Value>\ninline int PopCount(const Value &value){return __builtin_popcount(value);}\n\
+    template<typename Value>\ninline Value Floor(Value numerator, Value denominator){if(denominator\
+    \ < 0) numerator *= -1, denominator *= -1; return numerator < 0 ? (numerator +\
+    \ 1) / denominator - 1 : numerator / denominator;}\ntemplate<typename Value>\n\
+    inline Value Ceil(Value numerator, Value denominator){if(denominator < 0) numerator\
+    \ *= -1, denominator *= -1; return numerator > 0 ? (numerator - 1) / denominator\
+    \ + 1 : numerator / denominator;}\ntemplate<typename Value>\ninline int LowerBoundIndex(const\
     \ vector<Value> &container, const Value &value){return distance(container.begin(),\
     \ lower_bound(container.begin(), container.end(), value));}\ntemplate<typename\
     \ Value>\ninline int UpperBoundIndex(const vector<Value> &container, const Value\
@@ -165,7 +164,7 @@ data:
   isVerificationFile: true
   path: verify/LC-CycleDetection.test.cpp
   requiredBy: []
-  timestamp: '2026-06-01 14:23:03+09:00'
+  timestamp: '2026-06-21 14:34:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/LC-CycleDetection.test.cpp

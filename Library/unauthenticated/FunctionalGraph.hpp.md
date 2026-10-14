@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
   _extendedRequiredBy: []
@@ -18,22 +18,22 @@ data:
     - https://atcoder.jp/contests/abc377/submissions/59194861
   bundledCode: "#line 1 \"Library/unauthenticated/FunctionalGraph.hpp\"\n/**\n * @file\
     \ FunctionalGraph.hpp\n * @brief Functional Graph\n * @version 2.0\n * @date 2024-10-27\n\
-    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n * @file Common.hpp\n */\n\n#include\
-    \ <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include <cassert>\n\
-    #include <cmath>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
-    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
-    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
-    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
-    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
-    \ << 62) - (3LL << 30) - 1;\n#line 9 \"Library/unauthenticated/FunctionalGraph.hpp\"\
-    \n\ntemplate<typename WeightType = int32_t>\nclass FunctionalGraph{\n    public:\n\
-    \    /**\n     * @brief \u91CD\u307F\u306A\u3057 Functional Graph \u306E\u69CB\
-    \u7BC9\u3092\u884C\u3046\u3002\n     * @param to \u5404\u9802\u70B9 i \u304C\u63A5\
-    \u7D9A\u3057\u3066\u3044\u308B\u9802\u70B9\n     * @param one_index \u9802\u70B9\
-    \u756A\u53F7\u3092 1-index \u3068\u3057\u3066\u6271\u3046\u304B `(default = true)`\n\
-    \     * @param doubling_size \u30C0\u30D6\u30EA\u30F3\u30B0\u306E\u30C6\u30FC\u30D6\
-    \u30EB\u30B5\u30A4\u30BA `(default = 60)`\n     */\n    FunctionalGraph(vector<int>\
-    \ &to, bool one_index = true, int doubling_size = 60) :\n        vertex_size_((int)to.size()),\
+    \ */\n\n#line 2 \"Library/Common.hpp\"\n\n#include <algorithm>\n#include <array>\n\
+    #include <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include\
+    \ <cstdint>\n#include <deque>\n#include <functional>\n#include <iomanip>\n#include\
+    \ <iostream>\n#include <limits>\n#include <map>\n#include <numeric>\n#include\
+    \ <queue>\n#include <set>\n#include <stack>\n#include <string>\n#include <tuple>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\nusing ll = int64_t;\n\
+    using ull = uint64_t;\n\nconstexpr const ll INF = (1LL << 62) - (3LL << 30) -\
+    \ 1;\n#line 9 \"Library/unauthenticated/FunctionalGraph.hpp\"\n\ntemplate<typename\
+    \ WeightType = int32_t>\nclass FunctionalGraph{\n    public:\n    /**\n     *\
+    \ @brief \u91CD\u307F\u306A\u3057 Functional Graph \u306E\u69CB\u7BC9\u3092\u884C\
+    \u3046\u3002\n     * @param to \u5404\u9802\u70B9 i \u304C\u63A5\u7D9A\u3057\u3066\
+    \u3044\u308B\u9802\u70B9\n     * @param one_index \u9802\u70B9\u756A\u53F7\u3092\
+    \ 1-index \u3068\u3057\u3066\u6271\u3046\u304B `(default = true)`\n     * @param\
+    \ doubling_size \u30C0\u30D6\u30EA\u30F3\u30B0\u306E\u30C6\u30FC\u30D6\u30EB\u30B5\
+    \u30A4\u30BA `(default = 60)`\n     */\n    FunctionalGraph(vector<int> &to, bool\
+    \ one_index = true, int doubling_size = 60) :\n        vertex_size_((int)to.size()),\
     \ doubling_size_(doubling_size), one_index_(one_index){\n        vector<WeightType>\
     \ cost(vertex_size_, 1);\n        Build(to, cost);\n    }\n    \n    /**\n   \
     \  * @brief \u91CD\u307F\u3042\u308A Functional Graph \u306E\u69CB\u7BC9\u3092\
@@ -181,7 +181,7 @@ data:
   isVerificationFile: false
   path: Library/unauthenticated/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2026-04-12 14:16:26+09:00'
+  timestamp: '2026-06-21 14:34:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Library/unauthenticated/FunctionalGraph.hpp

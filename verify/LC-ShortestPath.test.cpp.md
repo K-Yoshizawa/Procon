@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Common.hpp
     title: Library/Common.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Dijkstra.hpp
     title: Library/Graph/Dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Graph/Graph.hpp
     title: "Graph - \u30B0\u30E9\u30D5\u69CB\u9020"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Library/Template.hpp
     title: Library/Template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
     - https://judge.yosupo.jp/problem/shortest_path
   bundledCode: "#line 1 \"verify/LC-ShortestPath.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\
-    \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n/**\n\
-    \ * @file Common.hpp\n */\n\n#include <algorithm>\n#include <array>\n#include\
-    \ <bit>\n#include <bitset>\n#include <cassert>\n#include <cmath>\n#include <cstdint>\n\
-    #include <deque>\n#include <functional>\n#include <iomanip>\n#include <iostream>\n\
-    #include <limits>\n#include <map>\n#include <numeric>\n#include <queue>\n#include\
-    \ <set>\n#include <stack>\n#include <string>\n#include <tuple>\n#include <utility>\n\
-    #include <vector>\nusing namespace std;\n\nusing ll = int64_t;\nusing ull = uint64_t;\n\
-    \nconstexpr const ll INF = (1LL << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\
-    \n\ninline bool YnPrint(bool flag){cout << (flag ? \"Yes\" : \"No\") << '\\n';\
-    \ return flag;}\ninline bool YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\"\
-    ) << '\\n'; return flag;}\ntemplate<typename Container>\ninline void Sort(Container\
-    \ &container){sort(container.begin(), container.end());}\ntemplate<typename Container>\n\
-    inline void ReverseSort(Container &container){sort(container.rbegin(), container.rend());}\n\
-    template<typename Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
+    \n\n#line 2 \"Library/Template.hpp\"\n\n#line 2 \"Library/Common.hpp\"\n\n#include\
+    \ <algorithm>\n#include <array>\n#include <bit>\n#include <bitset>\n#include <cassert>\n\
+    #include <cmath>\n#include <cstdint>\n#include <deque>\n#include <functional>\n\
+    #include <iomanip>\n#include <iostream>\n#include <limits>\n#include <map>\n#include\
+    \ <numeric>\n#include <queue>\n#include <set>\n#include <stack>\n#include <string>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
+    \nusing ll = int64_t;\nusing ull = uint64_t;\n\nconstexpr const ll INF = (1LL\
+    \ << 62) - (3LL << 30) - 1;\n#line 4 \"Library/Template.hpp\"\n\ninline bool YnPrint(bool\
+    \ flag){cout << (flag ? \"Yes\" : \"No\") << '\\n'; return flag;}\ninline bool\
+    \ YNPrint(bool flag){cout << (flag ? \"YES\" : \"NO\") << '\\n'; return flag;}\n\
+    template<typename Container>\ninline void Sort(Container &container){sort(container.begin(),\
+    \ container.end());}\ntemplate<typename Container>\ninline void ReverseSort(Container\
+    \ &container){sort(container.rbegin(), container.rend());}\ntemplate<typename\
+    \ Container>\ninline void Reverse(Container &container){reverse(container.begin(),\
     \ container.end());}\ntemplate<typename Value>\ninline int PopCount(const Value\
     \ &value){return __builtin_popcount(value);}\ntemplate<typename Value>\ninline\
     \ Value Floor(Value numerator, Value denominator){if(denominator < 0) numerator\
@@ -176,8 +176,8 @@ data:
   isVerificationFile: true
   path: verify/LC-ShortestPath.test.cpp
   requiredBy: []
-  timestamp: '2026-06-01 14:23:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-21 14:34:19+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/LC-ShortestPath.test.cpp
 layout: document
