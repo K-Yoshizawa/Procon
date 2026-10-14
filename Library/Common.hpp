@@ -1,9 +1,5 @@
 #pragma once
 
-/**
- * @file Common.hpp
- */
-
 #include <algorithm>
 #include <array>
 #include <bit>

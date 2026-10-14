@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Common.hpp"
 
 struct Montgomery{
@@ -48,10 +50,10 @@ struct Montgomery{
     }
 
     mont Inverse() const {
-        return Power(mod - 2);
+        return Powerer(mod - 2);
     }
 
-    mont Power(long long k) const {
+    mont Powerer(long long k) const {
         mont ret(1), mul(*this);
         while(k){
             if(k & 1) ret *= mul;

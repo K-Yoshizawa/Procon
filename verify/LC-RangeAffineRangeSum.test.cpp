@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
 #include "../Library/Template.hpp"
-#include "../Library/modint.hpp"
+#include "../Library/ModInt.hpp"
 #include "../Library/DataStructure/LazySegmentTree.hpp"
 
 struct Monoid{

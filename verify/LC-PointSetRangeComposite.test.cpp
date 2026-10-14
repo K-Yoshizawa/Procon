@@ -2,7 +2,7 @@
 
 #include "../Library/Template.hpp"
 #include "../Library/DataStructure/SegmentTree.hpp"
-#include "../Library/modint.hpp"
+#include "../Library/ModInt.hpp"
 
 struct Affine{
     Affine(mint a = 1, mint b = 0) : a(a), b(b){}

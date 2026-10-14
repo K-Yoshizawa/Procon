@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_path_composite_sum"
 
 #include "../Library/Template.hpp"
-#include "../Library/modint.hpp"
+#include "../Library/ModInt.hpp"
 #include "../Library/Tree/RerootingDP.hpp"
 
 struct Affine{

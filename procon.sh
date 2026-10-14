@@ -35,9 +35,6 @@ if [ ! -d "$new_dir" ]; then
     echo "Created directory $new_dir"
 fi
 
-# Get the current date and time in "YYYY-MM-DD HH:MM:SS" format
-current_date=$(date +"%Y-%m-%d %H:%M:%S")
-
 # Generate file names (A.cpp, B.cpp, ..., up to the specified file count)
 new_files=()
 for ((i=0; i<file_count; i++)); do
@@ -45,16 +42,16 @@ for ((i=0; i<file_count; i++)); do
     new_files+=("${contest_upper}_${file_letter}.cpp")
 done
 
-# Loop to copy the original file to new files with "{contest}", "{problem}", and "{date}" replaced
+# Loop to copy the original file to new files with "{contest}" and "{problem}" replaced
 for new_file in "${new_files[@]}"; do
     # Extract the file name without extension for "{problem}" replacement
     problem_name="${new_file##*_}"
     problem_name="${problem_name%.cpp}"
     
-    # Use sed to replace "{contest}" with "$contest_upper", "{problem}" with "$problem_name", and "{date}" with "$current_date"
-    sed -e "s/{contest}/$contest_upper/g" -e "s/{problem}/$problem_name/g" -e "s/{date}/$current_date/g" "$origin_dir/$origin_file" > "$new_dir/$new_file"
+    # Use sed to replace "{contest}" with "$contest_upper" and "{problem}" with "$problem_name"
+    sed -e "s/{contest}/$contest_upper/g" -e "s/{problem}/$problem_name/g" "$origin_dir/$origin_file" > "$new_dir/$new_file"
     
-    echo "Copied $origin_file to $new_file in $new_dir with {contest} replaced by $contest_upper, {problem} replaced by $problem_name, and {date} replaced by $current_date"
+    echo "Copied $origin_file to $new_file in $new_dir with {contest} replaced by $contest_upper and {problem} replaced by $problem_name"
 done
 
 echo "All files have been successfully copied."
